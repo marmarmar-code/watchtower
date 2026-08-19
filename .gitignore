@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.env
+.env.*
+config/private*
+private/
+runtime/
+state/
+*.pem
+*.key
+*.p12
+*.pfx
