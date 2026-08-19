@@ -1,0 +1,144 @@
+name: Watchtower
+
+on:
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: "Operation"
+        required: true
+        default: "run"
+        type: choice
+        options:
+          - run
+          - dry-run
+          - test-slack
+
+permissions:
+  contents: read
+
+concurrency:
+  group: watchtower-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out reviewed public source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          path: public-source
+          persist-credentials: false
+
+      - name: Enforce public-source safety
+        working-directory: public-source
+        run: python3 scripts/check_public_safety.py
+
+      - name: Check out private runtime
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: marmarmar-code/watchtower-runtime
+          ref: main
+          path: runtime
+          ssh-key: ${{ secrets.RUNTIME_DEPLOY_KEY }}
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: public-source/pyproject.toml
+
+      - name: Install reviewed source
+        run: python -m pip install ./public-source
+
+      - name: Mask private runtime configuration
+        run: python3 public-source/scripts/mask_private_config.py runtime/config/watchtower.toml
+
+      - name: Validate private runtime and public/private separation
+        run: |
+          set -euo pipefail
+          python -m watchtower validate-runtime runtime
+          python3 public-source/scripts/check_private_leaks.py runtime/config/watchtower.toml public-source
+
+      - name: Resolve operation
+        id: operation
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+            operation="run"
+          else
+            operation="${{ inputs.operation }}"
+          fi
+          echo "value=$operation" >> "$GITHUB_OUTPUT"
+
+      - name: Test Slack
+        if: steps.operation.outputs.value == 'test-slack'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python -m watchtower test-slack
+
+      - name: Run watchtower
+        if: steps.operation.outputs.value == 'run' || steps.operation.outputs.value == 'dry-run'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          set -euo pipefail
+          if [[ "${{ steps.operation.outputs.value }}" == "dry-run" ]]; then
+            command=dry-run
+          else
+            command=run
+            if [[ -z "$SLACK_WEBHOOK_URL" ]]; then
+              echo "SLACK_WEBHOOK_URL is not configured" >&2
+              exit 1
+            fi
+          fi
+          python -m watchtower "$command" \
+            --config runtime/config/watchtower.toml \
+            --state-dir runtime/state \
+            --redact-output
+
+      - name: Scheduled failure notification
+        if: failure() && github.event_name == 'schedule'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        shell: bash
+        run: |
+          if [[ -n "$SLACK_WEBHOOK_URL" ]]; then
+            curl --fail --silent --show-error \
+              -H 'Content-type: application/json' \
+              --data '{"text":"WATCHTOWER · DRIFTSVARSEL\nEn planlagt overvåkingsrunde feilet. Sjekk GitHub Actions."}' \
+              "$SLACK_WEBHOOK_URL" >/dev/null
+          fi
+
+      - name: Commit private state only
+        if: success() && steps.operation.outputs.value == 'run'
+        working-directory: runtime
+        run: |
+          set -euo pipefail
+          git config user.name "watchtower[bot]"
+          git config user.email "watchtower[bot]@users.noreply.github.com"
+          git add -- state
+          changed=$(git diff --cached --name-only)
+          if [[ -n "$changed" ]] && grep -Ev '^state/' <<< "$changed" >/dev/null; then
+            echo "Refusing to commit files outside private state/" >&2
+            exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo "Private state unchanged"
+            exit 0
+          fi
+          git commit --quiet -m "chore: update watchtower state"
+          for attempt in 1 2 3; do
+            if git pull --rebase --quiet origin main && git push --quiet origin HEAD:main; then
+              exit 0
+            fi
+            git rebase --abort >/dev/null 2>&1 || true
+            sleep $((attempt * 2))
+          done
+          echo "Could not synchronize private runtime state" >&2
+          exit 1
