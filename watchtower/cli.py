@@ -1,0 +1,61 @@
+from __future__ import annotations
+
+import argparse
+import os
+
+from .config import load_config
+from .engine import run
+from .notifier import SlackNotifier
+from .runtime_safety import validate_runtime
+from .state import StateStore
+
+
+def parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(prog="watchtower")
+    sub = p.add_subparsers(dest="command", required=True)
+    for name in ("run", "dry-run"):
+        cmd = sub.add_parser(name)
+        cmd.add_argument("--config", required=True)
+        cmd.add_argument("--state-dir", required=True)
+        cmd.add_argument("--redact-output", action="store_true")
+    validate = sub.add_parser("validate-runtime")
+    validate.add_argument("path")
+    sub.add_parser("test-slack")
+    return p
+
+
+def main() -> int:
+    args = parser().parse_args()
+    if args.command == "validate-runtime":
+        problems = validate_runtime(args.path)
+        if problems:
+            for problem in problems:
+                print(problem)
+            return 1
+        print("PRIVATE RUNTIME SAFETY OK")
+        return 0
+    if args.command == "test-slack":
+        webhook = os.environ.get("SLACK_WEBHOOK_URL", "")
+        SlackNotifier(webhook).send("Watchtower: Slack-varsling er koblet til og fungerer.")
+        return 0
+
+    config = load_config(args.config)
+    state = StateStore(args.state_dir)
+    dry_run = args.command == "dry-run"
+    notifier = None
+    if not dry_run:
+        webhook = os.environ.get("SLACK_WEBHOOK_URL", "")
+        notifier = SlackNotifier(webhook)
+    result = run(config, state, notifier, dry_run=dry_run)
+    if args.redact_output:
+        print(
+            f"watchtower complete; sources={result.checked_sources} "
+            f"baselines={result.baselined_sources} alerts={result.alerts} errors={len(result.errors)}"
+        )
+    else:
+        print(result)
+    return 2 if result.checked_sources == 0 and result.errors else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
