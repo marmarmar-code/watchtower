@@ -116,7 +116,17 @@ def evaluate(
     baseline = previous is None
     alerts: list[Alert] = []
 
-    for item in items:
+    # Some upstream feeds can emit the same logical item more than once in a
+    # single response. The old loop compared each occurrence against state
+    # mutated by the previous occurrence, creating false "updated" alerts.
+    # Keep only the last occurrence for each key, which matches the state that
+    # the previous implementation ultimately persisted for that key.
+    latest: dict[str, tuple[int, Item]] = {}
+    for index, item in enumerate(items):
+        latest[item.key] = (index, item)
+    unique_items = [item for _, item in sorted(latest.values(), key=lambda pair: pair[0])]
+
+    for item in unique_items:
         digest = item.content_hash()
         old_digest = seen.get(item.key)
         change = "new" if old_digest is None else ("updated" if old_digest != digest else "unchanged")
