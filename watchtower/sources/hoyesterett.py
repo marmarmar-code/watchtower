@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 import xml.etree.ElementTree as ET
+from typing import Any
 from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup
@@ -16,28 +17,24 @@ HR_RE = re.compile(r"\bHR-(20\d{2})-(\d+)-([A-Z])\b", re.I)
 class HoyesterettSource(Source):
     """Monitor newly published Norwegian Supreme Court decisions.
 
-    domstol.no's decision search is JavaScript-driven. The public sitemap is a
-    simpler and more stable discovery surface: find recent HR decision URLs,
-    then read the decision page itself for title and searchable article text.
+    Discovery uses domstol.no's public sitemap. The first run reads a bounded
+    recent window to establish a silent baseline. Later runs open only HR
+    references not already present in state, which keeps hourly traffic small.
     """
 
     def fetch(self) -> list[Item]:
+        return self.fetch_with_state(None)
+
+    def fetch_with_state(self, previous: dict[str, Any] | None) -> list[Item]:
         sitemap_url = self.config.urls[0] if self.config.urls else SITEMAP_URL
-        max_items = min(max(int(self.config.options.get("max_items", 80)), 1), 250)
-        urls = self._decision_urls(sitemap_url)
-        ranked: list[tuple[int, int, str, str]] = []
-        for url in urls:
-            match = HR_RE.search(url)
-            if not match:
-                continue
-            year = int(match.group(1))
-            number = int(match.group(2))
-            ref = match.group(0).upper()
-            ranked.append((year, number, ref, url))
-        ranked.sort(reverse=True)
+        max_items = min(max(int(self.config.options.get("max_items", 40)), 1), 250)
+        ranked = self._ranked_decisions(sitemap_url)[:max_items]
+        if previous:
+            known = set(previous.get("seen", {}))
+            ranked = [row for row in ranked if row[2] not in known]
 
         out: list[Item] = []
-        for _, _, ref, url in ranked[:max_items]:
+        for _, _, ref, url in ranked:
             response = self.get(url)
             soup = BeautifulSoup(response.text, "html.parser")
             title_node = soup.find("h1")
@@ -55,28 +52,30 @@ class HoyesterettSource(Source):
             ))
         return out
 
-    def _decision_urls(self, sitemap_url: str) -> set[str]:
+    def _ranked_decisions(self, sitemap_url: str) -> list[tuple[int, int, str, str]]:
         root = self._xml(sitemap_url)
         urls: set[str] = set()
         local = _local(root.tag)
         if local == "sitemapindex":
             sitemap_locs = [_element_text(node) for node in root.iter() if _local(node.tag) == "loc"]
             for child_url in sitemap_locs[:100]:
-                if not child_url:
-                    continue
-                child = self._xml(child_url)
-                urls.update(_locs(child))
+                if child_url:
+                    urls.update(_locs(self._xml(child_url)))
         elif local == "urlset":
             urls.update(_locs(root))
         else:
             raise SourceError("unsupported domstol.no sitemap format")
 
-        return {
-            url for url in urls
-            if _is_domstol(url)
-            and "/no/hoyesterett/avgjorelser/avgjorelser-" in url.casefold()
-            and HR_RE.search(url)
-        }
+        ranked: list[tuple[int, int, str, str]] = []
+        for url in urls:
+            if not _is_domstol(url) or "/no/hoyesterett/avgjorelser/avgjorelser-" not in url.casefold():
+                continue
+            match = HR_RE.search(url)
+            if not match:
+                continue
+            ranked.append((int(match.group(1)), int(match.group(2)), match.group(0).upper(), url))
+        ranked.sort(reverse=True)
+        return ranked
 
     def _xml(self, url: str) -> ET.Element:
         response = self.get(url)
@@ -109,7 +108,6 @@ def _is_domstol(url: str) -> bool:
 
 
 def _published(text: str, ref: str) -> str | None:
-    # Decision pages normally start with e.g. "Høyesterett dom 30. januar 2026, HR-...".
     idx = text.find(ref)
     prefix = text[max(0, idx - 120):idx] if idx >= 0 else text[:120]
     match = re.search(r"(\d{1,2}\.\s+[A-Za-zÆØÅæøå]+\s+20\d{2})", prefix)
