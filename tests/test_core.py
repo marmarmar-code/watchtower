@@ -48,6 +48,20 @@ class CoreTests(unittest.TestCase):
         _, alerts, _ = evaluate(source, [self.item("Media B")], old, max_seen=100)
         self.assertEqual([], alerts)
 
+    def test_duplicate_key_does_not_create_false_update_alerts(self):
+        source = self.source()
+        first = self.item("Media variant A")
+        second = self.item("Media variant B")
+        old, baseline_alerts, baseline = evaluate(source, [first, second], None, max_seen=100)
+        self.assertTrue(baseline)
+        self.assertEqual([], baseline_alerts)
+
+        next_state, alerts, next_baseline = evaluate(source, [first, second], old, max_seen=100)
+        self.assertFalse(next_baseline)
+        self.assertEqual([], alerts)
+        self.assertEqual(old["seen"], next_state["seen"])
+        self.assertEqual(old["order"], next_state["order"])
+
     def test_state_roundtrip(self):
         with tempfile.TemporaryDirectory() as tmp:
             store = StateStore(tmp)
