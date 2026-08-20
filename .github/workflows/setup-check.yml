@@ -2,21 +2,33 @@ name: Watchtower setup verification
 
 on:
   schedule:
-    - cron: "58 9 20 8 *"
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/setup-check.yml"
+    - cron: "2 10 20 8 *"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Check out public source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          path: public-source
+
+      - name: Record that GitHub schedule fired
+        working-directory: public-source
+        run: |
+          set -euo pipefail
+          git config user.name "watchtower[bot]"
+          git config user.email "watchtower[bot]@users.noreply.github.com"
+          printf '{"schedule":"fired"}\n' > setup_schedule_fired.json
+          git add -- setup_schedule_fired.json
+          git commit --quiet -m "chore: record watchtower setup schedule"
+          git push --quiet origin HEAD:main
+
       - name: Check out private runtime with deploy key
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
