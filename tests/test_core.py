@@ -5,9 +5,10 @@ import unittest
 from pathlib import Path
 
 from watchtower.config import FilterRule, SourceConfig, load_config
-from watchtower.engine import evaluate, format_slack
+from watchtower.engine import SOURCE_TYPES, evaluate, format_slack
 from watchtower.models import Item
 from watchtower.runtime_safety import validate_runtime
+from watchtower.sources.doffin import _item as doffin_item
 from watchtower.state import StateStore
 
 
@@ -61,6 +62,27 @@ class CoreTests(unittest.TestCase):
         self.assertEqual([], alerts)
         self.assertEqual(old["seen"], next_state["seen"])
         self.assertEqual(old["order"], next_state["order"])
+
+    def test_doffin_hit_is_normalized_for_filtering(self):
+        item = doffin_item("doffin", {
+            "id": "2026-123456",
+            "title": "Anskaffelse av medieovervåking",
+            "shortDescription": "Overvåking av norske medier",
+            "buyer": {"name": "Medietilsynet"},
+            "issueDate": "2026-08-20",
+            "type": "COMPETITION",
+            "status": "ACTIVE",
+            "cpvCodes": ["79340000"],
+        })
+        self.assertIsNotNone(item)
+        assert item is not None
+        self.assertEqual("2026-123456", item.key)
+        self.assertIn("Medietilsynet", item.searchable_text())
+        self.assertIn("medieovervåking", item.searchable_text())
+
+    def test_new_source_types_are_registered(self):
+        self.assertIn("doffin", SOURCE_TYPES)
+        self.assertIn("hoyesterett", SOURCE_TYPES)
 
     def test_state_roundtrip(self):
         with tempfile.TemporaryDirectory() as tmp:
