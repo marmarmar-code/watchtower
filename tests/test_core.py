@@ -16,17 +16,17 @@ class CoreTests(unittest.TestCase):
     def source(self, **kwargs):
         return SourceConfig(
             id="x", kind="regjeringen", label="Test",
-            filters=kwargs.pop("filters", FilterRule(include_any=("media",))),
+            filters=kwargs.pop("filters", FilterRule(include_any=("alpha-rule",))),
             **kwargs,
         )
 
-    def item(self, title="Media endres", text=""):
+    def item(self, title="Alpha-rule endres", text=""):
         return Item("x", "1", title, "https://example.test/1", text=text)
 
     def test_filter_requires_private_match(self):
-        rule = FilterRule(include_any=("mediestøtte", "NRK"), exclude_any=("kalender",))
-        self.assertTrue(rule.matches("Ny ordning for mediestøtte"))
-        self.assertFalse(rule.matches("NRK kalender"))
+        rule = FilterRule(include_any=("alpha-rule", "bravo-rule"), exclude_any=("blocked-rule",))
+        self.assertTrue(rule.matches("Ny sak om alpha-rule"))
+        self.assertFalse(rule.matches("bravo-rule blocked-rule"))
         self.assertFalse(rule.matches("Noe helt annet"))
 
     def test_first_run_is_silent_baseline(self):
@@ -36,8 +36,8 @@ class CoreTests(unittest.TestCase):
         self.assertIn("1", state["seen"])
 
     def test_new_matching_item_alerts_after_baseline(self):
-        old, _, _ = evaluate(self.source(), [self.item("Gammel media")], None, max_seen=100)
-        items = [self.item("Gammel media"), Item("x", "2", "Ny media-sak", "https://example.test/2")]
+        old, _, _ = evaluate(self.source(), [self.item("Gammel alpha-rule")], None, max_seen=100)
+        items = [self.item("Gammel alpha-rule"), Item("x", "2", "Ny alpha-rule-sak", "https://example.test/2")]
         _, alerts, baseline = evaluate(self.source(), items, old, max_seen=100)
         self.assertFalse(baseline)
         self.assertEqual(1, len(alerts))
@@ -45,14 +45,14 @@ class CoreTests(unittest.TestCase):
 
     def test_update_can_be_disabled(self):
         source = self.source(alert_on_update=False)
-        old, _, _ = evaluate(source, [self.item("Media A")], None, max_seen=100)
-        _, alerts, _ = evaluate(source, [self.item("Media B")], old, max_seen=100)
+        old, _, _ = evaluate(source, [self.item("Alpha-rule A")], None, max_seen=100)
+        _, alerts, _ = evaluate(source, [self.item("Alpha-rule B")], old, max_seen=100)
         self.assertEqual([], alerts)
 
     def test_duplicate_key_does_not_create_false_update_alerts(self):
         source = self.source()
-        first = self.item("Media variant A")
-        second = self.item("Media variant B")
+        first = self.item("Alpha-rule variant A")
+        second = self.item("Alpha-rule variant B")
         old, baseline_alerts, baseline = evaluate(source, [first, second], None, max_seen=100)
         self.assertTrue(baseline)
         self.assertEqual([], baseline_alerts)
@@ -66,19 +66,19 @@ class CoreTests(unittest.TestCase):
     def test_doffin_hit_is_normalized_for_filtering(self):
         item = doffin_item("doffin", {
             "id": "2026-123456",
-            "title": "Anskaffelse av medieovervåking",
-            "shortDescription": "Overvåking av norske medier",
-            "buyer": {"name": "Medietilsynet"},
+            "title": "Synthetic procurement example",
+            "shortDescription": "Alpha-rule procurement description",
+            "buyer": {"name": "Example Buyer"},
             "issueDate": "2026-08-20",
             "type": "COMPETITION",
             "status": "ACTIVE",
-            "cpvCodes": ["79340000"],
+            "cpvCodes": ["00000000"],
         })
         self.assertIsNotNone(item)
         assert item is not None
         self.assertEqual("2026-123456", item.key)
-        self.assertIn("Medietilsynet", item.searchable_text())
-        self.assertIn("medieovervåking", item.searchable_text())
+        self.assertIn("Example Buyer", item.searchable_text())
+        self.assertIn("Alpha-rule", item.searchable_text())
 
     def test_new_source_types_are_registered(self):
         self.assertIn("doffin", SOURCE_TYPES)
@@ -96,7 +96,7 @@ class CoreTests(unittest.TestCase):
             (root / "config").mkdir()
             (root / "state").mkdir()
             (root / "config" / "watchtower.toml").write_text(
-                '[[source]]\nid="x"\nkind="regjeringen"\n[source.filter]\ninclude_any=["media"]\n',
+                '[[source]]\nid="x"\nkind="regjeringen"\n[source.filter]\ninclude_any=["alpha-rule"]\n',
                 encoding="utf-8",
             )
             self.assertEqual([], validate_runtime(root))
@@ -105,15 +105,15 @@ class CoreTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             p = Path(tmp) / "c.toml"
             p.write_text(
-                '[[source]]\nid="r"\nkind="regjeringen"\nlabel="R"\n[source.filter]\ninclude_any=["presse"]\n',
+                '[[source]]\nid="r"\nkind="regjeringen"\nlabel="R"\n[source.filter]\ninclude_any=["bravo-rule"]\n',
                 encoding="utf-8",
             )
             cfg = load_config(p)
-            self.assertEqual("presse", cfg.sources[0].filters.include_any[0])
+            self.assertEqual("bravo-rule", cfg.sources[0].filters.include_any[0])
 
     def test_slack_output_contains_source_and_link(self):
-        old, _, _ = evaluate(self.source(), [self.item("Media A")], None, max_seen=100)
-        _, alerts, _ = evaluate(self.source(), [self.item("Media B")], old, max_seen=100)
+        old, _, _ = evaluate(self.source(), [self.item("Alpha-rule A")], None, max_seen=100)
+        _, alerts, _ = evaluate(self.source(), [self.item("Alpha-rule B")], old, max_seen=100)
         text = format_slack(alerts)
         self.assertIn("WATCHTOWER", text)
         self.assertIn("https://example.test/1", text)
