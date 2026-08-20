@@ -2,7 +2,7 @@ name: Watchtower
 
 on:
   schedule:
-    - cron: "33 * * * *"
+    - cron: "37 * * * *"
   workflow_dispatch:
     inputs:
       operation:
