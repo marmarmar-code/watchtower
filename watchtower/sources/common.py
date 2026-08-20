@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from typing import Any
 import requests
 
 from ..config import SourceConfig
@@ -26,6 +27,9 @@ class Source(ABC):
         if response.status_code != 200:
             raise SourceError(f"{self.config.id} returned HTTP {response.status_code}")
         return response
+
+    def fetch_with_state(self, previous: dict[str, Any] | None) -> list[Item]:
+        return self.fetch()
 
     @abstractmethod
     def fetch(self) -> list[Item]:
