@@ -82,6 +82,10 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python -m watchtower test-slack
 
+      - name: Record successful setup verification privately
+        if: steps.operation.outputs.value == 'test-slack'
+        run: printf '{"runtime":"ok","slack":"ok"}\n' > runtime/state/setup_verified.json
+
       - name: Run watchtower
         if: steps.operation.outputs.value == 'run' || steps.operation.outputs.value == 'dry-run'
         env:
@@ -116,7 +120,7 @@ jobs:
           fi
 
       - name: Commit private state only
-        if: success() && steps.operation.outputs.value == 'run'
+        if: success() && (steps.operation.outputs.value == 'run' || steps.operation.outputs.value == 'test-slack')
         working-directory: runtime
         run: |
           set -euo pipefail
