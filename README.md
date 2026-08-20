@@ -1,31 +1,18 @@
 # watchtower
 
-Public source code for Medier24-style deterministic monitoring of public sources.
+Deterministic monitoring engine for public data sources.
 
 ## Security model
 
-This repository is intentionally public and contains **no production watchlists, keywords, priorities, event history, Slack webhook or runtime state**.
+This repository is intentionally public. It contains the monitoring engine, source adapters, tests and workflow logic, but **no production watchlists, search terms, priorities, runtime state or secret values**.
 
-Production runs use a separate private repository, expected at `marmarmar-code/watchtower-runtime`, which contains only private configuration and state. GitHub Actions checks out the private runtime using a repository-scoped deploy key and commits **only `state/`** back to it.
+Production uses a separate private runtime repository for configuration and state. GitHub Actions checks out that runtime with a repository-scoped credential, masks private configuration before execution and commits only runtime state back to the private repository.
 
-Supported source adapters in V1:
+Filtering is deterministic. No AI/LLM is required at runtime.
 
-- Regjeringen.no RSS
-- Stortingets åpne data: saker, skriftlige spørsmål and høringer
-- Konkurransetilsynet: fusjoner og oppkjøp
-- Euronext issuer news (small experimental adapter)
-- Doffin slot/config contract; disabled until a verified data interface is wired in
+## Secrets
 
-Filtering is deterministic. No AI/LLM is used.
-
-## Production secrets
-
-The public repo needs two GitHub Actions secrets:
-
-- `RUNTIME_DEPLOY_KEY`: write-enabled deploy key for the private runtime repo
-- `SLACK_WEBHOOK_URL`: Slack incoming webhook
-
-Never commit either secret.
+Credentials and notification endpoints are supplied through GitHub Actions secrets and must never be committed to this repository.
 
 ## Local validation
 
@@ -39,11 +26,4 @@ python -m unittest discover -s tests -v
 
 ## Runtime contract
 
-The private repo contains:
-
-```text
-config/watchtower.toml
-state/*.json
-```
-
-The monitor baselines each source silently on first run. Afterwards, new or materially changed items that match private rules are sent to Slack. State is advanced only after Slack succeeds when alerts are pending.
+A private runtime provides configuration plus persisted state. The monitor establishes a silent baseline for a newly enabled source, then compares later runs against that state and emits notifications only for items that satisfy the private rules.
