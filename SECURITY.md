@@ -17,5 +17,9 @@ The production workflow must:
 2. access the private runtime only with a repository-scoped credential;
 3. mask private config values before running monitors;
 4. never print private configuration;
-5. commit only `state/` in the private runtime;
-6. fail closed if unexpected private-runtime files are staged.
+5. derive the public leak deny-list automatically from private `protected_values`, filter rules (`include_any`, `include_all`, `exclude_any`) and `search_queries`;
+6. check that none of those private runtime terms occur in the public source tree before monitoring;
+7. commit only `state/` in the private runtime;
+8. fail closed if unexpected private-runtime files are staged.
+
+Leak checks must report only affected public file paths, never the private values themselves.
