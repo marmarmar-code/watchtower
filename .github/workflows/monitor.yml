@@ -1,6 +1,11 @@
 name: Watchtower
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/monitor.yml"
   workflow_dispatch:
     inputs:
       operation:
@@ -41,7 +46,13 @@ jobs:
       - name: Resolve operation
         id: operation
         shell: bash
-        run: echo "value=${{ inputs.operation }}" >> "$GITHUB_OUTPUT"
+        run: |
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            operation="run"
+          else
+            operation="${{ inputs.operation }}"
+          fi
+          echo "value=$operation" >> "$GITHUB_OUTPUT"
 
       - name: Check out private runtime
         id: runtime_checkout
