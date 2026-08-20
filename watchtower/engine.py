@@ -54,6 +54,13 @@ def build_source(config: SourceConfig) -> Source:
     return cls(config)
 
 
+def _safe_error(exc: Exception) -> str:
+    # Persist only a short exception class/message in the PRIVATE runtime state.
+    # Source exceptions must never include credentials or request headers.
+    message = " ".join(str(exc).split())[:160]
+    return type(exc).__name__ if not message else f"{type(exc).__name__}: {message}"
+
+
 def run(
     config: Config,
     state: StateStore,
@@ -84,7 +91,7 @@ def run(
             if was_baseline:
                 baselined += 1
         except Exception as exc:
-            errors[source_config.id] = type(exc).__name__
+            errors[source_config.id] = _safe_error(exc)
 
     if dry_run:
         return RunResult(checked, baselined, len(alerts), errors)
@@ -118,11 +125,6 @@ def evaluate(
     baseline = previous is None
     alerts: list[Alert] = []
 
-    # Some upstream feeds can emit the same logical item more than once in a
-    # single response. The old loop compared each occurrence against state
-    # mutated by the previous occurrence, creating false "updated" alerts.
-    # Keep only the last occurrence for each key, which matches the state that
-    # the previous implementation ultimately persisted for that key.
     latest: dict[str, tuple[int, Item]] = {}
     for index, item in enumerate(items):
         latest[item.key] = (index, item)
