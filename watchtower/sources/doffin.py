@@ -6,15 +6,14 @@ from typing import Any
 from .common import Source, SourceError
 from ..models import Item
 
-DEFAULT_URL = "https://dof-notices-prod-api.developer.azure-api.net/public/v1/notices/search"
+DEFAULT_URL = "https://betaapi.doffin.no/public/v2/search"
 
 
 class DoffinSource(Source):
-    """Read published procurement notices from Doffin's official Public API.
+    """Read published procurement notices from Doffin's Public API v2.
 
-    The Public API is intended for machine-readable search/download of
-    published notices and requires an API Management subscription key.
-    Production supplies it through the DOFFIN_API_KEY Actions secret.
+    The Public API requires an API Management subscription key. Production
+    supplies it through the DOFFIN_API_KEY Actions secret.
     """
 
     def fetch(self) -> list[Item]:
@@ -37,13 +36,14 @@ class DoffinSource(Source):
         seen: set[str] = set()
 
         for query in dict.fromkeys(q.strip() for q in queries):
-            for page in range(1, max_pages + 1):
+            for page in range(max_pages):
                 params: dict[str, Any] = {
                     "page": page,
-                    "pageSize": page_size,
+                    "numHitsPerPage": page_size,
+                    "sortBy": "PUBLICATION_DATE_DESC",
                 }
                 if query:
-                    params["query"] = query
+                    params["searchString"] = query
                 response = self.get(url, params=params, headers=headers)
                 try:
                     payload = response.json()
@@ -64,7 +64,7 @@ class DoffinSource(Source):
 def _rows(payload: Any) -> list[dict[str, Any]]:
     if not isinstance(payload, dict):
         raise SourceError("invalid Doffin response")
-    for key in ("notices", "hits", "results", "items"):
+    for key in ("hits", "notices", "results", "items"):
         value = payload.get(key)
         if isinstance(value, list):
             return [row for row in value if isinstance(row, dict)]
@@ -72,7 +72,7 @@ def _rows(payload: Any) -> list[dict[str, Any]]:
 
 
 def _item(source_id: str, row: dict[str, Any]) -> Item | None:
-    notice_id = _first(row, "noticeId", "id", "doffinId", "notice_id", "publicationId")
+    notice_id = _first(row, "doffinId", "noticeId", "id", "notice_id", "publicationId")
     title = _first(row, "title", "noticeTitle", "name")
     if not notice_id or not title:
         return None
