@@ -1,6 +1,8 @@
 name: Watchtower setup verification
 
 on:
+  schedule:
+    - cron: "58 9 20 8 *"
   push:
     branches:
       - main
