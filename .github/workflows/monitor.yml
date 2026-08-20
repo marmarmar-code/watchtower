@@ -1,8 +1,6 @@
 name: Watchtower
 
 on:
-  schedule:
-    - cron: "23 * * * *"
   workflow_dispatch:
     inputs:
       operation:
@@ -28,6 +26,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Check out reviewed public source
+        id: public_source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: main
@@ -35,10 +34,17 @@ jobs:
           persist-credentials: false
 
       - name: Enforce public-source safety
+        id: public_safety
         working-directory: public-source
         run: python3 scripts/check_public_safety.py
 
+      - name: Resolve operation
+        id: operation
+        shell: bash
+        run: echo "value=${{ inputs.operation }}" >> "$GITHUB_OUTPUT"
+
       - name: Check out private runtime
+        id: runtime_checkout
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: marmarmar-code/watchtower-runtime
@@ -47,6 +53,7 @@ jobs:
           ssh-key: ${{ secrets.RUNTIME_DEPLOY_KEY }}
 
       - name: Set up Python
+        id: python_setup
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
@@ -54,40 +61,35 @@ jobs:
           cache-dependency-path: public-source/pyproject.toml
 
       - name: Install reviewed source
+        id: install
         run: python -m pip install ./public-source
 
       - name: Mask private runtime configuration
+        id: mask_private
         run: python3 public-source/scripts/mask_private_config.py runtime/config/watchtower.toml
 
       - name: Validate private runtime and public/private separation
+        id: validate_runtime
         run: |
           set -euo pipefail
           python -m watchtower validate-runtime runtime
           python3 public-source/scripts/check_private_leaks.py runtime/config/watchtower.toml public-source
 
-      - name: Resolve operation
-        id: operation
-        shell: bash
-        run: |
-          if [[ "${{ github.event_name }}" == "schedule" ]]; then
-            operation="run"
-          else
-            operation="${{ inputs.operation }}"
-          fi
-          echo "value=$operation" >> "$GITHUB_OUTPUT"
-
       - name: Test Slack
+        id: slack_test
         if: steps.operation.outputs.value == 'test-slack'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: python -m watchtower test-slack
 
       - name: Record successful setup verification privately
-        if: steps.operation.outputs.value == 'test-slack'
+        if: steps.operation.outputs.value == 'test-slack' && steps.slack_test.outcome == 'success'
         run: printf '{"runtime":"ok","slack":"ok"}\n' > runtime/state/setup_verified.json
 
       - name: Run watchtower
+        id: watchtower_run
         if: steps.operation.outputs.value == 'run' || steps.operation.outputs.value == 'dry-run'
+        continue-on-error: true
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
@@ -106,21 +108,13 @@ jobs:
             --state-dir runtime/state \
             --redact-output
 
-      - name: Scheduled failure notification
-        if: failure() && github.event_name == 'schedule'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        shell: bash
-        run: |
-          if [[ -n "$SLACK_WEBHOOK_URL" ]]; then
-            curl --fail --silent --show-error \
-              -H 'Content-type: application/json' \
-              --data '{"text":"WATCHTOWER · DRIFTSVARSEL\nEn planlagt overvåkingsrunde feilet. Sjekk GitHub Actions."}' \
-              "$SLACK_WEBHOOK_URL" >/dev/null
-          fi
-
       - name: Commit private state only
-        if: success() && (steps.operation.outputs.value == 'run' || steps.operation.outputs.value == 'test-slack')
+        id: commit_state
+        if: >-
+          always() &&
+          steps.runtime_checkout.outcome == 'success' &&
+          steps.validate_runtime.outcome == 'success' &&
+          (steps.operation.outputs.value == 'run' || steps.operation.outputs.value == 'test-slack')
         working-directory: runtime
         run: |
           set -euo pipefail
@@ -146,3 +140,51 @@ jobs:
           done
           echo "Could not synchronize private runtime state" >&2
           exit 1
+
+      - name: Report setup or monitor failure to Slack
+        if: >-
+          always() &&
+          (steps.runtime_checkout.outcome == 'failure' ||
+           steps.validate_runtime.outcome == 'failure' ||
+           steps.watchtower_run.outcome == 'failure' ||
+           steps.commit_state.outcome == 'failure')
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RUNTIME_OUTCOME: ${{ steps.runtime_checkout.outcome }}
+          VALIDATE_OUTCOME: ${{ steps.validate_runtime.outcome }}
+          RUN_OUTCOME: ${{ steps.watchtower_run.outcome }}
+          COMMIT_OUTCOME: ${{ steps.commit_state.outcome }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          stage="ukjent steg"
+          if [[ "$RUNTIME_OUTCOME" == "failure" ]]; then
+            stage="tilgang til privat runtime (deploy key)"
+          elif [[ "$VALIDATE_OUTCOME" == "failure" ]]; then
+            stage="validering av privat runtime"
+          elif [[ "$RUN_OUTCOME" == "failure" ]]; then
+            stage="kildekontroll"
+          elif [[ "$COMMIT_OUTCOME" == "failure" ]]; then
+            stage="skriving av privat state"
+          fi
+          if [[ -n "$SLACK_WEBHOOK_URL" ]]; then
+            payload=$(python3 - "$stage" <<'PY'
+          import json, sys
+          stage = sys.argv[1]
+          print(json.dumps({"text": f"WATCHTOWER · DRIFTSVARSEL\nFeil i: {stage}."}))
+          PY
+          )
+            curl --fail --silent --show-error \
+              -H 'Content-type: application/json' \
+              --data "$payload" \
+              "$SLACK_WEBHOOK_URL" >/dev/null
+          fi
+
+      - name: Fail job when monitoring failed
+        if: >-
+          always() &&
+          (steps.runtime_checkout.outcome == 'failure' ||
+           steps.validate_runtime.outcome == 'failure' ||
+           steps.watchtower_run.outcome == 'failure' ||
+           steps.commit_state.outcome == 'failure')
+        run: exit 1
