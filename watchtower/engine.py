@@ -14,6 +14,7 @@ from .sources.stortinget import StortingetSource
 from .sources.konkurransetilsynet import KonkurransetilsynetSource
 from .sources.euronext import EuronextSource
 from .sources.doffin import DoffinSource
+from .sources.hoyesterett import HoyesterettSource
 
 
 SOURCE_TYPES: dict[str, type[Source]] = {
@@ -22,6 +23,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "konkurransetilsynet": KonkurransetilsynetSource,
     "euronext": EuronextSource,
     "doffin": DoffinSource,
+    "hoyesterett": HoyesterettSource,
 }
 
 
