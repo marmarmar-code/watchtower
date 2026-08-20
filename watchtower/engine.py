@@ -73,9 +73,9 @@ def run(
             continue
         try:
             source = source_factory(source_config)
-            items = source.fetch()
-            checked += 1
             old_state = state.load(source_config.id)
+            items = source.fetch_with_state(old_state)
+            checked += 1
             next_state, source_alerts, was_baseline = evaluate(
                 source_config, items, old_state, max_seen=config.max_seen_per_source
             )
