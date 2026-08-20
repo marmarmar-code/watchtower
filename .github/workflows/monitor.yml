@@ -1,6 +1,13 @@
 name: Watchtower
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/monitor.yml"
+  schedule:
+    - cron: "23 * * * *"
   workflow_dispatch:
     inputs:
       operation:
@@ -67,7 +74,7 @@ jobs:
         id: operation
         shell: bash
         run: |
-          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+          if [[ "${{ github.event_name }}" == "schedule" || "${{ github.event_name }}" == "push" ]]; then
             operation="run"
           else
             operation="${{ inputs.operation }}"
