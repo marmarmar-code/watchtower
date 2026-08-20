@@ -1,8 +1,6 @@
 name: Watchtower
 
 on:
-  schedule:
-    - cron: "23 * * * *"
   workflow_dispatch:
     inputs:
       operation:
@@ -43,13 +41,7 @@ jobs:
       - name: Resolve operation
         id: operation
         shell: bash
-        run: |
-          if [[ "${{ github.event_name }}" == "schedule" ]]; then
-            operation="run"
-          else
-            operation="${{ inputs.operation }}"
-          fi
-          echo "value=$operation" >> "$GITHUB_OUTPUT"
+        run: echo "value=${{ inputs.operation }}" >> "$GITHUB_OUTPUT"
 
       - name: Check out private runtime
         id: runtime_checkout
