@@ -2,7 +2,7 @@ name: Watchtower setup verification
 
 on:
   schedule:
-    - cron: "2 10 20 8 *"
+    - cron: "*/5 * * * *"
 
 permissions:
   contents: write
