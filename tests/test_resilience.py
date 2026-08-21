@@ -6,6 +6,7 @@ from unittest.mock import Mock
 import requests
 
 from watchtower.config import FilterRule, SourceConfig
+from watchtower.diagnostics import failure_detail
 from watchtower.engine import evaluate
 from watchtower.models import Item
 from watchtower.sources.common import Source, SourceError
@@ -106,6 +107,19 @@ class ResilienceTests(unittest.TestCase):
         self.assertEqual(["2", "1"], current["order"])
         self.assertEqual(1, len(alerts))
         self.assertEqual("updated", alerts[0].change)
+
+    def test_failure_detail_exposes_source_and_status_only(self):
+        detail = failure_detail(
+            {
+                "errors": {
+                    "euronext": "SourceError: euronext returned HTTP 500",
+                    "other": "ParserError: private and unnecessary detail",
+                }
+            }
+        )
+
+        self.assertEqual("euronext (HTTP 500), other (ParserError)", detail)
+        self.assertNotIn("private", detail)
 
 
 if __name__ == "__main__":
