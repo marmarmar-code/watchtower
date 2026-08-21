@@ -163,24 +163,35 @@ jobs:
           VALIDATE_OUTCOME: ${{ steps.validate_runtime.outcome }}
           RUN_OUTCOME: ${{ steps.watchtower_run.outcome }}
           COMMIT_OUTCOME: ${{ steps.commit_state.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         shell: bash
         run: |
           set -euo pipefail
           stage="ukjent steg"
+          detail=""
           if [[ "$RUNTIME_OUTCOME" == "failure" ]]; then
             stage="tilgang til privat runtime (deploy key)"
           elif [[ "$VALIDATE_OUTCOME" == "failure" ]]; then
             stage="validering av privat runtime"
           elif [[ "$RUN_OUTCOME" == "failure" ]]; then
             stage="kildekontroll"
+            if [[ -f runtime/state/_status.json ]]; then
+              detail=$(python -m watchtower.diagnostics runtime/state/_status.json || true)
+            fi
           elif [[ "$COMMIT_OUTCOME" == "failure" ]]; then
             stage="skriving av privat state"
           fi
           if [[ -n "$SLACK_WEBHOOK_URL" ]]; then
-            payload=$(python3 - "$stage" <<'PY'
+            payload=$(python3 - "$stage" "$detail" "$RUN_URL" <<'PY'
           import json, sys
-          stage = sys.argv[1]
-          print(json.dumps({"text": f"WATCHTOWER · DRIFTSVARSEL\nFeil i: {stage}."}))
+
+          stage, detail, run_url = sys.argv[1:4]
+          text = f"WATCHTOWER · DRIFTSVARSEL\nFeil i: {stage}."
+          if detail:
+              text += f"\nDetalj: {detail}."
+          if run_url:
+              text += f"\nKjøring: {run_url}"
+          print(json.dumps({"text": text}))
           PY
           )
             curl --fail --silent --show-error \
