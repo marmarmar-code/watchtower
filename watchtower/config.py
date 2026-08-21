@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
+import re
 import tomllib
 
 
@@ -11,14 +12,28 @@ class FilterRule:
     include_any: tuple[str, ...] = ()
     include_all: tuple[str, ...] = ()
     exclude_any: tuple[str, ...] = ()
+    match_mode: str = "smart"
+
+    def _matches_term(self, text: str, term: str) -> bool:
+        mode = self.match_mode
+        if mode == "smart":
+            mode = "whole_word" if len(term.strip()) <= 3 else "substring"
+        if mode == "substring":
+            return term.casefold() in text.casefold()
+        if mode == "whole_word":
+            pattern = rf"(?<!\w){re.escape(term)}(?!\w)"
+            return re.search(pattern, text, flags=re.IGNORECASE) is not None
+        raise ValueError(f"unsupported filter match_mode: {self.match_mode}")
+
+    def matches_term(self, text: str, term: str) -> bool:
+        return self._matches_term(text, term)
 
     def matches(self, text: str) -> bool:
-        haystack = text.casefold()
-        if self.exclude_any and any(term.casefold() in haystack for term in self.exclude_any):
+        if self.exclude_any and any(self._matches_term(text, term) for term in self.exclude_any):
             return False
-        if self.include_all and not all(term.casefold() in haystack for term in self.include_all):
+        if self.include_all and not all(self._matches_term(text, term) for term in self.include_all):
             return False
-        if self.include_any and not any(term.casefold() in haystack for term in self.include_any):
+        if self.include_any and not any(self._matches_term(text, term) for term in self.include_any):
             return False
         return bool(self.include_any or self.include_all)
 
@@ -69,10 +84,14 @@ def load_config(path: str | Path) -> Config:
             raise ValueError(f"duplicate source id: {source_id}")
         ids.add(source_id)
         filter_row = row.get("filter", {}) or {}
+        match_mode = str(filter_row.get("match_mode", "smart")).strip()
+        if match_mode not in {"smart", "substring", "whole_word"}:
+            raise ValueError("filter match_mode must be smart, substring or whole_word")
         filters = FilterRule(
             include_any=_strings(filter_row.get("include_any")),
             include_all=_strings(filter_row.get("include_all")),
             exclude_any=_strings(filter_row.get("exclude_any")),
+            match_mode=match_mode,
         )
         urls = _strings(row.get("urls"))
         options = {k: v for k, v in row.items() if k not in {
