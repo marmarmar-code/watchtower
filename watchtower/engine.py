@@ -149,15 +149,28 @@ def evaluate(
     max_seen: int,
 ) -> tuple[dict, list[Alert], bool]:
     seen = dict(previous.get("seen", {})) if previous else {}
-    order = list(previous.get("order", [])) if previous else []
+    previous_order = list(previous.get("order", [])) if previous else []
     baseline = previous is None
     alerts: list[Alert] = []
+
+    order: list[str] = []
+    order_keys: set[str] = set()
+    for key in previous_order:
+        if key in seen and key not in order_keys:
+            order.append(key)
+            order_keys.add(key)
+    for key in seen:
+        if key not in order_keys:
+            order.append(key)
+            order_keys.add(key)
 
     latest: dict[str, tuple[int, Item]] = {}
     for index, item in enumerate(items):
         latest[item.key] = (index, item)
     unique_items = [item for _, item in sorted(latest.values(), key=lambda pair: pair[0])]
 
+    move_to_end: list[str] = []
+    moved: set[str] = set()
     for item in unique_items:
         digest = item.content_hash()
         old_digest = seen.get(item.key)
@@ -166,9 +179,15 @@ def evaluate(
         if not baseline and candidate and source.filters.matches(item.searchable_text()):
             alerts.append(Alert(source, item, change, _matched_terms(source, item.searchable_text())))
         seen[item.key] = digest
-        if item.key in order:
-            order.remove(item.key)
-        order.append(item.key)
+
+        if change != "unchanged" or item.key not in order_keys:
+            if item.key not in moved:
+                move_to_end.append(item.key)
+                moved.add(item.key)
+
+    if moved:
+        order = [key for key in order if key not in moved]
+        order.extend(move_to_end)
 
     if max_seen > 0 and len(order) > max_seen:
         drop = order[:-max_seen]
