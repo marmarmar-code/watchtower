@@ -73,6 +73,16 @@ def _should_save_status(previous: dict | None, current: dict) -> bool:
     return not previous_day or previous_day != current_day
 
 
+def _state_for_evaluation(source: SourceConfig, previous: dict | None) -> dict | None:
+    if (
+        previous is not None
+        and source.options.get("rebaseline_empty_state") is True
+        and not previous.get("seen")
+    ):
+        return None
+    return previous
+
+
 def run(
     config: Config,
     state: StateStore,
@@ -96,7 +106,10 @@ def run(
             items = source.fetch_with_state(old_state)
             checked += 1
             next_state, source_alerts, was_baseline = evaluate(
-                source_config, items, old_state, max_seen=config.max_seen_per_source
+                source_config,
+                items,
+                _state_for_evaluation(source_config, old_state),
+                max_seen=config.max_seen_per_source,
             )
             staged[source_config.id] = next_state
             alerts.extend(source_alerts)
