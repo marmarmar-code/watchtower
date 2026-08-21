@@ -12,12 +12,12 @@ from watchtower.sources.euronext import EuronextSource, _company_page_items
 COMPANY_URL = "https://example.test/nb/product/equities/NO0010000000-XOSL/company-information"
 COMPANY_HTML = """
 <html>
-  <head><title>POLARIS MEDIA | NO0010000000 | Company information</title></head>
+  <head><title>EXAMPLE INDUSTRIES | NO0010000000 | Company information</title></head>
   <body>
     <section class="issuer-news">
       <a href="/nb/listview/company-press-release/152145">Se alle</a>
-      <div><span>14/08/2026</span><span>2. kvartal 2026: Sterk resultatvekst for Polaris Media</span></div>
-      <div><span>07/08/2026</span><span>Polaris Media ASA (POL): Invitasjon til resultatpresentasjon</span></div>
+      <div><span>14/08/2026</span><span>Second-quarter results show continued growth</span></div>
+      <div><span>07/08/2026</span><span>Example Industries ASA (EXI): Invitation to results webcast</span></div>
       <div class="modal"><a href="/nb/products/equities/company-news/2026-08-14-quarter">Open in new window</a></div>
       <div class="modal"><a href="/nb/products/equities/company-news/2026-08-07-invitation">Open in new window</a></div>
     </section>
@@ -42,14 +42,14 @@ class EuronextTests(unittest.TestCase):
         self.assertEqual(2, len(items))
         self.assertEqual("14/08/2026", items[0].published)
         self.assertEqual(
-            "2. kvartal 2026: Sterk resultatvekst for Polaris Media",
+            "Second-quarter results show continued growth",
             items[0].title,
         )
         self.assertEqual(
             "https://example.test/nb/products/equities/company-news/2026-08-14-quarter",
             items[0].url,
         )
-        self.assertIn("POLARIS MEDIA", items[0].searchable_text())
+        self.assertIn("EXAMPLE INDUSTRIES", items[0].searchable_text())
 
     def test_fetch_does_not_open_stale_listview_when_company_page_has_news(self):
         source = self.source()
