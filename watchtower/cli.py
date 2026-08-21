@@ -4,7 +4,7 @@ import argparse
 import os
 
 from .config import load_config
-from .engine import run
+from .engine import RunResult, run
 from .notifier import SlackNotifier
 from .runtime_safety import validate_runtime
 from .state import StateStore
@@ -22,6 +22,10 @@ def parser() -> argparse.ArgumentParser:
     validate.add_argument("path")
     sub.add_parser("test-slack")
     return p
+
+
+def result_exit_code(result: RunResult) -> int:
+    return 2 if result.errors else 0
 
 
 def main() -> int:
@@ -54,7 +58,7 @@ def main() -> int:
         )
     else:
         print(result)
-    return 2 if result.checked_sources == 0 and result.errors else 0
+    return result_exit_code(result)
 
 
 if __name__ == "__main__":

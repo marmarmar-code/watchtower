@@ -26,6 +26,8 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "hoyesterett": HoyesterettSource,
 }
 
+_STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors")
+
 
 @dataclass
 class Alert:
@@ -61,6 +63,26 @@ def _safe_error(exc: Exception) -> str:
     return type(exc).__name__ if not message else f"{type(exc).__name__}: {message}"
 
 
+def _should_save_status(previous: dict | None, current: dict) -> bool:
+    if previous is None:
+        return True
+    if any(previous.get(field) != current.get(field) for field in _STATUS_FIELDS):
+        return True
+    previous_day = str(previous.get("last_run_at") or "")[:10]
+    current_day = str(current.get("last_run_at") or "")[:10]
+    return not previous_day or previous_day != current_day
+
+
+def _state_for_evaluation(source: SourceConfig, previous: dict | None) -> dict | None:
+    if (
+        previous is not None
+        and source.options.get("rebaseline_empty_state") is True
+        and not previous.get("seen")
+    ):
+        return None
+    return previous
+
+
 def run(
     config: Config,
     state: StateStore,
@@ -84,7 +106,10 @@ def run(
             items = source.fetch_with_state(old_state)
             checked += 1
             next_state, source_alerts, was_baseline = evaluate(
-                source_config, items, old_state, max_seen=config.max_seen_per_source
+                source_config,
+                items,
+                _state_for_evaluation(source_config, old_state),
+                max_seen=config.max_seen_per_source,
             )
             staged[source_config.id] = next_state
             alerts.extend(source_alerts)
@@ -103,13 +128,16 @@ def run(
 
     for source_id, next_state in staged.items():
         state.save(source_id, next_state)
-    state.save("_status", {
+
+    status = {
         "last_run_at": now_iso(),
         "checked_sources": checked,
         "baselined_sources": baselined,
         "alerts": len(alerts),
         "errors": errors,
-    })
+    }
+    if _should_save_status(state.load("_status"), status):
+        state.save("_status", status)
     return RunResult(checked, baselined, len(alerts), errors)
 
 
@@ -148,6 +176,14 @@ def evaluate(
         for key in drop:
             seen.pop(key, None)
 
+    if (
+        previous is not None
+        and previous.get("initialized") is True
+        and previous.get("seen") == seen
+        and previous.get("order") == order
+    ):
+        return dict(previous), alerts, baseline
+
     next_state = {
         "initialized": True,
         "updated_at": now_iso(),
@@ -158,9 +194,8 @@ def evaluate(
 
 
 def _matched_terms(source: SourceConfig, text: str) -> tuple[str, ...]:
-    haystack = text.casefold()
     terms = [*source.filters.include_any, *source.filters.include_all]
-    return tuple(term for term in terms if term.casefold() in haystack)[:8]
+    return tuple(term for term in terms if source.filters.matches_term(text, term))[:8]
 
 
 def format_slack(alerts: list[Alert]) -> str:
