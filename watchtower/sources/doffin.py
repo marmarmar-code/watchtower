@@ -6,11 +6,11 @@ from typing import Any
 from .common import Source, SourceError
 from ..models import Item
 
-DEFAULT_URL = "https://betaapi.doffin.no/public/v2/search"
+DEFAULT_URL = "https://dof-notices-prod-api.developer.azure-api.net/public/v1/notices/search"
 
 
 class DoffinSource(Source):
-    """Read published procurement notices from Doffin's Public API v2.
+    """Read published procurement notices from Doffin's Public API.
 
     The Public API requires an API Management subscription key. Production
     supplies it through the DOFFIN_API_KEY Actions secret.
@@ -36,14 +36,13 @@ class DoffinSource(Source):
         seen: set[str] = set()
 
         for query in dict.fromkeys(q.strip() for q in queries):
-            for page in range(max_pages):
+            for page_index in range(max_pages):
                 params: dict[str, Any] = {
-                    "page": page,
-                    "numHitsPerPage": page_size,
-                    "sortBy": "PUBLICATION_DATE_DESC",
+                    "page": page_index + 1,
+                    "pageSize": page_size,
                 }
                 if query:
-                    params["searchString"] = query
+                    params["query"] = query
                 response = self.get(url, params=params, headers=headers)
                 try:
                     payload = response.json()
@@ -64,7 +63,7 @@ class DoffinSource(Source):
 def _rows(payload: Any) -> list[dict[str, Any]]:
     if not isinstance(payload, dict):
         raise SourceError("invalid Doffin response")
-    for key in ("hits", "notices", "results", "items"):
+    for key in ("notices", "hits", "results", "items"):
         value = payload.get(key)
         if isinstance(value, list):
             return [row for row in value if isinstance(row, dict)]
