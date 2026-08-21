@@ -55,8 +55,6 @@ def build_source(config: SourceConfig) -> Source:
 
 
 def _safe_error(exc: Exception) -> str:
-    # Persist only a short exception class/message in the PRIVATE runtime state.
-    # Source exceptions must never include credentials or request headers.
     message = " ".join(str(exc).split())[:160]
     return type(exc).__name__ if not message else f"{type(exc).__name__}: {message}"
 
@@ -158,9 +156,8 @@ def evaluate(
 
 
 def _matched_terms(source: SourceConfig, text: str) -> tuple[str, ...]:
-    haystack = text.casefold()
     terms = [*source.filters.include_any, *source.filters.include_all]
-    return tuple(term for term in terms if term.casefold() in haystack)[:8]
+    return tuple(term for term in terms if source.filters.matches_term(text, term))[:8]
 
 
 def format_slack(alerts: list[Alert]) -> str:
