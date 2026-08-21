@@ -63,20 +63,24 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(old["seen"], next_state["seen"])
         self.assertEqual(old["order"], next_state["order"])
 
-    def test_doffin_hit_is_normalized_for_filtering(self):
+    def test_doffin_production_hit_is_normalized_for_filtering(self):
         item = doffin_item("doffin", {
             "id": "2026-123456",
-            "title": "Synthetic procurement example",
-            "shortDescription": "Alpha-rule procurement description",
-            "buyer": {"name": "Example Buyer"},
-            "issueDate": "2026-08-20",
+            "heading": "Synthetic procurement example",
+            "description": "Alpha-rule procurement description",
+            "buyer": [{"name": "Example Buyer"}],
+            "publicationDate": "2026-08-20T09:00:00Z",
             "type": "COMPETITION",
             "status": "ACTIVE",
             "cpvCodes": ["00000000"],
+            "doffinClassicUrl": "https://example.test/doffin/2026-123456",
         })
         self.assertIsNotNone(item)
         assert item is not None
         self.assertEqual("2026-123456", item.key)
+        self.assertEqual("Synthetic procurement example", item.title)
+        self.assertEqual("2026-08-20T09:00:00Z", item.published)
+        self.assertEqual("https://example.test/doffin/2026-123456", item.url)
         self.assertIn("Example Buyer", item.searchable_text())
         self.assertIn("Alpha-rule", item.searchable_text())
 
