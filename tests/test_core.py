@@ -4,18 +4,22 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from bs4 import BeautifulSoup
+
 from watchtower.cli import result_exit_code
 from watchtower.config import FilterRule, SourceConfig, load_config
 from watchtower.engine import (
     SOURCE_TYPES,
     RunResult,
     _should_save_status,
+    _state_for_evaluation,
     evaluate,
     format_slack,
 )
 from watchtower.models import Item
 from watchtower.runtime_safety import validate_runtime
 from watchtower.sources.doffin import _item as doffin_item
+from watchtower.sources.euronext import _listview_items
 from watchtower.state import StateStore
 
 
@@ -87,6 +91,13 @@ class CoreTests(unittest.TestCase):
         self.assertEqual([], alerts)
         self.assertEqual(old, next_state)
 
+    def test_empty_state_can_be_explicitly_rebaselined(self):
+        source = self.source(options={"rebaseline_empty_state": True})
+        empty = {"initialized": True, "seen": {}, "order": [], "updated_at": "old"}
+        populated = {"initialized": True, "seen": {"1": "hash"}, "order": ["1"]}
+        self.assertIsNone(_state_for_evaluation(source, empty))
+        self.assertEqual(populated, _state_for_evaluation(source, populated))
+
     def test_status_is_saved_on_change_or_new_utc_day(self):
         previous = {
             "last_run_at": "2026-08-21T08:00:00+00:00",
@@ -128,6 +139,35 @@ class CoreTests(unittest.TestCase):
         self.assertEqual("https://example.test/doffin/2026-123456", item.url)
         self.assertIn("Example Buyer", item.searchable_text())
         self.assertIn("Alpha-rule", item.searchable_text())
+
+    def test_euronext_listview_table_is_normalized(self):
+        soup = BeautifulSoup(
+            """
+            <table>
+              <thead><tr>
+                <th>Tid</th><th>Selskap</th><th>Tittel</th><th>Sektor</th><th>Kategori</th>
+              </tr></thead>
+              <tbody>
+                <tr><td colspan="5">14 Aug 2026</td></tr>
+                <tr>
+                  <td>07:00 CEST</td><td>EXAMPLE CORP</td>
+                  <td><a href="/nb/products/equities/company-news/2026-1">Quarter report</a></td>
+                  <td>Publishing</td><td>Half-year report</td>
+                </tr>
+              </tbody>
+            </table>
+            """,
+            "html.parser",
+        )
+        items = _listview_items("euronext", soup, "https://example.test/listview/company-press-release/1")
+        self.assertEqual(1, len(items))
+        self.assertEqual("Quarter report", items[0].title)
+        self.assertEqual("14 Aug 2026 07:00 CEST", items[0].published)
+        self.assertEqual(
+            "https://example.test/nb/products/equities/company-news/2026-1",
+            items[0].url,
+        )
+        self.assertIn("EXAMPLE CORP", items[0].searchable_text())
 
     def test_new_source_types_are_registered(self):
         self.assertIn("doffin", SOURCE_TYPES)
