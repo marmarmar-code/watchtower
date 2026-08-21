@@ -6,7 +6,8 @@ from typing import Any
 from .common import Source, SourceError
 from ..models import Item
 
-DEFAULT_URL = "https://betaapi.doffin.no/public/v2/search"
+# The Azure developer portal documents the API, but requests are served by api.doffin.no.
+DEFAULT_URL = "https://api.doffin.no/public/v2/search"
 
 
 class DoffinSource(Source):
@@ -36,9 +37,9 @@ class DoffinSource(Source):
         seen: set[str] = set()
 
         for query in dict.fromkeys(q.strip() for q in queries):
-            for page in range(max_pages):
+            for page_index in range(max_pages):
                 params: dict[str, Any] = {
-                    "page": page,
+                    "page": page_index + 1,
                     "numHitsPerPage": page_size,
                     "sortBy": "PUBLICATION_DATE_DESC",
                 }
@@ -73,7 +74,7 @@ def _rows(payload: Any) -> list[dict[str, Any]]:
 
 def _item(source_id: str, row: dict[str, Any]) -> Item | None:
     notice_id = _first(row, "doffinId", "noticeId", "id", "notice_id", "publicationId")
-    title = _first(row, "title", "noticeTitle", "name")
+    title = _first(row, "heading", "title", "noticeTitle", "name")
     if not notice_id or not title:
         return None
 
@@ -84,10 +85,12 @@ def _item(source_id: str, row: dict[str, Any]) -> Item | None:
     notice_type = _first(row, "type", "noticeType")
     status = _first(row, "status")
     cpv = _text(row.get("cpvCodes") or row.get("cpvCode") or row.get("cpv"))
-    published = _first(row, "publishedDate", "issueDate", "publicationDate", "date") or None
+    published = _first(row, "publicationDate", "publishedDate", "issueDate", "date") or None
     deadline = _first(row, "deadline", "tenderDeadline", "submissionDeadline")
     estimated = _text(row.get("estimatedValue"))
-    url = _first(row, "url", "noticeUrl", "webUrl") or f"https://www.doffin.no/notices/{notice_id}"
+    url = _first(row, "url", "noticeUrl", "webUrl", "doffinClassicUrl") or (
+        f"https://www.doffin.no/notices/{notice_id}"
+    )
 
     text = "\n".join(part for part in (description, buyer) if part)
     return Item(
