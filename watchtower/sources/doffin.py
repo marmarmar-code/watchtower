@@ -37,9 +37,9 @@ class DoffinSource(Source):
         seen: set[str] = set()
 
         for query in dict.fromkeys(q.strip() for q in queries):
-            for page in range(max_pages):
+            for page_index in range(max_pages):
                 params: dict[str, Any] = {
-                    "page": page,
+                    "page": page_index + 1,
                     "numHitsPerPage": page_size,
                     "sortBy": "PUBLICATION_DATE_DESC",
                 }
