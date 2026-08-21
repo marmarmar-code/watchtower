@@ -12,12 +12,12 @@ from watchtower.sources.euronext import EuronextSource, _company_page_items
 COMPANY_URL = "https://example.test/nb/product/equities/NO0010000000-XOSL/company-information"
 COMPANY_HTML = """
 <html>
-  <head><title>POLARIS MEDIA | NO0010000000 | Company information</title></head>
+  <head><title>NORTHSTAR GROUP | NO0010000000 | Company information</title></head>
   <body>
     <section class="issuer-news">
-      <a href="/nb/listview/company-press-release/152145">Se alle</a>
-      <div><span>14/08/2026</span><span>2. kvartal 2026: Sterk resultatvekst for Polaris Media</span></div>
-      <div><span>07/08/2026</span><span>Polaris Media ASA (POL): Invitasjon til resultatpresentasjon</span></div>
+      <a href="/nb/listview/company-press-release/152145">See all</a>
+      <div><span>14/08/2026</span><span>Second quarter 2026: Strong result growth for Northstar Group</span></div>
+      <div><span>07/08/2026</span><span>Northstar Group ASA (NST): Invitation to results presentation</span></div>
       <div class="modal"><a href="/nb/products/equities/company-news/2026-08-14-quarter">Open in new window</a></div>
       <div class="modal"><a href="/nb/products/equities/company-news/2026-08-07-invitation">Open in new window</a></div>
     </section>
@@ -42,14 +42,14 @@ class EuronextTests(unittest.TestCase):
         self.assertEqual(2, len(items))
         self.assertEqual("14/08/2026", items[0].published)
         self.assertEqual(
-            "2. kvartal 2026: Sterk resultatvekst for Polaris Media",
+            "Second quarter 2026: Strong result growth for Northstar Group",
             items[0].title,
         )
         self.assertEqual(
             "https://example.test/nb/products/equities/company-news/2026-08-14-quarter",
             items[0].url,
         )
-        self.assertIn("POLARIS MEDIA", items[0].searchable_text())
+        self.assertIn("NORTHSTAR GROUP", items[0].searchable_text())
 
     def test_fetch_does_not_open_stale_listview_when_company_page_has_news(self):
         source = self.source()
@@ -64,20 +64,20 @@ class EuronextTests(unittest.TestCase):
     def test_listview_remains_a_fallback_when_company_page_has_no_news(self):
         company_html = """
         <html><body>
-          <a href="/nb/listview/company-press-release/152145">Se alle</a>
+          <a href="/nb/listview/company-press-release/152145">See all</a>
         </body></html>
         """
         list_html = """
         <table>
           <thead><tr>
-            <th>Tid</th><th>Selskap</th><th>Tittel</th><th>Sektor</th><th>Kategori</th>
+            <th>Time</th><th>Company</th><th>Title</th><th>Sector</th><th>Category</th>
           </tr></thead>
           <tbody>
             <tr><td colspan="5">14 Aug 2026</td></tr>
             <tr>
               <td>07:00 CEST</td><td>EXAMPLE CORP</td>
               <td><a href="/nb/products/equities/company-news/2026-1">Quarter report</a></td>
-              <td>Publishing</td><td>Half-year report</td>
+              <td>Technology</td><td>Half-year report</td>
             </tr>
           </tbody>
         </table>
