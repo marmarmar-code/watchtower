@@ -29,6 +29,17 @@ class CoreTests(unittest.TestCase):
         self.assertFalse(rule.matches("bravo-rule blocked-rule"))
         self.assertFalse(rule.matches("Noe helt annet"))
 
+    def test_short_terms_default_to_whole_word_matching(self):
+        rule = FilterRule(include_any=("KI",))
+        self.assertTrue(rule.matches("Ny satsing på KI i redaksjonen"))
+        self.assertTrue(rule.matches("KI-basert verktøy"))
+        self.assertFalse(rule.matches("Sikkerhetsarbeid i virksomheten"))
+        self.assertFalse(rule.matches("Arkitekturendring"))
+
+    def test_explicit_substring_mode_preserves_legacy_matching(self):
+        rule = FilterRule(include_any=("KI",), match_mode="substring")
+        self.assertTrue(rule.matches("Sikkerhetsarbeid i virksomheten"))
+
     def test_first_run_is_silent_baseline(self):
         state, alerts, baseline = evaluate(self.source(), [self.item()], None, max_seen=100)
         self.assertTrue(baseline)
@@ -110,6 +121,7 @@ class CoreTests(unittest.TestCase):
             )
             cfg = load_config(p)
             self.assertEqual("bravo-rule", cfg.sources[0].filters.include_any[0])
+            self.assertEqual("smart", cfg.sources[0].filters.match_mode)
 
     def test_slack_output_contains_source_and_link(self):
         old, _, _ = evaluate(self.source(), [self.item("Alpha-rule A")], None, max_seen=100)
