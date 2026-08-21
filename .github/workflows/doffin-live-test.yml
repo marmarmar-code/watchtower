@@ -16,13 +16,50 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m pip install .
-      - name: Authenticate, fetch and parse Doffin Public API
+      - name: Inspect response schema and parser result
         env:
           DOFFIN_API_KEY: ${{ secrets.DOFFIN_API_KEY }}
         run: |
           python - <<'PY'
+          import os
+          import requests
+
           from watchtower.config import FilterRule, SourceConfig
           from watchtower.sources.doffin import DoffinSource
+
+          endpoint = "https://api.doffin.no/public/v2/search"
+          headers = {
+              "Ocp-Apim-Subscription-Key": os.environ["DOFFIN_API_KEY"],
+              "Accept": "application/json",
+          }
+          params = {
+              "page": 1,
+              "numHitsPerPage": 5,
+              "sortBy": "PUBLICATION_DATE_DESC",
+          }
+          response = requests.get(endpoint, headers=headers, params=params, timeout=30)
+          print(f"http_status={response.status_code}")
+          response.raise_for_status()
+          payload = response.json()
+          print("top_level_keys=" + ",".join(sorted(payload.keys())))
+          for key, value in payload.items():
+              print(f"top_level_type:{key}={type(value).__name__}")
+
+          rows = next(
+              (payload[key] for key in ("hits", "notices", "results", "items") if isinstance(payload.get(key), list)),
+              [],
+          )
+          print(f"raw_rows={len(rows)}")
+          if rows and isinstance(rows[0], dict):
+              print("first_row_keys=" + ",".join(sorted(rows[0].keys())))
+              for key, value in rows[0].items():
+                  if isinstance(value, dict):
+                      print(f"field_shape:{key}=dict[{','.join(sorted(value.keys()))}]")
+                  elif isinstance(value, list):
+                      nested = type(value[0]).__name__ if value else "empty"
+                      print(f"field_shape:{key}=list[{nested}]")
+                  else:
+                      print(f"field_shape:{key}={type(value).__name__}")
 
           config = SourceConfig(
               id="doffin",
@@ -36,5 +73,5 @@ jobs:
               },
           )
           items = DoffinSource(config).fetch()
-          print(f"Doffin live test passed; normalized_items={len(items)}")
+          print(f"normalized_items={len(items)}")
           PY
