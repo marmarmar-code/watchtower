@@ -21,6 +21,7 @@ def response(status: int, *, retry_after: str | None = None) -> requests.Respons
     value = requests.Response()
     value.status_code = status
     value._content = b"ok"
+    value.raw = Mock()
     value.url = "https://example.test/source"
     if retry_after is not None:
         value.headers["Retry-After"] = retry_after
