@@ -27,6 +27,8 @@ SOURCE_TYPES: dict[str, type[Source]] = {
 }
 
 _STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors")
+_ALERT_AUDIT_SOURCE_ID = "_alert_audit"
+_ALERT_AUDIT_LIMIT = 500
 
 
 @dataclass
@@ -83,6 +85,29 @@ def _state_for_evaluation(source: SourceConfig, previous: dict | None) -> dict |
     return previous
 
 
+def _save_alert_audit(
+    state: StateStore,
+    alerts: list[Alert],
+    *,
+    sent_at: str,
+) -> None:
+    previous = state.load(_ALERT_AUDIT_SOURCE_ID) or {}
+    entries = previous.get("entries", [])
+    if not isinstance(entries, list) or not all(isinstance(entry, dict) for entry in entries):
+        raise ValueError("invalid private alert audit")
+    entries = list(entries)
+    entries.extend(
+        {
+            "sent_at": sent_at,
+            "source_id": alert.source.id,
+            "item_key": alert.item.key,
+            "change": alert.change,
+        }
+        for alert in alerts
+    )
+    state.save(_ALERT_AUDIT_SOURCE_ID, {"entries": entries[-_ALERT_AUDIT_LIMIT:]})
+
+
 def run(
     config: Config,
     state: StateStore,
@@ -129,8 +154,12 @@ def run(
     for source_id, next_state in staged.items():
         state.save(source_id, next_state)
 
+    completed_at = now_iso()
+    if alerts:
+        _save_alert_audit(state, alerts, sent_at=completed_at)
+
     status = {
-        "last_run_at": now_iso(),
+        "last_run_at": completed_at,
         "checked_sources": checked,
         "baselined_sources": baselined,
         "alerts": len(alerts),

@@ -3,18 +3,22 @@ from __future__ import annotations
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import Mock
 
 from bs4 import BeautifulSoup
 
 from watchtower.cli import result_exit_code
-from watchtower.config import FilterRule, SourceConfig, load_config
+from watchtower.config import Config, FilterRule, SourceConfig, load_config
 from watchtower.engine import (
+    Alert,
     SOURCE_TYPES,
     RunResult,
+    _save_alert_audit,
     _should_save_status,
     _state_for_evaluation,
     evaluate,
     format_slack,
+    run,
 )
 from watchtower.models import Item
 from watchtower.runtime_safety import validate_runtime
@@ -112,6 +116,80 @@ class CoreTests(unittest.TestCase):
         self.assertFalse(_should_save_status(previous, same_day))
         self.assertTrue(_should_save_status(previous, next_day))
         self.assertTrue(_should_save_status(previous, changed))
+
+    def test_successful_alert_is_written_to_minimal_private_audit(self):
+        class StaticSource:
+            def __init__(self, items):
+                self.items = items
+
+            def fetch_with_state(self, previous):
+                return self.items
+
+        source = self.source()
+        config = Config((source,), max_seen_per_source=100)
+        current = [self.item("Old alpha-rule item")]
+        notifier = Mock()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            state = StateStore(tmp)
+            factory = lambda _: StaticSource(current)
+            run(config, state, notifier, source_factory=factory)
+            self.assertIsNone(state.load("_alert_audit"))
+
+            current.append(Item("x", "2", "New alpha-rule item", "https://example.test/2"))
+            result = run(config, state, notifier, source_factory=factory)
+
+            self.assertEqual(1, result.alerts)
+            notifier.send.assert_called_once()
+            audit = state.load("_alert_audit")
+            self.assertIsNotNone(audit)
+            assert audit is not None
+            self.assertEqual(1, len(audit["entries"]))
+            entry = audit["entries"][0]
+            self.assertEqual({"sent_at", "source_id", "item_key", "change"}, set(entry))
+            self.assertEqual("x", entry["source_id"])
+            self.assertEqual("2", entry["item_key"])
+            self.assertEqual("new", entry["change"])
+
+    def test_failed_slack_delivery_is_not_audited(self):
+        class StaticSource:
+            def __init__(self, items):
+                self.items = items
+
+            def fetch_with_state(self, previous):
+                return self.items
+
+        source = self.source()
+        config = Config((source,), max_seen_per_source=100)
+        old = self.item("Old alpha-rule item")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            state = StateStore(tmp)
+            run(config, state, Mock(), source_factory=lambda _: StaticSource([old]))
+            failing_notifier = Mock()
+            failing_notifier.send.side_effect = RuntimeError("delivery failed")
+            items = [old, Item("x", "2", "New alpha-rule item", "https://example.test/2")]
+
+            with self.assertRaisesRegex(RuntimeError, "delivery failed"):
+                run(config, state, failing_notifier, source_factory=lambda _: StaticSource(items))
+
+            self.assertIsNone(state.load("_alert_audit"))
+
+    def test_private_alert_audit_is_bounded(self):
+        source = self.source()
+        alerts = [
+            Alert(source, Item("x", str(index), "Alpha", f"https://example.test/{index}"), "new", ())
+            for index in range(501)
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            state = StateStore(tmp)
+            _save_alert_audit(state, alerts, sent_at="2026-08-24T08:00:00+00:00")
+            audit = state.load("_alert_audit")
+            self.assertIsNotNone(audit)
+            assert audit is not None
+            self.assertEqual(500, len(audit["entries"]))
+            self.assertEqual("1", audit["entries"][0]["item_key"])
+            self.assertEqual("500", audit["entries"][-1]["item_key"])
 
     def test_any_source_error_produces_nonzero_exit_code(self):
         healthy = RunResult(6, 0, 0, {})

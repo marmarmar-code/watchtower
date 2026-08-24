@@ -99,14 +99,14 @@ class ResilienceTests(unittest.TestCase):
             <sporsmal>
               <id>123</id>
               <tittel>Alpha question</tittel>
-              <emne_liste><emne><navn>Media</navn></emne><emne><navn>Technology</navn></emne></emne_liste>
+              <emne_liste><emne><navn>Synthetic Topic One</navn></emne><emne><navn>Synthetic Topic Two</navn></emne></emne_liste>
             </sporsmal>
             """
         )
         shuffled = ET.fromstring(
             """
             <sporsmal>
-              <emne_liste><emne><navn>Technology</navn></emne><emne><navn>Media</navn></emne></emne_liste>
+              <emne_liste><emne><navn>Synthetic Topic Two</navn></emne><emne><navn>Synthetic Topic One</navn></emne></emne_liste>
               <tittel>Alpha question</tittel>
               <id>123</id>
             </sporsmal>
