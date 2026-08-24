@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import unittest
+import xml.etree.ElementTree as ET
 from unittest.mock import Mock
 
 import requests
@@ -10,6 +11,7 @@ from watchtower.diagnostics import failure_detail
 from watchtower.engine import evaluate
 from watchtower.models import Item
 from watchtower.sources.common import Source, SourceError
+from watchtower.sources.stortinget import _stable_text
 
 
 class StubSource(Source):
@@ -90,6 +92,29 @@ class ResilienceTests(unittest.TestCase):
         self.assertFalse(baseline)
         self.assertEqual([], alerts)
         self.assertEqual(previous, current)
+
+    def test_stortinget_text_is_stable_when_nested_xml_order_changes(self):
+        first = ET.fromstring(
+            """
+            <sporsmal>
+              <id>123</id>
+              <tittel>Alpha question</tittel>
+              <emne_liste><emne><navn>Media</navn></emne><emne><navn>Technology</navn></emne></emne_liste>
+            </sporsmal>
+            """
+        )
+        shuffled = ET.fromstring(
+            """
+            <sporsmal>
+              <emne_liste><emne><navn>Technology</navn></emne><emne><navn>Media</navn></emne></emne_liste>
+              <tittel>Alpha question</tittel>
+              <id>123</id>
+            </sporsmal>
+            """
+        )
+
+        self.assertEqual(_stable_text(first), _stable_text(shuffled))
+        self.assertIn("Alpha question", _stable_text(first))
 
     def test_real_content_update_moves_item_to_recent_end(self):
         config = self.source_config()
