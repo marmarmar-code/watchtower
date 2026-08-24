@@ -95,7 +95,8 @@ def _save_alert_audit(
     entries = previous.get("entries", [])
     if not isinstance(entries, list) or not all(isinstance(entry, dict) for entry in entries):
         raise ValueError("invalid private alert audit")
-    entries = [*entries, *(
+    entries = list(entries)
+    entries.extend(
         {
             "sent_at": sent_at,
             "source_id": alert.source.id,
@@ -103,7 +104,7 @@ def _save_alert_audit(
             "change": alert.change,
         }
         for alert in alerts
-    )]
+    )
     state.save(_ALERT_AUDIT_SOURCE_ID, {"entries": entries[-_ALERT_AUDIT_LIMIT:]})
 
 
@@ -258,3 +259,9 @@ def format_slack(alerts: list[Alert]) -> str:
         if alert.matched_terms:
             lines.append("Treff: " + _escape(", ".join(alert.matched_terms)))
         lines.append(f"<{alert.item.url}|Åpne kilden>")
+        blocks.append("\n".join(lines))
+    return "\n\n——————————\n\n".join(blocks)
+
+
+def _escape(value: str) -> str:
+    return value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
