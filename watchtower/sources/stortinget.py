@@ -48,7 +48,7 @@ class StortingetSource(Source):
                 title,
                 f"{BASE}/sak?{urlencode({'sakid': item_id})}",
                 _first(node, "sist_oppdatert_dato", "dato") or None,
-                text=" ".join(_all_text(node)),
+                text=_stable_text(node),
                 metadata={"dataset": "sak"},
             ))
         return out
@@ -67,7 +67,7 @@ class StortingetSource(Source):
                 title,
                 f"{BASE}/enkeltsporsmal?{urlencode({'NSporsmalId': item_id})}",
                 _first(node, "sendt_dato", "datert_dato") or None,
-                text=" ".join(_all_text(node)),
+                text=_stable_text(node),
                 metadata={
                     "dataset": "skriftlig spørsmål",
                     "status": _first(node, "status"),
@@ -95,7 +95,7 @@ class StortingetSource(Source):
                 title,
                 "https://www.stortinget.no/no/Hva-skjer-pa-Stortinget/Horing/",
                 _first(node, "horing_dato_tid", "anmodningsfrist_dato_tid") or None,
-                text=" ".join(_all_text(node)),
+                text=_stable_text(node),
                 metadata={"dataset": "høring"},
             ))
         return out
@@ -127,3 +127,15 @@ def _first(node: ET.Element, *names: str) -> str:
 
 def _all_text(node: ET.Element) -> list[str]:
     return [part.strip() for part in node.itertext() if part and part.strip()]
+
+
+def _stable_text(node: ET.Element) -> str:
+    """Return searchable XML text without depending on element order.
+
+    Stortinget occasionally returns the same record with nested elements in a
+    different order. Item hashes include ``text``, so preserving response order
+    turns those harmless reshuffles into apparent updates and rewrites state.
+    Sorting the text fragments keeps every searchable value while making the
+    representation deterministic.
+    """
+    return " ".join(sorted(_all_text(node), key=str.casefold))
