@@ -185,6 +185,7 @@ def format_slack_entries(alerts: Sequence[NotificationEntry]) -> str:
             f"{_slack_escape(alert.status)}*",
             f"*{_slack_escape(alert.title)}*",
         ]
+        lines.extend(f"• {_slack_escape(detail)}" for detail in alert.details)
         if alert.published:
             lines.append(f"Publisert: {_slack_escape(alert.published)}")
         if alert.matched_terms:
@@ -217,6 +218,16 @@ def format_teams_payload(alerts: Sequence[NotificationEntry]) -> dict:
                 "spacing": "Small",
             }
         )
+
+        if alert.details:
+            body.append(
+                {
+                    "type": "TextBlock",
+                    "text": "\n".join(f"• {detail}" for detail in alert.details),
+                    "wrap": True,
+                    "spacing": "Small",
+                }
+            )
 
         facts = []
         if alert.published:
@@ -277,6 +288,7 @@ def _entry_size(alert: NotificationEntry) -> int:
             alert.url,
             alert.published or "",
             ", ".join(alert.matched_terms),
+            "\n".join(alert.details),
         )
     )
 
