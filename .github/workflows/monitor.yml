@@ -14,6 +14,8 @@ on:
           - run
           - dry-run
           - test-slack
+          - test-teams
+          - test-notification
 
 permissions:
   contents: read
@@ -83,16 +85,27 @@ jobs:
           python -m watchtower validate-runtime runtime
           python3 public-source/scripts/check_private_leaks.py runtime/config/watchtower.toml public-source
 
-      - name: Test Slack
-        id: slack_test
-        if: steps.operation.outputs.value == 'test-slack'
+      - name: Test notification
+        id: notification_test
+        if: >-
+          steps.operation.outputs.value == 'test-slack' ||
+          steps.operation.outputs.value == 'test-teams' ||
+          steps.operation.outputs.value == 'test-notification'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: python -m watchtower test-slack
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "${{ steps.operation.outputs.value }}" in
+            test-slack) python -m watchtower test-slack ;;
+            test-teams) python -m watchtower test-teams ;;
+            test-notification) python -m watchtower test-notification --config runtime/config/watchtower.toml ;;
+          esac
 
       - name: Record successful setup verification privately
-        if: steps.operation.outputs.value == 'test-slack' && steps.slack_test.outcome == 'success'
-        run: printf '{"runtime":"ok","slack":"ok"}\n' > runtime/state/setup_verified.json
+        if: steps.notification_test.outcome == 'success'
+        run: printf '{"runtime":"ok","notification":"ok"}\n' > runtime/state/setup_verified.json
 
       - name: Run watchtower
         id: watchtower_run
@@ -100,6 +113,7 @@ jobs:
         continue-on-error: true
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
           DOFFIN_API_KEY: ${{ secrets.DOFFIN_API_KEY }}
         run: |
           set -euo pipefail
@@ -107,10 +121,6 @@ jobs:
             command=dry-run
           else
             command=run
-            if [[ -z "$SLACK_WEBHOOK_URL" ]]; then
-              echo "SLACK_WEBHOOK_URL is not configured" >&2
-              exit 1
-            fi
           fi
           python -m watchtower "$command" \
             --config runtime/config/watchtower.toml \
@@ -123,7 +133,7 @@ jobs:
           always() &&
           steps.runtime_checkout.outcome == 'success' &&
           steps.validate_runtime.outcome == 'success' &&
-          (steps.operation.outputs.value == 'run' || steps.operation.outputs.value == 'test-slack')
+          (steps.operation.outputs.value == 'run' || steps.notification_test.outcome == 'success')
         working-directory: runtime
         run: |
           set -euo pipefail
@@ -150,7 +160,7 @@ jobs:
           echo "Could not synchronize private runtime state" >&2
           exit 1
 
-      - name: Report setup or monitor failure to Slack
+      - name: Report setup or monitor failure
         if: >-
           always() &&
           (steps.runtime_checkout.outcome == 'failure' ||
@@ -159,6 +169,7 @@ jobs:
            steps.commit_state.outcome == 'failure')
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
           RUNTIME_OUTCOME: ${{ steps.runtime_checkout.outcome }}
           VALIDATE_OUTCOME: ${{ steps.validate_runtime.outcome }}
           RUN_OUTCOME: ${{ steps.watchtower_run.outcome }}
@@ -181,9 +192,10 @@ jobs:
           elif [[ "$COMMIT_OUTCOME" == "failure" ]]; then
             stage="skriving av privat state"
           fi
-          if [[ -n "$SLACK_WEBHOOK_URL" ]]; then
-            payload=$(python3 - "$stage" "$detail" "$RUN_URL" <<'PY'
-          import json, sys
+          python3 - "$stage" "$detail" "$RUN_URL" <<'PY'
+          import os, sys
+          from watchtower.config import load_config
+          from watchtower.notifier import build_notifier
 
           stage, detail, run_url = sys.argv[1:4]
           text = f"WATCHTOWER · DRIFTSVARSEL\nFeil i: {stage}."
@@ -191,14 +203,24 @@ jobs:
               text += f"\nDetalj: {detail}."
           if run_url:
               text += f"\nKjøring: {run_url}"
-          print(json.dumps({"text": text}))
+
+          provider = "slack"
+          try:
+              provider = load_config("runtime/config/watchtower.toml").notifications.provider
+          except Exception:
+              if os.environ.get("TEAMS_WEBHOOK_URL") and not os.environ.get("SLACK_WEBHOOK_URL"):
+                  provider = "teams"
+
+          try:
+              notifier = build_notifier(
+                  provider,
+                  slack_url=os.environ.get("SLACK_WEBHOOK_URL", ""),
+                  teams_url=os.environ.get("TEAMS_WEBHOOK_URL", ""),
+              )
+              notifier.send(text)
+          except Exception as exc:
+              print(f"Could not send failure notification: {type(exc).__name__}", file=sys.stderr)
           PY
-          )
-            curl --fail --silent --show-error \
-              -H 'Content-type: application/json' \
-              --data "$payload" \
-              "$SLACK_WEBHOOK_URL" >/dev/null
-          fi
 
       - name: Fail job when monitoring failed
         if: >-

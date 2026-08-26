@@ -10,6 +10,32 @@ Production uses a separate private runtime repository for configuration and stat
 
 Filtering is deterministic. No AI/LLM is required at runtime.
 
+## Notifications
+
+Watchtower supports Slack and Microsoft Teams.
+
+The private runtime can select the provider:
+
+```toml
+[notifications]
+provider = "slack"
+```
+
+or:
+
+```toml
+[notifications]
+provider = "teams"
+```
+
+If `[notifications]` is omitted, Watchtower defaults to Slack for backward compatibility.
+
+Slack uses the GitHub Actions secret `SLACK_WEBHOOK_URL`.
+
+Microsoft Teams uses `TEAMS_WEBHOOK_URL` and expects a Teams Workflows webhook. Watchtower sends Teams notifications as Adaptive Cards.
+
+Notification endpoints are secrets and must never be committed to either the public repository or a private runtime repository.
+
 ## Secrets
 
 Credentials and notification endpoints are supplied through GitHub Actions secrets and must never be committed to this repository.

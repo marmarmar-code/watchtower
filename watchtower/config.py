@@ -8,6 +8,7 @@ import tomllib
 
 
 MATCH_MODES = {"smart", "substring", "whole_word"}
+NOTIFICATION_PROVIDERS = {"slack", "teams"}
 
 
 @dataclass(frozen=True)
@@ -54,9 +55,15 @@ class SourceConfig:
 
 
 @dataclass(frozen=True)
+class NotificationConfig:
+    provider: str = "slack"
+
+
+@dataclass(frozen=True)
 class Config:
     sources: tuple[SourceConfig, ...]
     max_seen_per_source: int = 3000
+    notifications: NotificationConfig = field(default_factory=NotificationConfig)
 
 
 def _strings(value: Any) -> tuple[str, ...]:
@@ -71,6 +78,15 @@ def load_config(path: str | Path) -> Config:
     raw = tomllib.loads(Path(path).read_text(encoding="utf-8"))
     general = raw.get("general", {})
     max_seen = int(general.get("max_seen_per_source", 3000))
+
+    notification_row = raw.get("notifications", {}) or {}
+    if not isinstance(notification_row, dict):
+        raise ValueError("[notifications] must be a table")
+    notification_provider = str(notification_row.get("provider", "slack")).strip().lower()
+    if notification_provider not in NOTIFICATION_PROVIDERS:
+        raise ValueError("notification provider must be slack or teams")
+    notifications = NotificationConfig(provider=notification_provider)
+
     source_rows = raw.get("source", [])
     if not isinstance(source_rows, list):
         raise ValueError("[[source]] entries are required")
@@ -110,4 +126,4 @@ def load_config(path: str | Path) -> Config:
             alert_on_update=bool(row.get("alert_on_update", True)),
             options=options,
         ))
-    return Config(tuple(sources), max_seen)
+    return Config(tuple(sources), max_seen, notifications)
