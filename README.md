@@ -1,50 +1,46 @@
-# watchtower
+# Watchtower
 
-Deterministic monitoring engine for public data sources.
+Deterministisk overvåkingsmotor for offentlige datakilder.
 
-## Security model
+Watchtower skiller offentlig programkode fra privat konfigurasjon og state. Ingen språkmodell er nødvendig i drift.
 
-This repository is intentionally public. It contains the monitoring engine, source adapters, tests and workflow logic, but **no production watchlists, search terms, priorities, runtime state or secret values**.
+## Struktur
 
-Production uses a separate private runtime repository for configuration and state. GitHub Actions checks out that runtime with a repository-scoped credential, masks private configuration before execution and commits only runtime state back to the private repository.
-
-Filtering is deterministic. No AI/LLM is required at runtime.
-
-## Notifications
-
-Watchtower supports Slack and Microsoft Teams.
-
-The private runtime can select the provider:
-
-```toml
-[notifications]
-provider = "slack"
+```text
+watchtower           offentlig kode, adaptere, tester og workflow
+watchtower-runtime   privat konfigurasjon, overvåkingsverdier og state
 ```
 
-or:
+Opprett en privat runtime fra [watchtower-runtime-template](https://github.com/marmarmar-code/watchtower-runtime-template). Malen inneholder full oppstarts- og kontrollprosedyre.
 
-```toml
-[notifications]
-provider = "teams"
+## Kilder
+
+Motoren inneholder adaptere for:
+
+```text
+regjeringen
+stortinget
+konkurransetilsynet
+euronext
+doffin
+hoyesterett
+brreg
 ```
 
-If `[notifications]` is omitted, Watchtower defaults to Slack for backward compatibility.
+Hver kilde er valgfri. Aktivitet, URL-er, kildespesifikke valg og filterregler angis i privat runtime.
 
-Slack uses the GitHub Actions secret `SLACK_WEBHOOK_URL`.
+### BRREG
 
-Microsoft Teams uses `TEAMS_WEBHOOK_URL` and expects a Teams Workflows webhook. Watchtower sends Teams notifications as Adaptive Cards.
+`brreg` kan overvåke en eksplisitt liste med organisasjonsnumre for:
 
-Notification endpoints are secrets and must never be committed to either the public repository or a private runtime repository.
+- nye årsregnskap;
+- navn, organisasjonsform og næringskode;
+- konkurs, avvikling, sletting og fjerning;
+- daglig leder, styreleder, nestleder og styremedlemmer.
 
-## BRREG monitoring
+Første kjøring etablerer en stille baseline. Adapteren lagrer kompakte snapshots i privat state for å beskrive konkrete endringer. Den laster ikke ned PDF-er og inneholder ingen database eller rapporteringsflate.
 
-Watchtower can monitor selected Norwegian companies through Brønnøysundregistrene. The initial `brreg` source supports:
-
-- new annual accounts;
-- company/status changes, including name, organisation form, industry, bankruptcy, liquidation, deletion and removal;
-- role changes for CEO, chair, deputy chair and board members.
-
-Example private runtime configuration:
+Eksempel:
 
 ```toml
 [[source]]
@@ -57,28 +53,96 @@ companies = ["999999999"]
 events = ["annual_accounts", "company", "roles"]
 
 [source.filter]
-include_any = ["999999999"]
+match_all = true
 exclude_any = []
 ```
 
-Replace the example organisation number with the companies to monitor. The same organisation numbers should normally be present in `include_any`, because BRREG still uses Watchtower's generic deterministic filter before emitting an alert.
+## Filtrering
 
-The first run is a silent baseline. Compact canonical company and role snapshots are stored only in the private runtime state so later alerts can describe concrete changes. The BRREG adapter does **not** archive PDFs, build a filing database or provide a dashboard.
+En aktiv kilde må ha positive filterregler:
 
-## Secrets
+```toml
+[source.filter]
+include_any = ["eksempel"]
+include_all = []
+exclude_any = []
+match_mode = "smart"
+```
 
-Credentials and notification endpoints are supplied through GitHub Actions secrets and must never be committed to this repository.
+eller eksplisitt:
 
-## Local validation
+```toml
+[source.filter]
+match_all = true
+```
+
+`match_all` bør bare brukes når adapteren allerede er begrenset av en konkret liste. Aktive kilder med `REPLACE_ME` eller uten positive regler blir avvist før overvåking starter.
+
+## Varsling
+
+Støttede providere:
+
+```toml
+[notifications]
+provider = "teams"
+```
+
+eller:
+
+```toml
+[notifications]
+provider = "slack"
+```
+
+Teams bruker en Workflow-webhook lagret som Actions-secret `TEAMS_WEBHOOK_URL`. Slack bruker `SLACK_WEBHOOK_URL`.
+
+Varsler presenteres separat for hver provider. Teams får Adaptive Cards med native lenkeknapper; Slack får Slack-formatert tekst. Store treffmengder deles i avgrensede meldinger.
+
+## Runtime-kontrakt
+
+En runtime skal bare inneholde:
+
+```text
+README.md
+.gitignore
+config/watchtower.toml
+state/
+```
+
+Credentials skal ligge i GitHub Actions Secrets, ikke i runtime. Workflowen maskerer private konfigurasjonsverdier, kontrollerer dem mot den offentlige kodebasen og nekter å committe filer utenfor `state/`.
+
+Dersom fork og privat runtime har samme eier og runtime heter `watchtower-runtime`, finner workflowen repositoryet automatisk. Andre plasseringer angis med Actions-variabelen:
+
+```text
+WATCHTOWER_RUNTIME_REPOSITORY=<eier>/<repository>
+```
+
+## Kommandoer
+
+```bash
+python -m watchtower validate-runtime <runtime-katalog>
+python -m watchtower validate-config --config <watchtower.toml>
+python -m watchtower test-notification --config <watchtower.toml>
+python -m watchtower dry-run --config <watchtower.toml> --state-dir <state-katalog>
+python -m watchtower run --config <watchtower.toml> --state-dir <state-katalog>
+```
+
+Første ordinære kjøring av en ny kilde er en stille baseline. En `dry-run` sender ikke ordinære varsler og skriver ikke state.
+
+## Lokal kontroll
 
 ```bash
 python3 -m venv .venv
 . .venv/bin/activate
-pip install -e .
+python -m pip install .
+python -m pip check
+python -m compileall -q watchtower tests scripts
 python scripts/check_public_safety.py
 python -m unittest discover -s tests -v
 ```
 
-## Runtime contract
+## Oppdateringer og bidrag
 
-A private runtime provides configuration plus persisted state. The monitor establishes a silent baseline for a newly enabled source, then compares later runs against that state and emits notifications only for items that satisfy the private rules.
+Hver fork eier sin egen drift, secrets, runtime og lokale kodeendringer. Upstream gir ingen sentral driftsgaranti eller plikt til å utvikle særtilpasninger.
+
+Generelle endringer kan foreslås som pull requests. Se `CONTRIBUTING.md` og `SUPPORT.md` før en endring sendes.
