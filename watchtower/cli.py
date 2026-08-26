@@ -67,7 +67,8 @@ def main() -> int:
     if args.command == "validate-config":
         config = load_config(args.config)
         for source in config.sources:
-            build_source(source)
+            if source.enabled:
+                build_source(source)
         enabled = sum(1 for source in config.sources if source.enabled)
         print(f"WATCHTOWER CONFIG OK; enabled_sources={enabled}")
         return 0
