@@ -4,7 +4,7 @@ import argparse
 import os
 
 from .config import load_config
-from .engine import RunResult, run
+from .engine import RunResult, build_source, run
 from .models import NotificationEntry
 from .notifier import build_notifier
 from .runtime_safety import validate_runtime
@@ -50,6 +50,7 @@ def _sample_entry(provider: str) -> NotificationEntry:
         url="https://example.com/",
         published="Eksempel",
         matched_terms=("test",),
+        details=("Dette er et representativt testvarsel.",),
     )
 
 
@@ -65,6 +66,8 @@ def main() -> int:
         return 0
     if args.command == "validate-config":
         config = load_config(args.config)
+        for source in config.sources:
+            build_source(source)
         enabled = sum(1 for source in config.sources if source.enabled)
         print(f"WATCHTOWER CONFIG OK; enabled_sources={enabled}")
         return 0
