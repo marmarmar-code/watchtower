@@ -9,12 +9,13 @@ import tomllib
 
 FILTER_KEYS = ("include_any", "include_all", "exclude_any")
 SOURCE_KEYS = ("search_queries", "companies")
+PLACEHOLDER_MARKER = "REPLACE_ME"
 
 
 def _strings(value: Any):
     if isinstance(value, str):
         value = value.strip()
-        if value:
+        if value and PLACEHOLDER_MARKER not in value.upper():
             yield value
     elif isinstance(value, list):
         for item in value:
