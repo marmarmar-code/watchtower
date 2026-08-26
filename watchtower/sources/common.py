@@ -49,7 +49,13 @@ class Source(ABC):
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": "watchtower/0.1 (+public-source-monitor)"})
 
-    def get(self, url: str, **kwargs) -> requests.Response:
+    def get(
+        self,
+        url: str,
+        *,
+        accepted_statuses: tuple[int, ...] = (),
+        **kwargs,
+    ) -> requests.Response:
         for attempt in range(1, self.retry_attempts + 1):
             response: requests.Response | None = None
             try:
@@ -60,7 +66,7 @@ class Source(ABC):
                 self.sleep(_retry_delay(None, attempt))
                 continue
 
-            if response.status_code == 200:
+            if response.status_code == 200 or response.status_code in accepted_statuses:
                 return response
 
             if not _is_retryable_status(response.status_code) or attempt >= self.retry_attempts:
@@ -76,11 +82,7 @@ class Source(ABC):
         return self.fetch()
 
     def augment_state(self, state: dict[str, Any]) -> dict[str, Any]:
-        """Add source-specific private state after generic item evaluation.
-
-        Most sources need no extra state. Stateful adapters may override this to
-        persist compact cursors or canonical snapshots in the private runtime.
-        """
+        """Add source-specific private state after generic item evaluation."""
         return state
 
     @abstractmethod
