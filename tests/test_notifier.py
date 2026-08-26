@@ -23,6 +23,7 @@ class NotifierTests(unittest.TestCase):
             url=f"https://example.test/items/{index}",
             published="2026-08-26T12:00:00Z",
             matched_terms=("example",),
+            details=("Example change: A → B",),
         )
 
     def test_build_notifier_selects_slack(self):
@@ -42,7 +43,7 @@ class NotifierTests(unittest.TestCase):
         self.assertEqual("AdaptiveCard", attachment["content"]["type"])
         self.assertEqual("Watchtower test", attachment["content"]["body"][0]["text"])
 
-    def test_teams_alert_payload_has_native_link_action(self):
+    def test_teams_alert_payload_has_native_link_action_and_details(self):
         payload = format_teams_payload((self.entry(),))
         body = payload["attachments"][0]["content"]["body"]
         action_set = next(row for row in body if row["type"] == "ActionSet")
@@ -50,11 +51,13 @@ class NotifierTests(unittest.TestCase):
         self.assertEqual("Action.OpenUrl", action["type"])
         self.assertEqual("Åpne kilden", action["title"])
         self.assertEqual("https://example.test/items/1", action["url"])
+        self.assertIn("Example change: A → B", str(payload))
         self.assertNotIn("<https://", str(payload))
 
-    def test_slack_alert_payload_keeps_slack_link_syntax(self):
+    def test_slack_alert_payload_keeps_slack_link_syntax_and_details(self):
         text = format_slack_entries((self.entry(),))
         self.assertIn("*WATCHTOWER · EXAMPLE SOURCE · NY*", text)
+        self.assertIn("• Example change: A → B", text)
         self.assertIn("<https://example.test/items/1|Åpne kilden>", text)
 
     def test_notification_batches_are_bounded(self):
@@ -79,6 +82,7 @@ class NotifierTests(unittest.TestCase):
         payload = post.call_args.kwargs["json"]
         self.assertEqual("message", payload["type"])
         self.assertIn("Action.OpenUrl", str(payload))
+        self.assertIn("Example change: A → B", str(payload))
 
     def test_slack_rejects_non_slack_webhook(self):
         with self.assertRaisesRegex(ValueError, "invalid Slack webhook URL"):
