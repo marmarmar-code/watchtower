@@ -278,15 +278,31 @@ def _diff_entity(previous: Any, current: dict[str, Any]) -> list[str]:
     ):
         if bool(old.get(key)) != bool(current.get(key)):
             changes.append(f"{label}: {'ja' if current.get(key) else 'nei'}")
-    if old.get("organisation_form") and old.get("organisation_form") != current.get("organisation_form"):
+
+    old_form = old.get("organisation_form")
+    new_form = current.get("organisation_form")
+    if (
+        isinstance(old_form, dict)
+        and isinstance(new_form, dict)
+        and old_form.get("code")
+        and new_form.get("code")
+        and old_form != new_form
+    ):
         changes.append(
-            f"Organisasjonsform: {_coded_display(old.get('organisation_form'))} → "
-            f"{_coded_display(current.get('organisation_form'))}"
+            f"Organisasjonsform: {_coded_display(old_form)} → {_coded_display(new_form)}"
         )
-    if old.get("industry") and old.get("industry") != current.get("industry"):
+
+    old_industry = old.get("industry")
+    new_industry = current.get("industry")
+    if (
+        isinstance(old_industry, dict)
+        and isinstance(new_industry, dict)
+        and old_industry.get("code")
+        and new_industry.get("code")
+        and old_industry != new_industry
+    ):
         changes.append(
-            f"Næringskode: {_coded_display(old.get('industry'))} → "
-            f"{_coded_display(current.get('industry'))}"
+            f"Næringskode: {_coded_display(old_industry)} → {_coded_display(new_industry)}"
         )
     return changes
 
