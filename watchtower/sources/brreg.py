@@ -24,11 +24,7 @@ ROLE_CODES = {
 
 
 class BrregSource(Source):
-    """Monitor selected Norwegian companies through BRREG public APIs.
-
-    The source keeps compact canonical snapshots in the private Watchtower state.
-    Watchtower's generic item store handles deduplication and silent first baseline.
-    """
+    """Monitor selected Norwegian companies through BRREG public APIs."""
 
     def __init__(self, config, *args, **kwargs) -> None:
         super().__init__(config, *args, **kwargs)
@@ -43,9 +39,7 @@ class BrregSource(Source):
             companies.append(orgnr)
         self.companies = tuple(dict.fromkeys(companies))
 
-        raw_events = config.options.get(
-            "events", ["annual_accounts", "company", "roles"]
-        )
+        raw_events = config.options.get("events", ["annual_accounts", "company", "roles"])
         if not isinstance(raw_events, list):
             raise ValueError("BRREG events must be an array")
         allowed = {"annual_accounts", "company", "roles"}
@@ -79,16 +73,12 @@ class BrregSource(Source):
                 old = {}
 
             if "company" in self.events:
-                items.append(
-                    self._entity_item(orgnr, company_name, old.get("entity"), entity)
-                )
+                items.append(self._entity_item(orgnr, company_name, old.get("entity"), entity))
 
             if "roles" in self.events:
                 roles = self._roles(orgnr)
                 current["roles"] = roles
-                items.append(
-                    self._roles_item(orgnr, company_name, old.get("roles"), roles)
-                )
+                items.append(self._roles_item(orgnr, company_name, old.get("roles"), roles))
 
             if "annual_accounts" in self.events:
                 account = self._latest_account(orgnr)
@@ -104,16 +94,25 @@ class BrregSource(Source):
     def augment_state(self, state: dict[str, Any]) -> dict[str, Any]:
         result = dict(state)
         source_state = result.get("source_state")
-        if not isinstance(source_state, dict):
-            source_state = {}
-        else:
-            source_state = dict(source_state)
+        source_state = dict(source_state) if isinstance(source_state, dict) else {}
         source_state["brreg"] = self._snapshots
         result["source_state"] = source_state
         return result
 
     def _entity(self, orgnr: str) -> dict[str, Any]:
-        response = self.get(ENTITY_URL.format(orgnr=orgnr))
+        response = self.get(ENTITY_URL.format(orgnr=orgnr), accepted_statuses=(404, 410))
+        if response.status_code in {404, 410}:
+            return {
+                "name": None,
+                "organisation_form": {"code": None, "description": None},
+                "industry": {"code": None, "description": None},
+                "bankrupt": False,
+                "liquidating": False,
+                "forced_liquidation": False,
+                "deleted": False,
+                "removed": response.status_code == 410,
+                "unknown": response.status_code == 404,
+            }
         try:
             payload = response.json()
         except ValueError as exc:
@@ -126,14 +125,16 @@ class BrregSource(Source):
             "industry": _coded(payload.get("naeringskode1")),
             "bankrupt": bool(payload.get("konkurs")),
             "liquidating": bool(payload.get("underAvvikling")),
-            "forced_liquidation": bool(
-                payload.get("underTvangsavviklingEllerTvangsopplosning")
-            ),
+            "forced_liquidation": bool(payload.get("underTvangsavviklingEllerTvangsopplosning")),
             "deleted": bool(payload.get("slettedato") or payload.get("erSlettet") is True),
+            "removed": False,
+            "unknown": False,
         }
 
     def _roles(self, orgnr: str) -> dict[str, list[str]]:
-        response = self.get(ROLES_URL.format(orgnr=orgnr))
+        response = self.get(ROLES_URL.format(orgnr=orgnr), accepted_statuses=(404, 410))
+        if response.status_code in {404, 410}:
+            return {code: [] for code in ROLE_CODES}
         try:
             payload = response.json()
         except ValueError as exc:
@@ -159,7 +160,9 @@ class BrregSource(Source):
         return {code: sorted(values, key=str.casefold) for code, values in result.items()}
 
     def _latest_account(self, orgnr: str) -> dict[str, Any] | None:
-        response = self.get(ACCOUNTS_URL.format(orgnr=orgnr))
+        response = self.get(ACCOUNTS_URL.format(orgnr=orgnr), accepted_statuses=(404,))
+        if response.status_code == 404:
+            return None
         try:
             payload = response.json()
         except ValueError as exc:
@@ -179,13 +182,7 @@ class BrregSource(Source):
             "journal_number": _clean(latest.get("journalnr")),
         }
 
-    def _entity_item(
-        self,
-        orgnr: str,
-        company_name: str,
-        previous: Any,
-        current: dict[str, Any],
-    ) -> Item:
+    def _entity_item(self, orgnr: str, company_name: str, previous: Any, current: dict[str, Any]) -> Item:
         changes = _diff_entity(previous, current)
         detail = "; ".join(changes) if changes else "Selskapsdata uendret"
         digest = _digest(current)
@@ -198,13 +195,7 @@ class BrregSource(Source):
             metadata={"orgnr": orgnr, "event": "company"},
         )
 
-    def _roles_item(
-        self,
-        orgnr: str,
-        company_name: str,
-        previous: Any,
-        current: dict[str, list[str]],
-    ) -> Item:
+    def _roles_item(self, orgnr: str, company_name: str, previous: Any, current: dict[str, list[str]]) -> Item:
         changes = _diff_roles(previous, current)
         detail = "; ".join(changes) if changes else "Roller uendret"
         digest = _digest(current)
@@ -221,21 +212,14 @@ class BrregSource(Source):
         report_id = int(account["id"])
         period_to = str(account.get("period_to") or "")
         year = period_to[:4] if len(period_to) >= 4 and period_to[:4].isdigit() else ""
-        url = (
-            ANNUAL_REPORT_URL.format(orgnr=orgnr, year=year)
-            if year
-            else ACCOUNTS_URL.format(orgnr=orgnr)
-        )
+        url = ANNUAL_REPORT_URL.format(orgnr=orgnr, year=year) if year else ACCOUNTS_URL.format(orgnr=orgnr)
         return Item(
             self.config.id,
             f"annual:{orgnr}:{report_id}",
             f"Nytt årsregnskap: {company_name}",
             url,
             published=period_to or None,
-            text=(
-                f"{company_name}\n{orgnr}\nNytt årsregnskap\n"
-                f"Periode til: {period_to or 'ukjent'}\nBRREG-ID: {report_id}"
-            ),
+            text=(f"{company_name}\n{orgnr}\nNytt årsregnskap\nPeriode til: {period_to or 'ukjent'}\nBRREG-ID: {report_id}"),
             metadata={"orgnr": orgnr, "event": "annual_accounts", "report_id": report_id},
         )
 
@@ -252,18 +236,14 @@ def _diff_entity(previous: Any, current: dict[str, Any]) -> list[str]:
         ("liquidating", "Avvikling"),
         ("forced_liquidation", "Tvangsavvikling/tvangsoppløsning"),
         ("deleted", "Slettet"),
+        ("removed", "Fjernet fra BRREG Åpne Data"),
     ):
         if bool(old.get(key)) != bool(current.get(key)):
             changes.append(f"{label}: {'ja' if current.get(key) else 'nei'}")
     if old.get("organisation_form") and old.get("organisation_form") != current.get("organisation_form"):
-        changes.append(
-            f"Organisasjonsform: {_coded_display(old.get('organisation_form'))} → "
-            f"{_coded_display(current.get('organisation_form'))}"
-        )
+        changes.append(f"Organisasjonsform: {_coded_display(old.get('organisation_form'))} → {_coded_display(current.get('organisation_form'))}")
     if old.get("industry") and old.get("industry") != current.get("industry"):
-        changes.append(
-            f"Næringskode: {_coded_display(old.get('industry'))} → {_coded_display(current.get('industry'))}"
-        )
+        changes.append(f"Næringskode: {_coded_display(old.get('industry'))} → {_coded_display(current.get('industry'))}")
     return changes
 
 
@@ -309,10 +289,7 @@ def _role_holder(role: dict[str, Any]) -> str | None:
 def _coded(value: Any) -> dict[str, str | None]:
     if not isinstance(value, dict):
         return {"code": None, "description": None}
-    return {
-        "code": _clean(value.get("kode")),
-        "description": _clean(value.get("beskrivelse")),
-    }
+    return {"code": _clean(value.get("kode")), "description": _clean(value.get("beskrivelse"))}
 
 
 def _coded_display(value: Any) -> str:
