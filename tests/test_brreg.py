@@ -29,6 +29,19 @@ def entity(*, bankrupt=False):
     }
 
 
+def removed_entity():
+    return {
+        "name": None,
+        "organisation_form": {"code": None, "description": None},
+        "industry": {"code": None, "description": None},
+        "bankrupt": False,
+        "liquidating": False,
+        "forced_liquidation": False,
+        "deleted": False,
+        "removed": True,
+    }
+
+
 def roles(chair="Ada Example"):
     return {
         "DAGL": ["Editor Example"],
@@ -170,6 +183,22 @@ class BrregTests(unittest.TestCase):
         self.assertEqual(1, len(company_alerts))
         self.assertIn("Konkurs: ja", company_alerts[0].item.text)
         self.assertIn("Konkurs: ja", company_alerts[0].item.alert_details)
+
+    def test_removed_company_alert_omits_unknown_form_and_industry(self):
+        state, _, _ = self.baseline()
+
+        second = self.source(current_entity=removed_entity())
+        items = second.fetch_with_state(state)
+        _, alerts, _ = evaluate(self.config(), items, state, max_seen=100)
+
+        company_alerts = [a for a in alerts if a.item.metadata["event"] == "company"]
+        self.assertEqual(1, len(company_alerts))
+        self.assertEqual(
+            ("Fjernet fra BRREG Åpne Data: ja",),
+            company_alerts[0].item.alert_details,
+        )
+        self.assertNotIn("Organisasjonsform", company_alerts[0].item.text)
+        self.assertNotIn("Næringskode", company_alerts[0].item.text)
 
 
 if __name__ == "__main__":
