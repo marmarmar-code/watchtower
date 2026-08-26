@@ -75,6 +75,14 @@ class Source(ABC):
     def fetch_with_state(self, previous: dict[str, Any] | None) -> list[Item]:
         return self.fetch()
 
+    def augment_state(self, state: dict[str, Any]) -> dict[str, Any]:
+        """Add source-specific private state after generic item evaluation.
+
+        Most sources need no extra state. Stateful adapters may override this to
+        persist compact cursors or canonical snapshots in the private runtime.
+        """
+        return state
+
     @abstractmethod
     def fetch(self) -> list[Item]:
         raise NotImplementedError
