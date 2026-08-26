@@ -139,6 +139,11 @@ def load_config(path: str | Path) -> Config:
             match_mode=match_mode,
             match_all=match_all,
         )
+        if enabled and not (filters.include_any or filters.include_all or filters.match_all):
+            raise ValueError(
+                f"enabled source {source_id} requires include rules or filter.match_all = true"
+            )
+
         urls = _strings(row.get("urls"))
         options = {k: v for k, v in row.items() if k not in {
             "id", "kind", "enabled", "label", "urls", "filter", "alert_on_update"
