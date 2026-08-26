@@ -61,7 +61,7 @@ include_any = ["999999999"]
 exclude_any = []
 ```
 
-Replace the example organisation number with the companies your newsroom wants to monitor. The same organisation numbers should normally be present in `include_any`, because BRREG still uses Watchtower's generic deterministic filter before emitting an alert.
+Replace the example organisation number with the companies to monitor. The same organisation numbers should normally be present in `include_any`, because BRREG still uses Watchtower's generic deterministic filter before emitting an alert.
 
 The first run is a silent baseline. Compact canonical company and role snapshots are stored only in the private runtime state so later alerts can describe concrete changes. The BRREG adapter does **not** archive PDFs, build a filing database or provide a dashboard.
 
