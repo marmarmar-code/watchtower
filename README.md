@@ -146,3 +146,9 @@ python -m unittest discover -s tests -v
 Hver fork eier sin egen drift, secrets, runtime og lokale kodeendringer. Upstream gir ingen sentral driftsgaranti eller plikt til å utvikle særtilpasninger.
 
 Generelle endringer kan foreslås som pull requests. Se `CONTRIBUTING.md` og `SUPPORT.md` før en endring sendes.
+
+## Lisensstatus
+
+Det er foreløpig ikke lagt inn en programvarelisens. Offentlig tilgjengelig kildekode gir derfor ikke i seg selv generell tillatelse til bruk, endring eller videre distribusjon.
+
+En ny installasjon må ha uttrykkelig tillatelse fra rettighetshaveren fram til rettighetshaver og lisens er formelt avklart.
