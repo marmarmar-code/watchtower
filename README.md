@@ -36,6 +36,35 @@ Microsoft Teams uses `TEAMS_WEBHOOK_URL` and expects a Teams Workflows webhook. 
 
 Notification endpoints are secrets and must never be committed to either the public repository or a private runtime repository.
 
+## BRREG monitoring
+
+Watchtower can monitor selected Norwegian companies through Brønnøysundregistrene. The initial `brreg` source supports:
+
+- new annual accounts;
+- company/status changes, including name, organisation form, industry, bankruptcy, liquidation, deletion and removal;
+- role changes for CEO, chair, deputy chair and board members.
+
+Example private runtime configuration:
+
+```toml
+[[source]]
+id = "brreg"
+kind = "brreg"
+label = "Brønnøysundregistrene"
+enabled = true
+alert_on_update = true
+companies = ["999999999"]
+events = ["annual_accounts", "company", "roles"]
+
+[source.filter]
+include_any = ["999999999"]
+exclude_any = []
+```
+
+Replace the example organisation number with the companies to monitor. The same organisation numbers should normally be present in `include_any`, because BRREG still uses Watchtower's generic deterministic filter before emitting an alert.
+
+The first run is a silent baseline. Compact canonical company and role snapshots are stored only in the private runtime state so later alerts can describe concrete changes. The BRREG adapter does **not** archive PDFs, build a filing database or provide a dashboard.
+
 ## Secrets
 
 Credentials and notification endpoints are supplied through GitHub Actions secrets and must never be committed to this repository.
