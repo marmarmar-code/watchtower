@@ -35,6 +35,21 @@ class DistributionTests(unittest.TestCase):
             parsed = load_config(config)
             self.assertFalse(parsed.sources[0].enabled)
 
+    def test_disabled_incomplete_adapter_is_allowed_in_runtime_template(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.write_runtime(
+                root,
+                '[[source]]\n'
+                'id="brreg"\n'
+                'kind="brreg"\n'
+                'enabled=false\n'
+                'companies=["REPLACE_ME_ORGNR_1"]\n'
+                '[source.filter]\n'
+                'match_all=true\n',
+            )
+            self.assertEqual([], validate_runtime(root))
+
     def test_enabled_placeholders_are_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
             config = Path(tmp) / "watchtower.toml"
@@ -82,6 +97,18 @@ class DistributionTests(unittest.TestCase):
             problems = validate_runtime(root)
             self.assertTrue(any("secret-like content" in problem for problem in problems))
 
+    def test_runtime_rejects_legacy_teams_connector_webhook(self):
+        webhook = (
+            "https://example.webhook."
+            "office.com/webhookb2/example/IncomingWebhook/secret"
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.write_runtime(root, '[notifications]\nprovider="teams"\n')
+            (root / "README.md").write_text(webhook, encoding="utf-8")
+            problems = validate_runtime(root)
+            self.assertTrue(any("secret-like content" in problem for problem in problems))
+
     def test_public_safety_rejects_power_platform_webhook(self):
         webhook = (
             "https://default-example.environment.api."
@@ -94,7 +121,7 @@ class DistributionTests(unittest.TestCase):
             problems = find_problems(root)
             self.assertEqual(["secret-like content: leak.txt"], problems)
 
-    def test_runtime_rejects_unknown_source_kind(self):
+    def test_runtime_rejects_enabled_unknown_source_kind(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.write_runtime(
@@ -102,9 +129,9 @@ class DistributionTests(unittest.TestCase):
                 '[[source]]\n'
                 'id="example"\n'
                 'kind="unsupported"\n'
-                'enabled=false\n'
+                'enabled=true\n'
                 '[source.filter]\n'
-                'include_any=[]\n',
+                'match_all=true\n',
             )
             problems = validate_runtime(root)
             self.assertTrue(any("invalid source configuration" in problem for problem in problems))
