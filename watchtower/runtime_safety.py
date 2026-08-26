@@ -4,7 +4,7 @@ import json
 import re
 from pathlib import Path
 
-from .config import load_config
+from .config import Config, load_config
 
 
 SECRET_PATTERNS = [
@@ -35,12 +35,13 @@ def validate_runtime(root: str | Path) -> list[str]:
         if child.name not in allowed_top:
             problems.append(f"unexpected top-level path: {child.name}")
 
+    parsed: Config | None = None
     config = root / "config" / "watchtower.toml"
     if not config.exists():
         problems.append("missing config/watchtower.toml")
     else:
         try:
-            load_config(config)
+            parsed = load_config(config)
         except Exception as exc:
             message = " ".join(str(exc).split())[:160]
             problems.append(
@@ -48,6 +49,17 @@ def validate_runtime(root: str | Path) -> list[str]:
                 if not message
                 else f"invalid watchtower.toml: {message}"
             )
+
+    if parsed is not None:
+        from .engine import build_source
+
+        for source in parsed.sources:
+            try:
+                build_source(source)
+            except Exception as exc:
+                problems.append(
+                    f"invalid source configuration: {source.id} ({type(exc).__name__})"
+                )
 
     for path in root.rglob("*"):
         if not path.is_file() or ".git" in path.parts:
