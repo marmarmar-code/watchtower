@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased distribution candidate
+## Distribution-ready baseline — 2026-08-26
 
 ### Added
 
@@ -11,13 +11,16 @@
 - Fork-local private runtime discovery with optional repository variables.
 - Runtime preflight validation and representative notification tests.
 - Parser contract tests for public source adapters.
+- Generic setup, support, contribution and security documentation.
 
 ### Changed
 
 - All third-party GitHub Actions are pinned to reviewed commit SHAs.
 - Enabled sources must have complete configuration and positive filter rules.
 - Configured company identifiers are included in private/public leak checks.
-- CI now includes patch, package, compilation, security, unit and CLI checks.
+- Setup placeholders are excluded from leak deny-lists until they are replaced.
+- Monitoring runs fail when no source is enabled.
+- CI includes patch, package, compilation, security, unit and CLI checks.
 
 ### Fixed
 
@@ -27,3 +30,7 @@
 - Removed BRREG entities produce a focused status alert without synthetic form or industry changes.
 - Teams alerts no longer contain Slack link syntax.
 - Teams and Power Automate webhook URLs are detected as secret-like content.
+
+### Pending before general open-source distribution
+
+- Confirm the correct rights holder and add an explicit software license.
