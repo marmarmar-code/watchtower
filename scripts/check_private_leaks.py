@@ -6,8 +6,9 @@ from pathlib import Path
 from typing import Any
 import tomllib
 
+
 FILTER_KEYS = ("include_any", "include_all", "exclude_any")
-SOURCE_KEYS = ("search_queries",)
+SOURCE_KEYS = ("search_queries", "companies")
 
 
 def _strings(value: Any):
@@ -50,8 +51,6 @@ def collect_protected_values(data: dict[str, Any]) -> tuple[str, ...]:
 
 
 def _contains_protected(text: str, value: str) -> bool:
-    # Treat runtime terms as words/phrases rather than raw substrings. This also
-    # protects short terms without false positives inside unrelated identifiers.
     pattern = re.compile(rf"(?<!\w){re.escape(value)}(?!\w)", re.IGNORECASE)
     return bool(pattern.search(text))
 
@@ -85,7 +84,6 @@ def main() -> int:
     except ValueError as exc:
         raise SystemExit(str(exc)) from exc
     if leaked_files:
-        # Do not print the private values themselves into Actions logs.
         print("Private runtime terms found in public source", file=sys.stderr)
         for path in leaked_files:
             print(f"- {path}", file=sys.stderr)

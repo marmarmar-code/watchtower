@@ -9,6 +9,7 @@ import tomllib
 
 MATCH_MODES = {"smart", "substring", "whole_word"}
 NOTIFICATION_PROVIDERS = {"slack", "teams"}
+PLACEHOLDER_MARKER = "REPLACE_ME"
 
 
 @dataclass(frozen=True)
@@ -17,6 +18,7 @@ class FilterRule:
     include_all: tuple[str, ...] = ()
     exclude_any: tuple[str, ...] = ()
     match_mode: str = "smart"
+    match_all: bool = False
 
     def matches_term(self, text: str, term: str) -> bool:
         needle = term.strip()
@@ -39,7 +41,7 @@ class FilterRule:
             return False
         if self.include_any and not any(self.matches_term(text, term) for term in self.include_any):
             return False
-        return bool(self.include_any or self.include_all)
+        return self.match_all or bool(self.include_any or self.include_all)
 
 
 @dataclass(frozen=True)
@@ -74,10 +76,24 @@ def _strings(value: Any) -> tuple[str, ...]:
     return tuple(v.strip() for v in value if v.strip())
 
 
+def _contains_placeholder(value: Any) -> bool:
+    if isinstance(value, str):
+        return PLACEHOLDER_MARKER in value.upper()
+    if isinstance(value, list):
+        return any(_contains_placeholder(item) for item in value)
+    if isinstance(value, dict):
+        return any(_contains_placeholder(item) for item in value.values())
+    return False
+
+
 def load_config(path: str | Path) -> Config:
     raw = tomllib.loads(Path(path).read_text(encoding="utf-8"))
     general = raw.get("general", {})
+    if not isinstance(general, dict):
+        raise ValueError("[general] must be a table")
     max_seen = int(general.get("max_seen_per_source", 3000))
+    if max_seen < 1:
+        raise ValueError("general.max_seen_per_source must be positive")
 
     notification_row = raw.get("notifications", {}) or {}
     if not isinstance(notification_row, dict):
@@ -102,16 +118,32 @@ def load_config(path: str | Path) -> Config:
         if source_id in ids:
             raise ValueError(f"duplicate source id: {source_id}")
         ids.add(source_id)
+
+        enabled = bool(row.get("enabled", True))
+        if enabled and _contains_placeholder(row):
+            raise ValueError(f"enabled source {source_id} contains placeholder values")
+
         filter_row = row.get("filter", {}) or {}
+        if not isinstance(filter_row, dict):
+            raise ValueError("source.filter must be a table")
         match_mode = str(filter_row.get("match_mode", "smart")).strip()
         if match_mode not in MATCH_MODES:
             raise ValueError("filter match_mode must be smart, substring or whole_word")
+        match_all = filter_row.get("match_all", False)
+        if not isinstance(match_all, bool):
+            raise ValueError("filter match_all must be true or false")
         filters = FilterRule(
             include_any=_strings(filter_row.get("include_any")),
             include_all=_strings(filter_row.get("include_all")),
             exclude_any=_strings(filter_row.get("exclude_any")),
             match_mode=match_mode,
+            match_all=match_all,
         )
+        if enabled and not (filters.include_any or filters.include_all or filters.match_all):
+            raise ValueError(
+                f"enabled source {source_id} requires include rules or filter.match_all = true"
+            )
+
         urls = _strings(row.get("urls"))
         options = {k: v for k, v in row.items() if k not in {
             "id", "kind", "enabled", "label", "urls", "filter", "alert_on_update"
@@ -119,7 +151,7 @@ def load_config(path: str | Path) -> Config:
         sources.append(SourceConfig(
             id=source_id,
             kind=kind,
-            enabled=bool(row.get("enabled", True)),
+            enabled=enabled,
             label=str(row.get("label") or source_id).strip(),
             urls=urls,
             filters=filters,

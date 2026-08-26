@@ -21,6 +21,7 @@ ROLE_CODES = {
     "NEST": "Nestleder",
     "MEDL": "Styremedlem",
 }
+ORGNR_WEIGHTS = (3, 2, 7, 6, 5, 4, 3, 2)
 
 
 class BrregSource(Source):
@@ -34,8 +35,10 @@ class BrregSource(Source):
         companies = []
         for value in raw_companies:
             orgnr = str(value).strip().replace(" ", "")
-            if len(orgnr) != 9 or not orgnr.isdigit():
-                raise ValueError("BRREG companies must contain 9-digit organisation numbers")
+            if not _valid_orgnr(orgnr):
+                raise ValueError(
+                    "BRREG companies must contain valid 9-digit organisation numbers"
+                )
             companies.append(orgnr)
         self.companies = tuple(dict.fromkeys(companies))
 
@@ -101,7 +104,9 @@ class BrregSource(Source):
 
     def _entity(self, orgnr: str) -> dict[str, Any]:
         response = self.get(ENTITY_URL.format(orgnr=orgnr), accepted_statuses=(404, 410))
-        if response.status_code in {404, 410}:
+        if response.status_code == 404:
+            raise SourceError("BRREG entity was not found")
+        if response.status_code == 410:
             return {
                 "name": None,
                 "organisation_form": {"code": None, "description": None},
@@ -110,8 +115,7 @@ class BrregSource(Source):
                 "liquidating": False,
                 "forced_liquidation": False,
                 "deleted": False,
-                "removed": response.status_code == 410,
-                "unknown": response.status_code == 404,
+                "removed": True,
             }
         try:
             payload = response.json()
@@ -128,7 +132,6 @@ class BrregSource(Source):
             "forced_liquidation": bool(payload.get("underTvangsavviklingEllerTvangsopplosning")),
             "deleted": bool(payload.get("slettedato") or payload.get("erSlettet") is True),
             "removed": False,
-            "unknown": False,
         }
 
     def _roles(self, orgnr: str) -> dict[str, list[str]]:
@@ -182,45 +185,80 @@ class BrregSource(Source):
             "journal_number": _clean(latest.get("journalnr")),
         }
 
-    def _entity_item(self, orgnr: str, company_name: str, previous: Any, current: dict[str, Any]) -> Item:
+    def _entity_item(
+        self,
+        orgnr: str,
+        company_name: str,
+        previous: Any,
+        current: dict[str, Any],
+    ) -> Item:
         changes = _diff_entity(previous, current)
         detail = "; ".join(changes) if changes else "Selskapsdata uendret"
-        digest = _digest(current)
         return Item(
-            self.config.id,
-            f"company:{orgnr}:{digest}",
-            f"Selskapsendring: {company_name}" if changes else f"Selskapsstatus: {company_name}",
-            ENTITY_URL.format(orgnr=orgnr),
+            source_id=self.config.id,
+            key=f"company:{orgnr}",
+            title=(
+                f"Selskapsendring: {company_name}"
+                if changes
+                else f"Selskapsstatus: {company_name}"
+            ),
+            url=ENTITY_URL.format(orgnr=orgnr),
             text=f"{company_name}\n{orgnr}\n{detail}",
             metadata={"orgnr": orgnr, "event": "company"},
+            fingerprint=_digest(current),
+            suppress_alert=not changes,
+            alert_details=tuple(changes),
         )
 
-    def _roles_item(self, orgnr: str, company_name: str, previous: Any, current: dict[str, list[str]]) -> Item:
+    def _roles_item(
+        self,
+        orgnr: str,
+        company_name: str,
+        previous: Any,
+        current: dict[str, list[str]],
+    ) -> Item:
         changes = _diff_roles(previous, current)
         detail = "; ".join(changes) if changes else "Roller uendret"
-        digest = _digest(current)
         return Item(
-            self.config.id,
-            f"roles:{orgnr}:{digest}",
-            f"Rolleendring: {company_name}" if changes else f"Roller: {company_name}",
-            ROLES_URL.format(orgnr=orgnr),
+            source_id=self.config.id,
+            key=f"roles:{orgnr}",
+            title=f"Rolleendring: {company_name}" if changes else f"Roller: {company_name}",
+            url=ROLES_URL.format(orgnr=orgnr),
             text=f"{company_name}\n{orgnr}\n{detail}",
             metadata={"orgnr": orgnr, "event": "roles"},
+            fingerprint=_digest(current),
+            suppress_alert=not changes,
+            alert_details=tuple(changes),
         )
 
     def _account_item(self, orgnr: str, company_name: str, account: dict[str, Any]) -> Item:
         report_id = int(account["id"])
         period_to = str(account.get("period_to") or "")
         year = period_to[:4] if len(period_to) >= 4 and period_to[:4].isdigit() else ""
-        url = ANNUAL_REPORT_URL.format(orgnr=orgnr, year=year) if year else ACCOUNTS_URL.format(orgnr=orgnr)
+        url = (
+            ANNUAL_REPORT_URL.format(orgnr=orgnr, year=year)
+            if year
+            else ACCOUNTS_URL.format(orgnr=orgnr)
+        )
         return Item(
-            self.config.id,
-            f"annual:{orgnr}:{report_id}",
-            f"Nytt årsregnskap: {company_name}",
-            url,
+            source_id=self.config.id,
+            key=f"annual:{orgnr}:{report_id}",
+            title=f"Nytt årsregnskap: {company_name}",
+            url=url,
             published=period_to or None,
-            text=(f"{company_name}\n{orgnr}\nNytt årsregnskap\nPeriode til: {period_to or 'ukjent'}\nBRREG-ID: {report_id}"),
-            metadata={"orgnr": orgnr, "event": "annual_accounts", "report_id": report_id},
+            text=(
+                f"{company_name}\n{orgnr}\nNytt årsregnskap\n"
+                f"Periode til: {period_to or 'ukjent'}\nBRREG-ID: {report_id}"
+            ),
+            metadata={
+                "orgnr": orgnr,
+                "event": "annual_accounts",
+                "report_id": report_id,
+            },
+            alert_details=(
+                f"Periode til: {period_to or 'ukjent'}",
+                f"BRREG-ID: {report_id}",
+            ),
         )
 
 
@@ -240,10 +278,32 @@ def _diff_entity(previous: Any, current: dict[str, Any]) -> list[str]:
     ):
         if bool(old.get(key)) != bool(current.get(key)):
             changes.append(f"{label}: {'ja' if current.get(key) else 'nei'}")
-    if old.get("organisation_form") and old.get("organisation_form") != current.get("organisation_form"):
-        changes.append(f"Organisasjonsform: {_coded_display(old.get('organisation_form'))} → {_coded_display(current.get('organisation_form'))}")
-    if old.get("industry") and old.get("industry") != current.get("industry"):
-        changes.append(f"Næringskode: {_coded_display(old.get('industry'))} → {_coded_display(current.get('industry'))}")
+
+    old_form = old.get("organisation_form")
+    new_form = current.get("organisation_form")
+    if (
+        isinstance(old_form, dict)
+        and isinstance(new_form, dict)
+        and old_form.get("code")
+        and new_form.get("code")
+        and old_form != new_form
+    ):
+        changes.append(
+            f"Organisasjonsform: {_coded_display(old_form)} → {_coded_display(new_form)}"
+        )
+
+    old_industry = old.get("industry")
+    new_industry = current.get("industry")
+    if (
+        isinstance(old_industry, dict)
+        and isinstance(new_industry, dict)
+        and old_industry.get("code")
+        and new_industry.get("code")
+        and old_industry != new_industry
+    ):
+        changes.append(
+            f"Næringskode: {_coded_display(old_industry)} → {_coded_display(new_industry)}"
+        )
     return changes
 
 
@@ -272,13 +332,21 @@ def _role_holder(role: dict[str, Any]) -> str | None:
     if isinstance(person, dict):
         name = person.get("navn")
         if isinstance(name, dict):
-            parts = [_clean(name.get("fornavn")), _clean(name.get("mellomnavn")), _clean(name.get("etternavn"))]
+            parts = [
+                _clean(name.get("fornavn")),
+                _clean(name.get("mellomnavn")),
+                _clean(name.get("etternavn")),
+            ]
             value = " ".join(part for part in parts if part)
             return value or None
     entity = role.get("enhet")
     if isinstance(entity, dict):
         name = entity.get("navn")
-        value = " ".join(str(part).strip() for part in name if str(part).strip()) if isinstance(name, list) else _clean(name)
+        value = (
+            " ".join(str(part).strip() for part in name if str(part).strip())
+            if isinstance(name, list)
+            else _clean(name)
+        )
         orgnr = _clean(entity.get("organisasjonsnummer"))
         if value and orgnr:
             return f"{value} ({orgnr})"
@@ -289,7 +357,10 @@ def _role_holder(role: dict[str, Any]) -> str | None:
 def _coded(value: Any) -> dict[str, str | None]:
     if not isinstance(value, dict):
         return {"code": None, "description": None}
-    return {"code": _clean(value.get("kode")), "description": _clean(value.get("beskrivelse"))}
+    return {
+        "code": _clean(value.get("kode")),
+        "description": _clean(value.get("beskrivelse")),
+    }
 
 
 def _coded_display(value: Any) -> str:
@@ -305,6 +376,19 @@ def _clean(value: Any) -> str | None:
         return None
     cleaned = " ".join(value.split())
     return cleaned or None
+
+
+def _valid_orgnr(value: str) -> bool:
+    if len(value) != 9 or not value.isdigit():
+        return False
+    weighted = sum(int(digit) * weight for digit, weight in zip(value[:8], ORGNR_WEIGHTS))
+    remainder = weighted % 11
+    check_digit = 11 - remainder
+    if check_digit == 11:
+        check_digit = 0
+    if check_digit == 10:
+        return False
+    return check_digit == int(value[-1])
 
 
 def _digest(value: Any) -> str:

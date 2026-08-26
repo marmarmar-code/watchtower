@@ -31,7 +31,7 @@ jobs:
     steps:
       - name: Check out reviewed public source
         id: public_source
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: main
           path: public-source
@@ -55,10 +55,10 @@ jobs:
 
       - name: Check out private runtime
         id: runtime_checkout
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          repository: marmarmar-code/watchtower-runtime
-          ref: main
+          repository: ${{ vars.WATCHTOWER_RUNTIME_REPOSITORY || format('{0}/watchtower-runtime', github.repository_owner) }}
+          ref: ${{ vars.WATCHTOWER_RUNTIME_REF || 'main' }}
           path: runtime
           ssh-key: ${{ secrets.RUNTIME_DEPLOY_KEY }}
 
@@ -72,7 +72,9 @@ jobs:
 
       - name: Install reviewed source
         id: install
-        run: python -m pip install ./public-source
+        run: |
+          python -m pip install ./public-source
+          python -m pip check
 
       - name: Mask private runtime configuration
         id: mask_private
@@ -151,7 +153,8 @@ jobs:
           fi
           git commit --quiet -m "chore: update watchtower state"
           for attempt in 1 2 3; do
-            if git pull --rebase --quiet origin main && git push --quiet origin HEAD:main; then
+            if git pull --rebase --quiet origin "${{ vars.WATCHTOWER_RUNTIME_REF || 'main' }}" && \
+               git push --quiet origin "HEAD:${{ vars.WATCHTOWER_RUNTIME_REF || 'main' }}"; then
               exit 0
             fi
             git rebase --abort >/dev/null 2>&1 || true
@@ -217,7 +220,7 @@ jobs:
                   slack_url=os.environ.get("SLACK_WEBHOOK_URL", ""),
                   teams_url=os.environ.get("TEAMS_WEBHOOK_URL", ""),
               )
-              notifier.send(text)
+              notifier.send_text(text)
           except Exception as exc:
               print(f"Could not send failure notification: {type(exc).__name__}", file=sys.stderr)
           PY
