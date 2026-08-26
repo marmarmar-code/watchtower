@@ -136,7 +136,10 @@ def run(
                 _state_for_evaluation(source_config, old_state),
                 max_seen=config.max_seen_per_source,
             )
-            staged[source_config.id] = source.augment_state(next_state)
+            augment_state = getattr(source, "augment_state", None)
+            staged[source_config.id] = (
+                augment_state(next_state) if callable(augment_state) else next_state
+            )
             alerts.extend(source_alerts)
             if was_baseline:
                 baselined += 1
