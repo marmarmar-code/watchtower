@@ -39,6 +39,23 @@ class PrivateLeakTests(unittest.TestCase):
             values,
         )
 
+    def test_setup_placeholders_are_not_treated_as_private_values(self):
+        config = {
+            "privacy": {"protected_values": ["REPLACE_ME_PRIVATE_VALUE"]},
+            "source": [
+                {
+                    "search_queries": ["REPLACE_ME_QUERY_1"],
+                    "companies": ["REPLACE_ME_ORGNR_1"],
+                    "filter": {
+                        "include_any": ["REPLACE_ME_TOPIC_1"],
+                        "include_all": [],
+                        "exclude_any": [],
+                    },
+                }
+            ],
+        }
+        self.assertEqual((), collect_protected_values(config))
+
     def test_clean_public_tree_passes(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
