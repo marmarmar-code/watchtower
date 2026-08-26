@@ -6,7 +6,7 @@ from typing import Callable
 
 from .config import Config, SourceConfig
 from .models import Item
-from .notifier import SlackNotifier
+from .notifier import Notifier
 from .state import StateStore
 from .sources.common import Source
 from .sources.regjeringen import RegjeringenSource
@@ -15,6 +15,7 @@ from .sources.konkurransetilsynet import KonkurransetilsynetSource
 from .sources.euronext import EuronextSource
 from .sources.doffin import DoffinSource
 from .sources.hoyesterett import HoyesterettSource
+from .sources.brreg import BrregSource
 
 
 SOURCE_TYPES: dict[str, type[Source]] = {
@@ -24,6 +25,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "euronext": EuronextSource,
     "doffin": DoffinSource,
     "hoyesterett": HoyesterettSource,
+    "brreg": BrregSource,
 }
 
 _STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors")
@@ -59,8 +61,6 @@ def build_source(config: SourceConfig) -> Source:
 
 
 def _safe_error(exc: Exception) -> str:
-    # Persist only a short exception class/message in the PRIVATE runtime state.
-    # Source exceptions must never include credentials or request headers.
     message = " ".join(str(exc).split())[:160]
     return type(exc).__name__ if not message else f"{type(exc).__name__}: {message}"
 
@@ -111,7 +111,7 @@ def _save_alert_audit(
 def run(
     config: Config,
     state: StateStore,
-    notifier: SlackNotifier | None,
+    notifier: Notifier | None,
     *,
     dry_run: bool = False,
     source_factory: Callable[[SourceConfig], Source] = build_source,
@@ -136,7 +136,7 @@ def run(
                 _state_for_evaluation(source_config, old_state),
                 max_seen=config.max_seen_per_source,
             )
-            staged[source_config.id] = next_state
+            staged[source_config.id] = source.augment_state(next_state)
             alerts.extend(source_alerts)
             if was_baseline:
                 baselined += 1
