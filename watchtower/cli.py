@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import sys
 
 from .config import load_config
 from .engine import RunResult, build_source, run
@@ -93,6 +94,10 @@ def main() -> int:
         return 0
 
     config = load_config(args.config)
+    if not any(source.enabled for source in config.sources):
+        print("Watchtower requires at least one enabled source", file=sys.stderr)
+        return 1
+
     state = StateStore(args.state_dir)
     dry_run = args.command == "dry-run"
     notifier = None if dry_run else _notifier_for_config(config)
