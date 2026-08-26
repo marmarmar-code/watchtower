@@ -259,6 +259,17 @@ def _matched_terms(source: SourceConfig, text: str) -> tuple[str, ...]:
     return tuple(term for term in terms if source.filters.matches_term(text, term))[:8]
 
 
+def _bounded_details(item: Item) -> tuple[str, ...]:
+    details: list[str] = []
+    for value in item.alert_details:
+        cleaned = " ".join(str(value).split())
+        if cleaned:
+            details.append(cleaned[:500])
+        if len(details) >= 8:
+            break
+    return tuple(details)
+
+
 def notification_entries(alerts: list[Alert]) -> tuple[NotificationEntry, ...]:
     return tuple(
         NotificationEntry(
@@ -268,6 +279,7 @@ def notification_entries(alerts: list[Alert]) -> tuple[NotificationEntry, ...]:
             url=alert.item.url,
             published=alert.item.published,
             matched_terms=alert.matched_terms,
+            details=_bounded_details(alert.item),
         )
         for alert in alerts
     )
