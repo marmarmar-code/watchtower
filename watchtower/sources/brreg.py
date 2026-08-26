@@ -21,6 +21,7 @@ ROLE_CODES = {
     "NEST": "Nestleder",
     "MEDL": "Styremedlem",
 }
+ORGNR_WEIGHTS = (3, 2, 7, 6, 5, 4, 3, 2)
 
 
 class BrregSource(Source):
@@ -34,8 +35,10 @@ class BrregSource(Source):
         companies = []
         for value in raw_companies:
             orgnr = str(value).strip().replace(" ", "")
-            if len(orgnr) != 9 or not orgnr.isdigit():
-                raise ValueError("BRREG companies must contain 9-digit organisation numbers")
+            if not _valid_orgnr(orgnr):
+                raise ValueError(
+                    "BRREG companies must contain valid 9-digit organisation numbers"
+                )
             companies.append(orgnr)
         self.companies = tuple(dict.fromkeys(companies))
 
@@ -101,7 +104,9 @@ class BrregSource(Source):
 
     def _entity(self, orgnr: str) -> dict[str, Any]:
         response = self.get(ENTITY_URL.format(orgnr=orgnr), accepted_statuses=(404, 410))
-        if response.status_code in {404, 410}:
+        if response.status_code == 404:
+            raise SourceError("BRREG entity was not found")
+        if response.status_code == 410:
             return {
                 "name": None,
                 "organisation_form": {"code": None, "description": None},
@@ -110,8 +115,7 @@ class BrregSource(Source):
                 "liquidating": False,
                 "forced_liquidation": False,
                 "deleted": False,
-                "removed": response.status_code == 410,
-                "unknown": response.status_code == 404,
+                "removed": True,
             }
         try:
             payload = response.json()
@@ -128,7 +132,6 @@ class BrregSource(Source):
             "forced_liquidation": bool(payload.get("underTvangsavviklingEllerTvangsopplosning")),
             "deleted": bool(payload.get("slettedato") or payload.get("erSlettet") is True),
             "removed": False,
-            "unknown": False,
         }
 
     def _roles(self, orgnr: str) -> dict[str, list[str]]:
@@ -357,6 +360,19 @@ def _clean(value: Any) -> str | None:
         return None
     cleaned = " ".join(value.split())
     return cleaned or None
+
+
+def _valid_orgnr(value: str) -> bool:
+    if len(value) != 9 or not value.isdigit():
+        return False
+    weighted = sum(int(digit) * weight for digit, weight in zip(value[:8], ORGNR_WEIGHTS))
+    remainder = weighted % 11
+    check_digit = 11 - remainder
+    if check_digit == 11:
+        check_digit = 0
+    if check_digit == 10:
+        return False
+    return check_digit == int(value[-1])
 
 
 def _digest(value: Any) -> str:
