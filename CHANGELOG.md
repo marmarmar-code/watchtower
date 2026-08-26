@@ -24,5 +24,6 @@
 - BRREG state changes no longer generate repeat alerts on the following unchanged run.
 - BRREG organisation numbers are validated before monitoring starts.
 - Missing BRREG entities fail closed instead of becoming apparent changes.
+- Removed BRREG entities produce a focused status alert without synthetic form or industry changes.
 - Teams alerts no longer contain Slack link syntax.
 - Teams and Power Automate webhook URLs are detected as secret-like content.
