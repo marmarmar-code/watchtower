@@ -182,45 +182,74 @@ class BrregSource(Source):
             "journal_number": _clean(latest.get("journalnr")),
         }
 
-    def _entity_item(self, orgnr: str, company_name: str, previous: Any, current: dict[str, Any]) -> Item:
+    def _entity_item(
+        self,
+        orgnr: str,
+        company_name: str,
+        previous: Any,
+        current: dict[str, Any],
+    ) -> Item:
         changes = _diff_entity(previous, current)
         detail = "; ".join(changes) if changes else "Selskapsdata uendret"
-        digest = _digest(current)
         return Item(
-            self.config.id,
-            f"company:{orgnr}:{digest}",
-            f"Selskapsendring: {company_name}" if changes else f"Selskapsstatus: {company_name}",
-            ENTITY_URL.format(orgnr=orgnr),
+            source_id=self.config.id,
+            key=f"company:{orgnr}",
+            title=(
+                f"Selskapsendring: {company_name}"
+                if changes
+                else f"Selskapsstatus: {company_name}"
+            ),
+            url=ENTITY_URL.format(orgnr=orgnr),
             text=f"{company_name}\n{orgnr}\n{detail}",
             metadata={"orgnr": orgnr, "event": "company"},
+            fingerprint=_digest(current),
+            suppress_alert=not changes,
         )
 
-    def _roles_item(self, orgnr: str, company_name: str, previous: Any, current: dict[str, list[str]]) -> Item:
+    def _roles_item(
+        self,
+        orgnr: str,
+        company_name: str,
+        previous: Any,
+        current: dict[str, list[str]],
+    ) -> Item:
         changes = _diff_roles(previous, current)
         detail = "; ".join(changes) if changes else "Roller uendret"
-        digest = _digest(current)
         return Item(
-            self.config.id,
-            f"roles:{orgnr}:{digest}",
-            f"Rolleendring: {company_name}" if changes else f"Roller: {company_name}",
-            ROLES_URL.format(orgnr=orgnr),
+            source_id=self.config.id,
+            key=f"roles:{orgnr}",
+            title=f"Rolleendring: {company_name}" if changes else f"Roller: {company_name}",
+            url=ROLES_URL.format(orgnr=orgnr),
             text=f"{company_name}\n{orgnr}\n{detail}",
             metadata={"orgnr": orgnr, "event": "roles"},
+            fingerprint=_digest(current),
+            suppress_alert=not changes,
         )
 
     def _account_item(self, orgnr: str, company_name: str, account: dict[str, Any]) -> Item:
         report_id = int(account["id"])
         period_to = str(account.get("period_to") or "")
         year = period_to[:4] if len(period_to) >= 4 and period_to[:4].isdigit() else ""
-        url = ANNUAL_REPORT_URL.format(orgnr=orgnr, year=year) if year else ACCOUNTS_URL.format(orgnr=orgnr)
+        url = (
+            ANNUAL_REPORT_URL.format(orgnr=orgnr, year=year)
+            if year
+            else ACCOUNTS_URL.format(orgnr=orgnr)
+        )
         return Item(
-            self.config.id,
-            f"annual:{orgnr}:{report_id}",
-            f"Nytt årsregnskap: {company_name}",
-            url,
+            source_id=self.config.id,
+            key=f"annual:{orgnr}:{report_id}",
+            title=f"Nytt årsregnskap: {company_name}",
+            url=url,
             published=period_to or None,
-            text=(f"{company_name}\n{orgnr}\nNytt årsregnskap\nPeriode til: {period_to or 'ukjent'}\nBRREG-ID: {report_id}"),
-            metadata={"orgnr": orgnr, "event": "annual_accounts", "report_id": report_id},
+            text=(
+                f"{company_name}\n{orgnr}\nNytt årsregnskap\n"
+                f"Periode til: {period_to or 'ukjent'}\nBRREG-ID: {report_id}"
+            ),
+            metadata={
+                "orgnr": orgnr,
+                "event": "annual_accounts",
+                "report_id": report_id,
+            },
         )
 
 
@@ -241,9 +270,15 @@ def _diff_entity(previous: Any, current: dict[str, Any]) -> list[str]:
         if bool(old.get(key)) != bool(current.get(key)):
             changes.append(f"{label}: {'ja' if current.get(key) else 'nei'}")
     if old.get("organisation_form") and old.get("organisation_form") != current.get("organisation_form"):
-        changes.append(f"Organisasjonsform: {_coded_display(old.get('organisation_form'))} → {_coded_display(current.get('organisation_form'))}")
+        changes.append(
+            f"Organisasjonsform: {_coded_display(old.get('organisation_form'))} → "
+            f"{_coded_display(current.get('organisation_form'))}"
+        )
     if old.get("industry") and old.get("industry") != current.get("industry"):
-        changes.append(f"Næringskode: {_coded_display(old.get('industry'))} → {_coded_display(current.get('industry'))}")
+        changes.append(
+            f"Næringskode: {_coded_display(old.get('industry'))} → "
+            f"{_coded_display(current.get('industry'))}"
+        )
     return changes
 
 
@@ -272,13 +307,21 @@ def _role_holder(role: dict[str, Any]) -> str | None:
     if isinstance(person, dict):
         name = person.get("navn")
         if isinstance(name, dict):
-            parts = [_clean(name.get("fornavn")), _clean(name.get("mellomnavn")), _clean(name.get("etternavn"))]
+            parts = [
+                _clean(name.get("fornavn")),
+                _clean(name.get("mellomnavn")),
+                _clean(name.get("etternavn")),
+            ]
             value = " ".join(part for part in parts if part)
             return value or None
     entity = role.get("enhet")
     if isinstance(entity, dict):
         name = entity.get("navn")
-        value = " ".join(str(part).strip() for part in name if str(part).strip()) if isinstance(name, list) else _clean(name)
+        value = (
+            " ".join(str(part).strip() for part in name if str(part).strip())
+            if isinstance(name, list)
+            else _clean(name)
+        )
         orgnr = _clean(entity.get("organisasjonsnummer"))
         if value and orgnr:
             return f"{value} ({orgnr})"
@@ -289,7 +332,10 @@ def _role_holder(role: dict[str, Any]) -> str | None:
 def _coded(value: Any) -> dict[str, str | None]:
     if not isinstance(value, dict):
         return {"code": None, "description": None}
-    return {"code": _clean(value.get("kode")), "description": _clean(value.get("beskrivelse"))}
+    return {
+        "code": _clean(value.get("kode")),
+        "description": _clean(value.get("beskrivelse")),
+    }
 
 
 def _coded_display(value: Any) -> str:
