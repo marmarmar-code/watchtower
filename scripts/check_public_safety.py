@@ -19,7 +19,7 @@ SECRET_PATTERNS = [
         re.I,
     ),
     re.compile(
-        r"https://[A-Za-z0-9.-]+\.(?:webhook\.office\.com|outlook\.office\.com)/"
+        r"https://(?:[A-Za-z0-9.-]+\.)?(?:webhook\.office\.com|outlook\.office\.com)/"
         r"[^\s\"']*webhook[^\s\"']*",
         re.I,
     ),
