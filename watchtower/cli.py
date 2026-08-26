@@ -5,6 +5,7 @@ import os
 
 from .config import load_config
 from .engine import RunResult, run
+from .models import NotificationEntry
 from .notifier import build_notifier
 from .runtime_safety import validate_runtime
 from .state import StateStore
@@ -41,6 +42,17 @@ def _notifier_for_config(config):
     )
 
 
+def _sample_entry(provider: str) -> NotificationEntry:
+    return NotificationEntry(
+        source_label="Varslingstest",
+        status="TEST",
+        title=f"Watchtower er koblet til {provider}",
+        url="https://example.com/",
+        published="Eksempel",
+        matched_terms=("test",),
+    )
+
+
 def main() -> int:
     args = parser().parse_args()
     if args.command == "validate-runtime":
@@ -57,23 +69,23 @@ def main() -> int:
         print(f"WATCHTOWER CONFIG OK; enabled_sources={enabled}")
         return 0
     if args.command == "test-slack":
-        build_notifier(
+        notifier = build_notifier(
             "slack",
             slack_url=os.environ.get("SLACK_WEBHOOK_URL", ""),
-        ).send_text("Watchtower: Slack-varsling er koblet til og fungerer.")
+        )
+        notifier.send_alerts((_sample_entry("Slack"),))
         return 0
     if args.command == "test-teams":
-        build_notifier(
+        notifier = build_notifier(
             "teams",
             teams_url=os.environ.get("TEAMS_WEBHOOK_URL", ""),
-        ).send_text("Watchtower: Microsoft Teams-varsling er koblet til og fungerer.")
+        )
+        notifier.send_alerts((_sample_entry("Microsoft Teams"),))
         return 0
     if args.command == "test-notification":
         config = load_config(args.config)
         provider = config.notifications.provider
-        _notifier_for_config(config).send_text(
-            f"Watchtower: {provider}-varsling er koblet til og fungerer."
-        )
+        _notifier_for_config(config).send_alerts((_sample_entry(provider),))
         return 0
 
     config = load_config(args.config)
