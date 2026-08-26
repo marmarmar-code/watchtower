@@ -160,7 +160,7 @@ class BrregSource(Source):
         return {code: sorted(values, key=str.casefold) for code, values in result.items()}
 
     def _latest_account(self, orgnr: str) -> dict[str, Any] | None:
-        response = self.get(ACOUNTS_URL.format(orgnr=orgnr), accepted_statuses=(404,))
+        response = self.get(ACCOUNTS_URL.format(orgnr=orgnr), accepted_statuses=(404,))
         if response.status_code == 404:
             return None
         try:
