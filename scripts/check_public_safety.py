@@ -18,6 +18,11 @@ SECRET_PATTERNS = [
         r"[^\s\"']*(?:workflows|automations|triggers/manual|[?&]sig=)[^\s\"']*",
         re.I,
     ),
+    re.compile(
+        r"https://[A-Za-z0-9.-]+\.(?:webhook\.office\.com|outlook\.office\.com)/"
+        r"[^\s\"']*webhook[^\s\"']*",
+        re.I,
+    ),
     re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
     re.compile(r"gh[pousr]_[A-Za-z0-9_]{20,}"),
 ]
