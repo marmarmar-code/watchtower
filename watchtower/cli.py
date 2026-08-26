@@ -23,6 +23,7 @@ def parser() -> argparse.ArgumentParser:
     test_notification = sub.add_parser("test-notification")
     test_notification.add_argument("--config", required=True)
     sub.add_parser("test-slack")
+    sub.add_parser("test-teams")
     return p
 
 
@@ -51,6 +52,11 @@ def main() -> int:
     if args.command == "test-slack":
         build_notifier("slack", slack_url=os.environ.get("SLACK_WEBHOOK_URL", "")).send(
             "Watchtower: Slack-varsling er koblet til og fungerer."
+        )
+        return 0
+    if args.command == "test-teams":
+        build_notifier("teams", teams_url=os.environ.get("TEAMS_WEBHOOK_URL", "")).send(
+            "Watchtower: Microsoft Teams-varsling er koblet til og fungerer."
         )
         return 0
     if args.command == "test-notification":
