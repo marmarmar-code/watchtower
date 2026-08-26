@@ -48,7 +48,7 @@ class BrregTests(unittest.TestCase):
             id="brreg-test",
             kind="brreg",
             label="BRREG",
-            filters=FilterRule(include_any=(ORGNR,)),
+            filters=FilterRule(match_all=True),
             options={
                 "companies": [ORGNR],
                 "events": ["annual_accounts", "company", "roles"],
@@ -62,25 +62,27 @@ class BrregTests(unittest.TestCase):
         source._latest_account = lambda _: current_account or account()
         return source
 
+    def baseline(self):
+        source = self.source()
+        items = source.fetch_with_state(None)
+        state, alerts, baseline = evaluate(self.config(), items, None, max_seen=100)
+        return source.augment_state(state), alerts, baseline
+
     def test_brreg_source_is_registered(self):
         self.assertIs(SOURCE_TYPES["brreg"], BrregSource)
 
     def test_first_run_is_silent_and_persists_private_snapshot(self):
-        source = self.source()
-        items = source.fetch_with_state(None)
-        state, alerts, baseline = evaluate(self.config(), items, None, max_seen=100)
-        state = source.augment_state(state)
+        state, alerts, baseline = self.baseline()
 
         self.assertTrue(baseline)
         self.assertEqual([], alerts)
         self.assertIn("brreg", state["source_state"])
         self.assertEqual("Ada Example", state["source_state"]["brreg"][ORGNR]["roles"]["LEDE"][0])
+        self.assertIn(f"company:{ORGNR}", state["seen"])
+        self.assertIn(f"roles:{ORGNR}", state["seen"])
 
     def test_role_change_and_new_annual_account_alert_after_baseline(self):
-        first = self.source()
-        items = first.fetch_with_state(None)
-        state, _, _ = evaluate(self.config(), items, None, max_seen=100)
-        state = first.augment_state(state)
+        state, _, _ = self.baseline()
 
         second = self.source(
             current_roles=roles("Grace Example"),
@@ -99,11 +101,37 @@ class BrregTests(unittest.TestCase):
         self.assertIn("Styreleder: Ada Example → Grace Example", role_alert.item.text)
         self.assertEqual("Grace Example", next_state["source_state"]["brreg"][ORGNR]["roles"]["LEDE"][0])
 
+    def test_unchanged_run_after_change_does_not_repeat_alert(self):
+        state, _, _ = self.baseline()
+
+        changed = self.source(
+            current_roles=roles("Grace Example"),
+            current_account=account(101, "2026-12-31"),
+        )
+        changed_items = changed.fetch_with_state(state)
+        changed_state, alerts, _ = evaluate(self.config(), changed_items, state, max_seen=100)
+        changed_state = changed.augment_state(changed_state)
+        self.assertEqual(2, len(alerts))
+
+        unchanged = self.source(
+            current_roles=roles("Grace Example"),
+            current_account=account(101, "2026-12-31"),
+        )
+        unchanged_items = unchanged.fetch_with_state(changed_state)
+        final_state, repeated, baseline = evaluate(
+            self.config(), unchanged_items, changed_state, max_seen=100
+        )
+        final_state = unchanged.augment_state(final_state)
+
+        self.assertFalse(baseline)
+        self.assertEqual([], repeated)
+        self.assertEqual(
+            changed_state["source_state"]["brreg"],
+            final_state["source_state"]["brreg"],
+        )
+
     def test_company_status_change_is_described(self):
-        first = self.source()
-        items = first.fetch_with_state(None)
-        state, _, _ = evaluate(self.config(), items, None, max_seen=100)
-        state = first.augment_state(state)
+        state, _, _ = self.baseline()
 
         second = self.source(current_entity=entity(bankrupt=True))
         items = second.fetch_with_state(state)
