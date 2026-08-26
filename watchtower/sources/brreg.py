@@ -160,7 +160,7 @@ class BrregSource(Source):
         return {code: sorted(values, key=str.casefold) for code, values in result.items()}
 
     def _latest_account(self, orgnr: str) -> dict[str, Any] | None:
-        response = self.get(ACCOUNTS_URL.format(orgnr=orgnr), accepted_statuses=(404,))
+        response = self.get(ACOUNTS_URL.format(orgnr=orgnr), accepted_statuses=(404,))
         if response.status_code == 404:
             return None
         try:
@@ -204,6 +204,7 @@ class BrregSource(Source):
             metadata={"orgnr": orgnr, "event": "company"},
             fingerprint=_digest(current),
             suppress_alert=not changes,
+            alert_details=tuple(changes),
         )
 
     def _roles_item(
@@ -224,6 +225,7 @@ class BrregSource(Source):
             metadata={"orgnr": orgnr, "event": "roles"},
             fingerprint=_digest(current),
             suppress_alert=not changes,
+            alert_details=tuple(changes),
         )
 
     def _account_item(self, orgnr: str, company_name: str, account: dict[str, Any]) -> Item:
@@ -250,6 +252,10 @@ class BrregSource(Source):
                 "event": "annual_accounts",
                 "report_id": report_id,
             },
+            alert_details=(
+                f"Periode til: {period_to or 'ukjent'}",
+                f"BRREG-ID: {report_id}",
+            ),
         )
 
 
