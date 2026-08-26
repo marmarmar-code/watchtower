@@ -31,11 +31,18 @@ class WebhookNotifier:
         self.webhook_url = webhook_url
         self.timeout = timeout
 
+    def payload(self, text: str) -> dict:
+        return {"text": text}
+
     def send(self, text: str) -> None:
         last: Exception | None = None
         for attempt in range(3):
             try:
-                response = requests.post(self.webhook_url, json={"text": text}, timeout=self.timeout)
+                response = requests.post(
+                    self.webhook_url,
+                    json=self.payload(text),
+                    timeout=self.timeout,
+                )
                 if response.status_code == 429 or 500 <= response.status_code < 600:
                     time.sleep(attempt + 1)
                     continue
@@ -72,6 +79,29 @@ class TeamsNotifier(WebhookNotifier):
         if not webhook_url.startswith("https://"):
             raise ValueError("invalid Microsoft Teams webhook URL")
         super().__init__(webhook_url, timeout)
+
+    def payload(self, text: str) -> dict:
+        return {
+            "type": "message",
+            "attachments": [
+                {
+                    "contentType": "application/vnd.microsoft.card.adaptive",
+                    "contentUrl": None,
+                    "content": {
+                        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                        "type": "AdaptiveCard",
+                        "version": "1.2",
+                        "body": [
+                            {
+                                "type": "TextBlock",
+                                "text": text,
+                                "wrap": True,
+                            }
+                        ],
+                    },
+                }
+            ],
+        }
 
     def send(self, text: str) -> None:
         try:
