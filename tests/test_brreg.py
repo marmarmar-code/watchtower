@@ -5,9 +5,15 @@ import unittest
 from watchtower.config import FilterRule, SourceConfig
 from watchtower.engine import SOURCE_TYPES, evaluate
 from watchtower.sources.brreg import BrregSource
+from watchtower.sources.common import SourceError
 
 
 ORGNR = "999999999"
+
+
+class Response:
+    def __init__(self, status_code: int) -> None:
+        self.status_code = status_code
 
 
 def entity(*, bankrupt=False):
@@ -20,7 +26,6 @@ def entity(*, bankrupt=False):
         "forced_liquidation": False,
         "deleted": False,
         "removed": False,
-        "unknown": False,
     }
 
 
@@ -43,14 +48,14 @@ def account(report_id=100, period_to="2025-12-31"):
 
 
 class BrregTests(unittest.TestCase):
-    def config(self):
+    def config(self, *, companies=None):
         return SourceConfig(
             id="brreg-test",
             kind="brreg",
             label="BRREG",
             filters=FilterRule(match_all=True),
             options={
-                "companies": [ORGNR],
+                "companies": companies or [ORGNR],
                 "events": ["annual_accounts", "company", "roles"],
             },
         )
@@ -70,6 +75,26 @@ class BrregTests(unittest.TestCase):
 
     def test_brreg_source_is_registered(self):
         self.assertIs(SOURCE_TYPES["brreg"], BrregSource)
+
+    def test_valid_norwegian_organisation_number_is_accepted(self):
+        source = BrregSource(self.config(companies=[ORGNR]))
+        self.assertEqual((ORGNR,), source.companies)
+
+    def test_invalid_check_digit_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "valid 9-digit"):
+            BrregSource(self.config(companies=["999999998"]))
+
+    def test_missing_entity_fails_closed(self):
+        source = BrregSource(self.config())
+        source.get = lambda *_args, **_kwargs: Response(404)
+        with self.assertRaisesRegex(SourceError, "not found"):
+            source._entity(ORGNR)
+
+    def test_removed_entity_is_canonicalized(self):
+        source = BrregSource(self.config())
+        source.get = lambda *_args, **_kwargs: Response(410)
+        result = source._entity(ORGNR)
+        self.assertTrue(result["removed"])
 
     def test_first_run_is_silent_and_persists_private_snapshot(self):
         state, alerts, baseline = self.baseline()
@@ -99,6 +124,10 @@ class BrregTests(unittest.TestCase):
         self.assertIn("Nytt årsregnskap: Example Publishing AS", titles)
         role_alert = next(alert for alert in alerts if alert.item.metadata["event"] == "roles")
         self.assertIn("Styreleder: Ada Example → Grace Example", role_alert.item.text)
+        self.assertIn(
+            "Styreleder: Ada Example → Grace Example",
+            role_alert.item.alert_details,
+        )
         self.assertEqual("Grace Example", next_state["source_state"]["brreg"][ORGNR]["roles"]["LEDE"][0])
 
     def test_unchanged_run_after_change_does_not_repeat_alert(self):
@@ -140,6 +169,7 @@ class BrregTests(unittest.TestCase):
         company_alerts = [a for a in alerts if a.item.metadata["event"] == "company"]
         self.assertEqual(1, len(company_alerts))
         self.assertIn("Konkurs: ja", company_alerts[0].item.text)
+        self.assertIn("Konkurs: ja", company_alerts[0].item.alert_details)
 
 
 if __name__ == "__main__":
