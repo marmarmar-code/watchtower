@@ -5,8 +5,8 @@ from datetime import datetime, timezone
 from typing import Callable
 
 from .config import Config, SourceConfig
-from .models import Item
-from .notifier import Notifier
+from .models import Item, NotificationEntry
+from .notifier import Notifier, format_slack_entries
 from .state import StateStore
 from .sources.common import Source
 from .sources.regjeringen import RegjeringenSource
@@ -152,7 +152,12 @@ def run(
     if alerts:
         if notifier is None:
             raise RuntimeError("alerts pending but notifier is not configured")
-        notifier.send(format_slack(alerts))
+        entries = notification_entries(alerts)
+        send_alerts = getattr(type(notifier), "send_alerts", None)
+        if callable(send_alerts):
+            notifier.send_alerts(entries)
+        else:
+            notifier.send(format_slack(alerts))  # type: ignore[attr-defined]
 
     for source_id, next_state in staged.items():
         state.save(source_id, next_state)
@@ -208,7 +213,12 @@ def evaluate(
         old_digest = seen.get(item.key)
         change = "new" if old_digest is None else ("updated" if old_digest != digest else "unchanged")
         candidate = change == "new" or (change == "updated" and source.alert_on_update)
-        if not baseline and candidate and source.filters.matches(item.searchable_text()):
+        if (
+            not baseline
+            and not item.suppress_alert
+            and candidate
+            and source.filters.matches(item.searchable_text())
+        ):
             alerts.append(Alert(source, item, change, _matched_terms(source, item.searchable_text())))
         seen[item.key] = digest
 
@@ -249,22 +259,20 @@ def _matched_terms(source: SourceConfig, text: str) -> tuple[str, ...]:
     return tuple(term for term in terms if source.filters.matches_term(text, term))[:8]
 
 
+def notification_entries(alerts: list[Alert]) -> tuple[NotificationEntry, ...]:
+    return tuple(
+        NotificationEntry(
+            source_label=alert.source.label,
+            status="NY" if alert.change == "new" else "OPPDATERT",
+            title=alert.item.title,
+            url=alert.item.url,
+            published=alert.item.published,
+            matched_terms=alert.matched_terms,
+        )
+        for alert in alerts
+    )
+
+
 def format_slack(alerts: list[Alert]) -> str:
-    blocks: list[str] = []
-    for alert in alerts:
-        kind = "NY" if alert.change == "new" else "OPPDATERT"
-        lines = [
-            f"*WATCHTOWER · {alert.source.label.upper()} · {kind}*",
-            f"*{_escape(alert.item.title)}*",
-        ]
-        if alert.item.published:
-            lines.append(f"Publisert: {_escape(alert.item.published)}")
-        if alert.matched_terms:
-            lines.append("Treff: " + _escape(", ".join(alert.matched_terms)))
-        lines.append(f"<{alert.item.url}|Åpne kilden>")
-        blocks.append("\n".join(lines))
-    return "\n\n——————————\n\n".join(blocks)
-
-
-def _escape(value: str) -> str:
-    return value.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    """Compatibility formatter used by tests and custom integrations."""
+    return format_slack_entries(notification_entries(alerts))
