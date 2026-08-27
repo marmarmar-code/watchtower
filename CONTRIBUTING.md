@@ -57,6 +57,18 @@ En ny adapter skal:
 
 Adaptere med egen snapshot-state kan bruke `augment_state()`. State skal være kompakt, deterministisk og lagres bare i privat runtime.
 
+## Nye RSS-profiler
+
+Bruk en RSS-profil før du lager en egen adapter når kilden tilbyr en offisiell RSS- eller Atom-feed. Profilen bør først legges i redaksjonens egen fork. En profil som foreslås upstream må:
+
+- peke til en dokumentert, offisiell HTTPS-feed;
+- ha dato for siste reelle kontroll;
+- hente og tolke ekte innhold i en skrivefri kontroll;
+- ikke inneholde private filtre eller installasjonsverdier;
+- ha en navngitt vedlikeholder som følger opp kildeendringer.
+
+Automatiske tester kan bruke interne testdata, men en test alene er ikke dokumentasjon på at den eksterne feeden fungerer.
+
 ## Pull request-beskrivelse
 
 Beskriv:

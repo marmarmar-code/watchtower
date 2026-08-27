@@ -6,8 +6,10 @@ import sys
 
 from .config import load_config
 from .engine import RunResult, build_source, run
+from .health import inspect_health, render_health
 from .models import NotificationEntry
 from .notifier import build_notifier
+from .rss_profiles import load_profiles
 from .runtime_safety import validate_runtime
 from .source_catalog import load_catalog
 from .state import StateStore
@@ -31,6 +33,11 @@ def parser() -> argparse.ArgumentParser:
     validate_config = sub.add_parser("validate-config")
     validate_config.add_argument("--config", required=True)
     sub.add_parser("list-sources")
+    sub.add_parser("list-rss-profiles")
+    status = sub.add_parser("status")
+    status.add_argument("--config", required=True)
+    status.add_argument("--state-dir", required=True)
+    status.add_argument("--redact-output", action="store_true")
     test_notification = sub.add_parser("test-notification")
     test_notification.add_argument("--config", required=True)
     sub.add_parser("test-slack")
@@ -100,6 +107,21 @@ def main() -> int:
                 f"{owner}\t{source['name']}"
             )
         return 0
+    if args.command == "list-rss-profiles":
+        print("ID\tSTATUS\tKONTROLLERT\tEIER\tNAVN")
+        status_labels = {"verified": "klar", "directory": "velg feed"}
+        for profile in sorted(load_profiles(), key=lambda row: str(row["id"])):
+            print(
+                f"{profile['id']}\t{status_labels[profile['status']]}\t"
+                f"{profile['verified_on']}\t"
+                f"{profile['owner']}\t{profile['name']}"
+            )
+        return 0
+    if args.command == "status":
+        config = load_config(args.config)
+        report = inspect_health(config, StateStore(args.state_dir))
+        print(render_health(report, redacted=args.redact_output))
+        return 0 if report.okay else 2
     if args.command == "test-slack":
         notifier = build_notifier(
             "slack",

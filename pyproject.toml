@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "watchtower"
-version = "0.2.0"
+version = "0.3.0"
 description = "Deterministic public-source monitor with private runtime configuration"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -20,4 +20,4 @@ watchtower = "watchtower.cli:main"
 include = ["watchtower*"]
 
 [tool.setuptools.package-data]
-watchtower = ["source_catalog.toml"]
+watchtower = ["source_catalog.toml", "rss_profiles.toml"]

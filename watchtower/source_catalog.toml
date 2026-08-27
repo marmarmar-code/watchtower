@@ -8,6 +8,15 @@ maintenance_owner = "fork-owner"
 coverage = "Konfigurerbare offentlige RSS- og Atom-feeder."
 
 [[source]]
+id = "ssb"
+name = "Statistisk sentralbyrå"
+status = "beta"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Nye perioder og strukturendringer i eksplisitt valgte tabeller i Statistikkbanken."
+
+[[source]]
 id = "regjeringen"
 name = "Regjeringen"
 status = "stable"

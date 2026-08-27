@@ -22,6 +22,15 @@ class RssSourceTests(unittest.TestCase):
             filters=FilterRule(include_any=("example",)),
         )
 
+    def profile_config(self, *profiles: str) -> SourceConfig:
+        return SourceConfig(
+            id="profile-feed",
+            kind="rss",
+            label="Profile feed",
+            filters=FilterRule(include_any=("example",)),
+            options={"profiles": list(profiles)},
+        )
+
     def test_rss_item_is_normalized(self):
         source = RssSource(self.config("https://example.test/feed.xml"))
         source.get = lambda *_args, **_kwargs: Response(
@@ -116,6 +125,17 @@ class RssSourceTests(unittest.TestCase):
     def test_feed_urls_are_required(self):
         with self.assertRaisesRegex(SourceError, "requires at least one feed URL"):
             RssSource(self.config()).fetch()
+
+    def test_bundled_profile_resolves_without_copying_a_url(self):
+        source = RssSource(self.profile_config("politiloggen"))
+        self.assertEqual(
+            ("https://api.politiloggen.politiet.no/feeds/rss",),
+            source.feed_urls,
+        )
+
+    def test_unknown_bundled_profile_fails_closed(self):
+        with self.assertRaisesRegex(ValueError, "unknown RSS profile"):
+            RssSource(self.profile_config("missing"))
 
     def test_empty_feed_fails_closed(self):
         source = RssSource(self.config("https://example.test/feed.xml"))

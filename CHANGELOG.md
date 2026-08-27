@@ -1,5 +1,19 @@
 # Changelog
 
+## Adoption and source expansion — 2026-08-27
+
+### Added
+
+- Ready-to-use official RSS profiles for Politiloggen, Finanstilsynet, Mattilsynet and Norges Bank press releases.
+- SSB table monitoring through the official PxWebApi v2 metadata surface without downloading statistics data.
+- Read-only source-health reporting with redacted GitHub Actions summaries.
+
+### Changed
+
+- Package version is now `0.3.0`.
+- Scheduled runs use an off-peak five-minute cadence while respecting each source interval.
+- The runtime template documents the current schedule and includes disabled RSS-profile and SSB examples.
+
 ## Fork-owned distribution baseline — 2026-08-27
 
 ### Added

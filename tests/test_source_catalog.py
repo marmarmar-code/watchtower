@@ -18,6 +18,7 @@ class SourceCatalogTests(unittest.TestCase):
         by_id = {row["id"]: row for row in rows}
         self.assertTrue(by_id["doffin"]["credential_required"])
         self.assertEqual("fork-owner", by_id["rss"]["maintenance_owner"])
+        self.assertEqual("beta", by_id["ssb"]["status"])
 
     def test_duplicate_ids_are_rejected(self):
         text = """[[source]]\nid='regjeringen'\nname='x'\nstatus='stable'\ncredential_required=false\ninterval_class='hourly'\nmaintenance_owner='fork-owner'\ncoverage='x'\n[[source]]\nid='regjeringen'\nname='x'\nstatus='stable'\ncredential_required=false\ninterval_class='hourly'\nmaintenance_owner='fork-owner'\ncoverage='x'\n"""
@@ -42,7 +43,22 @@ class SourceCatalogTests(unittest.TestCase):
             self.assertEqual(0, main())
         rendered = output.getvalue()
         self.assertIn("rss\tprøveversjon\toffentlig\tegen fork\tRSS og Atom", rendered)
+        self.assertIn("ssb\tprøveversjon\toffentlig\tegen fork", rendered)
         self.assertIn("doffin\tetablert\tkrever nøkkel", rendered)
+
+    def test_cli_lists_ready_rss_profiles(self):
+        output = StringIO()
+        with patch("sys.argv", ["watchtower", "list-rss-profiles"]), redirect_stdout(output):
+            self.assertEqual(0, main())
+        rendered = output.getvalue()
+        self.assertIn(
+            "politiloggen\tklar\t2026-08-27\tPolitiet\tPolitiloggen",
+            rendered,
+        )
+        self.assertIn(
+            "norges_bank_pressemeldinger\tklar\t2026-08-27\tNorges Bank",
+            rendered,
+        )
 
 
 if __name__ == "__main__":

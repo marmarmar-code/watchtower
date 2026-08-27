@@ -8,18 +8,29 @@ from bs4 import BeautifulSoup
 
 from .common import Source, SourceError
 from ..models import Item
+from ..rss_profiles import resolve_profile_urls
 
 
 class RssSource(Source):
     """Monitor one or more ordinary RSS or Atom feeds."""
 
+    def __init__(self, config, *args, **kwargs) -> None:
+        super().__init__(config, *args, **kwargs)
+        raw_profiles = config.options.get("profiles", [])
+        if not isinstance(raw_profiles, list) or not all(
+            isinstance(profile, str) for profile in raw_profiles
+        ):
+            raise ValueError("RSS profiles must be a string array")
+        profile_urls = resolve_profile_urls(raw_profiles) if raw_profiles else ()
+        self.feed_urls = tuple(dict.fromkeys((*config.urls, *profile_urls)))
+
     def fetch(self) -> list[Item]:
-        if not self.config.urls:
+        if not self.feed_urls:
             raise SourceError("RSS source requires at least one feed URL")
 
         items: list[Item] = []
         seen: set[str] = set()
-        for feed_url in self.config.urls:
+        for feed_url in self.feed_urls:
             response = self.get(feed_url)
             try:
                 root = ET.fromstring(response.content)

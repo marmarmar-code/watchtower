@@ -1,0 +1,45 @@
+# Official RSS/Atom profile directory. URLs are public and contain no credentials.
+
+[[profile]]
+id = "politiloggen"
+name = "Politiloggen"
+official_url = "https://api.politiloggen.politiet.no/feeds/rss"
+owner = "Politiet"
+status = "verified"
+verified_on = "2026-08-27"
+coverage = "Operative meldinger fra politiets operasjonssentraler i Norge."
+feed_urls = ["https://api.politiloggen.politiet.no/feeds/rss"]
+
+[[profile]]
+id = "norges_bank_pressemeldinger"
+name = "Norges Bank – pressemeldinger"
+official_url = "https://www.norges-bank.no/RSS/"
+owner = "Norges Bank"
+status = "verified"
+verified_on = "2026-08-27"
+coverage = "Pressemeldinger fra Norges Bank."
+feed_urls = ["https://www.norges-bank.no/RSS/Pressemeldinger---Norges-Bank/"]
+
+[[profile]]
+id = "finanstilsynet"
+name = "Finanstilsynet"
+official_url = "https://www.finanstilsynet.no/RSS/"
+owner = "Finanstilsynet"
+status = "verified"
+verified_on = "2026-08-27"
+coverage = "Nyhetsarkiv, rundskriv og nyheter fra Finanstilsynet."
+feed_urls = [
+  "https://www.finanstilsynet.no/rss/nyhetsfeed/",
+  "https://www.finanstilsynet.no/rss/rundskriv/",
+  "https://www.finanstilsynet.no/rss/nyheter/",
+]
+
+[[profile]]
+id = "mattilsynet"
+name = "Mattilsynet"
+official_url = "https://www.mattilsynet.no/om-mattilsynet/api/rss"
+owner = "Mattilsynet"
+status = "verified"
+verified_on = "2026-08-27"
+coverage = "Offentlig RSS-innhold publisert av Mattilsynet."
+feed_urls = ["https://www.mattilsynet.no/om-mattilsynet/api/rss"]

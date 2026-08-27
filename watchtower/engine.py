@@ -17,6 +17,7 @@ from .sources.doffin import DoffinSource
 from .sources.hoyesterett import HoyesterettSource
 from .sources.brreg import BrregSource
 from .sources.rss import RssSource
+from .sources.ssb import SsbSource
 
 
 SOURCE_TYPES: dict[str, type[Source]] = {
@@ -28,6 +29,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "hoyesterett": HoyesterettSource,
     "brreg": BrregSource,
     "rss": RssSource,
+    "ssb": SsbSource,
 }
 
 _STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors")
@@ -91,7 +93,7 @@ def _state_for_evaluation(source: SourceConfig, previous: dict | None) -> dict |
     return previous
 
 
-def _source_interval_minutes(source: SourceConfig) -> int:
+def source_interval_minutes(source: SourceConfig) -> int:
     raw = source.options.get("interval_minutes", DEFAULT_SOURCE_INTERVAL_MINUTES)
     if isinstance(raw, bool):
         raise ValueError("interval_minutes must be an integer")
@@ -123,7 +125,7 @@ def _source_is_due(
         return True
     if last_checked.tzinfo is None:
         last_checked = last_checked.replace(tzinfo=timezone.utc)
-    return at >= last_checked + timedelta(minutes=_source_interval_minutes(source))
+    return at >= last_checked + timedelta(minutes=source_interval_minutes(source))
 
 
 def _save_alert_audit(

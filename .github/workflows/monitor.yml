@@ -2,7 +2,8 @@ name: Watchtower
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    # Avoid GitHub's busiest start-of-hour scheduling window.
+    - cron: "3-58/5 * * * *"
   workflow_dispatch:
     inputs:
       operation:
@@ -133,6 +134,19 @@ jobs:
             --state-dir runtime/state \
             --redact-output \
             "${interval_args[@]}"
+
+      - name: Summarize private source health
+        if: >-
+          always() &&
+          steps.runtime_checkout.outcome == 'success' &&
+          steps.validate_runtime.outcome == 'success' &&
+          (steps.operation.outputs.value == 'run' || steps.operation.outputs.value == 'dry-run')
+        continue-on-error: true
+        run: |
+          python -m watchtower status \
+            --config runtime/config/watchtower.toml \
+            --state-dir runtime/state \
+            --redact-output | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Commit private state only
         id: commit_state

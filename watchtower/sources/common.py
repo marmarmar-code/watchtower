@@ -47,7 +47,7 @@ class Source(ABC):
         self.retry_attempts = max(1, int(retry_attempts))
         self.sleep = sleep
         self.session = requests.Session()
-        self.session.headers.update({"User-Agent": "watchtower/0.2 (+public-source-monitor)"})
+        self.session.headers.update({"User-Agent": "watchtower/0.3 (+public-source-monitor)"})
 
     def get(
         self,

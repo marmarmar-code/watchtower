@@ -26,6 +26,7 @@ doffin
 hoyesterett
 brreg
 rss
+ssb
 ```
 
 Hver kilde er valgfri. Aktivitet, URL-er, kildespesifikke valg og filterregler angis i privat runtime.
@@ -42,16 +43,48 @@ Statusen beskriver hvor moden adapteren er i prosjektet. Den er ikke en bekrefte
 
 `rss` gjør vanlige offentlige RSS- og Atom-feeder tilgjengelige uten ny adapterkode. Flere feeder kan samles i én kilde, og ordinære private filterregler avgjør hva som varsles.
 
+Følgende offisielle profiler følger med og var kontrollert 27. august 2026:
+
+| Profil | Innhold |
+| --- | --- |
+| `politiloggen` | Operative meldinger fra Politiloggen |
+| `finanstilsynet` | Nyhetsarkiv, rundskriv og nyheter |
+| `mattilsynet` | Offentlig RSS-innhold fra Mattilsynet |
+| `norges_bank_pressemeldinger` | Pressemeldinger fra Norges Bank |
+
+Vis den maskinlesbare profillisten med `python -m watchtower list-rss-profiles`. Profilene gjør oppsettet enklere, men hver fork må fortsatt følge med på om den eksterne eieren endrer eller avvikler en feed.
+
 ```toml
 [[source]]
-id = "example_feed"
+id = "politiloggen"
 kind = "rss"
-label = "Eksempel-feed"
-enabled = true
-urls = ["https://example.test/feed.xml"]
+label = "Politiloggen"
+enabled = false
+profiles = ["politiloggen"]
+interval_minutes = 15
 
 [source.filter]
-include_any = ["eksempel"]
+include_any = ["REPLACE_ME_TOPIC_1"]
+exclude_any = []
+```
+
+Egne feed-URL-er kan fortsatt legges i `urls` i stedet for eller sammen med profiler.
+
+### SSB
+
+`ssb` følger nye perioder og strukturendringer i en eksplisitt liste med femsifrede tabellnumre fra Statistikkbanken. Adapteren bruker SSBs åpne PxWebApi v2 og henter bare tabellbeskrivelsen, ikke selve tallmaterialet.
+
+```toml
+[[source]]
+id = "ssb"
+kind = "ssb"
+label = "Statistisk sentralbyrå"
+enabled = false
+tables = ["REPLACE_ME_SSB_TABLE_1"]
+interval_minutes = 360
+
+[source.filter]
+match_all = true
 exclude_any = []
 ```
 
@@ -73,9 +106,9 @@ Eksempel:
 id = "brreg"
 kind = "brreg"
 label = "Brønnøysundregistrene"
-enabled = true
+enabled = false
 alert_on_update = true
-companies = ["999999999"]
+companies = ["REPLACE_ME_ORGNR_1"]
 events = ["annual_accounts", "company", "roles"]
 
 [source.filter]
@@ -149,12 +182,16 @@ WATCHTOWER_RUNTIME_REPOSITORY=<eier>/<repository>
 python -m watchtower validate-runtime <runtime-katalog>
 python -m watchtower validate-config --config <watchtower.toml>
 python -m watchtower list-sources
+python -m watchtower list-rss-profiles
+python -m watchtower status --config <watchtower.toml> --state-dir <state-katalog>
 python -m watchtower test-notification --config <watchtower.toml>
 python -m watchtower dry-run --config <watchtower.toml> --state-dir <state-katalog>
 python -m watchtower run --config <watchtower.toml> --state-dir <state-katalog>
 ```
 
 Første ordinære kjøring av en ny kilde er en stille baseline. En `dry-run` sender ikke ordinære varsler og skriver ikke state.
+
+`status` kontakter ingen eksterne kilder og endrer ikke state. Den viser hvilke aktive kilder som nylig er kontrollert, er forsinket, har feil eller ennå ikke er startet. Workflowen skriver bare en anonymisert totalsum til den offentlige Actions-oppsummeringen; kilde-ID-er og private filtre blir ikke publisert.
 
 ## Lokal kontroll
 

@@ -192,6 +192,9 @@ class DistributionTests(unittest.TestCase):
         self.assertIn("github.repository_owner", workflow)
         self.assertNotIn("repository: marmarmar-code/watchtower-runtime", workflow)
         self.assertIn("actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1", workflow)
+        self.assertIn('cron: "3-58/5 * * * *"', workflow)
+        self.assertIn("python -m watchtower status", workflow)
+        self.assertIn("--redact-output | tee -a", workflow)
 
 
 if __name__ == "__main__":
