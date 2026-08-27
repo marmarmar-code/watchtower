@@ -1,5 +1,19 @@
 # Changelog
 
+## Fork-owned distribution baseline — 2026-08-27
+
+### Added
+
+- Explicit fork ownership, support boundaries and independent update policy.
+- A machine-readable public source catalog with fork-owned maintenance metadata.
+- A safe generator for unregistered source-adapter skeletons and contract tests.
+- A generic RSS and Atom adapter for configuration-only feed monitoring.
+
+### Changed
+
+- Package version is now `0.2.0`.
+- CI validates that every bundled adapter is represented in the source catalog.
+
 ## Alert-storm hotfix — 2026-08-27
 
 ### Fixed

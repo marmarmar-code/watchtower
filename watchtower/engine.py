@@ -16,6 +16,7 @@ from .sources.euronext import EuronextSource
 from .sources.doffin import DoffinSource
 from .sources.hoyesterett import HoyesterettSource
 from .sources.brreg import BrregSource
+from .sources.rss import RssSource
 
 
 SOURCE_TYPES: dict[str, type[Source]] = {
@@ -26,6 +27,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "doffin": DoffinSource,
     "hoyesterett": HoyesterettSource,
     "brreg": BrregSource,
+    "rss": RssSource,
 }
 
 _STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors")

@@ -9,6 +9,7 @@ from .engine import RunResult, build_source, run
 from .models import NotificationEntry
 from .notifier import build_notifier
 from .runtime_safety import validate_runtime
+from .source_catalog import load_catalog
 from .state import StateStore
 
 
@@ -29,6 +30,7 @@ def parser() -> argparse.ArgumentParser:
     validate.add_argument("path")
     validate_config = sub.add_parser("validate-config")
     validate_config.add_argument("--config", required=True)
+    sub.add_parser("list-sources")
     test_notification = sub.add_parser("test-notification")
     test_notification.add_argument("--config", required=True)
     sub.add_parser("test-slack")
@@ -77,6 +79,26 @@ def main() -> int:
                 build_source(source)
         enabled = sum(1 for source in config.sources if source.enabled)
         print(f"WATCHTOWER CONFIG OK; enabled_sources={enabled}")
+        return 0
+    if args.command == "list-sources":
+        print("ID\tSTATUS\tTILGANG\tVEDLIKEHOLD\tNAVN")
+        status_labels = {
+            "stable": "etablert",
+            "beta": "prøveversjon",
+            "maintenance": "vedlikehold",
+            "deprecated": "utfases",
+        }
+        for source in sorted(load_catalog(), key=lambda row: str(row["id"])):
+            access = "krever nøkkel" if source["credential_required"] else "offentlig"
+            owner = (
+                "egen fork"
+                if source["maintenance_owner"] == "fork-owner"
+                else source["maintenance_owner"]
+            )
+            print(
+                f"{source['id']}\t{status_labels[source['status']]}\t{access}\t"
+                f"{owner}\t{source['name']}"
+            )
         return 0
     if args.command == "test-slack":
         notifier = build_notifier(

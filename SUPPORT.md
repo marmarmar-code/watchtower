@@ -2,9 +2,12 @@
 
 Watchtower distribueres som kildekode og utgangspunkt for selvstendige installasjoner.
 
+En installasjon er en egen fork. Den kan kjøre videre uten upstream, og upstream oppdaterer aldri en fork automatisk. Hver redaksjon bestemmer selv hvilke endringer som tas inn, og må kontrollere dem før bruk.
+
 ## Den enkelte installasjonen er ansvarlig for
 
 - egen Watchtower-fork og privat runtime;
+- egen offentlig kodebase, inkludert eventuelle adapterendringer;
 - GitHub Actions, tidsplan og branch-beskyttelse;
 - deploy keys, webhook-adresser, API-nøkler og rotasjon;
 - filterregler, overvåkingslister og state;
@@ -12,6 +15,8 @@ Watchtower distribueres som kildekode og utgangspunkt for selvstendige installas
 - lokale kodeendringer;
 - oppfølging når eksterne kilder eller API-er endres;
 - vurdering av om løsningen kan brukes etter gjeldende interne regler.
+
+Dette ansvaret omfatter også å følge med på kildekilder, GitHub Actions og egne avhengigheter. Upstream har ikke tilgang til installasjonens secrets, runtime eller driftsmiljø.
 
 ## Upstream omfatter
 
@@ -28,6 +33,7 @@ Upstream innebærer ikke:
 - utvikling eller vedlikehold av særadaptere;
 - tilgang til private runtimes eller credentials;
 - garanti for at eksterne datakilder beholder samme format eller tilgjengelighet.
+- automatiske oppdateringer eller sentral synkronisering av en fork.
 
 ## Feilrapportering
 

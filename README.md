@@ -25,9 +25,35 @@ euronext
 doffin
 hoyesterett
 brreg
+rss
 ```
 
 Hver kilde er valgfri. Aktivitet, URL-er, kildespesifikke valg og filterregler angis i privat runtime.
+
+Vis den offentlige kildekatalogen med status, tilgangskrav og vedlikeholdsansvar:
+
+```bash
+python -m watchtower list-sources
+```
+
+Statusen beskriver hvor moden adapteren er i prosjektet. Den er ikke en bekreftelse på at den eksterne kilden fungerer akkurat nå; hver fork må følge opp sine aktive kilder.
+
+### RSS og Atom
+
+`rss` gjør vanlige offentlige RSS- og Atom-feeder tilgjengelige uten ny adapterkode. Flere feeder kan samles i én kilde, og ordinære private filterregler avgjør hva som varsles.
+
+```toml
+[[source]]
+id = "example_feed"
+kind = "rss"
+label = "Eksempel-feed"
+enabled = true
+urls = ["https://example.test/feed.xml"]
+
+[source.filter]
+include_any = ["eksempel"]
+exclude_any = []
+```
 
 ### BRREG
 
@@ -122,6 +148,7 @@ WATCHTOWER_RUNTIME_REPOSITORY=<eier>/<repository>
 ```bash
 python -m watchtower validate-runtime <runtime-katalog>
 python -m watchtower validate-config --config <watchtower.toml>
+python -m watchtower list-sources
 python -m watchtower test-notification --config <watchtower.toml>
 python -m watchtower dry-run --config <watchtower.toml> --state-dir <state-katalog>
 python -m watchtower run --config <watchtower.toml> --state-dir <state-katalog>
@@ -138,14 +165,19 @@ python -m pip install .
 python -m pip check
 python -m compileall -q watchtower tests scripts
 python scripts/check_public_safety.py
+python scripts/check_source_catalog.py
 python -m unittest discover -s tests -v
 ```
 
-## Oppdateringer og bidrag
+## Fork-eid drift og oppdateringer
 
-Hver fork eier sin egen drift, secrets, runtime og lokale kodeendringer. Upstream gir ingen sentral driftsgaranti eller plikt til å utvikle særtilpasninger.
+Hver redaksjon forker den offentlige koden og eier deretter sin egen kode, GitHub Actions, secrets, private runtime, adapterendringer, drift og support. Upstream er et startpunkt, ikke en sentral tjeneste: det finnes ingen SLA, sentral avhengighet eller garanti for at en kildekodeendring passer i din installasjon.
+
+Det skjer ingen automatiske oppdateringer fra upstream. Redaksjonen velger selv om og når den vil hente inn en endring, vurderer den i sin fork og ruller den ut på eget ansvar. Lokale adapterendringer bør normalt bli i forken, med mindre de er generelle og har en navngitt vedlikeholder.
 
 Generelle endringer kan foreslås som pull requests. Se `CONTRIBUTING.md` og `SUPPORT.md` før en endring sendes.
+
+Se [FORKING.md](FORKING.md) for en kort ansvars- og oppdateringsmodell.
 
 ## Lisensstatus
 

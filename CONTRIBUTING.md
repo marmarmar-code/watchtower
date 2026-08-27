@@ -1,6 +1,6 @@
 # Contributing
 
-Generelle forbedringer kan foreslås som pull requests. Installasjonsspesifikk konfigurasjon og særtilpasninger bør normalt bli i den enkelte fork.
+Generelle forbedringer kan foreslås som pull requests. Installasjonsspesifikk konfigurasjon og særtilpasninger bør normalt bli i den enkelte fork. En pull request er frivillig og gir ingen forventning om innarbeiding eller vedlikehold fra upstream.
 
 ## Før en pull request
 
@@ -29,10 +29,21 @@ python -m pip install .
 python -m pip check
 python -m compileall -q watchtower tests scripts
 python scripts/check_public_safety.py
+python scripts/check_source_catalog.py
 python -m unittest discover -s tests -v
 ```
 
 ## Nye adaptere
+
+En adapter som bare trengs av én redaksjon, eies og vedlikeholdes i den redaksjonens fork. En adapter som foreslås upstream, skal ha en navngitt vedlikeholder som følger opp endringer i kilden og driftsbehov. Uten slik vedlikeholder kan adapteren bli i forken.
+
+Opprett et trygt, uregistrert utgangspunkt i din egen fork:
+
+```bash
+python scripts/create_source_adapter.py example_source
+```
+
+Generatoren lager adapter, syntetisk kontrakttest og kort dokumentasjon. Den endrer ikke motorregisteret automatisk. Registrer adapteren bevisst i `SOURCE_TYPES`, legg den til i den offentlige kildekatalogen og dokumenter hvem som vedlikeholder den.
 
 En ny adapter skal:
 

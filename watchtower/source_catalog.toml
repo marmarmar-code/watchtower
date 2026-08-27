@@ -1,0 +1,71 @@
+[[source]]
+id = "rss"
+name = "RSS og Atom"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Konfigurerbare offentlige RSS- og Atom-feeder."
+
+[[source]]
+id = "regjeringen"
+name = "Regjeringen"
+status = "stable"
+credential_required = false
+interval_class = "hourly"
+maintenance_owner = "fork-owner"
+coverage = "Offentlige nyheter og meldinger fra regjeringen via RSS."
+
+[[source]]
+id = "stortinget"
+name = "Stortinget"
+status = "stable"
+credential_required = false
+interval_class = "hourly"
+maintenance_owner = "fork-owner"
+coverage = "Offentlige stortingsdata og publiseringer."
+
+[[source]]
+id = "konkurransetilsynet"
+name = "Konkurransetilsynet"
+status = "stable"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Offentlige saker om fusjoner og oppkjøp."
+
+[[source]]
+id = "euronext"
+name = "Euronext"
+status = "beta"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Offentlige selskaps- og markedsmeldinger fra oppgitte utstederkilder."
+
+[[source]]
+id = "doffin"
+name = "Doffin"
+status = "stable"
+credential_required = true
+interval_class = "hourly"
+maintenance_owner = "fork-owner"
+coverage = "Offentlige kunngjøringer i Doffin."
+
+[[source]]
+id = "hoyesterett"
+name = "Høyesterett"
+status = "stable"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Offentlige avgjørelser og publiseringer fra Høyesterett."
+
+[[source]]
+id = "brreg"
+name = "Brønnøysundregistrene"
+status = "stable"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Offentlige virksomhets-, rolle- og regnskapsendringer for oppgitte organisasjoner."
