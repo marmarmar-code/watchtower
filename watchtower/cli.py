@@ -20,6 +20,11 @@ def parser() -> argparse.ArgumentParser:
         cmd.add_argument("--config", required=True)
         cmd.add_argument("--state-dir", required=True)
         cmd.add_argument("--redact-output", action="store_true")
+        cmd.add_argument(
+            "--respect-intervals",
+            action="store_true",
+            help="only poll sources whose configured interval has elapsed",
+        )
     validate = sub.add_parser("validate-runtime")
     validate.add_argument("path")
     validate_config = sub.add_parser("validate-config")
@@ -101,7 +106,13 @@ def main() -> int:
     state = StateStore(args.state_dir)
     dry_run = args.command == "dry-run"
     notifier = None if dry_run else _notifier_for_config(config)
-    result = run(config, state, notifier, dry_run=dry_run)
+    result = run(
+        config,
+        state,
+        notifier,
+        dry_run=dry_run,
+        respect_intervals=args.respect_intervals,
+    )
     if args.redact_output:
         print(
             f"watchtower complete; sources={result.checked_sources} "
