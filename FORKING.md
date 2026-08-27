@@ -1,12 +1,12 @@
 # Forking og eierskap
 
-Watchtower er laget for at hver redaksjon skal eie sin egen installasjon.
+Watchtower er laget for at hver installasjonseier skal eie sin egen installasjon.
 
 > Det er foreløpig ikke lagt inn en programvarelisens. Fram til rettighetshaver og lisens er avklart, krever bruk, endring og videre distribusjon uttrykkelig tillatelse fra rettighetshaveren.
 
 ## Opprett en selvstendig installasjon
 
-1. Fork den offentlige Watchtower-koden til redaksjonens egen GitHub-konto.
+1. Fork den offentlige Watchtower-koden til installasjonseierens egen GitHub-konto.
 2. Opprett et privat `watchtower-runtime` hos samme eier fra runtime-malen.
 3. Legg deploy-nøkkel, Slack- eller Teams-webhook og eventuelle kildenøkler i Actions Secrets i forken. Legg aldri secrets i runtime.
 4. Fyll inn kilder og private filterregler i runtime-konfigurasjonen.
@@ -18,7 +18,7 @@ Standardoppsettet finner et privat repository med navnet `watchtower-runtime` ho
 
 ## Etter forking
 
-Redaksjonen eier og drifter:
+Installasjonseieren eier og drifter:
 
 - sin egen fork av den offentlige koden og GitHub Actions;
 - Actions-secrets, deploy-nøkler og andre credentials;
@@ -30,7 +30,7 @@ Upstream er bare et offentlig startpunkt. Det finnes ingen SLA, sentral drift el
 
 ## Oppdateringer
 
-En fork mottar ingen automatiske upstream-oppdateringer. Redaksjonen velger selv om en endring skal hentes inn, vurderer sikkerhet og kompatibilitet, tester den mot egen runtime og ruller den ut når den er klar. Det er også helt greit å bli på en kjent versjon.
+En fork mottar ingen automatiske upstream-oppdateringer. Installasjonseieren velger selv om en endring skal hentes inn, vurderer sikkerhet og kompatibilitet, tester den mot egen runtime og ruller den ut når den er klar. Det er også helt greit å bli på en kjent versjon.
 
 ## Bidrag
 

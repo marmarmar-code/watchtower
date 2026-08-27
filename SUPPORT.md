@@ -2,7 +2,7 @@
 
 Watchtower distribueres som kildekode og utgangspunkt for selvstendige installasjoner.
 
-En installasjon er en egen fork. Den kan kjøre videre uten upstream, og upstream oppdaterer aldri en fork automatisk. Hver redaksjon bestemmer selv hvilke endringer som tas inn, og må kontrollere dem før bruk.
+En installasjon er en egen fork. Den kan kjøre videre uten upstream, og upstream oppdaterer aldri en fork automatisk. Installasjonseieren bestemmer selv hvilke endringer som tas inn, og må kontrollere dem før bruk.
 
 ## Den enkelte installasjonen er ansvarlig for
 

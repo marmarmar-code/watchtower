@@ -35,7 +35,7 @@ python -m unittest discover -s tests -v
 
 ## Nye adaptere
 
-En adapter som bare trengs av én redaksjon, eies og vedlikeholdes i den redaksjonens fork. En adapter som foreslås upstream, skal ha en navngitt vedlikeholder som følger opp endringer i kilden og driftsbehov. Uten slik vedlikeholder kan adapteren bli i forken.
+En adapter som bare trengs av én installasjon, eies og vedlikeholdes i den installasjonens fork. En adapter som foreslås upstream, skal ha en navngitt vedlikeholder som følger opp endringer i kilden og driftsbehov. Uten slik vedlikeholder kan adapteren bli i forken.
 
 Opprett et trygt, uregistrert utgangspunkt i din egen fork:
 
@@ -59,7 +59,7 @@ Adaptere med egen snapshot-state kan bruke `augment_state()`. State skal være k
 
 ## Nye RSS-profiler
 
-Bruk en RSS-profil før du lager en egen adapter når kilden tilbyr en offisiell RSS- eller Atom-feed. Profilen bør først legges i redaksjonens egen fork. En profil som foreslås upstream må:
+Bruk en RSS-profil før du lager en egen adapter når kilden tilbyr en offisiell RSS- eller Atom-feed. Profilen bør først legges i installasjonens egen fork. En profil som foreslås upstream må:
 
 - peke til en dokumentert, offisiell HTTPS-feed;
 - ha dato for siste reelle kontroll;

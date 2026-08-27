@@ -40,7 +40,7 @@ def _snapshot(table: str, metadata: dict[str, Any]) -> dict[str, Any]:
     ):
         raise SourceError(f"SSB table {table} has invalid variable metadata")
 
-    # Only fields with editorial meaning belong in the fingerprint. Transport
+    # Only monitoring-relevant fields belong in the fingerprint. Transport
     # metadata and future unrelated response fields must not create alerts.
     relevant = {
         "label": label.strip(),

@@ -46,7 +46,7 @@ class CoreTests(unittest.TestCase):
 
     def test_short_terms_default_to_whole_word_matching(self):
         rule = FilterRule(include_any=("QX",))
-        self.assertTrue(rule.matches("Ny satsing på QX i redaksjonen"))
+        self.assertTrue(rule.matches("Ny satsing på QX i organisasjonen"))
         self.assertTrue(rule.matches("QX-basert verktøy"))
         self.assertFalse(rule.matches("AQX-verktøy"))
         self.assertFalse(rule.matches("aqxsystem"))

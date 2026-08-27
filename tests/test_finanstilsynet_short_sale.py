@@ -81,7 +81,7 @@ class ShortSaleTests(unittest.TestCase):
         self.assertEqual("2026-08-24T00:00:00", item.published)
         self.assertIn("Fund A: 1,12 %", item.text)
 
-    def test_position_change_has_editorial_detail_and_does_not_repeat(self):
+    def test_position_change_has_change_detail_and_does_not_repeat(self):
         first = self.source([instrument(1.12)])
         items = first.fetch_with_state(None)
         state, alerts, baseline = evaluate(self.config(), items, None, max_seen=100)

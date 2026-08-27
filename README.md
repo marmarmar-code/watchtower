@@ -11,7 +11,11 @@ watchtower           offentlig kode, adaptere, tester og workflow
 watchtower-runtime   privat konfigurasjon, overvåkingsverdier og state
 ```
 
-Opprett en privat runtime fra [watchtower-runtime-template](https://github.com/marmarmar-code/watchtower-runtime-template). Malen inneholder full oppstarts- og kontrollprosedyre.
+Opprett en privat runtime fra [watchtower-runtime-template](https://github.com/marmarmar-code/watchtower-runtime-template). Malen beskriver oppsettet av den private delen av installasjonen.
+
+## Start her
+
+Følg [den samlede startprosedyren](FORKING.md). Den viser den anbefalte rekkefølgen fra fork til kontrollert første kjøring. Runtime-malen inneholder de detaljerte stegene for den private delen av installasjonen. Installasjonseieren har ansvar for egne kilder, varsler, secrets og drift.
 
 ## Kilder
 
@@ -274,9 +278,9 @@ python -m unittest discover -s tests -v
 
 ## Fork-eid drift og oppdateringer
 
-Hver redaksjon forker den offentlige koden og eier deretter sin egen kode, GitHub Actions, secrets, private runtime, adapterendringer, drift og support. Upstream er et startpunkt, ikke en sentral tjeneste: det finnes ingen SLA, sentral avhengighet eller garanti for at en kildekodeendring passer i din installasjon.
+Hver installasjonseier forker den offentlige koden og eier deretter sin egen kode, GitHub Actions, secrets, private runtime, adapterendringer, drift og support. Upstream er et startpunkt, ikke en sentral tjeneste: det finnes ingen SLA, sentral avhengighet eller garanti for at en kildekodeendring passer i installasjonen.
 
-Det skjer ingen automatiske oppdateringer fra upstream. Redaksjonen velger selv om og når den vil hente inn en endring, vurderer den i sin fork og ruller den ut på eget ansvar. Lokale adapterendringer bør normalt bli i forken, med mindre de er generelle og har en navngitt vedlikeholder.
+Det skjer ingen automatiske oppdateringer fra upstream. Installasjonseieren velger selv om og når en endring hentes inn, vurderer den i sin fork og ruller den ut på eget ansvar. Lokale adapterendringer bør normalt bli i forken, med mindre de er generelle og har en navngitt vedlikeholder.
 
 Generelle endringer kan foreslås som pull requests. Se `CONTRIBUTING.md` og `SUPPORT.md` før en endring sendes.
 
