@@ -2,7 +2,7 @@ name: Watchtower
 
 on:
   schedule:
-    - cron: "23 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
     inputs:
       operation:
@@ -124,10 +124,15 @@ jobs:
           else
             command=run
           fi
+          interval_args=()
+          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+            interval_args+=(--respect-intervals)
+          fi
           python -m watchtower "$command" \
             --config runtime/config/watchtower.toml \
             --state-dir runtime/state \
-            --redact-output
+            --redact-output \
+            "${interval_args[@]}"
 
       - name: Commit private state only
         id: commit_state
