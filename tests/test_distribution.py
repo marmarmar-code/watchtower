@@ -195,6 +195,7 @@ class DistributionTests(unittest.TestCase):
         self.assertIn('cron: "3-58/5 * * * *"', workflow)
         self.assertIn("python -m watchtower status", workflow)
         self.assertIn("--redact-output | tee -a", workflow)
+        self.assertIn("PATENTSTYRET_API_KEY", workflow)
 
 
 if __name__ == "__main__":

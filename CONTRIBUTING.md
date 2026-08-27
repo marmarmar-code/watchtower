@@ -47,7 +47,7 @@ Generatoren lager adapter, syntetisk kontrakttest og kort dokumentasjon. Den end
 
 En ny adapter skal:
 
-- bruke `Source.get()` for nettverkskall;
+- bruke `Source.get()` for vanlige hentekall, eller `Source.post()` når en offentlig, skrivefri søketjeneste krever POST;
 - normalisere data til `Item`;
 - ha stabile nøkler;
 - ha syntetiske parser-fixtures eller mocks;

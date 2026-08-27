@@ -1,5 +1,19 @@
 # Changelog
 
+## Business-source expansion — 2026-08-27
+
+### Added
+
+- Scoped monitoring of public allocations in Støtteregisteret.
+- Aggregate and holder-level short-position monitoring for selected issuers.
+- Credential-backed beta monitoring of Patentstyret portfolios.
+- Optional BRREG group-structure and registry-update events.
+
+### Changed
+
+- Package version is now `0.4.0`.
+- The runtime template includes disabled examples for the new business sources.
+
 ## Adoption and source expansion — 2026-08-27
 
 ### Added

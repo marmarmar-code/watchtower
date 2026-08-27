@@ -77,4 +77,31 @@ status = "stable"
 credential_required = false
 interval_class = "daily"
 maintenance_owner = "fork-owner"
-coverage = "Offentlige virksomhets-, rolle- og regnskapsendringer for oppgitte organisasjoner."
+coverage = "Offentlige virksomhets-, rolle-, regnskaps-, konsern- og registerendringer for oppgitte organisasjoner."
+
+[[source]]
+id = "stotte"
+name = "Støtteregisteret"
+status = "beta"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Offentlige støttetildelinger avgrenset til valgte virksomheter, næringer, regioner eller datoer."
+
+[[source]]
+id = "finanstilsynet_short_sale"
+name = "Finanstilsynets shortsalgregister"
+status = "beta"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Samlede og aktive shortposisjoner for eksplisitt valgte utstedere eller ISIN-er."
+
+[[source]]
+id = "patentstyret"
+name = "Patentstyret"
+status = "beta"
+credential_required = true
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Patenter, varemerker og design knyttet til eksplisitt valgte organisasjonsnumre."

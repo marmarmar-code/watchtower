@@ -118,6 +118,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
           DOFFIN_API_KEY: ${{ secrets.DOFFIN_API_KEY }}
+          PATENTSTYRET_API_KEY: ${{ secrets.PATENTSTYRET_API_KEY }}
         run: |
           set -euo pipefail
           if [[ "${{ steps.operation.outputs.value }}" == "dry-run" ]]; then

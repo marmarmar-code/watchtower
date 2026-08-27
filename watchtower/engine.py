@@ -18,6 +18,9 @@ from .sources.hoyesterett import HoyesterettSource
 from .sources.brreg import BrregSource
 from .sources.rss import RssSource
 from .sources.ssb import SsbSource
+from .sources.stotte import StotteSource
+from .sources.finanstilsynet_short_sale import FinanstilsynetShortSaleSource
+from .sources.patentstyret import PatentstyretSource
 
 
 SOURCE_TYPES: dict[str, type[Source]] = {
@@ -30,6 +33,9 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "brreg": BrregSource,
     "rss": RssSource,
     "ssb": SsbSource,
+    "stotte": StotteSource,
+    "finanstilsynet_short_sale": FinanstilsynetShortSaleSource,
+    "patentstyret": PatentstyretSource,
 }
 
 _STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors")

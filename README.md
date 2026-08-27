@@ -27,6 +27,9 @@ hoyesterett
 brreg
 rss
 ssb
+stotte
+finanstilsynet_short_sale
+patentstyret
 ```
 
 Hver kilde er valgfri. Aktivitet, URL-er, kildespesifikke valg og filterregler angis i privat runtime.
@@ -96,6 +99,8 @@ exclude_any = []
 - navn, organisasjonsform og næringskode;
 - konkurs, avvikling, sletting og fjerning;
 - daglig leder, styreleder, nestleder og styremedlemmer.
+- konsernstruktur og konkrete endringer i konsernforhold;
+- den offentlige endringsstrømmen for registrerte virksomhetsopplysninger.
 
 Første kjøring etablerer en stille baseline. Adapteren lagrer kompakte snapshots i privat state for å beskrive konkrete endringer. Den laster ikke ned PDF-er og inneholder ingen database eller rapporteringsflate.
 
@@ -109,12 +114,73 @@ label = "Brønnøysundregistrene"
 enabled = false
 alert_on_update = true
 companies = ["REPLACE_ME_ORGNR_1"]
-events = ["annual_accounts", "company", "roles"]
+events = ["annual_accounts", "company", "roles", "group_structure", "registry_updates"]
 
 [source.filter]
 match_all = true
 exclude_any = []
 ```
+
+`group_structure` og `registry_updates` er valgfrie. De eksisterende tre hendelsene fortsetter som før dersom disse ikke legges til.
+
+### Støtteregisteret
+
+`stotte` følger offentlige støttetildelinger. Søk må avgrenses til minst én mottaker, støttegiver, næring, region eller datoperiode. Dette hindrer at en fork uforvarende forsøker å hente hele registeret.
+
+```toml
+[[source]]
+id = "stotte"
+kind = "stotte"
+label = "Støtteregisteret"
+enabled = false
+recipient_orgnrs = ["REPLACE_ME_ORGNR_1"]
+interval_minutes = 360
+
+[source.filter]
+match_all = true
+exclude_any = []
+```
+
+`provider_orgnrs`, `industries`, `regions`, `from_date` og `to_date` kan brukes som alternative eller ekstra avgrensninger.
+
+### Shortsalgregisteret
+
+`finanstilsynet_short_sale` følger siste samlede shortandel og de publiserte aktive posisjonene for eksplisitt valgte ISIN-er eller eksakte utstedernavn.
+
+```toml
+[[source]]
+id = "shortsalg"
+kind = "finanstilsynet_short_sale"
+label = "Finanstilsynets shortsalgregister"
+enabled = false
+isins = ["REPLACE_ME_ISIN_1"]
+interval_minutes = 360
+
+[source.filter]
+match_all = true
+exclude_any = []
+```
+
+### Patentstyret
+
+`patentstyret` følger patenter, varemerker og design knyttet til valgte organisasjonsnumre. Patentstyret krever en gratis abonnementnøkkel fra utviklerportalen. Nøkkelen skal lagres som Actions-secret `PATENTSTYRET_API_KEY`.
+
+```toml
+[[source]]
+id = "patentstyret"
+kind = "patentstyret"
+label = "Patentstyret"
+enabled = false
+companies = ["REPLACE_ME_ORGNR_1"]
+kinds = ["Patent", "Trademark", "Design"]
+interval_minutes = 360
+
+[source.filter]
+match_all = true
+exclude_any = []
+```
+
+Adapteren er en prøveversjon til en fork med egen nøkkel har kontrollert en full kjøring mot Patentstyrets API.
 
 ## Filtrering
 

@@ -19,6 +19,9 @@ class SourceCatalogTests(unittest.TestCase):
         self.assertTrue(by_id["doffin"]["credential_required"])
         self.assertEqual("fork-owner", by_id["rss"]["maintenance_owner"])
         self.assertEqual("beta", by_id["ssb"]["status"])
+        self.assertEqual("beta", by_id["stotte"]["status"])
+        self.assertFalse(by_id["finanstilsynet_short_sale"]["credential_required"])
+        self.assertTrue(by_id["patentstyret"]["credential_required"])
 
     def test_duplicate_ids_are_rejected(self):
         text = """[[source]]\nid='regjeringen'\nname='x'\nstatus='stable'\ncredential_required=false\ninterval_class='hourly'\nmaintenance_owner='fork-owner'\ncoverage='x'\n[[source]]\nid='regjeringen'\nname='x'\nstatus='stable'\ncredential_required=false\ninterval_class='hourly'\nmaintenance_owner='fork-owner'\ncoverage='x'\n"""
@@ -45,6 +48,7 @@ class SourceCatalogTests(unittest.TestCase):
         self.assertIn("rss\tprøveversjon\toffentlig\tegen fork\tRSS og Atom", rendered)
         self.assertIn("ssb\tprøveversjon\toffentlig\tegen fork", rendered)
         self.assertIn("doffin\tetablert\tkrever nøkkel", rendered)
+        self.assertIn("patentstyret\tprøveversjon\tkrever nøkkel", rendered)
 
     def test_cli_lists_ready_rss_profiles(self):
         output = StringIO()

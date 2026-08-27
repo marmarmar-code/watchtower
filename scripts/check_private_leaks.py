@@ -8,7 +8,16 @@ import tomllib
 
 
 FILTER_KEYS = ("include_any", "include_all", "exclude_any")
-SOURCE_KEYS = ("search_queries", "companies")
+SOURCE_KEYS = (
+    "search_queries",
+    "companies",
+    "recipient_orgnrs",
+    "provider_orgnrs",
+    "industries",
+    "regions",
+    "isins",
+    "issuers",
+)
 PLACEHOLDER_MARKER = "REPLACE_ME"
 
 

@@ -81,6 +81,21 @@ class ResilienceTests(unittest.TestCase):
         self.assertEqual(1, source.session.get.call_count)
         self.assertEqual([], delays)
 
+    def test_read_only_post_search_retries_transient_failure(self):
+        delays: list[float] = []
+        source = StubSource(
+            self.source_config(),
+            retry_attempts=2,
+            sleep=delays.append,
+        )
+        source.session.post = Mock(side_effect=[response(503), response(200)])
+
+        result = source.post("https://example.test/search", json=[{"field": "x"}])
+
+        self.assertEqual(200, result.status_code)
+        self.assertEqual(2, source.session.post.call_count)
+        self.assertEqual([1.0], delays)
+
     def test_shuffled_unchanged_items_do_not_rewrite_state(self):
         config = self.source_config()
         first = Item("example-source", "1", "Alpha one", "https://example.test/1")

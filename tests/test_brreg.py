@@ -12,8 +12,12 @@ ORGNR = "999999999"
 
 
 class Response:
-    def __init__(self, status_code: int) -> None:
+    def __init__(self, status_code: int, payload=None) -> None:
         self.status_code = status_code
+        self.payload = payload
+
+    def json(self):
+        return self.payload
 
 
 def entity(*, bankrupt=False):
@@ -60,8 +64,33 @@ def account(report_id=100, period_to="2025-12-31"):
     }
 
 
+def group_relation(orgnr="123456785", name="Example Subsidiary AS", basis="100%"):
+    return {
+        "child_orgnr": orgnr,
+        "child_name": name,
+        "parent_orgnr": ORGNR,
+        "parent_name": "Example Publishing AS",
+        "connection": {"code": "KDAT", "description": "Konsern datter"},
+        "basis": basis,
+        "date": "2026-08-20",
+        "organisation_form": {"code": "AS", "description": "Aksjeselskap"},
+        "level": 1,
+    }
+
+
+def registry_update(update_id=100, employees=20):
+    return {
+        "id": update_id,
+        "date": "2026-08-27T10:00:00Z",
+        "change_type": "Endring",
+        "changes": [
+            {"operation": "replace", "path": "/antallAnsatte", "value": employees}
+        ],
+    }
+
+
 class BrregTests(unittest.TestCase):
-    def config(self, *, companies=None):
+    def config(self, *, companies=None, events=None):
         return SourceConfig(
             id="brreg-test",
             kind="brreg",
@@ -69,15 +98,30 @@ class BrregTests(unittest.TestCase):
             filters=FilterRule(match_all=True),
             options={
                 "companies": companies or [ORGNR],
-                "events": ["annual_accounts", "company", "roles"],
+                "events": events or ["annual_accounts", "company", "roles"],
             },
         )
 
-    def source(self, *, current_entity=None, current_roles=None, current_account=None):
-        source = BrregSource(self.config())
+    def source(
+        self,
+        *,
+        current_entity=None,
+        current_roles=None,
+        current_account=None,
+        current_group=None,
+        current_updates=None,
+        events=None,
+    ):
+        source = BrregSource(self.config(events=events))
         source._entity = lambda _: current_entity or entity()
         source._roles = lambda _: current_roles or roles()
         source._latest_account = lambda _: current_account or account()
+        source._group_structure = lambda _: (
+            current_group if current_group is not None else []
+        )
+        source._registry_updates = lambda _: (
+            current_updates if current_updates is not None else []
+        )
         return source
 
     def baseline(self):
@@ -108,6 +152,11 @@ class BrregTests(unittest.TestCase):
         source.get = lambda *_args, **_kwargs: Response(410)
         result = source._entity(ORGNR)
         self.assertTrue(result["removed"])
+
+    def test_missing_group_is_canonicalized_as_empty(self):
+        source = BrregSource(self.config(events=["group_structure"]))
+        source.get = lambda *_args, **_kwargs: Response(404)
+        self.assertEqual([], source._group_structure(ORGNR))
 
     def test_first_run_is_silent_and_persists_private_snapshot(self):
         state, alerts, baseline = self.baseline()
@@ -199,6 +248,65 @@ class BrregTests(unittest.TestCase):
         )
         self.assertNotIn("Organisasjonsform", company_alerts[0].item.text)
         self.assertNotIn("Næringskode", company_alerts[0].item.text)
+
+    def test_group_structure_is_silent_when_enabled_then_alerts_on_change(self):
+        state, _, _ = self.baseline()
+        events = ["annual_accounts", "company", "roles", "group_structure"]
+        enabled = self.source(current_group=[group_relation()], events=events)
+        items = enabled.fetch_with_state(state)
+        enabled_state, alerts, _ = evaluate(
+            self.config(events=events), items, state, max_seen=100
+        )
+        enabled_state = enabled.augment_state(enabled_state)
+        self.assertEqual([], alerts)
+
+        changed = self.source(
+            current_group=[group_relation(), group_relation("974761076", "New AS")],
+            events=events,
+        )
+        items = changed.fetch_with_state(enabled_state)
+        _, alerts, _ = evaluate(
+            self.config(events=events), items, enabled_state, max_seen=100
+        )
+        self.assertEqual(1, len(alerts))
+        self.assertIn("Inn i konsernet: New AS", alerts[0].item.alert_details[0])
+
+    def test_registry_updates_are_silent_when_enabled_then_new_update_alerts(self):
+        state, _, _ = self.baseline()
+        events = ["annual_accounts", "company", "roles", "registry_updates"]
+        enabled = self.source(current_updates=[registry_update(100)], events=events)
+        items = enabled.fetch_with_state(state)
+        enabled_state, alerts, _ = evaluate(
+            self.config(events=events), items, state, max_seen=100
+        )
+        enabled_state = enabled.augment_state(enabled_state)
+        self.assertEqual([], alerts)
+
+        changed = self.source(
+            current_updates=[registry_update(101, 21), registry_update(100)],
+            events=events,
+        )
+        items = changed.fetch_with_state(enabled_state)
+        next_state, alerts, _ = evaluate(
+            self.config(events=events), items, enabled_state, max_seen=100
+        )
+        next_state = changed.augment_state(next_state)
+        self.assertEqual(1, len(alerts))
+        self.assertIn("Antall ansatte: 21", alerts[0].item.alert_details)
+        self.assertEqual(
+            101,
+            next_state["source_state"]["brreg"][ORGNR]["registry_updates"]["newest_id"],
+        )
+
+    def test_registry_update_cursor_gap_fails_closed(self):
+        state, _, _ = self.baseline()
+        state["source_state"]["brreg"][ORGNR]["registry_updates"] = {"newest_id": 100}
+        source = self.source(
+            current_updates=[registry_update(202), registry_update(201)],
+            events=["registry_updates"],
+        )
+        with self.assertRaisesRegex(SourceError, "previous cursor"):
+            source.fetch_with_state(state)
 
 
 if __name__ == "__main__":

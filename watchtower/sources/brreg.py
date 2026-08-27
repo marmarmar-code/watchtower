@@ -2,15 +2,19 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from typing import Any
 
 from ..models import Item
 from .common import Source, SourceError
+from .identifiers import valid_orgnr
 
 
 ENTITY_URL = "https://data.brreg.no/enhetsregisteret/api/enheter/{orgnr}"
 ROLES_URL = "https://data.brreg.no/enhetsregisteret/api/enheter/{orgnr}/roller"
 ACCOUNTS_URL = "https://data.brreg.no/regnskapsregisteret/regnskap/{orgnr}"
+GROUP_URL = "https://data.brreg.no/enhetsregisteret/api/konsernstruktur/{orgnr}"
+UPDATES_URL = "https://data.brreg.no/enhetsregisteret/api/oppdateringer/enheter"
 ANNUAL_REPORT_URL = (
     "https://data.brreg.no/regnskapsregisteret/regnskap/aarsregnskap/kopi/{orgnr}/{year}"
 )
@@ -21,7 +25,20 @@ ROLE_CODES = {
     "NEST": "Nestleder",
     "MEDL": "Styremedlem",
 }
-ORGNR_WEIGHTS = (3, 2, 7, 6, 5, 4, 3, 2)
+UPDATE_FIELD_LABELS = {
+    "aktivitet": "Aktivitet",
+    "antallAnsatte": "Antall ansatte",
+    "forretningsadresse": "Forretningsadresse",
+    "konkurs": "Konkurs",
+    "navn": "Navn",
+    "naeringskode1": "Næringskode",
+    "organisasjonsform": "Organisasjonsform",
+    "slettedato": "Slettedato",
+    "stiftelsesdato": "Stiftelsesdato",
+    "underAvvikling": "Under avvikling",
+    "underTvangsavviklingEllerTvangsopplosning": "Under tvangsavvikling",
+    "vedtektsfestetFormaal": "Vedtektsfestet formål",
+}
 
 
 class BrregSource(Source):
@@ -35,7 +52,7 @@ class BrregSource(Source):
         companies = []
         for value in raw_companies:
             orgnr = str(value).strip().replace(" ", "")
-            if not _valid_orgnr(orgnr):
+            if not valid_orgnr(orgnr):
                 raise ValueError(
                     "BRREG companies must contain valid 9-digit organisation numbers"
                 )
@@ -45,12 +62,30 @@ class BrregSource(Source):
         raw_events = config.options.get("events", ["annual_accounts", "company", "roles"])
         if not isinstance(raw_events, list):
             raise ValueError("BRREG events must be an array")
-        allowed = {"annual_accounts", "company", "roles"}
+        allowed = {
+            "annual_accounts",
+            "company",
+            "roles",
+            "group_structure",
+            "registry_updates",
+        }
         events = {str(value).strip() for value in raw_events}
         unknown = events - allowed
         if unknown:
             raise ValueError(f"unsupported BRREG events: {', '.join(sorted(unknown))}")
         self.events = events
+        self.max_group_relations = _bounded_int(
+            config.options.get("max_group_relations", 1000),
+            "max_group_relations",
+            1,
+            5000,
+        )
+        self.registry_update_limit = _bounded_int(
+            config.options.get("registry_update_limit", 100),
+            "registry_update_limit",
+            1,
+            1000,
+        )
         self._snapshots: dict[str, Any] = {}
 
     def fetch(self) -> list[Item]:
@@ -88,6 +123,48 @@ class BrregSource(Source):
                 current["annual_account"] = account
                 if account is not None:
                     items.append(self._account_item(orgnr, company_name, account))
+
+            if "group_structure" in self.events:
+                group = self._group_structure(orgnr)
+                current["group_structure"] = group
+                items.append(
+                    self._group_item(
+                        orgnr,
+                        company_name,
+                        old.get("group_structure"),
+                        group,
+                    )
+                )
+
+            if "registry_updates" in self.events:
+                update_state = old.get("registry_updates")
+                updates = self._registry_updates(orgnr)
+                initialized = isinstance(update_state, dict)
+                previous_newest = (
+                    update_state.get("newest_id") if initialized else None
+                )
+                update_ids = [int(update["id"]) for update in updates]
+                if (
+                    previous_newest is not None
+                    and update_ids
+                    and int(previous_newest) != update_ids[0]
+                    and int(previous_newest) not in update_ids
+                ):
+                    raise SourceError(
+                        "BRREG registry update window no longer contains the previous cursor"
+                    )
+                current["registry_updates"] = {
+                    "newest_id": update_ids[0] if update_ids else previous_newest,
+                }
+                items.extend(
+                    self._registry_update_item(
+                        orgnr,
+                        company_name,
+                        update,
+                        suppress_alert=not initialized,
+                    )
+                    for update in updates
+                )
 
             next_snapshots[orgnr] = current
 
@@ -185,6 +262,47 @@ class BrregSource(Source):
             "journal_number": _clean(latest.get("journalnr")),
         }
 
+    def _group_structure(self, orgnr: str) -> list[dict[str, Any]]:
+        response = self.get(GROUP_URL.format(orgnr=orgnr), accepted_statuses=(404,))
+        if response.status_code == 404:
+            return []
+        try:
+            payload = response.json()
+        except ValueError as exc:
+            raise SourceError("BRREG group response was not valid JSON") from exc
+        if not isinstance(payload, dict):
+            raise SourceError("BRREG group response had unexpected shape")
+        children = payload.get("children", [])
+        if not isinstance(children, list):
+            raise SourceError("BRREG group response had invalid children")
+        relations: list[dict[str, Any]] = []
+        _flatten_group(children, relations, self.max_group_relations)
+        relations.sort(key=_group_relation_key)
+        return relations
+
+    def _registry_updates(self, orgnr: str) -> list[dict[str, Any]]:
+        response = self.get(
+            UPDATES_URL,
+            params={
+                "organisasjonsnummer": orgnr,
+                "includeChanges": "true",
+                "page": 0,
+                "size": self.registry_update_limit,
+                "sort": "id,DESC",
+            },
+        )
+        try:
+            payload = response.json()
+        except ValueError as exc:
+            raise SourceError("BRREG registry update response was not valid JSON") from exc
+        embedded = payload.get("_embedded") if isinstance(payload, dict) else None
+        rows = embedded.get("oppdaterteEnheter") if isinstance(embedded, dict) else None
+        if not isinstance(rows, list) or not all(isinstance(row, dict) for row in rows):
+            raise SourceError("BRREG registry update response had invalid rows")
+        updates = [_normalize_registry_update(row, orgnr) for row in rows]
+        updates.sort(key=lambda row: int(row["id"]), reverse=True)
+        return updates
+
     def _entity_item(
         self,
         orgnr: str,
@@ -261,6 +379,63 @@ class BrregSource(Source):
             ),
         )
 
+    def _group_item(
+        self,
+        orgnr: str,
+        company_name: str,
+        previous: Any,
+        current: list[dict[str, Any]],
+    ) -> Item:
+        changes = _diff_group(previous, current)
+        summary = f"{len(current)} konsernforhold"
+        text = [company_name, orgnr, summary, *changes[:20]]
+        return Item(
+            source_id=self.config.id,
+            key=f"group:{orgnr}",
+            title=(
+                f"Konsernendring: {company_name}"
+                if changes
+                else f"Konsernstruktur: {company_name}"
+            ),
+            url=GROUP_URL.format(orgnr=orgnr),
+            text="\n".join(text),
+            metadata={"orgnr": orgnr, "event": "group_structure"},
+            fingerprint=_digest(current),
+            suppress_alert=not changes,
+            alert_details=tuple(changes[:8]),
+        )
+
+    def _registry_update_item(
+        self,
+        orgnr: str,
+        company_name: str,
+        update: dict[str, Any],
+        *,
+        suppress_alert: bool,
+    ) -> Item:
+        details = tuple(_format_registry_change(change) for change in update["changes"])
+        visible = list(details[:20])
+        if len(details) > 20:
+            visible.append(f"I tillegg: {len(details) - 20} felt")
+        return Item(
+            source_id=self.config.id,
+            key=f"registry-update:{orgnr}:{update['id']}",
+            title=f"Registerendring: {company_name}",
+            url=ENTITY_URL.format(orgnr=orgnr),
+            published=update["date"],
+            text="\n".join(
+                [company_name, orgnr, update["change_type"], *visible]
+            ),
+            metadata={
+                "orgnr": orgnr,
+                "event": "registry_updates",
+                "update_id": update["id"],
+            },
+            fingerprint=_digest(update),
+            suppress_alert=suppress_alert,
+            alert_details=details[:8],
+        )
+
 
 def _diff_entity(previous: Any, current: dict[str, Any]) -> list[str]:
     old = previous if isinstance(previous, dict) else {}
@@ -327,6 +502,140 @@ def _diff_roles(previous: Any, current: dict[str, list[str]]) -> list[str]:
     return changes
 
 
+def _flatten_group(
+    rows: list[Any],
+    result: list[dict[str, Any]],
+    maximum: int,
+) -> None:
+    for row in rows:
+        if not isinstance(row, dict):
+            raise SourceError("BRREG group response contained an invalid relation")
+        if len(result) >= maximum:
+            raise SourceError("BRREG group structure exceeded the configured safety limit")
+        child_orgnr = _clean(row.get("organisasjonsnummer"))
+        parent_orgnr = _clean(row.get("parentOrganisasjonsnummer"))
+        if not child_orgnr or not parent_orgnr:
+            raise SourceError("BRREG group relation lacked a stable organisation number")
+        connection = row.get("knytningsform")
+        form = row.get("organisasjonsform")
+        relation = {
+            "child_orgnr": child_orgnr,
+            "child_name": _clean(row.get("navn")),
+            "parent_orgnr": parent_orgnr,
+            "parent_name": _clean(row.get("parentNavn")),
+            "connection": _coded(connection),
+            "basis": _clean(row.get("grunnlag")),
+            "date": _clean(row.get("dato")),
+            "organisation_form": _coded(form),
+            "level": row.get("nivaa") if isinstance(row.get("nivaa"), int) else None,
+        }
+        result.append(relation)
+        children = row.get("children", [])
+        if not isinstance(children, list):
+            raise SourceError("BRREG group relation had invalid children")
+        _flatten_group(children, result, maximum)
+
+
+def _group_relation_key(row: dict[str, Any]) -> tuple[str, str, str]:
+    connection = row.get("connection")
+    code = connection.get("code") if isinstance(connection, dict) else ""
+    return (
+        str(row.get("parent_orgnr") or ""),
+        str(row.get("child_orgnr") or ""),
+        str(code or ""),
+    )
+
+
+def _diff_group(previous: Any, current: list[dict[str, Any]]) -> list[str]:
+    if not isinstance(previous, list):
+        return []
+    old = {_group_relation_key(row): row for row in previous if isinstance(row, dict)}
+    new = {_group_relation_key(row): row for row in current}
+    changes: list[str] = []
+    for key in sorted(old.keys() - new.keys()):
+        relation = old[key]
+        changes.append(f"Ut av konsernet: {_group_display(relation)}")
+    for key in sorted(new.keys() - old.keys()):
+        relation = new[key]
+        changes.append(f"Inn i konsernet: {_group_display(relation)}")
+    for key in sorted(old.keys() & new.keys()):
+        if old[key] != new[key]:
+            changes.append(f"Konsernforhold endret: {_group_display(new[key])}")
+    return changes
+
+
+def _group_display(row: dict[str, Any]) -> str:
+    child = row.get("child_name") or row.get("child_orgnr") or "ukjent"
+    child_orgnr = row.get("child_orgnr")
+    parent = row.get("parent_name") or row.get("parent_orgnr") or "ukjent"
+    basis = row.get("basis")
+    value = f"{child} ({child_orgnr}) under {parent}" if child_orgnr else f"{child} under {parent}"
+    return f"{value}, {basis}" if basis else value
+
+
+def _normalize_registry_update(row: dict[str, Any], orgnr: str) -> dict[str, Any]:
+    update_id = row.get("oppdateringsid")
+    if isinstance(update_id, bool) or not isinstance(update_id, int):
+        raise SourceError("BRREG registry update lacked a stable id")
+    if row.get("organisasjonsnummer") != orgnr:
+        raise SourceError("BRREG registry update had unexpected identity")
+    changed_at = _clean(row.get("dato"))
+    change_type = _clean(row.get("endringstype"))
+    changes = row.get("endringer")
+    if not changed_at or not change_type or not isinstance(changes, list):
+        raise SourceError("BRREG registry update was incomplete")
+    normalized_changes: list[dict[str, Any]] = []
+    for change in changes:
+        if not isinstance(change, dict):
+            raise SourceError("BRREG registry update contained an invalid field change")
+        operation = _clean(change.get("op"))
+        path = _clean(change.get("path"))
+        if not operation or not path:
+            raise SourceError("BRREG registry field change was incomplete")
+        try:
+            json.dumps(change.get("value"), ensure_ascii=False)
+        except (TypeError, ValueError) as exc:
+            raise SourceError("BRREG registry field value was not serializable") from exc
+        normalized_changes.append(
+            {"operation": operation, "path": path, "value": change.get("value")}
+        )
+    return {
+        "id": update_id,
+        "date": changed_at,
+        "change_type": change_type,
+        "changes": normalized_changes,
+    }
+
+
+def _format_registry_change(change: dict[str, Any]) -> str:
+    field = str(change.get("path") or "").strip("/").split("/")[-1]
+    label = UPDATE_FIELD_LABELS.get(field) or _humanize_field(field)
+    operation = change.get("operation")
+    if operation == "remove":
+        return f"{label}: fjernet"
+    value = _display_value(change.get("value"))
+    if operation in {"add", "replace"}:
+        return f"{label}: {value}"
+    return f"{label} ({operation}): {value}"
+
+
+def _humanize_field(value: str) -> str:
+    spaced = re.sub(r"(?<!^)(?=[A-Z])", " ", value).replace("_", " ").strip()
+    return spaced[:1].upper() + spaced[1:] if spaced else "Felt"
+
+
+def _display_value(value: Any) -> str:
+    if isinstance(value, bool):
+        rendered = "ja" if value else "nei"
+    elif isinstance(value, (dict, list)):
+        rendered = json.dumps(value, ensure_ascii=False, sort_keys=True)
+    elif value is None:
+        rendered = "ikke oppgitt"
+    else:
+        rendered = " ".join(str(value).split())
+    return rendered[:220]
+
+
 def _role_holder(role: dict[str, Any]) -> str | None:
     person = role.get("person")
     if isinstance(person, dict):
@@ -378,17 +687,16 @@ def _clean(value: Any) -> str | None:
     return cleaned or None
 
 
-def _valid_orgnr(value: str) -> bool:
-    if len(value) != 9 or not value.isdigit():
-        return False
-    weighted = sum(int(digit) * weight for digit, weight in zip(value[:8], ORGNR_WEIGHTS))
-    remainder = weighted % 11
-    check_digit = 11 - remainder
-    if check_digit == 11:
-        check_digit = 0
-    if check_digit == 10:
-        return False
-    return check_digit == int(value[-1])
+def _bounded_int(value: Any, field: str, minimum: int, maximum: int) -> int:
+    if isinstance(value, bool):
+        raise ValueError(f"BRREG {field} must be an integer")
+    try:
+        number = int(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(f"BRREG {field} must be an integer") from exc
+    if not minimum <= number <= maximum:
+        raise ValueError(f"BRREG {field} must be between {minimum} and {maximum}")
+    return number
 
 
 def _digest(value: Any) -> str:

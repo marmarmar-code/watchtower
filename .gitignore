@@ -2,6 +2,8 @@ __pycache__/
 *.py[cod]
 .venv/
 .pytest_cache/
+build/
+*.egg-info/
 .env
 .env.*
 config/private*

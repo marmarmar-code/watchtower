@@ -47,7 +47,7 @@ class Source(ABC):
         self.retry_attempts = max(1, int(retry_attempts))
         self.sleep = sleep
         self.session = requests.Session()
-        self.session.headers.update({"User-Agent": "watchtower/0.3 (+public-source-monitor)"})
+        self.session.headers.update({"User-Agent": "watchtower/0.4 (+public-source-monitor)"})
 
     def get(
         self,
@@ -60,6 +60,36 @@ class Source(ABC):
             response: requests.Response | None = None
             try:
                 response = self.session.get(url, timeout=self.timeout, **kwargs)
+            except requests.RequestException as exc:
+                if attempt >= self.retry_attempts:
+                    raise SourceError(f"request failed for {self.config.id}") from exc
+                self.sleep(_retry_delay(None, attempt))
+                continue
+
+            if response.status_code == 200 or response.status_code in accepted_statuses:
+                return response
+
+            if not _is_retryable_status(response.status_code) or attempt >= self.retry_attempts:
+                raise SourceError(f"{self.config.id} returned HTTP {response.status_code}")
+
+            delay = _retry_delay(response, attempt)
+            response.close()
+            self.sleep(delay)
+
+        raise SourceError(f"request failed for {self.config.id}")
+
+    def post(
+        self,
+        url: str,
+        *,
+        accepted_statuses: tuple[int, ...] = (),
+        **kwargs,
+    ) -> requests.Response:
+        """Perform a retry-safe POST used only by read-only public searches."""
+        for attempt in range(1, self.retry_attempts + 1):
+            response: requests.Response | None = None
+            try:
+                response = self.session.post(url, timeout=self.timeout, **kwargs)
             except requests.RequestException as exc:
                 if attempt >= self.retry_attempts:
                     raise SourceError(f"request failed for {self.config.id}") from exc
