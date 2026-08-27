@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Callable
 
 from .config import Config, SourceConfig
@@ -31,6 +31,9 @@ SOURCE_TYPES: dict[str, type[Source]] = {
 _STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors")
 _ALERT_AUDIT_SOURCE_ID = "_alert_audit"
 _ALERT_AUDIT_LIMIT = 500
+_LAST_CHECKED_FIELD = "last_checked_at"
+DEFAULT_SOURCE_INTERVAL_MINUTES = 60
+MIN_SOURCE_INTERVAL_MINUTES = 5
 MAX_DETAILED_ALERTS_PER_RUN = 32
 
 
@@ -86,6 +89,41 @@ def _state_for_evaluation(source: SourceConfig, previous: dict | None) -> dict |
     return previous
 
 
+def _source_interval_minutes(source: SourceConfig) -> int:
+    raw = source.options.get("interval_minutes", DEFAULT_SOURCE_INTERVAL_MINUTES)
+    if isinstance(raw, bool):
+        raise ValueError("interval_minutes must be an integer")
+    try:
+        interval = int(raw)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("interval_minutes must be an integer") from exc
+    if interval < MIN_SOURCE_INTERVAL_MINUTES:
+        raise ValueError(
+            f"interval_minutes must be at least {MIN_SOURCE_INTERVAL_MINUTES}"
+        )
+    return interval
+
+
+def _source_is_due(
+    source: SourceConfig,
+    previous: dict | None,
+    *,
+    at: datetime,
+) -> bool:
+    if previous is None:
+        return True
+    last_value = previous.get(_LAST_CHECKED_FIELD)
+    if not last_value:
+        return True
+    try:
+        last_checked = datetime.fromisoformat(str(last_value).replace("Z", "+00:00"))
+    except ValueError:
+        return True
+    if last_checked.tzinfo is None:
+        last_checked = last_checked.replace(tzinfo=timezone.utc)
+    return at >= last_checked + timedelta(minutes=_source_interval_minutes(source))
+
+
 def _save_alert_audit(
     state: StateStore,
     alerts: list[Alert],
@@ -136,6 +174,8 @@ def run(
     notifier: Notifier | None,
     *,
     dry_run: bool = False,
+    respect_intervals: bool = False,
+    run_at: datetime | None = None,
     source_factory: Callable[[SourceConfig], Source] = build_source,
 ) -> RunResult:
     checked = 0
@@ -143,13 +183,23 @@ def run(
     alerts: list[Alert] = []
     errors: dict[str, str] = {}
     staged: dict[str, dict] = {}
+    started_at = run_at or datetime.now(timezone.utc)
+    if started_at.tzinfo is None:
+        started_at = started_at.replace(tzinfo=timezone.utc)
+    checked_at = started_at.astimezone(timezone.utc).isoformat(timespec="seconds")
 
     for source_config in config.sources:
         if not source_config.enabled:
             continue
+        old_state = state.load(source_config.id)
         try:
+            if respect_intervals and not _source_is_due(
+                source_config,
+                old_state,
+                at=started_at,
+            ):
+                continue
             source = source_factory(source_config)
-            old_state = state.load(source_config.id)
             items = source.fetch_with_state(old_state)
             checked += 1
             next_state, source_alerts, was_baseline = evaluate(
@@ -159,9 +209,10 @@ def run(
                 max_seen=config.max_seen_per_source,
             )
             augment_state = getattr(source, "augment_state", None)
-            staged[source_config.id] = (
-                augment_state(next_state) if callable(augment_state) else next_state
-            )
+            next_state = augment_state(next_state) if callable(augment_state) else next_state
+            next_state = dict(next_state)
+            next_state[_LAST_CHECKED_FIELD] = checked_at
+            staged[source_config.id] = next_state
             alerts.extend(source_alerts)
             if was_baseline:
                 baselined += 1
