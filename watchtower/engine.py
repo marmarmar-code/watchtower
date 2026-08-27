@@ -31,6 +31,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
 _STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors")
 _ALERT_AUDIT_SOURCE_ID = "_alert_audit"
 _ALERT_AUDIT_LIMIT = 500
+MAX_DETAILED_ALERTS_PER_RUN = 32
 
 
 @dataclass
@@ -108,6 +109,27 @@ def _save_alert_audit(
     state.save(_ALERT_AUDIT_SOURCE_ID, {"entries": entries[-_ALERT_AUDIT_LIMIT:]})
 
 
+def _send_plain_text(notifier: Notifier, text: str) -> None:
+    send_text = getattr(type(notifier), "send_text", None)
+    if callable(send_text):
+        notifier.send_text(text)
+    else:
+        notifier.send(text)  # type: ignore[attr-defined]
+
+
+def _send_alerts(notifier: Notifier, alerts: list[Alert]) -> None:
+    if len(alerts) > MAX_DETAILED_ALERTS_PER_RUN:
+        _send_plain_text(notifier, format_alert_surge(alerts))
+        return
+
+    entries = notification_entries(alerts)
+    send_alerts = getattr(type(notifier), "send_alerts", None)
+    if callable(send_alerts):
+        notifier.send_alerts(entries)
+    else:
+        notifier.send(format_slack(alerts))  # type: ignore[attr-defined]
+
+
 def run(
     config: Config,
     state: StateStore,
@@ -152,12 +174,7 @@ def run(
     if alerts:
         if notifier is None:
             raise RuntimeError("alerts pending but notifier is not configured")
-        entries = notification_entries(alerts)
-        send_alerts = getattr(type(notifier), "send_alerts", None)
-        if callable(send_alerts):
-            notifier.send_alerts(entries)
-        else:
-            notifier.send(format_slack(alerts))  # type: ignore[attr-defined]
+        _send_alerts(notifier, alerts)
 
     for source_id, next_state in staged.items():
         state.save(source_id, next_state)
@@ -209,9 +226,15 @@ def evaluate(
     move_to_end: list[str] = []
     moved: set[str] = set()
     for item in unique_items:
-        digest = item.content_hash()
+        compatible_digests = item.compatible_content_hashes()
+        digest = compatible_digests[0]
         old_digest = seen.get(item.key)
-        change = "new" if old_digest is None else ("updated" if old_digest != digest else "unchanged")
+        if old_digest is None:
+            change = "new"
+        elif old_digest in compatible_digests:
+            change = "unchanged"
+        else:
+            change = "updated"
         candidate = change == "new" or (change == "updated" and source.alert_on_update)
         if (
             not baseline
@@ -283,6 +306,31 @@ def notification_entries(alerts: list[Alert]) -> tuple[NotificationEntry, ...]:
         )
         for alert in alerts
     )
+
+
+def format_alert_surge(alerts: list[Alert]) -> str:
+    counts: dict[tuple[str, str], int] = {}
+    for alert in alerts:
+        status = "NY" if alert.change == "new" else "OPPDATERT"
+        key = (alert.source.label, status)
+        counts[key] = counts.get(key, 0) + 1
+
+    lines = [
+        "WATCHTOWER · SIKKERHETSSTOPP",
+        f"{len(alerts)} varsler ble registrert i én kjøring.",
+        (
+            "Detaljutsendingen ble erstattet med denne oppsummeringen "
+            f"fordi sikkerhetsgrensen er {MAX_DETAILED_ALERTS_PER_RUN} varsler."
+        ),
+        "Fordeling:",
+    ]
+    for (source_label, status), count in sorted(
+        counts.items(),
+        key=lambda entry: (entry[0][0].casefold(), entry[0][1]),
+    ):
+        lines.append(f"• {source_label} · {status}: {count}")
+    lines.append("Kontroller kjøringen og den private varslingsloggen.")
+    return "\n".join(lines)
 
 
 def format_slack(alerts: list[Alert]) -> str:

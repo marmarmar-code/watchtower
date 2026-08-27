@@ -1,5 +1,13 @@
 # Changelog
 
+## Alert-storm hotfix — 2026-08-27
+
+### Fixed
+
+- Notification-only details no longer change persisted item fingerprints.
+- State written by the short-lived transition fingerprint is accepted and silently migrated.
+- More than 32 alerts in one run are replaced by one safety summary instead of detailed notification batches.
+
 ## Distribution-ready baseline — 2026-08-26
 
 ### Added
