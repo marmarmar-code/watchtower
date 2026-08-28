@@ -2,7 +2,7 @@ name: Watchtower
 
 on:
   schedule:
-    # Avoid GitHub's busiest start-of-hour scheduling window.
+    # Keep GitHub cron as a backup while the dispatcher cadence is verified.
     - cron: "4-59/5 * * * *"
   workflow_dispatch:
     inputs:
@@ -17,6 +17,11 @@ on:
           - test-slack
           - test-teams
           - test-notification
+      respect_intervals:
+        description: "Respect each source polling interval"
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -127,7 +132,7 @@ jobs:
             command=run
           fi
           interval_args=()
-          if [[ "${{ github.event_name }}" == "schedule" ]]; then
+          if [[ "${{ github.event_name }}" == "schedule" || "${{ inputs.respect_intervals }}" == "true" ]]; then
             interval_args+=(--respect-intervals)
           fi
           python -m watchtower "$command" \
