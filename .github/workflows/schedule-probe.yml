@@ -1,0 +1,30 @@
+name: Watchtower schedule probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/schedule-probe.yml"
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Report trigger
+        run: |
+          echo "event=${{ github.event_name }}"
+          echo "sha=${{ github.sha }}"
+
+      - name: Inspect workflow registration
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ github.repository }}/actions/workflows" \
+            --jq '.workflows[] | [.id, .name, .path, .state] | @tsv'
