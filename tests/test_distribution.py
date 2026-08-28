@@ -192,7 +192,8 @@ class DistributionTests(unittest.TestCase):
         self.assertIn("github.repository_owner", workflow)
         self.assertNotIn("repository: marmarmar-code/watchtower-runtime", workflow)
         self.assertIn("actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1", workflow)
-        self.assertIn('cron: "4-59/5 * * * *"', workflow)
+        self.assertNotIn("\n  schedule:\n", workflow)
+        self.assertNotIn("cron:", workflow)
         self.assertIn("respect_intervals:", workflow)
         self.assertIn("inputs.respect_intervals", workflow)
         self.assertIn("python -m watchtower status", workflow)
@@ -203,7 +204,7 @@ class DistributionTests(unittest.TestCase):
         scheduler = (
             ROOT / ".github" / "workflows" / "schedule-probe.yml"
         ).read_text(encoding="utf-8")
-        self.assertIn('name: Watchtower scheduler', scheduler)
+        self.assertIn("name: Watchtower scheduler", scheduler)
         self.assertIn('cron: "2-57/5 * * * *"', scheduler)
         self.assertIn("actions: write", scheduler)
         self.assertIn("group: watchtower-scheduler", scheduler)
