@@ -192,10 +192,26 @@ class DistributionTests(unittest.TestCase):
         self.assertIn("github.repository_owner", workflow)
         self.assertNotIn("repository: marmarmar-code/watchtower-runtime", workflow)
         self.assertIn("actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1", workflow)
-        self.assertIn('cron: "3-58/5 * * * *"', workflow)
+        self.assertIn('cron: "4-59/5 * * * *"', workflow)
+        self.assertIn("respect_intervals:", workflow)
+        self.assertIn("inputs.respect_intervals", workflow)
         self.assertIn("python -m watchtower status", workflow)
         self.assertIn("--redact-output | tee -a", workflow)
         self.assertIn("PATENTSTYRET_API_KEY", workflow)
+
+    def test_scheduler_dispatches_interval_aware_monitor_runs(self):
+        scheduler = (
+            ROOT / ".github" / "workflows" / "schedule-probe.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn('name: Watchtower scheduler', scheduler)
+        self.assertIn('cron: "2-57/5 * * * *"', scheduler)
+        self.assertIn("actions: write", scheduler)
+        self.assertIn("group: watchtower-scheduler", scheduler)
+        self.assertIn("cancel-in-progress: true", scheduler)
+        self.assertIn("gh workflow run monitor.yml", scheduler)
+        self.assertIn("-f operation=run", scheduler)
+        self.assertIn("-f respect_intervals=true", scheduler)
+        self.assertIn("gh workflow run schedule-probe.yml", scheduler)
 
 
 if __name__ == "__main__":
