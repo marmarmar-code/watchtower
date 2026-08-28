@@ -26,7 +26,9 @@ Produksjonsworkflowen skal:
 7. committe bare `state/` til privat runtime;
 8. stoppe dersom andre filer er staged;
 9. bruke pinnede commit-SHA-er for tredjeparts Actions;
-10. validere runtime og adapterinnstillinger før eksterne kilder kontaktes.
+10. validere runtime og adapterinnstillinger før eksterne kilder kontaktes;
+11. bare bruke produksjonssecrets og privat runtime i jobber som kjører fra `main`;
+12. begrense `actions: write` til scheduleren som trenger å starte neste workflow.
 
 Lekkasjekontrollen skal bare rapportere berørte offentlige filstier, aldri selve de private verdiene.
 
@@ -42,6 +44,8 @@ README.md
 config/
 state/
 ```
+
+Runtime-katalogen, konfigurasjonen og state-filene skal være vanlige filer og kataloger, ikke symbolske lenker.
 
 ## Rapportering
 

@@ -46,6 +46,8 @@ python -m watchtower list-sources
 
 Statusen beskriver hvor moden adapteren er i prosjektet. Den er ikke en bekreftelse på at den eksterne kilden fungerer akkurat nå; hver fork må følge opp sine aktive kilder.
 
+`doffin` krever Actions-secret `DOFFIN_API_KEY`. Nøkkelen sendes bare til Doffins offisielle API-endepunkt; et egendefinert Doffin-endepunkt blir avvist før nettverkstrafikk starter.
+
 ### RSS og Atom
 
 `rss` gjør vanlige offentlige RSS- og Atom-feeder tilgjengelige uten ny adapterkode. Flere feeder kan samles i én kilde, og ordinære private filterregler avgjør hva som varsles.
@@ -245,6 +247,14 @@ Dersom fork og privat runtime har samme eier og runtime heter `watchtower-runtim
 ```text
 WATCHTOWER_RUNTIME_REPOSITORY=<eier>/<repository>
 ```
+
+## Produksjonsflyt
+
+Watchtower er ikke en server eller en vedvarende prosess. GitHub Actions-scheduleren starter monitor-workflowen på `main` omtrent hvert femte minutt. GitHubs cron-trigger er en reserve som kan starte kjeden på nytt; den må verifiseres med en naturlig planlagt kjøring i hver fork.
+
+Monitoren sjekker ut gjennomgått offentlig kode fra `main` og privat runtime, validerer skillet mellom dem, og henter bare kilder med utløpt intervall. Etter filtrering og endringsdeteksjon sendes eventuelle varsler før ny state lagres lokalt. Bare `state/` kan committes og pushes tilbake til privat runtime. Til slutt publiseres en anonymisert status, og feil rapporteres uten private verdier.
+
+Runtime-templaten brukes bare ved oppsett. Den blir ikke lest av produksjonskjøringen. En kansellert scheduler-kjøring er ikke alene bevis på feil: kontroller om den tilhørende monitoren ble startet, og om neste scheduler overtok kjeden.
 
 ## Kommandoer
 

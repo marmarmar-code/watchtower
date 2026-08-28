@@ -12,7 +12,7 @@ Watchtower er laget for at hver installasjonseier skal eie sin egen installasjon
 4. Fyll inn kilder og private filterregler i runtime-konfigurasjonen.
 5. Kjør `test-notification` fra Actions for å kontrollere runtime og varslingskanal.
 6. Kjør deretter `run` én gang for å etablere en stille baseline.
-7. Kontroller at en senere naturlig planlagt kjøring fullføres før installasjonen regnes som operativ.
+7. Kontroller at en senere naturlig `schedule`-hendelse starter scheduleren, at monitoren blir dispatchert, og at state/status oppdateres før installasjonen regnes som operativ. En isolert manuell kjøring beviser ikke at cron-reserven virker.
 
 Standardoppsettet finner et privat repository med navnet `watchtower-runtime` hos samme GitHub-eier. En annen plassering må angis med `WATCHTOWER_RUNTIME_REPOSITORY`.
 

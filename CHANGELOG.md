@@ -1,5 +1,22 @@
 # Changelog
 
+## Production safety maintenance — 2026-08-28
+
+### Fixed
+
+- Corrupt or malformed state for one source is isolated instead of stopping all source checks or silently rebaselining that source.
+- Doffin credentials can only be sent to the official API endpoint, and malformed notice rows now fail closed.
+- Enabling BRREG annual-account monitoring for an existing source no longer emits a historical account as a new alert.
+- Notification transport failures no longer retain webhook URLs in displayed exception chains.
+- Runtime validation rejects symbolic links that could escape the reviewed runtime boundary.
+- Production jobs are restricted to `main`, early workflow failures can still send a dependency-free operational alert, and source-health pipeline failures are visible.
+- Self-dispatched scheduler runs queue their successor instead of cancelling the run before a failed monitor dispatch becomes visible.
+
+### Changed
+
+- Common source IDs, booleans, arrays and polling intervals are validated strictly before source setup.
+- Production-flow documentation now describes the scheduler, monitor, private-state commit and cron-recovery chain.
+
 ## Business-source expansion — 2026-08-27
 
 ### Added
