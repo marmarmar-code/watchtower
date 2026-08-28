@@ -1,4 +1,4 @@
-name: Watchtower schedule probe
+name: Watchtower scheduler
 
 on:
   push:
@@ -6,25 +6,86 @@ on:
     paths:
       - ".github/workflows/schedule-probe.yml"
   schedule:
-    - cron: "*/5 * * * *"
+    # GitHub cron remains a recovery trigger, not the only clock.
+    - cron: "2-57/5 * * * *"
+  workflow_dispatch:
+    inputs:
+      continuous:
+        description: "Continue the five-minute fallback cadence"
+        required: true
+        default: true
+        type: boolean
 
 permissions:
-  actions: read
+  actions: write
   contents: read
 
+concurrency:
+  group: watchtower-scheduler
+  cancel-in-progress: true
+
 jobs:
-  probe:
+  dispatch:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
-      - name: Report trigger
+      - name: Report scheduler trigger
         run: |
           echo "event=${{ github.event_name }}"
           echo "sha=${{ github.sha }}"
 
-      - name: Inspect workflow registration
+      - name: Dispatch interval-aware Watchtower run
+        id: dispatch_monitor
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh api "repos/${{ github.repository }}/actions/workflows" \
-            --jq '.workflows[] | [.id, .name, .path, .state] | @tsv'
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if gh workflow run monitor.yml \
+              --repo "${{ github.repository }}" \
+              --ref main \
+              -f operation=run \
+              -f respect_intervals=true; then
+              exit 0
+            fi
+            sleep $((attempt * 3))
+          done
+          echo "Could not dispatch Watchtower" >&2
+          exit 1
+
+      - name: Continue fallback cadence
+        if: >-
+          always() &&
+          (github.event_name != 'workflow_dispatch' || inputs.continuous)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          # Align the next dispatcher to minute 2, 7, 12, ... plus 20 seconds.
+          now=$(date -u +%s)
+          minute=$((now / 60))
+          next_minute=$(( ((minute + 3) / 5) * 5 + 2 ))
+          target=$((next_minute * 60 + 20))
+          delay=$((target - now))
+          if (( delay < 15 )); then
+            delay=$((delay + 300))
+          fi
+          sleep "$delay"
+
+          for attempt in 1 2 3 4 5; do
+            if gh workflow run schedule-probe.yml \
+              --repo "${{ github.repository }}" \
+              --ref main \
+              -f continuous=true; then
+              exit 0
+            fi
+            sleep $((attempt * 3))
+          done
+          echo "Could not continue Watchtower scheduler cadence" >&2
+          exit 1
+
+      - name: Fail visibly when monitoring was not dispatched
+        if: always() && steps.dispatch_monitor.outcome == 'failure'
+        run: exit 1
