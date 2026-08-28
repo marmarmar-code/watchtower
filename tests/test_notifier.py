@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import traceback
 import unittest
 from unittest.mock import Mock, patch
 
+import requests
+
 from watchtower.models import NotificationEntry
 from watchtower.notifier import (
+    SlackError,
     SlackNotifier,
     TeamsNotifier,
     build_notifier,
@@ -87,6 +91,22 @@ class NotifierTests(unittest.TestCase):
     def test_slack_rejects_non_slack_webhook(self):
         with self.assertRaisesRegex(ValueError, "invalid Slack webhook URL"):
             SlackNotifier("https://example.test/not-slack")
+
+    @patch("watchtower.notifier.time.sleep")
+    @patch("watchtower.notifier.requests.post")
+    def test_webhook_secret_is_not_exposed_by_exception_chain(self, post, _sleep):
+        secret_url = "https://hooks.slack.com/services/private-test-value"
+        post.side_effect = requests.ConnectionError(f"failed to reach {secret_url}")
+        notifier = SlackNotifier(secret_url)
+
+        try:
+            notifier.send_text("Watchtower test")
+        except SlackError as exc:
+            rendered = "".join(traceback.format_exception(exc))
+        else:
+            self.fail("SlackError was not raised")
+
+        self.assertNotIn(secret_url, rendered)
 
 
 if __name__ == "__main__":

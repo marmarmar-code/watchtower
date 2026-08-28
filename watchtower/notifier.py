@@ -45,7 +45,6 @@ class WebhookNotifier:
         return {"text": text}
 
     def _post(self, payload: dict) -> None:
-        last: Exception | None = None
         for attempt in range(1, 4):
             try:
                 response = requests.post(
@@ -66,12 +65,11 @@ class WebhookNotifier:
                         f"{self.provider_name} returned HTTP {response.status_code}"
                     )
                 return
-            except requests.RequestException as exc:
-                last = exc
+            except requests.RequestException:
                 if attempt < 3:
                     time.sleep(float(attempt))
                     continue
-        raise NotificationError(f"{self.provider_name} notification failed") from last
+        raise NotificationError(f"{self.provider_name} notification failed") from None
 
     def send_text(self, text: str) -> None:
         self._post(self.text_payload(text))
@@ -101,7 +99,7 @@ class SlackNotifier(WebhookNotifier):
         try:
             super().send_text(text)
         except NotificationError as exc:
-            raise SlackError(str(exc)) from exc
+            raise SlackError(str(exc)) from None
 
     def send_alerts(self, alerts: Sequence[NotificationEntry]) -> None:
         for batch in notification_batches(alerts):
@@ -131,14 +129,14 @@ class TeamsNotifier(WebhookNotifier):
         try:
             super().send_text(text)
         except NotificationError as exc:
-            raise TeamsError(str(exc)) from exc
+            raise TeamsError(str(exc)) from None
 
     def send_alerts(self, alerts: Sequence[NotificationEntry]) -> None:
         for batch in notification_batches(alerts):
             try:
                 self._post(format_teams_payload(batch))
             except NotificationError as exc:
-                raise TeamsError(str(exc)) from exc
+                raise TeamsError(str(exc)) from None
 
 
 def build_notifier(provider: str, *, slack_url: str = "", teams_url: str = "") -> Notifier:

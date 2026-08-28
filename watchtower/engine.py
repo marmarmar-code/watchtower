@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Callable
 
-from .config import Config, SourceConfig
+from .config import Config, MIN_SOURCE_INTERVAL_MINUTES, SourceConfig
 from .models import Item, NotificationEntry
 from .notifier import Notifier, format_slack_entries
 from .state import StateStore
@@ -43,7 +43,6 @@ _ALERT_AUDIT_SOURCE_ID = "_alert_audit"
 _ALERT_AUDIT_LIMIT = 500
 _LAST_CHECKED_FIELD = "last_checked_at"
 DEFAULT_SOURCE_INTERVAL_MINUTES = 60
-MIN_SOURCE_INTERVAL_MINUTES = 5
 MAX_DETAILED_ALERTS_PER_RUN = 32
 
 
@@ -96,7 +95,23 @@ def _state_for_evaluation(source: SourceConfig, previous: dict | None) -> dict |
         and not previous.get("seen")
     ):
         return None
+    if previous is not None:
+        _validate_source_state(previous)
     return previous
+
+
+def _validate_source_state(previous: dict) -> None:
+    seen = previous.get("seen")
+    order = previous.get("order")
+    if previous.get("initialized") is not True:
+        raise ValueError("invalid source state schema")
+    if not isinstance(seen, dict) or any(
+        not isinstance(key, str) or not isinstance(value, str)
+        for key, value in seen.items()
+    ):
+        raise ValueError("invalid source state schema")
+    if not isinstance(order, list) or any(not isinstance(key, str) for key in order):
+        raise ValueError("invalid source state schema")
 
 
 def source_interval_minutes(source: SourceConfig) -> int:
@@ -201,8 +216,9 @@ def run(
     for source_config in config.sources:
         if not source_config.enabled:
             continue
-        old_state = state.load(source_config.id)
         try:
+            old_state = state.load(source_config.id)
+            evaluation_state = _state_for_evaluation(source_config, old_state)
             if respect_intervals and not _source_is_due(
                 source_config,
                 old_state,
@@ -215,7 +231,7 @@ def run(
             next_state, source_alerts, was_baseline = evaluate(
                 source_config,
                 items,
-                _state_for_evaluation(source_config, old_state),
+                evaluation_state,
                 max_seen=config.max_seen_per_source,
             )
             augment_state = getattr(source, "augment_state", None)

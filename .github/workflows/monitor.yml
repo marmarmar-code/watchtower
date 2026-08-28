@@ -23,14 +23,14 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: watchtower-monitor
-  cancel-in-progress: false
-
 jobs:
   monitor:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    concurrency:
+      group: watchtower-monitor
+      cancel-in-progress: false
     steps:
       - name: Check out reviewed public source
         id: public_source
@@ -105,6 +105,7 @@ jobs:
           esac
 
       - name: Record successful setup verification privately
+        id: record_setup
         if: steps.notification_test.outcome == 'success'
         run: printf '{"runtime":"ok","notification":"ok"}\n' > runtime/state/setup_verified.json
 
@@ -135,13 +136,16 @@ jobs:
             "${interval_args[@]}"
 
       - name: Summarize private source health
+        id: source_health
         if: >-
           always() &&
           steps.runtime_checkout.outcome == 'success' &&
           steps.validate_runtime.outcome == 'success' &&
           (steps.operation.outputs.value == 'run' || steps.operation.outputs.value == 'dry-run')
         continue-on-error: true
+        shell: bash
         run: |
+          set -euo pipefail
           python -m watchtower status \
             --config runtime/config/watchtower.toml \
             --state-dir runtime/state \
@@ -184,41 +188,79 @@ jobs:
       - name: Report setup or monitor failure
         if: >-
           always() &&
-          (steps.runtime_checkout.outcome == 'failure' ||
+          (steps.public_source.outcome == 'failure' ||
+           steps.public_safety.outcome == 'failure' ||
+           steps.operation.outcome == 'failure' ||
+           steps.runtime_checkout.outcome == 'failure' ||
+           steps.python_setup.outcome == 'failure' ||
+           steps.install.outcome == 'failure' ||
+           steps.mask_private.outcome == 'failure' ||
            steps.validate_runtime.outcome == 'failure' ||
+           steps.notification_test.outcome == 'failure' ||
+           steps.record_setup.outcome == 'failure' ||
            steps.watchtower_run.outcome == 'failure' ||
+           steps.source_health.outcome == 'failure' ||
            steps.commit_state.outcome == 'failure')
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          PUBLIC_SOURCE_OUTCOME: ${{ steps.public_source.outcome }}
+          PUBLIC_SAFETY_OUTCOME: ${{ steps.public_safety.outcome }}
+          OPERATION_OUTCOME: ${{ steps.operation.outcome }}
           RUNTIME_OUTCOME: ${{ steps.runtime_checkout.outcome }}
+          PYTHON_OUTCOME: ${{ steps.python_setup.outcome }}
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          MASK_OUTCOME: ${{ steps.mask_private.outcome }}
           VALIDATE_OUTCOME: ${{ steps.validate_runtime.outcome }}
+          NOTIFICATION_OUTCOME: ${{ steps.notification_test.outcome }}
+          RECORD_SETUP_OUTCOME: ${{ steps.record_setup.outcome }}
           RUN_OUTCOME: ${{ steps.watchtower_run.outcome }}
+          HEALTH_OUTCOME: ${{ steps.source_health.outcome }}
           COMMIT_OUTCOME: ${{ steps.commit_state.outcome }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         shell: bash
         run: |
           set -euo pipefail
-          stage="ukjent steg"
-          detail=""
-          if [[ "$RUNTIME_OUTCOME" == "failure" ]]; then
-            stage="tilgang til privat runtime (deploy key)"
-          elif [[ "$VALIDATE_OUTCOME" == "failure" ]]; then
-            stage="validering av privat runtime"
-          elif [[ "$RUN_OUTCOME" == "failure" ]]; then
-            stage="kildekontroll"
-            if [[ -f runtime/state/_status.json ]]; then
-              detail=$(python -m watchtower.diagnostics runtime/state/_status.json || true)
-            fi
-          elif [[ "$COMMIT_OUTCOME" == "failure" ]]; then
-            stage="skriving av privat state"
-          fi
-          python3 - "$stage" "$detail" "$RUN_URL" <<'PY'
-          import os, sys
-          from watchtower.config import load_config
-          from watchtower.notifier import build_notifier
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+          import sys
+          import time
+          from pathlib import Path
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlparse
+          from urllib.request import Request, urlopen
 
-          stage, detail, run_url = sys.argv[1:4]
+          stages = (
+              ("PUBLIC_SOURCE_OUTCOME", "uthenting av offentlig kildekode"),
+              ("PUBLIC_SAFETY_OUTCOME", "sikkerhetskontroll av offentlig kildekode"),
+              ("OPERATION_OUTCOME", "valg av operasjon"),
+              ("RUNTIME_OUTCOME", "tilgang til privat runtime"),
+              ("PYTHON_OUTCOME", "oppsett av Python"),
+              ("INSTALL_OUTCOME", "installasjon av Watchtower"),
+              ("MASK_OUTCOME", "skjerming av privat konfigurasjon"),
+              ("VALIDATE_OUTCOME", "validering av privat runtime"),
+              ("NOTIFICATION_OUTCOME", "test av varsling"),
+              ("RECORD_SETUP_OUTCOME", "lagring av oppsettskontroll"),
+              ("RUN_OUTCOME", "kildekontroll"),
+              ("HEALTH_OUTCOME", "helsekontroll"),
+              ("COMMIT_OUTCOME", "skriving av privat tilstand"),
+          )
+          stage = next(
+              (label for variable, label in stages if os.environ.get(variable) == "failure"),
+              "ukjent steg",
+          )
+          detail = ""
+          try:
+              status = json.loads(Path("runtime/state/_status.json").read_text(encoding="utf-8"))
+              errors = status.get("errors") if isinstance(status, dict) else None
+              if stage == "kildekontroll" and isinstance(errors, dict) and errors:
+                  detail = f"{len(errors)} kilde(r) meldte feil"
+          except Exception:
+              pass
+
+          run_url = os.environ.get("RUN_URL", "")
           text = f"WATCHTOWER · DRIFTSVARSEL\nFeil i: {stage}."
           if detail:
               text += f"\nDetalj: {detail}."
@@ -227,18 +269,74 @@ jobs:
 
           provider = "slack"
           try:
-              provider = load_config("runtime/config/watchtower.toml").notifications.provider
+              config_text = Path("runtime/config/watchtower.toml").read_text(encoding="utf-8")
+              section = re.search(
+                  r"(?ms)^\[notifications\]\s*$\n(.*?)(?=^\[|\Z)",
+                  config_text,
+              )
+              match = re.search(r'(?m)^\s*provider\s*=\s*["\'](slack|teams)["\']', section.group(1)) if section else None
+              if match:
+                  provider = match.group(1)
           except Exception:
               if os.environ.get("TEAMS_WEBHOOK_URL") and not os.environ.get("SLACK_WEBHOOK_URL"):
                   provider = "teams"
 
-          try:
-              notifier = build_notifier(
-                  provider,
-                  slack_url=os.environ.get("SLACK_WEBHOOK_URL", ""),
-                  teams_url=os.environ.get("TEAMS_WEBHOOK_URL", ""),
+          def payload_for(selected_provider, message):
+              if selected_provider == "slack":
+                  return {"text": message}
+              return {
+                  "type": "message",
+                  "attachments": [{
+                      "contentType": "application/vnd.microsoft.card.adaptive",
+                      "contentUrl": None,
+                      "content": {
+                          "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                          "type": "AdaptiveCard",
+                          "version": "1.4",
+                          "body": [{"type": "TextBlock", "text": message, "wrap": True}],
+                      },
+                  }],
+              }
+
+          def send(selected_provider, message):
+              variable = "SLACK_WEBHOOK_URL" if selected_provider == "slack" else "TEAMS_WEBHOOK_URL"
+              webhook = os.environ.get(variable, "").strip()
+              parsed = urlparse(webhook)
+              if selected_provider == "slack":
+                  valid = (
+                      parsed.scheme == "https"
+                      and parsed.hostname in {"hooks.slack.com", "hooks.slack-gov.com"}
+                      and parsed.path.startswith("/services/")
+                  )
+              else:
+                  valid = parsed.scheme == "https" and bool(parsed.hostname)
+              if not valid:
+                  raise RuntimeError("notification webhook is unavailable")
+
+              body = json.dumps(payload_for(selected_provider, message)).encode("utf-8")
+              request = Request(
+                  webhook,
+                  data=body,
+                  headers={"Content-Type": "application/json"},
+                  method="POST",
               )
-              notifier.send_text(text)
+              for attempt in range(1, 4):
+                  try:
+                      with urlopen(request, timeout=20) as response:
+                          status_code = getattr(response, "status", 200)
+                      if 200 <= status_code < 300:
+                          return
+                      retryable = status_code == 429 or status_code >= 500
+                  except HTTPError as exc:
+                      retryable = exc.code == 429 or exc.code >= 500
+                  except URLError:
+                      retryable = True
+                  if not retryable or attempt == 3:
+                      raise RuntimeError("notification delivery failed") from None
+                  time.sleep(float(attempt))
+
+          try:
+              send(provider, text)
           except Exception as exc:
               print(f"Could not send failure notification: {type(exc).__name__}", file=sys.stderr)
           PY
@@ -246,8 +344,17 @@ jobs:
       - name: Fail job when monitoring failed
         if: >-
           always() &&
-          (steps.runtime_checkout.outcome == 'failure' ||
+          (steps.public_source.outcome == 'failure' ||
+           steps.public_safety.outcome == 'failure' ||
+           steps.operation.outcome == 'failure' ||
+           steps.runtime_checkout.outcome == 'failure' ||
+           steps.python_setup.outcome == 'failure' ||
+           steps.install.outcome == 'failure' ||
+           steps.mask_private.outcome == 'failure' ||
            steps.validate_runtime.outcome == 'failure' ||
+           steps.notification_test.outcome == 'failure' ||
+           steps.record_setup.outcome == 'failure' ||
            steps.watchtower_run.outcome == 'failure' ||
+           steps.source_health.outcome == 'failure' ||
            steps.commit_state.outcome == 'failure')
         run: exit 1

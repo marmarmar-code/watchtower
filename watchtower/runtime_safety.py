@@ -34,15 +34,24 @@ def validate_runtime(root: str | Path) -> list[str]:
     problems: list[str] = []
     if not root.is_dir():
         return ["runtime path is missing or is not a directory"]
+    if root.is_symlink():
+        return ["runtime path must not be a symbolic link"]
 
     allowed_top = {"README.md", ".gitignore", "config", "state", ".git"}
     for child in root.iterdir():
+        if child.is_symlink():
+            problems.append(f"symbolic link is not allowed: {child.name}")
         if child.name not in allowed_top:
             problems.append(f"unexpected top-level path: {child.name}")
 
+    for directory_name in ("config", "state"):
+        directory = root / directory_name
+        if not directory.is_dir() or directory.is_symlink():
+            problems.append(f"missing or invalid {directory_name} directory")
+
     parsed: Config | None = None
     config = root / "config" / "watchtower.toml"
-    if not config.exists():
+    if not config.is_file() or config.is_symlink():
         problems.append("missing config/watchtower.toml")
     else:
         try:
@@ -69,9 +78,14 @@ def validate_runtime(root: str | Path) -> list[str]:
                 )
 
     for path in root.rglob("*"):
-        if not path.is_file() or ".git" in path.parts:
+        if ".git" in path.parts:
             continue
         rel = path.relative_to(root)
+        if path.is_symlink():
+            problems.append(f"symbolic link is not allowed: {rel}")
+            continue
+        if not path.is_file():
+            continue
         if path.suffix.lower() in {".pem", ".key", ".p12", ".pfx"} or path.name.startswith(".env"):
             problems.append(f"secret file type: {rel}")
         try:

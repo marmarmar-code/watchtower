@@ -122,7 +122,14 @@ class BrregSource(Source):
                 account = self._latest_account(orgnr)
                 current["annual_account"] = account
                 if account is not None:
-                    items.append(self._account_item(orgnr, company_name, account))
+                    items.append(
+                        self._account_item(
+                            orgnr,
+                            company_name,
+                            account,
+                            suppress_alert="annual_account" not in old,
+                        )
+                    )
 
             if "group_structure" in self.events:
                 group = self._group_structure(orgnr)
@@ -349,7 +356,14 @@ class BrregSource(Source):
             alert_details=tuple(changes),
         )
 
-    def _account_item(self, orgnr: str, company_name: str, account: dict[str, Any]) -> Item:
+    def _account_item(
+        self,
+        orgnr: str,
+        company_name: str,
+        account: dict[str, Any],
+        *,
+        suppress_alert: bool = False,
+    ) -> Item:
         report_id = int(account["id"])
         period_to = str(account.get("period_to") or "")
         year = period_to[:4] if len(period_to) >= 4 and period_to[:4].isdigit() else ""
@@ -373,6 +387,7 @@ class BrregSource(Source):
                 "event": "annual_accounts",
                 "report_id": report_id,
             },
+            suppress_alert=suppress_alert,
             alert_details=(
                 f"Periode til: {period_to or 'ukjent'}",
                 f"BRREG-ID: {report_id}",

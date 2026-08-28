@@ -175,6 +175,49 @@ class CoreTests(unittest.TestCase):
 
             self.assertIsNone(state.load("_alert_audit"))
 
+    def test_corrupt_source_state_does_not_stop_other_sources(self):
+        class EmptySource:
+            def fetch_with_state(self, previous):
+                return []
+
+        sources = (
+            self.source(),
+            SourceConfig(
+                id="y",
+                kind="regjeringen",
+                filters=FilterRule(match_all=True),
+            ),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "x.json").write_text("not JSON", encoding="utf-8")
+            result = run(
+                Config(sources),
+                StateStore(tmp),
+                None,
+                dry_run=True,
+                source_factory=lambda _: EmptySource(),
+            )
+
+        self.assertEqual(1, result.checked_sources)
+        self.assertEqual({"x"}, set(result.errors))
+
+    def test_malformed_source_state_fails_closed_before_fetch(self):
+        source = self.source()
+        fetch = Mock()
+        fetch.fetch_with_state.return_value = []
+        with tempfile.TemporaryDirectory() as tmp:
+            StateStore(tmp).save("x", {})
+            result = run(
+                Config((source,)),
+                StateStore(tmp),
+                None,
+                dry_run=True,
+                source_factory=lambda _: fetch,
+            )
+
+        self.assertIn("invalid source state schema", result.errors["x"])
+        fetch.fetch_with_state.assert_not_called()
+
     def test_private_alert_audit_is_bounded(self):
         source = self.source()
         alerts = [
@@ -256,6 +299,15 @@ class CoreTests(unittest.TestCase):
             store = StateStore(tmp)
             store.save("abc", {"seen": {"1": "x"}})
             self.assertEqual({"seen": {"1": "x"}}, store.load("abc"))
+
+    def test_state_store_rejects_symbolic_link_file(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            target = root / "target.json"
+            target.write_text("{}", encoding="utf-8")
+            (root / "abc.json").symlink_to(target)
+            with self.assertRaisesRegex(ValueError, "symbolic link"):
+                StateStore(root).load("abc")
 
     def test_runtime_safety_accepts_contract(self):
         with tempfile.TemporaryDirectory() as tmp:

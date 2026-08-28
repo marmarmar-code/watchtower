@@ -15,7 +15,14 @@ class StateStore:
         safe = "".join(c for c in source_id if c.isalnum() or c in "-_")
         if safe != source_id:
             raise ValueError("unsafe source id")
-        return self.root / f"{safe}.json"
+        if self.root.is_symlink():
+            raise ValueError("state directory must not be a symbolic link")
+        path = self.root / f"{safe}.json"
+        if path.is_symlink():
+            raise ValueError("state file must not be a symbolic link")
+        if path.resolve(strict=False).parent != self.root.resolve(strict=False):
+            raise ValueError("state path escapes state directory")
+        return path
 
     def load(self, source_id: str) -> dict[str, Any] | None:
         path = self.path_for(source_id)

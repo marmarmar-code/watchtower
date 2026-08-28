@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import tempfile
+import textwrap
 import unittest
 from pathlib import Path
 
@@ -80,6 +81,26 @@ class DistributionTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "requires include rules"):
                 load_config(config)
 
+    def test_common_configuration_types_and_source_ids_are_strict(self):
+        invalid_rows = (
+            ('id="../example"\nkind="regjeringen"\n', "source id"),
+            ('id="example"\nkind="regjeringen"\nenabled="false"\n', "true or false"),
+            ('id="example"\nkind="regjeringen"\ninterval_minutes=1\n', "at least 5"),
+            ('id="example"\nkind="regjeringen"\nurls="https://example.test"\n', "string array"),
+        )
+        for source_row, message in invalid_rows:
+            with self.subTest(source_row=source_row):
+                with tempfile.TemporaryDirectory() as tmp:
+                    config = Path(tmp) / "watchtower.toml"
+                    config.write_text(
+                        "[[source]]\n"
+                        + source_row
+                        + "[source.filter]\nmatch_all=true\n",
+                        encoding="utf-8",
+                    )
+                    with self.assertRaisesRegex(ValueError, message):
+                        load_config(config)
+
     def test_match_all_is_explicit_and_respects_exclusions(self):
         rule = FilterRule(match_all=True, exclude_any=("blocked",))
         self.assertTrue(rule.matches("ordinary item"))
@@ -135,6 +156,16 @@ class DistributionTests(unittest.TestCase):
             )
             problems = validate_runtime(root)
             self.assertTrue(any("invalid source configuration" in problem for problem in problems))
+
+    def test_runtime_rejects_symbolic_links(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.write_runtime(root, '[notifications]\nprovider="teams"\n')
+            target = root / "state-target.json"
+            target.write_text("{}", encoding="utf-8")
+            (root / "state" / "linked.json").symlink_to(target)
+            problems = validate_runtime(root)
+            self.assertTrue(any("symbolic link is not allowed" in p for p in problems))
 
     def test_item_fingerprint_is_independent_of_display_text(self):
         first = Item(
@@ -197,8 +228,14 @@ class DistributionTests(unittest.TestCase):
         self.assertIn("respect_intervals:", workflow)
         self.assertIn("inputs.respect_intervals", workflow)
         self.assertIn("python -m watchtower status", workflow)
+        self.assertIn("set -euo pipefail", workflow)
         self.assertIn("--redact-output | tee -a", workflow)
         self.assertIn("PATENTSTYRET_API_KEY", workflow)
+        self.assertIn("if: github.ref == 'refs/heads/main'", workflow)
+        self.assertIn("PUBLIC_SOURCE_OUTCOME", workflow)
+        self.assertNotIn("from watchtower.config import load_config", workflow)
+        embedded = workflow.split("python3 - <<'PY'\n", 1)[1].split("\n          PY", 1)[0]
+        compile(textwrap.dedent(embedded), "monitor-failure-notifier", "exec")
 
     def test_scheduler_dispatches_interval_aware_monitor_runs(self):
         scheduler = (
@@ -208,7 +245,11 @@ class DistributionTests(unittest.TestCase):
         self.assertIn('cron: "2-57/5 * * * *"', scheduler)
         self.assertIn("actions: write", scheduler)
         self.assertIn("group: watchtower-scheduler", scheduler)
-        self.assertIn("cancel-in-progress: true", scheduler)
+        self.assertIn(
+            "cancel-in-progress: ${{ github.event_name != 'workflow_dispatch' }}",
+            scheduler,
+        )
+        self.assertIn("if: github.ref == 'refs/heads/main'", scheduler)
         self.assertIn("gh workflow run monitor.yml", scheduler)
         self.assertIn("-f operation=run", scheduler)
         self.assertIn("-f respect_intervals=true", scheduler)

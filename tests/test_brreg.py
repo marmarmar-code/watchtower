@@ -192,6 +192,39 @@ class BrregTests(unittest.TestCase):
         )
         self.assertEqual("Grace Example", next_state["source_state"]["brreg"][ORGNR]["roles"]["LEDE"][0])
 
+    def test_enabling_annual_accounts_is_silent_then_new_report_alerts(self):
+        original_events = ["company", "roles"]
+        original = self.source(events=original_events)
+        original_items = original.fetch_with_state(None)
+        state, _, _ = evaluate(
+            self.config(events=original_events),
+            original_items,
+            None,
+            max_seen=100,
+        )
+        state = original.augment_state(state)
+
+        enabled = self.source(current_account=account(100), events=["annual_accounts"])
+        enabled_items = enabled.fetch_with_state(state)
+        enabled_state, alerts, _ = evaluate(
+            self.config(events=["annual_accounts"]),
+            enabled_items,
+            state,
+            max_seen=100,
+        )
+        enabled_state = enabled.augment_state(enabled_state)
+        self.assertEqual([], alerts)
+
+        changed = self.source(current_account=account(101), events=["annual_accounts"])
+        changed_items = changed.fetch_with_state(enabled_state)
+        _, alerts, _ = evaluate(
+            self.config(events=["annual_accounts"]),
+            changed_items,
+            enabled_state,
+            max_seen=100,
+        )
+        self.assertEqual(1, len(alerts))
+
     def test_unchanged_run_after_change_does_not_repeat_alert(self):
         state, _, _ = self.baseline()
 

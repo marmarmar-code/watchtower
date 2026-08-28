@@ -17,12 +17,17 @@ class DoffinSource(Source):
     supplies it through the DOFFIN_API_KEY Actions secret.
     """
 
+    def __init__(self, config) -> None:
+        super().__init__(config)
+        if config.urls and config.urls != (DEFAULT_URL,):
+            raise ValueError("Doffin accepts only the official API URL")
+        self.endpoint = DEFAULT_URL
+
     def fetch(self) -> list[Item]:
         api_key = os.environ.get("DOFFIN_API_KEY", "").strip()
         if not api_key:
             raise SourceError("Doffin API key is not configured")
 
-        url = self.config.urls[0] if self.config.urls else DEFAULT_URL
         page_size = min(max(int(self.config.options.get("page_size", 100)), 1), 100)
         max_pages = min(max(int(self.config.options.get("max_pages", 1)), 1), 5)
         queries = self.config.options.get("search_queries", [""])
@@ -45,7 +50,12 @@ class DoffinSource(Source):
                 }
                 if query:
                     params["searchString"] = query
-                response = self.get(url, params=params, headers=headers)
+                response = self.get(
+                    self.endpoint,
+                    params=params,
+                    headers=headers,
+                    allow_redirects=False,
+                )
                 try:
                     payload = response.json()
                 except ValueError as exc:
@@ -53,7 +63,7 @@ class DoffinSource(Source):
                 rows = _rows(payload)
                 for row in rows:
                     item = _item(self.config.id, row)
-                    if item is None or item.key in seen:
+                    if item.key in seen:
                         continue
                     seen.add(item.key)
                     out.append(item)
@@ -68,15 +78,17 @@ def _rows(payload: Any) -> list[dict[str, Any]]:
     for key in ("hits", "notices", "results", "items"):
         value = payload.get(key)
         if isinstance(value, list):
-            return [row for row in value if isinstance(row, dict)]
+            if not all(isinstance(row, dict) for row in value):
+                raise SourceError("Doffin notice list contains an invalid row")
+            return value
     raise SourceError("Doffin response contains no notice list")
 
 
-def _item(source_id: str, row: dict[str, Any]) -> Item | None:
+def _item(source_id: str, row: dict[str, Any]) -> Item:
     notice_id = _first(row, "doffinId", "noticeId", "id", "notice_id", "publicationId")
     title = _first(row, "heading", "title", "noticeTitle", "name")
     if not notice_id or not title:
-        return None
+        raise SourceError("Doffin notice is missing identity or title")
 
     buyer = _first(row, "buyerName") or _text(
         row.get("buyer") or row.get("buyers") or row.get("contractingAuthority")

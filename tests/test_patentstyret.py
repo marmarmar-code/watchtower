@@ -70,6 +70,7 @@ class PatentstyretTests(unittest.TestCase):
             "test-key",
             request.kwargs["headers"]["Ocp-Apim-Subscription-Key"],
         )
+        self.assertFalse(request.kwargs["allow_redirects"])
 
     @patch.dict(os.environ, {"PATENTSTYRET_API_KEY": "test-key"})
     def test_status_change_alerts_and_new_case_is_not_suppressed(self):

@@ -75,6 +75,7 @@ class PatentstyretSource(Source):
                 self.endpoint,
                 params={"organizationNumber": orgnr},
                 headers=headers,
+                allow_redirects=False,
             )
             try:
                 payload = response.json()

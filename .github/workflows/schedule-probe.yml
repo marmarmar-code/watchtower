@@ -20,14 +20,14 @@ permissions:
   actions: write
   contents: read
 
-concurrency:
-  group: watchtower-scheduler
-  cancel-in-progress: true
-
 jobs:
   dispatch:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 8
+    concurrency:
+      group: watchtower-scheduler
+      cancel-in-progress: ${{ github.event_name != 'workflow_dispatch' }}
     steps:
       - name: Report scheduler trigger
         run: |
