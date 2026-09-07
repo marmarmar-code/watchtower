@@ -34,12 +34,25 @@ class EuronextSource(Source):
 
         out: list[Item] = []
         seen: set[str] = set()
-        fallback_errors: list[SourceError] = []
         for page_url in self.config.urls:
+            page_items = self._fetch_issuer(page_url)
+
+            for item in page_items:
+                if item.key in seen:
+                    continue
+                seen.add(item.key)
+                out.append(item)
+
+        return out
+
+    def _fetch_issuer(self, page_url: str) -> list[Item]:
+        """Fetch one issuer, retrying only an HTTP-successful empty page."""
+        for attempt in range(1, self.retry_attempts + 1):
             company_soup = BeautifulSoup(self.get(page_url).text, "html.parser")
             page_items = _company_page_items(self.config.id, company_soup, page_url)
 
             if not page_items:
+                fallback_errors: list[SourceError] = []
                 for list_url in _listview_urls(company_soup, page_url):
                     try:
                         list_soup = BeautifulSoup(self.get(list_url).text, "html.parser")
@@ -48,17 +61,15 @@ class EuronextSource(Source):
                         continue
                     page_items.extend(_listview_items(self.config.id, list_soup, list_url))
 
-            for item in page_items:
-                if item.key in seen:
-                    continue
-                seen.add(item.key)
-                out.append(item)
+                if not page_items and fallback_errors:
+                    raise SourceError(f"Euronext fallback failed: {fallback_errors[-1]}")
 
-        if not out:
-            if fallback_errors:
-                raise SourceError(f"Euronext fallback failed: {fallback_errors[-1]}")
-            raise SourceError("Euronext page contained no company news items")
-        return out
+            if page_items:
+                return page_items
+            if attempt < self.retry_attempts:
+                self.sleep(min(2.0, float(attempt)))
+
+        raise SourceError("Euronext page contained no company news items")
 
 
 def _company_page_items(source_id: str, soup: BeautifulSoup, page_url: str) -> list[Item]:
