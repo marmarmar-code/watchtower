@@ -8,6 +8,7 @@ from datetime import datetime, timedelta, timezone
 from .config import Config
 from .engine import source_interval_minutes
 from .state import StateStore
+from .delivery import pending
 
 
 HEALTHY = "healthy"
@@ -30,6 +31,8 @@ class SourceHealth:
 @dataclass(frozen=True)
 class HealthReport:
     entries: tuple[SourceHealth, ...]
+    pending_batches: int = 0
+    pending_delivery: bool = False
 
     @property
     def counts(self) -> dict[str, int]:
@@ -42,7 +45,7 @@ class HealthReport:
     def okay(self) -> bool:
         counts = self.counts
         return bool(self.entries) and not (
-            counts[LATE] or counts[ERROR] or counts[NOT_STARTED]
+            counts[LATE] or counts[ERROR] or counts[NOT_STARTED] or self.pending_delivery or self.pending_batches
         )
 
 
@@ -105,7 +108,9 @@ def inspect_health(
                 last_item_count=source_state.get("last_item_count"),
             )
         )
-    return HealthReport(tuple(entries))
+    journal = pending(state)
+    remaining = sum(not batch["sent_at"] for batch in journal["batches"]) if journal else 0
+    return HealthReport(tuple(entries), remaining, journal is not None)
 
 
 def render_health(report: HealthReport, *, redacted: bool = False) -> str:
@@ -117,7 +122,8 @@ def render_health(report: HealthReport, *, redacted: bool = False) -> str:
     summary = (
         f"WATCHTOWER STATUS {outcome}; enabled_sources={len(report.entries)} "
         f"healthy={counts[HEALTHY]} late={counts[LATE]} "
-        f"errors={counts[ERROR]} not_started={counts[NOT_STARTED]} coverage_limited={limited}"
+        f"errors={counts[ERROR]} not_started={counts[NOT_STARTED]} coverage_limited={limited} "
+        f"pending_batches={report.pending_batches} pending_delivery={int(report.pending_delivery)}"
     )
     if redacted:
         return summary

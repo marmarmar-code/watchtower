@@ -1,25 +1,38 @@
 # Videre utvikling
 
-0.5 gjør selvstendige installasjoner enklere å konfigurere og kontrollere.
-Neste prioriteringer er konkrete leveranser som kan vurderes hver for seg:
+Watchtower er under utvikling. Videre produktarbeid og interne kontroller kommer
+før utprøving hos andre redaksjoner. Det finnes ingen påstand om at produktet er
+ferdig, eller om dokumentert oppsettstid hos mottakere.
 
-| Prioritet | Leveranse | Akseptansekriterium |
+## Implementert i utviklingsforslaget for 0.5
+
+- Lokal konfigurasjonsveiviser, startpakker og delt privat virksomhetsliste.
+- `link-github` for kontroll og oppsett av eksisterende kodefork og privat runtime.
+- Finanstilsynets virksomhetsregister med avgrenset utvalg og konkrete endringer.
+- Privat leveringskø som gjenopptar usendte meldingspakker etter en feil.
+- Utvidet RSS-katalog, dekningsstatus og lesbar privat varselhistorikk.
+
+Disse leveransene må gjennomgås og utgis før de regnes som tilgjengelige i `main`.
+GitHub-oppsettet er testet med simulerte API-svar; faktisk nøkkeloppsett på en
+isolert utviklingsinstallasjon gjenstår. Webhooks gir ikke nøyaktig én levering.
+
+## Neste utviklingsleveranser
+
+| Prioritet | Leveranse | Kriterium før den regnes som klar |
 | --- | --- | --- |
-| 1 | Pilot av finans- og helsepakken hos to selvstendige eiere | Mottaker setter opp uten at upstream overtar; mål tidsbruk, hjelpebehov, relevante treff og duplikater |
-| 2 | Enklere GitHub-kobling fra lokal veiviser | Fork, runtime, nøkler og kanal kobles med mottakerens tilganger; feil gir forståelig veiledning |
-| 3 | Finanstilsynets virksomhetsregister | Eksplisitt utvalg, stabile identiteter, før/etter på tillatelser, fullstendig paginering og kildeeier avklart |
-| 4 | eInnsyn-saksoppfølging | Faktisk lesetilgang bekreftet; nye dokumenter og saksendringer oppdages uten å kopiere private søk til offentlig kode |
-| 5 | Valgte dokumentlister og strukturerte filer | En konkret redaksjonell bruk, stabil dokument-/radidentitet og en ansvarlig for hver kilde |
-| 6 | Bedre leveringsgjenoppretting og uavhengige livstegn | Feil etter delvis sending kan håndteres; installasjonseieren får beskjed når kjøringene uteblir |
+| 1 | Isolert installasjonsprøve og enklere opprettelse av repoer | Full fork–runtime–kanal-kjede prøvd med syntetiske data, forståelig feilretting og gjenkjøring etter avbrudd |
+| 2 | Uavhengig kontroll av livstegn og bedre varig lagring | Fravær av kjøringer oppdages uten hjelp fra den stansede workflowen; gjenoppretting etter runner-tap og feil ved state-push avklart |
+| 3 | eInnsyn-saksoppfølging | Offisiell lesetilgang bekreftet; nye dokumenter og saksendringer har stabile ID-er og kontrollerte pagineringsgrenser |
+| 4 | Valgte dokumentlister og strukturerte filer | Konkrete kilder, stabile dokument-/radidentiteter, endringsvisning og kontrakttester |
+| 5 | Kanalruting og samlevarsling | Kildevis kanalvalg og tidsstyrte sammendrag uten tap ved feil eller duplisering ved omstart |
+| 6 | Tallovervåking i utvalgte SSB-tabeller | Endringer i verdier, revisjoner og nye perioder skilles; måleenheter og sammenlikningsgrunnlag følger varselet |
 
-Utvid deretter med enkel kildevis kanalruting, samlevarsling og avgrensede
-statistikkvarsler etter behov i pilotene. Ikke presenter SSBs metadatakontroll som
-tallovervåking. Ikke merk en ny API-kobling som operativ før den er prøvd mot
-ekte innhold med nødvendige tilganger.
+Etter dette vurderes om oppsett, drift og redaksjonell nytte er tilstrekkelig
+modent til en avgrenset utprøving hos andre. Det er et senere steg, ikke en
+forutsetning for å fortsette utviklingen. Mottakernes egne forks skal ha tydelig
+lokalt eierskap og valgfrie oppdateringer, uten løpende supportplikt for upstream.
 
-Oppsettsmålet er 30–45 minutter etter at kontoer og tilganger foreligger. Det må
-måles; det er ikke dokumentert ytelse fra dagens veiviser. Hver mottaker må eie
-drift og redaksjonelle valg. Lisensspørsmålet trenger en beslutning fra rettighetshaver.
-
-Den eksisterende scheduler-kjeden beholdes inntil et enklere alternativ er prøvd
-mot installasjonens faktiske krav til intervall, kostnad og gjenoppretting.
+Den eksisterende scheduler-kjeden beholdes mens enklere alternativer vurderes mot
+krav til intervall, kostnad og gjenoppretting. Rettighetshaver og formell lisens
+må avklares før bred distribusjon. Maksimal funksjonsbredde oppnås gradvis gjennom
+valgfrie kilder; grunnoppsettet skal fortsatt kunne forstås og driftes selvstendig.

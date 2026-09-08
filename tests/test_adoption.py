@@ -56,6 +56,7 @@ exclude_any = ["Unwanted"]
     def test_shared_identifiers_resolve_for_each_supported_register(self):
         for kind, key, values in (
             ("brreg", "companies", ["123456785"]),
+            ("finanstilsynet_registry", "companies", ["123456785"]),
             ("patentstyret", "companies", ["123456785"]),
             ("stotte", "recipient_orgnrs", ["123456785"]),
             ("finanstilsynet_short_sale", "isins", ["NO0000000000"]),

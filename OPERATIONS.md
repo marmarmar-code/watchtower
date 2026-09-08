@@ -62,10 +62,39 @@ endringsdetaljer og en stabil `alert_id`. `delivery` angir `detail` eller `summa
 `sent_at` betyr at webhook-kallet returnerte uten feil, ikke at et menneske har lest
 varselet. Eldre audit-rader beholdes og mangler de nye feltene.
 
-Dette er en privat, begrenset logg, ikke et komplett dokumentarkiv eller en varig
-leveringskø. Feil etter utsending og før state er pushet kan fortsatt gi duplikater.
-En stabil ID gjør slike duplikater lettere å kjenne igjen; webhooken dedupliserer
-ikke automatisk på ID-en. Ikke slett state som et generelt feilsøkingstiltak.
+## Gjenoppretting etter varslingsfeil
+
+Fra 0.5 lagres hele leveringsplanen i privat `state/_outbox.json` før utsending.
+Hver meldingspakke får en kvittering etter at webhooken har svart uten feil.
+Ved neste ordinære `run` behandles en uferdig kø først: pakker med kvittering
+hoppes over, resten sendes, og kilde-state og historikk ferdigstilles. Denne
+kjøringen henter ikke nye kildeelementer; neste kjøring gjenopptar overvåkingen.
+`dry-run` sender ikke køen og endrer ingen filer.
+
+`status` viser `pending_batches` og `pending_delivery`. Sistnevnte kan være 1
+selv når alle pakkene er sendt, hvis lagring av state/historikk gjenstår. Status
+er da `NEEDS ATTENTION` og returkode 2. Bruk siste Actions-kjøring til å finne
+om feilen gjelder kanaltilgang eller lagring. Etter retting kjører du `run` igjen.
+Det kreves ingen separat database eller manuell flytting av meldinger.
+
+Ikke slett eller rediger en ventende kø som generell feilretting. Behold samme
+varslingskanal til køen er tømt. Bytte av leverandør (Teams/Slack) avvises mens
+køen er aktiv; bytte av webhook innen samme leverandør kan sende resten til den
+nye kanalen. Stans og vurder køinnholdet lokalt hvis en kilde deaktiveres mens
+meldinger fra den allerede ligger klare. Kjør bare én skriver mot samme runtime.
+
+Dette gir gjenoppretting etter ordinære delvise feil, ikke nøyaktig én levering.
+Hvis webhooken mottar meldingen, men svaret går tapt, kan et nytt forsøk gi en
+kopi. Det samme gjelder krasj etter sending og før lokal kvittering, eller tap av
+GitHub-runneren før privat state er pushet. Workflowen forsøker å lagre state
+også etter en vanlig kjøringsfeil; kansellering, timeout eller push-feil kan
+fortsatt hindre det. En stabil `alert_id` hjelper med å kjenne igjen kopier.
+`delivery_id` gjør ferdigstilling av samme kø idempotent i den lokale historikken.
+
+Køen inneholder private varseltekster og planlagt state. Den hører bare hjemme i
+den private runtimen. Historikken beholder de siste 500 varslene og hele siste
+varselrunde; dette er ikke et komplett dokumentarkiv. Git-historikken kan beholde
+eldre private køversjoner selv etter at den aktive køen er tømt.
 
 ## Når tidsplanen stopper
 

@@ -12,17 +12,6 @@ organisasjon. Velg **Use this template** på
 [runtime-malen](https://github.com/marmarmar-code/watchtower-runtime-template) og opprett
 et separat **privat** repo. Gi hver installasjon sitt eget runtime-repo.
 
-I kodeforken, under **Settings → Secrets and variables → Actions → Variables**, sett:
-
-| Variabel | Verdi |
-| --- | --- |
-| `WATCHTOWER_RUNTIME_REPOSITORY` | `DIN_EIER/DITT_RUNTIME_REPO` |
-| `WATCHTOWER_RUNTIME_REF` | `main`, eller din valgte runtime-branch |
-
-Angi koblingen eksplisitt også når standardnavnet brukes. Da er det lettere å
-kontrollere hvilken runtime hver fork skriver til. Uten variabel brukes fortsatt
-`<kodeforkens eier>/watchtower-runtime` av hensyn til eksisterende installasjoner.
-
 ## 2. Lag overvåkingsoppsettet lokalt
 
 Du trenger Git og Python 3.11 eller nyere. Klon kodeforken og den private runtimen
@@ -51,6 +40,7 @@ nyhetsfeeden finnes fortsatt i katalogen, men er utelatt fra startpakken fordi
 den overlapper med den første. Separate kilder dedupliserer ikke mot hverandre.
 
 Alle pakker legger til BRREG når du oppgir virksomheter med gyldig organisasjonsnummer.
+Finanspakken legger da også til [Finanstilsynets virksomhetsregister](FINANSTILSYNET.md).
 Pakkene er avgrensede utgangspunkt; de er ikke full sektorovervåking. Doffin og
 Patentstyret legges til etter at du har fått egne kildenøkler.
 
@@ -77,19 +67,41 @@ Du kan også redigere den deaktiverte malen manuelt uten veiviseren.
 
 ## 3. Koble til privat runtime
 
-Lag et eget SSH-nøkkelpar **utenfor begge repoene** på en maskin du kontrollerer:
+Installer [GitHub CLI](https://cli.github.com/), og logg inn med `gh auth login`.
+Du trenger administratortilgang til begge repoene. Kjør først kontrollen, og bruk
+deretter samme kommando med `--apply` for å lagre koblingen:
 
 ```bash
-ssh-keygen -t ed25519 -C "watchtower-runtime" -f watchtower-runtime-key -N ""
+python -m watchtower link-github --code-repo DIN_EIER/DIN_KODEFORK --runtime-repo DIN_EIER/DITT_RUNTIME_REPO
+python -m watchtower link-github --code-repo DIN_EIER/DIN_KODEFORK --runtime-repo DIN_EIER/DITT_RUNTIME_REPO --apply
 ```
 
-I det private runtime-repoet: åpne **Settings → Deploy keys → Add deploy key**, legg
-inn innholdet i `watchtower-runtime-key.pub`, og velg **Allow write access**.
-I kodeforkens **Actions Secrets**: opprett `RUNTIME_DEPLOY_KEY` med innholdet fra
-den private nøkkelfilen. Nøkkelen må ikke gjenbrukes mellom runtimes.
+Oppsettet kontrollerer offentlig kodefork, privat runtime, nødvendige filer og
+administratortilgang. Det setter `WATCHTOWER_RUNTIME_REPOSITORY` og
+`WATCHTOWER_RUNTIME_REF`, lager en egen skrivbar deploy-nøkkel til runtimen og
+lagrer privatnøkkelen som `RUNTIME_DEPLOY_KEY` i kodeforkens Actions Secrets.
+Bruk `--runtime-ref BRANCH` hvis runtime-konfigurasjonen ligger på en annen branch.
+Kommandoen leser ikke den private overvåkingslisten inn i offentlig kode.
 
-Oppbevar nøkkelfilene sikkert eller slett dem lokalt når oppsettet er kontrollert.
-De skal aldri committes. Overvåkingen trenger skrivetilgang for å lagre `state/`.
+Nøkkelfilene lages i en midlertidig mappe utenfor repoene og fjernes etterpå.
+Secret-innhold sendes til `gh` på standard input og skrives ikke til konsollen.
+[GitHub CLI krypterer secrets før opplasting](https://cli.github.com/manual/gh_secret_set).
+En eksisterende nøkkel beholdes, og en eksisterende kobling til et annet repo
+eller en annen branch avvises. Det er ingen automatisk nøkkelrotasjon.
+
+Kjør kommandoen på nytt etter et avbrutt oppsett. Ved feil under secret-lagringen
+forsøker den å fjerne bare deploy-nøkkelen den nettopp opprettet. Følg feilmeldingen
+hvis GitHub ikke kunne bekrefte lagring eller opprydding. Siden private secrets
+ikke kan leses tilbake, beviser ikke kontrollen at en eksisterende secret passer
+til deploy-nøkkelen; det avklares av installasjonskontrollen i steg 5.
+
+Manuelt alternativ: sett de to Actions-variablene i kodeforken, lag et eget
+Ed25519-nøkkelpar uten passord utenfor repoene, legg offentlig nøkkel i runtimens
+**Deploy keys** med **Allow write access**, og legg privatnøkkelen i kodeforkens
+`RUNTIME_DEPLOY_KEY`. Ikke gjenbruk en nøkkel mellom installasjoner.
+[GitHub dokumenterer deploy-nøkler og nødvendig tilgang her](https://docs.github.com/en/rest/deploy-keys/deploy-keys).
+Nøkler opprettet med en brukertoken kan påvirkes når tokenen tilbakekalles;
+kontroller runtime-tilgangen ved slike endringer.
 
 ## 4. Koble varslingskanalen
 

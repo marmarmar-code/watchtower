@@ -16,6 +16,7 @@ from .source_catalog import load_catalog
 from .state import StateStore
 from .setup import PRESETS, setup
 from . import __version__
+from .github_setup import link_github
 
 
 def parser() -> argparse.ArgumentParser:
@@ -32,6 +33,11 @@ def parser() -> argparse.ArgumentParser:
             action="store_true",
             help="only poll sources whose configured interval has elapsed",
         )
+    link = sub.add_parser("link-github", help="kontroller og koble egne GitHub-repoer")
+    link.add_argument("--code-repo", required=True)
+    link.add_argument("--runtime-repo", required=True)
+    link.add_argument("--runtime-ref", default="main")
+    link.add_argument("--apply", action="store_true")
     setup_cmd = sub.add_parser("setup", help="lag et privat oppsett med en startpakke")
     setup_cmd.add_argument("--runtime", required=True)
     setup_cmd.add_argument("--preset", choices=tuple(PRESETS))
@@ -86,6 +92,8 @@ def _sample_entry(provider: str) -> NotificationEntry:
 
 def main() -> int:
     args = parser().parse_args()
+    if args.command == "link-github":
+        return link_github(args)
     if args.command == "setup":
         try:
             return setup(args)

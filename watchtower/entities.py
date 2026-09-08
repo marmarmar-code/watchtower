@@ -64,6 +64,7 @@ def resolve_entity_options(kind: str, refs: Any, entities: dict, options: dict) 
         "patentstyret": ("companies", "orgnr"),
         "stotte": ("recipient_orgnrs", "orgnr"),
         "finanstilsynet_short_sale": ("isins", "isins"),
+        "finanstilsynet_registry": ("companies", "orgnr"),
     }
     if kind not in mappings:
         raise ValueError("source.entity_refs requires a supported register; use filter.entity_refs for text matching")

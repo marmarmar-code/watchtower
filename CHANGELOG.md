@@ -1,9 +1,15 @@
 # Changelog
 
-## 0.5.0 – enklere selvstendige installasjoner
+## 0.5.0 – enklere selvstendige installasjoner (under utvikling)
 
 - Lokal `setup`-veiviser med generelle, finans- og helserettede startpakker. Aktive
   runtimes beskyttes; et deaktivert oppsett bevares før erstatning.
+- Lokal `link-github` kobler eksisterende repoer med egne deploy-nøkler,
+  Actions-secrets og eksplisitte runtime-variabler. Kontroll uten endringer er standard.
+- Finanstilsynets virksomhetsregister følger aktive tillatelser, tjenester og
+  merknader for valgte organisasjonsnumre. Ufullstendige svar bevarer tidligere state.
+- Privat leveringskø med kvittering per meldingspakke. Neste kjøring fortsetter
+  usendte pakker før ny henting; status viser uferdig levering.
 - Privat `[[entity]]`-liste med eksplisitte referanser til navn/aliaser eller
   registeridentifikatorer. Eksisterende konfigurasjon fungerer fortsatt.
 - Fire nye RSS-profiler fra EMA og Skatteetaten, kontrollert med faktisk henting

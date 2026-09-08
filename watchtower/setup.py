@@ -86,6 +86,10 @@ def make_config(preset: str, topics: list[str], companies: list[str], provider: 
             f"entity_refs = {_quoted(entity_ids)}",
             'events = ["company", "roles", "annual_accounts"]',
         ), register=True)
+        if preset == "finance":
+            add_source("finanstilsynet_registry", "finanstilsynet_registry", "Finanstilsynets virksomhetsregister", (
+                f"entity_refs = {_quoted(entity_ids)}", "max_pages = 3",
+            ), register=True)
     profiles = {row["id"]: row for row in load_profiles()}
     for profile_id in PRESETS[preset][1]:
         profile = profiles[profile_id]

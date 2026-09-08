@@ -9,6 +9,7 @@ from .config import Config, MIN_SOURCE_INTERVAL_MINUTES, SourceConfig
 from .models import Item, NotificationEntry
 from .notifier import Notifier, format_slack_entries
 from .state import StateStore
+from .delivery import pending, prepare, deliver, record_history
 from .sources.common import Source
 from .sources.regjeringen import RegjeringenSource
 from .sources.stortinget import StortingetSource
@@ -21,6 +22,7 @@ from .sources.rss import RssSource
 from .sources.ssb import SsbSource
 from .sources.stotte import StotteSource
 from .sources.finanstilsynet_short_sale import FinanstilsynetShortSaleSource
+from .sources.finanstilsynet_registry import FinanstilsynetRegistrySource
 from .sources.patentstyret import PatentstyretSource
 
 
@@ -36,12 +38,11 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "ssb": SsbSource,
     "stotte": StotteSource,
     "finanstilsynet_short_sale": FinanstilsynetShortSaleSource,
+    "finanstilsynet_registry": FinanstilsynetRegistrySource,
     "patentstyret": PatentstyretSource,
 }
 
 _STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors", "warnings")
-_ALERT_AUDIT_SOURCE_ID = "_alert_audit"
-_ALERT_AUDIT_LIMIT = 500
 _LAST_CHECKED_FIELD = "last_checked_at"
 DEFAULT_SOURCE_INTERVAL_MINUTES = 60
 MAX_DETAILED_ALERTS_PER_RUN = 32
@@ -151,60 +152,29 @@ def _source_is_due(
     return at >= last_checked + timedelta(minutes=source_interval_minutes(source))
 
 
-def _save_alert_audit(
-    state: StateStore,
-    alerts: list[Alert],
-    *,
-    sent_at: str,
-) -> None:
-    previous = state.load(_ALERT_AUDIT_SOURCE_ID) or {}
-    entries = previous.get("entries", [])
-    if not isinstance(entries, list) or not all(isinstance(entry, dict) for entry in entries):
-        raise ValueError("invalid private alert audit")
-    entries = list(entries)
-    latest = [
+def _audit_rows(alerts: list[Alert], *, detected_at: str) -> list[dict]:
+    return [
         {
-            "sent_at": sent_at,
+            "detected_at": detected_at,
             "source_id": alert.source.id,
             "item_key": alert.item.key,
             "change": alert.change,
             "alert_id": sha256("\0".join((
                 alert.source.id, alert.item.key, alert.item.content_hash(), alert.change,
             )).encode()).hexdigest(),
-            "title": alert.item.title[:1000],
-            "url": alert.item.url,
-            "published": alert.item.published,
-            "matched_terms": list(alert.matched_terms),
+            "title": alert.item.title[:1000], "url": alert.item.url,
+            "published": alert.item.published, "matched_terms": list(alert.matched_terms),
             "details": list(_bounded_details(alert.item)),
             "delivery": "summary" if len(alerts) > MAX_DETAILED_ALERTS_PER_RUN else "detail",
         }
         for alert in alerts
     ]
-    # The latest batch remains complete even when it exceeds the rolling audit.
-    state.save("_latest_alerts", {"entries": latest})
-    entries.extend(latest)
-    state.save(_ALERT_AUDIT_SOURCE_ID, {"entries": entries[-_ALERT_AUDIT_LIMIT:]})
 
 
-def _send_plain_text(notifier: Notifier, text: str) -> None:
-    send_text = getattr(type(notifier), "send_text", None)
-    if callable(send_text):
-        notifier.send_text(text)
-    else:
-        notifier.send(text)  # type: ignore[attr-defined]
-
-
-def _send_alerts(notifier: Notifier, alerts: list[Alert]) -> None:
-    if len(alerts) > MAX_DETAILED_ALERTS_PER_RUN:
-        _send_plain_text(notifier, format_alert_surge(alerts))
-        return
-
-    entries = notification_entries(alerts)
-    send_alerts = getattr(type(notifier), "send_alerts", None)
-    if callable(send_alerts):
-        notifier.send_alerts(entries)
-    else:
-        notifier.send(format_slack(alerts))  # type: ignore[attr-defined]
+def _save_alert_audit(state: StateStore, alerts: list[Alert], *, sent_at: str) -> None:
+    record_history(state, [
+        {**row, "sent_at": sent_at} for row in _audit_rows(alerts, detected_at=sent_at)
+    ])
 
 
 def run(
@@ -217,6 +187,10 @@ def run(
     run_at: datetime | None = None,
     source_factory: Callable[[SourceConfig], Source] = build_source,
 ) -> RunResult:
+    if not dry_run and pending(state):
+        restored = deliver(state, notifier, provider=config.notifications.provider)
+        return RunResult(restored["checked_sources"], restored["baselined_sources"],
+                         restored["alerts"], restored["errors"], restored.get("warnings", {}))
     checked = 0
     baselined = 0
     alerts: list[Alert] = []
@@ -280,26 +254,24 @@ def run(
     if dry_run:
         return RunResult(checked, baselined, len(alerts), errors, warnings)
 
+    status = {
+        "last_run_at": now_iso(), "checked_sources": checked,
+        "baselined_sources": baselined, "alerts": len(alerts),
+        "errors": errors, "warnings": warnings,
+    }
     if alerts:
         if notifier is None:
             raise RuntimeError("alerts pending but notifier is not configured")
-        _send_alerts(notifier, alerts)
-
+        prepare(
+            state, provider=config.notifications.provider,
+            entries=notification_entries(alerts), rows=_audit_rows(alerts, detected_at=checked_at),
+            staged=staged, status=status,
+            summary=format_alert_surge(alerts) if len(alerts) > MAX_DETAILED_ALERTS_PER_RUN else None,
+        )
+        deliver(state, notifier, provider=config.notifications.provider)
+        return RunResult(checked, baselined, len(alerts), errors, warnings)
     for source_id, next_state in staged.items():
         state.save(source_id, next_state)
-
-    completed_at = now_iso()
-    if alerts:
-        _save_alert_audit(state, alerts, sent_at=completed_at)
-
-    status = {
-        "last_run_at": completed_at,
-        "checked_sources": checked,
-        "baselined_sources": baselined,
-        "alerts": len(alerts),
-        "errors": errors,
-        "warnings": warnings,
-    }
     if _should_save_status(state.load("_status"), status):
         state.save("_status", status)
     return RunResult(checked, baselined, len(alerts), errors, warnings)

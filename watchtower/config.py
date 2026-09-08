@@ -147,6 +147,8 @@ def load_config(path: str | Path) -> Config:
         kind = raw_kind.strip()
         if not source_id or not kind:
             raise ValueError("source id and kind are required")
+        if source_id.startswith("_"):
+            raise ValueError("source ids beginning with underscore are reserved for runtime state")
         if not _source_id_is_file_safe(source_id):
             raise ValueError(
                 "source id must contain only letters, digits, hyphen or underscore"

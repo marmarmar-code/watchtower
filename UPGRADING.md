@@ -15,6 +15,10 @@ metadata og en egen fil for siste varselrunde. Gammel state og gammel audit kan
 fortsatt leses. Doffin viser nå begrensninger ved fulle resultatvinduer; RSS avviser
 også svar der bare enkelte elementer mangler nødvendige felt.
 
+En ny privat `_outbox.json` lagrer ventende utsending og kvitteringer. Kilde-ID-er
+som begynner med `_` er nå reservert for interne state-filer. Kontroller og gi
+eventuelle slike egne kilder ny ID før oppgradering; ny ID gir ny stille baseline.
+
 Nye profiler aktiveres ikke i eksisterende runtimes. Velg dem uttrykkelig og
 kontroller første stille baseline. Startpakkene er ikke migreringsverktøy.
 
@@ -26,6 +30,10 @@ kontroller første stille baseline. Startpakkene er ikke migreringsverktøy.
 4. Kjør prosjektets kontroller og valider din runtime lokalt. En `dry-run` med en
    kopi av state kan kontrollere henting uten sending eller state-endringer.
 5. Merge gjennomgått kode til din forks `main` og følg de første kjøringene.
+
+Før retur til 0.4: fullfør en eventuell ventende kø med 0.5 og ta vare på privat
+state. 0.4 kjenner ikke køen og kan ellers sende allerede leverte treff på nytt.
+Deaktiver også `finanstilsynet_registry` før retur; adapteren finnes ikke i 0.4.
 
 Ved problemer: lag en vanlig revert av kodeendringen på `main`. Ikke force-push
 eller slett runtime-state. Hvis du har tatt i bruk `entity_refs`, må de utvides

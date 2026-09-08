@@ -47,6 +47,7 @@ Legg `entity_refs = ["example"]` direkte i kildeblokken for følgende koblinger:
 | `patentstyret` | `orgnr` | `companies` |
 | `stotte` | `orgnr` | `recipient_orgnrs` – mottakere, ikke støttegivere |
 | `finanstilsynet_short_sale` | `isins` | `isins` |
+| `finanstilsynet_registry` | `orgnr` | `companies` |
 
 ```toml
 [[source]]
@@ -61,8 +62,8 @@ match_all = true
 ```
 
 Eksisterende eksplisitte identifikatorlister beholdes og kombineres med referansene.
-Ingen automatisk kobling fra navn til børsmeldinger, Doffin-kjøpere eller
-Finanstilsynets virksomhetsregister er implisitt i dette formatet.
+Ingen automatisk kobling fra navn til børsmeldinger eller Doffin-kjøpere er
+implisitt i dette formatet. Virksomhetsregisteret bruker eksplisitte organisasjonsnumre.
 
 Ukjente referanser, duplikate ID-er og manglende nødvendige identifikatorer avvises
 ved validering. Behold eksisterende kilde-ID-er ved migrering, så samme state brukes.

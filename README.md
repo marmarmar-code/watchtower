@@ -22,6 +22,9 @@ konfigurasjon fra startpakkene `general`, `finance` og `health`:
 python -m watchtower setup --runtime ../watchtower-runtime
 ```
 
+GitHub-koblingen kan settes opp med `link-github`; se [installasjon](INSTALL.md).
+[Finanstilsynets virksomhetsregister](FINANSTILSYNET.md) følger aktive tillatelser og tjenester.
+
 Se [virksomhetslister](ENTITIES.md), [drift og dekningsstatus](OPERATIONS.md) og
 [oppgraderinger](UPGRADING.md). Installasjonseieren har ansvar for egne kilder,
 varsler, secrets og drift. [FORKING.md](FORKING.md) beskriver eierskap og bruksrett.
@@ -42,6 +45,7 @@ rss
 ssb
 stotte
 finanstilsynet_short_sale
+finanstilsynet_registry
 patentstyret
 ```
 
