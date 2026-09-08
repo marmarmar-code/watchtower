@@ -16,7 +16,7 @@ En installasjon er en egen fork. Den kan kjøre videre uten upstream, og upstrea
 - oppfølging når eksterne kilder eller API-er endres;
 - vurdering av om løsningen kan brukes etter gjeldende interne regler.
 
-Dette ansvaret omfatter også å følge med på kildekilder, GitHub Actions og egne avhengigheter. Upstream har ikke tilgang til installasjonens secrets, runtime eller driftsmiljø.
+Dette ansvaret omfatter også å følge med på datakilder, GitHub Actions og egne avhengigheter. Upstream har ikke tilgang til installasjonens secrets, runtime eller driftsmiljø.
 
 ## Upstream omfatter
 
@@ -40,3 +40,14 @@ Upstream innebærer ikke:
 En generell kodefeil kan beskrives i et offentlig issue dersom rapporten ikke inneholder private verdier, produksjonsstate, credentials eller uredigerte logger.
 
 Installasjonsspesifikke problemer håndteres i den aktuelle forken. Se `SECURITY.md` før sikkerhetsrelatert informasjon deles.
+
+
+## Lokal ansvarsoverføring
+
+Avtal en driftsansvarlig, en redaksjonell ansvarlig og en stedfortreder i den private
+runtimen. De følger opp nøkler, kildeendringer, relevans og manglende livstegn.
+Upstream-vedlikeholderen er ikke automatisk installasjonens kontakt for brukerstøtte.
+
+Bruk [INSTALL.md](INSTALL.md) ved oppsett og [OPERATIONS.md](OPERATIONS.md) for
+status, dekningsbegrensninger og privat varselhistorikk. En generell kodefeil kan
+fortsatt rapporteres uten private data.

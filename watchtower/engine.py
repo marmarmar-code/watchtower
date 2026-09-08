@@ -1,13 +1,15 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from typing import Callable
+from hashlib import sha256
 
 from .config import Config, MIN_SOURCE_INTERVAL_MINUTES, SourceConfig
 from .models import Item, NotificationEntry
 from .notifier import Notifier, format_slack_entries
 from .state import StateStore
+from .delivery import pending, prepare, deliver, record_history
 from .sources.common import Source
 from .sources.regjeringen import RegjeringenSource
 from .sources.stortinget import StortingetSource
@@ -20,6 +22,7 @@ from .sources.rss import RssSource
 from .sources.ssb import SsbSource
 from .sources.stotte import StotteSource
 from .sources.finanstilsynet_short_sale import FinanstilsynetShortSaleSource
+from .sources.finanstilsynet_registry import FinanstilsynetRegistrySource
 from .sources.patentstyret import PatentstyretSource
 
 
@@ -35,12 +38,11 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "ssb": SsbSource,
     "stotte": StotteSource,
     "finanstilsynet_short_sale": FinanstilsynetShortSaleSource,
+    "finanstilsynet_registry": FinanstilsynetRegistrySource,
     "patentstyret": PatentstyretSource,
 }
 
-_STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors")
-_ALERT_AUDIT_SOURCE_ID = "_alert_audit"
-_ALERT_AUDIT_LIMIT = 500
+_STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors", "warnings")
 _LAST_CHECKED_FIELD = "last_checked_at"
 DEFAULT_SOURCE_INTERVAL_MINUTES = 60
 MAX_DETAILED_ALERTS_PER_RUN = 32
@@ -60,6 +62,7 @@ class RunResult:
     baselined_sources: int
     alerts: int
     errors: dict[str, str]
+    warnings: dict[str, list[str]] = field(default_factory=dict)
 
 
 def now_iso() -> str:
@@ -149,48 +152,29 @@ def _source_is_due(
     return at >= last_checked + timedelta(minutes=source_interval_minutes(source))
 
 
-def _save_alert_audit(
-    state: StateStore,
-    alerts: list[Alert],
-    *,
-    sent_at: str,
-) -> None:
-    previous = state.load(_ALERT_AUDIT_SOURCE_ID) or {}
-    entries = previous.get("entries", [])
-    if not isinstance(entries, list) or not all(isinstance(entry, dict) for entry in entries):
-        raise ValueError("invalid private alert audit")
-    entries = list(entries)
-    entries.extend(
+def _audit_rows(alerts: list[Alert], *, detected_at: str) -> list[dict]:
+    return [
         {
-            "sent_at": sent_at,
+            "detected_at": detected_at,
             "source_id": alert.source.id,
             "item_key": alert.item.key,
             "change": alert.change,
+            "alert_id": sha256("\0".join((
+                alert.source.id, alert.item.key, alert.item.content_hash(), alert.change,
+            )).encode()).hexdigest(),
+            "title": alert.item.title[:1000], "url": alert.item.url,
+            "published": alert.item.published, "matched_terms": list(alert.matched_terms),
+            "details": list(_bounded_details(alert.item)),
+            "delivery": "summary" if len(alerts) > MAX_DETAILED_ALERTS_PER_RUN else "detail",
         }
         for alert in alerts
-    )
-    state.save(_ALERT_AUDIT_SOURCE_ID, {"entries": entries[-_ALERT_AUDIT_LIMIT:]})
+    ]
 
 
-def _send_plain_text(notifier: Notifier, text: str) -> None:
-    send_text = getattr(type(notifier), "send_text", None)
-    if callable(send_text):
-        notifier.send_text(text)
-    else:
-        notifier.send(text)  # type: ignore[attr-defined]
-
-
-def _send_alerts(notifier: Notifier, alerts: list[Alert]) -> None:
-    if len(alerts) > MAX_DETAILED_ALERTS_PER_RUN:
-        _send_plain_text(notifier, format_alert_surge(alerts))
-        return
-
-    entries = notification_entries(alerts)
-    send_alerts = getattr(type(notifier), "send_alerts", None)
-    if callable(send_alerts):
-        notifier.send_alerts(entries)
-    else:
-        notifier.send(format_slack(alerts))  # type: ignore[attr-defined]
+def _save_alert_audit(state: StateStore, alerts: list[Alert], *, sent_at: str) -> None:
+    record_history(state, [
+        {**row, "sent_at": sent_at} for row in _audit_rows(alerts, detected_at=sent_at)
+    ])
 
 
 def run(
@@ -203,10 +187,23 @@ def run(
     run_at: datetime | None = None,
     source_factory: Callable[[SourceConfig], Source] = build_source,
 ) -> RunResult:
+    if not dry_run and pending(state):
+        restored = deliver(state, notifier, provider=config.notifications.provider)
+        return RunResult(restored["checked_sources"], restored["baselined_sources"],
+                         restored["alerts"], restored["errors"], restored.get("warnings", {}))
     checked = 0
     baselined = 0
     alerts: list[Alert] = []
-    errors: dict[str, str] = {}
+    previous_status = state.load("_status") or {}
+    enabled_ids = {source.id for source in config.sources if source.enabled}
+    prior_errors = previous_status.get("errors", {})
+    if not isinstance(prior_errors, dict):
+        raise ValueError("invalid private status errors")
+    errors = {
+        key: value for key, value in prior_errors.items()
+        if key in enabled_ids
+    }
+    warnings: dict[str, list[str]] = {}
     staged: dict[str, dict] = {}
     started_at = run_at or datetime.now(timezone.utc)
     if started_at.tzinfo is None:
@@ -219,6 +216,8 @@ def run(
         try:
             old_state = state.load(source_config.id)
             evaluation_state = _state_for_evaluation(source_config, old_state)
+            if old_state and old_state.get("coverage_warnings"):
+                warnings[source_config.id] = old_state["coverage_warnings"]
             if respect_intervals and not _source_is_due(
                 source_config,
                 old_state,
@@ -227,6 +226,7 @@ def run(
                 continue
             source = source_factory(source_config)
             items = source.fetch_with_state(old_state)
+            source_warnings = list(getattr(source, "coverage_warnings", []))
             checked += 1
             next_state, source_alerts, was_baseline = evaluate(
                 source_config,
@@ -238,6 +238,12 @@ def run(
             next_state = augment_state(next_state) if callable(augment_state) else next_state
             next_state = dict(next_state)
             next_state[_LAST_CHECKED_FIELD] = checked_at
+            next_state["last_item_count"] = len(items)
+            next_state["coverage_warnings"] = source_warnings
+            errors.pop(source_config.id, None)
+            warnings.pop(source_config.id, None)
+            if source_warnings:
+                warnings[source_config.id] = source_warnings
             staged[source_config.id] = next_state
             alerts.extend(source_alerts)
             if was_baseline:
@@ -246,30 +252,29 @@ def run(
             errors[source_config.id] = _safe_error(exc)
 
     if dry_run:
-        return RunResult(checked, baselined, len(alerts), errors)
+        return RunResult(checked, baselined, len(alerts), errors, warnings)
 
+    status = {
+        "last_run_at": now_iso(), "checked_sources": checked,
+        "baselined_sources": baselined, "alerts": len(alerts),
+        "errors": errors, "warnings": warnings,
+    }
     if alerts:
         if notifier is None:
             raise RuntimeError("alerts pending but notifier is not configured")
-        _send_alerts(notifier, alerts)
-
+        prepare(
+            state, provider=config.notifications.provider,
+            entries=notification_entries(alerts), rows=_audit_rows(alerts, detected_at=checked_at),
+            staged=staged, status=status,
+            summary=format_alert_surge(alerts) if len(alerts) > MAX_DETAILED_ALERTS_PER_RUN else None,
+        )
+        deliver(state, notifier, provider=config.notifications.provider)
+        return RunResult(checked, baselined, len(alerts), errors, warnings)
     for source_id, next_state in staged.items():
         state.save(source_id, next_state)
-
-    completed_at = now_iso()
-    if alerts:
-        _save_alert_audit(state, alerts, sent_at=completed_at)
-
-    status = {
-        "last_run_at": completed_at,
-        "checked_sources": checked,
-        "baselined_sources": baselined,
-        "alerts": len(alerts),
-        "errors": errors,
-    }
     if _should_save_status(state.load("_status"), status):
         state.save("_status", status)
-    return RunResult(checked, baselined, len(alerts), errors)
+    return RunResult(checked, baselined, len(alerts), errors, warnings)
 
 
 def evaluate(
@@ -406,7 +411,10 @@ def format_alert_surge(alerts: list[Alert]) -> str:
         key=lambda entry: (entry[0][0].casefold(), entry[0][1]),
     ):
         lines.append(f"• {source_label} · {status}: {count}")
-    lines.append("Kontroller kjøringen og den private varslingsloggen.")
+    lines.append(
+        "Hele trefflisten lagres i privat state/_latest_alerts.json etter vellykket utsending. "
+        "Se den private driftsveiledningen for å lese trefflisten."
+    )
     return "\n".join(lines)
 
 

@@ -117,7 +117,7 @@ class CoreTests(unittest.TestCase):
         self.assertTrue(_should_save_status(previous, next_day))
         self.assertTrue(_should_save_status(previous, changed))
 
-    def test_successful_alert_is_written_to_minimal_private_audit(self):
+    def test_successful_alert_is_written_to_private_audit(self):
         class StaticSource:
             def __init__(self, items):
                 self.items = items
@@ -146,7 +146,12 @@ class CoreTests(unittest.TestCase):
             assert audit is not None
             self.assertEqual(1, len(audit["entries"]))
             entry = audit["entries"][0]
-            self.assertEqual({"sent_at", "source_id", "item_key", "change"}, set(entry))
+            self.assertTrue({"sent_at", "source_id", "item_key", "change"}.issubset(entry))
+            self.assertEqual("New alpha-rule item", entry["title"])
+            self.assertEqual("https://example.test/2", entry["url"])
+            self.assertEqual("detail", entry["delivery"])
+            self.assertEqual(64, len(entry["alert_id"]))
+            self.assertEqual([entry], state.load("_latest_alerts")["entries"])
             self.assertEqual("x", entry["source_id"])
             self.assertEqual("2", entry["item_key"])
             self.assertEqual("new", entry["change"])

@@ -23,7 +23,12 @@ class DoffinSource(Source):
             raise ValueError("Doffin accepts only the official API URL")
         self.endpoint = DEFAULT_URL
 
+    def fetch_with_state(self, previous: dict | None) -> list[Item]:
+        self._previous_keys = set((previous or {}).get("seen", {}))
+        return self.fetch()
+
     def fetch(self) -> list[Item]:
+        self.coverage_warnings = []
         api_key = os.environ.get("DOFFIN_API_KEY", "").strip()
         if not api_key:
             raise SourceError("Doffin API key is not configured")
@@ -40,8 +45,10 @@ class DoffinSource(Source):
         }
         out: list[Item] = []
         seen: set[str] = set()
+        previous_keys = getattr(self, "_previous_keys", set())
 
         for query in dict.fromkeys(q.strip() for q in queries):
+            overlap = False
             for page_index in range(max_pages):
                 params: dict[str, Any] = {
                     "page": page_index + 1,
@@ -63,12 +70,18 @@ class DoffinSource(Source):
                 rows = _rows(payload)
                 for row in rows:
                     item = _item(self.config.id, row)
+                    overlap = overlap or item.key in previous_keys
                     if item.key in seen:
                         continue
                     seen.add(item.key)
                     out.append(item)
                 if len(rows) < page_size:
                     break
+                if page_index == max_pages - 1:
+                    self.coverage_warnings.append("result_window_full")
+                    if previous_keys and not overlap:
+                        self.coverage_warnings.append("no_overlap_with_previous_window")
+        self.coverage_warnings = list(dict.fromkeys(self.coverage_warnings))
         return out
 
 

@@ -105,3 +105,12 @@ credential_required = true
 interval_class = "daily"
 maintenance_owner = "fork-owner"
 coverage = "Patenter, varemerker og design knyttet til eksplisitt valgte organisasjonsnumre."
+
+[[source]]
+id = "finanstilsynet_registry"
+name = "Finanstilsynets virksomhetsregister"
+status = "beta"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Endringer i aktive tillatelser, tjenester og merknader for eksplisitt valgte norske organisasjonsnumre."

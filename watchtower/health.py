@@ -8,6 +8,7 @@ from datetime import datetime, timedelta, timezone
 from .config import Config
 from .engine import source_interval_minutes
 from .state import StateStore
+from .delivery import pending
 
 
 HEALTHY = "healthy"
@@ -23,11 +24,15 @@ class SourceHealth:
     status: str
     last_checked_at: str | None
     interval_minutes: int
+    coverage_warnings: tuple[str, ...] = ()
+    last_item_count: int | None = None
 
 
 @dataclass(frozen=True)
 class HealthReport:
     entries: tuple[SourceHealth, ...]
+    pending_batches: int = 0
+    pending_delivery: bool = False
 
     @property
     def counts(self) -> dict[str, int]:
@@ -40,7 +45,7 @@ class HealthReport:
     def okay(self) -> bool:
         counts = self.counts
         return bool(self.entries) and not (
-            counts[LATE] or counts[ERROR] or counts[NOT_STARTED]
+            counts[LATE] or counts[ERROR] or counts[NOT_STARTED] or self.pending_delivery or self.pending_batches
         )
 
 
@@ -99,22 +104,30 @@ def inspect_health(
                     else None
                 ),
                 interval_minutes=interval,
+                coverage_warnings=tuple(source_state.get("coverage_warnings", [])),
+                last_item_count=source_state.get("last_item_count"),
             )
         )
-    return HealthReport(tuple(entries))
+    journal = pending(state)
+    remaining = sum(not batch["sent_at"] for batch in journal["batches"]) if journal else 0
+    return HealthReport(tuple(entries), remaining, journal is not None)
 
 
 def render_health(report: HealthReport, *, redacted: bool = False) -> str:
     counts = report.counts
+    limited = sum(bool(entry.coverage_warnings) for entry in report.entries)
     outcome = "OK" if report.okay else "NEEDS ATTENTION"
+    if limited and report.okay:
+        outcome = "LIMITED COVERAGE"
     summary = (
         f"WATCHTOWER STATUS {outcome}; enabled_sources={len(report.entries)} "
         f"healthy={counts[HEALTHY]} late={counts[LATE]} "
-        f"errors={counts[ERROR]} not_started={counts[NOT_STARTED]}"
+        f"errors={counts[ERROR]} not_started={counts[NOT_STARTED]} coverage_limited={limited} "
+        f"pending_batches={report.pending_batches} pending_delivery={int(report.pending_delivery)}"
     )
     if redacted:
         return summary
-    lines = [summary, "ID\tSTATUS\tSIST KONTROLLERT\tINTERVALL"]
+    lines = [summary, "ID\tSTATUS\tSIST KONTROLLERT\tINTERVALL\tHENTET\tDEKNING"]
     status_labels = {
         HEALTHY: "OK",
         LATE: "FORSINKET",
@@ -124,6 +137,8 @@ def render_health(report: HealthReport, *, redacted: bool = False) -> str:
     for entry in report.entries:
         lines.append(
             f"{entry.source_id}\t{status_labels[entry.status]}\t"
-            f"{entry.last_checked_at or '-'}\t{entry.interval_minutes} min"
+            f"{entry.last_checked_at or '-'}\t{entry.interval_minutes} min\t"
+            f"{entry.last_item_count if entry.last_item_count is not None else '-'}\t"
+            f"{', '.join(entry.coverage_warnings) or 'ingen registrert begrensning'}"
         )
     return "\n".join(lines)
