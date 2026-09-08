@@ -17,6 +17,9 @@ PRESETS = {
     "general": ("Generell næringslivsovervåking", ()),
     "finance": ("Finans", ("finanstilsynet", "norges_bank_pressemeldinger")),
     "health": ("Helse og legemidler", ("ema_news", "ema_human_medicines")),
+    "digital": ("Digital infrastruktur", ("nkom",)),
+    "property": ("Eiendom", ()),
+    "retail": ("Handel", ("mattilsynet",)),
 }
 
 # The two news feeds in the complete Finanstilsynet profile overlap. The starter
@@ -100,7 +103,12 @@ def make_config(preset: str, topics: list[str], companies: list[str], provider: 
             # A single failed feed cannot block another feed's state or alerts.
             add_source(f"{profile_id}_{index}", "rss", f"{profile['name']} ({index})", (
                 f"urls = {_quoted([url])}", "allow_empty = false",
-            ))
+            ), updates=False)
+    from .recipes import selected_sources, source_toml
+    preset_recipes = {"finance": ("nb_policy_rate", "ssb_cpi"),
+                      "property": ("ssb_housing",), "retail": ("ssb_retail",)}
+    for recipe in preset_recipes.get(preset, ()):
+        lines.extend(source_toml(source) for source in selected_sources(recipe=recipe))
     content = "\n".join(lines)
     if any(pattern.search(content) for pattern in SECRET_PATTERNS):
         raise ValueError("setup input contains a credential; use Actions Secrets")
@@ -154,10 +162,10 @@ def write_runtime(root: Path, content: str) -> Path:
 def setup(args) -> int:
     preset, topics, companies, provider = args.preset, list(args.topic), list(args.company), args.channel
     if preset is None:
-        print("Startpakker: general (generell), finance (finans), health (helse).")
+        print("Startpakker: " + ", ".join(f"{key} ({value[0]})" for key, value in PRESETS.items()))
         preset = input("Velg startpakke [general]: ").strip() or "general"
         if preset not in PRESETS:
-            raise ValueError("velg general, finance eller health")
+            raise ValueError("velg en av de oppgitte startpakkene")
         if not topics:
             topics = [term.strip() for term in input("Temaer, adskilt med komma: ").split(",") if term.strip()]
         print("Legg til virksomheter som ORGNR=NAVN. Tom linje avslutter listen.")

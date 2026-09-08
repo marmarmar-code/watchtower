@@ -1,6 +1,31 @@
 # Changelog
 
-## 0.5.0 – enklere selvstendige installasjoner (under utvikling)
+## 0.6.0 – hendelser, tall og valgte nettsider
+
+- Fem nye adaptertyper: `json_records`, `csv_records`, `web_page`, `web_links` og
+  `ssb_data`. Totalt 18 adaptertyper; alle tillegg er valgfrie.
+- Stabil postidentitet, eksplisitte feltvalg, nøyaktig radutvalg, tallnormalisering,
+  før–etter-visning, absolutte/prosentvise terskler og bekreftelser mot kortvarige endringer.
+- SSB-tall følger nye perioder, revisjoner, manglende verdier, enheter og indeksbasis
+  i eksplisitt valgte celler. Den eldre metadataadapteren beholdes.
+- Ti ferdige kildeoppskrifter for Norges Bank, SSB, MET, Riksrevisjonen og Nkom.
+  Alle ti er hentet og gjentatt uten falske endringsvarsler 8. september 2026.
+- `list-recipes`, lokal `add-source` med forhåndsvisning og kontrollert tilføying,
+  og `preview` av én kilde uten sending eller lagring.
+- Seks startpakker: generell, finans, helse, digital infrastruktur, eiendom og
+  handel. Finanspakken får styringsrente og KPI; eiendom og handel får valgte SSB-tall.
+- RSS-kilder i nye startpakker varsler nye publiseringer som standard; varsling
+  av rettinger må aktiveres uttrykkelig. Eksisterende oppsett endres ikke.
+- Nkom og MET som nye RSS-profiler; totalt ti profiler.
+- Hentegrenser, duplikatkontroll og validering av JSON-paginering. Feil bevarer
+  tidligere snapshot. Forsvinning krever eksplisitt komplett uttrekk og bekreftelser.
+- Konfigurasjonsformat 1 og eksisterende aktive kildevalg beholdes. Nye kilder
+  etablerer stille baseline. eInnsyn er tatt ut av prioritert produktutvikling.
+
+Se [RECIPES.md](RECIPES.md), [EVENT_MONITORING.md](EVENT_MONITORING.md) og
+[UPGRADING.md](UPGRADING.md). Oppskriftenes avgrensning er ikke full sektordekning.
+
+## 0.5.0 – enklere selvstendige installasjoner
 
 - Lokal `setup`-veiviser med generelle, finans- og helserettede startpakker. Aktive
   runtimes beskyttes; et deaktivert oppsett bevares før erstatning.

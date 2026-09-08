@@ -83,3 +83,23 @@ status = "verified"
 verified_on = "2026-09-08"
 coverage = "Publiserte vedtak i Skatteklagenemnda."
 feed_urls = ["https://www.skatteetaten.no/rss/rettskilder/vedtak/skatteklagenemnda/"]
+
+[[profile]]
+id = "nkom"
+name = "Nkom – publiseringer"
+owner = "Nasjonal kommunikasjonsmyndighet"
+official_url = "https://nkom.no/aktuelt"
+status = "verified"
+verified_on = "2026-09-08"
+coverage = "Publiseringer om nett, frekvenser og tilsyn."
+feed_urls = ["https://nkom.no/aktuelt/rss.xml"]
+
+[[profile]]
+id = "met_farevarsler"
+name = "MET – farevarsler"
+owner = "Meteorologisk institutt"
+official_url = "https://api.met.no/weatherapi/metalerts/2.0/documentation"
+status = "verified"
+verified_on = "2026-09-08"
+coverage = "Aktive farevarsler; avgrens geografisk og tillat lovlig tom feed."
+feed_urls = ["https://api.met.no/weatherapi/metalerts/2.0/current.rss"]

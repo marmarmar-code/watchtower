@@ -4,6 +4,23 @@
 `[general] config_version = 1` er det første eksplisitte formatet. Eldre filer uten
 feltet tolkes fortsatt som format 1. Ukjente fremtidige formatversjoner avvises.
 
+## Fra 0.5 til 0.6
+
+Konfigurasjonsformatet er fortsatt 1. Eksisterende kilder, baseline, leveringskø,
+filtre og intervaller videreføres. Oppgrader kodeforken før du bruker nye typer
+`json_records`, `csv_records`, `web_page`, `web_links` eller `ssb_data`.
+
+Bruk `add-source` for nye kilder i en aktiv runtime. `setup` skal ikke kjøres på
+nytt. Ny katalogkode endrer ikke oppskrifter som tidligere er kopiert inn i privat
+konfigurasjon. Nye kilder etablerer stille baseline. De fem nye typene lagrer
+utvalgte felt i privat kilde-state; endring av deres URL, felt eller terskler gir
+ny stille baseline for samme kilde.
+
+Før retur til 0.5: deaktiver alle fem nye adaptertyper i privat konfigurasjon.
+Behold state og fullfør eventuell ventende kø før bytte. Kommandoene `add-source`,
+`list-recipes` og `preview` og de nye startpakkene finnes bare fra 0.6. Nkom og MET
+kan brukes som vanlige eksplisitte RSS-adresser på eldre kode; profilnavnene er nye.
+
 ## Fra 0.4 til 0.5
 
 Eksisterende kilde-ID-er, filtre, eksplisitte identifikatorlister, baseline og
