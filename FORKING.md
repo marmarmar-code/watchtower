@@ -6,15 +6,13 @@ Watchtower er laget for at hver installasjonseier skal eie sin egen installasjon
 
 ## Opprett en selvstendig installasjon
 
-1. Fork den offentlige Watchtower-koden til installasjonseierens egen GitHub-konto.
-2. Opprett et privat `watchtower-runtime` hos samme eier fra runtime-malen.
-3. Legg deploy-nøkkel, Slack- eller Teams-webhook og eventuelle kildenøkler i Actions Secrets i forken. Legg aldri secrets i runtime.
-4. Fyll inn kilder og private filterregler i runtime-konfigurasjonen.
-5. Kjør `test-notification` fra Actions for å kontrollere runtime og varslingskanal.
-6. Kjør deretter `run` én gang for å etablere en stille baseline.
-7. Kontroller at en senere naturlig `schedule`-hendelse starter scheduleren, at monitoren blir dispatchert, og at state/status oppdateres før installasjonen regnes som operativ. En isolert manuell kjøring beviser ikke at cron-reserven virker.
+Følg [INSTALL.md](INSTALL.md) for hele oppsettet: repoer, veiviser, nøkler,
+varsling, stille baseline og kontroll av automatisk kjøring. Runtime-malen peker
+til samme oppskrift.
 
-Standardoppsettet finner et privat repository med navnet `watchtower-runtime` hos samme GitHub-eier. En annen plassering må angis med `WATCHTOWER_RUNTIME_REPOSITORY`.
+Bruk ett eget privat runtime-repo per installasjon og angi
+`WATCHTOWER_RUNTIME_REPOSITORY` eksplisitt i kodeforken. Eksisterende standardoppslag
+av `<eier>/watchtower-runtime` støttes fortsatt.
 
 ## Etter forking
 
@@ -31,6 +29,8 @@ Upstream er bare et offentlig startpunkt. Det finnes ingen SLA, sentral drift el
 ## Oppdateringer
 
 En fork mottar ingen automatiske upstream-oppdateringer. Installasjonseieren velger selv om en endring skal hentes inn, vurderer sikkerhet og kompatibilitet, tester den mot egen runtime og ruller den ut når den er klar. Det er også helt greit å bli på en kjent versjon.
+
+Se [UPGRADING.md](UPGRADING.md) for versjoner, kompatibilitet og retur til kjent kode.
 
 ## Bidrag
 

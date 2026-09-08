@@ -6,11 +6,14 @@ from typing import Any
 import re
 import tomllib
 
+from .entities import load_entities, resolve_entity_options, resolve_entity_terms
+
 
 MATCH_MODES = {"smart", "substring", "whole_word"}
 NOTIFICATION_PROVIDERS = {"slack", "teams"}
 PLACEHOLDER_MARKER = "REPLACE_ME"
 MIN_SOURCE_INTERVAL_MINUTES = 5
+CONFIG_VERSION = 1
 
 
 @dataclass(frozen=True)
@@ -67,6 +70,7 @@ class Config:
     sources: tuple[SourceConfig, ...]
     max_seen_per_source: int = 3000
     notifications: NotificationConfig = field(default_factory=NotificationConfig)
+    config_version: int = CONFIG_VERSION
 
 
 def _strings(value: Any, field: str = "filter values") -> tuple[str, ...]:
@@ -108,6 +112,10 @@ def load_config(path: str | Path) -> Config:
     general = raw.get("general", {})
     if not isinstance(general, dict):
         raise ValueError("[general] must be a table")
+    version = _integer(general.get("config_version", CONFIG_VERSION), "general.config_version")
+    if version != CONFIG_VERSION:
+        raise ValueError("unsupported general.config_version; use a compatible Watchtower version")
+    entities = load_entities(raw.get("entity", []))
     max_seen = _integer(general.get("max_seen_per_source", 3000), "general.max_seen_per_source")
     if max_seen < 1:
         raise ValueError("general.max_seen_per_source must be positive")
@@ -163,13 +171,19 @@ def load_config(path: str | Path) -> Config:
         match_all = filter_row.get("match_all", False)
         if not isinstance(match_all, bool):
             raise ValueError("filter match_all must be true or false")
+        entity_terms = resolve_entity_terms(filter_row.get("entity_refs", []), entities)
         filters = FilterRule(
-            include_any=_strings(filter_row.get("include_any"), "source.filter.include_any"),
+            include_any=tuple(dict.fromkeys((
+                *_strings(filter_row.get("include_any"), "source.filter.include_any"),
+                *entity_terms,
+            ))),
             include_all=_strings(filter_row.get("include_all"), "source.filter.include_all"),
             exclude_any=_strings(filter_row.get("exclude_any"), "source.filter.exclude_any"),
             match_mode=match_mode,
             match_all=match_all,
         )
+        if enabled and _contains_placeholder(list(entity_terms)):
+            raise ValueError("enabled source references placeholder entity values")
         if enabled and not (filters.include_any or filters.include_all or filters.match_all):
             raise ValueError(
                 f"enabled source {source_id} requires include rules or filter.match_all = true"
@@ -196,8 +210,9 @@ def load_config(path: str | Path) -> Config:
         if "rebaseline_empty_state" in row:
             _boolean(row["rebaseline_empty_state"], "source.rebaseline_empty_state")
         options = {k: v for k, v in row.items() if k not in {
-            "id", "kind", "enabled", "label", "urls", "filter", "alert_on_update"
+            "id", "kind", "enabled", "label", "urls", "filter", "alert_on_update", "entity_refs"
         }}
+        options = resolve_entity_options(kind, row.get("entity_refs", []), entities, options)
         sources.append(SourceConfig(
             id=source_id,
             kind=kind,
@@ -208,4 +223,4 @@ def load_config(path: str | Path) -> Config:
             alert_on_update=alert_on_update,
             options=options,
         ))
-    return Config(tuple(sources), max_seen, notifications)
+    return Config(tuple(sources), max_seen, notifications, version)

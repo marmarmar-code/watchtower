@@ -43,11 +43,12 @@ class Source(ABC):
         sleep: Callable[[float], None] = time.sleep,
     ) -> None:
         self.config = config
+        self.coverage_warnings: list[str] = []
         self.timeout = timeout
         self.retry_attempts = max(1, int(retry_attempts))
         self.sleep = sleep
         self.session = requests.Session()
-        self.session.headers.update({"User-Agent": "watchtower/0.4 (+public-source-monitor)"})
+        self.session.headers.update({"User-Agent": "watchtower/0.5 (+public-source-monitor)"})
 
     def get(
         self,

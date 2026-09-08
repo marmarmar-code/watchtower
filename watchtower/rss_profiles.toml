@@ -6,7 +6,7 @@ name = "Politiloggen"
 official_url = "https://api.politiloggen.politiet.no/feeds/rss"
 owner = "Politiet"
 status = "verified"
-verified_on = "2026-08-27"
+verified_on = "2026-09-08"
 coverage = "Operative meldinger fra politiets operasjonssentraler i Norge."
 feed_urls = ["https://api.politiloggen.politiet.no/feeds/rss"]
 
@@ -16,7 +16,7 @@ name = "Norges Bank – pressemeldinger"
 official_url = "https://www.norges-bank.no/RSS/"
 owner = "Norges Bank"
 status = "verified"
-verified_on = "2026-08-27"
+verified_on = "2026-09-08"
 coverage = "Pressemeldinger fra Norges Bank."
 feed_urls = ["https://www.norges-bank.no/RSS/Pressemeldinger---Norges-Bank/"]
 
@@ -26,7 +26,7 @@ name = "Finanstilsynet"
 official_url = "https://www.finanstilsynet.no/RSS/"
 owner = "Finanstilsynet"
 status = "verified"
-verified_on = "2026-08-27"
+verified_on = "2026-09-08"
 coverage = "Nyhetsarkiv, rundskriv og nyheter fra Finanstilsynet."
 feed_urls = [
   "https://www.finanstilsynet.no/rss/nyhetsfeed/",
@@ -40,6 +40,46 @@ name = "Mattilsynet"
 official_url = "https://www.mattilsynet.no/om-mattilsynet/api/rss"
 owner = "Mattilsynet"
 status = "verified"
-verified_on = "2026-08-27"
+verified_on = "2026-09-08"
 coverage = "Offentlig RSS-innhold publisert av Mattilsynet."
 feed_urls = ["https://www.mattilsynet.no/om-mattilsynet/api/rss"]
+
+[[profile]]
+id = "ema_news"
+name = "EMA – nyheter og pressemeldinger"
+official_url = "https://www.ema.europa.eu/en/news-events/rss-feeds"
+owner = "European Medicines Agency"
+status = "verified"
+verified_on = "2026-09-08"
+coverage = "Nyheter og pressemeldinger; EU-vurderinger er ikke norske refusjonsvedtak."
+feed_urls = ["https://www.ema.europa.eu/en/news.xml"]
+
+[[profile]]
+id = "ema_human_medicines"
+name = "EMA – nye humanlegemidler"
+official_url = "https://www.ema.europa.eu/en/news-events/rss-feeds"
+owner = "European Medicines Agency"
+status = "verified"
+verified_on = "2026-09-08"
+coverage = "Publiseringer om nye humanlegemidler; feeden har et kort historisk vindu."
+feed_urls = ["https://www.ema.europa.eu/en/new-human-medicine-new.xml"]
+
+[[profile]]
+id = "skatteetaten_uttalelser"
+name = "Skatteetaten – uttalelser"
+official_url = "https://www.skatteetaten.no/rss/"
+owner = "Skatteetaten"
+status = "verified"
+verified_on = "2026-09-08"
+coverage = "Publiserte juridiske uttalelser."
+feed_urls = ["https://www.skatteetaten.no/rss/rettskilder/uttalelser/"]
+
+[[profile]]
+id = "skatteklagenemnda"
+name = "Skatteklagenemnda – vedtak"
+official_url = "https://www.skatteetaten.no/rss/"
+owner = "Skatteetaten"
+status = "verified"
+verified_on = "2026-09-08"
+coverage = "Publiserte vedtak i Skatteklagenemnda."
+feed_urls = ["https://www.skatteetaten.no/rss/rettskilder/vedtak/skatteklagenemnda/"]

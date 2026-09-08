@@ -23,6 +23,8 @@ class SourceHealth:
     status: str
     last_checked_at: str | None
     interval_minutes: int
+    coverage_warnings: tuple[str, ...] = ()
+    last_item_count: int | None = None
 
 
 @dataclass(frozen=True)
@@ -99,6 +101,8 @@ def inspect_health(
                     else None
                 ),
                 interval_minutes=interval,
+                coverage_warnings=tuple(source_state.get("coverage_warnings", [])),
+                last_item_count=source_state.get("last_item_count"),
             )
         )
     return HealthReport(tuple(entries))
@@ -106,15 +110,18 @@ def inspect_health(
 
 def render_health(report: HealthReport, *, redacted: bool = False) -> str:
     counts = report.counts
+    limited = sum(bool(entry.coverage_warnings) for entry in report.entries)
     outcome = "OK" if report.okay else "NEEDS ATTENTION"
+    if limited and report.okay:
+        outcome = "LIMITED COVERAGE"
     summary = (
         f"WATCHTOWER STATUS {outcome}; enabled_sources={len(report.entries)} "
         f"healthy={counts[HEALTHY]} late={counts[LATE]} "
-        f"errors={counts[ERROR]} not_started={counts[NOT_STARTED]}"
+        f"errors={counts[ERROR]} not_started={counts[NOT_STARTED]} coverage_limited={limited}"
     )
     if redacted:
         return summary
-    lines = [summary, "ID\tSTATUS\tSIST KONTROLLERT\tINTERVALL"]
+    lines = [summary, "ID\tSTATUS\tSIST KONTROLLERT\tINTERVALL\tHENTET\tDEKNING"]
     status_labels = {
         HEALTHY: "OK",
         LATE: "FORSINKET",
@@ -124,6 +131,8 @@ def render_health(report: HealthReport, *, redacted: bool = False) -> str:
     for entry in report.entries:
         lines.append(
             f"{entry.source_id}\t{status_labels[entry.status]}\t"
-            f"{entry.last_checked_at or '-'}\t{entry.interval_minutes} min"
+            f"{entry.last_checked_at or '-'}\t{entry.interval_minutes} min\t"
+            f"{entry.last_item_count if entry.last_item_count is not None else '-'}\t"
+            f"{', '.join(entry.coverage_warnings) or 'ingen registrert begrensning'}"
         )
     return "\n".join(lines)

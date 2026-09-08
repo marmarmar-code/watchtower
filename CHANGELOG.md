@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.5.0 – enklere selvstendige installasjoner
+
+- Lokal `setup`-veiviser med generelle, finans- og helserettede startpakker. Aktive
+  runtimes beskyttes; et deaktivert oppsett bevares før erstatning.
+- Privat `[[entity]]`-liste med eksplisitte referanser til navn/aliaser eller
+  registeridentifikatorer. Eksisterende konfigurasjon fungerer fortsatt.
+- Fire nye RSS-profiler fra EMA og Skatteetaten, kontrollert med faktisk henting
+  og parsing 8. september 2026. Nye pakker bruker én kilde per feed.
+- Doffin markerer fulle resultatvinduer og manglende overlapp med tidligere treff.
+  Hentede treff behandles fortsatt; begrensninger vises i privat og redigert status.
+- RSS støtter eksplisitt tillatt tom feed og avviser ufullstendige elementer.
+- Lesbar privat historikk med stabil varsel-ID, leveringsform og hele siste
+  varselrunde. `history` kan lese både gamle og nye audit-rader.
+- Kildevarsler og feil beholdes gjennom kjøringer der kilden venter på sitt intervall.
+- `--version`, konfigurasjonsformat 1, samlet installasjonsoppskrift og rutine for
+  oppgraderinger. Scheduler og produksjonskobling er uendret.
+
+Se [UPGRADING.md](UPGRADING.md) før utrulling. Denne oppføringen er ikke i seg selv
+en publisert GitHub Release.
+
 ## Production safety maintenance — 2026-08-28
 
 ### Fixed

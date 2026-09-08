@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
 
@@ -13,10 +14,13 @@ from .rss_profiles import load_profiles
 from .runtime_safety import validate_runtime
 from .source_catalog import load_catalog
 from .state import StateStore
+from .setup import PRESETS, setup
+from . import __version__
 
 
 def parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="watchtower")
+    p.add_argument("--version", action="version", version=f"Watchtower {__version__}; config=1")
     sub = p.add_subparsers(dest="command", required=True)
     for name in ("run", "dry-run"):
         cmd = sub.add_parser(name)
@@ -28,12 +32,23 @@ def parser() -> argparse.ArgumentParser:
             action="store_true",
             help="only poll sources whose configured interval has elapsed",
         )
+    setup_cmd = sub.add_parser("setup", help="lag et privat oppsett med en startpakke")
+    setup_cmd.add_argument("--runtime", required=True)
+    setup_cmd.add_argument("--preset", choices=tuple(PRESETS))
+    setup_cmd.add_argument("--topic", action="append", default=[])
+    setup_cmd.add_argument("--company", action="append", default=[], metavar="ORGNR=NAME")
+    setup_cmd.add_argument("--channel", choices=("teams", "slack"), default="teams")
     validate = sub.add_parser("validate-runtime")
     validate.add_argument("path")
     validate_config = sub.add_parser("validate-config")
     validate_config.add_argument("--config", required=True)
     sub.add_parser("list-sources")
     sub.add_parser("list-rss-profiles")
+    history = sub.add_parser("history", help="les privat varselhistorikk lokalt")
+    history.add_argument("--state-dir", required=True)
+    history.add_argument("--latest", action="store_true", help="vis hele siste varselrunde")
+    history.add_argument("--limit", type=int, default=20)
+    history.add_argument("--redact-output", action="store_true")
     status = sub.add_parser("status")
     status.add_argument("--config", required=True)
     status.add_argument("--state-dir", required=True)
@@ -71,6 +86,12 @@ def _sample_entry(provider: str) -> NotificationEntry:
 
 def main() -> int:
     args = parser().parse_args()
+    if args.command == "setup":
+        try:
+            return setup(args)
+        except (OSError, ValueError, EOFError) as exc:
+            print(f"Oppsett kunne ikke fullføres: {type(exc).__name__}: {exc}", file=sys.stderr)
+            return 1
     if args.command == "validate-runtime":
         problems = validate_runtime(args.path)
         if problems:
@@ -117,6 +138,22 @@ def main() -> int:
                 f"{profile['owner']}\t{profile['name']}"
             )
         return 0
+    if args.command == "history":
+        audit = StateStore(args.state_dir).load("_latest_alerts" if args.latest else "_alert_audit") or {}
+        entries = audit.get("entries", [])
+        if not isinstance(entries, list) or not all(isinstance(entry, dict) for entry in entries):
+            print("Invalid private alert history", file=sys.stderr)
+            return 1
+        if args.limit < 1:
+            print("history --limit must be positive", file=sys.stderr)
+            return 1
+        if args.redact_output:
+            print(f"WATCHTOWER HISTORY; entries={len(entries)}")
+            return 0
+        selected = entries if args.latest else entries[-args.limit:]
+        for entry in selected:
+            print(json.dumps(entry, ensure_ascii=False))
+        return 0
     if args.command == "status":
         config = load_config(args.config)
         report = inspect_health(config, StateStore(args.state_dir))
@@ -160,7 +197,8 @@ def main() -> int:
     if args.redact_output:
         print(
             f"watchtower complete; sources={result.checked_sources} "
-            f"baselines={result.baselined_sources} alerts={result.alerts} errors={len(result.errors)}"
+            f"baselines={result.baselined_sources} alerts={result.alerts} errors={len(result.errors)} "
+            f"coverage_limited={len(result.warnings)}"
         )
     else:
         print(result)

@@ -23,6 +23,9 @@ class RssSource(Source):
             raise ValueError("RSS profiles must be a string array")
         profile_urls = resolve_profile_urls(raw_profiles) if raw_profiles else ()
         self.feed_urls = tuple(dict.fromkeys((*config.urls, *profile_urls)))
+        self.allow_empty = config.options.get("allow_empty", False)
+        if not isinstance(self.allow_empty, bool):
+            raise ValueError("RSS allow_empty must be true or false")
 
     def fetch(self) -> list[Item]:
         if not self.feed_urls:
@@ -40,11 +43,17 @@ class RssSource(Source):
             root_type = _local(root.tag).casefold()
             if root_type == "feed":
                 parsed = _atom_items(self.config.id, root, feed_url)
+                nodes = [node for node in root if _local(node.tag) == "entry"]
             elif root_type in {"rss", "rdf"}:
+                if not any(_local(node.tag) == "channel" for node in root):
+                    raise SourceError("RSS feed is missing its channel")
                 parsed = _rss_items(self.config.id, root, feed_url)
+                nodes = [node for node in root.iter() if _local(node.tag) == "item"]
             else:
                 raise SourceError("unsupported RSS or Atom format")
-            if not parsed:
+            if nodes and len(parsed) != len(nodes):
+                raise SourceError("RSS or Atom feed contained no usable items or malformed entries")
+            if not parsed and not self.allow_empty:
                 raise SourceError("RSS or Atom feed contained no usable items")
             for item in parsed:
                 if item.key in seen:
@@ -52,7 +61,7 @@ class RssSource(Source):
                 seen.add(item.key)
                 items.append(item)
 
-        if not items:
+        if not items and not self.allow_empty:
             raise SourceError("RSS or Atom feeds contained no usable items")
         return items
 

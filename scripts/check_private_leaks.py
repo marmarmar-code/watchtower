@@ -42,6 +42,14 @@ def collect_protected_values(data: dict[str, Any]) -> tuple[str, ...]:
         raise ValueError("privacy.protected_values must be an array")
     values.update(_strings(protected))
 
+    entities = data.get("entity", [])
+    if not isinstance(entities, list):
+        raise ValueError("entity must be an array")
+    for entity in entities:
+        if isinstance(entity, dict):
+            for key in ("name", "orgnr", "aliases", "isins"):
+                values.update(_strings(entity.get(key, [])))
+
     sources = data.get("source", [])
     if not isinstance(sources, list):
         raise ValueError("source must be an array")

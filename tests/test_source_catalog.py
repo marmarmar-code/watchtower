@@ -56,11 +56,11 @@ class SourceCatalogTests(unittest.TestCase):
             self.assertEqual(0, main())
         rendered = output.getvalue()
         self.assertIn(
-            "politiloggen\tklar\t2026-08-27\tPolitiet\tPolitiloggen",
+            "politiloggen\tklar\t2026-09-08\tPolitiet\tPolitiloggen",
             rendered,
         )
         self.assertIn(
-            "norges_bank_pressemeldinger\tklar\t2026-08-27\tNorges Bank",
+            "norges_bank_pressemeldinger\tklar\t2026-09-08\tNorges Bank",
             rendered,
         )
 

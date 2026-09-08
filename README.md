@@ -11,11 +11,20 @@ watchtower           offentlig kode, adaptere, tester og workflow
 watchtower-runtime   privat konfigurasjon, overvåkingsverdier og state
 ```
 
-Opprett en privat runtime fra [watchtower-runtime-template](https://github.com/marmarmar-code/watchtower-runtime-template). Malen beskriver oppsettet av den private delen av installasjonen.
+Opprett en privat runtime fra [watchtower-runtime-template](https://github.com/marmarmar-code/watchtower-runtime-template). Følg [installasjonsveiledningen](INSTALL.md) for hele oppsettet.
 
 ## Start her
 
-Følg [den samlede startprosedyren](FORKING.md). Den viser den anbefalte rekkefølgen fra fork til kontrollert første kjøring. Runtime-malen inneholder de detaljerte stegene for den private delen av installasjonen. Installasjonseieren har ansvar for egne kilder, varsler, secrets og drift.
+Følg [installasjonsveiledningen](INSTALL.md). Den lokale veiviseren lager en privat
+konfigurasjon fra startpakkene `general`, `finance` og `health`:
+
+```bash
+python -m watchtower setup --runtime ../watchtower-runtime
+```
+
+Se [virksomhetslister](ENTITIES.md), [drift og dekningsstatus](OPERATIONS.md) og
+[oppgraderinger](UPGRADING.md). Installasjonseieren har ansvar for egne kilder,
+varsler, secrets og drift. [FORKING.md](FORKING.md) beskriver eierskap og bruksrett.
 
 ## Kilder
 
@@ -50,9 +59,9 @@ Statusen beskriver hvor moden adapteren er i prosjektet. Den er ikke en bekrefte
 
 ### RSS og Atom
 
-`rss` gjør vanlige offentlige RSS- og Atom-feeder tilgjengelige uten ny adapterkode. Flere feeder kan samles i én kilde, og ordinære private filterregler avgjør hva som varsles.
+`rss` gjør vanlige offentlige RSS- og Atom-feeder tilgjengelige uten ny adapterkode. Ordinære private filterregler avgjør hva som varsles. Veiviseren lager én kilde per feed, slik at feeder feiler uavhengig. Eksisterende blokker med flere feeder støttes fortsatt.
 
-Følgende offisielle profiler følger med og var kontrollert 27. august 2026:
+Følgende offisielle profiler følger med. Alle feedene i tabellen ble hentet og tolket med RSS-adapteren 8. september 2026:
 
 | Profil | Innhold |
 | --- | --- |
@@ -60,6 +69,10 @@ Følgende offisielle profiler følger med og var kontrollert 27. august 2026:
 | `finanstilsynet` | Nyhetsarkiv, rundskriv og nyheter |
 | `mattilsynet` | Offentlig RSS-innhold fra Mattilsynet |
 | `norges_bank_pressemeldinger` | Pressemeldinger fra Norges Bank |
+| `ema_news` | EMA-nyheter og pressemeldinger |
+| `ema_human_medicines` | Nye humanlegemidler hos EMA |
+| `skatteetaten_uttalelser` | Juridiske uttalelser |
+| `skatteklagenemnda` | Publiserte vedtak i Skatteklagenemnda |
 
 Vis den maskinlesbare profillisten med `python -m watchtower list-rss-profiles`. Profilene gjør oppsettet enklere, men hver fork må fortsatt følge med på om den eksterne eieren endrer eller avvikler en feed.
 
@@ -78,6 +91,9 @@ exclude_any = []
 ```
 
 Egne feed-URL-er kan fortsatt legges i `urls` i stedet for eller sammen med profiler.
+`allow_empty = true` kan brukes for en bestemt feed som legitimt kan være tom.
+Standard er å avvise tomme feeder; ugyldige elementer avvises også når tomhet er tillatt.
+EMA-innhold beskriver EU-prosesser og innebærer ikke automatisk norske vedtak.
 
 ### SSB
 
@@ -190,7 +206,10 @@ Adapteren er en prøveversjon til en fork med egen nøkkel har kontrollert en fu
 
 ## Filtrering
 
-En aktiv kilde må ha positive filterregler:
+En aktiv kilde må ha positive filterregler. Navn og aliaser fra en privat
+[virksomhetsliste](ENTITIES.md) kan gjenbrukes med `filter.entity_refs`.
+
+Eksempel:
 
 ```toml
 [source.filter]
@@ -240,6 +259,8 @@ config/watchtower.toml
 state/
 ```
 
+`[general] config_version = 1` angir konfigurasjonsformat; eldre filer uten feltet støttes. Virksomhetslisten ligger i samme private TOML-fil.
+
 Credentials skal ligge i GitHub Actions Secrets, ikke i runtime. Workflowen maskerer private konfigurasjonsverdier, kontrollerer dem mot den offentlige kodebasen og nekter å committe filer utenfor `state/`.
 
 Dersom fork og privat runtime har samme eier og runtime heter `watchtower-runtime`, finner workflowen repositoryet automatisk. Andre plasseringer angis med Actions-variabelen:
@@ -259,11 +280,14 @@ Runtime-templaten brukes bare ved oppsett. Den blir ikke lest av produksjonskjø
 ## Kommandoer
 
 ```bash
+python -m watchtower --version
+python -m watchtower setup --runtime <privat-runtime-katalog>
 python -m watchtower validate-runtime <runtime-katalog>
 python -m watchtower validate-config --config <watchtower.toml>
 python -m watchtower list-sources
 python -m watchtower list-rss-profiles
 python -m watchtower status --config <watchtower.toml> --state-dir <state-katalog>
+python -m watchtower history --state-dir <state-katalog> --latest
 python -m watchtower test-notification --config <watchtower.toml>
 python -m watchtower dry-run --config <watchtower.toml> --state-dir <state-katalog>
 python -m watchtower run --config <watchtower.toml> --state-dir <state-katalog>
@@ -271,13 +295,15 @@ python -m watchtower run --config <watchtower.toml> --state-dir <state-katalog>
 
 Første ordinære kjøring av en ny kilde er en stille baseline. En `dry-run` sender ikke ordinære varsler og skriver ikke state.
 
+`history` viser den private varselhistorikken; `--latest` viser hele siste varselrunde, også etter en oppsummering.
+
 `status` kontakter ingen eksterne kilder og endrer ikke state. Den viser hvilke aktive kilder som nylig er kontrollert, er forsinket, har feil eller ennå ikke er startet. Workflowen skriver bare en anonymisert totalsum til den offentlige Actions-oppsummeringen; kilde-ID-er og private filtre blir ikke publisert.
 
 ## Lokal kontroll
 
 ```bash
-python3 -m venv .venv
-. .venv/bin/activate
+python3 -m venv ../watchtower-venv
+. ../watchtower-venv/bin/activate
 python -m pip install .
 python -m pip check
 python -m compileall -q watchtower tests scripts

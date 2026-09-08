@@ -14,6 +14,10 @@ class RssProfileCatalogTests(unittest.TestCase):
                 "norges_bank_pressemeldinger",
                 "finanstilsynet",
                 "mattilsynet",
+                "ema_news",
+                "ema_human_medicines",
+                "skatteetaten_uttalelser",
+                "skatteklagenemnda",
             },
             {p["id"] for p in profiles},
         )
@@ -21,7 +25,7 @@ class RssProfileCatalogTests(unittest.TestCase):
             self.assertTrue(profile["official_url"].startswith("https://"))
             self.assertTrue(profile["coverage"])
             self.assertTrue(profile["feed_urls"])
-            self.assertEqual("2026-08-27", profile["verified_on"])
+            self.assertRegex(profile["verified_on"], r"^\d{4}-\d{2}-\d{2}$")
 
     def test_duplicate_ids_fail_closed(self):
         with tempfile.TemporaryDirectory() as directory:
