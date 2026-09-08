@@ -32,8 +32,11 @@ For engelske feeder må søkeordene også dekke engelske uttrykk.
 | Startpakke | Innhold |
 | --- | --- |
 | `general` | Regjeringen, Stortinget og Konkurransetilsynet |
-| `finance` | Grunnpakken, to separate Finanstilsynet-feeder og Norges Banks pressemeldinger |
+| `finance` | Grunnpakken, Finanstilsynet-feeder, Norges Banks pressemeldinger, styringsrente og KPI |
 | `health` | Grunnpakken, EMA-nyheter og nye humanlegemidler |
+| `digital` | Grunnpakken og Nkoms publiseringer |
+| `property` | Grunnpakken og SSBs boligprisindeks |
+| `retail` | Grunnpakken, Mattilsynet og SSBs detaljhandelstall |
 
 Finanspakken bruker én nyhetsfeed og rundskriv fra Finanstilsynet. Den andre
 nyhetsfeeden finnes fortsatt i katalogen, men er utelatt fra startpakken fordi
@@ -132,6 +135,13 @@ Kjør monitor-workflowen manuelt på `main`, i denne rekkefølgen:
 Et vellykket testvarsel beviser kanaltilgang, og en vellykket henting beviser at
 kilden svarte. Ingen av delene beviser full redaksjonell dekning. Sjekk et lite
 utvalg kjente publiseringer mot kildevalgene og filtrene.
+
+## Utvid en eksisterende installasjon
+
+Bruk `list-recipes`, `add-source` og `preview` for å legge til kilder i en aktiv
+privat runtime. Se [ferdige kildeoppsett](RECIPES.md). `setup` er for nye oppsett;
+`add-source` bevarer eksisterende konfigurasjon og state. Nye makroserier i
+startpakkene har et uttrykkelig avgrenset utvalg og varsler uten temaordfilter.
 
 ## Drift og oppdateringer
 

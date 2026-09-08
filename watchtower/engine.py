@@ -24,9 +24,17 @@ from .sources.stotte import StotteSource
 from .sources.finanstilsynet_short_sale import FinanstilsynetShortSaleSource
 from .sources.finanstilsynet_registry import FinanstilsynetRegistrySource
 from .sources.patentstyret import PatentstyretSource
+from .sources.structured import StructuredSource
+from .sources.web_changes import WebChangesSource
+from .sources.ssb_data import SsbDataSource
 
 
 SOURCE_TYPES: dict[str, type[Source]] = {
+    "json_records": StructuredSource,
+    "csv_records": StructuredSource,
+    "web_page": WebChangesSource,
+    "web_links": WebChangesSource,
+    "ssb_data": SsbDataSource,
     "regjeringen": RegjeringenSource,
     "stortinget": StortingetSource,
     "konkurransetilsynet": KonkurransetilsynetSource,

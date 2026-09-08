@@ -6,7 +6,7 @@ import os
 import sys
 
 from .config import load_config
-from .engine import RunResult, build_source, run
+from .engine import RunResult, build_source, run, evaluate
 from .health import inspect_health, render_health
 from .models import NotificationEntry
 from .notifier import build_notifier
@@ -17,6 +17,7 @@ from .state import StateStore
 from .setup import PRESETS, setup
 from . import __version__
 from .github_setup import link_github
+from .recipes import add_source, load_recipes
 
 
 def parser() -> argparse.ArgumentParser:
@@ -49,6 +50,23 @@ def parser() -> argparse.ArgumentParser:
     validate_config = sub.add_parser("validate-config")
     validate_config.add_argument("--config", required=True)
     sub.add_parser("list-sources")
+    recipes = sub.add_parser("list-recipes", help="ferdige oppsett for hendelser og tall")
+    recipes.add_argument("--sector")
+    add = sub.add_parser("add-source", help="legg til en kilde i privat runtime")
+    add.add_argument("--runtime", required=True)
+    choice = add.add_mutually_exclusive_group(required=True)
+    choice.add_argument("--recipe")
+    choice.add_argument("--rss-profile")
+    add.add_argument("--source-id")
+    add.add_argument("--topic", action="append", default=[])
+    add.add_argument("--all", action="store_true")
+    add.add_argument("--apply", action="store_true")
+    preview = sub.add_parser("preview", help="hent og vis kildeinnhold uten sending eller lagring")
+    preview.add_argument("--config", required=True)
+    preview.add_argument("--state-dir", required=True)
+    preview.add_argument("--source", required=True)
+    preview.add_argument("--limit", type=int, default=5)
+    preview.add_argument("--redact-output", action="store_true")
     sub.add_parser("list-rss-profiles")
     history = sub.add_parser("history", help="les privat varselhistorikk lokalt")
     history.add_argument("--state-dir", required=True)
@@ -92,6 +110,39 @@ def _sample_entry(provider: str) -> NotificationEntry:
 
 def main() -> int:
     args = parser().parse_args()
+    if args.command == "add-source":
+        return add_source(args)
+    if args.command == "list-recipes":
+        print("ID\tSEKTOR\tNAVN\tHVA VARSLES")
+        for row in load_recipes():
+            if not args.sector or args.sector == row["sector"]:
+                print(f"{row['id']}\t{row['sector']}\t{row['name']}\t{row['description']}")
+        return 0
+    if args.command == "preview":
+        try:
+            if not 1 <= args.limit <= 100:
+                raise ValueError("preview limit must be 1–100")
+            config = load_config(args.config)
+            selected = next((source for source in config.sources if source.id == args.source), None)
+            if selected is None:
+                raise ValueError("unknown source id")
+            source = build_source(selected)
+            previous = StateStore(args.state_dir).load(selected.id)
+            items = source.fetch_with_state(previous)
+            _, alerts, baseline = evaluate(selected, items, previous, max_seen=config.max_seen_per_source)
+            print(f"WATCHTOWER PREVIEW; items={len(items)} alerts={len(alerts)} baseline={int(baseline)}")
+            if not args.redact_output:
+                for item in items[:args.limit]:
+                    print(json.dumps({"title": item.title, "url": item.url,
+                                      "published": item.published,
+                                      "matches_filter": selected.filters.matches(item.searchable_text()),
+                                      "suppressed": item.suppress_alert,
+                                      "details": [value[:500] for value in item.alert_details[:8]],
+                                      "content": item.text[:1500]}, ensure_ascii=False))
+            return 0
+        except Exception as exc:
+            print("Preview failed: " + (type(exc).__name__ if args.redact_output else str(exc)), file=sys.stderr)
+            return 1
     if args.command == "link-github":
         return link_github(args)
     if args.command == "setup":

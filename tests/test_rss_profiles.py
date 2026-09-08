@@ -18,6 +18,8 @@ class RssProfileCatalogTests(unittest.TestCase):
                 "ema_human_medicines",
                 "skatteetaten_uttalelser",
                 "skatteklagenemnda",
+                "nkom",
+                "met_farevarsler",
             },
             {p["id"] for p in profiles},
         )

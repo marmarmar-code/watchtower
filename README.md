@@ -16,7 +16,7 @@ Opprett en privat runtime fra [watchtower-runtime-template](https://github.com/m
 ## Start her
 
 Følg [installasjonsveiledningen](INSTALL.md). Den lokale veiviseren lager en privat
-konfigurasjon fra startpakkene `general`, `finance` og `health`:
+konfigurasjon fra startpakkene `general`, `finance`, `health`, `digital`, `property` og `retail`:
 
 ```bash
 python -m watchtower setup --runtime ../watchtower-runtime
@@ -28,6 +28,24 @@ GitHub-koblingen kan settes opp med `link-github`; se [installasjon](INSTALL.md)
 Se [virksomhetslister](ENTITIES.md), [drift og dekningsstatus](OPERATIONS.md) og
 [oppgraderinger](UPGRADING.md). Installasjonseieren har ansvar for egne kilder,
 varsler, secrets og drift. [FORKING.md](FORKING.md) beskriver eierskap og bruksrett.
+
+## Hendelser og endringer i 0.6
+
+Fem nye adaptere følger valgte JSON-poster, CSV-rader, nettsidetekst, dokumentlenker
+og faktiske SSB-tall. Varsler kan avgrenses til nye poster eller endringer i bestemte
+felt, med tallterskler og gjentatte bekreftelser. [Ti ferdige kildeoppsett](RECIPES.md)
+dekker blant annet styringsrente, valuta, KPI, boligpriser, detaljhandel, konkurser,
+alvorlige farevarsler, Riksrevisjonen og Nkom.
+
+```bash
+python -m watchtower list-recipes
+python -m watchtower add-source --runtime ../watchtower-runtime --recipe nb_policy_rate
+```
+
+`add-source` viser oppsettet først; `--apply` legger det til i lokal privat runtime.
+`preview` lar deg kontrollere én kilde uten sending eller lagring. Se
+[oppskrifter](RECIPES.md) og [endringsregler](EVENT_MONITORING.md). Eksisterende
+installasjoner velger selv hvilke tillegg de vil aktivere.
 
 ## Kilder
 
@@ -47,6 +65,11 @@ stotte
 finanstilsynet_short_sale
 finanstilsynet_registry
 patentstyret
+json_records
+csv_records
+web_page
+web_links
+ssb_data
 ```
 
 Hver kilde er valgfri. Aktivitet, URL-er, kildespesifikke valg og filterregler angis i privat runtime.
@@ -77,6 +100,8 @@ Følgende offisielle profiler følger med. Alle feedene i tabellen ble hentet og
 | `ema_human_medicines` | Nye humanlegemidler hos EMA |
 | `skatteetaten_uttalelser` | Juridiske uttalelser |
 | `skatteklagenemnda` | Publiserte vedtak i Skatteklagenemnda |
+| `nkom` | Nkoms publiseringer |
+| `met_farevarsler` | METs gjeldende farevarsler; kan være tom |
 
 Vis den maskinlesbare profillisten med `python -m watchtower list-rss-profiles`. Profilene gjør oppsettet enklere, men hver fork må fortsatt følge med på om den eksterne eieren endrer eller avvikler en feed.
 
@@ -100,6 +125,9 @@ Standard er å avvise tomme feeder; ugyldige elementer avvises også når tomhet
 EMA-innhold beskriver EU-prosesser og innebærer ikke automatisk norske vedtak.
 
 ### SSB
+
+Fra 0.6 følger `ssb_data` også faktiske verdier og revisjoner i avgrensede utvalg.
+Se [SSB-tallovervåking](EVENT_MONITORING.md#faktiske-ssb-tall).
 
 `ssb` følger nye perioder og strukturendringer i en eksplisitt liste med femsifrede tabellnumre fra Statistikkbanken. Adapteren bruker SSBs åpne PxWebApi v2 og henter bare tabellbeskrivelsen, ikke selve tallmaterialet.
 

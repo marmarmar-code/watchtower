@@ -114,3 +114,48 @@ credential_required = false
 interval_class = "daily"
 maintenance_owner = "fork-owner"
 coverage = "Endringer i aktive tillatelser, tjenester og merknader for eksplisitt valgte norske organisasjonsnumre."
+
+[[source]]
+id = "json_records"
+name = "JSON-registre"
+status = "beta"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Nye, endrede og eksplisitt bekreftede bortfalte poster i avgrensede offentlige JSON-uttrekk."
+
+[[source]]
+id = "csv_records"
+name = "CSV-datasett"
+status = "beta"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Endringer i utvalgte rader og felt i offentlige CSV-filer."
+
+[[source]]
+id = "web_page"
+name = "Utvalgt nettsidetekst"
+status = "beta"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Endringer i eksplisitt valgt tekstområde, med utelatelse av navigasjon og valgte elementer."
+
+[[source]]
+id = "web_links"
+name = "Lenke- og dokumentlister"
+status = "beta"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Nye lenker og endrede titler i en eksplisitt valgt liste; ingen innsynsbestilling."
+
+[[source]]
+id = "ssb_data"
+name = "SSB – tall og revisjoner"
+status = "beta"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Nye observasjoner, reviderte verdier, enheter og status i eksplisitt valgte statistikkuttrekk."

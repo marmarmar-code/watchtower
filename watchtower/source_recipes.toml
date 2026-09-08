@@ -1,0 +1,210 @@
+# Reviewed, optional public event sources. No installation is changed by this catalog.
+[[recipe]]
+id = "nb_policy_rate"
+name = "Norges Bank – styringsrente"
+sector = "finance"
+description = "Endret styringsrente; en ny dato med samme rente gir ikke varsel."
+official_url = "https://www.norges-bank.no/en/topics/statistics/open-data/"
+verified_on = "2026-09-08"
+[recipe.source]
+kind = "csv_records"
+urls = ["https://data.norges-bank.no/api/data/IR/B.KPRA?format=csv&lastNObservations=1&locale=en"]
+delimiter = ";"
+id_fields = ["INSTRUMENT_TYPE", "TENOR"]
+fields = ["OBS_VALUE", "UNIT_MEASURE"]
+numeric_fields = ["OBS_VALUE"]
+published_field = "TIME_PERIOD"
+events = ["changed"]
+[recipe.source.where]
+TENOR = ["SD"]
+[recipe.source.field_labels]
+OBS_VALUE = "Styringsrente (%)"
+UNIT_MEASURE = "Enhet"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nb_usd_nok"
+name = "Norges Bank – USD/NOK"
+sector = "finance"
+description = "Kursendring på minst 1 prosent fra sist aksepterte verdi."
+official_url = "https://www.norges-bank.no/en/topics/statistics/open-data/"
+verified_on = "2026-09-08"
+[recipe.source]
+kind = "csv_records"
+urls = ["https://data.norges-bank.no/api/data/EXR/B.USD.NOK.SP?format=csv&lastNObservations=1&locale=en"]
+delimiter = ";"
+id_fields = ["BASE_CUR", "QUOTE_CUR", "TENOR"]
+fields = ["OBS_VALUE", "UNIT_MULT"]
+numeric_fields = ["OBS_VALUE"]
+published_field = "TIME_PERIOD"
+events = ["changed"]
+[recipe.source.thresholds.OBS_VALUE]
+percent = 1.0
+[recipe.source.field_labels]
+OBS_VALUE = "NOK per USD"
+UNIT_MULT = "Enhetsfaktor"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nb_eur_nok"
+name = "Norges Bank – EUR/NOK"
+sector = "finance"
+description = "Kursendring på minst 1 prosent fra sist aksepterte verdi."
+official_url = "https://www.norges-bank.no/en/topics/statistics/open-data/"
+verified_on = "2026-09-08"
+[recipe.source]
+kind = "csv_records"
+urls = ["https://data.norges-bank.no/api/data/EXR/B.EUR.NOK.SP?format=csv&lastNObservations=1&locale=en"]
+delimiter = ";"
+id_fields = ["BASE_CUR", "QUOTE_CUR", "TENOR"]
+fields = ["OBS_VALUE", "UNIT_MULT"]
+numeric_fields = ["OBS_VALUE"]
+published_field = "TIME_PERIOD"
+events = ["changed"]
+[recipe.source.thresholds.OBS_VALUE]
+percent = 1.0
+[recipe.source.field_labels]
+OBS_VALUE = "NOK per EUR"
+UNIT_MULT = "Enhetsfaktor"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ssb_cpi"
+name = "SSB – konsumprisindeksen"
+sector = "finance"
+description = "Nye KPI-observasjoner og revisjoner i de siste tre månedene."
+official_url = "https://www.ssb.no/statbank/table/14700"
+verified_on = "2026-09-08"
+[recipe.source]
+kind = "ssb_data"
+table = "14700"
+[recipe.source.value_codes]
+VareTjenesteGrp = ["00"]
+ContentsCode = ["KpiIndMnd"]
+Tid = ["top(3)"]
+[recipe.source.field_labels]
+value = "Indeksverdi"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ssb_housing"
+name = "SSB – brukte boliger"
+sector = "property"
+description = "Boligprisindeks for landet samlet; nye kvartaler og revisjoner i siste fire kvartaler."
+official_url = "https://www.ssb.no/statbank/table/07221"
+verified_on = "2026-09-08"
+[recipe.source]
+kind = "ssb_data"
+table = "07221"
+[recipe.source.value_codes]
+Region = ["TOTAL"]
+Boligtype = ["00"]
+ContentsCode = ["Boligindeks"]
+Tid = ["top(4)"]
+[recipe.source.field_labels]
+value = "Boligprisindeks"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ssb_retail"
+name = "SSB – detaljhandel"
+sector = "retail"
+description = "Sesongjustert volumindeks for detaljhandel; nye observasjoner og revisjoner i siste tre måneder."
+official_url = "https://www.ssb.no/statbank/table/07129"
+verified_on = "2026-09-08"
+[recipe.source]
+kind = "ssb_data"
+table = "07129"
+[recipe.source.value_codes]
+NACE = ["47"]
+ContentsCode = ["VolumSesong"]
+Tid = ["top(3)"]
+[recipe.source.field_labels]
+value = "Volumindeks"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ssb_bankruptcies"
+name = "SSB – åpnede konkurser"
+sector = "general"
+description = "Antall åpnede konkurser; nye observasjoner og revisjoner i siste tre måneder."
+official_url = "https://www.ssb.no/statbank/table/09695"
+verified_on = "2026-09-08"
+[recipe.source]
+kind = "ssb_data"
+table = "09695"
+[recipe.source.value_codes]
+ContentsCode = ["Konkursar"]
+Tid = ["top(3)"]
+[recipe.source.field_labels]
+value = "Åpnede konkurser"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "met_severe_weather"
+name = "MET – oransje og røde farevarsler"
+sector = "transport"
+description = "Publiserte alvorlige farevarsler i Norge; geografien står i varselet."
+official_url = "https://api.met.no/weatherapi/metalerts/2.0/documentation"
+verified_on = "2026-09-08"
+[recipe.source]
+kind = "json_records"
+urls = ["https://api.met.no/weatherapi/metalerts/2.0/current.json"]
+records_path = "features"
+id_fields = ["properties.id"]
+fields = ["properties.riskMatrixColor", "properties.description", "properties.consequences", "properties.eventEndingTime"]
+title_field = "properties.title"
+allow_empty = true
+interval_minutes = 60
+[recipe.source.where]
+"properties.riskMatrixColor" = ["Orange", "Red"]
+[recipe.source.field_labels]
+"properties.riskMatrixColor" = "Farenivå"
+"properties.description" = "Beskrivelse"
+"properties.consequences" = "Konsekvenser"
+"properties.eventEndingTime" = "Gjelder til"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "riksrevisjonen_reports"
+name = "Riksrevisjonen – nye rapporter"
+sector = "general"
+description = "Nye publiserte rapportlenker på første listeside; velg tema eller eksplisitt alle."
+official_url = "https://www.riksrevisjonen.no/rapporter/"
+verified_on = "2026-09-08"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.riksrevisjonen.no/rapporter/"]
+selector = "main a.rr-link-wrapper[href*='/rapporter-mappe/']"
+title_selector = "h2"
+events = ["added"]
+interval_minutes = 60
+
+[[recipe]]
+id = "nkom_events"
+name = "Nkom – publiseringer"
+sector = "digital"
+description = "Nye publiseringer fra Nkom; velg tema eller eksplisitt alle."
+official_url = "https://nkom.no/aktuelt"
+verified_on = "2026-09-08"
+[recipe.source]
+kind = "rss"
+urls = ["https://nkom.no/aktuelt/rss.xml"]
+interval_minutes = 60
+alert_on_update = false
