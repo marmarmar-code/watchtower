@@ -221,7 +221,7 @@ class DistributionTests(unittest.TestCase):
         )
         self.assertIn("WATCHTOWER_RUNTIME_REPOSITORY", workflow)
         self.assertIn("github.repository_owner", workflow)
-        self.assertNotIn("repository: marmarmar-code/watchtower-runtime", workflow)
+        self.assertNotIn("repository: example-owner/watchtower-runtime", workflow)
         self.assertIn("actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1", workflow)
         self.assertNotIn("\n  schedule:\n", workflow)
         self.assertNotIn("cron:", workflow)
