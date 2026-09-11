@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-09-11",
+  "layer": "https://kart3.miljodirektoratet.no/arcgis/rest/services/industri/MapServer/0",
+  "verified_config": {"installation_ids": [5447], "events": ["added", "changed"], "max_records": 10, "max_bytes": 100000},
+  "query_contract": {"where": "anlegg_id IN (5447)", "returnGeometry": false, "resultRecordCount": 1, "restricted_outFields": true},
+  "poll": {"records_each": 1, "first_alerts": 0, "second_alerts": 0, "identical_full_snapshots": true, "scope_hash": "04b521c8ea4ed92966bc9872a8319ef331a68370359c33846e65a26addd743f1"},
+  "observed": {"anlegg_id": 5447, "name": "Yara Porsgrunn", "status": "Aktiv", "authority": "Miljødirektoratet", "reporting_year": 2023, "emissions_air_flag": true, "emissions_water_flag": true, "monitoring_required_flag": true},
+  "facts_link": {"url": "https://www.norskeutslipp.no/Templates/NorskeUtslipp/Pages/company.aspx?CompanyID=5447", "http_status": 200, "usable_html": true},
+  "identity": "anlegg_id",
+  "published_field": null,
+  "removed_supported": false,
+  "scope_boundary": "Operational status and reporting metadata only; no emission values, permit revisions, breaches, or enforcement decisions",
+  "freshness_limitation": "The observed latest reporting year is 2023 and is not claimed as fresh annual emissions data."
+}

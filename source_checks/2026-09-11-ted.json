@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-09-11T09:30:15.868974+00:00",
+  "endpoint": "https://api.ted.europa.eu/v3/notices/search",
+  "lookback_days": 7,
+  "method": "Two actual complete bounded date-window fetches per type, local engine poll without notifier",
+  "checks": [
+    {
+      "types": [
+        "can-standard",
+        "can-social"
+      ],
+      "records": 62,
+      "first_alerts": 0,
+      "repeat_alerts": 0,
+      "identical_full_state": true,
+      "sample": [
+        {
+          "present": true,
+          "row": {
+            "key": "628112-2026",
+            "title": "Norway – Software package and information systems – Avinor AS - T - 193032 - Anskaffelse - Carbon Accounting Program",
+            "published": "2026-09-11+02:00",
+            "url": "https://ted.europa.eu/en/notice/628112-2026/html",
+            "fields": {
+              "title": "Norway – Software package and information systems – Avinor AS - T - 193032 - Anskaffelse - Carbon Accounting Program",
+              "notice_type": "can-standard",
+              "winner": [
+                "Emisoft AS"
+              ],
+              "tenderers": [
+                "AZETS CONSULTING AS",
+                "Emisoft AS",
+                "KPMG AS"
+              ],
+              "value": 5000000,
+              "currency": [
+                "NOK"
+              ]
+            }
+          },
+          "missing": 0
+        }
+      ]
+    },
+    {
+      "types": [
+        "can-modif"
+      ],
+      "records": 0,
+      "first_alerts": 0,
+      "repeat_alerts": 0,
+      "identical_full_state": true,
+      "sample": []
+    }
+  ],
+  "limitations": "Notice total value is not value per winner; modification notice is not a full contract history. Natural delivery unobserved."
+}

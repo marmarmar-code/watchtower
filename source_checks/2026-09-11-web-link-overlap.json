@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-09-11T07:27:45.523847+00:00",
+  "method": "Actual adapter HTTP reads evaluated against stored pre-event history. No notification calls or runtime state writes.",
+  "sources": [
+    {
+      "url": "https://www.fiskeridir.no/nyheter",
+      "items": 30,
+      "candidates": 1,
+      "baseline": false,
+      "html_sha256": "f3711d00f3c27673336ef9df36fbfbba9f4dc5e1fd42cfa0a5f36420460c3a50"
+    },
+    {
+      "url": "https://www.fiskeridir.no/nyheter?type=akvakultur",
+      "items": 30,
+      "candidates": 1,
+      "baseline": false,
+      "html_sha256": "92a0c89d983fa408d49cd861994ef03ea0efbc892489d551d5c14bc2bd336fa7"
+    },
+    {
+      "url": "https://www.fiskeridir.no/nyheter?type=yrkesfiske",
+      "items": 30,
+      "candidates": 0,
+      "baseline": false,
+      "html_sha256": "23f6317c94c869f8c235eeb906405913a999248463a1adf4bff51e7b5e47d807"
+    }
+  ],
+  "before_candidates": 2,
+  "after_candidates": 1,
+  "article": {
+    "title": "Muligheten til å søke om fastprisvekst er nå åpen Oppdrettere i grønne områder får nå mulighet til å kjøpe en prosentsats av egen produksjonskapasitet som vekst til fastpris. 11.09.2026",
+    "url": "https://www.fiskeridir.no/nyheter/muligheten-til-a-soke-om-fastprisvekst-er-na-apen"
+  },
+  "source_histories": "Notification collapse happens after independent source evaluation; items, hashes and staged source histories are untouched.",
+  "limitation": "Only identical new web_links alerts in the same run. Separate runs, changed content and other adapters remain independent."
+}

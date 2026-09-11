@@ -117,7 +117,16 @@ def _nodes(root: ET.Element, name: str):
 
 def _first(node: ET.Element, *names: str) -> str:
     wanted = set(names)
+    # Record fields are direct children in the Stortinget exports. Prefer them
+    # over identically named fields in nested representatives and committees.
+    for child in node:
+        if _local(child.tag) in wanted:
+            text = _element_text(child)
+            if text:
+                return text
     for child in node.iter():
+        if child is node or child in node:
+            continue
         if _local(child.tag) in wanted:
             text = _element_text(child)
             if text:

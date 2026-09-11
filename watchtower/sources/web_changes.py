@@ -1,7 +1,8 @@
 """Selected page text and link-list events; no browser or JavaScript runtime."""
 import re
+from dataclasses import replace
 from difflib import SequenceMatcher
-from urllib.parse import urldefrag, urljoin
+from urllib.parse import urldefrag, urljoin, urlsplit
 
 from bs4 import BeautifulSoup
 from soupsieve import compile as compile_selector
@@ -26,7 +27,20 @@ class WebChangesSource(SnapshotSource):
         return " | ".join(excerpts)
 
     def __init__(self, config, *args, **kwargs):
-        super().__init__(config, *args, **kwargs)
+        self.excluded_prefixes = []
+        for prefix in strings(config.options.get("exclude_url_prefixes", []), "exclude_url_prefixes", empty=True):
+            parsed = urlsplit(public_url(prefix))
+            if (config.kind != "web_links" or prefix != prefix.strip()
+                    or not parsed.path.endswith("/") or parsed.query or parsed.fragment
+                    or any(char.isspace() for char in prefix) or "*" in prefix):
+                raise ValueError("exclude_url_prefixes requires HTTPS directory URLs without queries or wildcards, for web_links only")
+            self.excluded_prefixes.append((parsed.netloc.casefold(), parsed.path))
+        # Notification routing does not alter the selected records or their scope.
+        snapshot_config = replace(config, options={
+            key: value for key, value in config.options.items() if key != "exclude_url_prefixes"
+        })
+        super().__init__(snapshot_config, *args, **kwargs)
+        self.config = config
         if len(config.urls) != 1:
             raise ValueError("Web monitoring requires exactly one URL")
         self.url = public_url(config.urls[0])
@@ -47,6 +61,14 @@ class WebChangesSource(SnapshotSource):
             raise ValueError("min_text_length exceeds max_text_length")
         if self.thresholds:
             raise ValueError("Numeric thresholds apply to structured records, not page text")
+
+    def _item(self, row, event, details, suppress):
+        item = super()._item(row, event, details, suppress)
+        parsed = urlsplit(item.url)
+        if any(parsed.scheme == "https" and parsed.netloc.casefold() == host
+               and parsed.path.startswith(path) for host, path in self.excluded_prefixes):
+            return replace(item, suppress_alert=True)
+        return item
 
     def read_records(self):
         raw = document(self, self.url)

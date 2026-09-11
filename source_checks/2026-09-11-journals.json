@@ -1,0 +1,39 @@
+{
+  "source": "https://api.einnsyn.no/search",
+  "checked_at": "2026-09-11",
+  "scope": {
+    "entity": "Journalpost",
+    "tittel": "Wisting",
+    "publisertDatoFrom": "2026-08-12",
+    "publisertDatoTo": "2026-09-11",
+    "sortBy": "publisertDato",
+    "sortOrder": "desc",
+    "limit": 2,
+    "max_pages": 5,
+    "max_records": 20
+  },
+  "records_per_poll": 3,
+  "pages_per_poll": 2,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "identical_full_snapshots": true,
+  "sort_control": {
+    "asc": [
+      "2026-08-17T11:36:45.256272Z",
+      "2026-08-29T22:00:46.824634Z",
+      "2026-09-11T08:52:16.776176Z"
+    ],
+    "desc": [
+      "2026-09-11T08:52:16.776176Z",
+      "2026-08-29T22:00:46.824634Z",
+      "2026-08-17T11:36:45.256272Z"
+    ]
+  },
+  "public_item_url": "https://einnsyn.no/journalpost/jp_01m27tns88eg5t5mhxz15gtzev",
+  "public_item_http_status": 200,
+  "identity": "validated jp_ id",
+  "alert_fields": ["offentligTittel", "journalposttype", "journaldato"],
+  "metadata_only_timestamp_change_alerts": false,
+  "removed_supported": false,
+  "limitation": "Complete only for the selected rolling publication window when the cursor ends within configured bounds; no case-outcome claim."
+}

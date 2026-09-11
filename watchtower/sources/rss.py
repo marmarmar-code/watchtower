@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import xml.etree.ElementTree as ET
+import re
+from dataclasses import replace
 from html import unescape
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit
 
 from bs4 import BeautifulSoup
 
@@ -27,6 +29,31 @@ class RssSource(Source):
         if not isinstance(self.allow_empty, bool):
             raise ValueError("RSS allow_empty must be true or false")
 
+        raw_hosts = config.options.get("exclude_url_hosts", [])
+        if not isinstance(raw_hosts, list) or any(not isinstance(host, str) for host in raw_hosts):
+            raise ValueError("RSS exclude_url_hosts must be a string array of exact hostnames")
+        self.exclude_url_hosts = set()
+        for host in raw_hosts:
+            normalized = host.casefold().rstrip(".")
+            if not re.fullmatch(r"(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?", normalized):
+                raise ValueError("RSS exclude_url_hosts requires exact hostnames without scheme, port, path or wildcard")
+            self.exclude_url_hosts.add(normalized)
+
+        segments = config.options.get("exclude_url_path_segments", [])
+        if not isinstance(segments, list) or any(
+            not isinstance(segment, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", segment)
+            for segment in segments
+        ):
+            raise ValueError("RSS exclude_url_path_segments requires exact path segments without slashes or wildcards")
+        self.exclude_url_path_segments = set(segments)
+        categories = config.options.get("exclude_categories", [])
+        if not isinstance(categories, list) or any(
+            not isinstance(category, str) or not category.strip()
+            or category != category.strip() for category in categories
+        ):
+            raise ValueError("RSS exclude_categories requires non-empty exact category labels")
+        self.exclude_categories = frozenset(category.casefold() for category in categories)
+
     def fetch(self) -> list[Item]:
         if not self.feed_urls:
             raise SourceError("RSS source requires at least one feed URL")
@@ -42,12 +69,12 @@ class RssSource(Source):
 
             root_type = _local(root.tag).casefold()
             if root_type == "feed":
-                parsed = _atom_items(self.config.id, root, feed_url)
+                parsed = _atom_items(self.config.id, root, feed_url, self.exclude_categories)
                 nodes = [node for node in root if _local(node.tag) == "entry"]
             elif root_type in {"rss", "rdf"}:
                 if not any(_local(node.tag) == "channel" for node in root):
                     raise SourceError("RSS feed is missing its channel")
-                parsed = _rss_items(self.config.id, root, feed_url)
+                parsed = _rss_items(self.config.id, root, feed_url, self.exclude_categories)
                 nodes = [node for node in root.iter() if _local(node.tag) == "item"]
             else:
                 raise SourceError("unsupported RSS or Atom format")
@@ -59,6 +86,16 @@ class RssSource(Source):
                 if item.key in seen:
                     continue
                 seen.add(item.key)
+                if self.exclude_url_hosts or self.exclude_url_path_segments:
+                    try:
+                        parsed_url = urlsplit(item.url)
+                        host = (parsed_url.hostname or "").casefold().rstrip(".")
+                    except ValueError as exc:
+                        raise SourceError("RSS item URL is invalid for URL filtering") from exc
+                    if (host in self.exclude_url_hosts
+                            or self.exclude_url_path_segments.intersection(parsed_url.path.split("/"))):
+                        # Keep identity/history and valid-feed health; suppress only delivery.
+                        item = replace(item, suppress_alert=True)
                 items.append(item)
 
         if not items and not self.allow_empty:
@@ -66,7 +103,7 @@ class RssSource(Source):
         return items
 
 
-def _rss_items(source_id: str, root: ET.Element, feed_url: str) -> list[Item]:
+def _rss_items(source_id: str, root: ET.Element, feed_url: str, excluded_categories=()) -> list[Item]:
     nodes = [node for node in root.iter() if _local(node.tag) == "item"]
     out: list[Item] = []
     for node in nodes:
@@ -89,12 +126,13 @@ def _rss_items(source_id: str, root: ET.Element, feed_url: str) -> list[Item]:
                 published=_child_text(node, "pubDate") or _child_text(node, "date") or None,
                 text=description,
                 metadata={"categories": " | ".join(categories)},
+                suppress_alert=any(category.casefold() in excluded_categories for category in categories),
             )
         )
     return out
 
 
-def _atom_items(source_id: str, root: ET.Element, feed_url: str) -> list[Item]:
+def _atom_items(source_id: str, root: ET.Element, feed_url: str, excluded_categories=()) -> list[Item]:
     out: list[Item] = []
     for node in root:
         if _local(node.tag) != "entry":
@@ -120,6 +158,7 @@ def _atom_items(source_id: str, root: ET.Element, feed_url: str) -> list[Item]:
                 published=_child_text(node, "published") or _child_text(node, "updated") or None,
                 text=_clean_markup(body),
                 metadata={"categories": " | ".join(categories)},
+                suppress_alert=any(category.casefold() in excluded_categories for category in categories),
             )
         )
     return out

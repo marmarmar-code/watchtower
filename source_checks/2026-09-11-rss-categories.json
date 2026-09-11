@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-09-11T08:35:20.434013+00:00",
+  "url": "https://sjomatnorge.no/feed/",
+  "reads": [
+    {
+      "status": 200,
+      "url": "https://sjomatnorge.no/feed/",
+      "sha256": "ed41404a4cfc7ec69a884febec156e921791723ac832c611959a04fb64d1e818"
+    },
+    {
+      "status": 200,
+      "url": "https://sjomatnorge.no/feed/",
+      "sha256": "ed41404a4cfc7ec69a884febec156e921791723ac832c611959a04fb64d1e818"
+    }
+  ],
+  "items": 10,
+  "before_candidates": 2,
+  "after_candidates": 0,
+  "matching_before": 10,
+  "matching_after": 4,
+  "excluded_titles": [
+    "SAVE THE DATE – Skattedebatt i Trondheim",
+    "Sjømat Norge, BRUS & KPB inviterer til frokostmøte og politisk debatt i Bodø",
+    "Sjømat Norges Årsarrangement 2027",
+    "Årssamling Havbruk Nord 2027",
+    "Medlemsmøte Havbruk Nord, Stokmarknes",
+    "Seminar for havbruksnæringen på Maritim uke 2026 – påmelding åpen!"
+  ],
+  "preserved_titles": [
+    "Oppgjøret for Havbruksoverenskomsten er vedtatt",
+    "Vil vurdere lovutvalg",
+    "Tariffoppgjøret 2026 – nye satser helligdagsgodtgjørelse",
+    "Norsk sjømat rammes av urimelig amerikansk tollforskjell"
+  ],
+  "full_next_state_unchanged": true,
+  "keys_hashes_unchanged": true,
+  "filter": "exclude_categories=[Kalenderen]",
+  "method": "Two actual RSS reads and evaluation against real pre-event history. Only exact source category Kalenderen is excluded using the optional RSS category rule. No notifier calls or runtime writes.",
+  "limit": "Case-insensitive exact category matching. Title and body are not used for exclusion. Untagged or mistagged source events are not guaranteed to be excluded."
+}

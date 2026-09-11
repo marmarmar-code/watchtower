@@ -1,0 +1,156 @@
+[
+  {
+    "recipe": "einnsyn_project_journal",
+    "checked_at": "2026-09-11T09:48:42.558932+00:00",
+    "records": 3,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://api.einnsyn.no/search?entity=Journalpost&limit=100&sortBy=publisertDato&sortOrder=desc&publisertDatoFrom=2026-08-12&publisertDatoTo=2026-09-11&tittel=Wisting",
+        "bytes": 4304,
+        "sha256": "853c2f7e08ff52720a89ad38899ca008816f4965d78cd21fb86bb5d22d85fcf3"
+      },
+      {
+        "url": "https://api.einnsyn.no/search?entity=Journalpost&limit=100&sortBy=publisertDato&sortOrder=desc&publisertDatoFrom=2026-08-12&publisertDatoTo=2026-09-11&tittel=Wisting",
+        "bytes": 4304,
+        "sha256": "853c2f7e08ff52720a89ad38899ca008816f4965d78cd21fb86bb5d22d85fcf3"
+      }
+    ],
+    "config_sha256": "1e55d0a30ebf03fd402021c881c38dc48a48875847c464f6fada31d5c61af871",
+    "module_sha256": "ea2d8d9ad3f275beb1fb842265eb3d2510208007d0e67712bb0092ef5aa17446"
+  },
+  {
+    "recipe": "finkn_company_decisions",
+    "checked_at": "2026-09-11T09:48:44.885689+00:00",
+    "records": 2,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://publisering.finkn.no/api/statements/searchstatements",
+        "bytes": 71903,
+        "sha256": "9803c8d5665abb2bb7728ec76553837458555f0866100fe7e8d423b3bdb356e3"
+      },
+      {
+        "url": "https://publisering.finkn.no/api/statements/searchstatements",
+        "bytes": 71903,
+        "sha256": "9803c8d5665abb2bb7728ec76553837458555f0866100fe7e8d423b3bdb356e3"
+      }
+    ],
+    "config_sha256": "f239ccc7cd1e884986d342276d594a80ffce501121071972895145f3a8240c84",
+    "module_sha256": "980f95440ec7518e047782dd6875b63acee2fd8e2f131c32901eb5be3cefc903"
+  },
+  {
+    "recipe": "oslo_project_cases",
+    "checked_at": "2026-09-11T09:48:44.710539+00:00",
+    "records": 26,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://innsyn.pbe.oslo.kommune.no/saksinnsyn/main.asp?mode=all&text=Sinsenveien+5",
+        "bytes": 39629,
+        "sha256": "9bb8acebc346a3e5eeed3af4d3006982ea139d36520244db82eff32891816e34"
+      },
+      {
+        "url": "https://innsyn.pbe.oslo.kommune.no/saksinnsyn/main.asp?mode=all&text=Sinsenveien+5",
+        "bytes": 39629,
+        "sha256": "9bb8acebc346a3e5eeed3af4d3006982ea139d36520244db82eff32891816e34"
+      }
+    ],
+    "config_sha256": "a48822ab4e4a694f85b856cff1f5d546c9ed36886862881aa779cb5668d8dd47",
+    "module_sha256": "7dc5311c445219123129e3ce2b198da29478e92f5293a384c9f0ea65f4c5f2d2"
+  },
+  {
+    "recipe": "sodir_field_status",
+    "checked_at": "2026-09-11T09:52:12.977947+00:00",
+    "records": 318,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://factpages.sodir.no/public?/Factpages/external/tableview/field_activity_status_hst&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false",
+        "bytes": 23205,
+        "sha256": "fca36019a6e2630437f36a3b49ed54bc9c5ba75430298ead87ce5cd417dff278"
+      },
+      {
+        "url": "https://factpages.sodir.no/public?/Factpages/external/tableview/field_activity_status_hst&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false",
+        "bytes": 23205,
+        "sha256": "fca36019a6e2630437f36a3b49ed54bc9c5ba75430298ead87ce5cd417dff278"
+      }
+    ],
+    "config_sha256": "a6382e172d155f1e455bc51563c7d8e717439a8d6b1485de8102d6e7f017e739",
+    "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f"
+  },
+  {
+    "recipe": "sodir_licence_operator",
+    "checked_at": "2026-09-11T09:52:12.439396+00:00",
+    "records": 541,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://factpages.sodir.no/public?/Factpages/external/tableview/licence_oper_hst&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false",
+        "bytes": 336366,
+        "sha256": "6e7c6f603a5785b12796bc641793d564c6a11645591235d21fabe693e9b60d41"
+      },
+      {
+        "url": "https://factpages.sodir.no/public?/Factpages/external/tableview/licence_oper_hst&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false",
+        "bytes": 336366,
+        "sha256": "6e7c6f603a5785b12796bc641793d564c6a11645591235d21fabe693e9b60d41"
+      }
+    ],
+    "config_sha256": "1c9282fcd09abdb55786a34df9150b0ff9567a3e7f216bb9fce4a08cb74b8407",
+    "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f"
+  },
+  {
+    "recipe": "ted_contract_awards",
+    "checked_at": "2026-09-11T09:48:43.430954+00:00",
+    "records": 62,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://api.ted.europa.eu/v3/notices/search",
+        "bytes": 473555,
+        "sha256": "c198623aba7fdb1abe266a5411b1585a8b22f246400d844b1ea1ef1cbf8fec6c"
+      },
+      {
+        "url": "https://api.ted.europa.eu/v3/notices/search",
+        "bytes": 473555,
+        "sha256": "727f00515c879343672f948936a4b14bb7105ff3d7a0bdad631e4ade6d0ae68d"
+      }
+    ],
+    "config_sha256": "eeada328cb809c746fc12c8b54d8b7da82bb25f21e33e0005004915165ab6d00",
+    "module_sha256": "3deed8866aefdd323931cd1243e36fb1a702fe97bcb3c36b922dc329e9bda2be"
+  },
+  {
+    "recipe": "ted_contract_modifications",
+    "checked_at": "2026-09-11T09:48:43.786341+00:00",
+    "records": 0,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://api.ted.europa.eu/v3/notices/search",
+        "bytes": 78,
+        "sha256": "4392cb2130efe494f4bca8f6967874500e6242fa87227fa0bcb8504a0bfb6737"
+      },
+      {
+        "url": "https://api.ted.europa.eu/v3/notices/search",
+        "bytes": 78,
+        "sha256": "4392cb2130efe494f4bca8f6967874500e6242fa87227fa0bcb8504a0bfb6737"
+      }
+    ],
+    "config_sha256": "282fc5d208e38ac5c8eaf8fd48e0ec7a028fc78909a8151bbb561f64157534f2",
+    "module_sha256": "3deed8866aefdd323931cd1243e36fb1a702fe97bcb3c36b922dc329e9bda2be"
+  }
+]

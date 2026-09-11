@@ -1,0 +1,116 @@
+{
+  "id": "ssb_production_total",
+  "table": "07095",
+  "official_url": "https://www.ssb.no/statbank/table/07095",
+  "scope": "Seasonally adjusted production for extraction, mining, manufacturing and power combined (P101); latest two monthly observations, including revisions only within that rolling window. Not manufacturing alone, not turnover, not percentage changes.",
+  "metadata_updated": "2026-09-07T06:00:00Z",
+  "method": "Root inspected current official metadata then fetched the exact final selection twice using existing ssb_data adapter. Validated dimensions, unit/base, dates, unique keys and stable full record snapshots; silent in-memory initialization and unchanged second evaluation. No synthetic observations or notification calls, no runtime state writes. Future new/revised delivery is not yet observed.",
+  "runs": [
+    {
+      "requests": [
+        {
+          "url": "https://data.ssb.no/api/pxwebapi/v2/tables/07095/data?lang=no&outputFormat=json-stat2&valueCodes%5BPKoder%5D=P101&valueCodes%5BContentsCode%5D=Sesongjustert&valueCodes%5BTid%5D=top%282%29",
+          "at": "2026-09-10T09:08:14.379738+00:00",
+          "status": 200
+        }
+      ],
+      "count": 2,
+      "filtered_count": 2,
+      "baseline": true,
+      "alerts": 0,
+      "observations": [
+        {
+          "key": "{\"ContentsCode\":\"Sesongjustert\",\"PKoder\":\"P101\",\"Tid\":\"2026M06\"}",
+          "title": "SSB · Utvinning, bergverk, industri og kraft / Produksjonsindeks. Sesongjustert / 2026M06",
+          "url": "https://www.ssb.no/statbank/table/07095",
+          "published": "2026M06",
+          "fields": {
+            "value": 113.1,
+            "unit": {
+              "ContentsCode": {
+                "base": "indeks",
+                "decimals": 1,
+                "base_period": "2021",
+                "adjustment": "WorkAndSes"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Sesongjustert\",\"PKoder\":\"P101\",\"Tid\":\"2026M07\"}",
+          "title": "SSB · Utvinning, bergverk, industri og kraft / Produksjonsindeks. Sesongjustert / 2026M07",
+          "url": "https://www.ssb.no/statbank/table/07095",
+          "published": "2026M07",
+          "fields": {
+            "value": 105.1,
+            "unit": {
+              "ContentsCode": {
+                "base": "indeks",
+                "decimals": 1,
+                "base_period": "2021",
+                "adjustment": "WorkAndSes"
+              }
+            },
+            "status": ""
+          }
+        }
+      ],
+      "identity_digest": "5b70d2f9d7c9534291e51220584ca11db011d7fe83abc6cd4eec4069b94125f3",
+      "snapshot_scope": "bc36bea91f22a2c172a3494fd136749b2489d5646dbcb24c3601333af6cad073"
+    },
+    {
+      "requests": [
+        {
+          "url": "https://data.ssb.no/api/pxwebapi/v2/tables/07095/data?lang=no&outputFormat=json-stat2&valueCodes%5BPKoder%5D=P101&valueCodes%5BContentsCode%5D=Sesongjustert&valueCodes%5BTid%5D=top%282%29",
+          "at": "2026-09-10T09:08:14.517986+00:00",
+          "status": 200
+        }
+      ],
+      "count": 2,
+      "filtered_count": 2,
+      "baseline": false,
+      "alerts": 0,
+      "observations": [
+        {
+          "key": "{\"ContentsCode\":\"Sesongjustert\",\"PKoder\":\"P101\",\"Tid\":\"2026M06\"}",
+          "title": "SSB · Utvinning, bergverk, industri og kraft / Produksjonsindeks. Sesongjustert / 2026M06",
+          "url": "https://www.ssb.no/statbank/table/07095",
+          "published": "2026M06",
+          "fields": {
+            "value": 113.1,
+            "unit": {
+              "ContentsCode": {
+                "base": "indeks",
+                "decimals": 1,
+                "base_period": "2021",
+                "adjustment": "WorkAndSes"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Sesongjustert\",\"PKoder\":\"P101\",\"Tid\":\"2026M07\"}",
+          "title": "SSB · Utvinning, bergverk, industri og kraft / Produksjonsindeks. Sesongjustert / 2026M07",
+          "url": "https://www.ssb.no/statbank/table/07095",
+          "published": "2026M07",
+          "fields": {
+            "value": 105.1,
+            "unit": {
+              "ContentsCode": {
+                "base": "indeks",
+                "decimals": 1,
+                "base_period": "2021",
+                "adjustment": "WorkAndSes"
+              }
+            },
+            "status": ""
+          }
+        }
+      ],
+      "identity_digest": "5b70d2f9d7c9534291e51220584ca11db011d7fe83abc6cd4eec4069b94125f3",
+      "snapshot_scope": "bc36bea91f22a2c172a3494fd136749b2489d5646dbcb24c3601333af6cad073"
+    }
+  ]
+}

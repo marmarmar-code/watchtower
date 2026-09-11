@@ -33,6 +33,17 @@ def poll(source, previous=None):
 
 
 class SnapshotTests(unittest.TestCase):
+    def test_blank_cell_selection_preserves_current_periods_only(self):
+        source = StructuredSource(config(id_fields=['id'], fields=['value'], where={'valid_to': ['']}))
+        source.get = Mock(return_value=response([
+            {'id': 'old', 'value': 1, 'valid_to': '2025-01-01'},
+            {'id': 'current', 'value': 2, 'valid_to': ''},
+        ]))
+        self.assertEqual(['["current"]'], [row['key'] for row in source.read_records()])
+        for selection in ([], [None], ''):
+            with self.assertRaises(ValueError):
+                StructuredSource(config(id_fields=['id'], fields=['value'], where={'valid_to': selection}))
+
     def source(self, **options):
         source=StructuredSource(config(id_fields=['id'], fields=['value','status'], **options))
         source.get=Mock(return_value=response([{'id':'A','value':100,'status':'active'}]))
@@ -178,6 +189,47 @@ class StructuredTests(unittest.TestCase):
 
 
 class WebTests(unittest.TestCase):
+    def test_url_routing_keeps_scope_hashes_and_records_without_losing_new_news(self):
+        original = WebChangesSource(config('web_links', selector='main a', events=['added']))
+        original.get = Mock(return_value=response(b'<main><a href="/other/old">Old</a></main>'))
+        previous, _ = poll(original)
+        routed = WebChangesSource(replace(original.config, options={**original.config.options,
+            'exclude_url_prefixes': ['https://EXAMPLE.test/energy/']}))
+        self.assertEqual(original.scope, routed.scope)
+        page = b'''<main><a href="/other/old">Old</a><a href="/energy/new">Energy</a>
+        <a href="/other/new">Other</a><a href="/energy-extra/new">Near path</a>
+        <a href="https://sub.example.test/energy/new">Other host</a></main>'''
+        original.get = Mock(return_value=response(page))
+        routed.get = Mock(return_value=response(page))
+        expected_items = original.fetch_with_state(previous)
+        actual_items = routed.fetch_with_state(previous)
+        self.assertEqual([(i.key, i.content_hash()) for i in expected_items],
+                         [(i.key, i.content_hash()) for i in actual_items])
+        expected_state, expected_alerts = poll(original, previous)
+        actual_state, alerts = poll(routed, previous)
+        self.assertEqual(expected_state['source_state'], actual_state['source_state'])
+        self.assertEqual(expected_state['seen'], actual_state['seen'])
+        self.assertEqual(4, len(expected_alerts))
+        self.assertEqual({'Other', 'Near path', 'Other host'}, {a.item.title for a in alerts})
+        # A valid list containing only routed-away items is still a healthy source.
+        routed.get = Mock(return_value=response(b'<main><a href="/energy/second">Energy 2</a></main>'))
+        state, alerts = poll(routed, actual_state)
+        self.assertEqual([], alerts)
+        self.assertEqual(1, len(state['source_state']['records']['rows']))
+        routed.get = Mock(return_value=response(b'<main>Broken selector</main>'))
+        with self.assertRaises(SourceError):
+            poll(routed, state)
+
+    def test_url_routing_rejects_ambiguous_prefixes(self):
+        for prefix in ['http://example.test/energy/', 'https://example.test/energy',
+                       'https://example.test/energy/?q=x', 'https://example.test/energy/#x',
+                       'https://*.example.test/energy/', ' https://example.test/energy/']:
+            with self.subTest(prefix=prefix), self.assertRaises(ValueError):
+                WebChangesSource(config('web_links', selector='main a', exclude_url_prefixes=[prefix]))
+        with self.assertRaises(ValueError):
+            WebChangesSource(config('web_page', selector='main',
+                exclude_url_prefixes=['https://example.test/energy/']))
+
     def test_selected_text_ignores_chrome_and_reports_change_at_end_of_long_page(self):
         source=WebChangesSource(config('web_page',selector='main',ignore_selectors=['.clock']))
         def page(number):return ('<nav>Different</nav><main><span class="clock">now</span><p>'+('Synthetic context '*500)+f'Price {number}</p></main>').encode()

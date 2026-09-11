@@ -1,0 +1,205 @@
+{
+  "method": "Two public RSS fetches per final source definition, using the existing adapter and filters. No notification delivery.",
+  "sources": [
+    {
+      "id": "nho_business_news",
+      "kind": "rss",
+      "label": "NHO – næringsliv",
+      "same_fingerprint": true,
+      "runs": [
+        {
+          "at": "2026-09-09T14:19:09.126805+00:00",
+          "items": 47,
+          "matched": 45,
+          "unique_keys": 47,
+          "fingerprint": "c7b9e1fe3be90d3a32695f3446988ab483c526cf145665deb0252d7f9c435749",
+          "seconds": 0.15,
+          "warnings": [],
+          "examples": [
+            {
+              "title": "Næring i Nordvest",
+              "url": "https://www.nho.no/regionforeninger/nho-more-romsdal/arrangementer/2027/naring-i-nordvest/",
+              "published": "Tue, 08 Sep 2026 15:30:05 +0200"
+            },
+            {
+              "title": "Regional årskonferanse 2027",
+              "url": "https://www.nho.no/regionforeninger/nho-more-romsdal/arrangementer/2027/nhos-regionale-arskonferanse-2027/",
+              "published": "Tue, 08 Sep 2026 14:56:48 +0200"
+            }
+          ]
+        },
+        {
+          "at": "2026-09-09T14:19:09.228411+00:00",
+          "items": 47,
+          "matched": 45,
+          "unique_keys": 47,
+          "fingerprint": "c7b9e1fe3be90d3a32695f3446988ab483c526cf145665deb0252d7f9c435749",
+          "seconds": 0.101,
+          "warnings": [],
+          "examples": [
+            {
+              "title": "Næring i Nordvest",
+              "url": "https://www.nho.no/regionforeninger/nho-more-romsdal/arrangementer/2027/naring-i-nordvest/",
+              "published": "Tue, 08 Sep 2026 15:30:05 +0200"
+            },
+            {
+              "title": "Regional årskonferanse 2027",
+              "url": "https://www.nho.no/regionforeninger/nho-more-romsdal/arrangementer/2027/nhos-regionale-arskonferanse-2027/",
+              "published": "Tue, 08 Sep 2026 14:56:48 +0200"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "finansnorge_news",
+      "kind": "rss",
+      "label": "Finans Norge – nyheter",
+      "same_fingerprint": true,
+      "runs": [
+        {
+          "at": "2026-09-09T14:19:09.230583+00:00",
+          "items": 16,
+          "matched": 16,
+          "unique_keys": 16,
+          "fingerprint": "57496c44c1812cc829d1ebf939afbc41159f2eb04918f0908a6b56ae8ee1da82",
+          "seconds": 0.161,
+          "warnings": [],
+          "examples": [
+            {
+              "title": "Kraftig økning i brannerstatningene",
+              "url": "https://www.finansnorge.no/artikler/2026/09/kraftig-okning-i-brannerstatningene/",
+              "published": "Mon, 07 Sep 2026 09:36:34 +0200"
+            },
+            {
+              "title": "Obligasjonskonferansen 2027",
+              "url": "https://www.finansnorge.no/arrangementer/2027/obligasjonskonferansen-2027/",
+              "published": "Wed, 02 Sep 2026 12:49:52 +0200"
+            }
+          ]
+        },
+        {
+          "at": "2026-09-09T14:19:09.341860+00:00",
+          "items": 16,
+          "matched": 16,
+          "unique_keys": 16,
+          "fingerprint": "57496c44c1812cc829d1ebf939afbc41159f2eb04918f0908a6b56ae8ee1da82",
+          "seconds": 0.11,
+          "warnings": [],
+          "examples": [
+            {
+              "title": "Kraftig økning i brannerstatningene",
+              "url": "https://www.finansnorge.no/artikler/2026/09/kraftig-okning-i-brannerstatningene/",
+              "published": "Mon, 07 Sep 2026 09:36:34 +0200"
+            },
+            {
+              "title": "Obligasjonskonferansen 2027",
+              "url": "https://www.finansnorge.no/arrangementer/2027/obligasjonskonferansen-2027/",
+              "published": "Wed, 02 Sep 2026 12:49:52 +0200"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forbrukertilsynet_news",
+      "kind": "rss",
+      "label": "Forbrukertilsynet – næringsliv og tilsyn",
+      "same_fingerprint": true,
+      "runs": [
+        {
+          "at": "2026-09-09T14:19:09.240300+00:00",
+          "items": 10,
+          "matched": 8,
+          "unique_keys": 10,
+          "fingerprint": "6cb62079681b695acecb01d8736b4a5c0f143939a26e703f100c73add46221c3",
+          "seconds": 0.084,
+          "warnings": [],
+          "examples": [
+            {
+              "title": "Influenserselskaper får gebyr etter skjult reklame for egne merkevarer",
+              "url": "https://www.forbrukertilsynet.no/influenserselskaper-far-gebyr-etter-skjult-reklame-for-egne-merkevarer",
+              "published": "Tue, 25 Aug 2026 06:56:23 +0000"
+            },
+            {
+              "title": "Arendalsuka er i gang",
+              "url": "https://www.forbrukertilsynet.no/arendalsuka-er-i-gang",
+              "published": "Mon, 10 Aug 2026 10:51:18 +0000"
+            }
+          ]
+        },
+        {
+          "at": "2026-09-09T14:19:09.291200+00:00",
+          "items": 10,
+          "matched": 8,
+          "unique_keys": 10,
+          "fingerprint": "6cb62079681b695acecb01d8736b4a5c0f143939a26e703f100c73add46221c3",
+          "seconds": 0.05,
+          "warnings": [],
+          "examples": [
+            {
+              "title": "Influenserselskaper får gebyr etter skjult reklame for egne merkevarer",
+              "url": "https://www.forbrukertilsynet.no/influenserselskaper-far-gebyr-etter-skjult-reklame-for-egne-merkevarer",
+              "published": "Tue, 25 Aug 2026 06:56:23 +0000"
+            },
+            {
+              "title": "Arendalsuka er i gang",
+              "url": "https://www.forbrukertilsynet.no/arendalsuka-er-i-gang",
+              "published": "Mon, 10 Aug 2026 10:51:18 +0000"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sjomatnorge_news",
+      "kind": "rss",
+      "label": "Sjømat Norge – nyheter",
+      "same_fingerprint": true,
+      "runs": [
+        {
+          "at": "2026-09-09T14:19:09.493887+00:00",
+          "items": 10,
+          "matched": 10,
+          "unique_keys": 10,
+          "fingerprint": "f58ca16f06d2756beca42648c6a63f10348119433e42d4064780f34b0b6bc9d6",
+          "seconds": 0.265,
+          "warnings": [],
+          "examples": [
+            {
+              "title": "Oppgjøret for Havbruksoverenskomsten er vedtatt",
+              "url": "https://sjomatnorge.no/oppgjoret-for-havbruksoverenskomsten-er-vedtatt/",
+              "published": "Mon, 24 Aug 2026 11:05:53 +0000"
+            },
+            {
+              "title": "Sjømat Norges Årsarrangement 2027",
+              "url": "https://sjomatnorge.no/sjomat-norges-arsarrangement-2/",
+              "published": "Mon, 24 Aug 2026 07:35:14 +0000"
+            }
+          ]
+        },
+        {
+          "at": "2026-09-09T14:19:09.772025+00:00",
+          "items": 10,
+          "matched": 10,
+          "unique_keys": 10,
+          "fingerprint": "f58ca16f06d2756beca42648c6a63f10348119433e42d4064780f34b0b6bc9d6",
+          "seconds": 0.277,
+          "warnings": [],
+          "examples": [
+            {
+              "title": "Oppgjøret for Havbruksoverenskomsten er vedtatt",
+              "url": "https://sjomatnorge.no/oppgjoret-for-havbruksoverenskomsten-er-vedtatt/",
+              "published": "Mon, 24 Aug 2026 11:05:53 +0000"
+            },
+            {
+              "title": "Sjømat Norges Årsarrangement 2027",
+              "url": "https://sjomatnorge.no/sjomat-norges-arsarrangement-2/",
+              "published": "Mon, 24 Aug 2026 07:35:14 +0000"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
