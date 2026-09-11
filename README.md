@@ -11,7 +11,7 @@ watchtower           offentlig kode, adaptere, tester og workflow
 watchtower-runtime   privat konfigurasjon, overvåkingsverdier og state
 ```
 
-Opprett en privat runtime fra [watchtower-runtime-template](https://github.com/marmarmar-code/watchtower-runtime-template). Følg [installasjonsveiledningen](INSTALL.md) for hele oppsettet.
+Opprett en privat runtime fra en separat runtime-mal. Følg [installasjonsveiledningen](INSTALL.md) for hele oppsettet.
 
 ## Start her
 

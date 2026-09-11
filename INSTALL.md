@@ -2,14 +2,14 @@
 
 En installasjon består av din offentlige kodefork og ett privat runtime-repo.
 Du eier kontoer, nøkler, kildevalg, drift og oppgraderinger. Velg en driftsansvarlig,
-en redaksjonell ansvarlig og en stedfortreder før oppstart. Se [ansvarsmodellen](SUPPORT.md).
+en faglig ansvarlig og en stedfortreder før oppstart. Se [ansvarsmodellen](SUPPORT.md).
 Bruksrett må være avklart med rettighetshaveren mens prosjektet mangler lisens.
 
 ## 1. Opprett repoene
 
-Fork [Watchtower](https://github.com/marmarmar-code/watchtower) til din egen konto eller
+Fork dette repositoryet til din egen konto eller
 organisasjon. Velg **Use this template** på
-[runtime-malen](https://github.com/marmarmar-code/watchtower-runtime-template) og opprett
+en separat runtime-mal og opprett
 et separat **privat** repo. Gi hver installasjon sitt eget runtime-repo.
 
 ## 2. Lag overvåkingsoppsettet lokalt
@@ -133,7 +133,7 @@ Kjør monitor-workflowen manuelt på `main`, i denne rekkefølgen:
 6. Kontroller også en naturlig `schedule`-hendelse, slik at cron-reserven er prøvd.
 
 Et vellykket testvarsel beviser kanaltilgang, og en vellykket henting beviser at
-kilden svarte. Ingen av delene beviser full redaksjonell dekning. Sjekk et lite
+kilden svarte. Ingen av delene beviser full faglig dekning. Sjekk et lite
 utvalg kjente publiseringer mot kildevalgene og filtrene.
 
 ## Utvid en eksisterende installasjon

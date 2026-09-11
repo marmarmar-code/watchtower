@@ -28,7 +28,7 @@ Kode, kildeoppskrifter, mal og oppgraderingsveiledning hører til samme leverans
 De ti oppskriftene er kontrollert mot faktiske kilder og gjentatt henting.
 Automatiserte tester dekker hendelser, revisjoner, feil og bevaring av state.
 Dette er funksjonsbredde med eksplisitte avgrensninger, ikke dekning av alle
-institusjoner eller dokumentasjon på nytte hos andre redaksjoner.
+institusjoner eller dokumentasjon på nytte hos andre brukermiljøer.
 
 ## Gjenstående produktarbeid
 

@@ -1,6 +1,6 @@
 # Drift av en selvstendig installasjon
 
-Installasjonseieren følger opp Actions, nøkler og kildefeil. Den redaksjonelle eieren
+Installasjonseieren følger opp Actions, nøkler og kildefeil. Den faglige eieren
 vedlikeholder overvåkingslisten og vurderer treff. Ha en stedfortreder med nødvendig
 GitHub-tilgang og en medeier av Teams Workflow. Upstream overvåker ikke installasjonen.
 

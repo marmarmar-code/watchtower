@@ -44,7 +44,7 @@ Installasjonsspesifikke problemer håndteres i den aktuelle forken. Se `SECURITY
 
 ## Lokal ansvarsoverføring
 
-Avtal en driftsansvarlig, en redaksjonell ansvarlig og en stedfortreder i den private
+Avtal en driftsansvarlig, en faglig ansvarlig og en stedfortreder i den private
 runtimen. De følger opp nøkler, kildeendringer, relevans og manglende livstegn.
 Upstream-vedlikeholderen er ikke automatisk installasjonens kontakt for brukerstøtte.
 
