@@ -1923,3 +1923,24 @@ events = ["added", "changed"]
 interval_minutes = 720
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "clinical_trials_norway_results"
+name = "Kliniske studier – publiserte resultater ved norske studiesteder"
+sector = "health"
+description = "Nye og reviderte publiserte resultatmoduler for studier med norsk studiested. Varsler rapporterte dataendringer uten å tolke effekt, årsak eller medisinsk betydning."
+official_url = "https://clinicaltrials.gov/data-api/about-api/study-data-structure"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "clinical_trial_results"
+urls = ["https://clinicaltrials.gov/api/v2/studies"]
+last_update_days = 14
+page_size = 20
+max_pages = 10
+max_records = 200
+max_bytes = 8000000
+allow_empty = true
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

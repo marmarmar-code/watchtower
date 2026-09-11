@@ -365,3 +365,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Tre faste regulatoriske datasett: human sikkerhetskommunikasjon uten ren mangeltype, humane sikkerhetsprosedyrer og alle periodiske sikkerhetsvurderinger. Nye og endrede fagopplysninger, med komplette totaler og validerte sideidentiteter."
+
+[[source]]
+id = "clinical_trial_results"
+name = "Publiserte kliniske studieresultater"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og reviderte resultatmoduler i et avgrenset oppdateringsvindu for studier med norsk studiested. Overvåker rapporterte tabellendringer uten å tolke effekt eller årsak."

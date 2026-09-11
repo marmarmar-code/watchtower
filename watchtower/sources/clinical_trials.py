@@ -29,6 +29,8 @@ PHASES = {"NA": "Ikke relevant", "EARLY_PHASE1": "Tidlig fase 1", "PHASE1": "Fas
 class ClinicalTrialsSource(SnapshotSource):
     """Discover new and substantive changes in a rolling update window."""
 
+    fields = FIELDS
+
     def __init__(self, config, *args, **kwargs):
         super().__init__(config, *args, **kwargs)
         if config.urls and config.urls != (API,):
@@ -54,8 +56,9 @@ class ClinicalTrialsSource(SnapshotSource):
         for _page in range(self.max_pages):
             query = {"query.locn": "AREA[LocationCountry]Norway",
                      "filter.advanced": f"AREA[LastUpdatePostDate]RANGE[{first.isoformat()}, {today.isoformat()}]",
-                     "fields": ",".join(FIELDS), "format": "json", "pageSize": self.page_size,
+                     "fields": ",".join(self.fields), "format": "json", "pageSize": self.page_size,
                      "countTotal": "true"}
+            query.update(self.query_extras())
             if token is not None:
                 query["pageToken"] = token
             raw = document(self, API + "?" + urlencode(query))
@@ -80,7 +83,7 @@ class ClinicalTrialsSource(SnapshotSource):
             if len(studies) != expected_page_size:
                 raise SourceError("ClinicalTrials.gov returned an incomplete page")
             for study in studies:
-                row = _record(study, first, today)
+                row = self.record(study, first, today)
                 if row["key"] in seen_ids:
                     raise SourceError("ClinicalTrials.gov repeated an NCT ID")
                 seen_ids.add(row["key"])
@@ -95,6 +98,12 @@ class ClinicalTrialsSource(SnapshotSource):
             seen_tokens.add(next_token)
             token = next_token
         raise SourceError("ClinicalTrials.gov window exceeds max_pages")
+
+    def query_extras(self):
+        return {}
+
+    def record(self, study, first, last):
+        return _record(study, first, last)
 
     def _item(self, row, event, details, suppress):
         item = super()._item(row, event, details, suppress)
