@@ -1804,3 +1804,25 @@ unit = "Enhet og beregningsgrunnlag"
 status = "Datastatus"
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "storting_recent_vote_discovery"
+name = "Stortinget – automatisk voteringsoppdagelse"
+sector = "public_policy"
+description = "Oppdager saker fra møter de siste 30 dagene og følger kildens voteringsresultater for disse sakene, også eventuelle eldre voteringer. Samme voterings-ID samles én gang. Første innlesing er stille; møtevinduet dokumenterer ikke sletting."
+official_url = "https://data.stortinget.no/eksport/sesjoner"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "parliament_vote_discovery"
+urls = []
+interval_minutes = 60
+lookback_days = 30
+max_sessions = 2
+max_meetings = 40
+max_cases = 200
+max_records = 1000
+max_bytes = 5000000
+allow_empty = true
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

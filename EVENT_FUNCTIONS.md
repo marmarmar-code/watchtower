@@ -68,3 +68,9 @@ Ved samtidig bruk av automatisk forskningsoppdagelse og en eksplisitt utlysning 
 `ssb_housing_permits_monthly` følger antall boliger med igangsettingstillatelse. `ssb_nonres_floor_permits_monthly` følger bruksareal til annet enn bolig, målt i 1000 m². Begge er ujusterte og følger de to siste publiserte månedene, inkludert revisjoner innenfor vinduet. Tillatelse dokumenterer ikke faktisk byggestart, og arealserien omfatter mer enn næringsbygg.
 
 To ekte avlesninger per oppskrift ga to observasjoner, stille førstegangsinnlesing og identisk historikk uten gjentakelsesvarsel. Se [kildekontroll](source_checks/ssb-building-permits-2026-09-11.md). De to oppskriftene telles konservativt som én ny funksjonsfamilie for byggetillatelser: 33 ulike funksjoner og totalt 92 oppskrifter.
+
+## Automatisk voteringsoppdagelse
+
+`storting_recent_vote_discovery` finner saker gjennom Stortingets sesjoner, møter og dagsordener. Den overvåker voteringsresultatene uten manuell liste over saks-ID-er. En votering knyttet til flere saker behandles én gang; endring i hvilke saker som omfattes av tidsvinduet lager ikke et resultatvarsel. Motstridende resultater eller manglende sesjonsdekning avviser uttrekket.
+
+To ekte avlesninger ga et gyldig tomt vindu. Et separat historisk uttrekk med 31 voteringer verifiserer positiv parsing, men er ikke bevis på en ny hendelse eller levering. Se [kildekontroll](source_checks/parliament-discovery-2026-09-11.md). Dette er en vesentlig utvidelse av eksisterende voteringsfunksjon og øker katalogen til 93 oppskrifter; den konservative funksjonstellingen forblir 33.

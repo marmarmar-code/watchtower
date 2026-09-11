@@ -347,3 +347,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nylig registrerte AS/ASA i valgte tosifrede næringsdivisjoner, med komplett avgrenset søkeresultat. Registreringsdato er ikke stiftelsesdato."
+
+[[source]]
+id = "parliament_vote_discovery"
+name = "Automatisk oppdagelse av stortingsvoteringer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Oppdager saker fra møter i et avgrenset tidsvindu og henter alle deres voteringer. Samme voterings-ID samles på tvers av saker; ufullstendige svar og motstridende resultater avvises."

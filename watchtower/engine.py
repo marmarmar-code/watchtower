@@ -48,6 +48,7 @@ from .sources.industrial_environment import IndustrialEnvironmentSource
 from .sources.industrial_documents import IndustrialDocumentsSource
 from .sources.company_discovery import CompanyDiscoverySource
 from .sources.parliament_votes import ParliamentVotesSource
+from .sources.parliament_vote_discovery import ParliamentVoteDiscoverySource
 
 
 SOURCE_TYPES: dict[str, type[Source]] = {
@@ -55,6 +56,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "industrial_documents": IndustrialDocumentsSource,
     "company_discovery": CompanyDiscoverySource,
     "parliament_votes": ParliamentVotesSource,
+    "parliament_vote_discovery": ParliamentVoteDiscoverySource,
     "pesticides": PesticidesSource,
     "methods_decisions": MethodsDecisionsSource,
     "ema_medicines": EmaMedicinesSource,
