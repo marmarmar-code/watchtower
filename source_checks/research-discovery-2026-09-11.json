@@ -1,0 +1,265 @@
+{
+  "checked_at": "2026-09-11",
+  "listing_url": "https://www.forskningsradet.no/utlysninger/?timeframe=2",
+  "verified_config": {
+    "kind": "research_awards",
+    "discover_results": true,
+    "discovery_years": [
+      2026
+    ],
+    "max_listing_pages": 1,
+    "max_discovery_calls": 10,
+    "max_records": 500,
+    "max_bytes": 500000,
+    "allow_empty": true,
+    "events": [
+      "added",
+      "changed"
+    ]
+  },
+  "listing": {
+    "proposal_cards": 99,
+    "result_marked_cards": 98,
+    "selected_2026_calls": 8,
+    "duplicate_result_urls": 0,
+    "declared_group_counts": [
+      22,
+      12,
+      1,
+      20,
+      8,
+      7,
+      2,
+      25,
+      2
+    ],
+    "group_count_guard": "Each declared count must match every embedded proposal, including hidden cards; pagination is rejected."
+  },
+  "selected_tables": {
+    "calls": 8,
+    "approved_project_rows": 277,
+    "requested_amount_tables": 5,
+    "degree_institution_tables": 2,
+    "awarded_amount_tables": 1
+  },
+  "poll": {
+    "records_each": 277,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "identical_full_snapshots": true,
+    "scope_hash": "39502656c5ec256edd0e07231b279f9d9dca882e745e5ec3aa7852ea0da84811"
+  },
+  "identity": "call URL plus project number",
+  "listing_generation_metadata_stored": false,
+  "removed_supported": false,
+  "empty_selected_year": "valid only when the listing structure itself is valid",
+  "explicit_urls_mode_changed": false,
+  "final_recipe_check": {
+    "recipe": "research_result_discovery",
+    "checked_at": "2026-09-11T12:39:37.753943+00:00",
+    "records": 277,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/?timeframe=2",
+        "bytes": 381363,
+        "sha256": "9b91b2df592462487b97992ca6531d3d10d07e0422ca6967112cac33df55f22b"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/finansiering-kvalifiserte-erc-soknader/",
+        "bytes": 118083,
+        "sha256": "8da3b1e8f4932bdf16e54abb179c751b1b56f0c61698c2ce77e86ceea14170d4"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/polhavet-2050/",
+        "bytes": 115992,
+        "sha256": "be27a4b693ce0b2a5ac4b383616fe366a4032fbb8c7f810dd8e63293c8eca89c"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/",
+        "bytes": 221653,
+        "sha256": "1f39e00589b0a025c163b69a2a4a4b5115726a8aeac168f0f434ecb962ee9dc5"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/offentlig-sektor-phd-doktorgradsprosjekt-offentlig-virksomhet-2026/",
+        "bytes": 226920,
+        "sha256": "c61d697cb1b5f040ca3cefc6091cee6c73a67734e396ca84448b91acabca29cb"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/narings-phd-doktorgradsprosjekt-bedrift-2026/",
+        "bytes": 252098,
+        "sha256": "26fab4dfaf2823206ead2577b9af3e29092fe48dfa3559cf041436dc9441a2e3"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/kvalifisering-kommersialisering-offentlig-finansiert-forskning/",
+        "bytes": 271958,
+        "sha256": "cf12f6033dfaecbb08dcdc54b035d167e1cae062babf5490d30cfb0ca0e070b0"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/stotte-arrangement-forskningsdagene/",
+        "bytes": 246983,
+        "sha256": "b9fd06253e9a062f752d3029a2e8571e77928726b2f453b63a883cf7086ca602"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/obligatoriske-forprosjekter-soknader-innovative-offentlige-anskaffelser/",
+        "bytes": 137975,
+        "sha256": "6183ebe8b3304266ff69c0d08b87fbf6c277fabf0746a1b9a55b1c95b6d72e9b"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/?timeframe=2",
+        "bytes": 381363,
+        "sha256": "5fade6c02266afd6b64f2170388e00d757031f5484f9142bb9e26897422ecd0e"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/finansiering-kvalifiserte-erc-soknader/",
+        "bytes": 118083,
+        "sha256": "c12b6f2b4800360451a03e4579440aff6bc003ae1a910abeb357fb9d804995fb"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/polhavet-2050/",
+        "bytes": 115992,
+        "sha256": "fc095a15f4a6ae8f96c0c8ec09e5bf339c29c2bd25812ab6f318d5ed5190c230"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/",
+        "bytes": 221743,
+        "sha256": "d3bfcee14a5c9419d92ec906e3104b51bd47033b334e3e8132ab7cb27dc4e286"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/offentlig-sektor-phd-doktorgradsprosjekt-offentlig-virksomhet-2026/",
+        "bytes": 226920,
+        "sha256": "d6bedbbd2be997ac0214230ffe68f602c0ff26b7795b95e73b65d7b724c1b20d"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/narings-phd-doktorgradsprosjekt-bedrift-2026/",
+        "bytes": 252098,
+        "sha256": "67d0ca43ce858d3ea717d78983602525b6b734893454c5b9f93ce063578fa3d3"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/kvalifisering-kommersialisering-offentlig-finansiert-forskning/",
+        "bytes": 272003,
+        "sha256": "8b24fb62012b36813daa12a76abff848580b2716504f72fbcf97158eef4d2bb4"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/stotte-arrangement-forskningsdagene/",
+        "bytes": 246983,
+        "sha256": "c0acbdafc793bfe28965a9a81e3ec0cba1e882c9632009ba6ac423bad59d87f2"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/obligatoriske-forprosjekter-soknader-innovative-offentlige-anskaffelser/",
+        "bytes": 137885,
+        "sha256": "3d07b2a2c0a132c3bc7e14f86cc4212cc303ef82db060baa8b70852175ce4117"
+      }
+    ],
+    "config_sha256": "338ff16b0be8a143add166d82d721e2acf211d92538d1d0d6d3a2b23365eb67e",
+    "module_sha256": "111a227ec9edab178d7b7c446c2cbb7941a3b6df53929b266497dd8ab2a287a8"
+  },
+  "notification_routing_check": {
+    "recipe": "research_result_discovery",
+    "checked_at": "2026-09-11T12:40:01.514777+00:00",
+    "records": 277,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/?timeframe=2",
+        "bytes": 381318,
+        "sha256": "5f4fe39aac5dc5008a3707fa1cd3669e85ad5a490a54543a4b22bd9617b9755a"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/finansiering-kvalifiserte-erc-soknader/",
+        "bytes": 118083,
+        "sha256": "e3e85222454321bfabb29ff57430e3248f3d8786a728b5196d65210b52e5f487"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/polhavet-2050/",
+        "bytes": 115992,
+        "sha256": "a5e5a599b5bf6c4fea36940d385e59d9ec60a2541371bbe854204db2bdaf43a6"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/",
+        "bytes": 221653,
+        "sha256": "fdd576a534b20b0c76f37b86d1834f521035e5ac3970540a7e55a15a03df0be4"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/offentlig-sektor-phd-doktorgradsprosjekt-offentlig-virksomhet-2026/",
+        "bytes": 226920,
+        "sha256": "d2ab0cc46cfe3f2b68f82165e958359a926fd43c9dea4171cb1a819f7dc40483"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/narings-phd-doktorgradsprosjekt-bedrift-2026/",
+        "bytes": 252098,
+        "sha256": "f1f55ee0a3addb0f54a8395f5cb9cda0fc50ba386a806d47722a8f56e3c44e6f"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/kvalifisering-kommersialisering-offentlig-finansiert-forskning/",
+        "bytes": 271958,
+        "sha256": "d7bb8d71a34b1442dfe5783470dab187c139ff4910e97a203842285afa95af45"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/stotte-arrangement-forskningsdagene/",
+        "bytes": 246983,
+        "sha256": "c1fce290a2af955acd4760cb26b95412bd4dad408fb85ba8457eae46c978fffb"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/obligatoriske-forprosjekter-soknader-innovative-offentlige-anskaffelser/",
+        "bytes": 137885,
+        "sha256": "35d6561fc50c91f929f01450cd6acdac5077343b37ee587e41b82204efa4edc9"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/?timeframe=2",
+        "bytes": 381363,
+        "sha256": "f0d83df862f810292e5f2ceab1d332920117380313f728a194f4862a772b8dcc"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/finansiering-kvalifiserte-erc-soknader/",
+        "bytes": 118083,
+        "sha256": "ed74d78a26bcd06b5c469559c4a4fe4d6c9fcdecaedf9d618c1e84927de2346c"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/polhavet-2050/",
+        "bytes": 115992,
+        "sha256": "fe6b3daaa0a280d61e7614c3d9fed17d25991cfc627bc15d10ad31b1f951226d"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/",
+        "bytes": 221698,
+        "sha256": "ab63acdf635d206f5c30f4bb5c0c5fdd4cfb6646b35eea83fdf02ac3c25afcfb"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/offentlig-sektor-phd-doktorgradsprosjekt-offentlig-virksomhet-2026/",
+        "bytes": 227010,
+        "sha256": "26a2ea28a4bfcb0a075e5f06616939898913eda94edac40793faeded3f56db86"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/narings-phd-doktorgradsprosjekt-bedrift-2026/",
+        "bytes": 252098,
+        "sha256": "3d306359292b41aacde2a694af34ede209edcdb167536b36d6fb710bd70fac06"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/kvalifisering-kommersialisering-offentlig-finansiert-forskning/",
+        "bytes": 272003,
+        "sha256": "ee5faacdeb61f2535206f79e2e5bce761cb185140fa5eea866b0210e5760256f"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/stotte-arrangement-forskningsdagene/",
+        "bytes": 247028,
+        "sha256": "dbc2ccede9ffe6e66b683924cbcc1de007e0cb5cc5991673a8f1dd84e9e222d1"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/obligatoriske-forprosjekter-soknader-innovative-offentlige-anskaffelser/",
+        "bytes": 138020,
+        "sha256": "d0e3a51099055f28395784f2e344390202da70bb71301c62172d253974265a3d"
+      }
+    ],
+    "config_sha256": "243a0b8598686ea21a86736058c15fddda1171d0f41cbf770e7030af1cd63ea4",
+    "module_sha256": "111a227ec9edab178d7b7c446c2cbb7941a3b6df53929b266497dd8ab2a287a8",
+    "suppressed_call_urls": [
+      "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/"
+    ],
+    "scope_and_state_preservation": "Regression test evaluates the same rows with and without routing; full next state and scope identical, only notification is suppressed."
+  }
+}

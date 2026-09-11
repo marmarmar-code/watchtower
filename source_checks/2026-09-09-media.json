@@ -1,0 +1,444 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-09T09:38:56.739258+00:00",
+  "watchtower_git_sha": "10a2e639",
+  "validation_method": "Two separate live calls through the existing Watchtower adapter; no state and no notifications.",
+  "verified": [
+    {
+      "id": "lla_nyheter",
+      "kind": "rss",
+      "url": "https://lla.no/feed/",
+      "runs": [
+        10,
+        10
+      ],
+      "examples": [
+        {
+          "title": "Skal bygge KI-kompetanse på egne premisser",
+          "url": "https://lla.no/nyheter/skal-bygge-ki-kompetanse-pa-egne-premisser/"
+        },
+        {
+          "title": "– Lokalavisene viktige for lokaldemokratiet",
+          "url": "https://lla.no/nyheter/lokalavisene-viktige-for-lokaldemokratiet/"
+        },
+        {
+          "title": "Velkomen til Lokalavisveka: Vi starter der ytringsfridomen blei grunnlovsfesta",
+          "url": "https://lla.no/nyheter/velkomen-til-lokalavisveka-vi-starter-der-ytringsfridomen-blei-grunnlovsfesta/"
+        }
+      ],
+      "same_keys": true
+    },
+    {
+      "id": "schibsted_media_news",
+      "kind": "rss",
+      "url": "https://schibsted.com/feed/?post_type=brand_post",
+      "runs": [
+        10,
+        10
+      ],
+      "examples": [
+        {
+          "title": "Schibsted introduces a new solution to safeguard the funding of journalism",
+          "url": "https://schibsted.com/2026/02/03/schibsted-introduces-a-new-solution-to-safeguard-the-funding-of-journalism/"
+        },
+        {
+          "title": "Leading the way in Finnish TV history",
+          "url": "https://schibsted.com/2025/07/02/leading-the-way-in-finish-tv-history/"
+        },
+        {
+          "title": "Shaping the leaders of the future",
+          "url": "https://schibsted.com/2024/09/27/shaping-the-leaders-of-the-future/"
+        }
+      ],
+      "same_keys": true
+    },
+    {
+      "id": "reuters_institute_news",
+      "kind": "rss",
+      "url": "https://reutersinstitute.politics.ox.ac.uk/rss/news",
+      "runs": [
+        8,
+        8
+      ],
+      "examples": [
+        {
+          "title": "Anatomy of a hate campaign: How a few powerful actors targeted an editor to frame journalism as a crime",
+          "url": "https://reutersinstitute.politics.ox.ac.uk/news/hate-campaign-jose-ruben-zamora-journalism-crime"
+        },
+        {
+          "title": "Six respected figures from journalism, technology and academia join the Reuters Institute’s Advisory Board",
+          "url": "https://reutersinstitute.politics.ox.ac.uk/news/six-respected-figures-journalism-technology-and-academia-join-reuters-institutes-advisory"
+        },
+        {
+          "title": "A new Fellowship will bring a journalist from Collective Newsroom to the Reuters Institute",
+          "url": "https://reutersinstitute.politics.ox.ac.uk/news/new-fellowship-will-bring-journalist-collective-newsroom-reuters-institute"
+        }
+      ],
+      "same_keys": true
+    },
+    {
+      "id": "nordicom_news",
+      "kind": "rss",
+      "url": "https://www.nordicom.gu.se/sv-rss",
+      "runs": [
+        20,
+        20
+      ],
+      "examples": [
+        {
+          "title": "När algoritmer formar nyhetsflödet",
+          "url": "https://www.nordicom.gu.se/sv/aktuellt/nyheter/nar-algoritmer-formar-nyhetsflodet"
+        },
+        {
+          "title": "Nya numret av Nordic Journal of Media Studies om medier och det förflutna",
+          "url": "https://www.nordicom.gu.se/sv/aktuellt/nyheter/nya-numret-av-nordic-journal-media-studies-om-medier-och-det-forflutna"
+        },
+        {
+          "title": "Nytt temanummer undersöker extremism online i de nordiska länderna",
+          "url": "https://www.nordicom.gu.se/sv/aktuellt/nyheter/nytt-temanummer-undersoker-extremism-online-i-de-nordiska-landerna"
+        }
+      ],
+      "same_keys": true
+    },
+    {
+      "id": "efj_news",
+      "kind": "rss",
+      "url": "https://europeanjournalists.org/feed/",
+      "runs": [
+        10,
+        10
+      ],
+      "examples": [
+        {
+          "title": "Slovenia: International media and journalist organisations call for strong safeguards to protect the independence and financial sustainability of RTV Slovenija",
+          "url": "https://europeanjournalists.org/blog/2026/09/07/slovenia-international-media-and-journalist-organisations-call-for-strong-safeguards-to-protect-the-independence-and-financial-sustainability-of-rtv-slovenija/"
+        },
+        {
+          "title": "MFRR Monitoring Briefing: 736 press freedom violations in the first six months of 2026",
+          "url": "https://europeanjournalists.org/blog/2026/09/07/mfrr-monitoring-briefing-736-press-freedom-violations-in-the-first-six-months-of-2026/"
+        },
+        {
+          "title": "Germany: Press freedom at stake in upcoming Saxony-Anhalt elections",
+          "url": "https://europeanjournalists.org/blog/2026/09/04/mfrr-concerned-press-freedom-at-stake-in-upcoming-saxony-anhalt-elections/"
+        }
+      ],
+      "same_keys": true
+    },
+    {
+      "id": "journalismfund_news",
+      "kind": "rss",
+      "url": "https://www.journalismfund.eu/news/rss.xml",
+      "runs": [
+        554,
+        554
+      ],
+      "examples": [
+        {
+          "title": "Supported Earth Investigations Project Finalist for DIG Best Audio",
+          "url": "https://www.journalismfund.eu/news/boy-wasted-finalist-dig-best-audio"
+        },
+        {
+          "title": "Parliamentary Questions Raised in Athens Following Investigation",
+          "url": "https://www.journalismfund.eu/news/parliamentary-questions-raised-athens-after-investigation-israeli-technologies"
+        },
+        {
+          "title": "New evidence report: independent journalism drives growth, security and crisis response",
+          "url": "https://www.journalismfund.eu/news/the-value-of-journalism"
+        }
+      ],
+      "same_keys": true
+    },
+    {
+      "id": "medietilsynet_nyheter",
+      "kind": "web_links",
+      "url": "https://www.medietilsynet.no/nyheter/aktuelt/",
+      "selector": ".right-content a[href*=\"/nyheter/aktuelt/\"]",
+      "runs": [
+        15,
+        15
+      ],
+      "examples": [
+        {
+          "title": "Søk om støtte til forsking på medier og dataspill",
+          "url": "https://www.medietilsynet.no/nyheter/aktuelt/sok-om-stotte-til-forsking-pa-medier-og-dataspill/"
+        },
+        {
+          "title": "Gutter og jenter møter ulike verdener i sosiale medier",
+          "url": "https://www.medietilsynet.no/nyheter/aktuelt/gutter-og-jenter-moter-ulike-verdener-i-sosiale-medier/"
+        },
+        {
+          "title": "Over halvparten tar nyhetspauser",
+          "url": "https://www.medietilsynet.no/nyheter/aktuelt/over-halvparten-tar-nyhetspauser/"
+        }
+      ],
+      "same_keys": true,
+      "coverage_limit": "Detects additions/removals in the selected link list; changes behind an unchanged URL are not detected."
+    },
+    {
+      "id": "medietilsynet_avgjorelser",
+      "kind": "web_links",
+      "url": "https://www.medietilsynet.no/regelverk/sentrale-avgjoerelser/",
+      "selector": ".vertical-list a[href]",
+      "runs": [
+        9,
+        9
+      ],
+      "examples": [
+        {
+          "title": "Vedtak: Ileggelse av overtredelsesgebyr – Norsk Lokalkringkasting 30.04.21",
+          "url": "https://www.klagenemndssekretariatet.no/medieklage/2020-674"
+        },
+        {
+          "title": "Vedtak: Klage på vedtak om proratarisk avkortning i produksjonstilskudd – Barbosa Film AS 30.04.21",
+          "url": "https://www.klagenemndssekretariatet.no/medieklage/2020-689"
+        },
+        {
+          "title": "Vedtak: Klage på avslag om produksjonstilskudd - Norway Naturefilm AS 30.04.21",
+          "url": "https://www.klagenemndssekretariatet.no/medieklage/2020-699"
+        }
+      ],
+      "same_keys": true,
+      "coverage_limit": "Detects additions/removals in the selected link list; changes behind an unchanged URL are not detected."
+    },
+    {
+      "id": "mbl_nyheter",
+      "kind": "web_links",
+      "url": "https://www.mediebedriftene.no/artikler/",
+      "selector": ".article-item__heading a[href]",
+      "runs": [
+        10,
+        10
+      ],
+      "examples": [
+        {
+          "title": "Klar melding fra nordisk medietoppmøte på Grønland: Å ta medienes journalistiske innhold uten tillatelse er tyveri",
+          "url": "https://www.mediebedriftene.no/artikler/2026/klar-melding-fra-nordisk-medietoppmote-pa-gronland-a-ta-medienes-journalistiske-innhold-uten-tillatelse-er-tyveri/"
+        },
+        {
+          "title": "Trygve Ulset er ny rådgiver i MBL",
+          "url": "https://www.mediebedriftene.no/artikler/2026/trygve-ulset-er-ny-radgiver-i-mbl/"
+        },
+        {
+          "title": "H.M. Kong Haralds bortgang - MBL kondolerer",
+          "url": "https://www.mediebedriftene.no/artikler/2026/h.m.-kong-haralds-bortgang----mbl-kondolerer"
+        }
+      ],
+      "same_keys": true,
+      "coverage_limit": "Detects additions/removals in the selected link list; changes behind an unchanged URL are not detected."
+    },
+    {
+      "id": "ij_aktuelt",
+      "kind": "web_links",
+      "url": "https://www.ij.no/aktuelt",
+      "selector": "a.group[href*=\"/aktuelt/\"]",
+      "runs": [
+        56,
+        56
+      ],
+      "examples": [
+        {
+          "title": "Daglig leder for Institutt for journalistikk går videre",
+          "url": "https://www.ij.no/aktuelt/daglig-leder-for-institutt-for-journalistikk-gar-videre"
+        },
+        {
+          "title": "Gratis studieturer med Norwaco Til høsten har vi to studieturer: Bli en bedre krim- og gravejournalist i Gøteborg og 2026s mest brennbare geopolitiske adresse, NUUK i Grønland",
+          "url": "https://www.ij.no/aktuelt/gratis-studieturer-med-norwaco"
+        },
+        {
+          "title": "Fagpressens KI-skole er tilbake: – Fra null til nytte på én dag Etter fullt klasserom og svært gode tilbakemeldinger i februar, setter Fagpressen og Institutt for Journalistikk opp et nytt, praktisk KI-kurs 12. mai.",
+          "url": "https://www.ij.no/aktuelt/fagpressens-ki-skole-er-tilbake-fra-null-til-nytte-pa-en-dag"
+        }
+      ],
+      "same_keys": true,
+      "coverage_limit": "Detects additions/removals in the selected link list; changes behind an unchanged URL are not detected."
+    },
+    {
+      "id": "fritt_ord_aktuelt",
+      "kind": "web_links",
+      "url": "https://frittord.no/nb/aktuelt",
+      "selector": "a.article.news-item[href*=\"/nb/aktuelt/\"]",
+      "runs": [
+        16,
+        16
+      ],
+      "examples": [
+        {
+          "title": "Ukrainske, georgiske, armenske, russiske og belarusiske journalister og medier får fem Free Media Awards for 2026 3. september 2026 Dette er årets prisvinnere som vil motta Free Media Awards fra Stiftelsen Fritt Ord og Zeit Stiftung Bucerius: Den undersøkende journalisten Mykhailo Tkach fra Ukraina Det undersøkende mediet iFact fra Georgia Online-mediet Factor TV fra Armenia Online-mediet Verstka fra Russland (i eksil) Journalisten og medielederen Andrei Aliaksandrau fra Belarus (fengslet)",
+          "url": "https://frittord.no/nb/aktuelt/ukrainske-georgiske-armenske-russiske-og-belarusiske-journalister-og-medier-far-fem-free-media-awards-for-2026"
+        },
+        {
+          "title": "Fritt Ords masterstipend – Frist 25. september 30. august 2026 Handler masterprosjektet ditt om ytringsfrihet, samfunnsdebatt eller journalistikk? Da kan du søke studentstipend fra Stiftelsen Fritt Ord. Stiftelsen Fritt Ord lyser ut stipend til masterprosjekter som tar for seg ytringsfrihet i juridisk betydning og/eller ytringskultur i bredere, kulturell forstand. Neste frist: 25. september 2026.",
+          "url": "https://frittord.no/nb/aktuelt/fritt-ords-masterstipend"
+        },
+        {
+          "title": "Takk, Kong Harald 28. august 2026 “Landet vårt er bygget på at alle mennesker er like mye verdt. Det er bygget på ytringsfrihet. Det er bygget på at vi tåler uenighet og søker oss frem til kompromisser.” Tale ved tiårsmarkeringen for terroren 22. juli 2011",
+          "url": "https://frittord.no/nb/aktuelt/takk-kong-harald"
+        }
+      ],
+      "same_keys": true,
+      "coverage_limit": "Detects additions/removals in the selected link list; changes behind an unchanged URL are not detected."
+    },
+    {
+      "id": "amedia_nyheter",
+      "kind": "web_links",
+      "url": "https://www.amedia.no/aktuelt/nyheter",
+      "selector": "a.uk-card-hover[href*=\"/aktuelt/nyheter/\"]",
+      "runs": [
+        15,
+        15
+      ],
+      "examples": [
+        {
+          "title": "04. september 2026 Mads A. Andersen blir ny direktør for Direktesport Amedia gjør seg klar til å løfte dekningen av norsk fotball og ansetter Mads A. Andersen (43) som ny di… Les mer",
+          "url": "https://www.amedia.no/aktuelt/nyheter/amedia-ruster-til-fotballoffensiv-mads-a-andersen-blir-ny-direktor-for-direktesport"
+        },
+        {
+          "title": "31. august 2026 Marie Olaussen blir ny redaktør i Gjengangeren Marie Olaussen (49) blir ny ansvarlig redaktør og daglig leder i Gjengangeren. Hun kommer fra stillingen som… Les mer",
+          "url": "https://www.amedia.no/aktuelt/nyheter/marie-olaussen-blir-ny-redaktor-i-gjengangeren"
+        },
+        {
+          "title": "10. august 2026 Glenn Veiby blir ny konserndirektør Glenn Veiby (55) er ansatt som konserndirektør for samarbeid og partnerskap i Amedia. Han får et samlet ansva… Les mer",
+          "url": "https://www.amedia.no/aktuelt/nyheter/ny-konserndirektor"
+        }
+      ],
+      "same_keys": true,
+      "coverage_limit": "Detects additions/removals in the selected link list; changes behind an unchanged URL are not detected."
+    },
+    {
+      "id": "polaris_media_pressemeldinger",
+      "kind": "web_links",
+      "url": "https://kommunikasjon.ntb.no/presserom/17848354/polarismedia/r",
+      "selector": "a[href*=\"/pressemelding/\"][href*=\"publisherId=17848354\"]",
+      "runs": [
+        20,
+        20
+      ],
+      "examples": [
+        {
+          "title": "[public excerpt omitted]",
+          "url": "https://kommunikasjon.ntb.no/pressemelding/18705633/polaris-media-etablerer-ny-produktorganisasjon-styrker-produktutviklingen-pa-tvers-av-konsernet?publisherId=17848354&lang=no"
+        },
+        {
+          "title": "Svakere utvikling i Sverige gav resultatnedgang for Polaris Media 15.8.2025 07:00:00 CEST | Pressemelding Polaris Media leverte en EBITDA på 78 millioner kroner i andre kvartal 2025, justert for engangsinntekter på 7 millioner kroner fra eiendomssalg. Til tross for fortsatt god vekst i digitale inntekter, er resultatet 10 millioner kroner lavere enn i tilsvarende periode i fjor. Svakere resultatutvikling i Sverige, både i mediehusene og i distribusjonsvirksomheten, var hovedårsaken til resultatnedgangen i konsernet. Mediehusene i Norge leverte resultatvekst i kvartalet.",
+          "url": "https://kommunikasjon.ntb.no/pressemelding/18620242/svakere-utvikling-i-sverige-gav-resultatnedgang-for-polaris-media?publisherId=17848354&lang=no"
+        },
+        {
+          "title": "Invitasjon til resultatpresentasjon 2. kvartal 2025 9.8.2025 14:51:23 CEST | Pressemelding Polaris Media ASA inviterer til presentasjon av konsernets resultater for andre kvartal 2025 fredag 15. august kl. 09:30 på Hotel Continental, Oslo.",
+          "url": "https://kommunikasjon.ntb.no/pressemelding/18613420/invitasjon-til-resultatpresentasjon-2-kvartal-2025?publisherId=17848354&lang=no"
+        }
+      ],
+      "same_keys": true,
+      "coverage_limit": "Detects additions/removals in the selected link list; changes behind an unchanged URL are not detected."
+    },
+    {
+      "id": "tv2_pressemeldinger",
+      "kind": "web_links",
+      "url": "https://kommunikasjon.ntb.no/presserom/13318709/tv2/r",
+      "selector": "a[href*=\"/pressemelding/\"][href*=\"publisherId=13318709\"]",
+      "runs": [
+        20,
+        20
+      ],
+      "examples": [
+        {
+          "title": "Her er artistene i neste sesong av «Hver gang vi møtes» 3.9.2026 10:00:00 CEST | Pressemelding Det er klart for en ny sesong av «Hver gang vi møtes», og sju artister flytter inn på Thorbjørnrud hotell i Jevnaker på Hadeland. Artistene som TV 2 følger i den 17. sesongen er; Janove Ottesen, Ingrid Bjørnov, Jason Diakité (Timbuktu), Fay Wildhagen, Ruben Markussen, Julie Bergan og Oscar Berggaard (Golf).",
+          "url": "https://kommunikasjon.ntb.no/pressemelding/19037644/her-er-artistene-i-neste-sesong-av-hver-gang-vi-motes?publisherId=13318709&lang=no"
+        },
+        {
+          "title": "Endringer i sendeskjema på TV 2 i helgen 29.8.2026 14:30:52 CEST | Pressemelding Fra lørdag kl. 21.20 går hovedkanalen TV 2 Direkte tilbake til ordinært sendeskjema, etter å ha vært i samsending med TV 2 Nyhetskanalen siden torsdag. TV 2 Nyhetskanalen vil fortsatt være reklamefri gjennom helgen.",
+          "url": "https://kommunikasjon.ntb.no/pressemelding/19042937/endringer-i-sendeskjema-pa-tv-2-i-helgen?publisherId=13318709&lang=no"
+        },
+        {
+          "title": "TV 2 sparker i gang høsten: Nye storsatsinger og gjensyn med seerfavoritter 20.8.2026 12:00:00 CEST | Pressemelding TV 2 inviterer til en høst fylt med store underholdningssatsinger, sterke dramaserier og aktuell journalistikk. Blant høydepunktene finner vi en splitter ny lørdagsgigant, oppfølgeren til det prisbelønte dramaet «Nepobaby» og en fersk sesong av «Spillet» – der taktikere som Sophie Elise Isachsen og Christer Falck inntar spillbrettet.",
+          "url": "https://kommunikasjon.ntb.no/pressemelding/19024721/tv-2-sparker-i-gang-hosten-nye-storsatsinger-og-gjensyn-med-seerfavoritter?publisherId=13318709&lang=no"
+        }
+      ],
+      "same_keys": true,
+      "coverage_limit": "Detects additions/removals in the selected link list; changes behind an unchanged URL are not detected."
+    },
+    {
+      "id": "nrk_pressemeldinger",
+      "kind": "web_links",
+      "url": "https://kommunikasjon.ntb.no/presserom/89389/nrk/r",
+      "selector": "a[href*=\"/pressemelding/\"][href*=\"publisherId=89389\"]",
+      "runs": [
+        20,
+        20
+      ],
+      "examples": [
+        {
+          "title": "NRK leverer TV-bilder ved H.M.K. Harald Vs bortgang og tronskiftet 28.8.2026 08:50:58 CEST | Pressemelding NRK er leverandør av fjernsynsbilder fra de offisielle hendelsene i forbindelse med H.M.K. Harald Vs bortgang og tronskiftet.",
+          "url": "https://kommunikasjon.ntb.no/pressemelding/19040770/nrk-leverer-tv-bilder-ved-hmk-harald-vs-bortgang-og-tronskiftet?publisherId=89389&lang=no"
+        },
+        {
+          "title": "NRK lager ny humorserie med gjengen bak «Hvite gutter» og «Basic Bitch» 26.8.2026 09:00:00 CEST | Pressemelding Skaperne av seriene «Hvite gutter» og «Basic Bitch» er i gang med innspillingen av en ny humorserie for NRK: «Champagnesosialistene».",
+          "url": "https://kommunikasjon.ntb.no/pressemelding/19037895/nrk-lager-ny-humorserie-med-gjengen-bak-hvite-gutter-og-basic-bitch?publisherId=89389&lang=no"
+        },
+        {
+          "title": "«Humoretaten» er tilbake med ny sesong 25.8.2026 15:00:00 CEST | Pressemelding NRKs humorflaggskip «Humoretaten» ruller ut sesong 4. Denne gangen med en stjernegjest i hver episode.",
+          "url": "https://kommunikasjon.ntb.no/pressemelding/19037874/humoretaten-er-tilbake-med-ny-sesong?publisherId=89389&lang=no"
+        }
+      ],
+      "same_keys": true,
+      "coverage_limit": "Detects additions/removals in the selected link list; changes behind an unchanged URL are not detected."
+    }
+  ],
+  "unavailable": [
+    {
+      "id": "redaktorforeningen_nyheter",
+      "url": "https://www.redaktor.no/",
+      "selector": "a.group[href^=\"/nyheter/\"]",
+      "reason": "SourceError: Selected link lacks a visible title"
+    },
+    {
+      "id": "pfu_publiserte_avgjorelser",
+      "url": "https://presse.no/pfu-basen",
+      "reason": "Public page exposes no server-rendered case links; official /api/pfu/cases requires authentication, so existing public adapters cannot monitor new decisions safely."
+    },
+    {
+      "id": "nj_nyheter",
+      "url": "https://www.nj.no/",
+      "reason": "Homepage is readable, but no stable server-rendered news archive selector or Watchtower-compatible RSS feed was found."
+    },
+    {
+      "id": "redaktorforeningen_horingssvar",
+      "url": "https://www.redaktor.no/horingsuttalelser",
+      "reason": "The public homepage exposes PDF links, but their visible titles are all the generic text 'Se høringsuttalelse'; existing web_links cannot emit a useful named event without a new adapter or upstream markup change."
+    },
+    {
+      "id": "bonnier_news",
+      "url": "https://www.bonniernews.se/",
+      "reason": "Readable homepage, but no stable server-rendered news list or valid RSS/Atom endpoint was found."
+    },
+    {
+      "id": "aller_media_norge",
+      "url": "https://www.aller.no/",
+      "reason": "Readable company homepage, but it did not expose a current company-news list suitable for existing adapters."
+    },
+    {
+      "id": "mentor_medier",
+      "url": "https://www.mentormedier.no/",
+      "reason": "Readable company homepage, but it did not expose a current company-news list suitable for existing adapters."
+    },
+    {
+      "id": "dn_media_group",
+      "url": "https://www.dnmediagroup.no/",
+      "reason": "Candidate corporate domain was unavailable during probing; dn.no newspaper front was intentionally excluded."
+    },
+    {
+      "id": "fritt_ord_rss",
+      "url": "https://frittord.no/nb/aktuelt.rss",
+      "reason": "Advertised alternate endpoint returned content rejected by the existing RSS adapter as invalid XML; web_links recipe is used instead."
+    },
+    {
+      "id": "nrk_info_rss",
+      "url": "https://info.nrk.no/feed/",
+      "reason": "Advertised feed contained no usable Watchtower items; official NRK pressroom link list is used instead."
+    },
+    {
+      "id": "polaris_rss",
+      "url": "https://www.polarismedia.no/category/nyheter/feed/",
+      "reason": "Advertised feed returned content rejected by the existing RSS adapter as invalid XML; official Polaris NTB pressroom link list is used instead."
+    }
+  ]
+}

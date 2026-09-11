@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timedelta, timezone
 from typing import Callable
 from hashlib import sha256
@@ -27,9 +27,57 @@ from .sources.patentstyret import PatentstyretSource
 from .sources.structured import StructuredSource
 from .sources.web_changes import WebChangesSource
 from .sources.ssb_data import SsbDataSource
+from .sources.food_recalls import FoodRecallsSource
+from .sources.nve_cases import NveCasesSource
+from .sources.medicine import MedicineSource
+from .sources.public_cases import PublicCasesSource
+from .sources.journals import JournalsSource
+from .sources.ted_notices import TedNoticesSource
+from .sources.building_cases import BuildingCasesSource
+from .sources.financial_decisions import FinancialDecisionsSource
+from .sources.aquaculture import AquacultureSource
+from .sources.research_awards import ResearchAwardsSource
+from .sources.account_documents import AccountDocumentsSource
+from .sources.press_cases import PressCasesSource
+from .sources.clinical_trials import ClinicalTrialsSource
+from .sources.clinical_trial_results import ClinicalTrialResultsSource
+from .sources.food_inspections import FoodInspectionsSource
+from .sources.ema_medicines import EmaMedicinesSource
+from .sources.ema_regulatory_events import EmaRegulatoryEventsSource
+from .sources.pesticides import PesticidesSource
+from .sources.methods_decisions import MethodsDecisionsSource
+from .sources.industrial_environment import IndustrialEnvironmentSource
+from .sources.industrial_documents import IndustrialDocumentsSource
+from .sources.company_discovery import CompanyDiscoverySource
+from .sources.parliament_votes import ParliamentVotesSource
+from .sources.parliament_vote_discovery import ParliamentVoteDiscoverySource
 
 
 SOURCE_TYPES: dict[str, type[Source]] = {
+    "industrial_environment": IndustrialEnvironmentSource,
+    "industrial_documents": IndustrialDocumentsSource,
+    "company_discovery": CompanyDiscoverySource,
+    "parliament_votes": ParliamentVotesSource,
+    "parliament_vote_discovery": ParliamentVoteDiscoverySource,
+    "pesticides": PesticidesSource,
+    "methods_decisions": MethodsDecisionsSource,
+    "ema_medicines": EmaMedicinesSource,
+    "ema_regulatory_events": EmaRegulatoryEventsSource,
+    "food_inspections": FoodInspectionsSource,
+    "clinical_trials": ClinicalTrialsSource,
+    "clinical_trial_results": ClinicalTrialResultsSource,
+    "account_documents": AccountDocumentsSource,
+    "press_cases": PressCasesSource,
+    "aquaculture": AquacultureSource,
+    "research_awards": ResearchAwardsSource,
+    "food_recalls": FoodRecallsSource,
+    "nve_cases": NveCasesSource,
+    "medicine": MedicineSource,
+    "public_cases": PublicCasesSource,
+    "journals": JournalsSource,
+    "ted_notices": TedNoticesSource,
+    "building_cases": BuildingCasesSource,
+    "financial_decisions": FinancialDecisionsSource,
     "json_records": StructuredSource,
     "csv_records": StructuredSource,
     "web_page": WebChangesSource,
@@ -185,6 +233,26 @@ def _save_alert_audit(state: StateStore, alerts: list[Alert], *, sent_at: str) -
     ])
 
 
+def _unique_web_link_alerts(alerts: list[Alert]) -> list[Alert]:
+    """Send an identical new link once when monitored lists overlap in a run.
+
+    Source histories remain independent. Different content, revisions and other
+    adapters are deliberately preserved; this is not cross-run deduplication.
+    """
+    seen = set()
+    result = []
+    for alert in alerts:
+        if alert.source.kind == "web_links" and alert.change == "new":
+            # Hash without the per-list source ID, without changing stored items.
+            identity = (alert.item.url, alert.item.key,
+                        replace(alert.item, source_id="").content_hash())
+            if identity in seen:
+                continue
+            seen.add(identity)
+        result.append(alert)
+    return result
+
+
 def run(
     config: Config,
     state: StateStore,
@@ -259,6 +327,7 @@ def run(
         except Exception as exc:
             errors[source_config.id] = _safe_error(exc)
 
+    alerts = _unique_web_link_alerts(alerts)
     if dry_run:
         return RunResult(checked, baselined, len(alerts), errors, warnings)
 

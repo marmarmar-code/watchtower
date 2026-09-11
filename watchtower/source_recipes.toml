@@ -22,6 +22,385 @@ OBS_VALUE = "Styringsrente (%)"
 UNIT_MEASURE = "Enhet"
 [recipe.source.filter]
 match_all = true
+# New sector recipes validated 2026-09-09.
+
+[[recipe]]
+id = "nve_news"
+name = "NVE – nyhetsarkiv"
+sector = "energy"
+description = "Nye saker i NVEs nyhetsarkiv."
+official_url = "https://www.nve.no/nyheter/nyhetsarkiv/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.nve.no/nyheter/nyhetsarkiv/"]
+selector = "main a[href^='/nytt-fra-nve/']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nve_energy_news"
+name = "NVE – energinyheter"
+sector = "energy"
+description = "NVEs temasorterte energinyheter."
+official_url = "https://www.nve.no/nyheter/nyhetsarkiv/?term=&year=&topic=10381"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.nve.no/nyheter/nyhetsarkiv/?term=&year=&topic=10381"]
+selector = "main a[href*='/nytt-fra-nve/nyheter-energi/']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nve_power_situation"
+name = "NVE – kraftsituasjonen"
+sector = "energy"
+description = "NVEs løpende rapporter om kraftsituasjonen."
+official_url = "https://www.nve.no/nyheter/nyhetsarkiv/?term=&year=&topic=11960"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.nve.no/nyheter/nyhetsarkiv/?term=&year=&topic=11960"]
+selector = "main a[href*='/nytt-fra-nve/rapporter-kraftsituasjonen/']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nve_rme_news"
+name = "RME – nyheter"
+sector = "energy"
+description = "Nyheter fra Reguleringsmyndigheten for energi."
+official_url = "https://www.nve.no/reguleringsmyndigheten/nytt-fra-rme/nyheter-reguleringsmyndigheten-for-energi/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.nve.no/reguleringsmyndigheten/nytt-fra-rme/nyheter-reguleringsmyndigheten-for-energi/"]
+selector = "main a[href*='/reguleringsmyndigheten/nytt-fra-rme/nyheter-reguleringsmyndigheten-for-energi/']:not([href$='/nyheter-reguleringsmyndigheten-for-energi/'])"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "statnett_news"
+name = "Statnett – nyheter og pressemeldinger"
+sector = "energy"
+description = "Nyheter og pressemeldinger fra Statnett."
+official_url = "https://www.statnett.no/om-statnett/nyheter-og-pressemeldinger/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.statnett.no/om-statnett/nyheter-og-pressemeldinger/"]
+selector = "main a[href*='/om-statnett/nyheter-og-pressemeldinger/nyhetsarkiv-']"
+events = ["added"]
+max_records = 100
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "havtil_news"
+name = "Havtil – nyheter"
+sector = "energy"
+description = "Nyheter og fagpubliseringer fra Havindustritilsynet."
+official_url = "https://www.havtil.no/utforsk-fagstoff/havtil/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.havtil.no/utforsk-fagstoff/havtil/"]
+selector = "main a[href*='/utforsk-fagstoff/'][href*='/2026/']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "havtil_investigations"
+name = "Havtil – granskingsrapporter"
+sector = "energy"
+description = "Nye granskingsrapporter fra Havtil."
+official_url = "https://www.havtil.no/tilsyn/granskingsrapporter/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.havtil.no/tilsyn/granskingsrapporter/"]
+selector = "main a[href*='/tilsyn/granskingsrapporter/'][href*='/202']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "havtil_orders"
+name = "Havtil – meldinger om pålegg"
+sector = "energy"
+description = "Pålegg publisert av Havtil uten tilknytning til ferdige revisjoner og granskingsrapporter."
+official_url = "https://www.havtil.no/tilsyn/viktige-meldinger/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.havtil.no/tilsyn/viktige-meldinger/"]
+selector = "main a[href*='/tilsyn/viktige-meldinger/'][href*='/202']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "landbruksdir_news"
+name = "Landbruksdirektoratet – nyhetsarkiv"
+sector = "food_retail"
+description = "Nyheter om jordbruk, skogbruk, reindrift og handel."
+official_url = "https://www.landbruksdirektoratet.no/nb/nyhetsrom/nyhetsarkiv"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.landbruksdirektoratet.no/nb/nyhetsrom/nyhetsarkiv"]
+selector = "main a[href*='/nb/nyhetsrom/nyhetsarkiv/']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "fiskeridir_news"
+name = "Fiskeridirektoratet – nyheter"
+sector = "food_retail"
+description = "Alle nyheter fra Fiskeridirektoratet."
+official_url = "https://www.fiskeridir.no/nyheter"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.fiskeridir.no/nyheter"]
+selector = "main a[href^='/nyheter/']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "fiskeridir_aquaculture"
+name = "Fiskeridirektoratet – akvakultur"
+sector = "food_retail"
+description = "Temasorterte akvakulturnyheter fra Fiskeridirektoratet."
+official_url = "https://www.fiskeridir.no/nyheter?type=akvakultur"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.fiskeridir.no/nyheter?type=akvakultur"]
+selector = "main a[href^='/nyheter/']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "fiskeridir_fisheries"
+name = "Fiskeridirektoratet – yrkesfiske"
+sector = "food_retail"
+description = "Temasorterte yrkesfiskenyheter fra Fiskeridirektoratet."
+official_url = "https://www.fiskeridir.no/nyheter?type=yrkesfiske"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.fiskeridir.no/nyheter?type=yrkesfiske"]
+selector = "main a[href^='/nyheter/']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "tolletaten_news"
+name = "Tolletaten – aktuelt"
+sector = "food_retail"
+description = "Nyheter fra Tolletaten om grensehandel, beslag og regelverk."
+official_url = "https://www.toll.no/no/om-oss/aktuelt-fra-tolletaten"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.toll.no/no/om-oss/aktuelt-fra-tolletaten"]
+selector = "main a[href*='/no/om-oss/aktuelt-fra-tolletaten/']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "datatilsynet_news"
+name = "Datatilsynet – aktuelle nyheter"
+sector = "technology"
+description = "Aktuelle nyheter om personvern og tilsyn."
+official_url = "https://www.datatilsynet.no/aktuelt/aktuelle-nyheter-2026/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.datatilsynet.no/aktuelt/aktuelle-nyheter-2026/"]
+selector = "main a[href*='/aktuelt/aktuelle-nyheter-2026/']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nsm_news"
+name = "NSM – aktuelt"
+sector = "technology"
+description = "Nyheter og aktuelle råd fra Nasjonal sikkerhetsmyndighet."
+official_url = "https://nsm.no/aktuelt/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://nsm.no/aktuelt/"]
+selector = "a[href^='https://nsm.no/aktuelt/']:not([href*='?']):not([href$='/aktuelt/'])"
+events = ["added"]
+max_records = 300
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nye_metoder_decision_docs"
+name = "Nye metoder – Beslutningsforum-dokumenter"
+sector = "health"
+description = "Sakslister, sakspapirer og protokoller fra Beslutningsforum."
+official_url = "https://www.nyemetoder.no/moter-i-beslutningsforum-for-nye-metoder"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.nyemetoder.no/moter-i-beslutningsforum-for-nye-metoder"]
+selector = "a[href$='.pdf'][href*='/contentassets/']"
+events = ["added"]
+max_records = 500
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "sivilombudet_statements"
+name = "Sivilombudet – uttalelser"
+sector = "legal"
+description = "Nye uttalelser fra Sivilombudet."
+official_url = "https://www.sivilombudet.no/uttalelser/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.sivilombudet.no/uttalelser/"]
+selector = "a[href^='https://www.sivilombudet.no/uttalelser/']:not([href$='/uttalelser/'])"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "advokattilsynet_news"
+name = "Advokattilsynet – aktuelt"
+sector = "legal"
+description = "Aktuelle saker og tilsynsrapporter fra Advokattilsynet."
+official_url = "https://tilsynet.no/aktuelt"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://tilsynet.no/aktuelt"]
+selector = "a[href^='/aktuelt/']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "kartverket_news"
+name = "Kartverket – nyheter"
+sector = "property"
+description = "Nyheter om eiendom, matrikkel, kart og geodata."
+official_url = "https://www.kartverket.no/om-kartverket/nyheter"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.kartverket.no/om-kartverket/nyheter"]
+selector = "main a[href*='/om-kartverket/nyheter/']"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "lottstift_news"
+name = "Lotteri- og stiftelsestilsynet – nyheter"
+sector = "finance"
+description = "Nyheter om lotteri-, pengespill- og stiftelsestilsyn."
+official_url = "https://lottstift.no/nyheter/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://lottstift.no/nyheter/"]
+selector = "main a[href*='/nyheter/']:not([href$='/nyheter/'])"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "arbeidstilsynet_news"
+name = "Arbeidstilsynet – nyheter"
+sector = "general"
+description = "Nyheter om arbeidsmiljø, regelverk og tilsyn."
+official_url = "https://www.arbeidstilsynet.no/nyheter/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.arbeidstilsynet.no/nyheter/"]
+selector = "main a[href*='/nyheter/']:not([href$='/nyheter/'])"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
 
 [[recipe]]
 id = "nb_usd_nok"
@@ -208,3 +587,1360 @@ kind = "rss"
 urls = ["https://nkom.no/aktuelt/rss.xml"]
 interval_minutes = 60
 alert_on_update = false
+[[recipe]]
+id = "medietilsynet_nyheter"
+name = "Medietilsynet – nyheter"
+sector = "media"
+description = "Nye lenker i Medietilsynets aktuelle nyheter. Endringer bak en uendret lenke fanges ikke."
+official_url = "https://www.medietilsynet.no/nyheter/aktuelt/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.medietilsynet.no/nyheter/aktuelt/"]
+selector = ".right-content a[href*=\"/nyheter/aktuelt/\"]"
+events = ["added"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "medietilsynet_avgjorelser"
+name = "Medietilsynet – sentrale avgjørelser"
+sector = "media"
+description = "Nye lenker i listen over sentrale avgjørelser, inkludert mediestøtteklager. Endringer i et eksisterende dokument fanges ikke."
+official_url = "https://www.medietilsynet.no/regelverk/sentrale-avgjoerelser/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.medietilsynet.no/regelverk/sentrale-avgjoerelser/"]
+selector = ".vertical-list a[href]"
+events = ["added"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "mbl_nyheter"
+name = "Mediebedriftenes Landsforening – nyheter"
+sector = "media"
+description = "Nye MBL-saker om mediepolitikk, arbeidsliv og bransjen. Endringer bak en uendret lenke fanges ikke."
+official_url = "https://www.mediebedriftene.no/artikler/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.mediebedriftene.no/artikler/"]
+selector = ".article-item__heading a[href]"
+events = ["added"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ij_aktuelt"
+name = "Institutt for journalistikk – aktuelt"
+sector = "media"
+description = "Nye saker fra IJs aktuelt-arkiv. Endringer bak en uendret lenke fanges ikke."
+official_url = "https://www.ij.no/aktuelt"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.ij.no/aktuelt"]
+selector = "a.group[href*=\"/aktuelt/\"]"
+events = ["added"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "fritt_ord_aktuelt"
+name = "Fritt Ord – aktuelt"
+sector = "media"
+description = "Nye saker, utlysninger og tildelinger fra Fritt Ord. Endringer bak en uendret lenke fanges ikke."
+official_url = "https://frittord.no/nb/aktuelt"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://frittord.no/nb/aktuelt"]
+selector = "a.article.news-item[href*=\"/nb/aktuelt/\"]"
+events = ["added"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "amedia_nyheter"
+name = "Amedia – konsernnyheter"
+sector = "media"
+description = "Nye saker fra Amedias offisielle konsernarkiv. Endringer bak en uendret lenke fanges ikke."
+official_url = "https://www.amedia.no/aktuelt/nyheter"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.amedia.no/aktuelt/nyheter"]
+selector = "a.uk-card-hover[href*=\"/aktuelt/nyheter/\"]"
+events = ["added"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "polaris_media_pressemeldinger"
+name = "Polaris Media – pressemeldinger"
+sector = "media"
+description = "Nye pressemeldinger fra Polaris Medias offisielle presserom hos NTB. Endringer bak en uendret lenke fanges ikke."
+official_url = "https://kommunikasjon.ntb.no/presserom/17848354/polarismedia/r"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://kommunikasjon.ntb.no/presserom/17848354/polarismedia/r"]
+selector = "a[href*=\"/pressemelding/\"][href*=\"publisherId=17848354\"]"
+events = ["added"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "tv2_pressemeldinger"
+name = "TV 2 – pressemeldinger"
+sector = "media"
+description = "Nye pressemeldinger fra TV 2s offisielle presserom hos NTB. Endringer bak en uendret lenke fanges ikke."
+official_url = "https://kommunikasjon.ntb.no/presserom/13318709/tv2/r"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://kommunikasjon.ntb.no/presserom/13318709/tv2/r"]
+selector = "a[href*=\"/pressemelding/\"][href*=\"publisherId=13318709\"]"
+events = ["added"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nrk_pressemeldinger"
+name = "NRK – pressemeldinger"
+sector = "media"
+description = "Nye pressemeldinger fra NRKs offisielle presserom hos NTB; dette er ikke NRKs generelle nyhetsfeed. Endringer bak en uendret lenke fanges ikke."
+official_url = "https://kommunikasjon.ntb.no/presserom/89389/nrk/r"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://kommunikasjon.ntb.no/presserom/89389/nrk/r"]
+selector = "a[href*=\"/pressemelding/\"][href*=\"publisherId=89389\"]"
+events = ["added"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "kommunikasjonsforeningen_news"
+name = "Kommunikasjonsforeningen – nyheter"
+sector = "marketing"
+description = "Nyheter, fag og bransjeinformasjon fra Kommunikasjonsforeningen."
+official_url = "https://www.kommunikasjon.no/fagstoff/nyheter"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.kommunikasjon.no/fagstoff/nyheter"]
+selector = "a.card-clean_link[href*='/fagstoff/nyheter/']"
+title_selector = "span span"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "kreativtforum_news"
+name = "Kreativt Forum – nyheter"
+sector = "marketing"
+description = "Nyheter om reklame, byråer og kommersiell kommunikasjon."
+official_url = "https://www.kreativtforum.no/artikler/nyheter"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.kreativtforum.no/artikler/nyheter"]
+selector = "a[data-article-card][href*='/artikler/nyheter/']"
+title_selector = "h2"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "kreativtforum_people"
+name = "Kreativt Forum – overganger"
+sector = "marketing"
+description = "Ansettelser og jobbskifter i reklame- og kommunikasjonsbransjen."
+official_url = "https://www.kreativtforum.no/artikler/overganger"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.kreativtforum.no/artikler/overganger"]
+selector = "a[data-article-card][href*='/artikler/overganger/']"
+title_selector = "h2"
+events = ["added"]
+max_records = 200
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+match_all = true
+
+# Additional official business feeds validated with real responses.
+[[recipe]]
+id = "nho_business_news"
+name = "NHO – næringsliv"
+sector = "business"
+description = "Nyheter og arrangementer fra NHO; ikoninnhold og annonser fra den angitte Jobylon-verten utelates."
+official_url = "https://www.nho.no/rss/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "rss"
+urls = ["https://www.nho.no/rss/"]
+interval_minutes = 60
+alert_on_update = false
+exclude_url_hosts = ["emp.jobylon.com"]
+[recipe.source.filter]
+exclude_any = ["Ikoner"]
+
+[[recipe]]
+id = "finansnorge_news"
+name = "Finans Norge – nyheter"
+sector = "finance"
+description = "Nyheter og arrangementer fra finans- og forsikringsnæringen."
+official_url = "https://www.finansnorge.no/rss/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "rss"
+urls = ["https://www.finansnorge.no/rss/"]
+interval_minutes = 60
+alert_on_update = false
+
+[[recipe]]
+id = "forbrukertilsynet_news"
+name = "Forbrukertilsynet – næringsliv og tilsyn"
+sector = "legal"
+description = "Tilsyn, vedtak og veiledning; rekrutteringsfraser utelates."
+official_url = "https://www.forbrukertilsynet.no/feed"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "rss"
+urls = ["https://www.forbrukertilsynet.no/feed"]
+interval_minutes = 60
+alert_on_update = false
+[recipe.source.filter]
+exclude_any = ["ledig stilling", "vi søker", "jobb hos oss"]
+
+[[recipe]]
+id = "sjomatnorge_news"
+name = "Sjømat Norge – nyheter"
+sector = "food"
+description = "Nyheter fra sjømat- og havbruksnæringen."
+official_url = "https://sjomatnorge.no/feed/"
+verified_on = "2026-09-09"
+[recipe.source]
+kind = "rss"
+urls = ["https://sjomatnorge.no/feed/"]
+interval_minutes = 60
+alert_on_update = false
+
+
+[[recipe]]
+id = "virke_pressemeldinger"
+name = "Virke – pressemeldinger"
+sector = "business"
+description = "Nye pressemeldinger om handel, tjenestenæringer og arbeidsliv fra Virkes offisielle NTB-strøm. Velg tema eller eksplisitt alle. De 25 siste meldingene inngår; eldre arkiv og endringer i allerede kjente meldinger overvåkes ikke."
+official_url = "https://www.virke.no/kontakt/presse/"
+verified_on = "2026-09-10"
+[recipe.source]
+kind = "rss"
+urls = ["https://kommunikasjon.ntb.no/rss/releases/latest?publisherId=13569120"]
+interval_minutes = 60
+alert_on_update = false
+
+
+[[recipe]]
+id = "ssb_production_total"
+name = "SSB – produksjon: utvinning, bergverk, industri og kraft"
+sector = "business"
+description = "Sesongjustert produksjonsindeks for utvinning, bergverk, industri og kraft samlet (P101), ikke industri alene. Nye måneder og revisjoner innenfor de siste to månedene overvåkes."
+official_url = "https://www.ssb.no/statbank/table/07095"
+verified_on = "2026-09-10"
+[recipe.source]
+kind = "ssb_data"
+table = "07095"
+interval_minutes = 60
+max_records = 2
+events = ["added", "changed"]
+[recipe.source.value_codes]
+PKoder = ["P101"]
+ContentsCode = ["Sesongjustert"]
+Tid = ["top(2)"]
+[recipe.source.field_labels]
+value = "Sesongjustert produksjonsindeks"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
+
+
+[[recipe]]
+id = "ssb_manufacturing"
+name = "SSB – industriproduksjon"
+sector = "business"
+description = "Sesongjustert produksjonsindeks for industri (P105), adskilt fra samlet utvinning, bergverk, industri og kraft. Nye måneder og revisjoner innenfor de siste to månedene overvåkes."
+official_url = "https://www.ssb.no/statbank/table/07095"
+verified_on = "2026-09-10"
+[recipe.source]
+kind = "ssb_data"
+table = "07095"
+interval_minutes = 60
+max_records = 2
+events = ["added", "changed"]
+[recipe.source.value_codes]
+PKoder = ["P105"]
+ContentsCode = ["Sesongjustert"]
+Tid = ["top(2)"]
+[recipe.source.field_labels]
+value = "Sesongjustert produksjonsindeks"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
+
+
+[[recipe]]
+id = "ssb_salmon_exports"
+name = "SSB – lakseeksport: pris og volum"
+sector = "seafood"
+description = "Ukentlig eksportmengde i tonn og gjennomsnittlig kilopris i kroner, separat for fersk/kjølt og frossen oppdrettslaks. Nye uker og revisjoner innenfor de siste to ukene overvåkes; dette er ikke samlet sjømateksport eller eksportverdi."
+official_url = "https://www.ssb.no/statbank/table/03024"
+verified_on = "2026-09-10"
+[recipe.source]
+kind = "ssb_data"
+table = "03024"
+interval_minutes = 60
+max_records = 8
+events = ["added", "changed"]
+[recipe.source.value_codes]
+VareGrupper2 = ["01", "02"]
+ContentsCode = ["Vekt", "Kilopris"]
+Tid = ["top(2)"]
+[recipe.source.field_labels]
+value = "Observasjonsverdi"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "konkurransetilsynet_news"
+name = "Konkurransetilsynet – nyheter"
+sector = "business"
+description = "Nyheter, omtalte vedtak og faginnlegg fra Konkurransetilsynet. Siste ti RSS-publikasjoner, ikke hele vedtaksregisteret."
+official_url = "https://konkurransetilsynet.no/feed/"
+verified_on = "2026-09-10"
+[recipe.source]
+kind = "rss"
+urls = ["https://konkurransetilsynet.no/feed/"]
+interval_minutes = 60
+alert_on_update = false
+
+[[recipe]]
+id = "esa_state_aid"
+name = "ESA – statsstøtte"
+sector = "business"
+description = "ESAs 24 siste engelske temaoppdateringer om statsstøtte. Standardfilter følger Norge og retningslinjer/rammeverk. Ikke et komplett vedtaksregister; første innlesing er stille."
+official_url = "https://www.eftasurv.int/newsroom/updates?theme=28&language=en"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "json_records"
+urls = ["https://www.eftasurv.int/cms/api/node?url=%2Fnewsroom%2Fupdates&search=theme%3D28%26language%3Den"]
+interval_minutes = 60
+alert_on_update = false
+records_path = "listing.data.nodes"
+id_fields = ["alias"]
+fields = ["title", "summary"]
+title_field = "title"
+url_field = "alias"
+max_records = 24
+events = ["added"]
+[recipe.source.field_labels]
+title = "Tittel"
+summary = "Omtale"
+[recipe.source.filter]
+include_any = ["Norway", "Norwegian", "guidelines", "framework"]
+
+[[recipe]]
+id = "esa_competition"
+name = "ESA – konkurranse"
+sector = "business"
+description = "ESAs 24 siste engelske temaoppdateringer om konkurranse. Standardfilter følger Norge og retningslinjer/rammeverk. Ikke et komplett vedtaksregister; første innlesing er stille."
+official_url = "https://www.eftasurv.int/newsroom/updates?theme=29&language=en"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "json_records"
+urls = ["https://www.eftasurv.int/cms/api/node?url=%2Fnewsroom%2Fupdates&search=theme%3D29%26language%3Den"]
+interval_minutes = 60
+alert_on_update = false
+records_path = "listing.data.nodes"
+id_fields = ["alias"]
+fields = ["title", "summary"]
+title_field = "title"
+url_field = "alias"
+max_records = 24
+events = ["added"]
+[recipe.source.field_labels]
+title = "Tittel"
+summary = "Omtale"
+[recipe.source.filter]
+include_any = ["Norway", "Norwegian", "guidelines", "framework"]
+
+[[recipe]]
+id = "nav_labour_news"
+name = "NAV – arbeidsmarked og sykefravær"
+sector = "business"
+description = "Arbeidsmarkedsnyheter fra NAVs nasjonale presseliste, sortert etter dato. Leser de 20 siste treffene og velger arbeidsliv, ledighet, sykefravær og rekrutteringsbehov. Ikke en komplett statistikkserie eller fylkesdekning."
+official_url = "https://www.nav.no/samarbeidspartner/presse"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.nav.no/sok?ord=&page=0&f=presse&uf=&s=1&preferredLanguage=nb"]
+selector = "main .aksel-link-card__title a[href^='https://www.nav.no/']"
+interval_minutes = 60
+alert_on_update = false
+max_records = 20
+events = ["added"]
+[recipe.source.filter]
+include_any = ["arbeidsledighet", "arbeidsledige", "arbeidsmarked", "arbeidslivet", "sykefravær", "bedriftsundersøkelsen", "permittering", "rekruttering", "ledige stillinger"]
+[[recipe]]
+id = "mattilsynet_recall_products"
+name = "Mattilsynet – tilbakekallinger og endret produktomfang"
+sector = "food"
+description = "Nye tilbakekallinger og endringer i produkt, parti, holdbarhet og selskaper i de ti sist viste sakene. Kontaktendringer alene varsles ikke. Mistanke og påvist funn gjengis som kilden skriver dem."
+official_url = "https://www.mattilsynet.no/tilbakekallinger"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "food_recalls"
+interval_minutes = 360
+max_notices = 10
+max_records = 10
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nve_solar_cases"
+name = "NVE – konsesjonssaker og prosjektendringer"
+sector = "energy"
+description = "Nye og endrede solkraftsaker: stadium, høringsfrist, tiltakshaver, effekt og produksjon. Utvalget må være komplett innen 1000 saker. Type, kommune og søkeord kan tilpasses."
+official_url = "https://www.nve.no/konsesjon/konsesjonssaker/"
+verified_on = "2026-09-11"
+[recipe.source]
+"kind" = "nve_cases"
+"type" = "A-8"
+"page_size" = 1000
+"max_records" = 1000
+"interval_minutes" = 360
+"events" = ["added", "changed"]
+["recipe"."source"."filter"]
+"match_all" = true
+
+[[recipe]]
+id = "dmp_shortage_periods"
+name = "DMP – legemiddelmangel og endrede mangelperioder"
+sector = "health"
+description = "Nye preparater i mangellisten og endrede perioder, status eller tiltak. DMP oppdaterer daglig; forventet lagerdato er ikke publiseringstid. Filtrer gjerne på preparat eller virkestoff."
+official_url = "https://www.dmp.no/forsyningssikkerhet/legemiddelmangel"
+verified_on = "2026-09-11"
+[recipe.source]
+"kind" = "medicine"
+"max_records" = 5000
+"interval_minutes" = 1440
+"events" = ["added", "changed"]
+["recipe"."source"."filter"]
+"match_all" = true
+
+[[recipe]]
+id = "kofa_case_progress"
+name = "KOFA – innkomne og avgjorte klagesaker"
+sector = "legal"
+description = "Nye saker og endret status eller avgjørelse i de 50 sist viste sakene. Eldre saker utenfor vinduet overvåkes ikke."
+official_url = "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker"
+verified_on = "2026-09-11"
+[recipe.source]
+"kind" = "public_cases"
+"board" = "kofa"
+"max_pages" = 5
+"max_records" = 100
+"interval_minutes" = 360
+"events" = ["added", "changed"]
+["recipe"."source"."field_labels"]
+"date" = "Registerdato"
+"type" = "Klagetype"
+"respondent" = "Innklaget"
+"subject" = "Saken gjelder"
+"decision" = "Avgjørelse"
+"status" = "Status"
+["recipe"."source"."filter"]
+"match_all" = true
+
+[[recipe]]
+id = "media_appeal_cases"
+name = "Medieklagenemnda – innkomne saker og avgjørelser"
+sector = "media"
+description = "Nye medieklager og endret avgjørelse/status i de 30 sist viste sakene. Registerets dato er ikke en nøyaktig publiseringstid."
+official_url = "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker"
+verified_on = "2026-09-11"
+[recipe.source]
+"kind" = "public_cases"
+"board" = "media"
+"max_pages" = 3
+"max_records" = 100
+"interval_minutes" = 360
+"events" = ["added", "changed"]
+["recipe"."source"."field_labels"]
+"date" = "Registerdato"
+"respondent" = "Klager"
+"decision" = "Avgjørelse"
+"status" = "Status"
+["recipe"."source"."filter"]
+"match_all" = true
+
+[[recipe]]
+id = "marketing_appeal_cases"
+name = "Markedsrådet – klager og avgjørelser"
+sector = "marketing"
+description = "Nye markedsføringsklager og endret avgjørelse/status i de 30 sist viste sakene; regelverk og part beholdes."
+official_url = "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker"
+verified_on = "2026-09-11"
+[recipe.source]
+"kind" = "public_cases"
+"board" = "marketing"
+"max_pages" = 3
+"max_records" = 100
+"interval_minutes" = 360
+"events" = ["added", "changed"]
+["recipe"."source"."field_labels"]
+"date" = "Registerdato"
+"respondent" = "Part/klager"
+"subject" = "Saken gjelder"
+"decision" = "Avgjørelse"
+"regulation" = "Regelverk"
+"status" = "Status"
+["recipe"."source"."filter"]
+"match_all" = true
+
+[[recipe]]
+id = "einnsyn_project_journal"
+name = "eInnsyn – journalposter om valgt prosjekt"
+sector = "public_affairs"
+description = "Nye journalposter og endret offentlig tittel/type/journaldato for valgt prosjekt. Standard Wisting, siste30 dager. Tilpass query eller tittel; journalføring og publisering er ulike datoer."
+official_url = "https://github.com/felleslosninger/einnsyn-api-spec"
+verified_on = "2026-09-11"
+[recipe.source]
+"kind" = "journals"
+"tittel" = "Wisting"
+"lookback_days" = 30
+"max_pages" = 10
+"limit" = 100
+"max_records" = 1000
+"allow_empty" = true
+"interval_minutes" = 60
+"events" = ["added", "changed"]
+["recipe"."source"."filter"]
+"match_all" = true
+
+[[recipe]]
+id = "ted_contract_awards"
+name = "TED – kontraktsresultater, vinnere og verdi"
+sector = "procurement"
+description = "Norske resultatkunngjøringer med vinnere og oppgitt samlet verdi siste7 dager. Hele vinduet må passe i grensene. Valuta og fraværende beløp beholdes; ikke verdi per vinner."
+official_url = "https://docs.ted.europa.eu/api/latest/search.html"
+verified_on = "2026-09-11"
+[recipe.source]
+"kind" = "ted_notices"
+"notice_types" = ["can-standard", "can-social"]
+"lookback_days" = 7
+"limit" = 100
+"max_pages" = 5
+"max_records" = 500
+"allow_empty" = true
+"interval_minutes" = 360
+"events" = ["added", "changed"]
+["recipe"."source"."filter"]
+"match_all" = true
+
+[[recipe]]
+id = "ted_contract_modifications"
+name = "TED – kunngjorte kontraktsendringer"
+sector = "procurement"
+description = "Norske kontraktsendringskunngjøringer siste7 dager. Dette er nye kunngjøringer, ikke komplett kontraktshistorikk. Utvalget var tomt ved kildekontrollen."
+official_url = "https://docs.ted.europa.eu/api/latest/search.html"
+verified_on = "2026-09-11"
+[recipe.source]
+"kind" = "ted_notices"
+"notice_types" = ["can-modif"]
+"lookback_days" = 7
+"limit" = 100
+"max_pages" = 5
+"max_records" = 500
+"allow_empty" = true
+"interval_minutes" = 360
+"events" = ["added", "changed"]
+["recipe"."source"."filter"]
+"match_all" = true
+
+[[recipe]]
+id = "oslo_project_cases"
+name = "Oslo PBE – saks- og dokumentaktivitet"
+sector = "property"
+description = "Fritekstsøk på valgt adresse/prosjekt. Nye saksnummer og endret status/siste dokumentdato. Standard Sinsenveien5 kan også treffe56; ikke eksakt adresse eller dokumentert tillatelse. Lenken åpner søkeresultatet."
+official_url = "https://innsyn.pbe.oslo.kommune.no/saksinnsyn/omtjeneste.asp"
+verified_on = "2026-09-11"
+[recipe.source]
+"kind" = "building_cases"
+"query" = "Sinsenveien 5"
+"max_rows" = 100
+"max_records" = 100
+"interval_minutes" = 360
+"events" = ["added", "changed"]
+["recipe"."source"."filter"]
+"match_all" = true
+
+[[recipe]]
+id = "finkn_company_decisions"
+name = "Finansklagenemnda – avgjørelser om valgt selskap"
+sector = "finance"
+description = "Nye og endrede avgjørelser for valgt selskap innen30 dagers behandlingsvindu. Standard Tryg Forsikring NUF. Publisering kan skje senere enn behandling; eldre etterpublisering faller utenfor vinduet."
+official_url = "https://publisering.finkn.no/"
+verified_on = "2026-09-11"
+[recipe.source]
+"kind" = "financial_decisions"
+"company" = "Tryg Forsikring NUF"
+"lookback_days" = 30
+"max_records" = 500
+"allow_empty" = true
+"interval_minutes" = 360
+"events" = ["added", "changed"]
+["recipe"."source"."filter"]
+"match_all" = true
+
+[[recipe]]
+id = "sodir_licence_operator"
+name = "Sodir – gjeldende operatører for utvinningstillatelser"
+sector = "energy"
+description = "Gjeldende operatørperioder der gyldig-til er tom. Ny operatørperiode og endret selskapsnavn/gyldighet overvåkes. Hele CSV-en leses; historiske perioder filtreres ut. Ingen slettingspåstand."
+official_url = "https://factpages.sodir.no/"
+verified_on = "2026-09-11"
+[recipe.source]
+"kind" = "csv_records"
+"urls" = ["https://factpages.sodir.no/public?/Factpages/external/tableview/licence_oper_hst&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false"]
+"delimiter" = ","
+"encoding" = "utf-8-sig"
+"id_fields" = ["prlNpdidLicence", "cmpNpdidCompany", "prlOperDateValidFrom"]
+"fields" = ["prlName", "cmpLongName", "prlOperDateValidFrom", "prlOperDateValidTo"]
+"max_records" = 5000
+"max_bytes" = 1000000
+"events" = ["added", "changed"]
+"title_field" = "prlName"
+"interval_minutes" = 1440
+["recipe"."source"."field_labels"]
+"prlName" = "Utvinningstillatelse"
+"cmpLongName" = "Operatør"
+"prlOperDateValidFrom" = "Gyldig fra"
+"prlOperDateValidTo" = "Gyldig til"
+["recipe"."source"."where"]
+"prlOperDateValidTo" = [""]
+["recipe"."source"."filter"]
+"match_all" = true
+
+[[recipe]]
+id = "sodir_field_status"
+name = "Sodir – feltstatus"
+sector = "energy"
+description = "Nye og endrede faglige status-/gyldighetsperioder i hele CSV-utvalget. Generisk synkroniseringsdato alene varsles ikke. Ingen slettingspåstand."
+official_url = "https://factpages.sodir.no/"
+verified_on = "2026-09-11"
+[recipe.source]
+"kind" = "csv_records"
+"urls" = ["https://factpages.sodir.no/public?/Factpages/external/tableview/field_activity_status_hst&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false"]
+"delimiter" = ","
+"encoding" = "utf-8-sig"
+"id_fields" = ["fldNpdidField", "fldStatusFromDate"]
+"fields" = ["fldName", "fldStatus", "fldStatusFromDate", "fldStatusToDate"]
+"max_records" = 1000
+"max_bytes" = 1000000
+"events" = ["added", "changed"]
+"title_field" = "fldName"
+"interval_minutes" = 1440
+["recipe"."source"."field_labels"]
+"fldName" = "Felt"
+"fldStatus" = "Feltstatus"
+"fldStatusFromDate" = "Status fra"
+"fldStatusToDate" = "Status til"
+"fldStatusDateUpdated" = "Status oppdatert"
+"datesyncNPD" = "Sodir-synk"
+["recipe"."source"."filter"]
+"match_all" = true
+
+[[recipe]]
+id = "aquaculture_site_capacity"
+name = "Akvakulturlokalitet – kapasitet og registerendringer"
+sector = "food"
+description = "Endret kapasitet og plassering for valgt lokalitetsnummer. Standard TUHOLMANE Ø, 10029. Nye lokaliteter oppdages ikke automatisk; lisens- og fiskehelsedata inngår ikke."
+official_url = "https://api.fiskeridir.no/pub-aqua/api/v1/sites"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "aquaculture"
+nr = "10029"
+max_records = 10
+interval_minutes = 1440
+events = ["changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "research_approved_projects"
+name = "Forskningsrådet – innvilgede prosjekter"
+sector = "innovation"
+description = "Nye og endrede innvilgede prosjekter for valgte utlysninger. Standard kompetansebyggende prosjekt for næringslivet2026. Viser søkt beløp i kroner, ikke tildeling; ingen nasjonal totaldekning."
+official_url = "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "research_awards"
+urls = ["https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/"]
+max_records = 1000
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "sodir_exploration_progress"
+name = "Sodir – letebrønners status og boredatoer"
+sector = "energy"
+description = "Nye letebrønner og endret status, borestart og ferdigstillelse i siste tiårs utvalg. Ikke komplette brønnresultater eller funnstørrelser. Kilden lenker til CSV-uttrekket."
+official_url = "https://factpages.sodir.no/"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "csv_records"
+urls = ["https://factpages.sodir.no/public?/Factpages/external/tableview/wellbore_exploration_last_10_years&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false"]
+delimiter = ","
+encoding = "utf-8-sig"
+id_fields = ["wlbWellboreName"]
+fields = ["wlbWellboreName", "wlbStatus", "wlbEntryDate", "wlbCompletionDate"]
+title_field = "wlbWellboreName"
+max_records = 1000
+max_bytes = 1000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.field_labels]
+wlbWellboreName = "Brønnbane"
+wlbStatus = "Status"
+wlbEntryDate = "Borestart"
+wlbCompletionDate = "Ferdigstilt"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nb_nowa_observations"
+name = "Norges Bank – daglig NOWA-rente"
+sector = "finance"
+description = "Nye og reviderte daglige NOWA-observasjoner innen de siste fem observasjonene. Prosent; observasjonsdato er ikke publiseringstid. Volum og års-/månedsverdier filtreres ut."
+official_url = "https://www.norges-bank.no/en/topics/statistics/open-data/News-about-api/change-in-ir-data-set/"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "csv_records"
+urls = ["https://data.norges-bank.no/api/data/SHORT_RATES/.NOWA?format=csv&lastNObservations=5&locale=en"]
+delimiter = ";"
+id_fields = ["FREQ", "INSTRUMENT_TYPE", "TENOR", "UNIT_MEASURE", "TIME_PERIOD"]
+fields = ["OBS_VALUE", "UNIT_MEASURE", "TIME_PERIOD"]
+numeric_fields = ["OBS_VALUE"]
+max_records = 100
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.where]
+FREQ = ["B"]
+TENOR = ["ON"]
+UNIT_MEASURE = ["R"]
+[recipe.source.field_labels]
+OBS_VALUE = "NOWA-rente (%)"
+UNIT_MEASURE = "Enhet (R = prosent)"
+TIME_PERIOD = "Observasjonsdato"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nve_reservoir_no1_weekly"
+name = "NVE – magasinfylling NO1"
+sector = "energy"
+description = "Ukentlig endring i magasinfylling for elspotområde NO 1. Oppskriften er et eksplisitt områdevindu, ikke et fullstendig nasjonalt register."
+official_url = "https://api.nve.no/doc/magasinstatistikk/"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "json_records"
+urls = ["https://biapi.nve.no/magasinstatistikk/api/Magasinstatistikk/HentOffentligDataSisteUke"]
+id_fields = ["dato_Id", "omrType", "omrnr"]
+fields = ["dato_Id", "iso_aar", "iso_uke", "fyllingsgrad", "kapasitet_TWh", "fylling_TWh", "fyllingsgrad_forrige_uke", "endring_fyllingsgrad"]
+numeric_fields = ["iso_aar", "iso_uke", "fyllingsgrad", "kapasitet_TWh", "fylling_TWh", "fyllingsgrad_forrige_uke", "endring_fyllingsgrad"]
+max_records = 20
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.where]
+omrType = ["EL"]
+omrnr = ["1"]
+[recipe.source.field_labels]
+dato_Id = "Observasjonsdato"
+iso_uke = "ISO-uke"
+fyllingsgrad = "Magasinfylling (andel)"
+kapasitet_TWh = "Magasinkapasitet (TWh)"
+fylling_TWh = "Magasininnhold (TWh)"
+fyllingsgrad_forrige_uke = "Fylling forrige uke (andel)"
+endring_fyllingsgrad = "Endring siden forrige uke (andel)"
+
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "brreg_account_document_years"
+name = "BRREG – tilgjengelige årsregnskapskopier"
+sector = "business"
+description = "Nye år i listen over tilgjengelige årsregnskapskopier for valgte organisasjonsnummer. Standard Hydro. Dokumentlenken har gitt tidsavbrudd; varselet lenker til den bekreftede årslisten. Ingen kontroll av PDF-innhold eller revisjon innen samme år."
+official_url = "https://data.brreg.no/regnskapsregisteret/regnskap/aarsregnskap/kopi/914778271/aar"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "account_documents"
+companies = ["914778271"]
+max_records = 200
+allow_empty = true
+interval_minutes = 360
+events = ["added"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "pfu_decision_outcomes"
+name = "PFU – avgjørelser og utfall"
+sector = "media"
+description = "Nye og endrede avgjørelser i siste30 dagers behandlingsvindu. Medium, klager og PFUs konklusjon. Behandlingstid er ikke publiseringstid; eldre etterregistrering utenfor vinduet dekkes ikke."
+official_url = "https://pfu.presse.no/pfu-basen/"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "press_cases"
+lookback_days = 30
+page_size = 100
+max_pages = 5
+max_records = 500
+max_bytes = 1000000
+allow_empty = true
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "cisa_known_exploited"
+name = "CISA – utnyttede sårbarheter"
+sector = "technology"
+description = "Nye CVE-er og endret tiltak eller ransomware-status i CISAs globale KEV-katalog. Fristen gjelder amerikanske føderale virksomheter; registrering er ikke bevis på norske angrep. Tilpass emnefilter til leverandører/produkter."
+official_url = "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "json_records"
+urls = ["https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"]
+records_path = "vulnerabilities"
+total_path = "count"
+id_fields = ["cveID"]
+fields = ["cveID", "vendorProject", "product", "vulnerabilityName", "requiredAction", "dueDate", "knownRansomwareCampaignUse"]
+title_field = "vulnerabilityName"
+published_field = "dateAdded"
+max_records = 2500
+max_bytes = 4000000
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.field_labels]
+cveID = "CVE"
+vendorProject = "Leverandør/prosjekt"
+product = "Produkt"
+vulnerabilityName = "Sårbarhet"
+requiredAction = "CISAs anbefalte tiltak"
+dueDate = "Frist for amerikanske føderale virksomheter"
+knownRansomwareCampaignUse = "CISAs opplysning om ransomware-bruk"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "clinical_trials_norway_updates"
+name = "Kliniske studier – norsk studiested"
+sector = "health"
+description = "Nyobserverte studier og faglige endringer i rekruttering, fase, sponsor og resultattilgjengelighet. Komplett14 dagers oppdateringsvindu; gammel studie kan være ny i utvalget. Oppdateringsdato alene gir ikke varsel."
+official_url = "https://clinicaltrials.gov/data-api/api"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "clinical_trials"
+last_update_days = 14
+page_size = 100
+max_pages = 5
+max_records = 500
+max_bytes = 1000000
+allow_empty = true
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "arbeidstilsynet_inspection_reactions_by_industry"
+name = "Arbeidstilsynet – tilsynsreaksjoner per næring"
+sector = "regulatory"
+description = "Endringer i publisert statistikk over vedtak per år og næringsgruppe; Samlet statistikk, ikke konkrete selskapsvedtak. Standard bygg og anlegg; inneværende år er foreløpig."
+official_url = "https://data.norge.no/nb/datasets/21c96146-9676-30c3-af4c-a885bd717c05/arbeidstilsynets-statistikk-over-tilsyn-pr-vedtak"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "csv_records"
+urls = ["https://registerdata.arbeidstilsynet.no/statistikk/Statistikk_Tilsyn_vedtak.csv"]
+delimiter = ";"
+id_fields = ["Ar", "Hovednaring", "Naring", "NaringsHovedgruppe", "Naringsgruppe"]
+fields = ["Ar", "Naringsgruppe", "AntallTilsynVedtaPålegg", "AntallTilsynVedtaStansVedOverhengendeFare", "AntallTilsynVedtaTvangsmulkt", "AntallTilsynVedtaStansSomPress", "AntallTilsynVedtaOvertredelsesgebyr"]
+numeric_fields = ["AntallTilsynVedtaPålegg", "AntallTilsynVedtaStansVedOverhengendeFare", "AntallTilsynVedtaTvangsmulkt", "AntallTilsynVedtaStansSomPress", "AntallTilsynVedtaOvertredelsesgebyr"]
+max_records = 3000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.field_labels]
+Ar = "År"
+Hovednaring = "Hovednæring"
+Naring = "Næring"
+NaringsHovedgruppe = "Næringshovedgruppe"
+Naringsgruppe = "Næringsgruppe"
+"AntallTilsynVedtaPålegg" = "Tilsyn med pålegg"
+AntallTilsynVedtaStansVedOverhengendeFare = "Stans ved overhengende fare"
+AntallTilsynVedtaTvangsmulkt = "Tvangsmulkt"
+AntallTilsynVedtaStansSomPress = "Stans som pressmiddel"
+AntallTilsynVedtaOvertredelsesgebyr = "Overtredelsesgebyr"
+
+[recipe.source.where]
+Hovednaring = ["F Bygge- og anleggsvirksomhet"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "smilefjes_restaurant_inspections"
+name = "Smilefjes – tilsynsresultater for serveringssted"
+sector = "food"
+description = "Nye tilsyn og endret overordnet smilefjes/vurdering ved ett valgt serveringssted. Standard Pincho Nation Trondheim. Tilsynsdato er ikke publiseringsdato. Alle detaljkrav overvåkes ikke."
+official_url = "https://smilefjes.mattilsynet.no/"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "food_inspections"
+urls = ["https://smilefjes.mattilsynet.no/spisested/trondheim/pincho_nation.Z1502171421588723252EMWQC/"]
+organisation_number = "914322863"
+max_records = 100
+max_bytes = 2000000
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ema_medicine_authorisations"
+name = "EMA – produktstatus og indikasjon"
+sector = "health"
+description = "Nye humanlegemidler og faglige endringer i produktstatus, uttalelse, virkestoff, indikasjon, innehaver og autorisasjonsdato. EU-produktsak, ikke norsk refusjonsvedtak. Genereringstid alene varsles ikke."
+official_url = "https://www.ema.europa.eu/en/medicines/download-medicine-data"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ema_medicines"
+max_records = 3000
+max_bytes = 2000000
+max_unpacked_bytes = 8000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "mattilsynet_pesticide_products"
+name = "Mattilsynet – plantevernmiddelgodkjenninger"
+sector = "food"
+description = "Nye godkjente preparater og endret status, gyldighet, aktivstoff eller merknad. Stabil produkt-ID brukes fordi registreringsnummer kan mangle. Godkjentlisten beviser ikke tilbakekalling ved fravær."
+official_url = "https://plantevernmidler.mattilsynet.io/api_dokumentasjon"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "pesticides"
+mode = "products"
+max_records = 1000
+max_bytes = 2000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "mattilsynet_pesticide_temporary_permits"
+name = "Mattilsynet – midlertidige plantevernmiddeltillatelser"
+sector = "food"
+description = "Separate tidsbegrensede brukstillatelser med egen bruksbetingelses-ID, behandlingsdato, sluttdato og vilkår. Dette er ikke en generell produktgodkjenning. Fravær beviser ikke oppheving."
+official_url = "https://plantevernmidler.mattilsynet.io/api_dokumentasjon"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "pesticides"
+mode = "temporary_permits"
+max_records = 200
+max_bytes = 2000000
+allow_empty = true
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "fishhealth_ila_outbreaks"
+name = "Fiskehelse – ILA-mistanke og påvisning"
+sector = "food"
+description = "Nye lokalitetsregistreringer og endret mistanke-/påvist-/tomtdato i BarentsWatch/Veterinærinstituttets ILA-lag. Råmeldinger er ikke i seg selv et endelig juridisk Mattilsynet-vedtak."
+official_url = "https://developer.barentswatch.no/docs/fishhealth/"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "json_records"
+urls = ["https://geoserver.barentswatch.no/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=bw:localitywithila&outputFormat=application/json&maxFeatures=500"]
+records_path = "features"
+total_path = "numberMatched"
+id_fields = ["properties.lokalitetsnummer", "properties.sykdommer"]
+fields = ["properties.lokalitetsnavn", "properties.sykdommer", "properties.mistankedato", "properties.paavistdato", "properties.tomtdato"]
+title_field = "properties.lokalitetsnavn"
+max_records = 500
+max_bytes = 4000000
+allow_empty = true
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.field_labels]
+"properties.lokalitetsnavn" = "Lokalitet"
+"properties.sykdommer" = "Sykdom"
+"properties.mistankedato" = "Mistanke registrert"
+"properties.paavistdato" = "Påvist dato"
+"properties.tomtdato" = "Tomtdato oppgitt av kilden"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "fishhealth_ila_zone_validity"
+name = "ILA-beskyttelsessoner – forskrift og gyldighet"
+sector = "food"
+description = "Nye soneposter og endrede forskriftsreferanser/gyldighetsdatoer i WFS-registeret. Inneholder også historiske soner. Kartgeometri overvåkes ikke, og sonen må vurderes mot lenket forskrift."
+official_url = "https://developer.barentswatch.no/docs/fishhealth/"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "json_records"
+urls = ["https://geoserver.barentswatch.no/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=bw:ilaprotectionzone&outputFormat=application/json&maxFeatures=500"]
+records_path = "features"
+total_path = "numberMatched"
+id_fields = ["properties.id"]
+fields = ["properties.forsknr", "properties.forsknavn", "properties.forsklink", "properties.fromdate", "properties.todate"]
+title_field = "properties.forsknavn"
+url_field = "properties.forsklink"
+max_records = 500
+max_bytes = 4000000
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.field_labels]
+"properties.forsknr" = "Forskriftsnummer"
+"properties.forsknavn" = "Forskrift"
+"properties.forsklink" = "Forskriftslenke"
+"properties.fromdate" = "Sone fra (kildedato)"
+"properties.todate" = "Sone til (kildedato)"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nye_metoder_treatment_decisions"
+name = "Nye metoder – innføringsbeslutninger"
+sector = "health"
+description = "Nyobserverte metode-/indikasjonsbeslutninger og endret nasjonalt utfall eller beslutningstekst. Aktuell Excel-oversikt oppdages fra kildesiden. Beslutningsdato er ikke publiseringstid; indikasjon skiller metoder med flere bruksområder."
+official_url = "https://www.nyemetoder.no/innforing-av-nye-metoder/beslutning/"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "methods_decisions"
+max_records = 1500
+max_bytes = 500000
+max_unpacked_bytes = 3000000
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "industrial_installation_status"
+name = "Industrianlegg – driftsstatus og rapporteringsår"
+sector = "energy"
+description = "Valgte anleggs driftsstatus, myndighet, siste rapporteringsår og rapporteringsflagg fra Miljødirektoratet. Yara Porsgrunn er kontrollert med rapporteringsår 2023. Overvåker ikke utslippsmengder, tillatelsesrevisjoner eller brudd."
+official_url = "https://kart3.miljodirektoratet.no/arcgis/rest/services/industri/MapServer/0"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "industrial_environment"
+installation_ids = [5447]
+max_records = 10
+max_bytes = 100000
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "storting_case_vote_outcomes"
+name = "Stortinget – voteringsresultater i valgt sak"
+sector = "legal"
+description = "Voterings-ID, vedtatt-felt, stemmetall, tema og voteringstid for eksplisitt valgte saker. Eksempelet er historisk sak 83657 fra 2021 og må byttes til ønsket sak. Oppdager ikke nye saker automatisk. Enstemmige voteringer kan ha null i stemmetallene."
+official_url = "https://data.stortinget.no/dokumentasjon-og-hjelp/"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "parliament_votes"
+case_ids = [83657]
+max_records = 500
+max_bytes = 2000000
+allow_empty = true
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "research_result_discovery"
+name = "Forskningsrådet – oppdag publiserte prosjektresultater"
+sector = "business"
+description = "Oppdager resultatmerkede utlysninger fra valgte år og følger alle innvilgede prosjekter. 2026-utvalget ga åtte utlysninger og 277 prosjekter. Søkt og tildelt beløp skilles. Årsutvalg må oppdateres ved årsskifte; alle valgte sider må kunne leses innen grensene."
+official_url = "https://www.forskningsradet.no/utlysninger/?timeframe=2"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "research_awards"
+discover_results = true
+discovery_years = [2026]
+max_listing_pages = 1
+max_discovery_calls = 10
+max_records = 500
+max_bytes = 500000
+allow_empty = true
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "industrial_permit_inspection_documents"
+name = "Yara Porsgrunn – tillatelser og tilsynsdokumenter"
+sector = "energy"
+description = "Oppdager tillatelses- og tilsynsdokumenter i anleggets faktaark og endret dokumenttype, etikett, år eller PDF-lenke. 21 dokumenter er verifisert. Overvåker ikke endrede PDF-bytes, utslippsverdier eller lukking av avvik. Ukjent dokumentår lagres tomt."
+official_url = "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "industrial_documents"
+company_id = 5447
+max_records = 100
+max_bytes = 4000000
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "brreg_publishing_company_discovery"
+name = "BRREG – nye registrerte selskaper innen utgivelse"
+sector = "media"
+description = "Oppdager AS/ASA registrert i Enhetsregisteret de siste 30 dagene innen SN2025-divisjon 58, som omfatter bøker, aviser, tidsskrifter og programvareutgivelse. Fem AS i det verifiserte vinduet. Datoen er registrering, ikke stiftelse; eldre etterregistreringer utenfor vinduet fanges ikke opp."
+official_url = "https://data.brreg.no/enhetsregisteret/api/dokumentasjon/no/index.html"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "company_discovery"
+industry_prefixes = ["58"]
+organisation_forms = ["AS", "ASA"]
+lookback_days = 30
+page_size = 100
+max_pages = 5
+max_records = 500
+max_bytes = 1000000
+allow_empty = true
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ssb_housing_permits_monthly"
+name = "SSB – igangsettingstillatelser for boliger"
+sector = "property"
+description = "Antall boliger med igangsettingstillatelse, ujustert, i de siste to publiserte månedene. Overvåker nye måneder og revisjoner innenfor vinduet. Tillatelse betyr ikke at byggearbeidet faktisk har startet."
+official_url = "https://www.ssb.no/statbank/table/05808"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ssb_data"
+table = "05808"
+interval_minutes = 60
+max_records = 2
+max_bytes = 100000
+events = ["added", "changed"]
+[recipe.source.value_codes]
+ContentsCode = ["BoligIgang"]
+Tid = ["top(2)"]
+[recipe.source.field_labels]
+value = "Observasjonsverdi"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ssb_nonres_floor_permits_monthly"
+name = "SSB – igangsettingstillatelser for andre bygg"
+sector = "property"
+description = "Bruksareal til annet enn bolig med igangsettingstillatelse, i 1000 m², ujustert. Utvalget omfatter de siste to publiserte månedene og er bredere enn næringsbygg. Overvåker nye måneder og revisjoner innenfor vinduet."
+official_url = "https://www.ssb.no/statbank/table/05809"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ssb_data"
+table = "05809"
+interval_minutes = 60
+max_records = 2
+max_bytes = 100000
+events = ["added", "changed"]
+[recipe.source.value_codes]
+ContentsCode = ["BruksarealIgang"]
+Tid = ["top(2)"]
+[recipe.source.field_labels]
+value = "Observasjonsverdi"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "storting_recent_vote_discovery"
+name = "Stortinget – automatisk voteringsoppdagelse"
+sector = "public_policy"
+description = "Oppdager saker fra møter de siste 30 dagene og følger kildens voteringsresultater for disse sakene, også eventuelle eldre voteringer. Samme voterings-ID samles én gang. Første innlesing er stille; møtevinduet dokumenterer ikke sletting."
+official_url = "https://data.stortinget.no/eksport/sesjoner"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "parliament_vote_discovery"
+urls = []
+interval_minutes = 60
+lookback_days = 30
+max_sessions = 2
+max_meetings = 40
+max_cases = 200
+max_records = 1000
+max_bytes = 5000000
+allow_empty = true
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "finanstilsynet_flaggeplikt_gebyrvedtak"
+name = "Finanstilsynet – vedtak om overtredelsesgebyr for flaggeplikt"
+sector = "finance"
+description = "Nye daterte vedtak om overtredelsesgebyr for flaggeplikt. Listen inneholder vedtakslenker og datoer; enkelte titler navngir ikke foretaket, så foretak må hentes fra selve vedtakssiden ved behov. Varsler bare nye lenker i utvalget; gebyrbeløp, innholdsendringer og klageutfall overvåkes ikke."
+official_url = "https://www.finanstilsynet.no/tilsyn/markedsatferd/vedtak-om-overtredelsesgebyr---flaggeplikt/"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.finanstilsynet.no/tilsyn/markedsatferd/vedtak-om-overtredelsesgebyr---flaggeplikt/"]
+selector = "main a[href*='flaggeplikt-vedtak-om-overtredelsesgebyr']"
+events = ["added"]
+max_records = 100
+max_bytes = 1000000
+interval_minutes = 360
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ssb_dwelling_property_transfers"
+name = "SSB – tinglyste hjemmelsoverføringer av boligeiendom"
+sector = "property"
+description = "Kvartalsvise hjemmelsoverføringer av boligeiendom i alt og delmengden fritt salg, i de siste to publiserte kvartalene. Delmengden skal ikke summeres med totalen. Nye kvartaler og revisjoner innenfor vinduet overvåkes; antall overføringer er ikke antall boliger, salgsverdi eller prisindeks."
+official_url = "https://www.ssb.no/statbank/table/08948"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ssb_data"
+table = "08948"
+interval_minutes = 60
+max_records = 4
+max_bytes = 100000
+events = ["added", "changed"]
+[recipe.source.value_codes]
+EiendomType = ["B0"]
+ContentsCode = ["FrittSalg", "Hjemmel"]
+Tid = ["top(2)"]
+[recipe.source.field_labels]
+value = "Antall hjemmelsoverføringer"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ema_human_safety_communications"
+name = "EMA – sikkerhetsinformasjon til helsepersonell"
+sector = "health"
+description = "Nye og endrede direkte sikkerhetsmeldinger for humane legemidler. Rene mangelsaker utelates; meldingen gjengir regulatoriske felt uten å gi medisinske råd."
+official_url = "https://www.ema.europa.eu/en/about-us/about-website/download-website-data-json-data-format"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ema_regulatory_events"
+urls = ["https://www.ema.europa.eu/en/documents/report/dhpc-output-json-report_en.json"]
+dataset = "dhpc"
+max_records = 500
+max_bytes = 500000
+events = ["added", "changed"]
+interval_minutes = 720
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ema_human_safety_referrals"
+name = "EMA – sikkerhetsprosedyrer for legemidler"
+sector = "health"
+description = "Nye sikkerhetshenvisninger for humane legemidler og endringer i status, anbefalinger og uttrykkelige beslutningsdatoer."
+official_url = "https://www.ema.europa.eu/en/about-us/about-website/download-website-data-json-data-format"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ema_regulatory_events"
+urls = ["https://www.ema.europa.eu/en/documents/report/referrals-output-json-report_en.json"]
+dataset = "referrals"
+max_records = 1000
+max_bytes = 2000000
+events = ["added", "changed"]
+interval_minutes = 720
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ema_periodic_safety_outcomes"
+name = "EMA – utfall av periodiske sikkerhetsvurderinger"
+sector = "health"
+description = "Nye periodiske sikkerhetsvurderinger og endringer i virkestoff eller regulatorisk utfall. Blank kategori beholdes fordi EMA bruker den i store deler av registeret."
+official_url = "https://www.ema.europa.eu/en/about-us/about-website/download-website-data-json-data-format"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ema_regulatory_events"
+urls = ["https://www.ema.europa.eu/en/documents/report/medicines-output-periodic_safety_update_report_single_assessments-output-json-report_en.json"]
+dataset = "psusa"
+max_records = 5000
+max_bytes = 3000000
+events = ["added", "changed"]
+interval_minutes = 720
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "clinical_trials_norway_results"
+name = "Kliniske studier – publiserte resultater ved norske studiesteder"
+sector = "health"
+description = "Nye og reviderte publiserte resultatmoduler for studier med norsk studiested. Varsler rapporterte dataendringer uten å tolke effekt, årsak eller medisinsk betydning."
+official_url = "https://clinicaltrials.gov/data-api/about-api/study-data-structure"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "clinical_trial_results"
+urls = ["https://clinicaltrials.gov/api/v2/studies"]
+last_update_days = 14
+page_size = 20
+max_pages = 10
+max_records = 200
+max_bytes = 8000000
+allow_empty = true
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

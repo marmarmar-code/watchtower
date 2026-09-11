@@ -1,0 +1,90 @@
+[
+  {
+    "recipe": "brreg_account_document_years",
+    "checked_at": "2026-09-11T10:00:33.474795+00:00",
+    "records": 15,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://data.brreg.no/regnskapsregisteret/regnskap/aarsregnskap/kopi/914778271/aar",
+        "bytes": 106,
+        "sha256": "b7bcd20d8a4607bc9ca49fbdfebf5e51cb31e39858edb985dc98a82e8d2b7cd1"
+      },
+      {
+        "url": "https://data.brreg.no/regnskapsregisteret/regnskap/aarsregnskap/kopi/914778271/aar",
+        "bytes": 106,
+        "sha256": "b7bcd20d8a4607bc9ca49fbdfebf5e51cb31e39858edb985dc98a82e8d2b7cd1"
+      }
+    ],
+    "config_sha256": "1eb92fd457aa021fbfc4256926851d921c673e9854c3d28b918ba3440b3577dd",
+    "module_sha256": "4dc6efa08a2afa0464b7616d287a13281d440918e9bcc8df0a4edf3500fa55cb"
+  },
+  {
+    "recipe": "cisa_known_exploited",
+    "checked_at": "2026-09-11T10:00:34.220271+00:00",
+    "records": 1705,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+        "bytes": 1714060,
+        "sha256": "30f1fbd6104b59507bbb6ad0ced75c39834fe7bb8962a8f2ef1027d81a996211"
+      },
+      {
+        "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+        "bytes": 1714060,
+        "sha256": "30f1fbd6104b59507bbb6ad0ced75c39834fe7bb8962a8f2ef1027d81a996211"
+      }
+    ],
+    "config_sha256": "38e02020cc484a5029dac7b3bcf859c00ba80b6cd5eaa5ac82ebb5e2ce68ed71",
+    "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f"
+  },
+  {
+    "recipe": "nve_reservoir_no1_weekly",
+    "checked_at": "2026-09-11T10:00:33.284157+00:00",
+    "records": 1,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://biapi.nve.no/magasinstatistikk/api/Magasinstatistikk/HentOffentligDataSisteUke",
+        "bytes": 2468,
+        "sha256": "7134b3fafcca7a26447af695b832d81e859084b46254ce7d64205fccce075a68"
+      },
+      {
+        "url": "https://biapi.nve.no/magasinstatistikk/api/Magasinstatistikk/HentOffentligDataSisteUke",
+        "bytes": 2468,
+        "sha256": "7134b3fafcca7a26447af695b832d81e859084b46254ce7d64205fccce075a68"
+      }
+    ],
+    "config_sha256": "0378393dfe4ba36334af4633dc5fe8118ff1abcd85457ec55249c524fc41453d",
+    "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f"
+  },
+  {
+    "recipe": "pfu_decision_outcomes",
+    "checked_at": "2026-09-11T10:00:33.788590+00:00",
+    "records": 11,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://z4hi2p3ajd-dsn.algolia.net/1/indexes/pfu-basen_processedAtDesc/query",
+        "bytes": 288626,
+        "sha256": "fd457764826a87eb4d03b4cc378dacf07115fd1826dde03d2f7440aa65832fcf"
+      },
+      {
+        "url": "https://z4hi2p3ajd-dsn.algolia.net/1/indexes/pfu-basen_processedAtDesc/query",
+        "bytes": 288613,
+        "sha256": "0a70fad44486c9fe0fb29df4511ac468106dd4c6832db165d8eb9efd60d92237"
+      }
+    ],
+    "config_sha256": "560a3ea4c1261e9de0ee53faecda52441f29eb36999b7130a17a5d32c933a75d",
+    "module_sha256": "e46b089bd250b46f5ba3582ae5c01e6d87fd29ad91c977096e55d6d5b9a4245c"
+  }
+]

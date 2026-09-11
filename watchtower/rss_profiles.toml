@@ -103,3 +103,73 @@ status = "verified"
 verified_on = "2026-09-08"
 coverage = "Aktive farevarsler; avgrens geografisk og tillat lovlig tom feed."
 feed_urls = ["https://api.met.no/weatherapi/metalerts/2.0/current.rss"]
+[[profile]]
+id = "lla_nyheter"
+name = "LLA – nyheter"
+official_url = "https://lla.no/nyheter/"
+owner = "Landslaget for lokalaviser"
+status = "verified"
+verified_on = "2026-09-09"
+coverage = "Nyheter om lokalaviser, rammevilkår, kompetanse og organisasjonens arbeid."
+feed_urls = ["https://lla.no/feed/"]
+
+[[profile]]
+id = "schibsted_media_news"
+name = "Schibsted Media – news"
+official_url = "https://schibsted.com/press/"
+owner = "Schibsted Media"
+status = "verified"
+verified_on = "2026-09-09"
+coverage = "Schibsted Medias egne konsern- og merkevaresaker; profilen gjelder medievirksomheten, ikke Schibsted Marketplaces."
+feed_urls = ["https://schibsted.com/feed/?post_type=brand_post"]
+
+[[profile]]
+id = "reuters_institute_news"
+name = "Reuters Institute – news"
+official_url = "https://reutersinstitute.politics.ox.ac.uk/news"
+owner = "Reuters Institute for the Study of Journalism"
+status = "verified"
+verified_on = "2026-09-09"
+coverage = "Nyheter om journalistikk, nyhetsmedier, teknologi og instituttets virksomhet."
+feed_urls = ["https://reutersinstitute.politics.ox.ac.uk/rss/news"]
+
+[[profile]]
+id = "nordicom_news"
+name = "Nordicom – medieforskning"
+official_url = "https://www.nordicom.gu.se/en/latest/news"
+owner = "Nordicom, University of Gothenburg"
+status = "verified"
+verified_on = "2026-09-09"
+coverage = "Nordiske medienyheter, publikasjoner, statistikk og forskningsresultater. Feeden er på svensk."
+feed_urls = ["https://www.nordicom.gu.se/sv-rss"]
+
+[[profile]]
+id = "efj_news"
+name = "European Federation of Journalists – news"
+official_url = "https://europeanjournalists.org/news/"
+owner = "European Federation of Journalists"
+status = "verified"
+verified_on = "2026-09-09"
+coverage = "Europeiske saker om journalisters arbeidsvilkår, pressefrihet og mediepolitikk."
+feed_urls = ["https://europeanjournalists.org/feed/"]
+
+[[profile]]
+id = "journalismfund_news"
+name = "Journalismfund Europe – news"
+official_url = "https://www.journalismfund.eu/news"
+owner = "Journalismfund Europe"
+status = "verified"
+verified_on = "2026-09-09"
+coverage = "Utlysninger, tildelinger og nyheter om grensekryssende og undersøkende journalistikk. Feeden har et stort historisk vindu."
+feed_urls = ["https://www.journalismfund.eu/news/rss.xml"]
+# New RSS profiles validated 2026-09-09.
+
+[[profile]]
+id = "fhi_news"
+name = "FHI – nyheter"
+official_url = "https://www.fhi.no/om/om-nettstedet/nyhetsvarsel/"
+owner = "FHI"
+status = "verified"
+verified_on = "2026-09-09"
+coverage = "Alle nyheter fra FHI."
+feed_urls = ["https://www.fhi.no/rss/nyheter/"]

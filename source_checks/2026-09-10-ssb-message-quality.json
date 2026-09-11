@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-09-10T13:25:30.091720+00:00",
+  "method": "Actual public SSB fetches, presentation previews only; zero notification calls. Old/new adapter comparison against preserved historical state.",
+  "sources": [
+    {
+      "table": "07095",
+      "url": "https://data.ssb.no/api/pxwebapi/v2/tables/07095/data?lang=no&outputFormat=json-stat2&valueCodes%5BPKoder%5D=P105&valueCodes%5BContentsCode%5D=Sesongjustert&valueCodes%5BTid%5D=top%282%29",
+      "count": 2,
+      "scope_unchanged": true,
+      "keys_and_hashes_unchanged": true,
+      "full_next_state_unchanged": true,
+      "known_data_alerts": 0,
+      "raw_sha256": "301f73ecb2c5ae219e5aa0ae7541c4d10590c644719a984c92b94d084f50648e",
+      "preview_before": "*WATCHTOWER · SSB – INDUSTRIPRODUKSJON · Forhåndsvisning*\n*SSB · Industri / Produksjonsindeks. Sesongjustert / 2026M07*\n• Ny statistikkobservasjon\n• Enhet: indeks, basis 2021, WorkAndSes\n• Sesongjustert produksjonsindeks: 107.8\n• Enhet og beregningsgrunnlag: {\"ContentsCode\":{\"adjustment\":\"WorkAndSes\",\"base\":\"indeks\",\"base_period\":\"2021\",\"decimals\":1}}\n• Datastatus: \nPublisert: 2026M07\n<https://www.ssb.no/statbank/table/07095|Åpne kilden>",
+      "preview_after": "*WATCHTOWER · SSB – INDUSTRIPRODUKSJON · Forhåndsvisning*\n*SSB · Industri / Produksjonsindeks. Sesongjustert / 2026M07*\n• Ny statistikkobservasjon\n• Enhet: indeks, basis 2021, kalender- og sesongjustert\n• Sesongjustert produksjonsindeks: 107.8\nPublisert: 2026M07\n<https://www.ssb.no/statbank/table/07095|Åpne kilden>"
+    },
+    {
+      "table": "03024",
+      "url": "https://data.ssb.no/api/pxwebapi/v2/tables/03024/data?lang=no&outputFormat=json-stat2&valueCodes%5BVareGrupper2%5D=01%2C02&valueCodes%5BContentsCode%5D=Vekt%2CKilopris&valueCodes%5BTid%5D=top%282%29",
+      "count": 8,
+      "scope_unchanged": true,
+      "keys_and_hashes_unchanged": true,
+      "full_next_state_unchanged": true,
+      "known_data_alerts": 0,
+      "raw_sha256": "4d5b398101703f4cb5b57a2560249d0b66c74f73ec02cd1d232df92b123193e9",
+      "preview_before": "*WATCHTOWER · SSB – LAKSEEKSPORT: PRIS OG VOLUM · Forhåndsvisning*\n*SSB · Frosen oppalen laks / Kilopris (kr) / 2026U36*\n• Ny statistikkobservasjon\n• Enhet: kr, None\n• Observasjonsverdi: 68.07\n• Enhet og beregningsgrunnlag: {\"ContentsCode\":{\"adjustment\":\"None\",\"base\":\"kr\",\"base_period\":null,\"decimals\":2}}\n• Datastatus: \nPublisert: 2026U36\n<https://www.ssb.no/statbank/table/03024|Åpne kilden>",
+      "preview_after": "*WATCHTOWER · SSB – LAKSEEKSPORT: PRIS OG VOLUM · Forhåndsvisning*\n*SSB · Frosen oppalen laks / Kilopris (kr) / 2026U36*\n• Ny statistikkobservasjon\n• Enhet: kr\n• Observasjonsverdi: 68.07\nPublisert: 2026U36\n<https://www.ssb.no/statbank/table/03024|Åpne kilden>"
+    }
+  ]
+}

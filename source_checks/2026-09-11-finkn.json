@@ -1,0 +1,34 @@
+{
+  "checked_at": "2026-09-11",
+  "endpoint": "https://publisering.finkn.no/api/statements/searchstatements",
+  "scope": {
+    "SelectedCompany": "Tryg Forsikring NUF",
+    "NemndClosedDateFrom": "2026-08-12",
+    "NemndClosedDateTo": "2026-09-11",
+    "SelectedKeywords": []
+  },
+  "date_format_comparison": {
+    "company_only_records": 496,
+    "company_only_bytes": 20418919,
+    "iso_date_records": 2,
+    "iso_datetime_records": 2,
+    "norwegian_date_records": 0,
+    "bounded_response_bytes": 71903
+  },
+  "poll": {
+    "records_each": 2,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "identical_full_snapshots": true,
+    "ids": ["2026-927", "2026-902"]
+  },
+  "fields": ["sPkStatementId", "sSummaryTitle", "dtNemndClosedDate", "dtPublishedDate", "sCompany", "sConclusion"],
+  "stored_change_fields": ["title", "company", "conclusion", "closed_date"],
+  "published_field": "dtPublishedDate",
+  "fulltext_stored": false,
+  "full_xml_stored": false,
+  "default_lookback_days": 30,
+  "empty_window_valid": true,
+  "removed_supported": false,
+  "limitation": "The rolling decision-date window is not a complete historical register and cannot prove deletion."
+}

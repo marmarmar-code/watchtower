@@ -1,0 +1,24 @@
+[
+  {
+    "recipe": "finanstilsynet_flaggeplikt_gebyrvedtak",
+    "checked_at": "2026-09-11T13:21:34.702585+00:00",
+    "records": 13,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.finanstilsynet.no/tilsyn/markedsatferd/vedtak-om-overtredelsesgebyr---flaggeplikt/",
+        "bytes": 34764,
+        "sha256": "989397e2665a0f4ef1916b41cb32159cb61b4d0b44a948295754fa0370cff641"
+      },
+      {
+        "url": "https://www.finanstilsynet.no/tilsyn/markedsatferd/vedtak-om-overtredelsesgebyr---flaggeplikt/",
+        "bytes": 34764,
+        "sha256": "bddc54277182aeb98307234ae6ac19527cf2a8b32369b0e3b7470dd1ef19d9d2"
+      }
+    ],
+    "config_sha256": "df8a40093233b24e3cddc7f580b84455c719720e81cb6585923f91745e50cb8a",
+    "module_sha256": "01050ffae1f1da5cde7599cf8a12e708941c3a797c7c83e0f1ca935d864e1d97"
+  }
+]

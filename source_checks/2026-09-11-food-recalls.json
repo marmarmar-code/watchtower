@@ -1,0 +1,216 @@
+{
+  "checked_at": "2026-09-11T09:19:03.156861+00:00",
+  "url": "https://www.mattilsynet.no/tilbakekallinger",
+  "method": "two actual HTTP adapter fetches and local engine evaluation, no notifier or runtime state writes",
+  "records_per_fetch": 10,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "identical_full_snapshots": true,
+  "snapshot_sha256": "65d17d5fde48905ebda86fa0d794d8d30c966942452d9271bc0416370197f192",
+  "observations": [
+    {
+      "title": "Tilbakekaller finmalt kanel fra Kryddhuset på grunn av forhøyet innhold av kvikksølv",
+      "published": "2026-08-28T13:27:19.904Z",
+      "url": "https://www.mattilsynet.no/tilbakekallinger/europris-tilbakekaller-malt-kanel-fra-krydderhuset",
+      "products": [
+        {
+          "product": "Kryddhuset Kanel finmalt",
+          "recalling_company": "Europris AS og Sunrise Food AS",
+          "manufacturer": "Kryddhuset i Ljung AB",
+          "importer": "Europris AS og Sunrise Food AS",
+          "expiry": "Best før-dato 17.03.2029 28.05.2029",
+          "batch": null,
+          "lot": null,
+          "ean": "7331642055558",
+          "origin": "Vietnam",
+          "pack_size": "100 gram"
+        }
+      ]
+    },
+    {
+      "title": "Kvite ostar frå Brubakken Gårdsmeieri vert kalla tilbake grunna funn av Listeria monocytogenes",
+      "published": "2026-09-09T06:57:15.413Z",
+      "url": "https://www.mattilsynet.no/tilbakekallinger/kvite-ostar-fra-brubakken-gardsmeieri-vert-kalla-tilbake-grunna-funn-av-listeria-monocytogenes",
+      "products": [
+        {
+          "product": "Gullros og Heidrun",
+          "recalling_company": "Brubekken Gårdsmeieri",
+          "manufacturer": null,
+          "importer": null,
+          "expiry": null,
+          "batch": null,
+          "lot": null,
+          "ean": null,
+          "origin": null,
+          "pack_size": "ca. 250 g"
+        },
+        {
+          "product": "Gullros",
+          "recalling_company": null,
+          "manufacturer": null,
+          "importer": null,
+          "expiry": null,
+          "batch": null,
+          "lot": null,
+          "ean": null,
+          "origin": null,
+          "pack_size": null
+        }
+      ]
+    },
+    {
+      "title": "Coop tilbakekaller MON AMI Fransk Brie på grunn av mistanke om Listeria",
+      "published": "2026-09-03T12:25:15.473Z",
+      "url": "https://www.mattilsynet.no/tilbakekallinger/coop-tilbakekaller-mon-ami-fransk-brie-pa-grunn-av-mistanke-om-listeria",
+      "products": [
+        {
+          "product": "MON AMI Fransk Brie 500 g",
+          "recalling_company": "Coop Norge SA",
+          "manufacturer": "SASU Pâturages Comtois",
+          "importer": "Coop Norge SA",
+          "expiry": "Best før 02.09.2026",
+          "batch": "BFBP",
+          "lot": null,
+          "ean": "5704025024649",
+          "origin": "Frankrike",
+          "pack_size": "500 gram"
+        }
+      ]
+    },
+    {
+      "title": "First Price røkt laks skivet 200 g og Fiskemannen røkt laks skivet 220 g kalles tilbake grunnet funn av Listeria.",
+      "published": "2026-08-12T14:10:36.822Z",
+      "url": "https://www.mattilsynet.no/tilbakekallinger/first-price-rokt-laks-skivet-200-g-og-fiskemannen-rokt-laks-skivet-220-g-kalles-tilbake-grunnet-funn-av-listeria",
+      "products": [
+        {
+          "product": "First Price røkt laks skivet 200 g og Fiskemannen røkt laks skivet 220 g",
+          "recalling_company": "UNIL",
+          "manufacturer": null,
+          "importer": null,
+          "expiry": "Siste forbruksdag 06.09.2026",
+          "batch": null,
+          "lot": null,
+          "ean": null,
+          "origin": null,
+          "pack_size": null
+        }
+      ]
+    },
+    {
+      "title": "Spirefrø, vital miks, 40 g, fra Rapunzel kalles tilbake på grunn av funn av E. coli",
+      "published": "2026-08-04T12:45:56.775Z",
+      "url": "https://www.mattilsynet.no/tilbakekallinger/spirefro-vital-miks-40-g-fra-rapunzel-kalles-tilbake-pa-grunn-av-funn-av-e.coli",
+      "products": [
+        {
+          "product": "Spirefrø, vital mix / Vital Spossen-Mix",
+          "recalling_company": "Norganic AS",
+          "manufacturer": "Rapunzel",
+          "importer": "Norganic AS",
+          "expiry": "Best før 01.12.2027",
+          "batch": null,
+          "lot": null,
+          "ean": "4006040169895",
+          "origin": "Østerrike",
+          "pack_size": "40 g"
+        }
+      ]
+    },
+    {
+      "title": "Normal AS tilbakekaller godteri fra Kina på grunn av innhold av fargestoffet E123",
+      "published": "2026-07-28T11:32:16.927Z",
+      "url": "https://www.mattilsynet.no/tilbakekallinger/normal-as-tilbakekaller-godteri-fra-kina-pa-grunn-av-innhold-av-fargestoffet-e123",
+      "products": [
+        {
+          "product": "Marshmallows Donuts (70 g), Marshmallows French fries (72 g), Marshmallows Hotdog (72 g)",
+          "recalling_company": "Normal AS",
+          "manufacturer": null,
+          "importer": "Normal Norge AS",
+          "expiry": null,
+          "batch": null,
+          "lot": "alle",
+          "ean": null,
+          "origin": "Kina",
+          "pack_size": null
+        }
+      ]
+    },
+    {
+      "title": "Frosne froskelår frå Vietnam blir kalla tilbake etter funn av ulovlege antibiotikarestar",
+      "published": "2026-07-28T08:41:03.145Z",
+      "url": "https://www.mattilsynet.no/tilbakekallinger/frosne-froskelar-fra-vietnam-blir-kalla-tilbake-etter-funn-av-ulovlege-antibiotikarestar",
+      "products": [
+        {
+          "product": "Frog Legs",
+          "recalling_company": "Yaki Import AS",
+          "manufacturer": null,
+          "importer": "Yaki Import AS",
+          "expiry": "Best før 12.07.2027",
+          "batch": null,
+          "lot": "VN/002/IV/078",
+          "ean": null,
+          "origin": "Vietnam",
+          "pack_size": "1 kg"
+        }
+      ]
+    },
+    {
+      "title": "Geia Food AS tilbakekaller produktet \"Bapao Beef\" (115 g)",
+      "published": "2026-07-22T10:57:17.866Z",
+      "url": "https://www.mattilsynet.no/tilbakekallinger/geia-food-as-tilbakekaller-produktet-bapao-beef",
+      "products": [
+        {
+          "product": "BAPAO BEEF",
+          "recalling_company": "Geia Food AS",
+          "manufacturer": "The Dutch Bakery Group BV, Nederland",
+          "importer": "Geia Food AS",
+          "expiry": "Best før 05.09.2026 17.12.2026 13.02.2027 08.04.2027",
+          "batch": null,
+          "lot": "26098 26044 25351 25248",
+          "ean": null,
+          "origin": "Nederland",
+          "pack_size": "115 g"
+        }
+      ]
+    },
+    {
+      "title": "Bama tilbakekaller ferdigvasket babyspinat og babyleaf Mix på grunn av mistanke om Listeria",
+      "published": "2026-07-02T12:34:01.325Z",
+      "url": "https://www.mattilsynet.no/tilbakekallinger/bama-tilbakekaller-ferdigvasket-babyspinat-og-babyleaf-mix-pa-grunn-av-mistanke-om-listeria",
+      "products": [
+        {
+          "product": "Babyspinat 65 g, Babyleaf Mix 65 g",
+          "recalling_company": "BAMA",
+          "manufacturer": "BAMA Industri, avd. Tranby",
+          "importer": null,
+          "expiry": "Siste forbruksdag 02.07.2026 03.07.2026",
+          "batch": null,
+          "lot": "Babyspinat 65 g: Lot D22 og D23 Babyleaf Mix 65: Lot D 22",
+          "ean": null,
+          "origin": "Polen og Norge",
+          "pack_size": "65 g"
+        }
+      ]
+    },
+    {
+      "title": "Sunrise food as tilbakekaller basmatiris fra Pakistan etter funn av plantevernmiddelrester over grenseverdi",
+      "published": "2026-06-26T11:36:18.303Z",
+      "url": "https://www.mattilsynet.no/tilbakekallinger/sunrise-food-as-tilbakekaller-basmatiris-fra-pakistan-etter-funn-av-plantevernmiddelrester-over-grenseverdi",
+      "products": [
+        {
+          "product": "Sunrise basmati ris",
+          "recalling_company": null,
+          "manufacturer": null,
+          "importer": "Sunrise food as",
+          "expiry": "Best før 01.08.2026",
+          "batch": null,
+          "lot": "26021607",
+          "ean": null,
+          "origin": "Pakistan",
+          "pack_size": "1,5 kg"
+        }
+      ]
+    }
+  ],
+  "scope": "ten most recently displayed notices, including product and batch changes while in this window; older notices not covered",
+  "limit": "No real new-event delivery has been observed. Missing optional fields stay null. Source wording retains suspected vs detected findings."
+}

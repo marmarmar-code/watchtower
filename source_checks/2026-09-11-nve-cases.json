@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-09-11T09:24:21.162048+00:00",
+  "source": "https://www.nve.no/konsesjon/konsesjonssaker/",
+  "api": "https://www.nve.no/umbraco/api/license/getall",
+  "selection": {
+    "type": "A-8",
+    "pageNumber": 1,
+    "pageSize": 1000,
+    "sortBy": "name",
+    "sortDir": "ASC",
+    "filterText": "",
+    "caseType": "00",
+    "county": "00",
+    "municipality": "00",
+    "stadium": 0,
+    "size": 0,
+    "progress": 0
+  },
+  "records": 115,
+  "baseline_alerts": 0,
+  "repeat_alerts": 0,
+  "identical_full_state": true,
+  "state_sha256": "78616af60e8160fe6127b82f221346c6b18b7f79cda7a53be62a1c31f1665435",
+  "contract": "All cases matching the selected type if total <= page_size; reject truncation. No removal events. Source Dato is case date, not published time.",
+  "sample": {
+    "key": "26249",
+    "title": "Steinsheia sol- og batteripark",
+    "url": "https://www.nve.no/konsesjon/konsesjonssaker/konsesjonssak?id=26249&type=A-8",
+    "published": null,
+    "fields": {
+      "Tittel": "Steinsheia sol- og batteripark",
+      "Tiltakshaver": "SOLKRAFT SØR AS",
+      "Fylke": "Agder",
+      "Kommune": "Lyngdal",
+      "Stadium": "Melding",
+      "Status": "",
+      "Dato": "2026-08-24T00:00:00",
+      "Sakstype": "",
+      "Hoeringsfrist": null,
+      "MW": 10.5,
+      "GWh": 12.9,
+      "Paaklaget": null
+    }
+  }
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "recipe": "aquaculture_site_capacity",
+    "checked_at": "2026-09-11T09:56:10.638963+00:00",
+    "records": 1,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://api.fiskeridir.no/pub-aqua/api/v1/sites?nr=10029&range=0-9",
+        "bytes": 4976,
+        "sha256": "784cd70aeed52451d40fb65b9eeb0fefd62955c70bca8ace01c9ce482153d911"
+      },
+      {
+        "url": "https://api.fiskeridir.no/pub-aqua/api/v1/sites?nr=10029&range=0-9",
+        "bytes": 4976,
+        "sha256": "784cd70aeed52451d40fb65b9eeb0fefd62955c70bca8ace01c9ce482153d911"
+      }
+    ],
+    "config_sha256": "8b8969bb72bb214ae6561b787ff788420de24313f02f3121c3197bf89225e861",
+    "module_sha256": "db02aafb8893f7ac0cea6e974e049f85fec85e4cdae8b63dafa0e7c313f7b158"
+  },
+  {
+    "recipe": "nb_nowa_observations",
+    "checked_at": "2026-09-11T09:57:58.196598+00:00",
+    "records": 5,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://data.norges-bank.no/api/data/SHORT_RATES/.NOWA?format=csv&lastNObservations=5&locale=en",
+        "bytes": 3385,
+        "sha256": "0349e14ee5ddc6c69209e80963a217c9297fed10ee36d1e0db691aa4d075af57"
+      },
+      {
+        "url": "https://data.norges-bank.no/api/data/SHORT_RATES/.NOWA?format=csv&lastNObservations=5&locale=en",
+        "bytes": 3385,
+        "sha256": "0349e14ee5ddc6c69209e80963a217c9297fed10ee36d1e0db691aa4d075af57"
+      }
+    ],
+    "config_sha256": "e1b3985098a78b56b06f21ca2568b522ffef89ce6ce49b2c516c5933a0fcc697",
+    "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f"
+  },
+  {
+    "recipe": "research_approved_projects",
+    "checked_at": "2026-09-11T09:56:11.076202+00:00",
+    "records": 19,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/",
+        "bytes": 221698,
+        "sha256": "77e335cda6f48cc0f5fd4064ae2778300637c4fc556f931b43da50ff287b386b"
+      },
+      {
+        "url": "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/",
+        "bytes": 221698,
+        "sha256": "e5217053c3286fb0db325b0ffd620970a59a83aa0cbf420c2467a4aa69fc8650"
+      }
+    ],
+    "config_sha256": "fac541872d3281d3c0135611e29524595afc56e510ab4f81c5b66811dd24f035",
+    "module_sha256": "1cb85a15006ed14e314a0ffd6f3b57ec1860bf6b861c67b06a28a2c178485534"
+  },
+  {
+    "recipe": "sodir_exploration_progress",
+    "checked_at": "2026-09-11T09:57:57.974385+00:00",
+    "records": 402,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://factpages.sodir.no/public?/Factpages/external/tableview/wellbore_exploration_last_10_years&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false",
+        "bytes": 47562,
+        "sha256": "66c976ddd40380d67d9bc2ca78818f956c0b04e351a22c8763fbd5c0bec2a746"
+      },
+      {
+        "url": "https://factpages.sodir.no/public?/Factpages/external/tableview/wellbore_exploration_last_10_years&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false",
+        "bytes": 47562,
+        "sha256": "66c976ddd40380d67d9bc2ca78818f956c0b04e351a22c8763fbd5c0bec2a746"
+      }
+    ],
+    "config_sha256": "6ff686095cec34f6eead0f5111da59e105d506e167dc885081f3544095fc6174",
+    "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f"
+  }
+]

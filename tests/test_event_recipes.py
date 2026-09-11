@@ -14,6 +14,7 @@ from watchtower.recipes import add_sources, load_recipes, selected_sources, sour
 from watchtower.setup import make_config, write_runtime
 from watchtower.sources.common import SourceError
 from watchtower.sources.ssb_data import SsbDataSource, observations
+from watchtower.sources.changes import SnapshotSource
 from watchtower.sources.structured import StructuredSource
 from test_change_sources import config, poll, response
 
@@ -55,7 +56,35 @@ class SsbObservationTests(unittest.TestCase):
         source.get.return_value=response(data)
         _,alerts=poll(source,previous)
         self.assertEqual(2,len(alerts))
-        self.assertTrue(all('base_period' in ' '.join(alert.item.alert_details) for alert in alerts))
+        self.assertTrue(all('basis 2025' in ' '.join(alert.item.alert_details)
+                            and 'basis 2026' in ' '.join(alert.item.alert_details) for alert in alerts))
+
+    def test_readable_units_preserve_observation_identity_and_unknown_metadata(self):
+        source = self.source()
+        for adjustment, expected in [('None', 'Enhet: index, basis 2025'),
+                                     ('WorkAndSes', 'Enhet: index, basis 2025, kalender- og sesongjustert'),
+                                     ('FutureCode', 'Enhet: index, basis 2025, justering: FutureCode')]:
+            with self.subTest(adjustment=adjustment):
+                data = cube()
+                data['dimension']['Metric']['extension']['adjustment'] = {'index': adjustment}
+                row = observations(data, table='14700', limit=4)[0]
+                original = deepcopy(row)
+                item = source._item(row, 'added', ('Ny registrering', 'raw unit metadata'), False)
+                canonical = SnapshotSource._item(source, row, 'added', (), False)
+                self.assertEqual(original, row)
+                self.assertEqual((canonical.key, canonical.content_hash(), canonical.metadata, canonical.text),
+                                 (item.key, item.content_hash(), item.metadata, item.text))
+                self.assertIn(expected, item.alert_details)
+                self.assertIn('Verdi: 101', item.alert_details)
+                self.assertFalse(any('raw unit' in d or 'base_period' in d for d in item.alert_details))
+        before = row['fields']['unit']
+        after = deepcopy(before)
+        after['Metric']['decimals'] = 2
+        after['Metric']['extra'] = 'source note'
+        detail = source.describe_change('unit', before, after)
+        self.assertIn('desimaler: 1', detail)
+        self.assertIn('desimaler: 2', detail)
+        self.assertIn('extra: source note', detail)
 
     def test_dimension_order_and_sparse_vectors_preserve_identity(self):
         data=cube()
@@ -98,7 +127,7 @@ class RecipeTests(unittest.TestCase):
             return build_source(load_config(path).sources[0])
 
     def test_every_recipe_and_rss_profile_builds_a_valid_configuration(self):
-        self.assertEqual(10,len(load_recipes()))
+        self.assertEqual(99,len(load_recipes()))
         for row in load_recipes():
             with self.subTest(recipe=row['id']):self.source(row['id'])
         for profile in ('nkom','met_farevarsler'):
@@ -107,8 +136,23 @@ class RecipeTests(unittest.TestCase):
                 path.write_text(source_toml(selected_sources(rss_profile=profile,topics=['Synthetic Topic'])[0]))
                 build_source(load_config(path).sources[0])
 
+    def test_business_feed_exclusions_survive_all_and_topic_selection(self):
+        from watchtower.config import FilterRule
+        for options in ({"match_all": True}, {"topics": ["tilsyn"]}):
+            selected = selected_sources(recipe="forbrukertilsynet_news", **options)[0]
+            rule = FilterRule(**selected["filter"])
+            self.assertFalse(rule.matches("Ledig stilling i tilsynet"))
+            self.assertTrue(rule.matches("Tilsynet undersøker skjult reklame"))
+        nho = selected_sources(recipe="nho_business_news", match_all=True)[0]
+        self.assertFalse(FilterRule(**nho["filter"]).matches("Ikoner"))
+        self.assertEqual(["emp.jobylon.com"], nho["exclude_url_hosts"])
+        self.assertEqual(["emp.jobylon.com"], selected_sources(recipe="nho_business_news", topics=["direktør"])[0]["exclude_url_hosts"])
+        for source_id in ("nho_business_news", "forbrukertilsynet_news", "finansnorge_news", "sjomatnorge_news"):
+            with self.subTest(source=source_id), self.assertRaisesRegex(ValueError, "--topic"):
+                selected_sources(recipe=source_id)
+
     def test_news_requires_topic_or_explicit_all_but_narrow_data_does_not(self):
-        for recipe in ('riksrevisjonen_reports','nkom_events'):
+        for recipe in ('riksrevisjonen_reports','nkom_events','virke_pressemeldinger','konkurransetilsynet_news'):
             with self.assertRaisesRegex(ValueError,'--topic'):selected_sources(recipe=recipe)
         self.assertTrue(selected_sources(recipe='nb_policy_rate')[0]['filter']['match_all'])
         with self.assertRaisesRegex(ValueError,'unknown'):selected_sources(recipe='missing')
@@ -123,7 +167,7 @@ class RecipeTests(unittest.TestCase):
             self.assertEqual(before,target.read_text())
             add_sources(root,sources,apply=True)
             self.assertTrue(target.read_text().startswith(before.rstrip()))
-            self.assertEqual(4,len(load_config(target).sources))
+            self.assertEqual(5,len(load_config(target).sources))
             self.assertEqual('{"marker":true}',state.read_text())
             after=target.read_bytes()
             with self.assertRaises(ValueError):add_sources(root,sources,apply=True)

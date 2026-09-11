@@ -1,0 +1,34 @@
+[
+  {
+    "recipe": "clinical_trials_norway_updates",
+    "checked_at": "2026-09-11T10:05:27.756185+00:00",
+    "records": 135,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.locn=AREA%5BLocationCountry%5DNorway&filter.advanced=AREA%5BLastUpdatePostDate%5DRANGE%5B2026-08-28%2C+2026-09-11%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CPhase%2CLeadSponsorName%2CStudyFirstPostDate%2CLastUpdatePostDate%2CLocationCountry%2CHasResults&format=json&pageSize=100&countTotal=true",
+        "bytes": 428722,
+        "sha256": "16b00a636d68901d0e4369b0e61e7716145b9c4dd88f6967c959cd47b9b0047c"
+      },
+      {
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.locn=AREA%5BLocationCountry%5DNorway&filter.advanced=AREA%5BLastUpdatePostDate%5DRANGE%5B2026-08-28%2C+2026-09-11%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CPhase%2CLeadSponsorName%2CStudyFirstPostDate%2CLastUpdatePostDate%2CLocationCountry%2CHasResults&format=json&pageSize=100&countTotal=true&pageToken=ZVt07cGHkvI2wRk2CJf6_LLtzoHfMpVrd7KrgP4ZnT-Xvvw0IQ",
+        "bytes": 160053,
+        "sha256": "a3c17f78b1a8326587156c6e44a81628c3a107d007f69e638f645f2751595751"
+      },
+      {
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.locn=AREA%5BLocationCountry%5DNorway&filter.advanced=AREA%5BLastUpdatePostDate%5DRANGE%5B2026-08-28%2C+2026-09-11%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CPhase%2CLeadSponsorName%2CStudyFirstPostDate%2CLastUpdatePostDate%2CLocationCountry%2CHasResults&format=json&pageSize=100&countTotal=true",
+        "bytes": 428722,
+        "sha256": "16b00a636d68901d0e4369b0e61e7716145b9c4dd88f6967c959cd47b9b0047c"
+      },
+      {
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.locn=AREA%5BLocationCountry%5DNorway&filter.advanced=AREA%5BLastUpdatePostDate%5DRANGE%5B2026-08-28%2C+2026-09-11%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CPhase%2CLeadSponsorName%2CStudyFirstPostDate%2CLastUpdatePostDate%2CLocationCountry%2CHasResults&format=json&pageSize=100&countTotal=true&pageToken=ZVt07cGHkvI2wRk2CJf6_LLtzoHfMpVrd7KrgP4ZnT-Xvvw0IQ",
+        "bytes": 160053,
+        "sha256": "a3c17f78b1a8326587156c6e44a81628c3a107d007f69e638f645f2751595751"
+      }
+    ],
+    "config_sha256": "6b6a95c1dd0d51412736f29b57bf398449777842dd0a7b4f7fc4a3d12fc22282",
+    "module_sha256": "ac959b2ab0f3d1460f958ff05aa792d00ca0ddb15512f39e1b60d0b1149232dd"
+  }
+]

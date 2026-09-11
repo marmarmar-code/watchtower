@@ -30,7 +30,15 @@ def pending(state: StateStore) -> dict | None:
             raise ValueError("invalid private delivery batch")
         if not isinstance(batch.get("entries"), list) or not isinstance(batch.get("sent_at"), (str, type(None))):
             raise ValueError("invalid private delivery batch")
-    if not isinstance(journal.get("staged"), dict) or not isinstance(journal.get("status"), dict):
+        if not all(isinstance(row, dict) for row in batch["rows"]):
+            raise ValueError("invalid private delivery batch")
+    if (
+        not isinstance(journal.get("provider"), str)
+        or not journal["provider"]
+        or not isinstance(journal.get("staged"), dict)
+        or not all(isinstance(value, dict) for value in journal["staged"].values())
+        or not isinstance(journal.get("status"), dict)
+    ):
         raise ValueError("invalid private delivery state")
     return journal
 

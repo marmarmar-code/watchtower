@@ -1,0 +1,46 @@
+{
+  "checked_at": "2026-09-11",
+  "endpoint": "https://clinicaltrials.gov/api/v2/studies",
+  "verified_config": {
+    "kind": "clinical_trials",
+    "urls": ["https://clinicaltrials.gov/api/v2/studies"],
+    "events": ["added", "changed"],
+    "last_update_days": 14,
+    "page_size": 100,
+    "max_pages": 5,
+    "max_records": 500,
+    "max_bytes": 1000000,
+    "allow_empty": true
+  },
+  "query": {
+    "query.locn": "AREA[LocationCountry]Norway",
+    "filter_field": "LastUpdatePostDate",
+    "from": "2026-08-28",
+    "to": "2026-09-11",
+    "countTotal": true
+  },
+  "observed_pagination": {
+    "totalCount": 135,
+    "page_sizes": [100, 35],
+    "pages": 2,
+    "totalCount_on_first_page": true,
+    "totalCount_on_token_page": false,
+    "final_nextPageToken": false
+  },
+  "poll": {
+    "records_each": 135,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "identical_full_snapshots": true,
+    "scope_hash": "9989c58f710fb9a099118c3b9d1b2a9978ed48c6cc31cd1b4878945233860516"
+  },
+  "identity": "NCTId",
+  "stored_change_fields": ["title", "status", "phases", "sponsor", "has_results"],
+  "published_field": "StudyFirstPostDate",
+  "last_update_in_fingerprint": false,
+  "norway_location_validated": true,
+  "all_reported_phases_preserved": true,
+  "empty_window_valid": true,
+  "removed_supported": false,
+  "limitation": "The rolling recent-update window is not a complete historical register and cannot prove deletion."
+}

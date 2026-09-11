@@ -1,0 +1,323 @@
+name: Watchtower catalog test
+
+on:
+  schedule:
+    - cron: "7,22,37,52 * * * *"
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: "Test operation"
+        required: true
+        default: preview
+        type: choice
+        options:
+          - preview
+          - baseline
+          - test-notification
+          - run
+  push:
+    branches:
+      - main
+    paths:
+      - .github/catalog-test-request.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: watchtower-catalog-test-runtime
+  cancel-in-progress: false
+
+jobs:
+  test:
+    if: >-
+      github.repository == 'example-owner/watchtower-test-runtime' &&
+      github.ref == 'refs/heads/main' &&
+      github.event.repository.private == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Check out dedicated test runtime
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 2
+
+      - name: Validate operation and repository marker
+        id: operation
+        env:
+          EVENT_BEFORE: ${{ github.event.before }}
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_SHA: ${{ github.sha }}
+          REQUESTED_OPERATION: ${{ inputs.operation }}
+          REPOSITORY_PRIVATE: ${{ github.event.repository.private }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = "example-owner/watchtower-test-runtime"
+          test "$GITHUB_REF" = "refs/heads/main"
+          test "$REPOSITORY_PRIVATE" = "true"
+          grep -Fxq '# WATCHTOWER CATALOG TEST RUNTIME' README.md
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          import subprocess
+
+          allowed = {"preview", "baseline", "test-notification", "run"}
+          event = os.environ["EVENT_NAME"]
+          if event == "workflow_dispatch":
+              operation = os.environ["REQUESTED_OPERATION"]
+          elif event == "schedule":
+              operation = "run"
+          elif event == "push":
+              before, sha = os.environ["EVENT_BEFORE"], os.environ["EVENT_SHA"]
+              parents = subprocess.run(
+                  ["git", "rev-list", "--parents", "-n", "1", sha],
+                  check=True, capture_output=True, text=True,
+              ).stdout.split()
+              if parents != [sha, before]:
+                  raise SystemExit("push must contain exactly one direct request commit")
+              request_name = ".github/catalog-test-request.json"
+              changed = subprocess.run(
+                  ["git", "diff", "--name-only", before, sha],
+                  check=True, capture_output=True, text=True,
+              ).stdout.splitlines()
+              if changed != [request_name]:
+                  raise SystemExit("request commit may change only the fixed request file")
+              path = Path(request_name)
+              if not path.exists():
+                  Path(os.environ["GITHUB_OUTPUT"]).write_text("authorized=false\n", encoding="utf-8")
+                  raise SystemExit(0)
+              value = json.loads(path.read_text(encoding="utf-8"))
+              if set(value) != {"operation"}:
+                  raise SystemExit("request may contain only operation")
+              operation = value["operation"]
+          else:
+              raise SystemExit("unsupported trigger")
+          if operation not in allowed:
+              raise SystemExit("unsupported test operation")
+          Path(os.environ["GITHUB_OUTPUT"]).write_text(
+              f"authorized=true\nvalue={operation}\n", encoding="utf-8"
+          )
+          PY
+
+      - name: Move to freshest main state after queueing
+        if: steps.operation.outputs.authorized == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin main
+          git checkout --quiet main
+          git merge --ff-only --quiet origin/main
+          grep -Fxq '# WATCHTOWER CATALOG TEST RUNTIME' README.md
+
+      - name: Check out pinned public Watchtower code
+        if: steps.operation.outputs.authorized == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: example-owner/watchtower
+          ref: REPLACE_WITH_REVIEWED_COMMIT_SHA
+          path: public-source
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        if: steps.operation.outputs.authorized == 'true'
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: public-source/pyproject.toml
+
+      - name: Install pinned code and validate catalog and adapter setup identities
+        if: steps.operation.outputs.authorized == 'true'
+        run: |
+          set -euo pipefail
+          python -m pip install ./public-source
+          python -m pip check
+          python -m watchtower validate-config --config config/watchtower.toml
+          python - <<'PY'
+          from watchtower.config import load_config
+          from watchtower.recipes import load_recipes
+          from watchtower.rss_profiles import load_profiles
+
+          expected = {row["id"] for row in load_profiles()} | {row["id"] for row in load_recipes()}
+          adapters = load_config("public-source/examples/adapter-test-sources.toml")
+          expected |= {source.id for source in adapters.sources if source.enabled}
+          config = load_config("config/watchtower.toml")
+          actual = {source.id for source in config.sources if source.enabled}
+          if len(config.sources) != len(expected) or actual != expected:
+              raise SystemExit("test runtime must contain exactly the reviewed catalog and adapter setup ids")
+          PY
+
+      - name: Acquire persistent run checkpoint
+        id: checkpoint
+        if: >-
+          steps.operation.outputs.value == 'run' ||
+          steps.operation.outputs.value == 'baseline'
+        env:
+          CHECKPOINT_OPERATION: ${{ steps.operation.outputs.value }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          checkpoint=state/_workflow_checkpoint.json
+          if [[ -e "$checkpoint" ]]; then
+            echo "An unresolved prior run checkpoint blocks automatic retry." >&2
+            echo "Restore and review that run's state before clearing it." >&2
+            exit 1
+          fi
+          python3 - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          if os.environ["CHECKPOINT_OPERATION"] == "baseline":
+              if any(path.name != ".gitkeep" for path in Path("state").iterdir()):
+                  raise SystemExit("baseline requires completely empty test state")
+
+          Path("state/_workflow_checkpoint.json").write_text(
+              json.dumps({
+                  "version": 1,
+                  "run_id": os.environ["GITHUB_RUN_ID"],
+                  "run_attempt": os.environ["GITHUB_RUN_ATTEMPT"],
+                  "operation": os.environ["CHECKPOINT_OPERATION"],
+                  "base_sha": os.environ["GITHUB_SHA"],
+                  "started_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+              }, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          PY
+          git config user.name "watchtower-test[bot]"
+          git config user.email "watchtower-test[bot]@users.noreply.github.com"
+          git add -- "$checkpoint"
+          git commit --quiet -m "chore: checkpoint catalog test run $GITHUB_RUN_ID"
+          git push --quiet origin HEAD:main
+          echo "owned=true" >> "$GITHUB_OUTPUT"
+
+      - name: Preview all public catalog sources without state or sending
+        if: steps.operation.outputs.value == 'preview'
+        run: |
+          python - <<'PY'
+          from watchtower.config import load_config
+          from watchtower.engine import build_source
+
+          failed = 0
+          config = load_config("config/watchtower.toml")
+          for row in config.sources:
+              try:
+                  source = build_source(row)
+                  items = source.fetch()
+                  print(f"PREVIEW; source={row.id} items={len(items)} warnings={len(source.coverage_warnings)}")
+              except Exception as exc:
+                  failed += 1
+                  print(f"PREVIEW FAILED; source={row.id} error={type(exc).__name__}")
+          print(f"TEST PREVIEW; sources={len(config.sources)} failed={failed}")
+          raise SystemExit(1 if failed else 0)
+          PY
+
+      - name: Establish silent baseline only from empty test state
+        id: baseline
+        if: >-
+          steps.operation.outputs.value == 'baseline' &&
+          steps.checkpoint.outputs.owned == 'true'
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from watchtower.config import load_config
+          from watchtower.engine import run
+          from watchtower.state import StateStore
+
+          state_path = Path("state")
+          allowed_control_files = {".gitkeep", "_workflow_checkpoint.json"}
+          if any(path.name not in allowed_control_files for path in state_path.iterdir()):
+              raise SystemExit("baseline requires completely empty test state")
+          config = load_config("config/watchtower.toml")
+          result = run(config, StateStore(state_path), None)
+          print(f"CATALOG BASELINE; checked={result.checked_sources} baselines={result.baselined_sources} errors={len(result.errors)}")
+          if result.alerts or result.errors:
+              raise SystemExit("baseline did not complete cleanly")
+          PY
+
+      - name: Send one representative test notification
+        if: steps.operation.outputs.value == 'test-notification'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.WATCHTOWER_TEST_SLACK_WEBHOOK_URL }}
+        run: python -m watchtower test-notification --config config/watchtower.toml
+
+      - name: Run against persistent test state and test channel
+        id: monitor
+        if: >-
+          steps.operation.outputs.value == 'run' &&
+          steps.checkpoint.outputs.owned == 'true'
+        continue-on-error: true
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.WATCHTOWER_TEST_SLACK_WEBHOOK_URL }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          set --
+          if [[ "${{ github.event_name }}" != "workflow_dispatch" ]]; then
+            set -- --respect-intervals
+          fi
+          python -m watchtower run \
+            --config config/watchtower.toml \
+            --state-dir state \
+            --redact-output \
+            "$@"
+
+      - name: Summarize test source health
+        id: health
+        if: >-
+          always() &&
+          steps.operation.outputs.value == 'run'
+        continue-on-error: true
+        run: >-
+          python -m watchtower status
+          --config config/watchtower.toml
+          --state-dir state
+          --redact-output
+
+      - name: Persist only test state
+        id: persist
+        if: >-
+          always() &&
+          steps.checkpoint.outputs.owned == 'true' &&
+          ((steps.operation.outputs.value == 'baseline' && steps.baseline.outcome == 'success') ||
+           steps.operation.outputs.value == 'run')
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f -- state/_workflow_checkpoint.json
+          git add -- state
+          changed=$(git diff --cached --name-only)
+          if [[ -n "$changed" ]] && grep -Ev '^state/' <<< "$changed" >/dev/null; then
+            echo "Refusing to commit files outside test state/" >&2
+            exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo "Test state unchanged"
+            exit 0
+          fi
+          git config user.name "watchtower-test[bot]"
+          git config user.email "watchtower-test[bot]@users.noreply.github.com"
+          git commit --quiet -m "chore: update catalog test state"
+          for attempt in 1 2 3; do
+            if git pull --rebase --quiet origin main && git push --quiet origin HEAD:main; then
+              exit 0
+            fi
+            git rebase --abort >/dev/null 2>&1 || true
+            sleep $((attempt * 2))
+          done
+          echo "Could not persist catalog test state; the upstream checkpoint blocks silent retry." >&2
+          exit 1
+
+      - name: Fail after preserving test state
+        if: >-
+          always() &&
+          (steps.baseline.outcome == 'failure' ||
+           steps.checkpoint.outcome == 'failure' ||
+           steps.monitor.outcome == 'failure' ||
+           steps.health.outcome == 'failure' ||
+           steps.persist.outcome == 'failure')
+        run: exit 1

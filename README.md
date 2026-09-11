@@ -16,7 +16,8 @@ Opprett en privat runtime fra en separat runtime-mal. Følg [installasjonsveiled
 ## Start her
 
 Følg [installasjonsveiledningen](INSTALL.md). Den lokale veiviseren lager en privat
-konfigurasjon fra startpakkene `general`, `finance`, `health`, `digital`, `property` og `retail`:
+konfigurasjon fra startpakker for generell overvåking, finans, helse, digital,
+eiendom, handel, medier, energi, mat, jus og digital kommunikasjon/nett/sikkerhet:
 
 ```bash
 python -m watchtower setup --runtime ../watchtower-runtime
@@ -33,7 +34,7 @@ varsler, secrets og drift. [FORKING.md](FORKING.md) beskriver eierskap og bruksr
 
 Fem nye adaptere følger valgte JSON-poster, CSV-rader, nettsidetekst, dokumentlenker
 og faktiske SSB-tall. Varsler kan avgrenses til nye poster eller endringer i bestemte
-felt, med tallterskler og gjentatte bekreftelser. [Ti ferdige kildeoppsett](RECIPES.md)
+felt, med tallterskler og gjentatte bekreftelser. [Førti ferdige kildeoppsett](RECIPES.md)
 dekker blant annet styringsrente, valuta, KPI, boligpriser, detaljhandel, konkurser,
 alvorlige farevarsler, Riksrevisjonen og Nkom.
 

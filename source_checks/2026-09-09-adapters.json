@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-09T12:14:09+00:00",
+  "public_snapshot": "d935009",
+  "config": "examples/adapter-test-sources.toml",
+  "validation_method": "Two separate live fetches of the final checked-in adapter test configuration, 20 second request timeout, two attempts; no state or notifications.",
+  "verified": [
+    {
+      "id": "web_page_medietilsynet",
+      "kind": "web_page",
+      "runs": [
+        {
+          "at": "2026-09-09T12:13:54+00:00",
+          "count": 1,
+          "unique_keys": 1,
+          "seconds": 0.196,
+          "warnings": [],
+          "keys_sha256": "e99b0a2db7ed8317219069110d7e95ba94f868f6f20b57fd5cb284f7041825f3",
+          "key_examples": [
+            "record:8ed9d58b130b7299aef0d87554944cda1f64814dc2f691faa8f867c4365d6074"
+          ]
+        },
+        {
+          "at": "2026-09-09T12:13:54+00:00",
+          "count": 1,
+          "unique_keys": 1,
+          "seconds": 0.158,
+          "warnings": [],
+          "keys_sha256": "e99b0a2db7ed8317219069110d7e95ba94f868f6f20b57fd5cb284f7041825f3",
+          "key_examples": [
+            "record:8ed9d58b130b7299aef0d87554944cda1f64814dc2f691faa8f867c4365d6074"
+          ]
+        }
+      ],
+      "same_keys": true,
+      "examples": [
+        {
+          "title": "Medietilsynet – aktuelt sidetekst",
+          "url": "https://www.medietilsynet.no/nyheter/aktuelt/"
+        }
+      ]
+    },
+    {
+      "id": "regjeringen_media",
+      "kind": "regjeringen",
+      "runs": [
+        {
+          "at": "2026-09-09T12:13:55+00:00",
+          "count": 99,
+          "unique_keys": 99,
+          "seconds": 0.388,
+          "warnings": [],
+          "keys_sha256": "137da5ecf5158ea7ed8f2c7b00dc45b4510b09a7ff264d3f7e7966f7af017c7e",
+          "key_examples": [
+            "3172068",
+            "3172093"
+          ]
+        },
+        {
+          "at": "2026-09-09T12:13:55+00:00",
+          "count": 99,
+          "unique_keys": 99,
+          "seconds": 0.14,
+          "warnings": [],
+          "keys_sha256": "137da5ecf5158ea7ed8f2c7b00dc45b4510b09a7ff264d3f7e7966f7af017c7e",
+          "key_examples": [
+            "3172068",
+            "3172093"
+          ]
+        }
+      ],
+      "same_keys": true,
+      "examples": [
+        {
+          "title": "Forsvarsministeren til Warsaw Security Forum",
+          "url": "https://www.regjeringen.no/no/aktuelt/forsvarsministeren-til-warsaw-security-forum/id3172068/?utm_source=regjeringen.no&utm_medium=rss"
+        }
+      ]
+    },
+    {
+      "id": "stortinget_horinger",
+      "kind": "stortinget",
+      "runs": [
+        {
+          "at": "2026-09-09T12:13:55+00:00",
+          "count": 351,
+          "unique_keys": 351,
+          "seconds": 0.141,
+          "warnings": [],
+          "keys_sha256": "22dbf29c0314512516c11035b36f2311ae5b091d5c6b9ecbe74cc977ec408820",
+          "key_examples": [
+            "horing:10005544",
+            "horing:10005545"
+          ]
+        },
+        {
+          "at": "2026-09-09T12:13:55+00:00",
+          "count": 351,
+          "unique_keys": 351,
+          "seconds": 0.142,
+          "warnings": [],
+          "keys_sha256": "22dbf29c0314512516c11035b36f2311ae5b091d5c6b9ecbe74cc977ec408820",
+          "key_examples": [
+            "horing:10005544",
+            "horing:10005545"
+          ]
+        }
+      ],
+      "same_keys": true,
+      "examples": [
+        {
+          "title": "Statsbudsjettet 2026 (kapitler fordelt til arbeids- og sosialkomiteen)",
+          "url": "https://www.stortinget.no/no/Hva-skjer-pa-Stortinget/Horing/"
+        }
+      ]
+    },
+    {
+      "id": "konkurransetilsynet_media",
+      "kind": "konkurransetilsynet",
+      "runs": [
+        {
+          "at": "2026-09-09T12:13:57+00:00",
+          "count": 30,
+          "unique_keys": 30,
+          "seconds": 1.452,
+          "warnings": [],
+          "keys_sha256": "74ed86b906def14ee171ae443e6197f728471ed856338ec8010dc58337826fda",
+          "key_examples": [
+            "https://konkurransetilsynet.no/fusjoner/eviny-as-mer-norway-as-mer-sweden-ab-mer-germany-public-gmbh/",
+            "https://konkurransetilsynet.no/fusjoner/equinor-asa-lastebilramp-for-propan-pa-karsto-innmat/"
+          ]
+        },
+        {
+          "at": "2026-09-09T12:13:58+00:00",
+          "count": 30,
+          "unique_keys": 30,
+          "seconds": 1.362,
+          "warnings": [],
+          "keys_sha256": "74ed86b906def14ee171ae443e6197f728471ed856338ec8010dc58337826fda",
+          "key_examples": [
+            "https://konkurransetilsynet.no/fusjoner/eviny-as-mer-norway-as-mer-sweden-ab-mer-germany-public-gmbh/",
+            "https://konkurransetilsynet.no/fusjoner/equinor-asa-lastebilramp-for-propan-pa-karsto-innmat/"
+          ]
+        }
+      ],
+      "same_keys": true,
+      "examples": [
+        {
+          "title": "Eviny AS – Mer Norway AS / Mer Sweden AB / Mer Germany Public GmbH",
+          "url": "https://konkurransetilsynet.no/fusjoner/eviny-as-mer-norway-as-mer-sweden-ab-mer-germany-public-gmbh/"
+        }
+      ]
+    },
+    {
+      "id": "euronext_polaris_media",
+      "kind": "euronext",
+      "runs": [
+        {
+          "at": "2026-09-09T12:13:58+00:00",
+          "count": 5,
+          "unique_keys": 5,
+          "seconds": 0.222,
+          "warnings": [],
+          "keys_sha256": "6f27f8a7159c37ad83ee5383a801a05531c898e0b8a26f49a0772f54f12acfc6",
+          "key_examples": [
+            "euronext:1bb028cdfaefb62381f66aa6",
+            "euronext:3737366b53f461aa6516ab80"
+          ]
+        },
+        {
+          "at": "2026-09-09T12:13:58+00:00",
+          "count": 5,
+          "unique_keys": 5,
+          "seconds": 0.127,
+          "warnings": [],
+          "keys_sha256": "6f27f8a7159c37ad83ee5383a801a05531c898e0b8a26f49a0772f54f12acfc6",
+          "key_examples": [
+            "euronext:1bb028cdfaefb62381f66aa6",
+            "euronext:3737366b53f461aa6516ab80"
+          ]
+        }
+      ],
+      "same_keys": true,
+      "examples": [
+        {
+          "title": "2. kvartal 2026: Sterk resultatvekst for Polaris Media i andre kvartal",
+          "url": "https://live.euronext.com/nb/product/equities/NO0010466022-XOSL/company-information"
+        }
+      ]
+    },
+    {
+      "id": "hoyesterett_recent",
+      "kind": "hoyesterett",
+      "runs": [
+        {
+          "at": "2026-09-09T12:13:59+00:00",
+          "count": 2,
+          "unique_keys": 2,
+          "seconds": 0.428,
+          "warnings": [],
+          "keys_sha256": "dba61266af7363b847807720f8f3cf3a413e78ec745fbbd2e341c46af8cb3541",
+          "key_examples": [
+            "HR-2026-1937-U",
+            "HR-2026-1909-U"
+          ]
+        },
+        {
+          "at": "2026-09-09T12:14:00+00:00",
+          "count": 2,
+          "unique_keys": 2,
+          "seconds": 0.913,
+          "warnings": [],
+          "keys_sha256": "dba61266af7363b847807720f8f3cf3a413e78ec745fbbd2e341c46af8cb3541",
+          "key_examples": [
+            "HR-2026-1937-U",
+            "HR-2026-1909-U"
+          ]
+        }
+      ],
+      "same_keys": true,
+      "examples": [
+        {
+          "title": "Grovt uaktsom overtredelse av domstolloven § 199 om rettergangsbot er straffbar",
+          "url": "https://www.domstol.no/no/hoyesterett/avgjorelser/avgjorelser-2026/hoyesteretts-ankeutvalg---straff/HR-2026-1937-U/"
+        }
+      ]
+    },
+    {
+      "id": "brreg_nrk",
+      "kind": "brreg",
+      "runs": [
+        {
+          "at": "2026-09-09T12:14:00+00:00",
+          "count": 1,
+          "unique_keys": 1,
+          "seconds": 0.155,
+          "warnings": [],
+          "keys_sha256": "3f524ec38cb1f20881599a937da8ff446381749660f24d36f53cab2efb74c643",
+          "key_examples": [
+            "company:976390512"
+          ]
+        },
+        {
+          "at": "2026-09-09T12:14:00+00:00",
+          "count": 1,
+          "unique_keys": 1,
+          "seconds": 0.427,
+          "warnings": [],
+          "keys_sha256": "3f524ec38cb1f20881599a937da8ff446381749660f24d36f53cab2efb74c643",
+          "key_examples": [
+            "company:976390512"
+          ]
+        }
+      ],
+      "same_keys": true,
+      "examples": [
+        {
+          "title": "Selskapsstatus: NORSK RIKSKRINGKASTING AS",
+          "url": "https://data.brreg.no/enhetsregisteret/api/enheter/976390512"
+        }
+      ]
+    },
+    {
+      "id": "ssb_kpi",
+      "kind": "ssb",
+      "runs": [
+        {
+          "at": "2026-09-09T12:14:00+00:00",
+          "count": 1,
+          "unique_keys": 1,
+          "seconds": 0.135,
+          "warnings": [],
+          "keys_sha256": "5f457a569a0dd7a278abb752d364fb43138fb1d27296c28c7545e282e82698f1",
+          "key_examples": [
+            "table:14700"
+          ]
+        },
+        {
+          "at": "2026-09-09T12:14:01+00:00",
+          "count": 1,
+          "unique_keys": 1,
+          "seconds": 0.129,
+          "warnings": [],
+          "keys_sha256": "5f457a569a0dd7a278abb752d364fb43138fb1d27296c28c7545e282e82698f1",
+          "key_examples": [
+            "table:14700"
+          ]
+        }
+      ],
+      "same_keys": true,
+      "examples": [
+        {
+          "title": "SSB: 14700: Konsumprisindeks (KPI), etter vare- og tjenestegruppe (2025=100) 2000M01-2026M07",
+          "url": "https://www.ssb.no/statbank/table/14700"
+        }
+      ]
+    },
+    {
+      "id": "stotte_nrk",
+      "kind": "stotte",
+      "runs": [
+        {
+          "at": "2026-09-09T12:14:02+00:00",
+          "count": 7,
+          "unique_keys": 7,
+          "seconds": 1.159,
+          "warnings": [],
+          "keys_sha256": "8a1d652cfff0afd23b99502f4f1ef3673a7f312fe398e09451682d7a1bfab9a6",
+          "key_examples": [
+            "allocation:1000034348",
+            "allocation:1000076227"
+          ]
+        },
+        {
+          "at": "2026-09-09T12:14:03+00:00",
+          "count": 7,
+          "unique_keys": 7,
+          "seconds": 0.926,
+          "warnings": [],
+          "keys_sha256": "8a1d652cfff0afd23b99502f4f1ef3673a7f312fe398e09451682d7a1bfab9a6",
+          "key_examples": [
+            "allocation:1000034348",
+            "allocation:1000076227"
+          ]
+        }
+      ],
+      "same_keys": true,
+      "examples": [
+        {
+          "title": "Støttetildeling: NORSK RIKSKRINGKASTING AS",
+          "url": "https://stotte.brreg.no/"
+        }
+      ]
+    },
+    {
+      "id": "short_sale_bouvet",
+      "kind": "finanstilsynet_short_sale",
+      "runs": [
+        {
+          "at": "2026-09-09T12:14:03+00:00",
+          "count": 1,
+          "unique_keys": 1,
+          "seconds": 0.168,
+          "warnings": [],
+          "keys_sha256": "88dbcc2e1667b068d962ec12310d24d1d47ca5084fc1c1ef9e9395a92852ed3b",
+          "key_examples": [
+            "short:NO0010360266"
+          ]
+        },
+        {
+          "at": "2026-09-09T12:14:04+00:00",
+          "count": 1,
+          "unique_keys": 1,
+          "seconds": 1.472,
+          "warnings": [],
+          "keys_sha256": "88dbcc2e1667b068d962ec12310d24d1d47ca5084fc1c1ef9e9395a92852ed3b",
+          "key_examples": [
+            "short:NO0010360266"
+          ]
+        }
+      ],
+      "same_keys": true,
+      "examples": [
+        {
+          "title": "Shortsalg: BOUVET – 0 %",
+          "url": "https://ssr.finanstilsynet.no/"
+        }
+      ]
+    },
+    {
+      "id": "finanstilsynet_dnb",
+      "kind": "finanstilsynet_registry",
+      "runs": [
+        {
+          "at": "2026-09-09T12:14:09+00:00",
+          "count": 1,
+          "unique_keys": 1,
+          "seconds": 4.745,
+          "warnings": [],
+          "keys_sha256": "c339037bc03b9c9330b27cc528576d43288139f3c6bdf6a0aa556e040af61240",
+          "key_examples": [
+            "org:984851006"
+          ]
+        },
+        {
+          "at": "2026-09-09T12:14:09+00:00",
+          "count": 1,
+          "unique_keys": 1,
+          "seconds": 0.303,
+          "warnings": [],
+          "keys_sha256": "c339037bc03b9c9330b27cc528576d43288139f3c6bdf6a0aa556e040af61240",
+          "key_examples": [
+            "org:984851006"
+          ]
+        }
+      ],
+      "same_keys": true,
+      "examples": [
+        {
+          "title": "Virksomhetsregister: DNB BANK ASA",
+          "url": "https://api.finanstilsynet.no/registry/v2/legal-entities?ids=98973"
+        }
+      ]
+    }
+  ],
+  "failed_or_excluded": [
+    {
+      "kind": "stortinget",
+      "selection": "skriftligesporsmal with status=alle",
+      "runs": [
+        {
+          "count": 3656,
+          "seconds": 1.232
+        },
+        {
+          "count": 3656,
+          "seconds": 1.151
+        }
+      ],
+      "reason": "Excluded from config: the initial live probe exposed duplicate keys in the pre-fix parser (example sporsmal:ASTAAS). The accompanying parser repair makes the 3656 direct question IDs unique, while this test config keeps the narrower 351-record horinger dataset."
+    },
+    {
+      "kind": "finanstilsynet_short_sale",
+      "selection": "Exact issuer Schibsted ASA",
+      "runs": [
+        {
+          "error": "Short-sale selection did not match every configured issuer",
+          "seconds": 11.945
+        },
+        {
+          "error": "Short-sale selection did not match every configured issuer",
+          "seconds": 0.139
+        }
+      ],
+      "reason": "Excluded; exceptions are failures and were not counted as source success. Exact Bouvet ISIN is used instead."
+    },
+    {
+      "kind": "doffin",
+      "reason": "Excluded from key-free coverage because the source catalog marks credentials required."
+    },
+    {
+      "kind": "patentstyret",
+      "reason": "Excluded from key-free coverage because the source catalog marks credentials required."
+    }
+  ],
+  "coverage": {
+    "verified_configs": 11,
+    "verified_adapter_kinds": 11,
+    "remaining_key_free_gap": 0,
+    "credentialed_gaps": [
+      "doffin",
+      "patentstyret"
+    ]
+  }
+}

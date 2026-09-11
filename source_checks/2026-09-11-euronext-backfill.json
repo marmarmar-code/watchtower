@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-09-11T07:14:06.410252+00:00",
+  "issuer_url": "https://live.euronext.com/nb/product/equities/NO0010360266-XOSL/company-information",
+  "method": "Two real issuer/list HTTP reads, old adapter replay over captured source and initialized history, then corrected adapter direct fetch. No runtime writes or notification calls.",
+  "count": 50,
+  "before_candidates": 1,
+  "after_candidates": 0,
+  "known_history_candidates": 0,
+  "full_next_state_unchanged": true,
+  "keys_hashes_order_unchanged": true,
+  "suppressed": [
+    {
+      "title": "Bouvet ASA – Salg av egne aksjer og gjennomføring av aksjekjøpsprogram for ansatte",
+      "published": "20 Nov 2025 15:26 CET",
+      "url": "https://newsweb.oslobors.no/message/660230"
+    }
+  ],
+  "corrected_fetches": [
+    {
+      "url": "https://live.euronext.com/nb/product/equities/NO0010360266-XOSL/company-information",
+      "status": 200,
+      "file": "after-0.html",
+      "sha256": "36710ed54cf6ad3320c3d98be9c0a6b8b2f18966679d6f295dc572ba921c2d34"
+    },
+    {
+      "url": "https://live.euronext.com/nb/listview/company-press-release/139723",
+      "status": 200,
+      "file": "after-1.html",
+      "sha256": "c8224536f9b92f8228b029f1b08c6c1949e29674c2e7a6e4ad09aa04227f567a"
+    }
+  ],
+  "scope": "Only expanded issuer lists with a valid previous successful check timestamp. An unseen publication older than the preceding UTC date is retained silently. Known revisions are unchanged; true delayed publications older than this allowance are intentionally classified as archive backfill."
+}

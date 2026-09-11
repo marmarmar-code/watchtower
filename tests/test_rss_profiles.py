@@ -20,6 +20,13 @@ class RssProfileCatalogTests(unittest.TestCase):
                 "skatteklagenemnda",
                 "nkom",
                 "met_farevarsler",
+                "lla_nyheter",
+                "schibsted_media_news",
+                "reuters_institute_news",
+                "nordicom_news",
+                "efj_news",
+                "journalismfund_news",
+                "fhi_news",
             },
             {p["id"] for p in profiles},
         )
