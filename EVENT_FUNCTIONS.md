@@ -59,6 +59,12 @@ Dette er en vesentlig utvidelse av funksjon 13, ikke en ekstra telling for hvert
 
 `industrial_permit_inspection_documents` gir én ny dokumentfunksjon: oppdagelse av tillatelses- og tilsynsdokumenter og endringer i deres metadata. 21 lenker fra Yara Porsgrunn ble lest to ganger. PDF-innholdet overvåkes ikke; uendret lenke til en overskrevet PDF utløser derfor ikke varsel. Dette løfter den konservative funksjonstellingen fra 30 til 31.
 
-`brreg_publishing_company_discovery` gir ytterligere én ny funksjon: automatisk oppdagelse av nylig registrerte AS/ASA i valgte næringsdivisjoner. Det verifiserte 30-dagersvinduet for divisjon 58 hadde fem AS. Dette er registrering i Enhetsregisteret, ikke en påstand om stiftelsesdato. Den konservative tellingen er dermed 32 ulike nye funksjoner, med prosjektoppdagelse som en vesentlig utvidelse av en eksisterende funksjon. Katalogen har totalt 90 oppskrifter og 17 RSS-profiler.
+`brreg_publishing_company_discovery` gir ytterligere én ny funksjon: automatisk oppdagelse av nylig registrerte AS/ASA i valgte næringsdivisjoner. Det verifiserte 30-dagersvinduet for divisjon 58 hadde fem AS. Dette er registrering i Enhetsregisteret, ikke en påstand om stiftelsesdato. Den konservative tellingen er dermed 32 ulike nye funksjoner, med prosjektoppdagelse som en vesentlig utvidelse av en eksisterende funksjon. Ved denne milepælen hadde katalogen 90 oppskrifter og 17 RSS-profiler.
 
 Ved samtidig bruk av automatisk forskningsoppdagelse og en eksplisitt utlysning kan `suppress_call_urls` rute den eksakte overlappende utlysningens varsler til det eksplisitte oppsettet. Alle prosjekter leses og beholdes fortsatt; valget endrer bare varsling og bevarer eksisterende scope/historikk.
+
+## Månedlige byggetillatelser
+
+`ssb_housing_permits_monthly` følger antall boliger med igangsettingstillatelse. `ssb_nonres_floor_permits_monthly` følger bruksareal til annet enn bolig, målt i 1000 m². Begge er ujusterte og følger de to siste publiserte månedene, inkludert revisjoner innenfor vinduet. Tillatelse dokumenterer ikke faktisk byggestart, og arealserien omfatter mer enn næringsbygg.
+
+To ekte avlesninger per oppskrift ga to observasjoner, stille førstegangsinnlesing og identisk historikk uten gjentakelsesvarsel. Se [kildekontroll](source_checks/ssb-building-permits-2026-09-11.md). De to oppskriftene telles konservativt som én ny funksjonsfamilie for byggetillatelser: 33 ulike funksjoner og totalt 92 oppskrifter.

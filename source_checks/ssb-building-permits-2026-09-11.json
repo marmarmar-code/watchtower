@@ -1,0 +1,46 @@
+[
+  {
+    "recipe": "ssb_housing_permits_monthly",
+    "checked_at": "2026-09-11T13:05:59.414851+00:00",
+    "records": 2,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://data.ssb.no/api/pxwebapi/v2/tables/05808/data?lang=no&outputFormat=json-stat2&valueCodes%5BContentsCode%5D=BoligIgang&valueCodes%5BTid%5D=top%282%29",
+        "bytes": 1841,
+        "sha256": "0b69835635879edcd245bc455e85380656416e0324c49837df903fbf1175e1f8"
+      },
+      {
+        "url": "https://data.ssb.no/api/pxwebapi/v2/tables/05808/data?lang=no&outputFormat=json-stat2&valueCodes%5BContentsCode%5D=BoligIgang&valueCodes%5BTid%5D=top%282%29",
+        "bytes": 1841,
+        "sha256": "0b69835635879edcd245bc455e85380656416e0324c49837df903fbf1175e1f8"
+      }
+    ],
+    "config_sha256": "5bcce86dd36b893fe771f51a9b0dbee9290ca5a16f9d429d0a55cfe0495c7fae",
+    "module_sha256": "69071767781a34171703a2a7220af4edabe17c34f8b29578afd54df08202e7d1"
+  },
+  {
+    "recipe": "ssb_nonres_floor_permits_monthly",
+    "checked_at": "2026-09-11T13:05:59.652336+00:00",
+    "records": 2,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://data.ssb.no/api/pxwebapi/v2/tables/05809/data?lang=no&outputFormat=json-stat2&valueCodes%5BContentsCode%5D=BruksarealIgang&valueCodes%5BTid%5D=top%282%29",
+        "bytes": 2061,
+        "sha256": "f4035f8bdba09b3b4a596d4b3dbe609bae45575492dc5f01e770895bbf365da2"
+      },
+      {
+        "url": "https://data.ssb.no/api/pxwebapi/v2/tables/05809/data?lang=no&outputFormat=json-stat2&valueCodes%5BContentsCode%5D=BruksarealIgang&valueCodes%5BTid%5D=top%282%29",
+        "bytes": 2061,
+        "sha256": "f4035f8bdba09b3b4a596d4b3dbe609bae45575492dc5f01e770895bbf365da2"
+      }
+    ],
+    "config_sha256": "96b55e1afd777aec3dc9ee774380c8db81442ab914da252b122118ef67322c63",
+    "module_sha256": "69071767781a34171703a2a7220af4edabe17c34f8b29578afd54df08202e7d1"
+  }
+]

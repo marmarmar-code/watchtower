@@ -127,7 +127,7 @@ class RecipeTests(unittest.TestCase):
             return build_source(load_config(path).sources[0])
 
     def test_every_recipe_and_rss_profile_builds_a_valid_configuration(self):
-        self.assertEqual(90,len(load_recipes()))
+        self.assertEqual(92,len(load_recipes()))
         for row in load_recipes():
             with self.subTest(recipe=row['id']):self.source(row['id'])
         for profile in ('nkom','met_farevarsler'):

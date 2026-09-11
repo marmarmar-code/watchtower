@@ -1756,3 +1756,51 @@ interval_minutes = 360
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "ssb_housing_permits_monthly"
+name = "SSB – igangsettingstillatelser for boliger"
+sector = "property"
+description = "Antall boliger med igangsettingstillatelse, ujustert, i de siste to publiserte månedene. Overvåker nye måneder og revisjoner innenfor vinduet. Tillatelse betyr ikke at byggearbeidet faktisk har startet."
+official_url = "https://www.ssb.no/statbank/table/05808"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ssb_data"
+table = "05808"
+interval_minutes = 60
+max_records = 2
+max_bytes = 100000
+events = ["added", "changed"]
+[recipe.source.value_codes]
+ContentsCode = ["BoligIgang"]
+Tid = ["top(2)"]
+[recipe.source.field_labels]
+value = "Observasjonsverdi"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ssb_nonres_floor_permits_monthly"
+name = "SSB – igangsettingstillatelser for andre bygg"
+sector = "property"
+description = "Bruksareal til annet enn bolig med igangsettingstillatelse, i 1000 m², ujustert. Utvalget omfatter de siste to publiserte månedene og er bredere enn næringsbygg. Overvåker nye måneder og revisjoner innenfor vinduet."
+official_url = "https://www.ssb.no/statbank/table/05809"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ssb_data"
+table = "05809"
+interval_minutes = 60
+max_records = 2
+max_bytes = 100000
+events = ["added", "changed"]
+[recipe.source.value_codes]
+ContentsCode = ["BruksarealIgang"]
+Tid = ["top(2)"]
+[recipe.source.field_labels]
+value = "Observasjonsverdi"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
