@@ -84,3 +84,9 @@ Den særskilte vedtakslisten gir ett nytt konfigurerbart hendelsesutvalg. Konser
 ## Tinglyste hjemmelsoverføringer
 
 `ssb_dwelling_property_transfers` følger kvartalsvise hjemmelsoverføringer av boligeiendom, med total og delmengden fritt salg. Dette gir faktisk overføringsaktivitet utover prisindekser og byggetillatelser. De to siste publiserte kvartalene ga fire observasjoner i to stille, identiske avlesninger. Se [kildekontroll](source_checks/property-transfers-2026-09-11.md). Katalogen har nå 95 oppskrifter og konservativt 35 ulike funksjoner.
+
+## Regulatorisk sikkerhetsoppfølging
+
+Tre nye funksjoner følger EMAs strukturerte sikkerhetsdatasett: `ema_human_safety_communications` oppdager direkte sikkerhetskommunikasjon og endrede fagopplysninger; `ema_human_safety_referrals` følger sikkerhetsprosedyrers status, anbefalinger og beslutningsdatoer; `ema_periodic_safety_outcomes` følger regulatoriske utfall av periodiske sikkerhetsvurderinger. De er forskjellige prosesser, ikke flere mål innen samme utvalg.
+
+To endelige avlesninger per oppskrift ga henholdsvis 142, 100 og 2714 poster, med stille baseline og identisk historikk uten gjentakelsesvarsler. EMAs genereringstid og generelle oppdateringsdato gir ikke egne varsler. Endret faglig innhold gjør det. Streng kontroll av totaler, skjema, valgte URL-er, datoer og statustyper avviser ufullstendige uttrekk. Ingen av disse kildene dokumenterer norsk refusjon eller gir behandlingsråd. Se [kildekontroll](source_checks/ema-regulatory-2026-09-11.md). Katalogen har nå 98 oppskrifter og konservativt 38 ulike funksjoner.

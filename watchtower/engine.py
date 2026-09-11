@@ -42,6 +42,7 @@ from .sources.press_cases import PressCasesSource
 from .sources.clinical_trials import ClinicalTrialsSource
 from .sources.food_inspections import FoodInspectionsSource
 from .sources.ema_medicines import EmaMedicinesSource
+from .sources.ema_regulatory_events import EmaRegulatoryEventsSource
 from .sources.pesticides import PesticidesSource
 from .sources.methods_decisions import MethodsDecisionsSource
 from .sources.industrial_environment import IndustrialEnvironmentSource
@@ -60,6 +61,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "pesticides": PesticidesSource,
     "methods_decisions": MethodsDecisionsSource,
     "ema_medicines": EmaMedicinesSource,
+    "ema_regulatory_events": EmaRegulatoryEventsSource,
     "food_inspections": FoodInspectionsSource,
     "clinical_trials": ClinicalTrialsSource,
     "account_documents": AccountDocumentsSource,

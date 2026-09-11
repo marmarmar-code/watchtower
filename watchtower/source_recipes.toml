@@ -1869,3 +1869,57 @@ unit = "Enhet og beregningsgrunnlag"
 status = "Datastatus"
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "ema_human_safety_communications"
+name = "EMA – sikkerhetsinformasjon til helsepersonell"
+sector = "health"
+description = "Nye og endrede direkte sikkerhetsmeldinger for humane legemidler. Rene mangelsaker utelates; meldingen gjengir regulatoriske felt uten å gi medisinske råd."
+official_url = "https://www.ema.europa.eu/en/about-us/about-website/download-website-data-json-data-format"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ema_regulatory_events"
+urls = ["https://www.ema.europa.eu/en/documents/report/dhpc-output-json-report_en.json"]
+dataset = "dhpc"
+max_records = 500
+max_bytes = 500000
+events = ["added", "changed"]
+interval_minutes = 720
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ema_human_safety_referrals"
+name = "EMA – sikkerhetsprosedyrer for legemidler"
+sector = "health"
+description = "Nye sikkerhetshenvisninger for humane legemidler og endringer i status, anbefalinger og uttrykkelige beslutningsdatoer."
+official_url = "https://www.ema.europa.eu/en/about-us/about-website/download-website-data-json-data-format"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ema_regulatory_events"
+urls = ["https://www.ema.europa.eu/en/documents/report/referrals-output-json-report_en.json"]
+dataset = "referrals"
+max_records = 1000
+max_bytes = 2000000
+events = ["added", "changed"]
+interval_minutes = 720
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ema_periodic_safety_outcomes"
+name = "EMA – utfall av periodiske sikkerhetsvurderinger"
+sector = "health"
+description = "Nye periodiske sikkerhetsvurderinger og endringer i virkestoff eller regulatorisk utfall. Blank kategori beholdes fordi EMA bruker den i store deler av registeret."
+official_url = "https://www.ema.europa.eu/en/about-us/about-website/download-website-data-json-data-format"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ema_regulatory_events"
+urls = ["https://www.ema.europa.eu/en/documents/report/medicines-output-periodic_safety_update_report_single_assessments-output-json-report_en.json"]
+dataset = "psusa"
+max_records = 5000
+max_bytes = 3000000
+events = ["added", "changed"]
+interval_minutes = 720
+[recipe.source.filter]
+match_all = true
