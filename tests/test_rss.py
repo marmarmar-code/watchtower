@@ -78,6 +78,42 @@ class RssSourceTests(unittest.TestCase):
             with self.subTest(segments=segments), self.assertRaisesRegex(ValueError, 'exclude_url_path_segments'):
                 RssSource(replace(self.config(), options={'exclude_url_path_segments': segments}))
 
+    def test_path_segment_prefix_exclusion_is_bounded_and_preserves_state(self):
+        urls = [
+            'https://example.test/flaggeplikt-vedtak-om-overtredelsesgebyr/1',
+            'https://example.test/flaggeplikt-vedtak-om-overtredelsesgebyr-old/2',
+            'https://example.test/other/flaggeplikt-vedtak-om-overtredelsesgebyr/3',
+            'https://example.test/flaggeplikt/4?next=flaggeplikt-vedtak-om-overtredelsesgebyr',
+            'https://flaggeplikt-vedtak-om-overtredelsesgebyr.example.test/5',
+        ]
+        raw = ('<rss><channel>' + ''.join(
+            f'<item><title>Example {i}</title><link>{url}</link></item>'
+            for i, url in enumerate(urls)
+        ) + '</channel></rss>').encode()
+        config = self.config('https://example.test/rss')
+        original = RssSource(config); original.get = lambda *_: Response(raw)
+        filtered = RssSource(replace(config, options={
+            'exclude_url_path_segment_prefixes': ['flaggeplikt-vedtak-om-overtredelsesgebyr'],
+        })); filtered.get = original.get
+        before, after = original.fetch(), filtered.fetch()
+        self.assertEqual([(i.key, i.content_hash()) for i in before], [(i.key, i.content_hash()) for i in after])
+        self.assertEqual([True, True, True, False, False], [i.suppress_alert for i in after])
+        previous, _, _ = evaluate(config, [], None, max_seen=100)
+        old_state, _, _ = evaluate(config, before, previous, max_seen=100)
+        new_state, alerts, _ = evaluate(filtered.config, after, previous, max_seen=100)
+        self.assertEqual(old_state, new_state)
+        self.assertEqual([urls[3], urls[4]], [entry.item.url for entry in alerts])
+
+    def test_path_segment_prefix_configuration_rejects_broad_rules(self):
+        for prefixes in ('flaggeplikt', [''], [None], ['/flaggeplikt'], ['flaggeplikt*'],
+                         ['flaggeplikt?x=1'], [' flaggeplikt']):
+            with self.subTest(prefixes=prefixes), self.assertRaisesRegex(
+                ValueError, 'exclude_url_path_segment_prefixes'
+            ):
+                RssSource(replace(self.config(), options={
+                    'exclude_url_path_segment_prefixes': prefixes,
+                }))
+
     def config(self, *urls: str) -> SourceConfig:
         return SourceConfig(
             id="example-feed",

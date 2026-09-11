@@ -74,3 +74,13 @@ To ekte avlesninger per oppskrift ga to observasjoner, stille førstegangsinnles
 `storting_recent_vote_discovery` finner saker gjennom Stortingets sesjoner, møter og dagsordener. Den overvåker voteringsresultatene uten manuell liste over saks-ID-er. En votering knyttet til flere saker behandles én gang; endring i hvilke saker som omfattes av tidsvinduet lager ikke et resultatvarsel. Motstridende resultater eller manglende sesjonsdekning avviser uttrekket.
 
 To ekte avlesninger ga et gyldig tomt vindu. Et separat historisk uttrekk med 31 voteringer verifiserer positiv parsing, men er ikke bevis på en ny hendelse eller levering. Se [kildekontroll](source_checks/parliament-discovery-2026-09-11.md). Dette er en vesentlig utvidelse av eksisterende voteringsfunksjon og øker katalogen til 93 oppskrifter; den konservative funksjonstellingen forblir 33.
+
+## Flaggepliktvedtak
+
+`finanstilsynet_flaggeplikt_gebyrvedtak` oppdager nye lenker i den særskilte listen over gebyrvedtak. To ekte avlesninger ga 13 daterte lenker, stille baseline og identisk historikk uten gjentakelsesvarsel. Varslet viser kildens listetekst og lenke; gebyrbeløp, klageutfall og dokumentrevisjoner inngår ikke. Se [kildekontroll og begrensninger](source_checks/flagging-decisions-2026-09-11.md).
+
+Den særskilte vedtakslisten gir ett nytt konfigurerbart hendelsesutvalg. Konservativ telling er 34 funksjoner og totalt 94 oppskrifter. Ved parallell RSS-overvåking rutes samme vedtakstype til listen uten å slette RSS-historikk.
+
+## Tinglyste hjemmelsoverføringer
+
+`ssb_dwelling_property_transfers` følger kvartalsvise hjemmelsoverføringer av boligeiendom, med total og delmengden fritt salg. Dette gir faktisk overføringsaktivitet utover prisindekser og byggetillatelser. De to siste publiserte kvartalene ga fire observasjoner i to stille, identiske avlesninger. Se [kildekontroll](source_checks/property-transfers-2026-09-11.md). Katalogen har nå 95 oppskrifter og konservativt 35 ulike funksjoner.

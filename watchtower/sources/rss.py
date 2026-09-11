@@ -46,6 +46,15 @@ class RssSource(Source):
         ):
             raise ValueError("RSS exclude_url_path_segments requires exact path segments without slashes or wildcards")
         self.exclude_url_path_segments = set(segments)
+        prefixes = config.options.get("exclude_url_path_segment_prefixes", [])
+        if not isinstance(prefixes, list) or any(
+            not isinstance(prefix, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", prefix)
+            for prefix in prefixes
+        ):
+            raise ValueError(
+                "RSS exclude_url_path_segment_prefixes requires non-empty path segment prefixes without slashes or wildcards"
+            )
+        self.exclude_url_path_segment_prefixes = tuple(dict.fromkeys(prefixes))
         categories = config.options.get("exclude_categories", [])
         if not isinstance(categories, list) or any(
             not isinstance(category, str) or not category.strip()
@@ -86,14 +95,21 @@ class RssSource(Source):
                 if item.key in seen:
                     continue
                 seen.add(item.key)
-                if self.exclude_url_hosts or self.exclude_url_path_segments:
+                if (self.exclude_url_hosts or self.exclude_url_path_segments
+                        or self.exclude_url_path_segment_prefixes):
                     try:
                         parsed_url = urlsplit(item.url)
                         host = (parsed_url.hostname or "").casefold().rstrip(".")
                     except ValueError as exc:
                         raise SourceError("RSS item URL is invalid for URL filtering") from exc
+                    path_segments = [segment for segment in parsed_url.path.split("/") if segment]
                     if (host in self.exclude_url_hosts
-                            or self.exclude_url_path_segments.intersection(parsed_url.path.split("/"))):
+                            or self.exclude_url_path_segments.intersection(path_segments)
+                            or any(
+                                segment.startswith(prefix)
+                                for segment in path_segments
+                                for prefix in self.exclude_url_path_segment_prefixes
+                            )):
                         # Keep identity/history and valid-feed health; suppress only delivery.
                         item = replace(item, suppress_alert=True)
                 items.append(item)

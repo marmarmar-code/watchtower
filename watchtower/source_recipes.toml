@@ -1826,3 +1826,46 @@ allow_empty = true
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "finanstilsynet_flaggeplikt_gebyrvedtak"
+name = "Finanstilsynet – vedtak om overtredelsesgebyr for flaggeplikt"
+sector = "finance"
+description = "Nye daterte vedtak om overtredelsesgebyr for flaggeplikt. Listen inneholder vedtakslenker og datoer; enkelte titler navngir ikke foretaket, så foretak må hentes fra selve vedtakssiden ved behov. Varsler bare nye lenker i utvalget; gebyrbeløp, innholdsendringer og klageutfall overvåkes ikke."
+official_url = "https://www.finanstilsynet.no/tilsyn/markedsatferd/vedtak-om-overtredelsesgebyr---flaggeplikt/"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "web_links"
+urls = ["https://www.finanstilsynet.no/tilsyn/markedsatferd/vedtak-om-overtredelsesgebyr---flaggeplikt/"]
+selector = "main a[href*='flaggeplikt-vedtak-om-overtredelsesgebyr']"
+events = ["added"]
+max_records = 100
+max_bytes = 1000000
+interval_minutes = 360
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ssb_dwelling_property_transfers"
+name = "SSB – tinglyste hjemmelsoverføringer av boligeiendom"
+sector = "property"
+description = "Kvartalsvise hjemmelsoverføringer av boligeiendom i alt og delmengden fritt salg, i de siste to publiserte kvartalene. Delmengden skal ikke summeres med totalen. Nye kvartaler og revisjoner innenfor vinduet overvåkes; antall overføringer er ikke antall boliger, salgsverdi eller prisindeks."
+official_url = "https://www.ssb.no/statbank/table/08948"
+verified_on = "2026-09-11"
+[recipe.source]
+kind = "ssb_data"
+table = "08948"
+interval_minutes = 60
+max_records = 4
+max_bytes = 100000
+events = ["added", "changed"]
+[recipe.source.value_codes]
+EiendomType = ["B0"]
+ContentsCode = ["FrittSalg", "Hjemmel"]
+Tid = ["top(2)"]
+[recipe.source.field_labels]
+value = "Antall hjemmelsoverføringer"
+unit = "Enhet og beregningsgrunnlag"
+status = "Datastatus"
+[recipe.source.filter]
+match_all = true
