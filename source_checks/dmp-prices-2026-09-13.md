@@ -1,0 +1,11 @@
+# DMP: revurderte maksimalpriser
+
+Den faste [maksimalprissiden](https://www.dmp.no/offentlig-finansiering/pris-pa-legemidler/maksimalpris) brukes til å oppdage den nyeste månedlige revurderingsfilen. Lenketekst og regnearktittel må ha samme gyldighetsdato. Ulike filer med samme nyeste dato avvises. Filen er komplett for dette utvalget, ikke for alle norske legemiddelpriser eller historiske revisjoner.
+
+Hver post gjelder en konkret pakning og viser gjeldende og neste maksimal AIP/AUP i NOK. Vedtatte priser skilles fra forhåndsvarslede priser; status og gyldighetsdato vises også når bare prisbeløpet blir revidert. AIP er maksimal innkjøpspris ekskludert MVA, AUP maksimal utsalgspris inkludert MVA. Faktisk pris kan være lavere. Kilden dokumenterer ikke refusjonsvedtak, rabattavtaler eller faktisk salgspris.
+
+Varenummer brukes som stabil identitet når det finnes. Kildeleverte sifre og innledende nuller beholdes; den observerte numeriske Excel-cellen med verdien 362 har generelt tallformat og tilføres derfor ingen oppdiktede nuller. Fem rader uten varenummer bruker en eksplisitt unik kombinasjon av navn, innehaver, ATC-kode, form, styrke og pakningsstørrelse. Endret varenummer eller en endret fallback-beskrivelse kan dermed bli observert som en ny pakning.
+
+Arkivstørrelse, antall arkivmedlemmer, kryptering, dupliserte navn, arkstruktur, formler, cellereferanser, strenger, radgrenser, eksakte kolonneoverskrifter, identiteter og prispar kontrolleres. Hver rad må ha nøyaktig ett positivt neste prispar, enten vedtatt eller forhåndsvarslet. Desimalregning fjerner observert binær representasjonsstøy, mens faktisk ekstra prispresisjon avvises. Tomme eller ufullstendige uttrekk gir kildefeil. Månedsskifte kan ikke bevise sletting; removed og komplett-snapshot-semantikk avvises.
+
+To faktiske adapterpoller 13. september ga 158 unike pakninger hver, null varsler ved første og andre innlesing og identisk full historikk. Det kontrollerte arket har 52 vedtatte og 106 forhåndsvarslede priser, gyldige fra 1. oktober 2026. Gyldighetsdato brukes ikke som publiseringsdato. 19 målrettede tester for DMP og oppskriftsintegrasjon samt katalogkontroll bestod. Dette er kilde- og motorbevis; senere nye hendelser og levering er ikke bevist av denne kontrollen.

@@ -374,3 +374,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og reviderte resultatmoduler i et avgrenset oppdateringsvindu for studier med norsk studiested. Overvåker rapporterte tabellendringer uten å tolke effekt eller årsak."
+
+[[source]]
+id = "dmp_prices"
+name = "DMP maksimalprisrevurderinger"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nyeste månedlige revurderingsfil: vedtatte og forhåndsvarslede maksimale AIP/AUP per pakning, med eksplisitt gyldighetsdato. Ingen påstand om faktisk salgspris, refusjon eller komplett prisregister."

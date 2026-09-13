@@ -1944,3 +1944,22 @@ interval_minutes = 720
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "dmp_maximum_price_reassessments"
+name = "DMP – revurderte maksimalpriser"
+sector = "health"
+description = "Nye og endrede vedtatte eller forhåndsvarslede maksimalpriser per legemiddelpakning. Forhåndsvarsler merkes uttrykkelig og kan endres før vedtak."
+official_url = "https://www.dmp.no/offentlig-finansiering/pris-pa-legemidler/maksimalpris"
+verified_on = "2026-09-13"
+[recipe.source]
+kind = "dmp_prices"
+urls = ["https://www.dmp.no/offentlig-finansiering/pris-pa-legemidler/maksimalpris"]
+max_bytes = 1000000
+max_unpacked_bytes = 1000000
+max_records = 1000
+allow_empty = false
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
