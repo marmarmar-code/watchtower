@@ -47,6 +47,7 @@ from .sources.customs_quotas import CustomsQuotasSource
 from .sources.customs_tariffs import CustomsTariffsSource
 from .sources.ofac_sdn import OfacSdnSource
 from .sources.number_allocations import NumberAllocationsSource
+from .sources.media_database import MediaDatabaseSource
 from .sources.consumer_decisions import ConsumerDecisionsSource
 from .sources.package_advisories import PackageAdvisoriesSource
 from .sources.funding_calls import FundingCallsSource
@@ -82,6 +83,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "customs_tariffs": CustomsTariffsSource,
     "ofac_sdn": OfacSdnSource,
     "number_allocations": NumberAllocationsSource,
+    "media_database": MediaDatabaseSource,
     "consumer_decisions": ConsumerDecisionsSource,
     "package_advisories": PackageAdvisoriesSource,
     "funding_calls": FundingCallsSource,

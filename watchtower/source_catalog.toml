@@ -464,3 +464,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og endrede E.164-nummerområder med tilbyder, status, antall, kategori, kommentar og punktkode. CSV kontrolleres mot den synlige nettsidetabellen, intervallantall og overlapp. Ingen per-vedtak-dato eller tilbaketrekking utledes; porterte enkeltnumre dekkes ikke."
+
+[[source]]
+id = "media_database"
+name = "Medietilsynet – årlige eier- og konsesjonsopplysninger"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Oppførte konsern-/utgiverrelasjoner og konsesjonsopplysninger fra valgte ark i det årlige datagrunnlaget. Referanseår følger hver oppføring uten å lage varsel alene. Navn brukes der unikt nummer mangler; ingen eierprosent, vedtaksdato, utløp eller tilbaketrekking utledes."

@@ -14,6 +14,7 @@ from bs4 import BeautifulSoup
 
 from .changes import SnapshotSource, document, integer
 from .common import SourceError
+from .workbooks import column_index as _column
 
 PAGE_URL = "https://www.dmp.no/offentlig-finansiering/pris-pa-legemidler/maksimalpris"
 NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
@@ -257,13 +258,3 @@ def _sheet(raw, shared, max_rows):
     if not data_numbers or data_numbers != list(range(5, data_numbers[-1] + 1)):
         raise SourceError("DMP workbook data rows are empty or incomplete")
     return [parsed[4], *(parsed[number] for number in data_numbers)], parsed[1][0]
-
-
-def _column(reference, expected_row):
-    match = re.fullmatch(r"([A-Z]+)(\d+)", reference)
-    if not match or int(match.group(2)) != expected_row:
-        raise SourceError("DMP workbook cell reference is invalid")
-    result = 0
-    for character in match.group(1):
-        result = result * 26 + ord(character) - 64
-    return result - 1

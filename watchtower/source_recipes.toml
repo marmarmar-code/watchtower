@@ -2194,3 +2194,83 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "media_group_relationships"
+name = "Medietilsynet – Årlige konsern- og utgiverrelasjoner"
+sector = "media"
+description = "Reviderte opplysninger i det årlige datagrunnlaget, med eksplisitt referanseår. Første observasjon er ikke et datert eierskifte eller vedtak. Navnebaserte nøkler kan ikke skille navnebytte fra nye oppføringer; fravær tolkes ikke som tilbaketrekking."
+official_url = "https://www.medietilsynet.no/fakta/mediedatabasen/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "media_database"
+urls = ["https://www.medietilsynet.no/fakta/mediedatabasen/"]
+dataset = "ownership"
+max_records = 1000
+max_bytes = 2000000
+max_unpacked_bytes = 2000000
+max_sheet_rows = 2000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "media_radio_content_records"
+name = "Medietilsynet – Årlige radioinnholdsopplysninger"
+sector = "media"
+description = "Reviderte opplysninger i det årlige datagrunnlaget, med eksplisitt referanseår. Første observasjon er ikke et datert eierskifte eller vedtak. Navnebaserte nøkler kan ikke skille navnebytte fra nye oppføringer; fravær tolkes ikke som tilbaketrekking."
+official_url = "https://www.medietilsynet.no/fakta/mediedatabasen/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "media_database"
+urls = ["https://www.medietilsynet.no/fakta/mediedatabasen/"]
+dataset = "radio_content"
+max_records = 1000
+max_bytes = 2000000
+max_unpacked_bytes = 2000000
+max_sheet_rows = 2000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "media_radio_transmitter_records"
+name = "Medietilsynet – Årlige senderanleggsopplysninger"
+sector = "media"
+description = "Reviderte opplysninger i det årlige datagrunnlaget, med eksplisitt referanseår. Første observasjon er ikke et datert eierskifte eller vedtak. Navnebaserte nøkler kan ikke skille navnebytte fra nye oppføringer; fravær tolkes ikke som tilbaketrekking."
+official_url = "https://www.medietilsynet.no/fakta/mediedatabasen/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "media_database"
+urls = ["https://www.medietilsynet.no/fakta/mediedatabasen/"]
+dataset = "radio_transmitters"
+max_records = 1000
+max_bytes = 2000000
+max_unpacked_bytes = 2000000
+max_sheet_rows = 2000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "media_tv_content_records"
+name = "Medietilsynet – Årlige TV-innholdsopplysninger"
+sector = "media"
+description = "Reviderte opplysninger i det årlige datagrunnlaget, med eksplisitt referanseår. Første observasjon er ikke et datert eierskifte eller vedtak. Navnebaserte nøkler kan ikke skille navnebytte fra nye oppføringer; fravær tolkes ikke som tilbaketrekking."
+official_url = "https://www.medietilsynet.no/fakta/mediedatabasen/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "media_database"
+urls = ["https://www.medietilsynet.no/fakta/mediedatabasen/"]
+dataset = "tv_content"
+max_records = 1000
+max_bytes = 2000000
+max_unpacked_bytes = 2000000
+max_sheet_rows = 2000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
