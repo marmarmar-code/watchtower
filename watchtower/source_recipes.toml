@@ -2176,3 +2176,21 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "nkom_number_allocation_changes"
+name = "Nkom – endringer i nummerområder"
+sector = "technology"
+description = "Oppførte tilbydere og tildelingsstatus i det norske E.164-registeret. Stabile nummerområder fanger endringer i status og kategori. Fravær er ikke en tilbaketrekking, og nummerområdets tilbyder er ikke nødvendigvis tilbyder for et portert enkeltnummer."
+official_url = "https://nkom.no/telefoni-og-telefonnummer/telefonnummer-og-den-norske-nummerplan/alle-nummerserier-for-norske-telefonnumre/den-norske-nummerplanen-for-telefoni-med-mer-e.164"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "number_allocations"
+urls = ["https://nkom.no/telefoni-og-telefonnummer/telefonnummer-og-den-norske-nummerplan/alle-nummerserier-for-norske-telefonnumre/den-norske-nummerplanen-for-telefoni-med-mer-e.164"]
+max_records = 3000
+max_register_records = 5000
+max_bytes = 2000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

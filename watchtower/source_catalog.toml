@@ -455,3 +455,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og endrede OFAC-listeoppføringer for eksplisitt valgte virksomheter eller fartøy, med navn, programmer, aliaser, identifikatorer og kildeopplysninger. Full XML-eksport kontrolleres mot publisert antall og sjekksum før utvalg. Dette er listeovervåking, ikke navnescreening, skyldvurdering eller vurdering av rettslig anvendelse. Fravær tolkes ikke som oppheving."
+
+[[source]]
+id = "number_allocations"
+name = "Nkom – nummerområder og tildelingsstatus"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede E.164-nummerområder med tilbyder, status, antall, kategori, kommentar og punktkode. CSV kontrolleres mot den synlige nettsidetabellen, intervallantall og overlapp. Ingen per-vedtak-dato eller tilbaketrekking utledes; porterte enkeltnumre dekkes ikke."
