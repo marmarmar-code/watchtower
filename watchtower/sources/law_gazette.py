@@ -97,7 +97,11 @@ class LawGazetteSource(SnapshotSource):
         return annual
 
     def _document(self,raw,name,year):
-        soup=BeautifulSoup(raw,'html.parser')
+        try:
+            document=raw.decode('utf-8-sig')
+        except UnicodeError as exc:
+            raise SourceError('Gazette document is not valid UTF-8') from exc
+        soup=BeautifulSoup(document,'html.parser')
         heads,mains,titles=soup.select('header.documentHeader'),soup.select('main.documentBody'),soup.select('head title')
         if len(heads)!=1 or len(mains)!=1 or len(titles)!=1:
             raise SourceError('Gazette document header, body or title is missing or ambiguous')
@@ -124,10 +128,12 @@ class LawGazetteSource(SnapshotSource):
         legacy=('LOV' if kind=='lov' else 'FOR')+'-'+dated+'-'+number
         prefix='nl' if kind=='lov' else 'sf'
         filename=re.fullmatch(r'lti/'+str(year)+'/'+prefix+'-'+dated.replace('-','')+r'-([0-9]+)\.xml',name)
-        if (not filename or int(filename.group(1))!=int(number) or metadata['legacyID']!=legacy
-                or metadata['refid']!=ident[4:] or mains[0].get('data-lovdata-url')!=ident
-                or text(titles[0])!=metadata['title']):
-            raise SourceError('Gazette filename and document identities disagree')
+        checks={'filename':bool(filename) and int(filename.group(1))==int(number),
+                'legacy':metadata['legacyID']==legacy,'reference':metadata['refid']==ident[4:],
+                'body':mains[0].get('data-lovdata-url')==ident,'title':text(titles[0])==metadata['title']}
+        failed=[field for field,ok in checks.items() if not ok]
+        if failed:
+            raise SourceError('Gazette document identity mismatch: '+ident+' ('+', '.join(failed)+')')
         if any(len(v)>20000 for k,v in metadata.items() if k!='table-of-contents'):
             raise SourceError('Gazette document metadata exceeds bounds')
         body=text(mains[0])

@@ -4,7 +4,7 @@ import io
 import json
 import tarfile
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 from watchtower.config import SourceConfig, FilterRule
 from watchtower.sources.common import SourceError
@@ -91,6 +91,17 @@ class LawGazetteTests(unittest.TestCase):
         self.assertEqual([],alerts);self.assertEqual(state,same)
         fields=next(iter(same['source_state']['records']['rows'].values()))['row']['fields']
         self.assertIsNone(fields['basedOn'])
+
+    def test_utf8_is_explicit_and_invalid_bytes_are_rejected(self):
+        name,raw=member(title='Endring av vilkår')
+        raw=raw.replace('<dd class="title">Endring av vilkår</dd>'.encode(),
+                        b'<dd class="title">Endring av vilk&#229;r</dd>')
+        # No platform-dependent byte-encoding guess may alter archive identity.
+        with patch('bs4.dammit.EncodingDetector',side_effect=AssertionError('Unexpected encoding guess')):
+            rows=src()._archive(archive([(name,raw)]),2026)
+        self.assertEqual('Endring av vilkår',rows[0]['fields']['title'])
+        with self.assertRaisesRegex(SourceError,'UTF-8'):
+            src()._archive(archive([(name,raw.replace(b'Kongen bestemmer',b'bad\xff'))]),2026)
 
     def test_all_documents_validated_before_type_filter(self):
         s=src(document_types=['lov']);install(s,[member(),member('forskrift','2')])
