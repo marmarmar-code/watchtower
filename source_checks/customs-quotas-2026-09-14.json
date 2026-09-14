@@ -1,0 +1,23 @@
+{
+  "recipe": "customs_quota_remaining_status",
+  "checked_at": "2026-09-14T07:05:28.842296+00:00",
+  "records": 10,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://data.toll.no/dataset/c78ae30b-230f-4680-9e31-4a76a37f6c51/resource/fab81ea1-7f2f-4110-8700-cf203edfc3fe/download/tollkvote.json",
+      "bytes": 2443,
+      "sha256": "c6164b4d673e46974551b662b0fc46feec06a165bf48ccd36d07f1df07ed7584"
+    },
+    {
+      "url": "https://data.toll.no/dataset/c78ae30b-230f-4680-9e31-4a76a37f6c51/resource/fab81ea1-7f2f-4110-8700-cf203edfc3fe/download/tollkvote.json",
+      "bytes": 2443,
+      "sha256": "c6164b4d673e46974551b662b0fc46feec06a165bf48ccd36d07f1df07ed7584"
+    }
+  ],
+  "config_sha256": "dc2b96726ffd132f18db782b19c43451b2deeee7ca8db4a7a8c8fb424a29de5d",
+  "module_sha256": "6cd26cde14541de0823d83537f40ec9b6cfb57c43aeb89ad2988f6d37f34eed4",
+  "proof_boundary": "Two real public source polls through the final recipe and engine; no hosted scheduling or actual later delivery proof."
+}

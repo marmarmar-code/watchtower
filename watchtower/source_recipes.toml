@@ -1982,3 +1982,41 @@ interval_minutes = 720
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "customs_quota_remaining_status"
+name = "Tolletaten – kapasitet og reststatus for tollkvoter"
+sector = "trade"
+description = "Nye kvoter, endringer i kapasitet/gyldighet og beregnet lav eller oppbrukt restkvote. Små avskrivninger innen samme restgruppe varsles ikke. Enheten Verdi vises uten antatt valuta."
+official_url = "https://data.toll.no/no/dataset/tollkvote"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "customs_quotas"
+urls = ["https://data.toll.no/dataset/c78ae30b-230f-4680-9e31-4a76a37f6c51/resource/fab81ea1-7f2f-4110-8700-cf203edfc3fe/download/tollkvote.json"]
+low_remaining_percent = 10
+max_records = 500
+max_bytes = 1000000
+allow_empty = false
+interval_minutes = 360
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "consumer_enforcement_decision_links"
+name = "Forbrukertilsynet – formelle vedtakslenker"
+sector = "trade"
+description = "Nye vedtakslenker og endrede titler i de tre nyeste publiserte årsgruppene. En listeendring er ikke bevis på endret dokumentinnhold eller et endelig klageutfall."
+official_url = "https://www.forbrukertilsynet.no/lov-og-rett/vedtak"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "consumer_decisions"
+urls = ["https://www.forbrukertilsynet.no/lov-og-rett/vedtak"]
+latest_years = 3
+max_records = 500
+max_bytes = 1000000
+allow_empty = false
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

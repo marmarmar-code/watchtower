@@ -392,3 +392,21 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nyobserverte og reviderte vedtaksopplysninger i et avgrenset vindu av EU-fusjonssaker. Samler vedtak og tilhørende vedlegg under samme vedtaksidentitet. Ufullstendige søkevindu avvises; ingen varsler om sletting eller påstand om full historikk."
+
+[[source]]
+id = "customs_quotas"
+name = "Tollkvoter og beregnet reststatus"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Tolletatens kvoteregister: nye kvoter, endringer i kapasitet og gyldighet, samt beregnede overganger til lav/oppbrukt restkvote. Ingen importørtildeling, auksjonspris eller garanti for tilgjengelig kvote ved import."
+
+[[source]]
+id = "consumer_decisions"
+name = "Forbrukertilsynets vedtaksoversikt"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye lenker og endrede listeopplysninger i de siste publiserte årsgruppene. Flere dokumenter i samme sak beholdes. Årsgruppe er ikke eksakt vedtaksdato; beløp, dokumentinnhold og senere klageutfall overvåkes ikke."
