@@ -103,6 +103,15 @@ class LawGazetteTests(unittest.TestCase):
         with self.assertRaisesRegex(SourceError,'UTF-8'):
             src()._archive(archive([(name,raw.replace(b'Kongen bestemmer',b'bad\xff'))]),2026)
 
+    def test_source_inline_title_markup_is_normalized_outside_rcdata(self):
+        name,raw=member(title='Krav til CO<sub>2</sub>-utslipp')
+        rows=src()._archive(archive([(name,raw)]),2026)
+        self.assertEqual('Krav til CO 2 -utslipp',rows[0]['fields']['title'])
+        bad=raw.replace(b'<title>Krav til CO<sub>2</sub>-utslipp</title>',
+                        b'<title>Krav til NO<sub>2</sub>-utslipp</title>')
+        with self.assertRaisesRegex(SourceError,r'identity mismatch:.*title'):
+            src()._archive(archive([(name,bad)]),2026)
+
     def test_all_documents_validated_before_type_filter(self):
         s=src(document_types=['lov']);install(s,[member(),member('forskrift','2')])
         self.assertEqual(1,len(s.read_records()))

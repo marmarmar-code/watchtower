@@ -128,9 +128,15 @@ class LawGazetteSource(SnapshotSource):
         legacy=('LOV' if kind=='lov' else 'FOR')+'-'+dated+'-'+number
         prefix='nl' if kind=='lov' else 'sf'
         filename=re.fullmatch(r'lti/'+str(year)+'/'+prefix+'-'+dated.replace('-','')+r'-([0-9]+)\.xml',name)
+        # The source embeds inline tags inside <title>. HTMLParser versions
+        # differ on title RCDATA; parse the original fragment outside that context.
+        fragments=re.findall(r'<title(?:\s[^>]*)?>(.*?)</title\s*>',document,re.I|re.S)
+        if len(fragments)!=1:
+            raise SourceError('Gazette raw document title is missing or ambiguous')
+        heading=text(BeautifulSoup('<div>'+fragments[0]+'</div>','html.parser'))
         checks={'filename':bool(filename) and int(filename.group(1))==int(number),
                 'legacy':metadata['legacyID']==legacy,'reference':metadata['refid']==ident[4:],
-                'body':mains[0].get('data-lovdata-url')==ident,'title':text(titles[0])==metadata['title']}
+                'body':mains[0].get('data-lovdata-url')==ident,'title':heading==metadata['title']}
         failed=[field for field,ok in checks.items() if not ok]
         if failed:
             raise SourceError('Gazette document identity mismatch: '+ident+' ('+', '.join(failed)+')')
