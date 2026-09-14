@@ -491,3 +491,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Klassifiserte tilbakekallingsposter for medisinsk utstyr i et avgrenset datovindu: produkt-/batchomfang, begrunnelse, årsakstype og oppførte tiltak. Flere produkter i samme hendelse beholdes. Ukentlig kilde; gir ikke løpende status, senere distribusjon, medisinske råd eller korreksjoner utenfor vinduet."
+
+[[source]]
+id = "account_figures"
+name = "BRREG – offentlige regnskapsnøkkeltall"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Siste offentlige selskapsregnskap for valgte organisasjonsnumre: nye perioder og endret kilde-ID, valuta, regnskapsregler og oppgitte resultat-/balansetall. Tallene bevares uten omregning; API-skalaen er ikke dokumentert. Ingen konserndekning, historiske korreksjoner eller beregnede nøkkeltall."

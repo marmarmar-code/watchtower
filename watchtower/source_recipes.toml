@@ -2314,3 +2314,20 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "brreg_latest_account_figure_changes"
+name = "BRREG – nye regnskapsperioder og endrede nøkkeltall"
+sector = "finance"
+description = "To offentlige selskapsregnskap: periode, kilde-ID, valuta og oppgitte drifts-, resultat- og balansetall. Samme periode beholder identitet ved endret kilde-ID. Råverdier bevares uten valuta- eller skalaomregning; skala må kontrolleres i årsregnskapet før beløp brukes."
+official_url = "https://data.brreg.no/regnskapsregisteret/regnskap/v3/api-docs"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "account_figures"
+companies = ["923609016", "976967631"]
+max_records = 10
+max_bytes = 1000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
