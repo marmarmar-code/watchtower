@@ -572,3 +572,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Oppførte årsverdier per valgt anlegg, stoff og medium. Enhet, tall, ikke tilgjengelig og ikke rapportert holdes atskilt. Hele valgte årsspenn valideres i to komplette innlesinger. Stoffvalg følger nettsidens offentlige skjema. Ingen publiseringsdato, overskridelse av tillatelse eller totalsum på tvers av ulike enheter utledes."
+
+[[source]]
+id = "frequency_licences"
+name = "Nkom – spektrumtillatelser og frekvensoppføringer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede registerrader med innehaver, frekvensgrenser i Hz, anvendelse, dekning og kildeoppgitt utløpstid. To komplette samlingssvar må stemme. Flere rader kan dele tillatelsesnummer. Generelle fribruks-/amatørregler utelates som standard og kan velges uttrykkelig. Ingen aktiv-status, vedtaksdato eller tilbakekalling utledes."

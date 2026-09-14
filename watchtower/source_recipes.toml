@@ -2520,3 +2520,21 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "nkom_spectrum_licence_changes"
+name = "Nkom – endrede spektrumtillatelser"
+sector = "technology"
+description = "Følger registerrader om innehaver, anvendelse, frekvensgrenser, dekning og oppført utløpstid. Generelle fribruks- og amatørregler utelates som i portalens standardfilter. En intern rad-ID gir identitet; flere rader kan dele tillatelsesnummer. Utløpstid bevares som UTC-tidsstempel og er ikke bevis på aktiv status. Valgte tillatelsesnumre kan avgrenses med permit_numbers. Lenken åpner portalen; søk på nummeret."
+official_url = "https://frekvens.nkom.no/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "frequency_licences"
+include_general_rules = false
+max_register_records = 5000
+max_records = 1000
+max_bytes = 1000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

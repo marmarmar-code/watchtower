@@ -1,0 +1,91 @@
+{
+  "checked_on": "2026-09-14",
+  "kind": "frequency_licences",
+  "checks": [
+    {
+      "recipe": "nkom_spectrum_licence_changes",
+      "checked_at": "2026-09-14T13:43:57.528960+00:00",
+      "records": 395,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://frekvens.nkom.no/frekvensportalen_service/rest/rightofuseinfos",
+          "method": "GET",
+          "bytes": 358957,
+          "sha256": "bbe2e4757d12df3e295f7c04b9af19216df1d52f45fa8d3ed7fd6bc6f03d41a0"
+        },
+        {
+          "url": "https://frekvens.nkom.no/frekvensportalen_service/rest/rightofuseinfos",
+          "method": "GET",
+          "bytes": 358957,
+          "sha256": "bbe2e4757d12df3e295f7c04b9af19216df1d52f45fa8d3ed7fd6bc6f03d41a0"
+        },
+        {
+          "url": "https://frekvens.nkom.no/frekvensportalen_service/rest/rightofuseinfos",
+          "method": "GET",
+          "bytes": 358957,
+          "sha256": "bbe2e4757d12df3e295f7c04b9af19216df1d52f45fa8d3ed7fd6bc6f03d41a0"
+        },
+        {
+          "url": "https://frekvens.nkom.no/frekvensportalen_service/rest/rightofuseinfos",
+          "method": "GET",
+          "bytes": 358957,
+          "sha256": "bbe2e4757d12df3e295f7c04b9af19216df1d52f45fa8d3ed7fd6bc6f03d41a0"
+        }
+      ],
+      "config_sha256": "6017f5c16be2283cf3bc51d678dcc1454064e05c9a6de44de39427fd3323daf7",
+      "module_sha256": "d7fbfdaea9097bfb356ac3638c8aedfd7ea3c1d9b850f5b66abac1e663c902be",
+      "engine_sha256": "073a9635ca0282729fceb6d7aebf9c5a2b25e8a176365a5c4947a7c28b363346",
+      "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+      "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8"
+    }
+  ],
+  "contract": {
+    "url": "https://frekvens.nkom.no/frekvensportalen_service/rest/rightofuseinfos",
+    "returned_records": 779,
+    "unique_row_ids": 779,
+    "unique_display_numbers": 176,
+    "default_selected_records": 395,
+    "default_selected_display_numbers": 174,
+    "general_rule_records": {
+      "9999999": 350,
+      "9999998": 34
+    },
+    "default_selected_duplex": {
+      "True": 240,
+      "False": 155
+    },
+    "expiry_min": "2023-06-29T22:00:00+0000",
+    "expiry_max": "2099-12-30T23:00:00+0000",
+    "frequency_unit": "Hz",
+    "source_date_format": "YYYY-MM-DDTHH:MM:SS+0000",
+    "client_pagination": true,
+    "independent_server_total": false
+  },
+  "evidence_files": [
+    {
+      "url": "https://frekvens.nkom.no/",
+      "bytes": 7580,
+      "sha256": "038868dac14a043ca3e38fc2e1920561a9c6971b4b9abef8aa223e575ce29cc1"
+    },
+    {
+      "url": "https://frekvens.nkom.no/app/services/nkom.services.js?version=10",
+      "bytes": 7922,
+      "sha256": "64b1ee72e679794c8a2cb74ced19e8084d14bb5eb1f2973dad7f4efa79e7c6d9"
+    },
+    {
+      "url": "https://frekvens.nkom.no/app/pages/spektrum/spektrum.client.controller.js?version=10",
+      "bytes": 14492,
+      "sha256": "316d321b2fb5849bada8d5461ce7c6d40e513a8231c3b21c06f49dd4863287a3"
+    }
+  ],
+  "limitations": [
+    "The returned array and consistent repeated reads do not prove every permit is included or a server transaction.",
+    "General-rule entries are separately selectable and excluded by default.",
+    "Displayed permit numbers repeat; internal row identity does not prove an immutable legal permit identity.",
+    "Source expiry timestamps remain UTC; no legal end-date, current validity, new decision or withdrawal is inferred.",
+    "Attachments, personal contact records and subsequent scheduled execution were not verified."
+  ]
+}
