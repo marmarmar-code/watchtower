@@ -473,3 +473,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Oppførte konsern-/utgiverrelasjoner og konsesjonsopplysninger fra valgte ark i det årlige datagrunnlaget. Referanseår følger hver oppføring uten å lage varsel alene. Navn brukes der unikt nummer mangler; ingen eierprosent, vedtaksdato, utløp eller tilbaketrekking utledes."
+
+[[source]]
+id = "package_metadata"
+name = "npm – pakketagger og versjonsmetadata"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Valgte npm-pakkers taggmål og oppført lisens, frarådingsmelding og kontrollsummer for taggens versjon. Taggmålet kontrolleres før og etter innlesing. Gir ikke historikk for tidligere/mellomliggende versjoner, eierskapsbevis, sikkerhetsvurdering eller kontroll av pakkefilen."

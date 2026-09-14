@@ -2274,3 +2274,22 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "npm_selected_tag_metadata_changes"
+name = "npm – endret versjon og metadata for valgt tagg"
+sector = "technology"
+description = "Følger latest for to programvarepakker: nytt taggmål, oppgitt lisens, frarådingsmelding og publiserte kontrollsummer. Samme pakke/tagg beholder identitet ved versjonsendring. Historiske og mellomliggende versjoner dekkes ikke; metadata er ikke bevis på eierskap eller programvaresikkerhet."
+official_url = "https://github.com/npm/registry/blob/main/docs/responses/package-metadata.md"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "package_metadata"
+urls = ["https://registry.npmjs.org"]
+packages = ["react", "vite"]
+tags = ["latest"]
+max_records = 100
+max_bytes = 1000000
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
