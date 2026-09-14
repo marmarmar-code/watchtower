@@ -545,3 +545,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og endrede oppføringer om godkjenninger, bruksvilkår, merking og rettelser i Kommisjonens liste. Følger valgbart antall nyeste publiserte rettsaktsår, inkludert innledende rettelseslenker. Rettingsdato i URL holdes atskilt fra grunnrettsaktens oppførte dato. Full rettsakt, norsk gjennomføring og markedsstatus overvåkes ikke."
+
+[[source]]
+id = "staffing_register"
+name = "Arbeidstilsynet – bemanningsregisterets godkjenningsstatus"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede enhetsoppføringer med navn og godkjenningsstatus. To komplette paginerte uttrekk må stemme før utvalg av hovedenheter eller eksplisitte organisasjonsnumre. Underenheter kan velges separat. Ingen godkjennings-/vedtaksdato, selvstendig lovlighetsvurdering eller tap av godkjenning utledes fra fravær."

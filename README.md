@@ -294,6 +294,8 @@ state/
 
 `[general] config_version = 1` angir konfigurasjonsformat; eldre filer uten feltet støttes. Virksomhetslisten ligger i samme private TOML-fil.
 
+`max_seen_per_source` under `[[source]]` kan angi en egen historikkgrense for én kilde (1–50 000 nøkler). Uten dette feltet brukes grensen fra `[general]`, som normalt er 3 000. Store registeroppsett bør ha plass til alle valgte oppføringer; bemanningsoppskriften bruker 5 000.
+
 Credentials skal ligge i GitHub Actions Secrets, ikke i runtime. Workflowen maskerer private konfigurasjonsverdier, kontrollerer dem mot den offentlige kodebasen og nekter å committe filer utenfor `state/`.
 
 Dersom fork og privat runtime har samme eier og runtime heter `watchtower-runtime`, finner workflowen repositoryet automatisk. Andre plasseringer angis med Actions-variabelen:

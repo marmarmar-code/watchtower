@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Callable
 from hashlib import sha256
 
-from .config import Config, MIN_SOURCE_INTERVAL_MINUTES, SourceConfig
+from .config import Config, MIN_SOURCE_INTERVAL_MINUTES, SourceConfig, source_seen_limit
 from .models import Item, NotificationEntry
 from .notifier import Notifier, format_slack_entries
 from .state import StateStore
@@ -58,6 +58,7 @@ from .sources.avalanche_warnings import AvalancheWarningsSource
 from .sources.hydropower import HydropowerSource
 from .sources.income_caps import IncomeCapsSource
 from .sources.novel_foods import NovelFoodsSource
+from .sources.staffing_register import StaffingRegisterSource
 from .sources.funding_calls import FundingCallsSource
 from .sources.food_establishments import FoodEstablishmentsSource
 from .sources.food_inspections import FoodInspectionsSource
@@ -102,6 +103,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "hydropower": HydropowerSource,
     "income_caps": IncomeCapsSource,
     "novel_foods": NovelFoodsSource,
+    "staffing_register": StaffingRegisterSource,
     "funding_calls": FundingCallsSource,
     "food_establishments": FoodEstablishmentsSource,
     "account_documents": AccountDocumentsSource,
@@ -399,6 +401,7 @@ def evaluate(
     *,
     max_seen: int,
 ) -> tuple[dict, list[Alert], bool]:
+    max_seen = source_seen_limit(source, max_seen)
     seen = dict(previous.get("seen", {})) if previous else {}
     previous_order = list(previous.get("order", [])) if previous else []
     baseline = previous is None

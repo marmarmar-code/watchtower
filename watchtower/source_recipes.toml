@@ -2441,3 +2441,24 @@ interval_minutes = 720
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "staffing_enterprise_approval_changes"
+name = "Bemanningsforetak – endret godkjenningsstatus"
+sector = "business"
+description = "Følger hovedenheter i det offentlige bemanningsregisteret. Organisasjonsnummer gir identitet; oppført navn og status overvåkes. Hele registeret valideres i to komplette uttrekk før underenheter filtreres bort. Navn som mangler beholdes som ukjent. Ingen vedtaksdato eller juridisk konklusjon utledes."
+official_url = "https://www.arbeidstilsynet.no/bemanningsvirksomhet/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "staffing_register"
+include_subunits = false
+page_size = 500
+max_pages = 20
+max_export_records = 10000
+max_records = 5000
+max_seen_per_source = 5000
+max_bytes = 500000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
