@@ -1,0 +1,106 @@
+[
+  {
+    "recipe": "consultation_deadline_status_changes",
+    "checked_at": "2026-09-14T10:36:38.704751+00:00",
+    "records": 2,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/",
+        "bytes": 65266,
+        "sha256": "5098e828bec426746d864b9c0a4081e449f91a45e5af4e4c4663330604db887a"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-forskrift-om-deling-av-taushetsbelagte-opplysninger-og-behandling-av-personopplysninger-i-arbeidet-mot-okonomisk-kriminalitet-o-kriminformasjonsforskriften/id3170511/",
+        "bytes": 67128,
+        "sha256": "a5b6c20d1049fb08dbff6074b108ae1e0f4b7580141a52407a932092a284a696"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/",
+        "bytes": 65266,
+        "sha256": "5098e828bec426746d864b9c0a4081e449f91a45e5af4e4c4663330604db887a"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-forskrift-om-deling-av-taushetsbelagte-opplysninger-og-behandling-av-personopplysninger-i-arbeidet-mot-okonomisk-kriminalitet-o-kriminformasjonsforskriften/id3170511/",
+        "bytes": 67128,
+        "sha256": "a5b6c20d1049fb08dbff6074b108ae1e0f4b7580141a52407a932092a284a696"
+      }
+    ],
+    "config_sha256": "fed601dfa4020d8be0cd28da762bb21df2452650476768962d7c2d6949d23d55",
+    "module_sha256": "962344633efe81f53962f212d5f556cef45c19371b3bbda88665fbfe160863ef"
+  },
+  {
+    "recipe": "consultation_published_response_changes",
+    "checked_at": "2026-09-14T10:36:40.255674+00:00",
+    "records": 3,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/",
+        "bytes": 65266,
+        "sha256": "5098e828bec426746d864b9c0a4081e449f91a45e5af4e4c4663330604db887a"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/?showSvar=true",
+        "bytes": 63154,
+        "sha256": "3d410e3272feaa27eb4676b227f0187fc94fb376dff48c9429e00b9c659b808b"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/?uid=18fbc795-0362-4953-8412-cbc5db2e50b8",
+        "bytes": 55583,
+        "sha256": "4bc7059acc84c55261513d132b494e6a4b631976a160b3f3a11aa1ed20856d37"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/?uid=4517cffd-c7d5-4c49-afac-77790c9d201f",
+        "bytes": 55571,
+        "sha256": "3913a3ab397944c36968d40acd2ebb4ce4690fab5dfbccbef07a0ffc45c42057"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/?uid=fbf470b9-9d2d-4c29-8554-a0e777ac253d",
+        "bytes": 55568,
+        "sha256": "ed7ba7bdee403000d7a95e71d3c2557fe964e75c5b1ed1653ead10d8cf375240"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/?showSvar=true",
+        "bytes": 63154,
+        "sha256": "3d410e3272feaa27eb4676b227f0187fc94fb376dff48c9429e00b9c659b808b"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/",
+        "bytes": 65266,
+        "sha256": "5098e828bec426746d864b9c0a4081e449f91a45e5af4e4c4663330604db887a"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/?showSvar=true",
+        "bytes": 63154,
+        "sha256": "3d410e3272feaa27eb4676b227f0187fc94fb376dff48c9429e00b9c659b808b"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/?uid=18fbc795-0362-4953-8412-cbc5db2e50b8",
+        "bytes": 55583,
+        "sha256": "4bc7059acc84c55261513d132b494e6a4b631976a160b3f3a11aa1ed20856d37"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/?uid=4517cffd-c7d5-4c49-afac-77790c9d201f",
+        "bytes": 55571,
+        "sha256": "3913a3ab397944c36968d40acd2ebb4ce4690fab5dfbccbef07a0ffc45c42057"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/?uid=fbf470b9-9d2d-4c29-8554-a0e777ac253d",
+        "bytes": 55568,
+        "sha256": "ed7ba7bdee403000d7a95e71d3c2557fe964e75c5b1ed1653ead10d8cf375240"
+      },
+      {
+        "url": "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/?showSvar=true",
+        "bytes": 63154,
+        "sha256": "3d410e3272feaa27eb4676b227f0187fc94fb376dff48c9429e00b9c659b808b"
+      }
+    ],
+    "config_sha256": "c5585efc45aa1a1a9ca0e02ac52e137b61a8c0357f00b665d66db7a16eefe1fb",
+    "module_sha256": "962344633efe81f53962f212d5f556cef45c19371b3bbda88665fbfe160863ef"
+  }
+]

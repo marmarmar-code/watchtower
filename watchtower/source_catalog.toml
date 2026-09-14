@@ -500,3 +500,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Siste offentlige selskapsregnskap for valgte organisasjonsnumre: nye perioder og endret kilde-ID, valuta, regnskapsregler og oppgitte resultat-/balansetall. Tallene bevares uten omregning; API-skalaen er ikke dokumentert. Ingen konserndekning, historiske korreksjoner eller beregnede nøkkeltall."
+
+[[source]]
+id = "consultations"
+name = "Høringer – frister, status og publiserte svar"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Valgte saker: oppgitt frist/status eller nye og endrede publiserte svar. Svarlisten krever samsvar med oppgitt totaltall og kontrolleres igjen etter detaljlesing. Privatpersoner utelates som standard. Følger HTML-tekst og vedleggslenker, ikke filinnhold, sletting eller senere vedtaksutfall."

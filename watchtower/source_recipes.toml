@@ -2331,3 +2331,41 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "consultation_deadline_status_changes"
+name = "Høringer – endret frist og status"
+sector = "general"
+description = "Oppgitt frist, tittel og status for to valgte høringer. Kalenderdato uten oppgitt klokkeslett; status er ikke et vedtaksutfall."
+official_url = "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "consultations"
+profile = "metadata"
+urls = ["https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/", "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-forskrift-om-deling-av-taushetsbelagte-opplysninger-og-behandling-av-personopplysninger-i-arbeidet-mot-okonomisk-kriminalitet-o-kriminformasjonsforskriften/id3170511/"]
+max_records = 50
+max_bytes = 2000000
+interval_minutes = 720
+allow_empty = true
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "consultation_published_response_changes"
+name = "Høringer – nye og endrede publiserte svar"
+sector = "general"
+description = "Institusjonelle svar i én valgt sak: oppgitt svardato, svartype, endret HTML-tekst og vedleggslenker. Privatpersoner utelates; vedleggenes filinnhold og senere vedtak dekkes ikke."
+official_url = "https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "consultations"
+profile = "responses"
+urls = ["https://www.regjeringen.no/no/dokumenter/horing-om-forslag-til-endringer-i-finanstilsynsloven-automatiserte-avgjorelser-og-bruk-av-personopplysninger-til-utvikling-av-it-systemer/id3170180/"]
+max_records = 50
+max_bytes = 2000000
+interval_minutes = 720
+allow_empty = true
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
