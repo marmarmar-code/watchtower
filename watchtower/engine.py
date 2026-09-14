@@ -56,6 +56,7 @@ from .sources.account_figures import AccountFiguresSource
 from .sources.consultations import ConsultationsSource
 from .sources.avalanche_warnings import AvalancheWarningsSource
 from .sources.hydropower import HydropowerSource
+from .sources.income_caps import IncomeCapsSource
 from .sources.funding_calls import FundingCallsSource
 from .sources.food_establishments import FoodEstablishmentsSource
 from .sources.food_inspections import FoodInspectionsSource
@@ -98,6 +99,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "consultations": ConsultationsSource,
     "avalanche_warnings": AvalancheWarningsSource,
     "hydropower": HydropowerSource,
+    "income_caps": IncomeCapsSource,
     "funding_calls": FundingCallsSource,
     "food_establishments": FoodEstablishmentsSource,
     "account_documents": AccountDocumentsSource,

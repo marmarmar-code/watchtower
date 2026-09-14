@@ -28,7 +28,9 @@ def _xml(raw):
     return ET.fromstring(decoded)
 
 
-def table_rows(raw, sheet_name, max_unpacked, max_rows, columns):
+def table_rows(raw, sheet_name, max_unpacked, max_rows, columns, *,
+               allow_cached_formulas=False, allow_blank_rows=False):
+    """Read text values; explicit cache mode never evaluates Excel formulas."""
     try:
         with ZipFile(BytesIO(raw)) as archive:
             infos = archive.infolist()
@@ -65,12 +67,12 @@ def table_rows(raw, sheet_name, max_unpacked, max_rows, columns):
                     raise SourceError('Workbook shared-string namespace changed')
                 shared = [''.join(t.text or '' for t in item.iter(NS+'t')) for item in root.findall(NS+'si')]
             sheet = _xml(archive.read(target))
-            return _rows(sheet, shared, max_rows, columns)
+            return _rows(sheet, shared, max_rows, columns, allow_cached_formulas, allow_blank_rows)
     except (BadZipFile, KeyError, RuntimeError, NotImplementedError, ET.ParseError, UnicodeError, ValueError, IndexError) as exc:
         raise SourceError('Public workbook is invalid') from exc
 
 
-def _rows(sheet, shared, max_rows, columns):
+def _rows(sheet, shared, max_rows, columns, allow_cached_formulas=False, allow_blank_rows=False):
     if sheet.tag != NS+'worksheet':
         raise SourceError('Worksheet namespace changed')
     data = sheet.findall(NS+'sheetData')
@@ -85,7 +87,8 @@ def _rows(sheet, shared, max_rows, columns):
         cells, seen = ['']*columns, set()
         for cell in row.findall(NS+'c'):
             index = column_index(cell.get('r',''), number)
-            if index in seen or cell.find(NS+'f') is not None:
+            formulas = cell.findall(NS+'f')
+            if index in seen or len(formulas) > 1 or (formulas and not allow_cached_formulas):
                 raise SourceError('Worksheet cell repeats or contains a formula')
             seen.add(index)
             kind = cell.get('t','n')
@@ -95,6 +98,8 @@ def _rows(sheet, shared, max_rows, columns):
             if len(values) > 1:
                 raise SourceError('Worksheet cell value repeats')
             text = '' if not values else values[0].text or ''
+            if formulas and (kind != 'n' or not re.fullmatch(r'[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:[Ee][+-]?[0-9]+)?', text)):
+                raise SourceError('Worksheet formula lacks a cached numeric result')
             if kind == 's':
                 if not text.isdigit() or int(text) >= len(shared):
                     raise SourceError('Worksheet shared-string index is invalid')
@@ -114,6 +119,6 @@ def _rows(sheet, shared, max_rows, columns):
     if not populated or min(populated) != 1 or max(populated) < 2:
         raise SourceError('Worksheet is empty or lacks header/data')
     last = max(populated)
-    if any(n not in parsed or not any(parsed[n]) for n in range(1,last+1)):
+    if not allow_blank_rows and any(n not in parsed or not any(parsed[n]) for n in range(1,last+1)):
         raise SourceError('Worksheet has missing or blank interior rows')
-    return [parsed[n] for n in range(1,last+1)]
+    return [parsed.get(n, ['']*columns) for n in range(1,last+1)]

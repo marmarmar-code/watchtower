@@ -2405,3 +2405,22 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "rme_distribution_income_cap_changes"
+name = "RME – endrede vedtatte inntektsrammer"
+sector = "energy"
+description = "Følger publiserte rammebeløp for andre nettselskaper i vedtaket for 2025. Kildens lagrede verdier og enhet 1000 NOK bevares. Kostnadsgrunnlaget gjelder et eget år. Nye årsvedtak må velges eksplisitt; Statnett og NordLink ligger i separate regneark og dekkes ikke."
+official_url = "https://www.nve.no/reguleringsmyndigheten/bransje/bransjeoppgaver/inntektsrammer/inntektsrammer-for-2025-vedtak/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "income_caps"
+urls = ["https://www.nve.no/reguleringsmyndigheten/bransje/bransjeoppgaver/inntektsrammer/inntektsrammer-for-2025-vedtak/"]
+max_records = 300
+max_bytes = 3000000
+max_unpacked_bytes = 20000000
+max_sheet_rows = 500
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

@@ -527,3 +527,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye anleggs-ID-er og endret registerstatus, oppgitte datoer, ytelse, normalårsproduksjon og tekniske verdier. Full-listen kontrolleres mot driftslisten før utvalg av eventuelle eksplisitte ID-er. Eierdata utelates. Ingen sanntidsproduksjon, midlertidige driftsstans eller slutning om nedlegging fra fravær."
+
+[[source]]
+id = "income_caps"
+name = "RME – publiserte inntektsrammer for nettselskaper"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye selskaps-/årsoppføringer og endrede publiserte inntektsrammer i valgte vedtaksregneark for andre nettselskaper. Lagrede formelresultater leses med eksplisitt enhet 1000 NOK og separat kostnadsgrunnlagsår. Ingen omberegning, automatisk oppdagelse av nye år eller slutning om nytt vedtak fra endret celle. Statnett og NordLink dekkes ikke."
