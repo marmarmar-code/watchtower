@@ -2424,3 +2424,20 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "eu_novel_food_act_updates"
+name = "EU – nye matvarer, vilkår og rettelser"
+sector = "food"
+description = "Oppdager og følger listeførte rettsakter for de to nyeste publiserte årgangene, inkludert innledende rettelseslenker. Årgangene følger kildens liste automatisk. Listebeskrivelse og datoendringer overvåkes; fullstendige vilkår og norsk gjennomføring må kontrolleres i originalkildene."
+official_url = "https://food.ec.europa.eu/food-safety/novel-food/authorisations/union-list-novel-foods_en"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "novel_foods"
+latest_years = 2
+max_records = 150
+max_bytes = 1000000
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

@@ -536,3 +536,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye selskaps-/årsoppføringer og endrede publiserte inntektsrammer i valgte vedtaksregneark for andre nettselskaper. Lagrede formelresultater leses med eksplisitt enhet 1000 NOK og separat kostnadsgrunnlagsår. Ingen omberegning, automatisk oppdagelse av nye år eller slutning om nytt vedtak fra endret celle. Statnett og NordLink dekkes ikke."
+
+[[source]]
+id = "novel_foods"
+name = "EU – listeførte rettsakter om nye matvarer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede oppføringer om godkjenninger, bruksvilkår, merking og rettelser i Kommisjonens liste. Følger valgbart antall nyeste publiserte rettsaktsår, inkludert innledende rettelseslenker. Rettingsdato i URL holdes atskilt fra grunnrettsaktens oppførte dato. Full rettsakt, norsk gjennomføring og markedsstatus overvåkes ikke."
