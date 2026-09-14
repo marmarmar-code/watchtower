@@ -1963,3 +1963,22 @@ interval_minutes = 720
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "eu_merger_decisions_recent"
+name = "EU – nye og reviderte fusjonsvedtak"
+sector = "cross-sector"
+description = "Vedtaksdato og vedtakstype i saker med nylig vedtaksaktivitet. Datoen for siste saksaktivitet bestemmer søkevinduet; et nyobservert vedtak kan være vedtatt tidligere."
+official_url = "https://competition-cases.ec.europa.eu/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "eu_merger_decisions"
+urls = ["https://webgate.ec.europa.eu/es/search-api/rest"]
+lookback_days = 14
+max_records = 100
+max_bytes = 2000000
+allow_empty = true
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

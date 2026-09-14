@@ -383,3 +383,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nyeste månedlige revurderingsfil: vedtatte og forhåndsvarslede maksimale AIP/AUP per pakning, med eksplisitt gyldighetsdato. Ingen påstand om faktisk salgspris, refusjon eller komplett prisregister."
+
+[[source]]
+id = "eu_merger_decisions"
+name = "EU-fusjonsvedtak"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nyobserverte og reviderte vedtaksopplysninger i et avgrenset vindu av EU-fusjonssaker. Samler vedtak og tilhørende vedlegg under samme vedtaksidentitet. Ufullstendige søkevindu avvises; ingen varsler om sletting eller påstand om full historikk."
