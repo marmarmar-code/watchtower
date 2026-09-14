@@ -44,6 +44,7 @@ from .sources.clinical_trial_results import ClinicalTrialResultsSource
 from .sources.dmp_prices import DmpPricesSource
 from .sources.eu_merger_decisions import EUMergerDecisionsSource
 from .sources.customs_quotas import CustomsQuotasSource
+from .sources.customs_tariffs import CustomsTariffsSource
 from .sources.consumer_decisions import ConsumerDecisionsSource
 from .sources.package_advisories import PackageAdvisoriesSource
 from .sources.funding_calls import FundingCallsSource
@@ -76,6 +77,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "dmp_prices": DmpPricesSource,
     "eu_merger_decisions": EUMergerDecisionsSource,
     "customs_quotas": CustomsQuotasSource,
+    "customs_tariffs": CustomsTariffsSource,
     "consumer_decisions": ConsumerDecisionsSource,
     "package_advisories": PackageAdvisoriesSource,
     "funding_calls": FundingCallsSource,

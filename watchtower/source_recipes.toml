@@ -2115,3 +2115,23 @@ interval_minutes = 720
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "customs_food_tariff_revisions"
+name = "Tollsatser – matvarer i kapittel 04 og 16"
+sector = "trade"
+description = "Nye varenumre og reviderte satser, landgrupper og gyldighetsperioder. Hele registeret lastes ned før kapittelutvalget brukes; omtrent 41 MB per henting. Satsverdi, rå enhetskode og datoer er ikke en beregnet avgift for en konkret import."
+official_url = "https://data.toll.no/no/dataset/tollavgiftssats"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "customs_tariffs"
+urls = ["https://data.toll.no/dataset/6243277c-891e-4088-be79-0456d589d033/resource/876e3a41-7a9c-438a-8592-137547a9263c/download/tollavgiftssats.json"]
+chapters = ["04", "16"]
+max_records = 500
+max_tariff_bytes = 60000000
+max_register_records = 15000
+max_rates_per_commodity = 500
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

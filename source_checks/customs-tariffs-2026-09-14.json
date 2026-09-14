@@ -1,0 +1,25 @@
+{
+  "recipe": "customs_food_tariff_revisions",
+  "checked_at": "2026-09-14T08:07:48.186713+00:00",
+  "records": 117,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://data.toll.no/dataset/6243277c-891e-4088-be79-0456d589d033/resource/876e3a41-7a9c-438a-8592-137547a9263c/download/tollavgiftssats.json",
+      "bytes": 40976143,
+      "sha256": "e57c4298c40afad4bc1ed154530e757a8f048670675cc9a93f521c3bd461b38f"
+    },
+    {
+      "url": "https://data.toll.no/dataset/6243277c-891e-4088-be79-0456d589d033/resource/876e3a41-7a9c-438a-8592-137547a9263c/download/tollavgiftssats.json",
+      "bytes": 40976143,
+      "sha256": "e57c4298c40afad4bc1ed154530e757a8f048670675cc9a93f521c3bd461b38f"
+    }
+  ],
+  "config_sha256": "07da5d8275bffa23cc851fa4b96a5f4857eb82c9462ce46e80b12ed1d8dea815",
+  "module_sha256": "2f2bc31195aab83cf290e37a04df6331062c0ab131fbbef96d165e10e0265360",
+  "register_records": 7440,
+  "selected_rate_entries": 2980,
+  "proof_boundary": "Two real complete-resource reads through the final recipe and engine, with local chapter selection. Not hosted scheduling or later actual delivery evidence."
+}

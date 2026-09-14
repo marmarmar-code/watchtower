@@ -437,3 +437,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Godkjenningsnumre og oppførte virksomhets-, aktivitets- og periodeopplysninger i valgte lister for melk, egg og kjøtt. Flere rader per nummer bevares samlet. Fravær er ikke bevis på inndratt godkjenning; adresseskifte, tilsynsutfall og eierskap overvåkes ikke."
+
+[[source]]
+id = "customs_tariffs"
+name = "Tollsatser og gyldighetsperioder"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Oppførte tollsatser per varenummer i valgte kapitler, med landgruppekoder og alle satsperioder. Henter hele JSON-registeret på omtrent 41 MB under en særskilt bytegrense. Ingen beregning av faktisk importavgift, valutautledning eller tilbakekallingstolkning ved fravær."
