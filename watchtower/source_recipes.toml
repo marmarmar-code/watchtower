@@ -2061,3 +2061,57 @@ interval_minutes = 720
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "food_approval_dairy_entries"
+name = "Mattilsynet – godkjenningsoppføringer for melk og meieriprodukter"
+sector = "food"
+description = "Nye godkjenningsnumre og endrede listeopplysninger. Alle ulike aktiviteter og perioder under samme nummer samles; ny observasjon er ikke ny vedtaksdato, og fravær tolkes ikke som tilbaketrekking."
+official_url = "https://www.mattilsynet.no/godkjente-produkter-og-virksomheter/food-of-animal-origin-section-IX-raw-milk-and-dairy-products"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "food_establishments"
+urls = ["https://www.mattilsynet.no/godkjente-produkter-og-virksomheter/food-of-animal-origin-section-IX-raw-milk-and-dairy-products"]
+list_type = "dairy"
+max_records = 1000
+max_bytes = 2000000
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "food_approval_eggs_entries"
+name = "Mattilsynet – godkjenningsoppføringer for egg og eggprodukter"
+sector = "food"
+description = "Nye godkjenningsnumre og endrede listeopplysninger. Alle ulike aktiviteter og perioder under samme nummer samles; ny observasjon er ikke ny vedtaksdato, og fravær tolkes ikke som tilbaketrekking."
+official_url = "https://www.mattilsynet.no/godkjente-produkter-og-virksomheter/food-of-animal-origin-section-x-eggs-and-egg-products"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "food_establishments"
+urls = ["https://www.mattilsynet.no/godkjente-produkter-og-virksomheter/food-of-animal-origin-section-x-eggs-and-egg-products"]
+list_type = "eggs"
+max_records = 1000
+max_bytes = 2000000
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "food_approval_meat_entries"
+name = "Mattilsynet – godkjenningsoppføringer for kjøtt fra husdyr"
+sector = "food"
+description = "Nye godkjenningsnumre og endrede listeopplysninger. Alle ulike aktiviteter og perioder under samme nummer samles; ny observasjon er ikke ny vedtaksdato, og fravær tolkes ikke som tilbaketrekking."
+official_url = "https://www.mattilsynet.no/godkjente-produkter-og-virksomheter/section-1-meat-of-domestic-ungulates"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "food_establishments"
+urls = ["https://www.mattilsynet.no/godkjente-produkter-og-virksomheter/section-1-meat-of-domestic-ungulates"]
+list_type = "meat"
+max_records = 1000
+max_bytes = 2000000
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

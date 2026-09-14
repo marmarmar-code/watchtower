@@ -47,6 +47,7 @@ from .sources.customs_quotas import CustomsQuotasSource
 from .sources.consumer_decisions import ConsumerDecisionsSource
 from .sources.package_advisories import PackageAdvisoriesSource
 from .sources.funding_calls import FundingCallsSource
+from .sources.food_establishments import FoodEstablishmentsSource
 from .sources.food_inspections import FoodInspectionsSource
 from .sources.ema_medicines import EmaMedicinesSource
 from .sources.ema_regulatory_events import EmaRegulatoryEventsSource
@@ -78,6 +79,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "consumer_decisions": ConsumerDecisionsSource,
     "package_advisories": PackageAdvisoriesSource,
     "funding_calls": FundingCallsSource,
+    "food_establishments": FoodEstablishmentsSource,
     "account_documents": AccountDocumentsSource,
     "press_cases": PressCasesSource,
     "aquaculture": AquacultureSource,
