@@ -1,0 +1,9 @@
+# EU innovation call deadline window
+
+Two actual reads through the final recipe and engine returned all 60 English topic records matching `innovation` in the 14–21 September 2026 deadline window. Initialization and repeat reads produced no alerts and identical full state. The adjacent JSON records response, configuration and module hashes.
+
+The public Funding & Tenders Search API uses multipart JSON query/sort/displayFields, type `1`, status codes `31094501` and `31094502`, English language and both date bounds. SEDIA is the portal's public client identifier. Only a complete first page within the 100-record cap is accepted. A larger result set fails visibly instead of silently truncating. Stable topic identifiers and exact official topic URLs are required. Duplicate topics, non-English rows, deadlines outside the requested window, malformed responses and redirects fail before state changes.
+
+Newly observed topics and changes to deadline date, programme and raw status code are monitored. Cosmetic titles do not trigger alerts. Source timestamps at midnight are represented as dates; they do not prove an exact submission hour. Budget and eligibility are not provided by this contract. Disappearance, closure or an extension outside the selected window is not a removal or closure alert. An added event means newly observed in this window, not newly published. The broad innovation text match spans multiple programmes and does not establish eligibility for any particular applicant.
+
+[Official portal](https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals). Unit tests cover quiet repeats, substantive changes and rejection paths; the adjacent JSON describes actual public reads. Hosted scheduling and later delivery remain separate evidence.

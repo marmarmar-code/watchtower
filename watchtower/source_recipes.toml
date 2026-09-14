@@ -2020,3 +2020,44 @@ interval_minutes = 720
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "reviewed_package_advisory_changes"
+name = "Programvarepakker – gjennomgåtte sikkerhetsrådgivninger"
+sector = "technology"
+description = "Nye og endrede rådgivninger med berørte versjoner, fikseversjoner, alvorlighetsgrad og tilbaketrekking. Alle gjennomgåtte pakkeøkosystemer i et avgrenset oppdateringsvindu; ny registrering er ikke bevis på faktisk utnyttelse."
+official_url = "https://docs.github.com/en/rest/security-advisories/global-advisories"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "package_advisories"
+urls = ["https://api.github.com/advisories"]
+updated_days = 3
+page_size = 100
+max_pages = 3
+max_records = 300
+max_bytes = 2000000
+allow_empty = true
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "eu_innovation_call_deadlines"
+name = "EU – innovasjonsutlysninger med nær frist"
+sector = "technology"
+description = "Utlysningsemner som treffer innovation og har oppført frist i dag eller innen syv dager. Nye observasjoner og endrede fristdatoer, program og statuskoder innen vinduet; utlysninger som forlater vinduet gir ikke slutt- eller fjerningsvarsel."
+official_url = "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/calls-for-proposals"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "funding_calls"
+urls = ["https://api.tech.ec.europa.eu/search-api/prod/rest/search"]
+text = "innovation"
+window_days = 7
+max_records = 100
+max_bytes = 2000000
+allow_empty = true
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

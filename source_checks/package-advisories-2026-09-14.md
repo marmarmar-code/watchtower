@@ -1,0 +1,7 @@
+# Reviewed package advisory changes
+
+Two actual reads through the final recipe and engine returned 42 advisory records, with quiet initialization, no repeat alerts and identical full state. Raw response hashes and module/configuration hashes are in the adjacent JSON proof. A separate actual cursor exercise returned 20 + 20 + 2 records, with no final next link; numeric page parameters are not used.
+
+The official endpoint is `https://api.github.com/advisories`, with `type=reviewed`, a complete three-day lookback through today in UTC calendar dates, and a bounded cursor traversal. [API contract](https://docs.github.com/en/rest/security-advisories/global-advisories). New GHSA identities and changes to summary, CVE association, severity, withdrawal, affected package ranges and first patched versions are monitored. Package order and transport/update timestamps alone are quiet. Missing patches are retained as unknown, not interpreted as safe.
+
+Malformed records, changed cursor scope, duplicate IDs, incomplete pages, redirects and size/page/record limits fail before state advances. Six withdrawn records were present in the research window. Withdrawal and later reactivation are retained as changes. This is advisory coverage, not evidence of exploitation or vulnerable local installations. Older records outside the update window and long outages can require separate investigation; the rolling window cannot establish removals. Unit tests exercise failures and changes using artificial fixtures; the adjacent JSON describes actual public reads.
