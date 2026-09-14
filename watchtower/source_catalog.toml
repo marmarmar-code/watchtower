@@ -446,3 +446,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Oppførte tollsatser per varenummer i valgte kapitler, med landgruppekoder og alle satsperioder. Henter hele JSON-registeret på omtrent 41 MB under en særskilt bytegrense. Ingen beregning av faktisk importavgift, valutautledning eller tilbakekallingstolkning ved fravær."
+
+[[source]]
+id = "ofac_sdn"
+name = "OFAC – endringer i SDN-oppføringer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede OFAC-listeoppføringer for eksplisitt valgte virksomheter eller fartøy, med navn, programmer, aliaser, identifikatorer og kildeopplysninger. Full XML-eksport kontrolleres mot publisert antall og sjekksum før utvalg. Dette er listeovervåking, ikke navnescreening, skyldvurdering eller vurdering av rettslig anvendelse. Fravær tolkes ikke som oppheving."

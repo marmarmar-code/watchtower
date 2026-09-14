@@ -2135,3 +2135,44 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "ofac_sdn_business_changes"
+name = "OFAC – virksomheter under IFSR"
+sector = "finance"
+description = "Nye og endrede SDN-listeopplysninger om navn, programmer, aliaser, identifikatorer og øvrige kildefelt. Første observasjon er ikke vedtaksdato. Utvalget gir ikke navnescreening eller vurdering av hvilke regler som gjelder i en konkret situasjon."
+official_url = "https://ofac.treasury.gov/sanctions-list-service"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "ofac_sdn"
+urls = ["https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN_XML.ZIP"]
+entry_types = ["Entity"]
+programs = ["IFSR"]
+max_records = 2500
+max_bytes = 5000000
+max_xml_bytes = 40000000
+max_register_records = 30000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "ofac_sdn_vessel_changes"
+name = "OFAC – fartøyoppføringer"
+sector = "trade"
+description = "Nye og endrede SDN-listeopplysninger om navn, programmer, aliaser, identifikatorer og øvrige kildefelt. Første observasjon er ikke vedtaksdato. Utvalget gir ikke navnescreening eller vurdering av hvilke regler som gjelder i en konkret situasjon."
+official_url = "https://ofac.treasury.gov/sanctions-list-service"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "ofac_sdn"
+urls = ["https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN_XML.ZIP"]
+entry_types = ["Vessel"]
+max_records = 3000
+max_bytes = 5000000
+max_xml_bytes = 40000000
+max_register_records = 30000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
