@@ -1,0 +1,471 @@
+[
+  {
+    "recipe": "easa_airworthiness_directive_updates",
+    "checked_at": "2026-09-14T12:49:51.262434+00:00",
+    "records": 13,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://ad.easa.europa.eu/search/",
+        "method": "POST",
+        "bytes": 74975,
+        "sha256": "d2fd2ecec9d020b19d2ced10d5171fab1509d9070306bf52cf7b8372053358cb",
+        "request_body": "fi_action=advanced&fi_adclass%5B%5D=AD&fi_date_start=2026-08-16&fi_date_end=2026-09-14"
+      },
+      {
+        "url": "https://ad.easa.europa.eu/search/page-2",
+        "method": "POST",
+        "bytes": 51821,
+        "sha256": "3e7c29a835caca8334650bd293bf457165c1c63e12ff4731e3f374f877e515c1",
+        "request_body": "fi_action=advanced&fi_adclass%5B%5D=AD&fi_date_start=2026-08-16&fi_date_end=2026-09-14"
+      },
+      {
+        "url": "https://ad.easa.europa.eu/search/?format=xml&r=200",
+        "method": "POST",
+        "bytes": 19878,
+        "sha256": "a814ebd706f70e8b10b2c5bc2fabc4ae2c61d730ce3f11e3322349e60b082c51",
+        "request_body": "fi_action=advanced&fi_adclass%5B%5D=AD&fi_date_start=2026-08-16&fi_date_end=2026-09-14"
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0177",
+        "method": "GET",
+        "bytes": 24646,
+        "sha256": "1854504828bea224f63d4acf71c3339fd245830707c78bc70262e3d590f0d9f6",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0176",
+        "method": "GET",
+        "bytes": 33109,
+        "sha256": "5757e8c056e927734543c7e79890adbd045c0ff3eaecc47063e3027513eeefa8",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0144R1",
+        "method": "GET",
+        "bytes": 25090,
+        "sha256": "73ea0c91e5260b143a17aac21436c43e20385161d19a6352a0783ac610598c0f",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0175",
+        "method": "GET",
+        "bytes": 24304,
+        "sha256": "7e98dae0763c3f14aef64d31590d0200a7f3d76486cb975bf2eee0d7e6558298",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0174",
+        "method": "GET",
+        "bytes": 31338,
+        "sha256": "9b5299b751fecf51b095ce96ab2c395488c53ed1d22d23c02a7527716d406ebc",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0171",
+        "method": "GET",
+        "bytes": 24215,
+        "sha256": "9a14383bec85da0ea5360f89192b34f4bf8fc5fa96f2356760f9f709ea95dda2",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0170",
+        "method": "GET",
+        "bytes": 24958,
+        "sha256": "4c4e803c48f477883095cba898057981dd6604e3abb01d835fc2e8ad3322440c",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2025-0094R2",
+        "method": "GET",
+        "bytes": 24336,
+        "sha256": "bb86a40fe3b8edbc08b2f429feb929cdba276747b2ffc0a02128dba47000572b",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0169",
+        "method": "GET",
+        "bytes": 27267,
+        "sha256": "8e93aa064c5d8bf33fa14fe4141455a42c2a82e14a1f250a6fd4b8e494f84ca5",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0167",
+        "method": "GET",
+        "bytes": 23993,
+        "sha256": "00345be88ab06795d9400c31412e896aa2958f9e0e46d8be6bbb81169d32583f",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0168",
+        "method": "GET",
+        "bytes": 25902,
+        "sha256": "d5c131727a0e10e7a1e1054788ff98b9f15eddd0764c8dfc4a80abb35e368edb",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0166",
+        "method": "GET",
+        "bytes": 24101,
+        "sha256": "92e58c31127d49e453cea86f8666971f12ce6ee693d83027f7e8075eaed709fb",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0165",
+        "method": "GET",
+        "bytes": 23943,
+        "sha256": "5998ab00438ce662846c07125420f78cdd663f8ebb3bde26ee1dd2d6a1fca0e4",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/search/",
+        "method": "POST",
+        "bytes": 74975,
+        "sha256": "d2fd2ecec9d020b19d2ced10d5171fab1509d9070306bf52cf7b8372053358cb",
+        "request_body": "fi_action=advanced&fi_adclass%5B%5D=AD&fi_date_start=2026-08-16&fi_date_end=2026-09-14"
+      },
+      {
+        "url": "https://ad.easa.europa.eu/search/page-2",
+        "method": "POST",
+        "bytes": 51821,
+        "sha256": "3e7c29a835caca8334650bd293bf457165c1c63e12ff4731e3f374f877e515c1",
+        "request_body": "fi_action=advanced&fi_adclass%5B%5D=AD&fi_date_start=2026-08-16&fi_date_end=2026-09-14"
+      },
+      {
+        "url": "https://ad.easa.europa.eu/search/?format=xml&r=200",
+        "method": "POST",
+        "bytes": 19878,
+        "sha256": "a814ebd706f70e8b10b2c5bc2fabc4ae2c61d730ce3f11e3322349e60b082c51",
+        "request_body": "fi_action=advanced&fi_adclass%5B%5D=AD&fi_date_start=2026-08-16&fi_date_end=2026-09-14"
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0177",
+        "method": "GET",
+        "bytes": 24646,
+        "sha256": "1854504828bea224f63d4acf71c3339fd245830707c78bc70262e3d590f0d9f6",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0176",
+        "method": "GET",
+        "bytes": 33109,
+        "sha256": "5757e8c056e927734543c7e79890adbd045c0ff3eaecc47063e3027513eeefa8",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0144R1",
+        "method": "GET",
+        "bytes": 25090,
+        "sha256": "73ea0c91e5260b143a17aac21436c43e20385161d19a6352a0783ac610598c0f",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0175",
+        "method": "GET",
+        "bytes": 24304,
+        "sha256": "7e98dae0763c3f14aef64d31590d0200a7f3d76486cb975bf2eee0d7e6558298",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0174",
+        "method": "GET",
+        "bytes": 31338,
+        "sha256": "9b5299b751fecf51b095ce96ab2c395488c53ed1d22d23c02a7527716d406ebc",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0171",
+        "method": "GET",
+        "bytes": 24215,
+        "sha256": "9a14383bec85da0ea5360f89192b34f4bf8fc5fa96f2356760f9f709ea95dda2",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0170",
+        "method": "GET",
+        "bytes": 24958,
+        "sha256": "4c4e803c48f477883095cba898057981dd6604e3abb01d835fc2e8ad3322440c",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2025-0094R2",
+        "method": "GET",
+        "bytes": 24336,
+        "sha256": "bb86a40fe3b8edbc08b2f429feb929cdba276747b2ffc0a02128dba47000572b",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0169",
+        "method": "GET",
+        "bytes": 27267,
+        "sha256": "8e93aa064c5d8bf33fa14fe4141455a42c2a82e14a1f250a6fd4b8e494f84ca5",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0167",
+        "method": "GET",
+        "bytes": 23993,
+        "sha256": "00345be88ab06795d9400c31412e896aa2958f9e0e46d8be6bbb81169d32583f",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0168",
+        "method": "GET",
+        "bytes": 25902,
+        "sha256": "d5c131727a0e10e7a1e1054788ff98b9f15eddd0764c8dfc4a80abb35e368edb",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0166",
+        "method": "GET",
+        "bytes": 24101,
+        "sha256": "92e58c31127d49e453cea86f8666971f12ce6ee693d83027f7e8075eaed709fb",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0165",
+        "method": "GET",
+        "bytes": 23943,
+        "sha256": "5998ab00438ce662846c07125420f78cdd663f8ebb3bde26ee1dd2d6a1fca0e4",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/search/",
+        "method": "POST",
+        "bytes": 74975,
+        "sha256": "d2fd2ecec9d020b19d2ced10d5171fab1509d9070306bf52cf7b8372053358cb",
+        "request_body": "fi_action=advanced&fi_adclass%5B%5D=AD&fi_date_start=2026-08-16&fi_date_end=2026-09-14"
+      },
+      {
+        "url": "https://ad.easa.europa.eu/search/page-2",
+        "method": "POST",
+        "bytes": 51821,
+        "sha256": "3e7c29a835caca8334650bd293bf457165c1c63e12ff4731e3f374f877e515c1",
+        "request_body": "fi_action=advanced&fi_adclass%5B%5D=AD&fi_date_start=2026-08-16&fi_date_end=2026-09-14"
+      },
+      {
+        "url": "https://ad.easa.europa.eu/search/?format=xml&r=200",
+        "method": "POST",
+        "bytes": 19878,
+        "sha256": "a814ebd706f70e8b10b2c5bc2fabc4ae2c61d730ce3f11e3322349e60b082c51",
+        "request_body": "fi_action=advanced&fi_adclass%5B%5D=AD&fi_date_start=2026-08-16&fi_date_end=2026-09-14"
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0177",
+        "method": "GET",
+        "bytes": 24646,
+        "sha256": "1854504828bea224f63d4acf71c3339fd245830707c78bc70262e3d590f0d9f6",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0176",
+        "method": "GET",
+        "bytes": 33109,
+        "sha256": "5757e8c056e927734543c7e79890adbd045c0ff3eaecc47063e3027513eeefa8",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0144R1",
+        "method": "GET",
+        "bytes": 25090,
+        "sha256": "73ea0c91e5260b143a17aac21436c43e20385161d19a6352a0783ac610598c0f",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0175",
+        "method": "GET",
+        "bytes": 24304,
+        "sha256": "7e98dae0763c3f14aef64d31590d0200a7f3d76486cb975bf2eee0d7e6558298",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0174",
+        "method": "GET",
+        "bytes": 31338,
+        "sha256": "9b5299b751fecf51b095ce96ab2c395488c53ed1d22d23c02a7527716d406ebc",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0171",
+        "method": "GET",
+        "bytes": 24215,
+        "sha256": "9a14383bec85da0ea5360f89192b34f4bf8fc5fa96f2356760f9f709ea95dda2",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0170",
+        "method": "GET",
+        "bytes": 24958,
+        "sha256": "4c4e803c48f477883095cba898057981dd6604e3abb01d835fc2e8ad3322440c",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2025-0094R2",
+        "method": "GET",
+        "bytes": 24336,
+        "sha256": "bb86a40fe3b8edbc08b2f429feb929cdba276747b2ffc0a02128dba47000572b",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0169",
+        "method": "GET",
+        "bytes": 27267,
+        "sha256": "8e93aa064c5d8bf33fa14fe4141455a42c2a82e14a1f250a6fd4b8e494f84ca5",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0167",
+        "method": "GET",
+        "bytes": 23993,
+        "sha256": "00345be88ab06795d9400c31412e896aa2958f9e0e46d8be6bbb81169d32583f",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0168",
+        "method": "GET",
+        "bytes": 25902,
+        "sha256": "d5c131727a0e10e7a1e1054788ff98b9f15eddd0764c8dfc4a80abb35e368edb",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0166",
+        "method": "GET",
+        "bytes": 24101,
+        "sha256": "92e58c31127d49e453cea86f8666971f12ce6ee693d83027f7e8075eaed709fb",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0165",
+        "method": "GET",
+        "bytes": 23943,
+        "sha256": "5998ab00438ce662846c07125420f78cdd663f8ebb3bde26ee1dd2d6a1fca0e4",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/search/",
+        "method": "POST",
+        "bytes": 74975,
+        "sha256": "d2fd2ecec9d020b19d2ced10d5171fab1509d9070306bf52cf7b8372053358cb",
+        "request_body": "fi_action=advanced&fi_adclass%5B%5D=AD&fi_date_start=2026-08-16&fi_date_end=2026-09-14"
+      },
+      {
+        "url": "https://ad.easa.europa.eu/search/page-2",
+        "method": "POST",
+        "bytes": 51821,
+        "sha256": "3e7c29a835caca8334650bd293bf457165c1c63e12ff4731e3f374f877e515c1",
+        "request_body": "fi_action=advanced&fi_adclass%5B%5D=AD&fi_date_start=2026-08-16&fi_date_end=2026-09-14"
+      },
+      {
+        "url": "https://ad.easa.europa.eu/search/?format=xml&r=200",
+        "method": "POST",
+        "bytes": 19878,
+        "sha256": "a814ebd706f70e8b10b2c5bc2fabc4ae2c61d730ce3f11e3322349e60b082c51",
+        "request_body": "fi_action=advanced&fi_adclass%5B%5D=AD&fi_date_start=2026-08-16&fi_date_end=2026-09-14"
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0177",
+        "method": "GET",
+        "bytes": 24646,
+        "sha256": "1854504828bea224f63d4acf71c3339fd245830707c78bc70262e3d590f0d9f6",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0176",
+        "method": "GET",
+        "bytes": 33109,
+        "sha256": "5757e8c056e927734543c7e79890adbd045c0ff3eaecc47063e3027513eeefa8",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0144R1",
+        "method": "GET",
+        "bytes": 25090,
+        "sha256": "73ea0c91e5260b143a17aac21436c43e20385161d19a6352a0783ac610598c0f",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0175",
+        "method": "GET",
+        "bytes": 24304,
+        "sha256": "7e98dae0763c3f14aef64d31590d0200a7f3d76486cb975bf2eee0d7e6558298",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0174",
+        "method": "GET",
+        "bytes": 31338,
+        "sha256": "9b5299b751fecf51b095ce96ab2c395488c53ed1d22d23c02a7527716d406ebc",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0171",
+        "method": "GET",
+        "bytes": 24215,
+        "sha256": "9a14383bec85da0ea5360f89192b34f4bf8fc5fa96f2356760f9f709ea95dda2",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0170",
+        "method": "GET",
+        "bytes": 24958,
+        "sha256": "4c4e803c48f477883095cba898057981dd6604e3abb01d835fc2e8ad3322440c",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2025-0094R2",
+        "method": "GET",
+        "bytes": 24336,
+        "sha256": "bb86a40fe3b8edbc08b2f429feb929cdba276747b2ffc0a02128dba47000572b",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0169",
+        "method": "GET",
+        "bytes": 27267,
+        "sha256": "8e93aa064c5d8bf33fa14fe4141455a42c2a82e14a1f250a6fd4b8e494f84ca5",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0167",
+        "method": "GET",
+        "bytes": 23993,
+        "sha256": "00345be88ab06795d9400c31412e896aa2958f9e0e46d8be6bbb81169d32583f",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0168",
+        "method": "GET",
+        "bytes": 25902,
+        "sha256": "d5c131727a0e10e7a1e1054788ff98b9f15eddd0764c8dfc4a80abb35e368edb",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0166",
+        "method": "GET",
+        "bytes": 24101,
+        "sha256": "92e58c31127d49e453cea86f8666971f12ce6ee693d83027f7e8075eaed709fb",
+        "request_body": null
+      },
+      {
+        "url": "https://ad.easa.europa.eu/ad/2026-0165",
+        "method": "GET",
+        "bytes": 23943,
+        "sha256": "5998ab00438ce662846c07125420f78cdd663f8ebb3bde26ee1dd2d6a1fca0e4",
+        "request_body": null
+      }
+    ],
+    "config_sha256": "2f425e06bda23798ba6e74217f528721665c41ea3d0e260e9c7788e9365deb5d",
+    "module_sha256": "8ccac39c8f5185fbf71cbe2ba1f58f4f447431a9ce0d60522323620219830318",
+    "engine_sha256": "2dca134058c6ab0973a56327fecd211aacd6a19f8b3aeb1e6bc09bd0220445d4",
+    "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+    "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+    "source_summary": {
+      "selected": 13,
+      "explicit_revision_references": 1,
+      "explicit_supersedure_references": 3,
+      "response_count": 64
+    }
+  }
+]

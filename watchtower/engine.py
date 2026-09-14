@@ -59,6 +59,7 @@ from .sources.hydropower import HydropowerSource
 from .sources.income_caps import IncomeCapsSource
 from .sources.novel_foods import NovelFoodsSource
 from .sources.staffing_register import StaffingRegisterSource
+from .sources.airworthiness import AirworthinessSource
 from .sources.funding_calls import FundingCallsSource
 from .sources.food_establishments import FoodEstablishmentsSource
 from .sources.food_inspections import FoodInspectionsSource
@@ -104,6 +105,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "income_caps": IncomeCapsSource,
     "novel_foods": NovelFoodsSource,
     "staffing_register": StaffingRegisterSource,
+    "airworthiness": AirworthinessSource,
     "funding_calls": FundingCallsSource,
     "food_establishments": FoodEstablishmentsSource,
     "account_documents": AccountDocumentsSource,

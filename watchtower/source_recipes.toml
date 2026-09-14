@@ -2462,3 +2462,23 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "easa_airworthiness_directive_updates"
+name = "EASA – nye og reviderte luftdyktighetsdirektiver"
+sector = "business"
+description = "Følger EU-utstedte AD-publikasjoner med utstedelsesdato de siste 30 dagene. Hele nummeret, inkludert revisjonssuffiks, gir identitet. Utstedelse og ikrafttredelse holdes atskilt; detaljsidens revisjon, korrigering og erstatning bevares som kildeopplysninger. Eldre dokumentendringer utenfor vinduet og innholdet i vedlegg dekkes ikke."
+official_url = "https://ad.easa.europa.eu/search/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "airworthiness"
+lookback_days = 30
+issuers = ["EU"]
+max_pages = 10
+max_records = 200
+max_bytes = 1000000
+allow_empty = true
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

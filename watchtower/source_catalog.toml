@@ -554,3 +554,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og endrede enhetsoppføringer med navn og godkjenningsstatus. To komplette paginerte uttrekk må stemme før utvalg av hovedenheter eller eksplisitte organisasjonsnumre. Underenheter kan velges separat. Ingen godkjennings-/vedtaksdato, selvstendig lovlighetsvurdering eller tap av godkjenning utledes fra fravær."
+
+[[source]]
+id = "airworthiness"
+name = "EASA – luftdyktighetsdirektiver og revisjoner"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Oppdager AD-publikasjoner, inkludert revisjonsnumre, og følger oppførte revisjons-/korrigerings-/erstatningsfelt i valgt utstedelsesvindu. Komplett HTML-paginering krysskontrolleres mot XML; to fulle innlesinger må stemme. Utsteder kan velges eksplisitt. Dekker ikke eldre endringer utenfor vinduet, PDF-innhold, global fullstendighet eller gjeldende status for et bestemt fly."
