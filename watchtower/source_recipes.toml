@@ -2369,3 +2369,22 @@ allow_empty = true
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "nve_regional_avalanche_warning_changes"
+name = "NVE – publiserte og endrede regionale skredvarsler"
+sector = "general"
+description = "Følger Jotunheimen og Lyngen fra gårsdagen til to dager fram. Nye vurderinger og endret detaljinnhold gir endringsmelding med lenke til hele Varsom-varselet. Nye ikke-vurderte dagsoppføringer er stille. Dette er ikke et komplett farevarsel eller en lokal sikkerhetsvurdering."
+official_url = "https://api.nve.no/doc/snoeskredvarsel/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "avalanche_warnings"
+regions = ["3028", "3010"]
+lookback_days = 1
+forecast_days = 2
+max_records = 40
+max_bytes = 2000000
+interval_minutes = 120
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

@@ -1,0 +1,84 @@
+{
+  "current_recipe": [
+    {
+      "recipe": "nve_regional_avalanche_warning_changes",
+      "checked_at": "2026-09-14T10:51:49.043878+00:00",
+      "records": 8,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://api01.nve.no/hydrology/forecast/avalanche/v6.3.2/api/Warning/Region/3010/1/2026-09-13/2026-09-16",
+          "bytes": 4357,
+          "sha256": "33eb4a9b20b7d5ee79c6bbbb1ef7ebbeb494d575333916c26b60718f0e774d63"
+        },
+        {
+          "url": "https://api01.nve.no/hydrology/forecast/avalanche/v6.3.2/api/Warning/Region/3028/1/2026-09-13/2026-09-16",
+          "bytes": 5213,
+          "sha256": "8fa85d7499643e722087ec1fd14bfd7c39f170565c535add04c16e79d65000db"
+        },
+        {
+          "url": "https://api01.nve.no/hydrology/forecast/avalanche/v6.3.2/api/Warning/Region/3010/1/2026-09-13/2026-09-16",
+          "bytes": 4357,
+          "sha256": "33eb4a9b20b7d5ee79c6bbbb1ef7ebbeb494d575333916c26b60718f0e774d63"
+        },
+        {
+          "url": "https://api01.nve.no/hydrology/forecast/avalanche/v6.3.2/api/Warning/Region/3028/1/2026-09-13/2026-09-16",
+          "bytes": 5213,
+          "sha256": "8fa85d7499643e722087ec1fd14bfd7c39f170565c535add04c16e79d65000db"
+        }
+      ],
+      "config_sha256": "a9a737bb81d4a6765a7d27dd37fb5ceeba4d5bd9bcaddac568b0f3179af4a53f",
+      "module_sha256": "ef718d4e65e5e5a8c7ea2adcb85caf17f139c620847d5f724528a92d9e7d4ac2"
+    }
+  ],
+  "historical_assessed_contract": {
+    "checked_at": "2026-09-14T10:52:43.570736+00:00",
+    "scope": "Historical March 1–3 2026; clock overridden only to select explicit archival dates. Actual source bytes unmodified. Not current hazard evidence or an activated recipe.",
+    "records": 3,
+    "danger_levels": [
+      3,
+      3,
+      3
+    ],
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://api01.nve.no/hydrology/forecast/avalanche/v6.3.2/api/Warning/Region/3028/1/2026-03-01/2026-03-03",
+        "bytes": 22564,
+        "sha256": "23972da45b414ba2319a3dbbbf76d7bc4f0377eb8f5a7134c7fb47f6b669bb7a"
+      },
+      {
+        "url": "https://api01.nve.no/hydrology/forecast/avalanche/v6.3.2/api/Warning/Region/3028/1/2026-03-01/2026-03-03",
+        "bytes": 22564,
+        "sha256": "23972da45b414ba2319a3dbbbf76d7bc4f0377eb8f5a7134c7fb47f6b669bb7a"
+      }
+    ]
+  },
+  "full_warning_links": [
+    {
+      "url": "https://www.varsom.no/snoskred/varsling/varsel/Jotunheimen/2026-09-13",
+      "final_url": "https://www.varsom.no/snoskred/varsling/varsel/Jotunheimen/2026-09-13",
+      "bytes": 113660,
+      "sha256": "f482cb5f505de7a9727c32a5f88349a7a325f3a32ed06dad62a474cac08acd6f",
+      "heading_matches_region_date": true
+    },
+    {
+      "url": "https://www.varsom.no/snoskred/varsling/varsel/Lyngen/2026-09-13",
+      "final_url": "https://www.varsom.no/snoskred/varsling/varsel/Lyngen/2026-09-13",
+      "bytes": 113639,
+      "sha256": "1f839ca5dca976312cf63dfe5d7f8967a9447483c13629105807cc202c8d0ea4",
+      "heading_matches_region_date": true
+    },
+    {
+      "url": "https://www.varsom.no/snoskred/varsling/varsel/Jotunheimen/2026-03-01",
+      "final_url": "https://www.varsom.no/snoskred/varsling/varsel/Jotunheimen/2026-03-01",
+      "bytes": 260499,
+      "sha256": "1f419c18cc2ef1501a8fbfd863f7a5a58a68bdf60c7a7deb40ff9f244e363b24",
+      "heading_matches_region_date": true
+    }
+  ]
+}

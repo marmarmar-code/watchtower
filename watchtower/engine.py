@@ -54,6 +54,7 @@ from .sources.package_metadata import PackageMetadataSource
 from .sources.device_actions import DeviceActionsSource
 from .sources.account_figures import AccountFiguresSource
 from .sources.consultations import ConsultationsSource
+from .sources.avalanche_warnings import AvalancheWarningsSource
 from .sources.funding_calls import FundingCallsSource
 from .sources.food_establishments import FoodEstablishmentsSource
 from .sources.food_inspections import FoodInspectionsSource
@@ -94,6 +95,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "device_actions": DeviceActionsSource,
     "account_figures": AccountFiguresSource,
     "consultations": ConsultationsSource,
+    "avalanche_warnings": AvalancheWarningsSource,
     "funding_calls": FundingCallsSource,
     "food_establishments": FoodEstablishmentsSource,
     "account_documents": AccountDocumentsSource,
