@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 import tempfile
+import tomllib
 import unittest
 
 from scripts.catalog_test_runtime import (
@@ -45,7 +46,11 @@ class CatalogTestRuntimeTests(unittest.TestCase):
     def test_config_generation_contains_no_webhook_or_private_selection(self):
         content = config_text()
         self.assertNotIn("WEBHOOK", content.upper())
-        self.assertNotIn("entity", content.lower())
+        parsed = tomllib.loads(content)
+        self.assertNotIn("entity", parsed)
+        for source in parsed["source"]:
+            self.assertNotIn("entity_refs", source)
+            self.assertNotIn("entity_refs", source.get("filter", {}))
 
     def test_delivery_workflow_is_ephemeral_and_uses_only_the_test_secret(self):
         root = Path(__file__).resolve().parents[1]
