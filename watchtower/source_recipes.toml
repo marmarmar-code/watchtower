@@ -2538,3 +2538,24 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "national_legal_announcement_changes"
+name = "Norsk Lovtidend – nye og endrede kunngjøringer"
+sector = "business"
+description = "Følger lover og forskrifter i nyeste annonserte enkeltårspakke fra avdeling I. Valg av latest_years og document_types kan avgrense utvalget. Kunngjøringstid og tekst om ikrafttredelse bevares separat uten juridisk statusinferens. Dokumenttekst, metadata og ressursreferanser følges; bilde-/vedleggsinnhold og eldre år utenfor utvalget dekkes ikke."
+official_url = "https://api.lovdata.no/v1/publicData/list"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "law_gazette"
+latest_years = 1
+document_types = ["lov", "forskrift"]
+max_records = 3000
+max_archive_records = 5000
+max_bytes = 4000000
+max_expanded_bytes = 32000000
+max_document_bytes = 1000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

@@ -581,3 +581,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og endrede registerrader med innehaver, frekvensgrenser i Hz, anvendelse, dekning og kildeoppgitt utløpstid. To komplette samlingssvar må stemme. Flere rader kan dele tillatelsesnummer. Generelle fribruks-/amatørregler utelates som standard og kan velges uttrykkelig. Ingen aktiv-status, vedtaksdato eller tilbakekalling utledes."
+
+[[source]]
+id = "law_gazette"
+name = "Norsk Lovtidend – kunngjøringer og dokumentendringer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede kunngjøringer i nyeste annonserte enkeltårspakker fra avdeling I. Dokumenttekst, ressursreferanser og utvalgte metadata følges. Kunngjøringstid og kildeoppgitt ikrafttredelse holdes atskilt. Komprimert og utvidet arkiv kontrolleres i to komplette innlesinger. Ingen konsolidert lovtilstand, juridisk virkning eller opphevelse utledes."

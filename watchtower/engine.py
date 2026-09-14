@@ -62,6 +62,7 @@ from .sources.staffing_register import StaffingRegisterSource
 from .sources.airworthiness import AirworthinessSource
 from .sources.emission_values import EmissionValuesSource
 from .sources.frequency_licences import FrequencyLicencesSource
+from .sources.law_gazette import LawGazetteSource
 from .sources.funding_calls import FundingCallsSource
 from .sources.food_establishments import FoodEstablishmentsSource
 from .sources.food_inspections import FoodInspectionsSource
@@ -110,6 +111,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "airworthiness": AirworthinessSource,
     "emission_values": EmissionValuesSource,
     "frequency_licences": FrequencyLicencesSource,
+    "law_gazette": LawGazetteSource,
     "funding_calls": FundingCallsSource,
     "food_establishments": FoodEstablishmentsSource,
     "account_documents": AccountDocumentsSource,
