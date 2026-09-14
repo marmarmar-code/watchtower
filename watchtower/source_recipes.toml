@@ -2388,3 +2388,20 @@ interval_minutes = 120
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "nve_hydropower_registry_changes"
+name = "NVE – endret vannkraftstatus og anleggsytelse"
+sector = "energy"
+description = "Følger alle oppførte vannkraftanlegg, også anlegg under bygging og permanent ute av drift. Nye ID-er og endringer i registerstatus, maksimal ytelse og øvrige tekniske råverdier varsles. Midlere årsproduksjon gjelder referanse 1991–2020; dette er ikke sanntidsdrift eller målt årsproduksjon."
+official_url = "https://api.nve.no/doc/vannkraftdatabase/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "hydropower"
+max_records = 2500
+max_export_records = 5000
+max_bytes = 6000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

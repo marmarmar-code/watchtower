@@ -518,3 +518,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Endringsmeldinger for eksplisitte regioner og datoer med lenke til hele varselet hos Varsom. Skiller ikke vurdert, redusert vurdering og utstedt vurdering. Følger komplett normalisert detaljinnhold uten forfatterfelt; gjengir ikke et delvis farevarsel. Ingen lokale farevurderinger, fraværsfortolkning eller historikk utenfor valgt datovindu."
+
+[[source]]
+id = "hydropower"
+name = "NVE – vannkraftregisterets status og tekniske verdier"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye anleggs-ID-er og endret registerstatus, oppgitte datoer, ytelse, normalårsproduksjon og tekniske verdier. Full-listen kontrolleres mot driftslisten før utvalg av eventuelle eksplisitte ID-er. Eierdata utelates. Ingen sanntidsproduksjon, midlertidige driftsstans eller slutning om nedlegging fra fravær."
