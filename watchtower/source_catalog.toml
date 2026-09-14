@@ -563,3 +563,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Oppdager AD-publikasjoner, inkludert revisjonsnumre, og følger oppførte revisjons-/korrigerings-/erstatningsfelt i valgt utstedelsesvindu. Komplett HTML-paginering krysskontrolleres mot XML; to fulle innlesinger må stemme. Utsteder kan velges eksplisitt. Dekker ikke eldre endringer utenfor vinduet, PDF-innhold, global fullstendighet eller gjeldende status for et bestemt fly."
+
+[[source]]
+id = "emission_values"
+name = "Norske utslipp – rapporterte stoffmengder per år"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Oppførte årsverdier per valgt anlegg, stoff og medium. Enhet, tall, ikke tilgjengelig og ikke rapportert holdes atskilt. Hele valgte årsspenn valideres i to komplette innlesinger. Stoffvalg følger nettsidens offentlige skjema. Ingen publiseringsdato, overskridelse av tillatelse eller totalsum på tvers av ulike enheter utledes."

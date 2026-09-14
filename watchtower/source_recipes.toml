@@ -2482,3 +2482,41 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "industrial_reported_emission_value_changes"
+name = "Industri – endrede rapporterte utslippsmengder"
+sector = "energy"
+description = "Følger stoffspesifikke årsverdier for et eksplisitt valgt faktaark. Fossilt CO2 og ammoniakk har ulike kildeoppgitte enheter; ingen omregning utføres. Nettsidens valgte årsspenn leses komplett. Ikke tilgjengelig, ikke rapportert og tallverdi null skilles. Nye år uten tall gir ikke førstegangsvarsel. Senere endringer av mengde eller tilgjengelighet følges. Faktaarklenken åpner standardvisningen; velg ønsket stoff under Type."
+official_url = "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "emission_values"
+urls = ["https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180"]
+substances = ["Karbondioksid fossilt (CO2 (F))", "Ammoniakk (NH3)"]
+max_years = 50
+max_records = 200
+max_bytes = 1000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "industrial_reported_water_emission_values"
+name = "Industri – rapporterte utslippsmengder til vann"
+sector = "food"
+description = "Følger årsverdier for biologisk oksygenforbruk (BOF5) i et valgt anleggsfaktaark. Kilden oppgir tonn per år; enhet og manglermarkører bevares. Den verifiserte tabellen har vannverdier til og med 2025. Dette er samme mengdefunksjon som andre stoff-/anleggsvalg, ikke en egen funksjonstype."
+official_url = "https://www.norskeutslipp.no/Templates/NorskeUtslipp/Pages/company.aspx?CompanyID=658"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "emission_values"
+urls = ["https://www.norskeutslipp.no/Templates/NorskeUtslipp/Pages/company.aspx?CompanyID=658"]
+substances = ["Biologisk oksygenforbruk (BOF5)"]
+max_years = 50
+max_records = 200
+max_bytes = 1000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
