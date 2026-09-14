@@ -1,0 +1,44 @@
+[
+  {
+    "recipe": "device_recall_action_changes",
+    "checked_at": "2026-09-14T09:56:31.351062+00:00",
+    "records": 42,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://api.fda.gov/device/recall.json?search=event_date_posted%3A%5B2026-09-01+TO+2026-09-14%5D&sort=product_res_number.exact%3Aasc&limit=25&skip=0",
+        "bytes": 341709,
+        "sha256": "805b33f4dcebc7f0e3e1b9e4521b933768f74e2581a6831e65d661be6097ae19"
+      },
+      {
+        "url": "https://api.fda.gov/device/recall.json?search=event_date_posted%3A%5B2026-09-01+TO+2026-09-14%5D&sort=product_res_number.exact%3Aasc&limit=25&skip=25",
+        "bytes": 361456,
+        "sha256": "5fa2975289b2ab6e293c78303a3f624ad3affafc4e435b0888b26abd749590fe"
+      },
+      {
+        "url": "https://api.fda.gov/device/recall.json?search=event_date_posted%3A%5B2026-09-01+TO+2026-09-14%5D&sort=product_res_number.exact%3Aasc&limit=25&skip=0",
+        "bytes": 341709,
+        "sha256": "805b33f4dcebc7f0e3e1b9e4521b933768f74e2581a6831e65d661be6097ae19"
+      },
+      {
+        "url": "https://api.fda.gov/device/recall.json?search=event_date_posted%3A%5B2026-09-01+TO+2026-09-14%5D&sort=product_res_number.exact%3Aasc&limit=25&skip=0",
+        "bytes": 341709,
+        "sha256": "805b33f4dcebc7f0e3e1b9e4521b933768f74e2581a6831e65d661be6097ae19"
+      },
+      {
+        "url": "https://api.fda.gov/device/recall.json?search=event_date_posted%3A%5B2026-09-01+TO+2026-09-14%5D&sort=product_res_number.exact%3Aasc&limit=25&skip=25",
+        "bytes": 361456,
+        "sha256": "5fa2975289b2ab6e293c78303a3f624ad3affafc4e435b0888b26abd749590fe"
+      },
+      {
+        "url": "https://api.fda.gov/device/recall.json?search=event_date_posted%3A%5B2026-09-01+TO+2026-09-14%5D&sort=product_res_number.exact%3Aasc&limit=25&skip=0",
+        "bytes": 341709,
+        "sha256": "805b33f4dcebc7f0e3e1b9e4521b933768f74e2581a6831e65d661be6097ae19"
+      }
+    ],
+    "config_sha256": "fb419888590d47789b464ce70ceaddad876136b20e74f6ede7722530459ce56e",
+    "module_sha256": "079edf762b0cdd8a62cd511f26f96591a91a106f08628c7c8503ed6416fb3b72"
+  }
+]

@@ -482,3 +482,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Valgte npm-pakkers taggmål og oppført lisens, frarådingsmelding og kontrollsummer for taggens versjon. Taggmålet kontrolleres før og etter innlesing. Gir ikke historikk for tidligere/mellomliggende versjoner, eierskapsbevis, sikkerhetsvurdering eller kontroll av pakkefilen."
+
+[[source]]
+id = "device_actions"
+name = "FDA – klassifiserte produktposter med tiltak"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Klassifiserte tilbakekallingsposter for medisinsk utstyr i et avgrenset datovindu: produkt-/batchomfang, begrunnelse, årsakstype og oppførte tiltak. Flere produkter i samme hendelse beholdes. Ukentlig kilde; gir ikke løpende status, senere distribusjon, medisinske råd eller korreksjoner utenfor vinduet."

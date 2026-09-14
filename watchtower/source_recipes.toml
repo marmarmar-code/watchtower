@@ -2293,3 +2293,24 @@ interval_minutes = 720
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "device_recall_action_changes"
+name = "FDA – endrede produktopplysninger og tiltak"
+sector = "health"
+description = "Klassifiserte produktposter i et komplett, avgrenset 14-dagers vindu. Følger tiltakstekst, årsak og produkt-/batchomfang. Klassifiseringsdato er ikke dato for ny feil eller ny tilbakekalling. Kildeopplysninger for undersøkelse; beviser ikke nåværende status, lokal eksponering eller medisinsk handlingsbehov."
+official_url = "https://open.fda.gov/apis/device/recall/"
+verified_on = "2026-09-14"
+[recipe.source]
+kind = "device_actions"
+urls = ["https://api.fda.gov/device/recall.json"]
+classification_days = 14
+page_size = 25
+max_pages = 10
+max_records = 250
+max_bytes = 4000000
+allow_empty = true
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
