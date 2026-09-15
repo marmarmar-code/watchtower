@@ -590,3 +590,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og endrede kunngjøringer i nyeste annonserte enkeltårspakker fra avdeling I. Dokumenttekst, ressursreferanser og utvalgte metadata følges. Kunngjøringstid og kildeoppgitt ikrafttredelse holdes atskilt. Komprimert og utvidet arkiv kontrolleres i to komplette innlesinger. Ingen konsolidert lovtilstand, juridisk virkning eller opphevelse utledes."
+
+[[source]]
+id = "efta_procedural_documents"
+name = "ESA – prosessdokumenter med saksreferanser"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede eksplisitt valgte dokumenttyper i ESAs offentlige dokumentbase, med land, saksreferanse og oppført dato. Nyeste annonserte år hentes med komplett paginering og to like innlesinger før typefilter. Dokumentnummer og vedleggslenke gir radidentitet. Ingen gjeldende saksstatus, etterlevelse, avslutning eller vedleggsinnhold utledes."

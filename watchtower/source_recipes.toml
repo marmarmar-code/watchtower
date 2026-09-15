@@ -2559,3 +2559,25 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "efta_norway_procedural_document_changes"
+name = "ESA – formelle prosessdokumenter om Norge"
+sector = "business"
+description = "Følger formelle varsler, begrunnede uttalelser og henvisninger til EFTA-domstolen i nyeste annonserte dokumentår. Saksnummer, navn, dokumenttype, oppført dato og kollegiereferanse bevares. Dette er publiserte prosessdokumenter, ikke et komplett register over gjeldende saksstatus. Dokumentnummer kan gjentas for ulike vedlegg; endret lenke kan gi ny rad. Eldre år og vedleggsinnhold dekkes ikke."
+official_url = "https://www.eftasurv.int/esa-at-a-glance/publications/public-access-to-documents/public-documents"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "efta_procedural_documents"
+country = "NO"
+latest_years = 1
+document_types = ["Letter of Formal Notice", "Reasoned Opinion", "Referral to EFTA Court"]
+max_pages = 20
+max_register_records = 5000
+max_records = 500
+max_bytes = 1000000
+allow_empty = true
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
