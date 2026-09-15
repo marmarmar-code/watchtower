@@ -69,6 +69,7 @@ from .sources.bankruptcy_notices import BankruptcyNoticesSource
 from .sources.umm_capacity import UmmCapacitySource
 from .sources.dsa_supervision import DsaSupervisionSource
 from .sources.certificate_auctions import CertificateAuctionsSource
+from .sources.corporate_actions import CorporateActionsSource
 from .sources.funding_calls import FundingCallsSource
 from .sources.food_establishments import FoodEstablishmentsSource
 from .sources.food_inspections import FoodInspectionsSource
@@ -124,6 +125,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "umm_capacity": UmmCapacitySource,
     "dsa_supervision": DsaSupervisionSource,
     "certificate_auctions": CertificateAuctionsSource,
+    "corporate_actions": CorporateActionsSource,
     "funding_calls": FundingCallsSource,
     "food_establishments": FoodEstablishmentsSource,
     "account_documents": AccountDocumentsSource,

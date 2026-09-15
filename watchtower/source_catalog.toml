@@ -644,3 +644,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og endrede publiserte resultater i nyeste annonserte år. Norges Banks paginerte indeks skiller innbydelser fra resultater. Per auksjonsdato og ISIN følges kurs, rente, tildelt volum, budvolum, marginaltildeling, oppgjør og forfall med eksplisitte enheter. To komplette innlesinger kontrolleres; fravær betyr ikke kansellering."
+
+[[source]]
+id = "corporate_actions"
+name = "Børsmeldinger om selskapsendringer og derivatkontrakter"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede oppføringer i de første avgrensede sidene av børsens offentlige oversikt over selskapsendringer for derivater. Meldingsnummer, utstedelsesdato, oppgitt virkningsdato, hendelsestype, instrumenttekst og PDF-lenkemetadata følges. Ingen beløp eller kontraktsvilkår utledes fra indeksen. Dokumentinnhold og komplett arkiv inngår ikke; fravær betyr ikke kansellering."

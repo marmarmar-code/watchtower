@@ -2677,3 +2677,20 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "euronext_derivative_corporate_action_changes"
+name = "Euronext – selskapsendringer som berører derivater"
+sector = "finance"
+description = "Følger nye og reviderte meldingsoppføringer i første side av den offentlige derivatoversikten. Kildens meldings-ID, utstedelsesdato, virkningstekst, hendelsestype, instrumenttekst og offisielle PDF-lenker beholdes. To komplette avlesninger av samme sidevindu må stemme. Utvalget følger kildens rekkefølge, ikke en antatt sortering etter nyeste utstedelse. Virkning uten fastsatt dato forblir udatert. Vedleggsinnhold, utbyttebeløp og konkrete kontraktsjusteringer inngår ikke; fravær betyr ikke kansellering."
+official_url = "https://live.euronext.com/en/resources/notices-corporate-actions/derivatives-corporate-actions"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "corporate_actions"
+max_pages = 1
+max_records = 250
+max_bytes = 2000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
