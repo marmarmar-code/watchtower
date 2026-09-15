@@ -1,0 +1,95 @@
+{
+  "recipe": "research_publication_correction_changes",
+  "checked_at": "2026-09-15T10:21:55.105245+00:00",
+  "records": 191,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://gitlab.com/crossref/retraction-watch-data/-/raw/main/README.md",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4046,
+      "sha256": "4a2c971015c94813b9d93c824a1d3c09db1665d9b0304487d9d57718e366d1a8"
+    },
+    {
+      "url": "https://gitlab.com/crossref/retraction-watch-data/-/raw/main/retraction_watch.csv?ref_type=heads&inline=false",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 66612180,
+      "sha256": "0ff2330bf8892093668aa7d0bc63e036b5bc5cabe54002376997bbaf35205ee6"
+    },
+    {
+      "url": "https://gitlab.com/crossref/retraction-watch-data/-/raw/main/README.md",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4046,
+      "sha256": "4a2c971015c94813b9d93c824a1d3c09db1665d9b0304487d9d57718e366d1a8"
+    },
+    {
+      "url": "https://gitlab.com/crossref/retraction-watch-data/-/raw/main/retraction_watch.csv?ref_type=heads&inline=false",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 66612180,
+      "sha256": "0ff2330bf8892093668aa7d0bc63e036b5bc5cabe54002376997bbaf35205ee6"
+    },
+    {
+      "url": "https://gitlab.com/crossref/retraction-watch-data/-/raw/main/README.md",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4046,
+      "sha256": "4a2c971015c94813b9d93c824a1d3c09db1665d9b0304487d9d57718e366d1a8"
+    },
+    {
+      "url": "https://gitlab.com/crossref/retraction-watch-data/-/raw/main/retraction_watch.csv?ref_type=heads&inline=false",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 66612180,
+      "sha256": "0ff2330bf8892093668aa7d0bc63e036b5bc5cabe54002376997bbaf35205ee6"
+    },
+    {
+      "url": "https://gitlab.com/crossref/retraction-watch-data/-/raw/main/README.md",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4046,
+      "sha256": "4a2c971015c94813b9d93c824a1d3c09db1665d9b0304487d9d57718e366d1a8"
+    },
+    {
+      "url": "https://gitlab.com/crossref/retraction-watch-data/-/raw/main/retraction_watch.csv?ref_type=heads&inline=false",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 66612180,
+      "sha256": "0ff2330bf8892093668aa7d0bc63e036b5bc5cabe54002376997bbaf35205ee6"
+    }
+  ],
+  "config_sha256": "4228b3d67069ceb5cb2223245501ebc0109f457626b5fd6fc8f342fdcf2c12ca",
+  "module_sha256": "f965ed1b71712edb9722545c14acef1270939247d49e968c621326e2b354230b",
+  "engine_sha256": "cb22e7df04bd4cc775f1d8046e2e177dc00f9258bb2c4d265975eaed4f59ce75",
+  "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+  "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+  "targeted_tests": 50,
+  "export_records": 72326,
+  "blank_trailer_rows": 199,
+  "selected_country_token": "Norway",
+  "exported_on": "2026-09-14",
+  "update_types": {
+    "Retraction": 167,
+    "Correction": 13,
+    "Expression of concern": 8,
+    "Reinstatement": 3
+  },
+  "link_kinds": {
+    "notice_doi": 182,
+    "notice_pubmed": 5,
+    "original_doi": 3,
+    "dataset": 1
+  },
+  "limitations": [
+    "Country denotes source author-affiliation tokens, not responsibility.",
+    "Source reason labels are not independent findings about authors.",
+    "Corrections and expressions of concern have less complete coverage than retractions.",
+    "Source dates are date-only, not inferred publication timestamps.",
+    "Local repeated reads do not prove scheduled operation or actual delivery."
+  ]
+}

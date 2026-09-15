@@ -689,3 +689,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Publiserte EU ETS1-auksjonsresultater i eksplisitt årsrapport. Pris, volum, status og inntekt bevares med kildens enheter. Auksjonsdato er atskilt fra publiseringstid; tallene er ikke sanntidsmarkedspriser."
+
+[[source]]
+id = "research_corrections"
+name = "Forskning – korreksjoner og tilbaketrekking"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Kuraterte publikasjonsoppdateringer fra Crossref Retraction Watch. Tilbaketrekking, korreksjon, bekymringsmelding og gjeninnføring holdes atskilt. Stabil Record ID, kildedatoer, årsaksmerkelapper og publikasjonsidentifikatorer følges. Eksakte landtoken fra forfattertilknytninger velger poster; landet sier ikke hvem som har ansvar. Hele eksporten leses to ganger, og kun helt tomme halerader utelates."

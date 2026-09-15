@@ -2764,3 +2764,22 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "research_publication_correction_changes"
+name = "Forskning – oppdateringer med norsk landtoken"
+sector = "research"
+description = "Følger fire ulike typer publikasjonsoppdatering i Crossref Retraction Watch når Norway finnes som eksakt landtoken i kildens forfattertilknytninger. countries kan velge andre eksakte landnavn. Record ID er identitet, også når flere poster deler DOI. Notice- og originaldato holdes atskilt. Tomme eller unavailable DOI-er og tomme eller null PubMed-ID-er er mangler; semikolon inne i en DOI er ikke et skilletegn. Lenken viser primært oppdateringen, alternativt originalen eller datasettet. Kildens årsaksmerkelapper er ikke en selvstendig konklusjon om forfatterne. Korreksjoner og bekymringsmeldinger har mindre komplett dekning enn tilbaketrekking. Første innlesing er stille; fravær betyr ikke gjeninnføring."
+official_url = "https://www.crossref.org/documentation/retrieve-metadata/retraction-watch/"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "research_corrections"
+countries = ["Norway"]
+max_download_bytes = 100000000
+max_export_records = 150000
+max_export_age_days = 14
+max_records = 1000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
