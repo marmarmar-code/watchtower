@@ -2621,3 +2621,23 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "umm_norway_capacity_message_changes"
+name = "UMM – norske kapasitetsmeldinger og revisjoner"
+sector = "energy"
+description = "Følger revisjoner og kildeoppgitte kapasitetstabeller for meldinger med NO1–NO5 i Area-feltet. Hver melding beholder komplett tabell med hovedenheter, underenheter, intervaller og tomme felt. Ingen kapasitet summeres, og tabelltidspunkter får ingen antatt tidssone. To komplette RSS-lesinger må gi like utvalgte meldinger. Offentlig RSS gir et begrenset vindu, ikke komplett historikk; meldinger kan falle ut mellom kontroller. Generelle meldinger og fritekstårsaker inngår ikke. Kapasitetsmeldinger er ikke nødvendigvis fysiske strømbrudd."
+official_url = "https://umm.nordpoolgroup.com/"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "umm_capacity"
+areas = ["NO1", "NO2", "NO3", "NO4", "NO5"]
+max_items = 500
+max_table_rows = 2000
+max_records = 500
+max_bytes = 4000000
+allow_empty = true
+interval_minutes = 60
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

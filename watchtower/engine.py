@@ -66,6 +66,7 @@ from .sources.law_gazette import LawGazetteSource
 from .sources.efta_procedural_documents import EftaProceduralDocumentsSource
 from .sources.short_positions import ShortPositionsSource
 from .sources.bankruptcy_notices import BankruptcyNoticesSource
+from .sources.umm_capacity import UmmCapacitySource
 from .sources.funding_calls import FundingCallsSource
 from .sources.food_establishments import FoodEstablishmentsSource
 from .sources.food_inspections import FoodInspectionsSource
@@ -118,6 +119,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "efta_procedural_documents": EftaProceduralDocumentsSource,
     "short_positions": ShortPositionsSource,
     "bankruptcy_notices": BankruptcyNoticesSource,
+    "umm_capacity": UmmCapacitySource,
     "funding_calls": FundingCallsSource,
     "food_establishments": FoodEstablishmentsSource,
     "account_documents": AccountDocumentsSource,

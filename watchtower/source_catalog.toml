@@ -617,3 +617,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og endrede konkursåpningskunngjøringer for foretak med organisasjonsnummer i et kort datovindu. Treffantall, datofilter, dokumentidentitet og to komplette innlesinger kontrolleres. Saksnummer, domstol, bostyrer, åpning, kravfrist, fristdag og skiftesamling er separate kildefelt. Ingen nåværende bostatus eller avslutning utledes fra fravær."
+
+[[source]]
+id = "umm_capacity"
+name = "Offentlige UMM-kapasitetsmeldinger"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og reviderte kapasitetsmeldinger med norske områdekoder i offentlig RSS. Meldingsidentitet, revisjon, status, kategori, årsakskode og kapasitetstabeller følges. Tabellrekkefølge og tomme felt bevares uten summering eller antatt tidssone. Generelle meldinger og full historikk er utenfor dekningen; fravær betyr ikke gjenoppretting."
