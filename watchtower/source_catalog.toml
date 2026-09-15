@@ -599,3 +599,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og endrede eksplisitt valgte dokumenttyper i ESAs offentlige dokumentbase, med land, saksreferanse og oppført dato. Nyeste annonserte år hentes med komplett paginering og to like innlesinger før typefilter. Dokumentnummer og vedleggslenke gir radidentitet. Ingen gjeldende saksstatus, etterlevelse, avslutning eller vedleggsinnhold utledes."
+
+[[source]]
+id = "short_positions"
+name = "Offentlig rapporterte netto shortposisjoner"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nyeste oppførte hendelse for valgte ISIN-er fra det dokumenterte offentlige API-et. Kildens samlede prosent og aksjetall samt hver aktive innehaverposisjon følges. To komplette svar valideres før lagring. Datoer beholdes som kildedatoer. Terskelbegrenset offentlig dekning; fravær eller null er ikke bevis på at en posisjon er lukket."

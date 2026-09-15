@@ -2581,3 +2581,23 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "disclosed_short_position_changes"
+name = "Shortregisteret – endrede offentlig rapporterte posisjoner"
+sector = "business"
+description = "Følger siste oppførte hendelse for fem valgte instrumenter, med samlet shortprosent, antall aksjer og aktive innehaverposisjoner. Velg andre instrumenter med isins. Kildens samlede aksjetall bevares selv om summen av innehavertall avviker. Posisjonsdato og hendelsesdato er ikke publiseringstid. Små posisjoner under offentlig terskel dekkes ikke; fravær eller null beviser ikke lukking. Eldre hendelser valideres, men overvåkes ikke for rettinger."
+official_url = "https://ssr.finanstilsynet.no/api/v2/"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "short_positions"
+isins = ["NO0010196140", "NO0012470089", "NO0003054108", "NO0010715139", "NO0010345853"]
+max_instruments = 1000
+max_history_events = 30000
+max_positions_per_event = 100
+max_records = 100
+max_bytes = 8000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
