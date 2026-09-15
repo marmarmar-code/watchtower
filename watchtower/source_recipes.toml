@@ -2713,3 +2713,22 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "eu_lobbying_financial_declaration_changes"
+name = "EU – finansdeklarasjoner om interesserepresentasjon"
+sector = "communications"
+description = "Følger innrapporterte finansopplysninger for aktører med hovedkontor i NORWAY. countries velger eksakte hovedkontorland fra kilden. Egne eller medlemmenes interesser og ikke-kommersielle interesser har ulike skjemaer: kostnadsintervaller er ikke NGO-totalbudsjett. Beløp beholder eksplisitt eurovaluta og type, manglende intervallgrense beholdes som fraværende, og kildens regnskapsdatoer endres ikke til antatte årsgrenser. Nåværende års oppføring har ingen utledet kalenderårsperiode. Hele eksportens total, ID-er, alder og to identiske valgte uttrekk kontrolleres. XML1.1-kontrollreferanser markeres i en kompatibilitetsvisning; markører i overvåkede felt avvises. Kontaktfelt og fritekstforklaringer inngår ikke. Klientinntektsmodellen er ikke støttet; fravær betyr ikke opphør av aktivitet."
+official_url = "https://transparency-register.europa.eu/index_en"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "lobbying_finance"
+countries = ["NORWAY"]
+max_download_bytes = 150000000
+max_export_records = 30000
+max_export_age_days = 7
+max_records = 1000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

@@ -662,3 +662,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Offentlige meldingssammendrag om grenseavvisninger i et avgrenset datovindu. Produktkategori, type, forhold, kildeoppgitt risiko, meldende land og opprinnelsesland følges. To komplette søkeuttrekk må stemme, med kontroll av sidetotaler, identiteter og anvendte filtre. Ingen detaljdokumenter, merker eller virksomhetsnavn hentes; fravær betyr ikke klarering."
+
+[[source]]
+id = "lobbying_finance"
+name = "EU-registerets innrapporterte finansopplysninger"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og reviderte finansdeklarasjoner for utvalgte hovedkontorland i det offentlige EU-registeret. Anslåtte kostnadsintervaller for registrerte aktiviteter, betaling til mellommenn, NGO-totalbudsjett, finansieringskilder og tilskudd holdes atskilt. Full eksport kontrolleres to ganger med dato, total og identiteter. Nye organisasjoner uten avsluttet regnskapsår beholdes eksplisitt. Ingen summering eller utledet faktisk påvirkning."
