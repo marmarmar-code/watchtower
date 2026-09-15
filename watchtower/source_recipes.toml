@@ -2659,3 +2659,21 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "nb_certificate_auction_result_changes"
+name = "Norges Bank – resultater fra sertifikatauksjoner"
+sector = "finance"
+description = "Følger publiserte auksjonsresultater for sentralbanksertifikater i nyeste år fra den offisielle indeksen. Auksjonsdato og ISIN identifiserer resultatet. Kurs, rente, tildelt volum, budvolum, marginaltildeling, oppgjør og forfall holdes atskilt. MNOK og prosent bevares eksplisitt. Innbydelser gir ikke resultatvarsler. Hele årsindeksen og alle resultatdetaljer leses to ganger med side- og størrelsesgrenser. Dette er sentralbanksertifikater, ikke statsobligasjoner eller løpende markedspriser. Tidssone i publiseringsklokken er ikke oppgitt; eldre år ligger utenfor utvalget."
+official_url = "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "certificate_auctions"
+max_pages = 20
+max_results = 150
+max_records = 500
+max_bytes = 1000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

@@ -1,0 +1,581 @@
+{
+  "recipe": "nb_certificate_auction_result_changes",
+  "checked_at": "2026-09-15T08:13:27.979556+00:00",
+  "records": 38,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/",
+      "method": "GET",
+      "bytes": 29670,
+      "sha256": "40eed2e94bde743ee204979e4d9b639633b437ede4866dfb125374bb3364d714"
+    },
+    {
+      "url": "https://www.norges-bank.no/api/NewsList/LoadMoreAndFilter?currentPageId=160580&page=1&clickedCategoryFilter=0&clickedYearFilter=0&language=no&tab=newslist",
+      "method": "GET",
+      "bytes": 11034,
+      "sha256": "c4a08aec5bbf2b53041acbae34b8071c648c21c1b7bac85ef96ec02aed6d141e"
+    },
+    {
+      "url": "https://www.norges-bank.no/api/NewsList/LoadMoreAndFilter?currentPageId=160580&page=1&clickedCategoryFilter=0&clickedYearFilter=2026&language=no&tab=newslist",
+      "method": "GET",
+      "bytes": 11034,
+      "sha256": "74bac1361fca0fd06f5ad8b02a90c5c34366d900b5f9d0da921b16feeba47f36"
+    },
+    {
+      "url": "https://www.norges-bank.no/api/NewsList/LoadMoreAndFilter?currentPageId=160580&page=2&clickedCategoryFilter=0&clickedYearFilter=2026&language=no&tab=newslist",
+      "method": "GET",
+      "bytes": 8929,
+      "sha256": "dbb1a60bfca27804466e8fcbfeca6169286b40fac25d9ec9b7dba7ca4dddfe1a"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741207-og-no0013741231/",
+      "method": "GET",
+      "bytes": 30003,
+      "sha256": "0c07f31a903afd085551332a0ad6524774b01b5ec5e865a2c6c21855a7c12ac7"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741207-og-no0013741223/",
+      "method": "GET",
+      "bytes": 30004,
+      "sha256": "4b07c1309f3e2c6fd7a4d7666337c8b6bd6f37df0c6a7b0cbf44cbfaf3b005a4"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741207-og-no0013741215/",
+      "method": "GET",
+      "bytes": 30001,
+      "sha256": "0c5b1458da10aadcf234e5d7d9b4c9e7a11f5fc58fc47c579ec2d80a451072ac"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741199/",
+      "method": "GET",
+      "bytes": 29999,
+      "sha256": "1f79fe34ddefe9313165f1179d30c918d048bef6cb0f3cbdefa01ea88a3cf2a5"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741181/",
+      "method": "GET",
+      "bytes": 29999,
+      "sha256": "a1d31affc2416e585a982f21ddaf0a9afb842a279ec01a85d787bcd1dd944746"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741173/",
+      "method": "GET",
+      "bytes": 29994,
+      "sha256": "09096a8ff6774b90cb2e9219f860980344682d0b1274e52a327ccbde268a81a2"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741165/",
+      "method": "GET",
+      "bytes": 29993,
+      "sha256": "effa12f53b55b9bfeed5143b96ad376f6f0ef64ec4e242bbebe20e37d2525f8f"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741140/",
+      "method": "GET",
+      "bytes": 29991,
+      "sha256": "b5b581b920c4f67e05c07f09149b6e4e2a983af572a255199758fea0089c58ee"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741116/",
+      "method": "GET",
+      "bytes": 29992,
+      "sha256": "a50a4fc85e9e4e84f8651b1a90f106c422567475de6d3a423631d4b58f31eaca"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741108/",
+      "method": "GET",
+      "bytes": 29988,
+      "sha256": "d80ac5bab3555e08f43008bad053f86e9c5644995c314fc50c7fee8090bc562d"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741090/",
+      "method": "GET",
+      "bytes": 29990,
+      "sha256": "0e8047b48432f474e8f7cef10ae2c4f70166206af3c7637d55ccf00e1bf3b75e"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741074/",
+      "method": "GET",
+      "bytes": 29988,
+      "sha256": "ba9454f1479bb24b07451ddcf062b1e462f34ce7bff12e7f534d7d3e50710b84"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741066/",
+      "method": "GET",
+      "bytes": 29987,
+      "sha256": "74b1d4c22ea7f704250dc8a23d673f3e1b20250385bfc6fd263609d3e6840bc3"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741058/",
+      "method": "GET",
+      "bytes": 29984,
+      "sha256": "e2dd3f5d7b7a267bddc0942eeb891be20132638c9e969b83199fd5722b2f3688"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741041/",
+      "method": "GET",
+      "bytes": 29984,
+      "sha256": "81ac107f06c3cfa16f56c48a2eb77411d089eee3fc1b3164a39c8470cf86df35"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740811-og-no0013741025/",
+      "method": "GET",
+      "bytes": 29983,
+      "sha256": "48ec432768ea9b148e210c7d934897d592b3d1a9eaf340a1017dcbc5bb6b6f78"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740811-og-no0013741017/",
+      "method": "GET",
+      "bytes": 29983,
+      "sha256": "062ff8ef833e00866596b42aa517ecf768c5b02acb23f993eadcab4d935afb6e"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740811-og-no0013741009/",
+      "method": "GET",
+      "bytes": 29982,
+      "sha256": "bfb3a821048bda74899b6faa153838bebeb44cbc55628088c33fee3480ae7011"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740829-og-no0013740811/",
+      "method": "GET",
+      "bytes": 29979,
+      "sha256": "fe83c5858ed8168e6d34d3737bf7cd3c33f18f4a2271dc7b80405b4965477f9b"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/",
+      "method": "GET",
+      "bytes": 29670,
+      "sha256": "94f177d8f369d7ddc485f30b01e0e76660383a501867aea02eb26759c66fe1ca"
+    },
+    {
+      "url": "https://www.norges-bank.no/api/NewsList/LoadMoreAndFilter?currentPageId=160580&page=1&clickedCategoryFilter=0&clickedYearFilter=0&language=no&tab=newslist",
+      "method": "GET",
+      "bytes": 11034,
+      "sha256": "c4a08aec5bbf2b53041acbae34b8071c648c21c1b7bac85ef96ec02aed6d141e"
+    },
+    {
+      "url": "https://www.norges-bank.no/api/NewsList/LoadMoreAndFilter?currentPageId=160580&page=1&clickedCategoryFilter=0&clickedYearFilter=2026&language=no&tab=newslist",
+      "method": "GET",
+      "bytes": 11034,
+      "sha256": "74bac1361fca0fd06f5ad8b02a90c5c34366d900b5f9d0da921b16feeba47f36"
+    },
+    {
+      "url": "https://www.norges-bank.no/api/NewsList/LoadMoreAndFilter?currentPageId=160580&page=2&clickedCategoryFilter=0&clickedYearFilter=2026&language=no&tab=newslist",
+      "method": "GET",
+      "bytes": 8929,
+      "sha256": "dbb1a60bfca27804466e8fcbfeca6169286b40fac25d9ec9b7dba7ca4dddfe1a"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741207-og-no0013741231/",
+      "method": "GET",
+      "bytes": 30003,
+      "sha256": "0c07f31a903afd085551332a0ad6524774b01b5ec5e865a2c6c21855a7c12ac7"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741207-og-no0013741223/",
+      "method": "GET",
+      "bytes": 30004,
+      "sha256": "4b07c1309f3e2c6fd7a4d7666337c8b6bd6f37df0c6a7b0cbf44cbfaf3b005a4"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741207-og-no0013741215/",
+      "method": "GET",
+      "bytes": 30001,
+      "sha256": "0c5b1458da10aadcf234e5d7d9b4c9e7a11f5fc58fc47c579ec2d80a451072ac"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741199/",
+      "method": "GET",
+      "bytes": 29999,
+      "sha256": "1f79fe34ddefe9313165f1179d30c918d048bef6cb0f3cbdefa01ea88a3cf2a5"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741181/",
+      "method": "GET",
+      "bytes": 29999,
+      "sha256": "a1d31affc2416e585a982f21ddaf0a9afb842a279ec01a85d787bcd1dd944746"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741173/",
+      "method": "GET",
+      "bytes": 29994,
+      "sha256": "09096a8ff6774b90cb2e9219f860980344682d0b1274e52a327ccbde268a81a2"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741165/",
+      "method": "GET",
+      "bytes": 29993,
+      "sha256": "effa12f53b55b9bfeed5143b96ad376f6f0ef64ec4e242bbebe20e37d2525f8f"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741140/",
+      "method": "GET",
+      "bytes": 29991,
+      "sha256": "b5b581b920c4f67e05c07f09149b6e4e2a983af572a255199758fea0089c58ee"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741116/",
+      "method": "GET",
+      "bytes": 29992,
+      "sha256": "a50a4fc85e9e4e84f8651b1a90f106c422567475de6d3a423631d4b58f31eaca"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741108/",
+      "method": "GET",
+      "bytes": 29988,
+      "sha256": "d80ac5bab3555e08f43008bad053f86e9c5644995c314fc50c7fee8090bc562d"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741090/",
+      "method": "GET",
+      "bytes": 29990,
+      "sha256": "0e8047b48432f474e8f7cef10ae2c4f70166206af3c7637d55ccf00e1bf3b75e"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741074/",
+      "method": "GET",
+      "bytes": 29988,
+      "sha256": "ba9454f1479bb24b07451ddcf062b1e462f34ce7bff12e7f534d7d3e50710b84"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741066/",
+      "method": "GET",
+      "bytes": 29987,
+      "sha256": "74b1d4c22ea7f704250dc8a23d673f3e1b20250385bfc6fd263609d3e6840bc3"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741058/",
+      "method": "GET",
+      "bytes": 29984,
+      "sha256": "e2dd3f5d7b7a267bddc0942eeb891be20132638c9e969b83199fd5722b2f3688"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741041/",
+      "method": "GET",
+      "bytes": 29984,
+      "sha256": "81ac107f06c3cfa16f56c48a2eb77411d089eee3fc1b3164a39c8470cf86df35"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740811-og-no0013741025/",
+      "method": "GET",
+      "bytes": 29983,
+      "sha256": "48ec432768ea9b148e210c7d934897d592b3d1a9eaf340a1017dcbc5bb6b6f78"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740811-og-no0013741017/",
+      "method": "GET",
+      "bytes": 29983,
+      "sha256": "062ff8ef833e00866596b42aa517ecf768c5b02acb23f993eadcab4d935afb6e"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740811-og-no0013741009/",
+      "method": "GET",
+      "bytes": 29982,
+      "sha256": "bfb3a821048bda74899b6faa153838bebeb44cbc55628088c33fee3480ae7011"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740829-og-no0013740811/",
+      "method": "GET",
+      "bytes": 29979,
+      "sha256": "fe83c5858ed8168e6d34d3737bf7cd3c33f18f4a2271dc7b80405b4965477f9b"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/",
+      "method": "GET",
+      "bytes": 29670,
+      "sha256": "94f177d8f369d7ddc485f30b01e0e76660383a501867aea02eb26759c66fe1ca"
+    },
+    {
+      "url": "https://www.norges-bank.no/api/NewsList/LoadMoreAndFilter?currentPageId=160580&page=1&clickedCategoryFilter=0&clickedYearFilter=0&language=no&tab=newslist",
+      "method": "GET",
+      "bytes": 11034,
+      "sha256": "c4a08aec5bbf2b53041acbae34b8071c648c21c1b7bac85ef96ec02aed6d141e"
+    },
+    {
+      "url": "https://www.norges-bank.no/api/NewsList/LoadMoreAndFilter?currentPageId=160580&page=1&clickedCategoryFilter=0&clickedYearFilter=2026&language=no&tab=newslist",
+      "method": "GET",
+      "bytes": 11034,
+      "sha256": "74bac1361fca0fd06f5ad8b02a90c5c34366d900b5f9d0da921b16feeba47f36"
+    },
+    {
+      "url": "https://www.norges-bank.no/api/NewsList/LoadMoreAndFilter?currentPageId=160580&page=2&clickedCategoryFilter=0&clickedYearFilter=2026&language=no&tab=newslist",
+      "method": "GET",
+      "bytes": 8929,
+      "sha256": "dbb1a60bfca27804466e8fcbfeca6169286b40fac25d9ec9b7dba7ca4dddfe1a"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741207-og-no0013741231/",
+      "method": "GET",
+      "bytes": 30003,
+      "sha256": "0c07f31a903afd085551332a0ad6524774b01b5ec5e865a2c6c21855a7c12ac7"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741207-og-no0013741223/",
+      "method": "GET",
+      "bytes": 30004,
+      "sha256": "4b07c1309f3e2c6fd7a4d7666337c8b6bd6f37df0c6a7b0cbf44cbfaf3b005a4"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741207-og-no0013741215/",
+      "method": "GET",
+      "bytes": 30001,
+      "sha256": "0c5b1458da10aadcf234e5d7d9b4c9e7a11f5fc58fc47c579ec2d80a451072ac"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741199/",
+      "method": "GET",
+      "bytes": 29999,
+      "sha256": "1f79fe34ddefe9313165f1179d30c918d048bef6cb0f3cbdefa01ea88a3cf2a5"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741181/",
+      "method": "GET",
+      "bytes": 29999,
+      "sha256": "a1d31affc2416e585a982f21ddaf0a9afb842a279ec01a85d787bcd1dd944746"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741173/",
+      "method": "GET",
+      "bytes": 29994,
+      "sha256": "09096a8ff6774b90cb2e9219f860980344682d0b1274e52a327ccbde268a81a2"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741165/",
+      "method": "GET",
+      "bytes": 29993,
+      "sha256": "effa12f53b55b9bfeed5143b96ad376f6f0ef64ec4e242bbebe20e37d2525f8f"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741140/",
+      "method": "GET",
+      "bytes": 29991,
+      "sha256": "b5b581b920c4f67e05c07f09149b6e4e2a983af572a255199758fea0089c58ee"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741116/",
+      "method": "GET",
+      "bytes": 29992,
+      "sha256": "a50a4fc85e9e4e84f8651b1a90f106c422567475de6d3a423631d4b58f31eaca"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741108/",
+      "method": "GET",
+      "bytes": 29988,
+      "sha256": "d80ac5bab3555e08f43008bad053f86e9c5644995c314fc50c7fee8090bc562d"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741090/",
+      "method": "GET",
+      "bytes": 29990,
+      "sha256": "0e8047b48432f474e8f7cef10ae2c4f70166206af3c7637d55ccf00e1bf3b75e"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741074/",
+      "method": "GET",
+      "bytes": 29988,
+      "sha256": "ba9454f1479bb24b07451ddcf062b1e462f34ce7bff12e7f534d7d3e50710b84"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741066/",
+      "method": "GET",
+      "bytes": 29987,
+      "sha256": "74b1d4c22ea7f704250dc8a23d673f3e1b20250385bfc6fd263609d3e6840bc3"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741058/",
+      "method": "GET",
+      "bytes": 29984,
+      "sha256": "e2dd3f5d7b7a267bddc0942eeb891be20132638c9e969b83199fd5722b2f3688"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741041/",
+      "method": "GET",
+      "bytes": 29984,
+      "sha256": "81ac107f06c3cfa16f56c48a2eb77411d089eee3fc1b3164a39c8470cf86df35"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740811-og-no0013741025/",
+      "method": "GET",
+      "bytes": 29983,
+      "sha256": "48ec432768ea9b148e210c7d934897d592b3d1a9eaf340a1017dcbc5bb6b6f78"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740811-og-no0013741017/",
+      "method": "GET",
+      "bytes": 29983,
+      "sha256": "062ff8ef833e00866596b42aa517ecf768c5b02acb23f993eadcab4d935afb6e"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740811-og-no0013741009/",
+      "method": "GET",
+      "bytes": 29982,
+      "sha256": "bfb3a821048bda74899b6faa153838bebeb44cbc55628088c33fee3480ae7011"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740829-og-no0013740811/",
+      "method": "GET",
+      "bytes": 29979,
+      "sha256": "fe83c5858ed8168e6d34d3737bf7cd3c33f18f4a2271dc7b80405b4965477f9b"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/",
+      "method": "GET",
+      "bytes": 29670,
+      "sha256": "94f177d8f369d7ddc485f30b01e0e76660383a501867aea02eb26759c66fe1ca"
+    },
+    {
+      "url": "https://www.norges-bank.no/api/NewsList/LoadMoreAndFilter?currentPageId=160580&page=1&clickedCategoryFilter=0&clickedYearFilter=0&language=no&tab=newslist",
+      "method": "GET",
+      "bytes": 11034,
+      "sha256": "c4a08aec5bbf2b53041acbae34b8071c648c21c1b7bac85ef96ec02aed6d141e"
+    },
+    {
+      "url": "https://www.norges-bank.no/api/NewsList/LoadMoreAndFilter?currentPageId=160580&page=1&clickedCategoryFilter=0&clickedYearFilter=2026&language=no&tab=newslist",
+      "method": "GET",
+      "bytes": 11034,
+      "sha256": "74bac1361fca0fd06f5ad8b02a90c5c34366d900b5f9d0da921b16feeba47f36"
+    },
+    {
+      "url": "https://www.norges-bank.no/api/NewsList/LoadMoreAndFilter?currentPageId=160580&page=2&clickedCategoryFilter=0&clickedYearFilter=2026&language=no&tab=newslist",
+      "method": "GET",
+      "bytes": 8929,
+      "sha256": "dbb1a60bfca27804466e8fcbfeca6169286b40fac25d9ec9b7dba7ca4dddfe1a"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741207-og-no0013741231/",
+      "method": "GET",
+      "bytes": 30003,
+      "sha256": "ef2e68a4156f510f6740a84e7132e6738bd6ac0ff4158a415f948eb2e3fccc5a"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741207-og-no0013741223/",
+      "method": "GET",
+      "bytes": 30004,
+      "sha256": "b97dec168c91d160503e7a99f244c4bc6ede17c4bfe896709ebb69447ea6e16d"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741207-og-no0013741215/",
+      "method": "GET",
+      "bytes": 30001,
+      "sha256": "6dcecb25ef9b8c88db5e19b483f1c39728a390f57cbf94c8199b821d23033146"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741199/",
+      "method": "GET",
+      "bytes": 29999,
+      "sha256": "b92009807b7c4be0c076e1db4a4cf0e71cec83f7374278915434e307232b13bb"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741181/",
+      "method": "GET",
+      "bytes": 29999,
+      "sha256": "5bc765d210f650a98c391e840cd45fa240d78172c55fc76a4e71b8da0ebc64e8"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741173/",
+      "method": "GET",
+      "bytes": 29994,
+      "sha256": "63f049715f554c076edbf2478173052f6e0de6fb7fb3cb882b8cfaa7328ee77c"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741157-og-no0013741165/",
+      "method": "GET",
+      "bytes": 29993,
+      "sha256": "598b14072b4235a95957af7fece8d4c31ca45392a02d668b894b09835d2dea7f"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741140/",
+      "method": "GET",
+      "bytes": 29991,
+      "sha256": "6171f6a7b470b5ca55d816d6b5144c04a5241d37d956b1b17307b88f1777bfd6"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741116/",
+      "method": "GET",
+      "bytes": 29992,
+      "sha256": "2ca406cb5e4872fa4dd9389c5e724997073327d7833d9ef06681eb8a620b92fc"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741108/",
+      "method": "GET",
+      "bytes": 29988,
+      "sha256": "2084ec51111d01990f07ecf24c02c71856a8211bb6bfa1f02cba0dc8c5edd767"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741082-og-no0013741090/",
+      "method": "GET",
+      "bytes": 29990,
+      "sha256": "00a23e882f513200f7d0d5c5fada5c1a24eebf958591cb56d985a6210caa84de"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741074/",
+      "method": "GET",
+      "bytes": 29988,
+      "sha256": "1bf41f6bf982373349332b72e4e34cbc1df7386175a5f8004bad3bfaa013cd5a"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741066/",
+      "method": "GET",
+      "bytes": 29987,
+      "sha256": "0aa4ed0e4aad941104363657323466f58329ae8a4839c2ff63a02cc846f63e5f"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741058/",
+      "method": "GET",
+      "bytes": 29984,
+      "sha256": "0338683f1594adef849e8ee1e7d0742a201c34db6bcfb784ed7c98a49df69a8e"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013741033-og-no0013741041/",
+      "method": "GET",
+      "bytes": 29984,
+      "sha256": "0982df7168625e69e8f26b5229a303b18a45adeb186ef9bab5c3ff00d2eee4c5"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740811-og-no0013741025/",
+      "method": "GET",
+      "bytes": 29983,
+      "sha256": "3568d98f82548dda51c01708554b77d18e5c56aceb9d5304da6a91de76ff35aa"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740811-og-no0013741017/",
+      "method": "GET",
+      "bytes": 29983,
+      "sha256": "4f501155bfe0f48e44f1540a6748cefc9bdbaddb559c5205f5f108ac75cd4704"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740811-og-no0013741009/",
+      "method": "GET",
+      "bytes": 29982,
+      "sha256": "e3a9070b91115bb9721dde6927530496f35ee374505edc0524945f6b8f3594df"
+    },
+    {
+      "url": "https://www.norges-bank.no/tema/markeder-likviditet/Markedsoperasjoner/sentralbanksertifikater/auksjonsresultater/2026/auksjonsresultater-i-no0013740829-og-no0013740811/",
+      "method": "GET",
+      "bytes": 29979,
+      "sha256": "fe83c5858ed8168e6d34d3737bf7cd3c33f18f4a2271dc7b80405b4965477f9b"
+    }
+  ],
+  "config_sha256": "8b0453a0c3d53f1874abb2885bbd31c7b8f15a730fafda3e0a138730058600dc",
+  "module_sha256": "a13b84c8896d715db31d48458ec75fc08036111e62bc0d7c2ae2409eea4e715b",
+  "engine_sha256": "b1f8589b2088cf97d856ce41dc546dcf98db0a409c1e6b0720b7ff3df3da22d9",
+  "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+  "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+  "observed_index": {
+    "year": 2026,
+    "pages": 2,
+    "entries": 39,
+    "result_documents": 19,
+    "instrument_results": 38
+  },
+  "limitations": [
+    "Central-bank certificates, not government bonds or current market quotes.",
+    "Latest announced year only; invitation pages do not produce result events.",
+    "MNOK, percentages, price and distinct dates are preserved without inferred publication timezone.",
+    "The observed frontend next-page markers define traversal; no server-side total or transactional snapshot is provided.",
+    "No runtime initialization yet."
+  ]
+}

@@ -635,3 +635,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye tjenester og endrede daterte tilsynshendelser i Kommisjonens offentlige DSA-oversikt. Tilbyder, kildeoppgitt klassifisering, koordinator, hendelsestekst og offisielle dokumentlenker følges. Foreløpige funn og vedtak beholdes med ulik kildetekst; fravær fastslår ikke avslutning eller oppheving. Brukertall og vedleggsinnhold inngår ikke."
+
+[[source]]
+id = "certificate_auctions"
+name = "Auksjonsresultater for sentralbanksertifikater"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede publiserte resultater i nyeste annonserte år. Norges Banks paginerte indeks skiller innbydelser fra resultater. Per auksjonsdato og ISIN følges kurs, rente, tildelt volum, budvolum, marginaltildeling, oppgjør og forfall med eksplisitte enheter. To komplette innlesinger kontrolleres; fravær betyr ikke kansellering."
