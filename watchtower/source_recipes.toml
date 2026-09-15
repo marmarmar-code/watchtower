@@ -2825,3 +2825,42 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "ets_installation_compliance_changes"
+name = "Kvoteoppgjør – publiserte koder og rapporttall"
+sector = "energy"
+description = "Følger siste publiserte oppgjørsrapport fra Union Registry, med NO som eksplisitt standardutvalg. countries og activity_codes kan avgrense registerland og kildeoppgitte aktivitetskoder. Identitet er rapportår, registerland og anleggs-ID. Oppgjørskoder, siste statusår, separate utslipps-/kvotetotaler og kontostatus beholdes som kilden oppgir dem. Tallene sammenlignes ikke for å beregne regelbrudd; rapportår kan avvike fra siste statusår, og fremtidig siste utslippsår beholdes. Nye årsrapporter gir nye poster. Første innlesing er stille. Fravær gir ikke varsel om tapt tillatelse eller endret etterlevelse. Valgte duplikater stopper innlesingen."
+official_url = "https://climate.ec.europa.eu/areas-action/carbon-markets/eu-emissions-trading-system-eu-ets/union-registry_en"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "ets_compliance"
+countries = ["NO"]
+max_report_age_days = 450
+max_export_rows = 25000
+max_unpacked_bytes = 20000000
+max_records = 1000
+max_bytes = 4000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "aquaculture_monthly_production_changes"
+name = "Havbruk – biomasse, produksjon og tapskategorier"
+sector = "food"
+description = "Følger tre nyeste sammenhengende måneder i Fiskeridirektoratets fylkesstatistikk. counties og species kan velge eksakte kildeetiketter; standarden omfatter alle fylker og begge arter. Identitet er år, måned, fylke, art og utsettingsår. Biomasse, fôrforbruk, ulike uttaksvekter og tapskategorier beholdes i separate kg/stk-felter. Negative tellekorrigeringer og manglende utsettingsår bevares. Ingen beregnet dødelighetsrate og ingen slutninger om enkeltanlegg. Måned er observasjonsperiode, ikke publiseringstid. Hele eksporten kontrolleres ved begge lesinger; første innlesing er stille, og måneder som går ut av vinduet gir ikke fjerningsvarsel."
+official_url = "https://www.fiskeridir.no/statistikk-tall-og-analyse/data-og-statistikk-om-akvakultur/biomassestatistikk-etter-fylke"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "aquaculture_production"
+latest_months = 3
+max_age_days = 120
+max_export_records = 20000
+max_records = 1000
+max_bytes = 4000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

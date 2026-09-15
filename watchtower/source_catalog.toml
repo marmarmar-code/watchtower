@@ -716,3 +716,21 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Utvalgte utstederes MAR- og KRT1500-skjemaer fra NewsWeb. Meldings- og skjemarettelser, flere transaksjonsseksjoner, pris/volum og utlån beholdes med kildeordlyd. Skannede eller ukjente formater og manglende vedlegg rapporteres som begrenset dekning. API-et må bekrefte overflow=false; endret utvalg får egen stille førstegangsinnlesing."
+
+[[source]]
+id = "ets_compliance"
+name = "EU – publiserte kvoteoppgjør"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Oppgjørskoder, statusår, kontostatus og uavhengige kildetotaler per rapportår og anleggsidentitet i Union Registry. Kodene beholdes uten juridisk tolkning eller avledet kvotegap. Standardutvalget er NO; andre land og aktivitetskoder kan velges, men duplikater i valgt utvalg stopper innlesingen."
+
+[[source]]
+id = "aquaculture_production"
+name = "Havbruk – månedlig produksjon"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Fylkesvise månedstall for laks og regnbueørret, med biomasse, fôr, uttak, utsett og tapskategorier. Kildens kg/stk-felter og utsettingsår holdes atskilt; negative tellekorrigeringer bevares. Ingen beregnede tapsrater eller slutninger om enkeltanlegg."
