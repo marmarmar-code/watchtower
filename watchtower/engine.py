@@ -72,6 +72,8 @@ from .sources.certificate_auctions import CertificateAuctionsSource
 from .sources.corporate_actions import CorporateActionsSource
 from .sources.rasff_border_rejections import RasffBorderRejectionsSource
 from .sources.lobbying_finance import LobbyingFinanceSource
+from .sources.harmonised_standards import HarmonisedStandardsSource
+from .sources.carbon_auctions import CarbonAuctionsSource
 from .sources.funding_calls import FundingCallsSource
 from .sources.food_establishments import FoodEstablishmentsSource
 from .sources.food_inspections import FoodInspectionsSource
@@ -130,6 +132,8 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "corporate_actions": CorporateActionsSource,
     "rasff_border_rejections": RasffBorderRejectionsSource,
     "lobbying_finance": LobbyingFinanceSource,
+    "harmonised_standards": HarmonisedStandardsSource,
+    "carbon_auctions": CarbonAuctionsSource,
     "funding_calls": FundingCallsSource,
     "food_establishments": FoodEstablishmentsSource,
     "account_documents": AccountDocumentsSource,

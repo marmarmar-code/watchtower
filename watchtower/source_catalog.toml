@@ -671,3 +671,21 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og reviderte finansdeklarasjoner for utvalgte hovedkontorland i det offentlige EU-registeret. Anslåtte kostnadsintervaller for registrerte aktiviteter, betaling til mellommenn, NGO-totalbudsjett, finansieringskilder og tilskudd holdes atskilt. Full eksport kontrolleres to ganger med dato, total og identiteter. Nye organisasjoner uten avsluttet regnskapsår beholdes eksplisitt. Ingen summering eller utledet faktisk påvirkning."
+
+[[source]]
+id = "harmonised_standards"
+name = "EU – harmoniserte standardreferanser"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Oppgitte publiserings- og opphørsdatoer for standardreferansesett i Kommisjonens sammendrag for medisinsk utstyr. Hovedreferanse og tillegg utgjør én identitet; ulike tillegg holdes atskilt. Kildens datoer og vedtaksreferanser beholdes. Sammendraget gir ikke selv rettsvirkning, og endret standardreferanse fastslår ikke produktforbud."
+
+[[source]]
+id = "carbon_auctions"
+name = "EEX – utslippskvoteauksjoner"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Publiserte EU ETS1-auksjonsresultater i eksplisitt årsrapport. Pris, volum, status og inntekt bevares med kildens enheter. Auksjonsdato er atskilt fra publiseringstid; tallene er ikke sanntidsmarkedspriser."

@@ -2732,3 +2732,35 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "medical_device_standard_reference_changes"
+name = "EU – endrede standardreferanser for medisinsk utstyr"
+sector = "health"
+description = "Følger Kommisjonens publiserte referansesett, virkningsdatoer og vedtaksreferanser under 2017/745. references kan avgrense til eksakte EN-referanser; uten filter leses hele sammendraget. Hovedstandard med forskjellige tillegg får separate identiteter. Første lesing er stille. Manglende opphørsdato beholdes som fraværende; fravær av en rad betyr ikke tilbaketrekking. Datoen i filnavnet brukes ikke som oppdateringsbevis. Sammendraget er informativt, ikke en selvstendig rettskilde eller produktgodkjenning."
+official_url = "https://single-market-economy.ec.europa.eu/single-market/goods/european-standards/harmonised-standards/medical-devices_en"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "harmonised_standards"
+max_unpacked_bytes = 2000000
+max_sheet_rows = 2000
+max_records = 1000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "eex_carbon_auction_result_changes"
+name = "EEX – resultater fra utslippskvoteauksjoner"
+sector = "energy"
+description = "Følger publiserte EU ETS1-auksjoner i 2026-rapporten. zones kan velge eksakte kildesoner, for eksempel EU, DE eller PL. Kvotepris i EUR per tCO2, volum i tCO2 og inntekt i EUR holdes atskilt. Auksjonsdato/-tid er kildefelt, ikke publiseringstid eller en utledet tidssone. Første lesing er stille, og manglende resultater blir ikke null. Dekningen gjelder dette rapportåret; EU ETS2, senere år og sanntidspriser inngår ikke."
+official_url = "https://www.eex.com/en/markets/environmental-markets/emissions-auctions"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "carbon_auctions"
+max_records = 1000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
