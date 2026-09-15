@@ -2641,3 +2641,21 @@ interval_minutes = 60
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "dsa_platform_supervision_changes"
+name = "DSA – tilsynshendelser for digitale tjenester"
+sector = "technology"
+description = "Følger nye tjenester og reviderte tilsynshistorikker i Kommisjonens samlede DSA-oversikt. Bevarer dato, oppgitt tiltak, offisielle lenker, tilbyder, tjenesteklassifisering og koordinator. Forespørsler, foreløpige funn, bindende tilsagn og vedtak tolkes ikke som samme utfall. services kan velge eksakte tjenestenavn; manglende valgt tjeneste avvises. To komplette lesinger må stemme. Brukertall, vedleggsinnhold og tiltak som ikke er oppført på oversiktssiden inngår ikke; fravær betyr ikke avslutning."
+official_url = "https://digital-strategy.ec.europa.eu/en/policies/list-designated-vlops-and-vloses"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "dsa_supervision"
+max_services = 100
+max_actions_per_service = 200
+max_records = 100
+max_bytes = 1000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

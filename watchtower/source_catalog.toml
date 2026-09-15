@@ -626,3 +626,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og reviderte kapasitetsmeldinger med norske områdekoder i offentlig RSS. Meldingsidentitet, revisjon, status, kategori, årsakskode og kapasitetstabeller følges. Tabellrekkefølge og tomme felt bevares uten summering eller antatt tidssone. Generelle meldinger og full historikk er utenfor dekningen; fravær betyr ikke gjenoppretting."
+
+[[source]]
+id = "dsa_supervision"
+name = "DSA-tilsyn per digital tjeneste"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye tjenester og endrede daterte tilsynshendelser i Kommisjonens offentlige DSA-oversikt. Tilbyder, kildeoppgitt klassifisering, koordinator, hendelsestekst og offisielle dokumentlenker følges. Foreløpige funn og vedtak beholdes med ulik kildetekst; fravær fastslår ikke avslutning eller oppheving. Brukertall og vedleggsinnhold inngår ikke."

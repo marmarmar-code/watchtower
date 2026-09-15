@@ -1,0 +1,57 @@
+{
+  "recipe": "dsa_platform_supervision_changes",
+  "verified_on": "2026-09-15",
+  "official_url": "https://digital-strategy.ec.europa.eu/en/policies/list-designated-vlops-and-vloses",
+  "source_contract_response": {
+    "method": "GET",
+    "status": 200,
+    "bytes": 144523,
+    "sha256": "622541b787bf0db6e85da7ee26ec0ff2b2b7be9bdd661c0e2cb3c7e376ea62c0"
+  },
+  "saved_response_parser_check": {
+    "services": 29,
+    "dated_actions": 145,
+    "offline_polls": 2,
+    "alerts": [
+      0,
+      0
+    ],
+    "full_state_identical": true
+  },
+  "targeted_tests": 51,
+  "live_adapter_verification": {
+    "successful": false,
+    "terminal_attempts": 2,
+    "error": "HTTP 504 before first successful snapshot"
+  },
+  "subsequent_transport_checks": [
+    {
+      "client": "default",
+      "status": 503,
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/list-designated-vlops-and-vloses",
+      "bytes": 40652,
+      "sha256": "3b8bf3c2759d087688ce04512d543054b8581a10460ba41f6c2f2666dcbb5444",
+      "content_type": null,
+      "location": null
+    },
+    {
+      "client": "monitor",
+      "status": 503,
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/list-designated-vlops-and-vloses",
+      "bytes": 40652,
+      "sha256": "3b8bf3c2759d087688ce04512d543054b8581a10460ba41f6c2f2666dcbb5444",
+      "content_type": null,
+      "location": null
+    }
+  ],
+  "source_error_body": "503 - Backend fetch failed; server temporarily unavailable",
+  "module_sha256": "f7438ebae3f44bda43a1ec633bce84b5bfa7cc07617022db85733284515c91e3",
+  "limitations": [
+    "One successfully downloaded real page was replayed; this is not two independent successful live adapter polls.",
+    "Live adapter repeatability and isolated test initialization remain unverified.",
+    "Source-labelled histories only; no independent legal conclusions or linked-document verification.",
+    "Identity uses normalized service names; a rename can look like a new service.",
+    "No closure or termination inferred from absence. The overview is not guaranteed exhaustive or real-time.",
+    "User counts are excluded from monitoring."
+  ]
+}
