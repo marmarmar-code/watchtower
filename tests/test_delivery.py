@@ -111,6 +111,19 @@ class DeliveryTests(unittest.TestCase):
             run(self.config, self.state, sender, source_factory=self.factory)
         self.assertEqual([], sender.calls)
 
+    def test_malformed_receipt_rows_fail_before_any_delivery(self):
+        self.start_partial()
+        journal = self.state.load("_outbox")
+        journal["batches"][1]["rows"] = ["not a receipt"]
+        journal["batches"][1]["sent_at"] = None
+        self.state.save("_outbox", journal)
+        sender = Sender()
+
+        with self.assertRaisesRegex(ValueError, "delivery batch"):
+            run(self.config, self.state, sender, source_factory=self.factory)
+
+        self.assertEqual([], sender.calls)
+
 
 if __name__ == "__main__":
     unittest.main()

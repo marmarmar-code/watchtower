@@ -95,6 +95,38 @@ class PrivateLeakTests(unittest.TestCase):
             path.write_text("standalone XZ value\n", encoding="utf-8")
             self.assertEqual([Path("short.py")], find_leaks(self.config(), root))
 
+    def test_reviewed_public_topic_exempts_only_that_topic(self):
+        config = self.config()
+        config["privacy"]["public_topic_terms"] = ["PUBLIC SUBJECT"]
+        config["source"][0]["filter"]["include_any"].append("Public Subject")
+        config["source"][0]["search_queries"].append("public subject")
+        values = collect_protected_values(config)
+        self.assertNotIn("Public Subject", values)
+        self.assertNotIn("public subject", values)
+        self.assertIn("include-private-term", values)
+        self.assertIn("query-private-term", values)
+
+    def test_public_topic_cannot_exempt_explicit_or_identifier_values(self):
+        for term in ("MANUAL-PRIVATE-TERM", "999999999", "Private Issuer ASA"):
+            config = self.config()
+            config["privacy"]["public_topic_terms"] = [term]
+            with self.subTest(term=term), self.assertRaises(ValueError):
+                collect_protected_values(config)
+
+    def test_public_topic_cannot_exempt_entity_alias(self):
+        config = self.config()
+        config["entity"] = [{"name": "Private Entity", "aliases": ["private alias"]}]
+        config["privacy"]["public_topic_terms"] = ["PRIVATE ALIAS"]
+        with self.assertRaises(ValueError):
+            collect_protected_values(config)
+
+    def test_invalid_public_topic_list_fails_closed(self):
+        for value in ("topic", [None], [""], ["  "], [7]):
+            config = self.config()
+            config["privacy"]["public_topic_terms"] = value
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                collect_protected_values(config)
+
 
 if __name__ == "__main__":
     unittest.main()

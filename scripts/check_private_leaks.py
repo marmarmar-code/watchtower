@@ -33,6 +33,7 @@ def _strings(value: Any):
 
 def collect_protected_values(data: dict[str, Any]) -> tuple[str, ...]:
     values: set[str] = set()
+    topics: set[str] = set()
 
     privacy = data.get("privacy", {})
     if not isinstance(privacy, dict):
@@ -41,6 +42,12 @@ def collect_protected_values(data: dict[str, Any]) -> tuple[str, ...]:
     if not isinstance(protected, list):
         raise ValueError("privacy.protected_values must be an array")
     values.update(_strings(protected))
+    public_topics = privacy.get("public_topic_terms", [])
+    if not isinstance(public_topics, list) or any(
+        not isinstance(value, str) or not value.strip() for value in public_topics
+    ):
+        raise ValueError("privacy.public_topic_terms must be an array of non-empty strings")
+    public_topics = {value.strip().casefold() for value in public_topics}
 
     entities = data.get("entity", [])
     if not isinstance(entities, list):
@@ -61,9 +68,16 @@ def collect_protected_values(data: dict[str, Any]) -> tuple[str, ...]:
             raise ValueError("source.filter must be a table")
         if isinstance(rules, dict):
             for key in FILTER_KEYS:
-                values.update(_strings(rules.get(key, [])))
+                topics.update(_strings(rules.get(key, [])))
         for key in SOURCE_KEYS:
-            values.update(_strings(source.get(key, [])))
+            target = topics if key == "search_queries" else values
+            target.update(_strings(source.get(key, [])))
+
+    # A reviewed public topic can also occur in generic source documentation.
+    # Explicit private values and entity/registry identifiers are never exempt.
+    if public_topics & {value.casefold() for value in values}:
+        raise ValueError("public topic terms overlap protected values or entity identifiers")
+    values.update(value for value in topics if value.casefold() not in public_topics)
 
     return tuple(sorted(values, key=lambda value: (value.casefold(), value)))
 

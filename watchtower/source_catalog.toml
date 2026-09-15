@@ -159,3 +159,156 @@ credential_required = false
 interval_class = "daily"
 maintenance_owner = "fork-owner"
 coverage = "Nye observasjoner, reviderte verdier, enheter og status i eksplisitt valgte statistikkuttrekk."
+
+[[source]]
+id = "public_cases"
+name = "Offentlige klagenemnder"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "KOFA, Medieklagenemnda og Markedsrådet: nye og endrede saker i valgte sidevinduer."
+
+[[source]]
+id = "journals"
+name = "Offentlige journalposter"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "eInnsyn: nye og endrede journalposter i komplett avgrenset publiseringsvindu etter prosjekt/selskap."
+
+[[source]]
+id = "ted_notices"
+name = "TED kontraktsresultater og endringer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Norske resultat-/endringskunngjøringer med oppgitte vinnere, samlet verdi og valuta; komplett datovindu."
+
+[[source]]
+id = "account_documents"
+name = "Tilgjengelige regnskapsår"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye år i BRREGs liste over tilgjengelige årsregnskapskopier. Kontrollerer ikke dokumentbytes eller revisjoner innen et år."
+
+[[source]]
+id = "press_cases"
+name = "PFU-avgjørelser"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede PFU-avgjørelser i et komplett avgrenset behandlingsvindu; ingen slettingspåstand."
+
+[[source]]
+id = "company_discovery"
+name = "Nye registrerte selskaper i valgte næringer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nylig registrerte AS/ASA i valgte tosifrede næringsdivisjoner, med komplett avgrenset søkeresultat. Registreringsdato er ikke stiftelsesdato."
+
+[[source]]
+id = "parliament_vote_discovery"
+name = "Automatisk oppdagelse av stortingsvoteringer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Oppdager saker fra møter i et avgrenset tidsvindu og henter alle deres voteringer. Samme voterings-ID samles på tvers av saker; ufullstendige svar og motstridende resultater avvises."
+
+[[source]]
+id = "eu_merger_decisions"
+name = "EU-fusjonsvedtak"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nyobserverte og reviderte vedtaksopplysninger i et avgrenset vindu av EU-fusjonssaker. Samler vedtak og tilhørende vedlegg under samme vedtaksidentitet. Ufullstendige søkevindu avvises; ingen varsler om sletting eller påstand om full historikk."
+
+[[source]]
+id = "consumer_decisions"
+name = "Forbrukertilsynets vedtaksoversikt"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye lenker og endrede listeopplysninger i de siste publiserte årsgruppene. Flere dokumenter i samme sak beholdes. Årsgruppe er ikke eksakt vedtaksdato; beløp, dokumentinnhold og senere klageutfall overvåkes ikke."
+
+[[source]]
+id = "media_database"
+name = "Medietilsynet – årlige eier- og konsesjonsopplysninger"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Oppførte konsern-/utgiverrelasjoner og konsesjonsopplysninger fra valgte ark i det årlige datagrunnlaget. Referanseår følger hver oppføring uten å lage varsel alene. Navn brukes der unikt nummer mangler; ingen eierprosent, vedtaksdato, utløp eller tilbaketrekking utledes."
+
+[[source]]
+id = "account_figures"
+name = "BRREG – offentlige regnskapsnøkkeltall"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Siste offentlige selskapsregnskap for valgte organisasjonsnumre: nye perioder og endret kilde-ID, valuta, regnskapsregler og oppgitte resultat-/balansetall. Tallene bevares uten omregning; API-skalaen er ikke dokumentert. Ingen konserndekning, historiske korreksjoner eller beregnede nøkkeltall."
+
+[[source]]
+id = "frequency_licences"
+name = "Nkom – spektrumtillatelser og frekvensoppføringer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede registerrader med innehaver, frekvensgrenser i Hz, anvendelse, dekning og kildeoppgitt utløpstid. To komplette samlingssvar må stemme. Flere rader kan dele tillatelsesnummer. Generelle fribruks-/amatørregler utelates som standard og kan velges uttrykkelig. Ingen aktiv-status, vedtaksdato eller tilbakekalling utledes."
+
+[[source]]
+id = "law_gazette"
+name = "Norsk Lovtidend – kunngjøringer og dokumentendringer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede kunngjøringer i nyeste annonserte enkeltårspakker fra avdeling I. Dokumenttekst, ressursreferanser og utvalgte metadata følges. Kunngjøringstid og kildeoppgitt ikrafttredelse holdes atskilt. Komprimert og utvidet arkiv kontrolleres i to komplette innlesinger. Ingen konsolidert lovtilstand, juridisk virkning eller opphevelse utledes."
+
+[[source]]
+id = "efta_procedural_documents"
+name = "ESA – prosessdokumenter med saksreferanser"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede eksplisitt valgte dokumenttyper i ESAs offentlige dokumentbase, med land, saksreferanse og oppført dato. Nyeste annonserte år hentes med komplett paginering og to like innlesinger før typefilter. Dokumentnummer og vedleggslenke gir radidentitet. Ingen gjeldende saksstatus, etterlevelse, avslutning eller vedleggsinnhold utledes."
+
+[[source]]
+id = "bankruptcy_notices"
+name = "Konkurskunngjøringer med separate saksfrister"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede konkursåpningskunngjøringer for foretak med organisasjonsnummer i et kort datovindu. Treffantall, datofilter, dokumentidentitet og to komplette innlesinger kontrolleres. Saksnummer, domstol, bostyrer, åpning, kravfrist, fristdag og skiftesamling er separate kildefelt. Ingen nåværende bostatus eller avslutning utledes fra fravær."
+
+[[source]]
+id = "dsa_supervision"
+name = "DSA-tilsyn per digital tjeneste"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye tjenester og endrede daterte tilsynshendelser i Kommisjonens offentlige DSA-oversikt. Tilbyder, kildeoppgitt klassifisering, koordinator, hendelsestekst og offisielle dokumentlenker følges. Foreløpige funn og vedtak beholdes med ulik kildetekst; fravær fastslår ikke avslutning eller oppheving. Brukertall og vedleggsinnhold inngår ikke."
+
+[[source]]
+id = "funding_calls"
+name = "EU-utlysninger med kommende frister"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Engelske utlysningsemner i et komplett, avgrenset fristvindu fra Funding & Tenders. Oppdager emner og endringer i oppført fristdato, program og statuskode innenfor vinduet. Gir ikke budsjett, kvalifikasjonsvilkår, eksakt fristklokkeslett eller full livsløpsdekning."

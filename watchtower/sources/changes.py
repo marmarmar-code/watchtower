@@ -151,7 +151,7 @@ class SnapshotSource(Source):
             raise ValueError("field_labels must map field names to text")
         # A changed selection has its own quiet baseline, rather than a storm.
         self.scope = digest({"kind": config.kind, "urls": config.urls, "options": {
-            k: v for k, v in options.items() if k not in {"interval_minutes"}
+            k: v for k, v in options.items() if k not in {"interval_minutes", "max_seen_per_source"}
         }})
 
     def read_records(self):

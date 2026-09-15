@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timedelta, timezone
 from typing import Callable
 from hashlib import sha256
 
-from .config import Config, MIN_SOURCE_INTERVAL_MINUTES, SourceConfig
+from .config import Config, MIN_SOURCE_INTERVAL_MINUTES, SourceConfig, source_seen_limit
 from .models import Item, NotificationEntry
 from .notifier import Notifier, format_slack_entries
 from .state import StateStore
@@ -27,9 +27,43 @@ from .sources.patentstyret import PatentstyretSource
 from .sources.structured import StructuredSource
 from .sources.web_changes import WebChangesSource
 from .sources.ssb_data import SsbDataSource
+from .sources.public_cases import PublicCasesSource
+from .sources.journals import JournalsSource
+from .sources.ted_notices import TedNoticesSource
+from .sources.account_documents import AccountDocumentsSource
+from .sources.press_cases import PressCasesSource
+from .sources.eu_merger_decisions import EUMergerDecisionsSource
+from .sources.media_database import MediaDatabaseSource
+from .sources.consumer_decisions import ConsumerDecisionsSource
+from .sources.account_figures import AccountFiguresSource
+from .sources.frequency_licences import FrequencyLicencesSource
+from .sources.law_gazette import LawGazetteSource
+from .sources.efta_procedural_documents import EftaProceduralDocumentsSource
+from .sources.bankruptcy_notices import BankruptcyNoticesSource
+from .sources.dsa_supervision import DsaSupervisionSource
+from .sources.funding_calls import FundingCallsSource
+from .sources.company_discovery import CompanyDiscoverySource
+from .sources.parliament_vote_discovery import ParliamentVoteDiscoverySource
 
 
 SOURCE_TYPES: dict[str, type[Source]] = {
+    "company_discovery": CompanyDiscoverySource,
+    "parliament_vote_discovery": ParliamentVoteDiscoverySource,
+    "eu_merger_decisions": EUMergerDecisionsSource,
+    "media_database": MediaDatabaseSource,
+    "consumer_decisions": ConsumerDecisionsSource,
+    "account_figures": AccountFiguresSource,
+    "frequency_licences": FrequencyLicencesSource,
+    "law_gazette": LawGazetteSource,
+    "efta_procedural_documents": EftaProceduralDocumentsSource,
+    "bankruptcy_notices": BankruptcyNoticesSource,
+    "dsa_supervision": DsaSupervisionSource,
+    "funding_calls": FundingCallsSource,
+    "account_documents": AccountDocumentsSource,
+    "press_cases": PressCasesSource,
+    "public_cases": PublicCasesSource,
+    "journals": JournalsSource,
+    "ted_notices": TedNoticesSource,
     "json_records": StructuredSource,
     "csv_records": StructuredSource,
     "web_page": WebChangesSource,
@@ -185,6 +219,26 @@ def _save_alert_audit(state: StateStore, alerts: list[Alert], *, sent_at: str) -
     ])
 
 
+def _unique_web_link_alerts(alerts: list[Alert]) -> list[Alert]:
+    """Send an identical new link once when monitored lists overlap in a run.
+
+    Source histories remain independent. Different content, revisions and other
+    adapters are deliberately preserved; this is not cross-run deduplication.
+    """
+    seen = set()
+    result = []
+    for alert in alerts:
+        if alert.source.kind == "web_links" and alert.change == "new":
+            # Hash without the per-list source ID, without changing stored items.
+            identity = (alert.item.url, alert.item.key,
+                        replace(alert.item, source_id="").content_hash())
+            if identity in seen:
+                continue
+            seen.add(identity)
+        result.append(alert)
+    return result
+
+
 def run(
     config: Config,
     state: StateStore,
@@ -259,6 +313,7 @@ def run(
         except Exception as exc:
             errors[source_config.id] = _safe_error(exc)
 
+    alerts = _unique_web_link_alerts(alerts)
     if dry_run:
         return RunResult(checked, baselined, len(alerts), errors, warnings)
 
@@ -292,6 +347,7 @@ def evaluate(
     *,
     max_seen: int,
 ) -> tuple[dict, list[Alert], bool]:
+    max_seen = source_seen_limit(source, max_seen)
     seen = dict(previous.get("seen", {})) if previous else {}
     previous_order = list(previous.get("order", [])) if previous else []
     baseline = previous is None

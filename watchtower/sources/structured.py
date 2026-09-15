@@ -31,7 +31,8 @@ class StructuredSource(SnapshotSource):
         if not isinstance(self.where, dict):
             raise ValueError("where must be a table of field selections")
         for name, values in self.where.items():
-            strings(values, "where selection")
+            if not isinstance(values, list) or not values or any(not isinstance(value, str) for value in values):
+                raise ValueError("where selection must be a non-empty string array; an empty string may select blank cells")
         for value in (self.title_field, self.url_field, self.published_field, self.records_path, self.next_path, self.total_path):
             if value is not None and not isinstance(value, str):
                 raise ValueError("record field paths must be strings")
