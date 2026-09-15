@@ -1,0 +1,121 @@
+{
+  "recipe": "prac_safety_signal_recommendation_changes",
+  "checked_at": "2026-09-15T10:49:49.745768+00:00",
+  "records": 23,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://www.ema.europa.eu/en/human-regulatory-overview/post-authorisation/pharmacovigilance-post-authorisation/signal-management/prac-recommendations-safety-signals",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 2540552,
+      "sha256": "affb37a1bda170ae5a6fffaceca6c75253f32647c843bb25febd0839604d1326"
+    },
+    {
+      "url": "https://www.ema.europa.eu/en/documents/prac-recommendation/prac-recommendations-signals-adopted-6-9-july-2026-prac-meeting_en.pdf",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 290709,
+      "sha256": "1a082da20d24cbf116ff62e8082149c8232e22c072ba15f385d3b7d21dac8ba0"
+    },
+    {
+      "url": "https://www.ema.europa.eu/en/documents/prac-recommendation/prac-recommendations-signals-adopted-8-11-june-2026-prac-meeting_en.pdf",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 261486,
+      "sha256": "f707a8fdcf3a6479ee32fa4935a09d8a2423c5513c4eb27caa09211effc79359"
+    },
+    {
+      "url": "https://www.ema.europa.eu/en/human-regulatory-overview/post-authorisation/pharmacovigilance-post-authorisation/signal-management/prac-recommendations-safety-signals",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 2540552,
+      "sha256": "affb37a1bda170ae5a6fffaceca6c75253f32647c843bb25febd0839604d1326"
+    },
+    {
+      "url": "https://www.ema.europa.eu/en/documents/prac-recommendation/prac-recommendations-signals-adopted-6-9-july-2026-prac-meeting_en.pdf",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 290709,
+      "sha256": "1a082da20d24cbf116ff62e8082149c8232e22c072ba15f385d3b7d21dac8ba0"
+    },
+    {
+      "url": "https://www.ema.europa.eu/en/documents/prac-recommendation/prac-recommendations-signals-adopted-8-11-june-2026-prac-meeting_en.pdf",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 261486,
+      "sha256": "f707a8fdcf3a6479ee32fa4935a09d8a2423c5513c4eb27caa09211effc79359"
+    },
+    {
+      "url": "https://www.ema.europa.eu/en/human-regulatory-overview/post-authorisation/pharmacovigilance-post-authorisation/signal-management/prac-recommendations-safety-signals",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 2540552,
+      "sha256": "affb37a1bda170ae5a6fffaceca6c75253f32647c843bb25febd0839604d1326"
+    },
+    {
+      "url": "https://www.ema.europa.eu/en/documents/prac-recommendation/prac-recommendations-signals-adopted-6-9-july-2026-prac-meeting_en.pdf",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 290709,
+      "sha256": "1a082da20d24cbf116ff62e8082149c8232e22c072ba15f385d3b7d21dac8ba0"
+    },
+    {
+      "url": "https://www.ema.europa.eu/en/documents/prac-recommendation/prac-recommendations-signals-adopted-8-11-june-2026-prac-meeting_en.pdf",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 261486,
+      "sha256": "f707a8fdcf3a6479ee32fa4935a09d8a2423c5513c4eb27caa09211effc79359"
+    },
+    {
+      "url": "https://www.ema.europa.eu/en/human-regulatory-overview/post-authorisation/pharmacovigilance-post-authorisation/signal-management/prac-recommendations-safety-signals",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 2540552,
+      "sha256": "affb37a1bda170ae5a6fffaceca6c75253f32647c843bb25febd0839604d1326"
+    },
+    {
+      "url": "https://www.ema.europa.eu/en/documents/prac-recommendation/prac-recommendations-signals-adopted-6-9-july-2026-prac-meeting_en.pdf",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 290709,
+      "sha256": "1a082da20d24cbf116ff62e8082149c8232e22c072ba15f385d3b7d21dac8ba0"
+    },
+    {
+      "url": "https://www.ema.europa.eu/en/documents/prac-recommendation/prac-recommendations-signals-adopted-8-11-june-2026-prac-meeting_en.pdf",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 261486,
+      "sha256": "f707a8fdcf3a6479ee32fa4935a09d8a2423c5513c4eb27caa09211effc79359"
+    }
+  ],
+  "config_sha256": "3cb21ec568316abdc66ff59986fbd2187ad42b51318eac6a92067065f765c03c",
+  "module_sha256": "05725a5977431b4884fc7065721e510b4e194598bb7f75e7132f798a4c81af95",
+  "engine_sha256": "08bbc23f5eb4e24950fd02d00e1f661b761a989fa11c232e1d59ba3825f15aed",
+  "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+  "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+  "targeted_tests": 55,
+  "document_count": 2,
+  "categories": {
+    "product_information": 7,
+    "supplementary_information": 13,
+    "other": 3
+  },
+  "document_records": {
+    "EMA/PRAC/155652/2026": 10,
+    "EMA/PRAC/124080/2026": 13
+  },
+  "parser": "pdfplumber==0.11.9",
+  "pdfminer_version": "20251230",
+  "limitations": [
+    "Two latest meeting documents from2026 onward, not the full historical archive.",
+    "Recommendation actions are not proof of implemented product changes or clinical harm.",
+    "Proposed product-information wording, deletions and insertions are outside plain-text monitoring.",
+    "Textual deadlines are retained without inferred due dates.",
+    "Pure formatting changes are not semantic action changes.",
+    "Matching reads do not establish a transactional snapshot.",
+    "Local checks do not prove scheduled operation or actual delivery."
+  ]
+}

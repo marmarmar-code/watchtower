@@ -2783,3 +2783,23 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "prac_safety_signal_recommendation_changes"
+name = "PRAC – anbefalingshandlinger for legemiddelsignaler"
+sector = "health"
+description = "Følger de to nyeste PRAC-møtedokumentene fra 2026 og fremover. Identitet er dokumentreferanse, kategori og EPITT; samme signal kan gi ulike anbefalinger i samme møte. Virkestoff, signaltekst, kildeoppgitt handling og MAH-celle beholdes. Produktinformasjonsseksjonen følger anbefalingsavsnittet frem til foreslått preparatomtale, som må leses i original PDF for korrekt understreking og strykning. Tekstlige frister beholdes uten beregnet forfallsdato. Møtedato, oppgitt vedtaksdato og første publiseringsdato holdes atskilt. Ingen slutning om implementering, markedsføringstillatelse eller faktisk skade. Første innlesing er stille; eldre dokumenter som går ut av vinduet gir ikke tilbaketrekkingsvarsel."
+official_url = "https://www.ema.europa.eu/en/human-regulatory-overview/post-authorisation/pharmacovigilance-post-authorisation/signal-management/prac-recommendations-safety-signals"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "prac_signals"
+from_year = 2026
+max_documents = 2
+max_pdf_pages = 20
+max_index_age_days = 120
+max_bytes = 4000000
+max_records = 200
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

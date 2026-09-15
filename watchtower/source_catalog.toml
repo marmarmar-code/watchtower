@@ -698,3 +698,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Kuraterte publikasjonsoppdateringer fra Crossref Retraction Watch. Tilbaketrekking, korreksjon, bekymringsmelding og gjeninnføring holdes atskilt. Stabil Record ID, kildedatoer, årsaksmerkelapper og publikasjonsidentifikatorer følges. Eksakte landtoken fra forfattertilknytninger velger poster; landet sier ikke hvem som har ansvar. Hele eksporten leses to ganger, og kun helt tomme halerader utelates."
+
+[[source]]
+id = "prac_signals"
+name = "Legemiddelsikkerhet – PRAC-anbefalinger"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Anbefalingshandlinger per EPITT, kategori og møtedokument fra EMA PRAC. Produktinformasjon, supplerende informasjon og andre handlinger holdes atskilt. Et avgrenset antall nyeste møtedokumenter leses som PDF med kontroll av synlige identiteter og tabellstruktur. Foreslått preparatomtale med strykninger og understreking overvåkes ikke som ren tekst."
