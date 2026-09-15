@@ -78,6 +78,7 @@ from .sources.research_corrections import ResearchCorrectionsSource
 from .sources.prac_signals import PracSignalsSource
 from .sources.pdmr_transactions import PdmrTransactionsSource
 from .sources.ets_compliance import EtsComplianceSource
+from .sources.gdpr_decisions import GdprDecisionsSource
 from .sources.aquaculture_production import AquacultureProductionSource
 from .sources.funding_calls import FundingCallsSource
 from .sources.food_establishments import FoodEstablishmentsSource
@@ -143,6 +144,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "prac_signals": PracSignalsSource,
     "pdmr_transactions": PdmrTransactionsSource,
     "ets_compliance": EtsComplianceSource,
+    "gdpr_decisions": GdprDecisionsSource,
     "aquaculture_production": AquacultureProductionSource,
     "funding_calls": FundingCallsSource,
     "food_establishments": FoodEstablishmentsSource,

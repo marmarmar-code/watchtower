@@ -2864,3 +2864,22 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "gdpr_norway_lead_decision_changes"
+name = "Personvern – vedtak med norsk ledende myndighet"
+sector = "technology"
+description = "Følger EDPBs publiserte one-stop-shop-vedtak fra 2026 til inneværende år med Norge som ledende myndighet. Stabil EDPBI-ID, beslutningsdato, ledende og berørte myndigheter, alle oppgitte rettsgrunnlag, emner, kildeoppgitt utfall og PDF-lenker overvåkes. Flere rettsgrunnlag bevares, og merkelappen Other får ingen avledet forklaring. authority_role kan settes til concerned, men komplett ekte uttrekk for den rollen er foreløpig ikke bevist på grunn av HTTP429; ufullstendig paginering stopper innlesing. Første innlesing er stille. Ingen publiseringsdato, bøtesum, foretaksidentitet eller klageutfall utledes. PDF-innhold overvåkes ikke, og fravær betyr ikke omgjøring."
+official_url = "https://www.edpb.europa.eu/registers/register-of-final-one-stop-shop-decisions_en"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "gdpr_decisions"
+from_year = 2026
+authority_role = "lead"
+max_pages = 10
+max_records = 100
+max_bytes = 4000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

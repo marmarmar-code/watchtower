@@ -734,3 +734,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Fylkesvise månedstall for laks og regnbueørret, med biomasse, fôr, uttak, utsett og tapskategorier. Kildens kg/stk-felter og utsettingsår holdes atskilt; negative tellekorrigeringer bevares. Ingen beregnede tapsrater eller slutninger om enkeltanlegg."
+
+[[source]]
+id = "gdpr_decisions"
+name = "Personvern – grenseoverskridende vedtaksopplysninger"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "EDPBs register over endelige one-stop-shop-vedtak med Norge som ledende eller berørt myndighet. Vedtaks-ID, dato, myndighetsroller, alle oppgitte rettsgrunnlag, emner, utfallsmerkelapp og dokumentlenker holdes atskilt. Komplett paginering kontrolleres to ganger. Kun ledende rolle har komplett ekte kildebevis; paginert berørt-rolle er foreløpig uverifisert etter HTTP429. PDF-innhold, foretaksidentitet, bøtebeløp og senere klageutfall hentes ikke."
