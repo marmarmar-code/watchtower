@@ -653,3 +653,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og endrede oppføringer i de første avgrensede sidene av børsens offentlige oversikt over selskapsendringer for derivater. Meldingsnummer, utstedelsesdato, oppgitt virkningsdato, hendelsestype, instrumenttekst og PDF-lenkemetadata følges. Ingen beløp eller kontraktsvilkår utledes fra indeksen. Dokumentinnhold og komplett arkiv inngår ikke; fravær betyr ikke kansellering."
+
+[[source]]
+id = "rasff_border_rejections"
+name = "RASFF – grenseavvisninger av mat, fôr og kontaktmaterialer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Offentlige meldingssammendrag om grenseavvisninger i et avgrenset datovindu. Produktkategori, type, forhold, kildeoppgitt risiko, meldende land og opprinnelsesland følges. To komplette søkeuttrekk må stemme, med kontroll av sidetotaler, identiteter og anvendte filtre. Ingen detaljdokumenter, merker eller virksomhetsnavn hentes; fravær betyr ikke klarering."

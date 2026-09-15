@@ -2694,3 +2694,22 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "rasff_border_rejection_changes"
+name = "RASFF – nye og endrede grenseavvisninger"
+sector = "food"
+description = "Følger offentlige meldinger klassifisert som border rejection notification i siste 30 kalenderdagers valideringsvindu. Bevarer meldings-ID, referanse, produkt, oppgitt forhold, risiko, meldende land og opprinnelse. origin_countries kan avgrense eksakte landkoder etter full validering. Kildens valideringsklokke holdes uten antatt tidssone og er ikke publiserings- eller avvisningsdato. Alle sider innenfor vinduet leses to ganger. Dette er grensekontrollmeldinger, ikke forbrukertilbakekallinger eller bevis på norsk distribusjon. Eldre revisjoner og detaljdokumenter inngår ikke; fravær betyr ikke klarering."
+official_url = "https://webgate.ec.europa.eu/rasff-window/screen/search"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "rasff_border_rejections"
+window_days = 30
+max_pages = 20
+max_records = 2000
+max_bytes = 1000000
+allow_empty = true
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
