@@ -2803,3 +2803,25 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "pdmr_transaction_form_changes"
+name = "Innsidertransaksjoner – skjemaer og rettelser"
+sector = "finance"
+description = "Følger transaksjonsskjemaer i NewsWeb-kategori 1102 for fem eksplisitt valgte utstedere. issuer_ids kan velge andre numeriske utsteder-ID-er; skjemadekningen må da kontrolleres. MAR- og KRT1500-skjemaer beholder aktør, rolle, instrument, transaksjonstype, pris/volum, aggregert informasjon, transaksjonsdato og handelsplass som kildeordlyd. Utlån og NOK 0 beholdes uten å bli tolket som kjøp eller manglende pris. Flere seksjoner holdes atskilt, og aggregater summeres ikke med enkelthandler. Meldings-ID og vedleggs-ID bevarer rettelseshistorikk; en skjemarettelse kan mangle API-lenke til opprinnelig melding. Skannede og ukjente vedlegg samt meldinger uten skjema gir uttrykkelig begrenset dekning. Tidligere leste skjemaer kan ikke bli overskrevet av uleselige vedlegg. Første innlesing er stille; fravær i datovinduet betyr ikke kansellering."
+official_url = "https://newsweb.oslobors.no/"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "pdmr_transactions"
+issuer_ids = [12499, 12310, 12714, 12412, 1652]
+lookback_days = 14
+max_messages = 50
+max_attachments = 60
+max_pdf_pages = 6
+max_records = 100
+max_bytes = 4000000
+allow_empty = true
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

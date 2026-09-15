@@ -76,6 +76,7 @@ from .sources.harmonised_standards import HarmonisedStandardsSource
 from .sources.carbon_auctions import CarbonAuctionsSource
 from .sources.research_corrections import ResearchCorrectionsSource
 from .sources.prac_signals import PracSignalsSource
+from .sources.pdmr_transactions import PdmrTransactionsSource
 from .sources.funding_calls import FundingCallsSource
 from .sources.food_establishments import FoodEstablishmentsSource
 from .sources.food_inspections import FoodInspectionsSource
@@ -138,6 +139,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "carbon_auctions": CarbonAuctionsSource,
     "research_corrections": ResearchCorrectionsSource,
     "prac_signals": PracSignalsSource,
+    "pdmr_transactions": PdmrTransactionsSource,
     "funding_calls": FundingCallsSource,
     "food_establishments": FoodEstablishmentsSource,
     "account_documents": AccountDocumentsSource,

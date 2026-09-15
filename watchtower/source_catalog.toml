@@ -707,3 +707,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Anbefalingshandlinger per EPITT, kategori og møtedokument fra EMA PRAC. Produktinformasjon, supplerende informasjon og andre handlinger holdes atskilt. Et avgrenset antall nyeste møtedokumenter leses som PDF med kontroll av synlige identiteter og tabellstruktur. Foreslått preparatomtale med strykninger og understreking overvåkes ikke som ren tekst."
+
+[[source]]
+id = "pdmr_transactions"
+name = "Innsidertransaksjoner – strukturerte skjemaopplysninger"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Utvalgte utstederes MAR- og KRT1500-skjemaer fra NewsWeb. Meldings- og skjemarettelser, flere transaksjonsseksjoner, pris/volum og utlån beholdes med kildeordlyd. Skannede eller ukjente formater og manglende vedlegg rapporteres som begrenset dekning. API-et må bekrefte overflow=false; endret utvalg får egen stille førstegangsinnlesing."
