@@ -1,0 +1,111 @@
+{
+  "feed": "https://www.nho.no/rss/",
+  "fetched_utc": "2026-09-10",
+  "fetches": [
+    {
+      "file": "nho-20260910T1.xml",
+      "sha256": "0735672e4c0bfee1cb0648e4bd21f4a338d19975c1a8e55675f7721809e32c38",
+      "count": 50
+    },
+    {
+      "file": "nho-20260910T2.xml",
+      "sha256": "0735672e4c0bfee1cb0648e4bd21f4a338d19975c1a8e55675f7721809e32c38",
+      "count": 50
+    }
+  ],
+  "same_payload": true,
+  "categories": {
+    "distinct": [],
+    "counts": {}
+  },
+  "url_path_rule": "exclude when any URL path segment is arrangementer, arrangementer2, or kurs-og-arrangementer",
+  "counts": {
+    "total": 50,
+    "event_path": 19,
+    "other_paths": 31
+  },
+  "event_examples": [
+    {
+      "title": "Oppdatering i saken om overtid for deltidsansatte",
+      "url": "https://www.nho.no/arrangementer/2026/oppdatering-i-saken-om-overtid-for-deltidsansatte/"
+    },
+    {
+      "title": "Pulsen på næringslivet - medlemsmøte i Ulsteinvik",
+      "url": "https://www.nho.no/regionforeninger/nho-more-romsdal/arrangementer/2027/medlemsmote-i-ulsteinvik/"
+    },
+    {
+      "title": "Pulsen på næringslivet - medlemsmøte i Molde",
+      "url": "https://www.nho.no/regionforeninger/nho-more-romsdal/arrangementer/2027/medlemsmote-i-molde/"
+    },
+    {
+      "title": "Næring i Nordvest",
+      "url": "https://www.nho.no/regionforeninger/nho-more-romsdal/arrangementer/2027/naring-i-nordvest/"
+    },
+    {
+      "title": "Regional årskonferanse 2027",
+      "url": "https://www.nho.no/regionforeninger/nho-more-romsdal/arrangementer/2027/nhos-regionale-arskonferanse-2027/"
+    },
+    {
+      "title": "Eierskap i en ny tid",
+      "url": "https://www.nho.no/arrangementer/2026/eierskap-i-en-ny-tid/"
+    },
+    {
+      "title": "Grønt landtransportprograms årskonferanse",
+      "url": "https://www.nho.no/samarbeid/gront-landtransportprogram/arrangementer2/gront-landtransportprograms-arskonferanse/"
+    },
+    {
+      "title": "Polsk-norsk seminar om dual use",
+      "url": "https://www.nho.no/arrangementer/2026/polsk-norsk-seminar-om-dual-use/"
+    }
+  ],
+  "ordinary_examples": [
+    {
+      "title": "NHO Nordland om ny hurtigbåtkontrakt: – Svært positivt at sommerruten sikres",
+      "url": "https://www.nho.no/regionforeninger/nho-nordland/artikkelarkiv/2026/nho-nordland-om-ny-hurtigbatkontrakt/"
+    },
+    {
+      "title": "NHO Reiseliv - administrerende direktør",
+      "url": "https://emp.jobylon.com/jobs/381412-nho-reiseliv-administrerende-direktor/"
+    },
+    {
+      "title": "Ikoner",
+      "url": "https://www.nho.no/informasjon/ikoner/"
+    },
+    {
+      "title": "Når dyktige kommunedirektører slutter taper alle",
+      "url": "https://www.nho.no/regionforeninger/nho-viken-oslo/artikkelarkiv/2026/nar-dyktige-kommunedirektorer-slutter-taper-alle/"
+    },
+    {
+      "title": "Ikoner",
+      "url": "https://www.nho.no/samarbeid/gront-landtransportprogram/artikler/2025/ikoner/"
+    },
+    {
+      "title": "Bedriftene ser mørkere på framtiden",
+      "url": "https://www.nho.no/regionforeninger/nho-arktis/artikkelarkiv/2026/bedriftene-ser-morkere-pa-framtiden/"
+    },
+    {
+      "title": "Svakere situasjonsvurdering blant NHOs medlemsbedrifter i september",
+      "url": "https://www.nho.no/tema/okonomisk-politikk-og-analyse/artikler/2026/svakere-situasjonsvurdering-blant-nhos-medlemsbedrifter-i-september/"
+    },
+    {
+      "title": "Slik henter de folk andre ikke finner",
+      "url": "https://www.nho.no/regionforeninger/nho-arktis/artikkelarkiv/2026/slik-henter-de-folk-andre-ikke-finner/"
+    }
+  ],
+  "preserve_existing_filters": {
+    "exclude_any": [
+      "Ikoner"
+    ],
+    "exclude_url_hosts": [
+      "emp.jobylon.com"
+    ]
+  },
+  "note": "RSS items contain no category elements; category exclusion cannot distinguish events. URL path rule is precise in these two identical live fetches; one ordinary article has event-like wording but an articlearkiv/artikler path and is retained.",
+  "actual_adapter_check": {
+    "identities_unchanged": true,
+    "all_items_retained": 50,
+    "eligible_before": 47,
+    "eligible_after": 28,
+    "delivery_calls": 0
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "checks": [
+    {
+      "recipe": "food_approval_dairy_entries",
+      "checked_at": "2026-09-14T07:54:45.553210+00:00",
+      "records": 124,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.mattilsynet.no/godkjente-produkter-og-virksomheter/food-of-animal-origin-section-IX-raw-milk-and-dairy-products",
+          "bytes": 176064,
+          "sha256": "a879c3b63bb1615ce474ef14d5ea6b908631d2990ccd170f5e1167fb3e9eb2f2"
+        },
+        {
+          "url": "https://mattilsynet-xp7prod.enonic.cloud/_/attachment/inline/3a60e260-5489-45f5-9bd5-1ec6a1279e18:0bf0a1dd84dd7141771f467553da04ef59e73078/v_virklist_4_10059.csv",
+          "bytes": 28575,
+          "sha256": "d9899378c53fe06c6a1e13d8f7c03a6ef1d207f492d6124d2c27390df248760a"
+        },
+        {
+          "url": "https://www.mattilsynet.no/godkjente-produkter-og-virksomheter/food-of-animal-origin-section-IX-raw-milk-and-dairy-products",
+          "bytes": 176064,
+          "sha256": "a879c3b63bb1615ce474ef14d5ea6b908631d2990ccd170f5e1167fb3e9eb2f2"
+        },
+        {
+          "url": "https://mattilsynet-xp7prod.enonic.cloud/_/attachment/inline/3a60e260-5489-45f5-9bd5-1ec6a1279e18:0bf0a1dd84dd7141771f467553da04ef59e73078/v_virklist_4_10059.csv",
+          "bytes": 28575,
+          "sha256": "d9899378c53fe06c6a1e13d8f7c03a6ef1d207f492d6124d2c27390df248760a"
+        }
+      ],
+      "config_sha256": "613031b3ef6a55c88916f0a30f73f17596a5b064fdc11458b2803bcc3df942db",
+      "module_sha256": "b22da27bb5ab7d4d004ca0a92a87d13735f62e3bd802596a022bd2318ec33aba"
+    },
+    {
+      "recipe": "food_approval_eggs_entries",
+      "checked_at": "2026-09-14T07:54:46.535925+00:00",
+      "records": 44,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.mattilsynet.no/godkjente-produkter-og-virksomheter/food-of-animal-origin-section-x-eggs-and-egg-products",
+          "bytes": 101639,
+          "sha256": "f7bc61c41c6785dafe7b1781d7a9586d5084c5b8b69a4072c65bb447090a1f7d"
+        },
+        {
+          "url": "https://mattilsynet-xp7prod.enonic.cloud/_/attachment/inline/f8dfe34e-ad39-4acf-828b-a01fb02f1f31:0d0243ef5c19759b920ba0472228913f2bfa1cff/v_virklist_4_10060.csv",
+          "bytes": 9570,
+          "sha256": "dd93b30c542503c4932f62ed96fd55859dda594370d1f06d933157f58d48ea8b"
+        },
+        {
+          "url": "https://www.mattilsynet.no/godkjente-produkter-og-virksomheter/food-of-animal-origin-section-x-eggs-and-egg-products",
+          "bytes": 101639,
+          "sha256": "f7bc61c41c6785dafe7b1781d7a9586d5084c5b8b69a4072c65bb447090a1f7d"
+        },
+        {
+          "url": "https://mattilsynet-xp7prod.enonic.cloud/_/attachment/inline/f8dfe34e-ad39-4acf-828b-a01fb02f1f31:0d0243ef5c19759b920ba0472228913f2bfa1cff/v_virklist_4_10060.csv",
+          "bytes": 9570,
+          "sha256": "dd93b30c542503c4932f62ed96fd55859dda594370d1f06d933157f58d48ea8b"
+        }
+      ],
+      "config_sha256": "e5d35489f23d5a5bca1530862badb519043bb9a7dd36892dccd8815cb781389b",
+      "module_sha256": "b22da27bb5ab7d4d004ca0a92a87d13735f62e3bd802596a022bd2318ec33aba"
+    },
+    {
+      "recipe": "food_approval_meat_entries",
+      "checked_at": "2026-09-14T07:54:47.551385+00:00",
+      "records": 159,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.mattilsynet.no/godkjente-produkter-og-virksomheter/section-1-meat-of-domestic-ungulates",
+          "bytes": 163876,
+          "sha256": "ab6f840ab6325dec5205b946931ceaba5165bf5c94285e5aaa8d09c674cee62a"
+        },
+        {
+          "url": "https://mattilsynet-xp7prod.enonic.cloud/_/attachment/inline/e1357de5-7169-4899-b8d3-735e7b2565c8:78ffc584c198bef99430cc8fa9a01ecd3525e712/v_virklist_food_section_1.csv",
+          "bytes": 24471,
+          "sha256": "85ac1e9dc2bfc3632ccb5f43fd27ae5f9a599c528a984c670537f95ab9cd3c16"
+        },
+        {
+          "url": "https://www.mattilsynet.no/godkjente-produkter-og-virksomheter/section-1-meat-of-domestic-ungulates",
+          "bytes": 163876,
+          "sha256": "ab6f840ab6325dec5205b946931ceaba5165bf5c94285e5aaa8d09c674cee62a"
+        },
+        {
+          "url": "https://mattilsynet-xp7prod.enonic.cloud/_/attachment/inline/e1357de5-7169-4899-b8d3-735e7b2565c8:78ffc584c198bef99430cc8fa9a01ecd3525e712/v_virklist_food_section_1.csv",
+          "bytes": 24471,
+          "sha256": "85ac1e9dc2bfc3632ccb5f43fd27ae5f9a599c528a984c670537f95ab9cd3c16"
+        }
+      ],
+      "config_sha256": "ce2cf3540817b35e66752c01910dfb311aa902e7348fe206515a00ef78f276d5",
+      "module_sha256": "b22da27bb5ab7d4d004ca0a92a87d13735f62e3bd802596a022bd2318ec33aba"
+    }
+  ],
+  "proof_boundary": "Two actual public polls per final recipe through the engine. Hosted initialization, scheduled repeats and later real delivery are separate proof."
+}

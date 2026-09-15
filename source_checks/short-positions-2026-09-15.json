@@ -1,0 +1,129 @@
+{
+  "recipe": "disclosed_short_position_changes",
+  "checked_at": "2026-09-15T06:56:48.800241+00:00",
+  "records": 5,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://ssr.finanstilsynet.no/api/v2/instruments",
+      "method": "GET",
+      "bytes": 1468731,
+      "sha256": "1a634d54b211a931906743d96050b54eea02ce43f77b626ebafeaef566a9d7b3"
+    },
+    {
+      "url": "https://ssr.finanstilsynet.no/api/v2/instruments",
+      "method": "GET",
+      "bytes": 1468731,
+      "sha256": "1a634d54b211a931906743d96050b54eea02ce43f77b626ebafeaef566a9d7b3"
+    },
+    {
+      "url": "https://ssr.finanstilsynet.no/api/v2/instruments",
+      "method": "GET",
+      "bytes": 1468731,
+      "sha256": "1a634d54b211a931906743d96050b54eea02ce43f77b626ebafeaef566a9d7b3"
+    },
+    {
+      "url": "https://ssr.finanstilsynet.no/api/v2/instruments",
+      "method": "GET",
+      "bytes": 1468731,
+      "sha256": "1a634d54b211a931906743d96050b54eea02ce43f77b626ebafeaef566a9d7b3"
+    }
+  ],
+  "config_sha256": "674193019f7e7f072d2aa2b8ebedb3adb321c164800f4559af8e781041aacd81",
+  "module_sha256": "35303293f7ad89b6d99688a5057528e3e10ed86554d463526964e459f541a3a4",
+  "engine_sha256": "e3bb8acc32c77a550479fc53a939ddda8b23e36a31732b6cb2eb2aa0eaf7c9af",
+  "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+  "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+  "targeted_tests": 52,
+  "official_api_documentation": "https://ssr.finanstilsynet.no/api/v2/",
+  "openapi_url": "https://ssr.finanstilsynet.no/api/v2/openapi.json",
+  "openapi_sha256": "165b76fd6352a75b4eca6e667261f143b0a382d7ca7d06884372feeb57350c11",
+  "observed_instruments": 99,
+  "observed_events": 3299,
+  "observed_underlying_positions": 10263,
+  "observed_empty_position_events": 177,
+  "aggregate_share_sum_differences": 437,
+  "selected_instruments": [
+    {
+      "isin": "NO0010345853",
+      "issuer": "AKER BP",
+      "latest_event_date": "2026-07-14T00:00:00",
+      "active_holders": 1
+    },
+    {
+      "isin": "NO0003054108",
+      "issuer": "MOWI",
+      "latest_event_date": "2026-08-31T00:00:00",
+      "active_holders": 2
+    },
+    {
+      "isin": "NO0010196140",
+      "issuer": "NORWEGIAN AIR SHUTTLE",
+      "latest_event_date": "2026-09-11T00:00:00",
+      "active_holders": 2
+    },
+    {
+      "isin": "NO0010715139",
+      "issuer": "SCATEC ASA",
+      "latest_event_date": "2026-08-20T00:00:00",
+      "active_holders": 1
+    },
+    {
+      "isin": "NO0012470089",
+      "issuer": "TOMRA SYSTEMS",
+      "latest_event_date": "2026-09-11T00:00:00",
+      "active_holders": 3
+    }
+  ],
+  "selected_active_holders": 9,
+  "limitations": [
+    "Official API documents instruments active within the last two years; this recipe follows latest returned events for five exact ISINs.",
+    "Earlier returned events are validated but not monitored for corrections. Missing selected instruments fail closed rather than imply zero.",
+    "Only public positions at or above the stated disclosure threshold are represented. Empty public positions or source zero do not prove all real positions closed.",
+    "Source aggregate shares and holder shares are retained independently; real source sums can differ.",
+    "Event and holder position dates are separate source date labels, not publication or collection times.",
+    "Two equal selected snapshots are an observation, not a server transaction guarantee. Local source proof is not scheduled runtime or new delivery proof."
+  ],
+  "bounded_decimal_rendering_regression_check": {
+    "recipe": "disclosed_short_position_changes",
+    "checked_at": "2026-09-15T07:19:32.040189+00:00",
+    "records": 5,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://ssr.finanstilsynet.no/api/v2/instruments",
+        "method": "GET",
+        "bytes": 1468731,
+        "sha256": "1a634d54b211a931906743d96050b54eea02ce43f77b626ebafeaef566a9d7b3"
+      },
+      {
+        "url": "https://ssr.finanstilsynet.no/api/v2/instruments",
+        "method": "GET",
+        "bytes": 1468731,
+        "sha256": "1a634d54b211a931906743d96050b54eea02ce43f77b626ebafeaef566a9d7b3"
+      },
+      {
+        "url": "https://ssr.finanstilsynet.no/api/v2/instruments",
+        "method": "GET",
+        "bytes": 1468731,
+        "sha256": "1a634d54b211a931906743d96050b54eea02ce43f77b626ebafeaef566a9d7b3"
+      },
+      {
+        "url": "https://ssr.finanstilsynet.no/api/v2/instruments",
+        "method": "GET",
+        "bytes": 1468731,
+        "sha256": "1a634d54b211a931906743d96050b54eea02ce43f77b626ebafeaef566a9d7b3"
+      }
+    ],
+    "config_sha256": "674193019f7e7f072d2aa2b8ebedb3adb321c164800f4559af8e781041aacd81",
+    "module_sha256": "fabc03eaef4f4c3127d3e1bc5feb51b9dcfcad49e5ad656d594fbfd3a80d85d5",
+    "engine_sha256": "d878827fc4b5951c39915111531b63ee097a3b8242f2958cd93c5f3c00d1444d",
+    "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+    "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+    "targeted_tests": 66
+  }
+}

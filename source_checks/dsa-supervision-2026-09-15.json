@@ -1,0 +1,54 @@
+{
+  "recipe": "dsa_platform_supervision_changes",
+  "checked_at": "2026-09-15T08:14:20.713857+00:00",
+  "records": 29,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/list-designated-vlops-and-vloses",
+      "method": "GET",
+      "bytes": 144519,
+      "sha256": "9de973a280f8573d440d142aadbc4b17568563284995959e2808b77a76acb475"
+    },
+    {
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/list-designated-vlops-and-vloses",
+      "method": "GET",
+      "bytes": 144519,
+      "sha256": "9de973a280f8573d440d142aadbc4b17568563284995959e2808b77a76acb475"
+    },
+    {
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/list-designated-vlops-and-vloses",
+      "method": "GET",
+      "bytes": 144519,
+      "sha256": "9de973a280f8573d440d142aadbc4b17568563284995959e2808b77a76acb475"
+    },
+    {
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/list-designated-vlops-and-vloses",
+      "method": "GET",
+      "bytes": 144519,
+      "sha256": "9de973a280f8573d440d142aadbc4b17568563284995959e2808b77a76acb475"
+    }
+  ],
+  "config_sha256": "f91e8c6025dbda5581c5b19a402f4f090959d999654b6c4dd499b0f9196d64e0",
+  "module_sha256": "f7438ebae3f44bda43a1ec633bce84b5bfa7cc07617022db85733284515c91e3",
+  "engine_sha256": "b1f8589b2088cf97d856ce41dc546dcf98db0a409c1e6b0720b7ff3df3da22d9",
+  "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+  "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+  "observed_actions": 145,
+  "earlier_temporary_failure": {
+    "adapter_terminal_attempts": 2,
+    "status": 504,
+    "diagnostic_status": 503,
+    "message": "Backend fetch failed",
+    "recovered": true
+  },
+  "limitations": [
+    "Per-service source-labelled history, not an independent legal conclusion.",
+    "Service names supply identity; rename can look like a new service.",
+    "User metrics and linked-document contents excluded.",
+    "No assurance of exhaustive or real-time coverage; no closure or termination inferred from absence.",
+    "Two equal reads are not a server transaction; no runtime initialization yet."
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "id": "konkurransetilsynet_news",
+  "official_url": "https://konkurransetilsynet.no/feed/",
+  "checked_on": "2026-09-10",
+  "method": "Two real RSS adapter HTTP fetches with official source data, valid dated unique articles, silent in-memory first baseline and unchanged second evaluation. Zero notification calls or runtime state writes. Separate actual existing merger adapter fetch compared exact URLs.",
+  "scope": "Latest ten RSS publications: authority news, decisions discussed in news, opinion, podcast and research announcements. Not a complete decision register or archive; new-only, hourly. Newly fetched old posts are not sent on initialization. Future recruitment noise needs review if it enters the feed.",
+  "runs": [
+    {
+      "requests": [
+        {
+          "url": "https://konkurransetilsynet.no/feed/",
+          "status": 200,
+          "fetched_at": "2026-09-10T14:19:35.615883+00:00",
+          "bytes": 45517,
+          "sha256": "148eac2e99dcba88c7e5b19818f39ea2ddc59afdf93222ed509f0f51008e0360"
+        }
+      ],
+      "count": 10,
+      "baseline": true,
+      "alerts": 0,
+      "identities_sha256": "e828913ca79bc15d33e07877590456b96f12cf3d247bcd3334a15fe268442a0d",
+      "items": [
+        {
+          "title": "Kronikk: Får kommunene det beste tilbudet?",
+          "url": "https://konkurransetilsynet.no/kronikk-far-kommunene-det-beste-tilbudet/",
+          "published": "Mon, 07 Sep 2026 08:44:32 +0000",
+          "categories": "Artikler og innlegg | Nyheter"
+        },
+        {
+          "title": "Konkurransepodden: Hvorfor er konkurranse om tjenestepensjon viktig for kommunene?",
+          "url": "https://konkurransetilsynet.no/konkurransepodden-hvorfor-er-konkurranse-om-tjenestepensjon-viktig-for-kommunene/",
+          "published": "Thu, 03 Sep 2026 11:40:45 +0000",
+          "categories": "Nyheter"
+        },
+        {
+          "title": "Kronikk: Når markedsmakten brukes til å hindre konkurranse",
+          "url": "https://konkurransetilsynet.no/nar-markedsmakten-brukes-til-a-hindre-konkurranse/",
+          "published": "Wed, 02 Sep 2026 07:37:52 +0000",
+          "categories": "Artikler og innlegg | Nyheter"
+        },
+        {
+          "title": "Replikk: Vi skal først og fremst løse konkurranseproblemer",
+          "url": "https://konkurransetilsynet.no/replikk-vi-skal-forst-og-fremst-lose-konkurranseproblemer/",
+          "published": "Mon, 31 Aug 2026 14:17:40 +0000",
+          "categories": "Artikler og innlegg"
+        },
+        {
+          "title": "Konkurransetilsynet undersøker samarbeidsklimaet i dagligvarebransjen",
+          "url": "https://konkurransetilsynet.no/undersoker-samarbeidsklimaet-i-dagligvarebransjen/",
+          "published": "Mon, 31 Aug 2026 08:33:30 +0000",
+          "categories": "Dagligvare | Nyheter"
+        },
+        {
+          "title": "KLP må endre praksis for å sikre betre konkurranse om offentleg tenestepensjon",
+          "url": "https://konkurransetilsynet.no/klp-ma-endre-praksis-for-a-sikre-betre-konkurranse-om-offentleg-tenestepensjon/",
+          "published": "Tue, 25 Aug 2026 06:45:07 +0000",
+          "categories": "Nyheter"
+        },
+        {
+          "title": "Elkjøp får kjøpe Eplehuset",
+          "url": "https://konkurransetilsynet.no/elkjop-far-kjope-eplehuset/",
+          "published": "Thu, 30 Jul 2026 16:15:59 +0000",
+          "categories": "Nyheter"
+        },
+        {
+          "title": "Øyvind Thomassen blir sjeføkonom i Konkurransetilsynet",
+          "url": "https://konkurransetilsynet.no/oyvind-thomassen-blir-sjefokonom-i-konkurransetilsynet/",
+          "published": "Wed, 08 Jul 2026 08:17:07 +0000",
+          "categories": "Nyheter"
+        },
+        {
+          "title": "Konkurransetilsynet tildeler forskingsmidlar for 2026",
+          "url": "https://konkurransetilsynet.no/konkurransetilsynet-tildeler-forskingsmidlar-2026/",
+          "published": "Fri, 03 Jul 2026 08:17:06 +0000",
+          "categories": "Nyheter"
+        },
+        {
+          "title": "Vurderer å stoppe Elkjøps oppkjøp av Eplehuset",
+          "url": "https://konkurransetilsynet.no/vurderer-stoppe-elkjop-eplehuset/",
+          "published": "Mon, 29 Jun 2026 16:24:19 +0000",
+          "categories": "Nyheter"
+        }
+      ]
+    },
+    {
+      "requests": [
+        {
+          "url": "https://konkurransetilsynet.no/feed/",
+          "status": 200,
+          "fetched_at": "2026-09-10T14:19:36.031982+00:00",
+          "bytes": 45517,
+          "sha256": "148eac2e99dcba88c7e5b19818f39ea2ddc59afdf93222ed509f0f51008e0360"
+        }
+      ],
+      "count": 10,
+      "baseline": false,
+      "alerts": 0,
+      "identities_sha256": "e828913ca79bc15d33e07877590456b96f12cf3d247bcd3334a15fe268442a0d",
+      "items": [
+        {
+          "title": "Kronikk: Får kommunene det beste tilbudet?",
+          "url": "https://konkurransetilsynet.no/kronikk-far-kommunene-det-beste-tilbudet/",
+          "published": "Mon, 07 Sep 2026 08:44:32 +0000",
+          "categories": "Artikler og innlegg | Nyheter"
+        },
+        {
+          "title": "Konkurransepodden: Hvorfor er konkurranse om tjenestepensjon viktig for kommunene?",
+          "url": "https://konkurransetilsynet.no/konkurransepodden-hvorfor-er-konkurranse-om-tjenestepensjon-viktig-for-kommunene/",
+          "published": "Thu, 03 Sep 2026 11:40:45 +0000",
+          "categories": "Nyheter"
+        },
+        {
+          "title": "Kronikk: Når markedsmakten brukes til å hindre konkurranse",
+          "url": "https://konkurransetilsynet.no/nar-markedsmakten-brukes-til-a-hindre-konkurranse/",
+          "published": "Wed, 02 Sep 2026 07:37:52 +0000",
+          "categories": "Artikler og innlegg | Nyheter"
+        },
+        {
+          "title": "Replikk: Vi skal først og fremst løse konkurranseproblemer",
+          "url": "https://konkurransetilsynet.no/replikk-vi-skal-forst-og-fremst-lose-konkurranseproblemer/",
+          "published": "Mon, 31 Aug 2026 14:17:40 +0000",
+          "categories": "Artikler og innlegg"
+        },
+        {
+          "title": "Konkurransetilsynet undersøker samarbeidsklimaet i dagligvarebransjen",
+          "url": "https://konkurransetilsynet.no/undersoker-samarbeidsklimaet-i-dagligvarebransjen/",
+          "published": "Mon, 31 Aug 2026 08:33:30 +0000",
+          "categories": "Dagligvare | Nyheter"
+        },
+        {
+          "title": "KLP må endre praksis for å sikre betre konkurranse om offentleg tenestepensjon",
+          "url": "https://konkurransetilsynet.no/klp-ma-endre-praksis-for-a-sikre-betre-konkurranse-om-offentleg-tenestepensjon/",
+          "published": "Tue, 25 Aug 2026 06:45:07 +0000",
+          "categories": "Nyheter"
+        },
+        {
+          "title": "Elkjøp får kjøpe Eplehuset",
+          "url": "https://konkurransetilsynet.no/elkjop-far-kjope-eplehuset/",
+          "published": "Thu, 30 Jul 2026 16:15:59 +0000",
+          "categories": "Nyheter"
+        },
+        {
+          "title": "Øyvind Thomassen blir sjeføkonom i Konkurransetilsynet",
+          "url": "https://konkurransetilsynet.no/oyvind-thomassen-blir-sjefokonom-i-konkurransetilsynet/",
+          "published": "Wed, 08 Jul 2026 08:17:07 +0000",
+          "categories": "Nyheter"
+        },
+        {
+          "title": "Konkurransetilsynet tildeler forskingsmidlar for 2026",
+          "url": "https://konkurransetilsynet.no/konkurransetilsynet-tildeler-forskingsmidlar-2026/",
+          "published": "Fri, 03 Jul 2026 08:17:06 +0000",
+          "categories": "Nyheter"
+        },
+        {
+          "title": "Vurderer å stoppe Elkjøps oppkjøp av Eplehuset",
+          "url": "https://konkurransetilsynet.no/vurderer-stoppe-elkjop-eplehuset/",
+          "published": "Mon, 29 Jun 2026 16:24:19 +0000",
+          "categories": "Nyheter"
+        }
+      ]
+    }
+  ],
+  "merger_comparison": {
+    "count": 30,
+    "url_overlap": [],
+    "limitation": "Exact URL comparison only; related merger and news articles can describe the same company or transaction."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "recipe": "eu_innovation_call_deadlines",
+  "checked_at": "2026-09-14T07:38:23.503239+00:00",
+  "records": 60,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://api.tech.ec.europa.eu/search-api/prod/rest/search",
+      "bytes": 92553,
+      "sha256": "3e5dea2135de1fe87b75b8507ba75a3c924285bf7e2120f53d6b81f4fd7004e3"
+    },
+    {
+      "url": "https://api.tech.ec.europa.eu/search-api/prod/rest/search",
+      "bytes": 92552,
+      "sha256": "b7a1c982ca299a92e3ceec927878ac7eb7ce9ec9f48a64ed7215c6ccffa21259"
+    }
+  ],
+  "config_sha256": "489b957aca499d3305dc8cebbd51ffa27deeb2b07658f0b865474bc2d66f0cc3",
+  "module_sha256": "b7e9cd5fe8341c3ad133b46b1e033e848d061b33e9dae56d2ba10c55fb047e45",
+  "proof_boundary": "Two real public source polls through the final recipe and engine; no hosted scheduling or actual later delivery proof."
+}

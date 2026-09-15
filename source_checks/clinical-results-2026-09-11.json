@@ -1,0 +1,26 @@
+[
+  {
+    "recipe": "clinical_trials_norway_results",
+    "checked_at": "2026-09-11T14:09:09.669806+00:00",
+    "records": 15,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.locn=AREA%5BLocationCountry%5DNorway&filter.advanced=AREA%5BLastUpdatePostDate%5DRANGE%5B2026-08-28%2C+2026-09-11%5D&fields=NCTId%2CBriefTitle%2CLocationCountry%2CHasResults%2CLastUpdatePostDate%2CResultsFirstPostDate%2CEnrollmentInfo%2CParticipantFlowModule%2COutcomeMeasuresModule%2CAdverseEventsModule&format=json&pageSize=20&countTotal=true&query.term=AREA%5BHasResults%5Dtrue",
+        "bytes": 2079036,
+        "sha256": "11c9399822be10e600655ef03d84ec579cbf2be3aed324fc3186b29bb8a7a5a4"
+      },
+      {
+        "url": "https://clinicaltrials.gov/api/v2/studies?query.locn=AREA%5BLocationCountry%5DNorway&filter.advanced=AREA%5BLastUpdatePostDate%5DRANGE%5B2026-08-28%2C+2026-09-11%5D&fields=NCTId%2CBriefTitle%2CLocationCountry%2CHasResults%2CLastUpdatePostDate%2CResultsFirstPostDate%2CEnrollmentInfo%2CParticipantFlowModule%2COutcomeMeasuresModule%2CAdverseEventsModule&format=json&pageSize=20&countTotal=true&query.term=AREA%5BHasResults%5Dtrue",
+        "bytes": 2079036,
+        "sha256": "11c9399822be10e600655ef03d84ec579cbf2be3aed324fc3186b29bb8a7a5a4"
+      }
+    ],
+    "config_sha256": "2304193a32159fc57e9e08cd61b7da9c33832f9bede7e5e24bf7d7d22f5aabdc",
+    "module_sha256": "1befbdc154cbcfe0d132c668a33b72bfb0c0901940ed5db7570081799c2addb7",
+    "shared_pagination_module_sha256": "dab75fa9d5552572252744ad746fac596fa24333d39f7387cb77cf0fb72aebaa",
+    "verification": "Two actual final recipe adapter polls through the change engine; no notifier or runtime writes."
+  }
+]

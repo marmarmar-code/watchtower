@@ -1,0 +1,61 @@
+{
+  "source": "industrial_documents",
+  "official_url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+  "company_id": 5447,
+  "live": {
+    "fetch_poll_count": 2,
+    "records_each": 21,
+    "first_baseline": true,
+    "first_alerts": 0,
+    "second_baseline": false,
+    "second_alerts": 0,
+    "example": {
+      "key": "5447:770680",
+      "document_type": "T",
+      "document_year": null,
+      "label": "Tillatelse",
+      "url": "https://www.norskeutslipp.no/WebHandlers/PDFDocumentHandler.ashx?documentID=770680&documentType=T&companyID=5447&aar=0&epslanguage=no"
+    }
+  },
+  "contract": {
+    "identity": [
+      "company_id",
+      "documentID"
+    ],
+    "fields": [
+      "document_type",
+      "document_year",
+      "document_label",
+      "official_pdf_url"
+    ],
+    "events": [
+      "added",
+      "changed"
+    ],
+    "removed": false,
+    "pdf_content_parsing": false
+  },
+  "tests": "python3 -m unittest tests.test_industrial_documents: passed 5",
+  "final_recipe_check": {
+    "recipe": "industrial_permit_inspection_documents",
+    "checked_at": "2026-09-11T12:29:12.839635+00:00",
+    "records": 21,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+        "bytes": 101455,
+        "sha256": "85bcdfd34b52bb1b7c14e4bd683baebbec112e3dfd70824fd77fb82391993d42"
+      },
+      {
+        "url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+        "bytes": 144840,
+        "sha256": "9efb511e5b76088654d706f0e2e72a16062eccd36ddc184d9439cc2c5479ac01"
+      }
+    ],
+    "config_sha256": "8269fba86bb3e41a7c0ba19885e6cd17f86ed1d7a84887cdc7aba96d6baf69da",
+    "module_sha256": "2bee86cc71ab6b8b6788637af589941bfccd9d5b2975737cef4d2e6b2bf174f2"
+  }
+}

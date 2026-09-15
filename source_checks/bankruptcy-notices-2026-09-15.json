@@ -1,0 +1,602 @@
+{
+  "recipe": "bankruptcy_opening_deadline_changes",
+  "checked_at": "2026-09-15T07:17:44.182947+00:00",
+  "records": 22,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://w2.brreg.no/kunngjoring/kombisok.jsp?datoFra=13.09.2026&datoTil=15.09.2026&id_niva1=51",
+      "method": "GET",
+      "bytes": 138940,
+      "sha256": "0e586b8f815e87a8ac7c5e6e308bbc256fcf9b4647fdcfb26d7818a484475dc4"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742060&sokeverdi=929412117&spraak=nb",
+      "method": "GET",
+      "bytes": 31440,
+      "sha256": "fc94fc01194bfcdf5a038da350c2eb52e4355d0e36ad733d092b1433ad648d97"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742266&sokeverdi=933417298&spraak=nb",
+      "method": "GET",
+      "bytes": 31910,
+      "sha256": "995b9d37dd1819c8794073f60a0a70030098fbd78796436e30d2cf3897ac9dea"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742267&sokeverdi=932240858&spraak=nb",
+      "method": "GET",
+      "bytes": 31403,
+      "sha256": "c08de6ad2e67ae0d11d1856aa178e524bd069b190f39eeff9eed36a25f8aa40e"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742359&sokeverdi=931949934&spraak=nb",
+      "method": "GET",
+      "bytes": 31361,
+      "sha256": "529b346fc33538e38cc2339f27b098888040f8cfa033dbbaff24c375fb2e8a7c"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742360&sokeverdi=932041367&spraak=nb",
+      "method": "GET",
+      "bytes": 31371,
+      "sha256": "3848aad34ea403529c55ac2f72099a255ab4022bd94a9076fb364586d52c3765"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742544&sokeverdi=933260658&spraak=nb",
+      "method": "GET",
+      "bytes": 31422,
+      "sha256": "472c7095fec56d9d48dec2e50ef5b4deff72244b8534c5407feeb54265194451"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742677&sokeverdi=924332123&spraak=nb",
+      "method": "GET",
+      "bytes": 31378,
+      "sha256": "6e71b5f3e29d61b6b558df25b61ca63ed3079d0ed8d6c3b3687cc544e171ce72"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742838&sokeverdi=925347892&spraak=nb",
+      "method": "GET",
+      "bytes": 31335,
+      "sha256": "1b34dfea4e74027f4c2b8bc8103276d98caf16208d70fe538f65752a8ab7338d"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742839&sokeverdi=929577159&spraak=nb",
+      "method": "GET",
+      "bytes": 31165,
+      "sha256": "b3b3c5958ba81cd18932d4587976833ca4c517dad81bc0d5a31e8826becc8a45"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742867&sokeverdi=919137738&spraak=nb",
+      "method": "GET",
+      "bytes": 31265,
+      "sha256": "98b16834513e9c1150bf11edf84529613c29cb7e448ca0faaeaf71b92b955f7b"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742868&sokeverdi=980897184&spraak=nb",
+      "method": "GET",
+      "bytes": 31271,
+      "sha256": "e091f46da92c63ed5cadd88bee286f18878ee54924f600fc742e4f505836cb06"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742869&sokeverdi=996576574&spraak=nb",
+      "method": "GET",
+      "bytes": 31422,
+      "sha256": "d0de84cce76c5b85b009bdc3a21f6d088c0084fca914da597cc36f55c1be5897"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742870&sokeverdi=923793119&spraak=nb",
+      "method": "GET",
+      "bytes": 31465,
+      "sha256": "bfc5ca3bb2b794fbed3c7a29aee6705cd391ee4daeefb3f360f289c2f6abfd44"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742872&sokeverdi=933079899&spraak=nb",
+      "method": "GET",
+      "bytes": 31636,
+      "sha256": "d486999bec8f2923dde5f4ff2dfdf81b9a6949ff5c83b4a57eaafd6d60c3382b"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742893&sokeverdi=930986828&spraak=nb",
+      "method": "GET",
+      "bytes": 31379,
+      "sha256": "8ddff840131482de66b8642628282d800ec48dcdb3bf8a93322b425c87570754"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742894&sokeverdi=921634544&spraak=nb",
+      "method": "GET",
+      "bytes": 31402,
+      "sha256": "9804649942f95a624939f587938fff66c58e3d6f361fd5ba9a2eb45bd788f45f"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742925&sokeverdi=932681897&spraak=nb",
+      "method": "GET",
+      "bytes": 31406,
+      "sha256": "b4511ea9b5e396bcdc5c0144f391869fb2d95cad2d781d4cf1744e826f5777f1"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742926&sokeverdi=932957728&spraak=nb",
+      "method": "GET",
+      "bytes": 31278,
+      "sha256": "e118116db6fc61323606d58dcaecb3bdb0d6dd4c948f9648d8c40d7f35f38edb"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742981&sokeverdi=933355942&spraak=nb",
+      "method": "GET",
+      "bytes": 31355,
+      "sha256": "2a4789dfc0c5eaa0ddcdd56de0707a4cb8453b97b0a32612e05d088bcdda3a96"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000743840&sokeverdi=918172351&spraak=nb",
+      "method": "GET",
+      "bytes": 31495,
+      "sha256": "f55a7352fe76ecf962895146431cbc8ac60c4bc82a9718aaf77ef3b70f14f667"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000743841&sokeverdi=915160093&spraak=nb",
+      "method": "GET",
+      "bytes": 31447,
+      "sha256": "3fb704bdb6864567d4be6c826d04612e55110e15c793a66eaefb7f80ff16937f"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000743842&sokeverdi=918917306&spraak=nb",
+      "method": "GET",
+      "bytes": 31304,
+      "sha256": "404211582aab59bc9555061b71359f914b4ea046d484aa956da441adb2661519"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/kombisok.jsp?datoFra=13.09.2026&datoTil=15.09.2026&id_niva1=51",
+      "method": "GET",
+      "bytes": 138940,
+      "sha256": "0e586b8f815e87a8ac7c5e6e308bbc256fcf9b4647fdcfb26d7818a484475dc4"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742060&sokeverdi=929412117&spraak=nb",
+      "method": "GET",
+      "bytes": 31440,
+      "sha256": "fc94fc01194bfcdf5a038da350c2eb52e4355d0e36ad733d092b1433ad648d97"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742266&sokeverdi=933417298&spraak=nb",
+      "method": "GET",
+      "bytes": 31910,
+      "sha256": "995b9d37dd1819c8794073f60a0a70030098fbd78796436e30d2cf3897ac9dea"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742267&sokeverdi=932240858&spraak=nb",
+      "method": "GET",
+      "bytes": 31403,
+      "sha256": "c08de6ad2e67ae0d11d1856aa178e524bd069b190f39eeff9eed36a25f8aa40e"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742359&sokeverdi=931949934&spraak=nb",
+      "method": "GET",
+      "bytes": 31361,
+      "sha256": "529b346fc33538e38cc2339f27b098888040f8cfa033dbbaff24c375fb2e8a7c"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742360&sokeverdi=932041367&spraak=nb",
+      "method": "GET",
+      "bytes": 31371,
+      "sha256": "3848aad34ea403529c55ac2f72099a255ab4022bd94a9076fb364586d52c3765"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742544&sokeverdi=933260658&spraak=nb",
+      "method": "GET",
+      "bytes": 31422,
+      "sha256": "472c7095fec56d9d48dec2e50ef5b4deff72244b8534c5407feeb54265194451"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742677&sokeverdi=924332123&spraak=nb",
+      "method": "GET",
+      "bytes": 31378,
+      "sha256": "6e71b5f3e29d61b6b558df25b61ca63ed3079d0ed8d6c3b3687cc544e171ce72"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742838&sokeverdi=925347892&spraak=nb",
+      "method": "GET",
+      "bytes": 31335,
+      "sha256": "1b34dfea4e74027f4c2b8bc8103276d98caf16208d70fe538f65752a8ab7338d"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742839&sokeverdi=929577159&spraak=nb",
+      "method": "GET",
+      "bytes": 31165,
+      "sha256": "b3b3c5958ba81cd18932d4587976833ca4c517dad81bc0d5a31e8826becc8a45"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742867&sokeverdi=919137738&spraak=nb",
+      "method": "GET",
+      "bytes": 31265,
+      "sha256": "98b16834513e9c1150bf11edf84529613c29cb7e448ca0faaeaf71b92b955f7b"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742868&sokeverdi=980897184&spraak=nb",
+      "method": "GET",
+      "bytes": 31271,
+      "sha256": "e091f46da92c63ed5cadd88bee286f18878ee54924f600fc742e4f505836cb06"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742869&sokeverdi=996576574&spraak=nb",
+      "method": "GET",
+      "bytes": 31422,
+      "sha256": "d0de84cce76c5b85b009bdc3a21f6d088c0084fca914da597cc36f55c1be5897"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742870&sokeverdi=923793119&spraak=nb",
+      "method": "GET",
+      "bytes": 31465,
+      "sha256": "bfc5ca3bb2b794fbed3c7a29aee6705cd391ee4daeefb3f360f289c2f6abfd44"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742872&sokeverdi=933079899&spraak=nb",
+      "method": "GET",
+      "bytes": 31636,
+      "sha256": "d486999bec8f2923dde5f4ff2dfdf81b9a6949ff5c83b4a57eaafd6d60c3382b"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742893&sokeverdi=930986828&spraak=nb",
+      "method": "GET",
+      "bytes": 31379,
+      "sha256": "8ddff840131482de66b8642628282d800ec48dcdb3bf8a93322b425c87570754"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742894&sokeverdi=921634544&spraak=nb",
+      "method": "GET",
+      "bytes": 31402,
+      "sha256": "9804649942f95a624939f587938fff66c58e3d6f361fd5ba9a2eb45bd788f45f"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742925&sokeverdi=932681897&spraak=nb",
+      "method": "GET",
+      "bytes": 31406,
+      "sha256": "b4511ea9b5e396bcdc5c0144f391869fb2d95cad2d781d4cf1744e826f5777f1"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742926&sokeverdi=932957728&spraak=nb",
+      "method": "GET",
+      "bytes": 31278,
+      "sha256": "e118116db6fc61323606d58dcaecb3bdb0d6dd4c948f9648d8c40d7f35f38edb"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742981&sokeverdi=933355942&spraak=nb",
+      "method": "GET",
+      "bytes": 31355,
+      "sha256": "2a4789dfc0c5eaa0ddcdd56de0707a4cb8453b97b0a32612e05d088bcdda3a96"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000743840&sokeverdi=918172351&spraak=nb",
+      "method": "GET",
+      "bytes": 31495,
+      "sha256": "f55a7352fe76ecf962895146431cbc8ac60c4bc82a9718aaf77ef3b70f14f667"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000743841&sokeverdi=915160093&spraak=nb",
+      "method": "GET",
+      "bytes": 31447,
+      "sha256": "3fb704bdb6864567d4be6c826d04612e55110e15c793a66eaefb7f80ff16937f"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000743842&sokeverdi=918917306&spraak=nb",
+      "method": "GET",
+      "bytes": 31304,
+      "sha256": "404211582aab59bc9555061b71359f914b4ea046d484aa956da441adb2661519"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/kombisok.jsp?datoFra=13.09.2026&datoTil=15.09.2026&id_niva1=51",
+      "method": "GET",
+      "bytes": 138940,
+      "sha256": "0e586b8f815e87a8ac7c5e6e308bbc256fcf9b4647fdcfb26d7818a484475dc4"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742060&sokeverdi=929412117&spraak=nb",
+      "method": "GET",
+      "bytes": 31440,
+      "sha256": "fc94fc01194bfcdf5a038da350c2eb52e4355d0e36ad733d092b1433ad648d97"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742266&sokeverdi=933417298&spraak=nb",
+      "method": "GET",
+      "bytes": 31910,
+      "sha256": "995b9d37dd1819c8794073f60a0a70030098fbd78796436e30d2cf3897ac9dea"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742267&sokeverdi=932240858&spraak=nb",
+      "method": "GET",
+      "bytes": 31403,
+      "sha256": "c08de6ad2e67ae0d11d1856aa178e524bd069b190f39eeff9eed36a25f8aa40e"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742359&sokeverdi=931949934&spraak=nb",
+      "method": "GET",
+      "bytes": 31361,
+      "sha256": "529b346fc33538e38cc2339f27b098888040f8cfa033dbbaff24c375fb2e8a7c"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742360&sokeverdi=932041367&spraak=nb",
+      "method": "GET",
+      "bytes": 31371,
+      "sha256": "3848aad34ea403529c55ac2f72099a255ab4022bd94a9076fb364586d52c3765"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742544&sokeverdi=933260658&spraak=nb",
+      "method": "GET",
+      "bytes": 31422,
+      "sha256": "472c7095fec56d9d48dec2e50ef5b4deff72244b8534c5407feeb54265194451"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742677&sokeverdi=924332123&spraak=nb",
+      "method": "GET",
+      "bytes": 31378,
+      "sha256": "6e71b5f3e29d61b6b558df25b61ca63ed3079d0ed8d6c3b3687cc544e171ce72"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742838&sokeverdi=925347892&spraak=nb",
+      "method": "GET",
+      "bytes": 31335,
+      "sha256": "1b34dfea4e74027f4c2b8bc8103276d98caf16208d70fe538f65752a8ab7338d"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742839&sokeverdi=929577159&spraak=nb",
+      "method": "GET",
+      "bytes": 31165,
+      "sha256": "b3b3c5958ba81cd18932d4587976833ca4c517dad81bc0d5a31e8826becc8a45"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742867&sokeverdi=919137738&spraak=nb",
+      "method": "GET",
+      "bytes": 31265,
+      "sha256": "98b16834513e9c1150bf11edf84529613c29cb7e448ca0faaeaf71b92b955f7b"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742868&sokeverdi=980897184&spraak=nb",
+      "method": "GET",
+      "bytes": 31271,
+      "sha256": "e091f46da92c63ed5cadd88bee286f18878ee54924f600fc742e4f505836cb06"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742869&sokeverdi=996576574&spraak=nb",
+      "method": "GET",
+      "bytes": 31422,
+      "sha256": "d0de84cce76c5b85b009bdc3a21f6d088c0084fca914da597cc36f55c1be5897"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742870&sokeverdi=923793119&spraak=nb",
+      "method": "GET",
+      "bytes": 31465,
+      "sha256": "bfc5ca3bb2b794fbed3c7a29aee6705cd391ee4daeefb3f360f289c2f6abfd44"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742872&sokeverdi=933079899&spraak=nb",
+      "method": "GET",
+      "bytes": 31636,
+      "sha256": "d486999bec8f2923dde5f4ff2dfdf81b9a6949ff5c83b4a57eaafd6d60c3382b"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742893&sokeverdi=930986828&spraak=nb",
+      "method": "GET",
+      "bytes": 31379,
+      "sha256": "8ddff840131482de66b8642628282d800ec48dcdb3bf8a93322b425c87570754"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742894&sokeverdi=921634544&spraak=nb",
+      "method": "GET",
+      "bytes": 31402,
+      "sha256": "9804649942f95a624939f587938fff66c58e3d6f361fd5ba9a2eb45bd788f45f"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742925&sokeverdi=932681897&spraak=nb",
+      "method": "GET",
+      "bytes": 31406,
+      "sha256": "b4511ea9b5e396bcdc5c0144f391869fb2d95cad2d781d4cf1744e826f5777f1"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742926&sokeverdi=932957728&spraak=nb",
+      "method": "GET",
+      "bytes": 31278,
+      "sha256": "e118116db6fc61323606d58dcaecb3bdb0d6dd4c948f9648d8c40d7f35f38edb"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742981&sokeverdi=933355942&spraak=nb",
+      "method": "GET",
+      "bytes": 31355,
+      "sha256": "2a4789dfc0c5eaa0ddcdd56de0707a4cb8453b97b0a32612e05d088bcdda3a96"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000743840&sokeverdi=918172351&spraak=nb",
+      "method": "GET",
+      "bytes": 31495,
+      "sha256": "f55a7352fe76ecf962895146431cbc8ac60c4bc82a9718aaf77ef3b70f14f667"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000743841&sokeverdi=915160093&spraak=nb",
+      "method": "GET",
+      "bytes": 31447,
+      "sha256": "3fb704bdb6864567d4be6c826d04612e55110e15c793a66eaefb7f80ff16937f"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000743842&sokeverdi=918917306&spraak=nb",
+      "method": "GET",
+      "bytes": 31304,
+      "sha256": "404211582aab59bc9555061b71359f914b4ea046d484aa956da441adb2661519"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/kombisok.jsp?datoFra=13.09.2026&datoTil=15.09.2026&id_niva1=51",
+      "method": "GET",
+      "bytes": 138940,
+      "sha256": "0e586b8f815e87a8ac7c5e6e308bbc256fcf9b4647fdcfb26d7818a484475dc4"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742060&sokeverdi=929412117&spraak=nb",
+      "method": "GET",
+      "bytes": 31440,
+      "sha256": "fc94fc01194bfcdf5a038da350c2eb52e4355d0e36ad733d092b1433ad648d97"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742266&sokeverdi=933417298&spraak=nb",
+      "method": "GET",
+      "bytes": 31910,
+      "sha256": "995b9d37dd1819c8794073f60a0a70030098fbd78796436e30d2cf3897ac9dea"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742267&sokeverdi=932240858&spraak=nb",
+      "method": "GET",
+      "bytes": 31403,
+      "sha256": "c08de6ad2e67ae0d11d1856aa178e524bd069b190f39eeff9eed36a25f8aa40e"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742359&sokeverdi=931949934&spraak=nb",
+      "method": "GET",
+      "bytes": 31361,
+      "sha256": "529b346fc33538e38cc2339f27b098888040f8cfa033dbbaff24c375fb2e8a7c"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742360&sokeverdi=932041367&spraak=nb",
+      "method": "GET",
+      "bytes": 31371,
+      "sha256": "3848aad34ea403529c55ac2f72099a255ab4022bd94a9076fb364586d52c3765"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742544&sokeverdi=933260658&spraak=nb",
+      "method": "GET",
+      "bytes": 31422,
+      "sha256": "472c7095fec56d9d48dec2e50ef5b4deff72244b8534c5407feeb54265194451"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742677&sokeverdi=924332123&spraak=nb",
+      "method": "GET",
+      "bytes": 31378,
+      "sha256": "6e71b5f3e29d61b6b558df25b61ca63ed3079d0ed8d6c3b3687cc544e171ce72"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742838&sokeverdi=925347892&spraak=nb",
+      "method": "GET",
+      "bytes": 31335,
+      "sha256": "1b34dfea4e74027f4c2b8bc8103276d98caf16208d70fe538f65752a8ab7338d"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742839&sokeverdi=929577159&spraak=nb",
+      "method": "GET",
+      "bytes": 31165,
+      "sha256": "b3b3c5958ba81cd18932d4587976833ca4c517dad81bc0d5a31e8826becc8a45"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742867&sokeverdi=919137738&spraak=nb",
+      "method": "GET",
+      "bytes": 31265,
+      "sha256": "98b16834513e9c1150bf11edf84529613c29cb7e448ca0faaeaf71b92b955f7b"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742868&sokeverdi=980897184&spraak=nb",
+      "method": "GET",
+      "bytes": 31271,
+      "sha256": "e091f46da92c63ed5cadd88bee286f18878ee54924f600fc742e4f505836cb06"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742869&sokeverdi=996576574&spraak=nb",
+      "method": "GET",
+      "bytes": 31422,
+      "sha256": "d0de84cce76c5b85b009bdc3a21f6d088c0084fca914da597cc36f55c1be5897"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742870&sokeverdi=923793119&spraak=nb",
+      "method": "GET",
+      "bytes": 31465,
+      "sha256": "bfc5ca3bb2b794fbed3c7a29aee6705cd391ee4daeefb3f360f289c2f6abfd44"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742872&sokeverdi=933079899&spraak=nb",
+      "method": "GET",
+      "bytes": 31636,
+      "sha256": "d486999bec8f2923dde5f4ff2dfdf81b9a6949ff5c83b4a57eaafd6d60c3382b"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742893&sokeverdi=930986828&spraak=nb",
+      "method": "GET",
+      "bytes": 31379,
+      "sha256": "8ddff840131482de66b8642628282d800ec48dcdb3bf8a93322b425c87570754"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742894&sokeverdi=921634544&spraak=nb",
+      "method": "GET",
+      "bytes": 31402,
+      "sha256": "9804649942f95a624939f587938fff66c58e3d6f361fd5ba9a2eb45bd788f45f"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742925&sokeverdi=932681897&spraak=nb",
+      "method": "GET",
+      "bytes": 31406,
+      "sha256": "b4511ea9b5e396bcdc5c0144f391869fb2d95cad2d781d4cf1744e826f5777f1"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742926&sokeverdi=932957728&spraak=nb",
+      "method": "GET",
+      "bytes": 31278,
+      "sha256": "e118116db6fc61323606d58dcaecb3bdb0d6dd4c948f9648d8c40d7f35f38edb"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000742981&sokeverdi=933355942&spraak=nb",
+      "method": "GET",
+      "bytes": 31355,
+      "sha256": "2a4789dfc0c5eaa0ddcdd56de0707a4cb8453b97b0a32612e05d088bcdda3a96"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000743840&sokeverdi=918172351&spraak=nb",
+      "method": "GET",
+      "bytes": 31495,
+      "sha256": "f55a7352fe76ecf962895146431cbc8ac60c4bc82a9718aaf77ef3b70f14f667"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000743841&sokeverdi=915160093&spraak=nb",
+      "method": "GET",
+      "bytes": 31447,
+      "sha256": "3fb704bdb6864567d4be6c826d04612e55110e15c793a66eaefb7f80ff16937f"
+    },
+    {
+      "url": "https://w2.brreg.no/kunngjoring/hent_en.jsp?kid=20260000743842&sokeverdi=918917306&spraak=nb",
+      "method": "GET",
+      "bytes": 31304,
+      "sha256": "404211582aab59bc9555061b71359f914b4ea046d484aa956da441adb2661519"
+    }
+  ],
+  "config_sha256": "851f185e6395419ae132b15761e2d02530deb7bf565d4b4e5399851a17234191",
+  "module_sha256": "94747a6bb91c115324c2f762bd5550bcdb0960c53fb75f7e531d9b5fd07312fa",
+  "engine_sha256": "d878827fc4b5951c39915111531b63ee097a3b8242f2958cd93c5f3c00d1444d",
+  "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+  "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+  "all_result_rows": 96,
+  "selected_corporate_openings": 22,
+  "personal_identifier_rows": 2,
+  "missing_opening_basis": 6,
+  "distinct_claim_and_fristdag": 22,
+  "meeting_dates": [
+    "2026-10-15",
+    "2026-11-18"
+  ],
+  "field_keys": [
+    "company",
+    "orgnr",
+    "announced_date",
+    "opening_date",
+    "opening_basis",
+    "case_number",
+    "court",
+    "claim_deadline",
+    "fristdag",
+    "meeting_date",
+    "meeting_time",
+    "meeting_place",
+    "trustee"
+  ],
+  "limitations": [
+    "Only corporate bankruptcy openings in the last three calendar days are followed; other announcement types and older documents are outside the recipe.",
+    "The complete dated index is checked before filtering. The observed six-digit personal search identifiers do not select corporate details.",
+    "An explicit index result count and unique document IDs are required for non-empty results; the documented 5000-hit limit is never accepted.",
+    "Some source documents omit opening basis; missing values remain null.",
+    "Claim deadline, fristdag, opening date, announcement date and first estate meeting are separate source fields, not inferred legal advice.",
+    "Only relevant estate/court/date and professional trustee fields are retained; source contact addresses, phone and email are excluded.",
+    "Two equal complete reads are observed consistency, not an atomic source transaction. Window gaps and corrections outside the window are not covered.",
+    "Local source checks do not prove later scheduled runtime repetition or new delivery."
+  ],
+  "targeted_tests": 66
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "recipe": "media_group_relationships",
+    "checked_at": "2026-09-14T09:20:34.679075+00:00",
+    "records": 258,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.medietilsynet.no/fakta/mediedatabasen/",
+        "bytes": 150367,
+        "sha256": "f4bbb93fde1c585bd4ae55d8cf7c4d02048bbcb078e218ba322e7af2b65d7a50"
+      },
+      {
+        "url": "https://www.medietilsynet.no/globalassets/tema/mediedatabasen/260626_mediedatabasen_alle_data.xlsx",
+        "bytes": 94413,
+        "sha256": "25e147f19bed07d31626e4a32e9e5cbb8166f65a820e3fa23b634d4dbe3c6e0a"
+      },
+      {
+        "url": "https://www.medietilsynet.no/fakta/mediedatabasen/",
+        "bytes": 150367,
+        "sha256": "f4bbb93fde1c585bd4ae55d8cf7c4d02048bbcb078e218ba322e7af2b65d7a50"
+      },
+      {
+        "url": "https://www.medietilsynet.no/globalassets/tema/mediedatabasen/260626_mediedatabasen_alle_data.xlsx",
+        "bytes": 94413,
+        "sha256": "25e147f19bed07d31626e4a32e9e5cbb8166f65a820e3fa23b634d4dbe3c6e0a"
+      }
+    ],
+    "config_sha256": "647382b47d408724ffdc898f1259b1fc49c0e092ab7fe8ef945a10477193ca97",
+    "module_sha256": "ca57b6d778072fafd9174001fdee378de815ae1fc820320aa95a7462eac9e6cb",
+    "reference_year": 2025,
+    "name_fallback_rows_for_zero_number": 0,
+    "workbook_reader_sha256": "f9cb91943c6132cd13ef7e8cd40b632478a939bdd3235f4a8cd91413ccbdf188",
+    "proof_boundary": "Two actual final-recipe engine polls, zero alerts and identical full state. Annual source-year records, not dated ownership/concession decisions or later hosted delivery proof."
+  },
+  {
+    "recipe": "media_radio_content_records",
+    "checked_at": "2026-09-14T09:20:35.027095+00:00",
+    "records": 621,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.medietilsynet.no/fakta/mediedatabasen/",
+        "bytes": 150367,
+        "sha256": "f4bbb93fde1c585bd4ae55d8cf7c4d02048bbcb078e218ba322e7af2b65d7a50"
+      },
+      {
+        "url": "https://www.medietilsynet.no/globalassets/tema/mediedatabasen/260626_mediedatabasen_alle_data.xlsx",
+        "bytes": 94413,
+        "sha256": "25e147f19bed07d31626e4a32e9e5cbb8166f65a820e3fa23b634d4dbe3c6e0a"
+      },
+      {
+        "url": "https://www.medietilsynet.no/fakta/mediedatabasen/",
+        "bytes": 150367,
+        "sha256": "f4bbb93fde1c585bd4ae55d8cf7c4d02048bbcb078e218ba322e7af2b65d7a50"
+      },
+      {
+        "url": "https://www.medietilsynet.no/globalassets/tema/mediedatabasen/260626_mediedatabasen_alle_data.xlsx",
+        "bytes": 94413,
+        "sha256": "25e147f19bed07d31626e4a32e9e5cbb8166f65a820e3fa23b634d4dbe3c6e0a"
+      }
+    ],
+    "config_sha256": "356c355180c3f544ef5408a33ca88f7f465285c5105fdb00115450dc9af7ab19",
+    "module_sha256": "ca57b6d778072fafd9174001fdee378de815ae1fc820320aa95a7462eac9e6cb",
+    "reference_year": 2025,
+    "name_fallback_rows_for_zero_number": 13,
+    "workbook_reader_sha256": "f9cb91943c6132cd13ef7e8cd40b632478a939bdd3235f4a8cd91413ccbdf188",
+    "proof_boundary": "Two actual final-recipe engine polls, zero alerts and identical full state. Annual source-year records, not dated ownership/concession decisions or later hosted delivery proof."
+  },
+  {
+    "recipe": "media_radio_transmitter_records",
+    "checked_at": "2026-09-14T09:20:35.384760+00:00",
+    "records": 39,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.medietilsynet.no/fakta/mediedatabasen/",
+        "bytes": 150367,
+        "sha256": "f4bbb93fde1c585bd4ae55d8cf7c4d02048bbcb078e218ba322e7af2b65d7a50"
+      },
+      {
+        "url": "https://www.medietilsynet.no/globalassets/tema/mediedatabasen/260626_mediedatabasen_alle_data.xlsx",
+        "bytes": 94413,
+        "sha256": "25e147f19bed07d31626e4a32e9e5cbb8166f65a820e3fa23b634d4dbe3c6e0a"
+      },
+      {
+        "url": "https://www.medietilsynet.no/fakta/mediedatabasen/",
+        "bytes": 150367,
+        "sha256": "f4bbb93fde1c585bd4ae55d8cf7c4d02048bbcb078e218ba322e7af2b65d7a50"
+      },
+      {
+        "url": "https://www.medietilsynet.no/globalassets/tema/mediedatabasen/260626_mediedatabasen_alle_data.xlsx",
+        "bytes": 94413,
+        "sha256": "25e147f19bed07d31626e4a32e9e5cbb8166f65a820e3fa23b634d4dbe3c6e0a"
+      }
+    ],
+    "config_sha256": "539d33522469dc72f06a29c1798b0c0ba2e11f2d18c0e38f6fc8a6b1ab229ef0",
+    "module_sha256": "ca57b6d778072fafd9174001fdee378de815ae1fc820320aa95a7462eac9e6cb",
+    "reference_year": 2025,
+    "name_fallback_rows_for_zero_number": 1,
+    "workbook_reader_sha256": "f9cb91943c6132cd13ef7e8cd40b632478a939bdd3235f4a8cd91413ccbdf188",
+    "proof_boundary": "Two actual final-recipe engine polls, zero alerts and identical full state. Annual source-year records, not dated ownership/concession decisions or later hosted delivery proof."
+  },
+  {
+    "recipe": "media_tv_content_records",
+    "checked_at": "2026-09-14T09:20:35.696326+00:00",
+    "records": 16,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.medietilsynet.no/fakta/mediedatabasen/",
+        "bytes": 150367,
+        "sha256": "f4bbb93fde1c585bd4ae55d8cf7c4d02048bbcb078e218ba322e7af2b65d7a50"
+      },
+      {
+        "url": "https://www.medietilsynet.no/globalassets/tema/mediedatabasen/260626_mediedatabasen_alle_data.xlsx",
+        "bytes": 94413,
+        "sha256": "25e147f19bed07d31626e4a32e9e5cbb8166f65a820e3fa23b634d4dbe3c6e0a"
+      },
+      {
+        "url": "https://www.medietilsynet.no/fakta/mediedatabasen/",
+        "bytes": 150367,
+        "sha256": "f4bbb93fde1c585bd4ae55d8cf7c4d02048bbcb078e218ba322e7af2b65d7a50"
+      },
+      {
+        "url": "https://www.medietilsynet.no/globalassets/tema/mediedatabasen/260626_mediedatabasen_alle_data.xlsx",
+        "bytes": 94413,
+        "sha256": "25e147f19bed07d31626e4a32e9e5cbb8166f65a820e3fa23b634d4dbe3c6e0a"
+      }
+    ],
+    "config_sha256": "71bb69b045b21b42201ea1026b842859b0dad65a3ceed992ce52371b4295dff8",
+    "module_sha256": "ca57b6d778072fafd9174001fdee378de815ae1fc820320aa95a7462eac9e6cb",
+    "reference_year": 2025,
+    "name_fallback_rows_for_zero_number": 0,
+    "workbook_reader_sha256": "f9cb91943c6132cd13ef7e8cd40b632478a939bdd3235f4a8cd91413ccbdf188",
+    "proof_boundary": "Two actual final-recipe engine polls, zero alerts and identical full state. Annual source-year records, not dated ownership/concession decisions or later hosted delivery proof."
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "recipe": "reviewed_package_advisory_changes",
+  "checked_at": "2026-09-14T07:31:33.197975+00:00",
+  "records": 42,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://api.github.com/advisories?type=reviewed&updated=2026-09-11..2026-09-14&sort=updated&direction=desc&per_page=100",
+      "bytes": 272636,
+      "sha256": "148e16867cce882e40212b0b2718d0de30c5870bd3943e84a62aec93df6c05fc"
+    },
+    {
+      "url": "https://api.github.com/advisories?type=reviewed&updated=2026-09-11..2026-09-14&sort=updated&direction=desc&per_page=100",
+      "bytes": 272636,
+      "sha256": "148e16867cce882e40212b0b2718d0de30c5870bd3943e84a62aec93df6c05fc"
+    }
+  ],
+  "config_sha256": "13fcc19da2a942b72c406cfda99db259879a813f5cafbd92c2b5e6e9a75f58c6",
+  "module_sha256": "95dca974988328a6f87534f60b66e2ef3ffad68218034c0adc28065c1d186123",
+  "proof_boundary": "Two real public source polls through the final recipe and engine; no hosted scheduling or actual later delivery proof."
+}

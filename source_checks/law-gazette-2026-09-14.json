@@ -1,0 +1,158 @@
+{
+  "checked_on": "2026-09-14",
+  "kind": "law_gazette",
+  "checks": [
+    {
+      "recipe": "national_legal_announcement_changes",
+      "checked_at": "2026-09-14T14:22:59.118609+00:00",
+      "records": 988,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://api.lovdata.no/v1/publicData/list",
+          "method": "GET",
+          "bytes": 700,
+          "sha256": "a51ab3576192c8f670e4166ee8cdcd92735d22448e38da59c0a47e7b8b0c557f"
+        },
+        {
+          "url": "https://api.lovdata.no/v1/publicData/get/lovtidend-avd1-2026.tar.bz2",
+          "method": "GET",
+          "bytes": 1400903,
+          "sha256": "6aba556edf4d2fd9ebe7dda3fef2907ec434e36dc8e8645bdf5760aa9074d9a5"
+        },
+        {
+          "url": "https://api.lovdata.no/v1/publicData/list",
+          "method": "GET",
+          "bytes": 700,
+          "sha256": "009aa5cdb95b76e4d3b87d65f1a19377796e93616eac00141ddafe9cfd0bab17"
+        },
+        {
+          "url": "https://api.lovdata.no/v1/publicData/get/lovtidend-avd1-2026.tar.bz2",
+          "method": "GET",
+          "bytes": 1400903,
+          "sha256": "6aba556edf4d2fd9ebe7dda3fef2907ec434e36dc8e8645bdf5760aa9074d9a5"
+        },
+        {
+          "url": "https://api.lovdata.no/v1/publicData/list",
+          "method": "GET",
+          "bytes": 700,
+          "sha256": "a51ab3576192c8f670e4166ee8cdcd92735d22448e38da59c0a47e7b8b0c557f"
+        },
+        {
+          "url": "https://api.lovdata.no/v1/publicData/get/lovtidend-avd1-2026.tar.bz2",
+          "method": "GET",
+          "bytes": 1400903,
+          "sha256": "6aba556edf4d2fd9ebe7dda3fef2907ec434e36dc8e8645bdf5760aa9074d9a5"
+        },
+        {
+          "url": "https://api.lovdata.no/v1/publicData/list",
+          "method": "GET",
+          "bytes": 700,
+          "sha256": "009aa5cdb95b76e4d3b87d65f1a19377796e93616eac00141ddafe9cfd0bab17"
+        },
+        {
+          "url": "https://api.lovdata.no/v1/publicData/get/lovtidend-avd1-2026.tar.bz2",
+          "method": "GET",
+          "bytes": 1400903,
+          "sha256": "6aba556edf4d2fd9ebe7dda3fef2907ec434e36dc8e8645bdf5760aa9074d9a5"
+        }
+      ],
+      "config_sha256": "7dc5a4d6dc6430819e1dacfcc25b94e72d6207532b62b61f70f4f358f6c84ecc",
+      "module_sha256": "f034d5a60a9cad33c9bd6144496950f266b1c36fdf92f8d51ce47a2e2f2c1701",
+      "engine_sha256": "937f74950dba032e4ede00b31d9248f5ce3a6bcda55cde61b46b94b831688717",
+      "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+      "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8"
+    }
+  ],
+  "source_contract": {
+    "list_records": 4,
+    "list_order_equal": false,
+    "list_canonical_equal": true,
+    "list_hashes": [
+      "6e2d89ba6310e0fb94981833b1c52b30dcdb056861fef32b5b466b8f8fff4b4c",
+      "d2a6bceeaac37a9f88df429fca6db92f9961d5e2600adb9f521e62aef50574e0"
+    ],
+    "archive_url": "https://api.lovdata.no/v1/publicData/get/lovtidend-avd1-2026.tar.bz2",
+    "archive_status": 200,
+    "archive_bytes": 1400903,
+    "archive_sha256": "6aba556edf4d2fd9ebe7dda3fef2907ec434e36dc8e8645bdf5760aa9074d9a5",
+    "archive_repeat_identical": true,
+    "document_files": 988,
+    "unique_document_ids": 988,
+    "unique_legacy_ids": 988,
+    "document_types": {
+      "lov": 77,
+      "forskrift": 911
+    },
+    "metadata_counts": {
+      "legacyID": 988,
+      "dokid": 988,
+      "ministry": 988,
+      "dateInForce": 988,
+      "changesToDocuments": 892,
+      "legalArea": 77,
+      "dateOfPublication": 988,
+      "journalNumber": 988,
+      "titleShort": 380,
+      "title": 988,
+      "miscInformation": 988,
+      "refid": 988,
+      "table-of-contents": 988,
+      "eeaReferences": 14,
+      "subunit": 899,
+      "basedOn": 910,
+      "a11yStatus": 911,
+      "lastupdated": 8
+    },
+    "missing": {},
+    "publication_min": "2026-01-05 14:20",
+    "publication_max": "2026-09-11 14:35",
+    "expanded_file_bytes": 14843830,
+    "largest_file_bytes": 345334
+  },
+  "document_link_check": {
+    "url": "https://lovdata.no/dokument/LTI/lov/2026-01-23-1",
+    "final_url": "https://lovdata.no/dokument/LTI/lov/2026-01-23-1",
+    "status": 200,
+    "bytes": 99311,
+    "sha256": "7eec984b1adfea5d7914d45f8d134a4da5b0db282490a08ae539ff402c438aee",
+    "canonical_links": []
+  },
+  "limitations": [
+    "Only the selected most recent advertised single-year packages are followed; older bundled historical archives are not fetched.",
+    "Package lastModified is transport metadata, not a document publication time.",
+    "Publication text lacks an explicit timezone and remains separate from source commencement text; no legal status or consolidated law state is inferred.",
+    "Archive repetition and identity checks do not prove a source transaction or externally complete legal coverage.",
+    "Text, selected metadata and structural/resource references are monitored. Images and attachments are not downloaded.",
+    "No later scheduled repeat or actual new-source delivery is established by these source checks."
+  ],
+  "document_encoding": "Explicit strict UTF-8, with optional BOM; all 988 actual documents accepted.",
+  "targeted_tests": 48,
+  "parser_compatibility_check": {
+    "parser": "CPython 3.12.14 html.parser loaded on local Python 3.12.10; not a complete runtime replica",
+    "parser_url": "https://raw.githubusercontent.com/python/cpython/v3.12.14/Lib/html/parser.py",
+    "parser_sha256": "a4c5558209ffe6d677dbe18e4a4b2d34672c73aee46e39b1d118846afa62a9ff",
+    "old_title_comparison_mismatches": [
+      "lti/2026/sf-20260218-0241.xml",
+      "lti/2026/sf-20260227-0300.xml",
+      "lti/2026/sf-20260303-0320.xml",
+      "lti/2026/sf-20260305-0355.xml",
+      "lti/2026/sf-20260305-0356.xml",
+      "lti/2026/sf-20260324-0473.xml",
+      "lti/2026/sf-20260326-0479.xml",
+      "lti/2026/sf-20260326-0480.xml",
+      "lti/2026/sf-20260326-0481.xml",
+      "lti/2026/sf-20260326-0482.xml",
+      "lti/2026/sf-20260326-0483.xml",
+      "lti/2026/sf-20260326-0484.xml",
+      "lti/2026/sf-20260326-0485.xml",
+      "lti/2026/sf-20260330-0525.xml",
+      "lti/2026/sf-20260608-1026.xml",
+      "lti/2026/sf-20260608-1027.xml",
+      "lti/2026/sf-20260623-1236.xml"
+    ],
+    "corrected_documents_passed": 988
+  }
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "recipe": "ssb_dwelling_property_transfers",
+    "checked_at": "2026-09-11T13:24:34.338838+00:00",
+    "records": 4,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://data.ssb.no/api/pxwebapi/v2/tables/08948/data?lang=no&outputFormat=json-stat2&valueCodes%5BEiendomType%5D=B0&valueCodes%5BContentsCode%5D=FrittSalg%2CHjemmel&valueCodes%5BTid%5D=top%282%29",
+        "bytes": 2198,
+        "sha256": "4464c649bd21e850ee12d293e4eeab8385ff7c7c536c85f2789190216604cab3"
+      },
+      {
+        "url": "https://data.ssb.no/api/pxwebapi/v2/tables/08948/data?lang=no&outputFormat=json-stat2&valueCodes%5BEiendomType%5D=B0&valueCodes%5BContentsCode%5D=FrittSalg%2CHjemmel&valueCodes%5BTid%5D=top%282%29",
+        "bytes": 2198,
+        "sha256": "4464c649bd21e850ee12d293e4eeab8385ff7c7c536c85f2789190216604cab3"
+      }
+    ],
+    "config_sha256": "b5f3a3510b7d547d03880e044d83dbcd2cc4541da43d1b53fdbccf9bb6ed4f7b",
+    "module_sha256": "69071767781a34171703a2a7220af4edabe17c34f8b29578afd54df08202e7d1"
+  }
+]

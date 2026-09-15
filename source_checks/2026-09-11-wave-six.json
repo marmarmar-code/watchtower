@@ -1,0 +1,46 @@
+[
+  {
+    "recipe": "arbeidstilsynet_inspection_reactions_by_industry",
+    "checked_at": "2026-09-11T10:09:41.265745+00:00",
+    "records": 126,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://registerdata.arbeidstilsynet.no/statistikk/Statistikk_Tilsyn_vedtak.csv",
+        "bytes": 508926,
+        "sha256": "30e5aad1e50a5c824e767a51b761b55d74cf43981a1409204172f9f3216f1759"
+      },
+      {
+        "url": "https://registerdata.arbeidstilsynet.no/statistikk/Statistikk_Tilsyn_vedtak.csv",
+        "bytes": 508926,
+        "sha256": "30e5aad1e50a5c824e767a51b761b55d74cf43981a1409204172f9f3216f1759"
+      }
+    ],
+    "config_sha256": "28f4275e4daf69c4f03fe8e2d860b5af450b40e2126324d4104d5b4c4c4a97de",
+    "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f"
+  },
+  {
+    "recipe": "smilefjes_restaurant_inspections",
+    "checked_at": "2026-09-11T10:09:41.545729+00:00",
+    "records": 10,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://smilefjes.mattilsynet.no/spisested/trondheim/pincho_nation.Z1502171421588723252EMWQC/",
+        "bytes": 114771,
+        "sha256": "16f3488226f007d45eebc74efe2e94a7ca395014623117afe9ae03b4f596f113"
+      },
+      {
+        "url": "https://smilefjes.mattilsynet.no/spisested/trondheim/pincho_nation.Z1502171421588723252EMWQC/",
+        "bytes": 114771,
+        "sha256": "16f3488226f007d45eebc74efe2e94a7ca395014623117afe9ae03b4f596f113"
+      }
+    ],
+    "config_sha256": "a336df3268b9f64c45520b627b1018397468fa1e5293ffc6012c37561a038c13",
+    "module_sha256": "fecaf40250158e318a307a622187d6e37ad248251271636a83977430a828d816"
+  }
+]

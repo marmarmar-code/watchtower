@@ -223,6 +223,55 @@ class CoreTests(unittest.TestCase):
         self.assertIn("invalid source state schema", result.errors["x"])
         fetch.fetch_with_state.assert_not_called()
 
+    def test_interruption_does_not_commit_partially_staged_source_state(self):
+        first = Mock()
+        first.fetch_with_state.return_value = []
+        first.augment_state.side_effect = lambda value: value
+        first.coverage_warnings = []
+        interrupted = Mock()
+        interrupted.fetch_with_state.side_effect = KeyboardInterrupt
+        sources = (
+            self.source(),
+            SourceConfig(id="y", kind="regjeringen", filters=FilterRule(match_all=True)),
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            state = StateStore(tmp)
+            with self.assertRaises(KeyboardInterrupt):
+                run(
+                    Config(sources),
+                    state,
+                    None,
+                    source_factory=lambda config: first if config.id == "x" else interrupted,
+                )
+            self.assertIsNone(state.load("x"))
+            self.assertIsNone(state.load("_status"))
+
+    def test_source_failure_does_not_discard_other_successful_source_state(self):
+        healthy = Mock()
+        healthy.fetch_with_state.return_value = []
+        healthy.augment_state.side_effect = lambda value: value
+        healthy.coverage_warnings = []
+        failed = Mock()
+        failed.fetch_with_state.side_effect = TimeoutError("synthetic timeout")
+        sources = (
+            self.source(),
+            SourceConfig(id="y", kind="regjeringen", filters=FilterRule(match_all=True)),
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            state = StateStore(tmp)
+            result = run(
+                Config(sources),
+                state,
+                None,
+                source_factory=lambda config: healthy if config.id == "x" else failed,
+            )
+
+            self.assertIsNotNone(state.load("x"))
+            self.assertIsNone(state.load("y"))
+            self.assertIn("TimeoutError", result.errors["y"])
+
     def test_private_alert_audit_is_bounded(self):
         source = self.source()
         alerts = [

@@ -1,0 +1,47 @@
+{
+  "recipe": "euronext_derivative_corporate_action_changes",
+  "checked_at": "2026-09-15T08:39:53.133950+00:00",
+  "records": 50,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://live.euronext.com/en/resources/notices-corporate-actions/derivatives-corporate-actions?alias=1&pageNum=1&pageSize=50",
+      "method": "GET",
+      "bytes": 656620,
+      "sha256": "dceecf694c3a5e7413d35fab78abc7a728cd479bbe1db00944db8162612dfdbc"
+    },
+    {
+      "url": "https://live.euronext.com/en/resources/notices-corporate-actions/derivatives-corporate-actions?alias=1&pageNum=1&pageSize=50",
+      "method": "GET",
+      "bytes": 656620,
+      "sha256": "dceecf694c3a5e7413d35fab78abc7a728cd479bbe1db00944db8162612dfdbc"
+    },
+    {
+      "url": "https://live.euronext.com/en/resources/notices-corporate-actions/derivatives-corporate-actions?alias=1&pageNum=1&pageSize=50",
+      "method": "GET",
+      "bytes": 656620,
+      "sha256": "dceecf694c3a5e7413d35fab78abc7a728cd479bbe1db00944db8162612dfdbc"
+    },
+    {
+      "url": "https://live.euronext.com/en/resources/notices-corporate-actions/derivatives-corporate-actions?alias=1&pageNum=1&pageSize=50",
+      "method": "GET",
+      "bytes": 656620,
+      "sha256": "dceecf694c3a5e7413d35fab78abc7a728cd479bbe1db00944db8162612dfdbc"
+    }
+  ],
+  "config_sha256": "7dd86f256b8ab7dc80f887041ce9812810f78bfc458459c88ea4bba5650cb63a",
+  "module_sha256": "6011fa0ea09f2c9871e97694272c7e316400f3cf103e1308c66401fac4dae36f",
+  "engine_sha256": "98a3116ffaf1e45af46245201656a34218d80f1da5927eb9d26446ddadf3a41c",
+  "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+  "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+  "scope": "First page of 50 derivative corporate-action notices in source order; not a complete archive or latest-issued ordering",
+  "limitations": [
+    "No PDF contents or lazy detail fields are read",
+    "Issue, effective and attachment dates remain separate",
+    "No dividend amount, adjustment ratio or completed transaction is inferred",
+    "Notices outside the selected window are not monitored; absence is not cancellation"
+  ],
+  "targeted_tests": 48
+}

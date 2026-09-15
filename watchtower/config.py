@@ -73,6 +73,16 @@ class Config:
     config_version: int = CONFIG_VERSION
 
 
+def source_seen_limit(source: SourceConfig, default: int) -> int:
+    """An explicit source limit changes retention only for that source."""
+    if "max_seen_per_source" not in source.options:
+        return default
+    value = source.options["max_seen_per_source"]
+    if type(value) is not int or not 1 <= value <= 50000:
+        raise ValueError("source.max_seen_per_source must be an integer from 1 to 50000")
+    return value
+
+
 def _strings(value: Any, field: str = "filter values") -> tuple[str, ...]:
     if value is None:
         return ()
@@ -225,4 +235,5 @@ def load_config(path: str | Path) -> Config:
             alert_on_update=alert_on_update,
             options=options,
         ))
+        source_seen_limit(sources[-1], max_seen)
     return Config(tuple(sources), max_seen, notifications, version)

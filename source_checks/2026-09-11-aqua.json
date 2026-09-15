@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-09-11",
+  "approved_mode": "sites",
+  "endpoint": "https://api.fiskeridir.no/pub-aqua/api/v1/sites",
+  "scope": {"nr": "10029", "range": "0-9"},
+  "records_per_poll": 1,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "identical_full_snapshots": true,
+  "sample": {
+    "siteNr": 10029,
+    "name": "TUHOLMANE Ø",
+    "capacity": 2340.0,
+    "tempCapacity": 2340.0,
+    "capacityUnitType": "TN",
+    "waterTypeValue": "SALT",
+    "productionArea": "Karmøy til Sotra",
+    "municipality": "KARMØY",
+    "county": "ROGALAND",
+    "firstClearanceTime": "1998-06-18T22:00:00Z",
+    "published": null
+  },
+  "identity": "siteNr",
+  "version_is_identity": false,
+  "health_data": false,
+  "removed_supported": false,
+  "licenses": {
+    "approved": false,
+    "attempts": 2,
+    "timeout_seconds_each": 15,
+    "scope": {"organisationNr": "969159570", "pageSize_attempts": [99, 10]},
+    "result": "read timeout before response headers",
+    "prior_raw_evidence": {"totalElements": 1500, "returned_rows": 2, "totalPages": 750},
+    "reason": "No complete bounded live extraction was verified."
+  }
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "recipe": "eu_novel_food_act_updates",
+    "checked_at": "2026-09-14T11:50:49.345432+00:00",
+    "records": 28,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://food.ec.europa.eu/food-safety/novel-food/authorisations/union-list-novel-foods_en",
+        "bytes": 159523,
+        "sha256": "467b7eee2ed285efed789ac377b5e664bd697974f5f5c3c1fbabbdaa0a922289"
+      },
+      {
+        "url": "https://food.ec.europa.eu/food-safety/novel-food/authorisations/union-list-novel-foods_en",
+        "bytes": 159523,
+        "sha256": "467b7eee2ed285efed789ac377b5e664bd697974f5f5c3c1fbabbdaa0a922289"
+      }
+    ],
+    "config_sha256": "2c2a2a9084417b3db6d929a7b1b3703e19c1013c1b2b47d3ba045fdd7b6cb1dc",
+    "module_sha256": "279a344266706f8e8fac9820af337a6382527911ebb0525037bc53440f74e8d4"
+  }
+]

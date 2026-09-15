@@ -1,0 +1,11 @@
+# Spectrum-register entry changes
+
+The official portal's public controller reads the complete returned JSON array from `rightofuseinfos`, then applies client pagination and filters. Two independently retrieved arrays contained the same 779 rows and 779 unique internal IDs, but only 176 displayed permit numbers. The displayed number cannot identify a unique row.
+
+The portal defines general free-use number `9999999` (350 rows) and amateur-rule number `9999998` (34 rows), excluding them by default. The recipe follows the remaining 395 rows with 174 displayed numbers. `include_general_rules = true` explicitly includes general-rule entries. `permit_numbers` selects exact displayed numbers; all matching rows remain separate. These options are selections of one function.
+
+The official formatting service establishes integer Hz units. Duplex rows expose downlink/uplink intervals; other rows expose one interval. Unused zero intervals, source text, national/local coverage and raw UTC expiry timestamps remain distinct. Old expiry timestamps and values in 2099 are present. Neither current legal validity nor a special meaning for 2099 is established. No issue date, new decision, revocation or legal local-calendar expiry date is inferred.
+
+The final recipe passed two actual adapter polls: four complete HTTP responses, 395 stored rows, zero initial alerts, zero repeat alerts and identical full state. Each poll validates the entire returned array twice before filtering. Malformed, excessive, empty, duplicate-ID, inconsistent-mode, missing-selection and changing responses fail before state is replaced. There is no removal mode. Tests additionally exercise artificial metadata changes, repeat suppression and transport failures; these are not real new-event delivery evidence.
+
+The stable internal row ID is an observed source key, not a guarantee of permanent legal identity. The response has no independently verifiable total or server transaction. Agreement between reads does not prove all permits are included. Portal links open the search interface rather than an individual row; search by the displayed number. Attachments and contact records are outside this function. Exact response and implementation hashes are in the adjacent JSON proof.

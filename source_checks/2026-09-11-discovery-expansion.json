@@ -1,0 +1,152 @@
+{
+  "date": "2026-09-11",
+  "boundary": "Two real public reads and local evaluation per exact recipe; no notifier or runtime writes.",
+  "checks": [
+    {
+      "recipe": "research_result_discovery",
+      "checked_at": "2026-09-11T12:39:37.753943+00:00",
+      "records": 277,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/?timeframe=2",
+          "bytes": 381363,
+          "sha256": "9b91b2df592462487b97992ca6531d3d10d07e0422ca6967112cac33df55f22b"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/finansiering-kvalifiserte-erc-soknader/",
+          "bytes": 118083,
+          "sha256": "8da3b1e8f4932bdf16e54abb179c751b1b56f0c61698c2ce77e86ceea14170d4"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/polhavet-2050/",
+          "bytes": 115992,
+          "sha256": "be27a4b693ce0b2a5ac4b383616fe366a4032fbb8c7f810dd8e63293c8eca89c"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/",
+          "bytes": 221653,
+          "sha256": "1f39e00589b0a025c163b69a2a4a4b5115726a8aeac168f0f434ecb962ee9dc5"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/offentlig-sektor-phd-doktorgradsprosjekt-offentlig-virksomhet-2026/",
+          "bytes": 226920,
+          "sha256": "c61d697cb1b5f040ca3cefc6091cee6c73a67734e396ca84448b91acabca29cb"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/narings-phd-doktorgradsprosjekt-bedrift-2026/",
+          "bytes": 252098,
+          "sha256": "26fab4dfaf2823206ead2577b9af3e29092fe48dfa3559cf041436dc9441a2e3"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/kvalifisering-kommersialisering-offentlig-finansiert-forskning/",
+          "bytes": 271958,
+          "sha256": "cf12f6033dfaecbb08dcdc54b035d167e1cae062babf5490d30cfb0ca0e070b0"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/stotte-arrangement-forskningsdagene/",
+          "bytes": 246983,
+          "sha256": "b9fd06253e9a062f752d3029a2e8571e77928726b2f453b63a883cf7086ca602"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/obligatoriske-forprosjekter-soknader-innovative-offentlige-anskaffelser/",
+          "bytes": 137975,
+          "sha256": "6183ebe8b3304266ff69c0d08b87fbf6c277fabf0746a1b9a55b1c95b6d72e9b"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/?timeframe=2",
+          "bytes": 381363,
+          "sha256": "5fade6c02266afd6b64f2170388e00d757031f5484f9142bb9e26897422ecd0e"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/finansiering-kvalifiserte-erc-soknader/",
+          "bytes": 118083,
+          "sha256": "c12b6f2b4800360451a03e4579440aff6bc003ae1a910abeb357fb9d804995fb"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/polhavet-2050/",
+          "bytes": 115992,
+          "sha256": "fc095a15f4a6ae8f96c0c8ec09e5bf339c29c2bd25812ab6f318d5ed5190c230"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/",
+          "bytes": 221743,
+          "sha256": "d3bfcee14a5c9419d92ec906e3104b51bd47033b334e3e8132ab7cb27dc4e286"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/offentlig-sektor-phd-doktorgradsprosjekt-offentlig-virksomhet-2026/",
+          "bytes": 226920,
+          "sha256": "d6bedbbd2be997ac0214230ffe68f602c0ff26b7795b95e73b65d7b724c1b20d"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/narings-phd-doktorgradsprosjekt-bedrift-2026/",
+          "bytes": 252098,
+          "sha256": "67d0ca43ce858d3ea717d78983602525b6b734893454c5b9f93ce063578fa3d3"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/kvalifisering-kommersialisering-offentlig-finansiert-forskning/",
+          "bytes": 272003,
+          "sha256": "8b24fb62012b36813daa12a76abff848580b2716504f72fbcf97158eef4d2bb4"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/stotte-arrangement-forskningsdagene/",
+          "bytes": 246983,
+          "sha256": "c0acbdafc793bfe28965a9a81e3ec0cba1e882c9632009ba6ac423bad59d87f2"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/obligatoriske-forprosjekter-soknader-innovative-offentlige-anskaffelser/",
+          "bytes": 137885,
+          "sha256": "3d07b2a2c0a132c3bc7e14f86cc4212cc303ef82db060baa8b70852175ce4117"
+        }
+      ],
+      "config_sha256": "338ff16b0be8a143add166d82d721e2acf211d92538d1d0d6d3a2b23365eb67e",
+      "module_sha256": "111a227ec9edab178d7b7c446c2cbb7941a3b6df53929b266497dd8ab2a287a8"
+    },
+    {
+      "recipe": "industrial_permit_inspection_documents",
+      "checked_at": "2026-09-11T12:29:12.839635+00:00",
+      "records": 21,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+          "bytes": 101455,
+          "sha256": "85bcdfd34b52bb1b7c14e4bd683baebbec112e3dfd70824fd77fb82391993d42"
+        },
+        {
+          "url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+          "bytes": 144840,
+          "sha256": "9efb511e5b76088654d706f0e2e72a16062eccd36ddc184d9439cc2c5479ac01"
+        }
+      ],
+      "config_sha256": "8269fba86bb3e41a7c0ba19885e6cd17f86ed1d7a84887cdc7aba96d6baf69da",
+      "module_sha256": "2bee86cc71ab6b8b6788637af589941bfccd9d5b2975737cef4d2e6b2bf174f2"
+    },
+    {
+      "recipe": "brreg_publishing_company_discovery",
+      "checked_at": "2026-09-11T12:33:44.374295+00:00",
+      "records": 5,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://data.brreg.no/enhetsregisteret/api/enheter?naeringskode=58&fraRegistreringsdatoEnhetsregisteret=2026-08-12&size=100&page=0",
+          "bytes": 26784,
+          "sha256": "03dfee95db47df085ff02ee774304fdbd919ef32b172aa4d8b7e82602c592d21"
+        },
+        {
+          "url": "https://data.brreg.no/enhetsregisteret/api/enheter?naeringskode=58&fraRegistreringsdatoEnhetsregisteret=2026-08-12&size=100&page=0",
+          "bytes": 26784,
+          "sha256": "03dfee95db47df085ff02ee774304fdbd919ef32b172aa4d8b7e82602c592d21"
+        }
+      ],
+      "config_sha256": "53156e08b568884a66b32b5d2ce1b4f3e82c906c417ec62b4fdabe515693bcd1",
+      "module_sha256": "18aac2aca1649e2adc1e6ce0a30f8c2af7ae71c2f701d7e3196f7936d2e8c99a"
+    }
+  ]
+}

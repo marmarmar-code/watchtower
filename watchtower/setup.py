@@ -16,10 +16,33 @@ from .sources.identifiers import valid_orgnr
 PRESETS = {
     "general": ("Generell næringslivsovervåking", ()),
     "finance": ("Finans", ("finanstilsynet", "norges_bank_pressemeldinger")),
-    "health": ("Helse og legemidler", ("ema_news", "ema_human_medicines")),
+    "health": ("Helse og legemidler", ("ema_news", "ema_human_medicines", "fhi_news")),
     "digital": ("Digital infrastruktur", ("nkom",)),
     "property": ("Eiendom", ()),
     "retail": ("Handel", ("mattilsynet",)),
+    "media": ("Medier", (
+        "lla_nyheter", "schibsted_media_news", "reuters_institute_news",
+        "nordicom_news", "efj_news", "journalismfund_news",
+    )),
+    "energy": ("Energi", ()),
+    "food": ("Mat og matindustri", ("mattilsynet",)),
+    "legal": ("Jus og regelverk", ("skatteetaten_uttalelser", "skatteklagenemnda")),
+    "communications": ("Digital kommunikasjon, nett og sikkerhet", ("nkom",)),
+    "marketing": ("Markedsføring, kommunikasjon og PR", ()),
+}
+
+# Broad industry feeds in these packs are themselves the selected scope. Requiring
+# a private keyword would silently discard relevant appointments and other sector
+# events whose headlines do not repeat a company or topic name.
+UNFILTERED_PRESET_PROFILES = {"media", "energy", "food", "legal", "communications", "marketing"}
+
+# These broad additions strengthen established packs, but keep those packs' old
+# contract: the user's topics still decide which publication alerts are relevant.
+TOPIC_FILTERED_PRESET_RECIPES = {
+    "general": {"arbeidstilsynet_news"},
+    "digital": {"datatilsynet_news", "nsm_news"},
+    "property": {"kartverket_news"},
+    "retail": {"landbruksdir_news", "fiskeridir_news", "tolletaten_news"},
 }
 
 # The two news feeds in the complete Finanstilsynet profile overlap. The starter
@@ -103,12 +126,40 @@ def make_config(preset: str, topics: list[str], companies: list[str], provider: 
             # A single failed feed cannot block another feed's state or alerts.
             add_source(f"{profile_id}_{index}", "rss", f"{profile['name']} ({index})", (
                 f"urls = {_quoted([url])}", "allow_empty = false",
-            ), updates=False)
+            ), register=preset in UNFILTERED_PRESET_PROFILES, updates=False)
     from .recipes import selected_sources, source_toml
-    preset_recipes = {"finance": ("nb_policy_rate", "ssb_cpi"),
-                      "property": ("ssb_housing",), "retail": ("ssb_retail",)}
+    preset_recipes = {
+        "general": ("arbeidstilsynet_news",),
+        "health": (),
+        "digital": ("datatilsynet_news", "nsm_news"),
+        "property": ("ssb_housing", "kartverket_news"),
+        "food": (
+            "landbruksdir_news", "fiskeridir_news", "tolletaten_news",
+        ),
+        "retail": (
+            "ssb_retail", "landbruksdir_news", "fiskeridir_news", "tolletaten_news",
+        ),
+        "legal": ("sivilombudet_statements", "advokattilsynet_news"),
+        "communications": ("datatilsynet_news", "nsm_news"),
+        "marketing": ("kommunikasjonsforeningen_news", "kreativtforum_news", "kreativtforum_people"),
+        "energy": (
+            "nve_energy_news", "nve_power_situation", "nve_rme_news",
+            "statnett_news", "havtil_news", "havtil_investigations", "havtil_orders",
+        ),
+        "finance": ("nb_policy_rate", "ssb_cpi"),
+        "media": (
+            "medietilsynet_nyheter", "medietilsynet_avgjorelser", "mbl_nyheter",
+            "ij_aktuelt", "fritt_ord_aktuelt", "amedia_nyheter",
+            "polaris_media_pressemeldinger", "tv2_pressemeldinger", "nrk_pressemeldinger",
+        ),
+    }
     for recipe in preset_recipes.get(preset, ()):
-        lines.extend(source_toml(source) for source in selected_sources(recipe=recipe))
+        scoped = recipe in TOPIC_FILTERED_PRESET_RECIPES.get(preset, set())
+        sources = selected_sources(recipe=recipe, topics=topics if scoped else ())
+        if scoped and entity_ids:
+            for source in sources:
+                source["filter"]["entity_refs"] = entity_ids
+        lines.extend(source_toml(source) for source in sources)
     content = "\n".join(lines)
     if any(pattern.search(content) for pattern in SECRET_PATTERNS):
         raise ValueError("setup input contains a credential; use Actions Secrets")

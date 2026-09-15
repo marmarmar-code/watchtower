@@ -1,0 +1,92 @@
+{
+  "checked_at": "2026-09-11",
+  "source": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker",
+  "authority": "Klagenemndssekretariatet / KOFA",
+  "method": "browser search result inspection; no notification delivery",
+  "observed": {
+    "result_count": 4997,
+    "first_page_rows": 10,
+    "columns": [
+      "Dato",
+      "Saknr.",
+      "Type",
+      "Innklaget",
+      "Saken gjelder",
+      "Avgjørelse",
+      "Status"
+    ],
+    "examples": [
+      {
+        "case": "2026/2039",
+        "date": "08.09.2026",
+        "status": "Innkommet"
+      },
+      {
+        "case": "2026/0255",
+        "date": "03.09.2026",
+        "status": "Avgjort"
+      }
+    ]
+  },
+  "coverage_boundary": "configured page only; UI is paginated and the adapter does not claim complete-register coverage",
+  "live_reads": {
+    "count": 2,
+    "records_each": 10,
+    "same_first": {
+      "case": "2026/2039",
+      "date": "08.09.2026",
+      "status": "Innkommet"
+    }
+  },
+  "poll": {
+    "first_records": 10,
+    "second_records": 10,
+    "same_keys": true,
+    "same_hashes": true,
+    "second_alerts": 0
+  },
+  "related_boards": {
+    "medieklagenemnda": {
+      "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker",
+      "results": 256,
+      "headers": [
+        "Dato",
+        "Saknr.",
+        "Klager",
+        "Avgjørelse",
+        "Status",
+        "Saksbeh."
+      ]
+    },
+    "markedsradet": {
+      "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker",
+      "results": 92,
+      "headers": [
+        "Dato",
+        "Saknr.",
+        "Part/klager",
+        "Saken gjelder",
+        "Avgjørelse",
+        "Regelverk",
+        "Status",
+        "Saksbeh."
+      ]
+    }
+  },
+  "related_board_polls": {
+    "media": {
+      "records_each": 10,
+      "same_keys": true,
+      "same_hashes": true,
+      "second_alerts": 0
+    },
+    "marketing": {
+      "records_each": 10,
+      "same_keys": true,
+      "same_hashes": true,
+      "second_alerts": 0
+    }
+  },
+  "time_resolution": "displayed date only (DD.MM.YYYY), source default first-page order; not an update timestamp",
+  "direct_shell_fetch": "initial sandbox DNS failure; approved network read succeeded"
+}

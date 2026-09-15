@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-09-11",
+  "source_page": "https://www.ema.europa.eu/en/medicines/download-medicine-data",
+  "xlsx_url": "https://www.ema.europa.eu/en/documents/report/medicines-output-medicines-report_en.xlsx",
+  "verified_config": {
+    "kind": "ema_medicines",
+    "urls": ["https://www.ema.europa.eu/en/documents/report/medicines-output-medicines-report_en.xlsx"],
+    "events": ["added", "changed"],
+    "max_records": 3000,
+    "max_bytes": 2000000,
+    "max_unpacked_bytes": 8000000
+  },
+  "observed_workbook": {
+    "compressed_bytes": 897597,
+    "product_rows": 2732,
+    "human_rows": 2339,
+    "veterinary_rows": 393,
+    "header_columns": 39,
+    "unique_human_product_ids": 2339
+  },
+  "poll": {
+    "records_each": 2339,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "identical_full_snapshots": true,
+    "scope_hash": "0b974ac09f1bda5859e236de421426b20fc2f3798c87ca1c330d6e61be19ec02"
+  },
+  "identity": "EMA product number",
+  "selected_category": "Human",
+  "stored_change_fields": [
+    "name", "medicine_status", "opinion_status", "inn", "active_substance",
+    "therapeutic_area", "indication", "mah", "authorisation_date"
+  ],
+  "published_field": "First published date",
+  "generation_timestamp_in_fingerprint": false,
+  "last_updated_date_in_fingerprint": false,
+  "removed_supported": false,
+  "execution_boundary": "ZIP and XML data parsing only; formulas and executable spreadsheet content are not evaluated",
+  "scope_boundary": "EU centralised EMA product data, not a Norwegian reimbursement or national-authorisation decision"
+}

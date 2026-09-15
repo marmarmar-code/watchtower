@@ -1,0 +1,24 @@
+[
+  {
+    "recipe": "ema_medicine_authorisations",
+    "checked_at": "2026-09-11T10:11:31.891807+00:00",
+    "records": 2339,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.ema.europa.eu/en/documents/report/medicines-output-medicines-report_en.xlsx",
+        "bytes": 897597,
+        "sha256": "5e95f4815626dae083e0621efbfcd23d8095ed13f528dd556c4a5edbb7831e94"
+      },
+      {
+        "url": "https://www.ema.europa.eu/en/documents/report/medicines-output-medicines-report_en.xlsx",
+        "bytes": 897597,
+        "sha256": "5e95f4815626dae083e0621efbfcd23d8095ed13f528dd556c4a5edbb7831e94"
+      }
+    ],
+    "config_sha256": "8deed2443c6e763ec85e6f3b66066a3f36aa75dc73786705f03c9fe31e5b93cc",
+    "module_sha256": "be0f1ac49bc43ba6dcf601a92425e3ae23907bd69f2ecb19689f843d32fd744c"
+  }
+]

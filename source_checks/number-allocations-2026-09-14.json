@@ -1,0 +1,47 @@
+{
+  "recipe": "nkom_number_allocation_changes",
+  "checked_at": "2026-09-14T09:02:17.942055+00:00",
+  "records": 2163,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://nkom.no/telefoni-og-telefonnummer/telefonnummer-og-den-norske-nummerplan/alle-nummerserier-for-norske-telefonnumre/den-norske-nummerplanen-for-telefoni-med-mer-e.164",
+      "bytes": 93249,
+      "sha256": "75f3130920a2d9bd486791b8d9e71ea5cfd767fabc1e58578b32815d064610ad"
+    },
+    {
+      "url": "https://stenonicprdnoea01.blob.core.windows.net/enonicpubliccontainer/numsys/nkom.no/E164.csv",
+      "bytes": 174712,
+      "sha256": "f22ddb4710689aecdf617754073f913b725c17e9d94b954da79fb5e97de305eb"
+    },
+    {
+      "url": "https://nkom.no/telefoni-og-telefonnummer/telefonnummer-og-den-norske-nummerplan/alle-nummerserier-for-norske-telefonnumre/den-norske-nummerplanen-for-telefoni-med-mer-e.164",
+      "bytes": 93249,
+      "sha256": "75f3130920a2d9bd486791b8d9e71ea5cfd767fabc1e58578b32815d064610ad"
+    },
+    {
+      "url": "https://stenonicprdnoea01.blob.core.windows.net/enonicpubliccontainer/numsys/nkom.no/E164.csv",
+      "bytes": 174712,
+      "sha256": "f22ddb4710689aecdf617754073f913b725c17e9d94b954da79fb5e97de305eb"
+    }
+  ],
+  "config_sha256": "de8f14ae8eb8d51a9166de511080a5c4e3e61aa25f211064ef89658def4116d9",
+  "module_sha256": "897a0ac4c7511db6ee2d39e747b823fd4c6b6acb982c89457aea3c8e39264b0f",
+  "visible_rows_checked": 25,
+  "source_list_updated_on": "2026-07-13",
+  "range_lengths": {
+    "8": 2097,
+    "12": 66
+  },
+  "status_counts": {
+    "Tildelt": 1239,
+    "Ledig": 881,
+    "Blokkert": 43
+  },
+  "duplicate_ranges": 0,
+  "overlapping_ranges": 0,
+  "quantity_mismatches": 0,
+  "proof_boundary": "Two actual final-recipe engine polls with identical full state and zero alerts. The visible HTML page is a partial cross-check, not an independent complete-export count. Not hosted scheduling or later change-delivery evidence."
+}

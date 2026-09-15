@@ -1,0 +1,11 @@
+# npm selected tag metadata
+
+Official contracts: [package metadata](https://github.com/npm/registry/blob/main/docs/responses/package-metadata.md) and [registry routes](https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md).
+
+Two real polls of the final recipe each read the selected tag mapping, exact version metadata, then the tag mapping again for each package. Both produced two records, zero alerts and identical full state. The observed targets were react 19.3.0 and vite 8.3.0. Request sizes and response SHA-256 values are recorded in [the evidence JSON](package-metadata-2026-09-14.json). No notifier was used for these checks.
+
+A record is identified by package and selected tag. It monitors that tag's target version and the target's declared license, deprecation message and published distribution checksums. A target moving backward remains a tag change. The adapter does not infer a new release date, package ownership, software safety or legal suitability. Maintainer and contact fields are omitted. Missing selected tags are represented explicitly; this is not package removal. The tag listing must contain latest and have no duplicate keys. A changed selected target during the read fails without advancing the snapshot.
+
+Version requests use the exact target, not the mutable latest endpoint. Responses, selections and tag counts are bounded; redirects, inconsistent identities, malformed data and oversized responses fail closed. The response is metadata only: archive contents, signatures and checksums are not independently verified. Earlier and intervening versions are outside coverage. Concurrent changes which return to the same tag target between the two checks cannot be ruled out.
+
+Eight adapter tests cover quiet repeated state, metadata noise, version retargeting and rollback, license and deprecation changes, legacy license form, missing tags, shared target requests, scoped names, publication races, identity mismatches, malformed/duplicate JSON, size bounds and redirects. Together with recipe, catalog and test-runtime generation checks, 26 targeted tests passed. Artificial changes prove event logic; no actual new upstream change delivery has yet been observed.

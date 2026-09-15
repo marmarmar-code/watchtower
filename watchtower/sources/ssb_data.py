@@ -5,9 +5,32 @@ import math
 import re
 from urllib.parse import urlencode
 
-from .changes import SnapshotSource, canonical, document, number, strings
+from .changes import SnapshotSource, canonical, document, number, shown, strings
 from .common import SourceError
 from .ssb import DEFAULT_BASE_URL
+
+
+# SSB/PxWeb metadata: https://www.ssb.no/api/pxwebapiv2
+_ADJUSTMENTS = {"SesOnly": "sesongjustert", "WorkOnly": "kalenderjustert",
+                "WorkAndSes": "kalender- og sesongjustert", "None": "ujustert"}
+
+
+def _unit_text(units, *, revision=False):
+    descriptions = []
+    for unit in units.values():
+        parts = [str(unit["base"])]
+        if unit.get("base_period"):
+            parts.append("basis " + str(unit["base_period"]))
+        adjustment = unit.get("adjustment")
+        if adjustment and (adjustment != "None" or revision):
+            parts.append(_ADJUSTMENTS.get(str(adjustment), "justering: " + str(adjustment)))
+        for name, value in unit.items():
+            if name in {"base", "base_period", "adjustment"} or (name == "decimals" and not revision):
+                continue
+            if value is not None:
+                parts.append(f"{'desimaler' if name == 'decimals' else name}: {shown(value)}")
+        descriptions.append(", ".join(parts))
+    return " / ".join(descriptions)
 
 
 def _vector(value, size, *, status=False):
@@ -118,13 +141,17 @@ class SsbDataSource(SnapshotSource):
 
     def _item(self, row, event, details, suppress):
         label = {"added": "Ny statistikkobservasjon", "changed": "Revidert statistikkobservasjon"}[event]
-        units = []
-        for unit in row["fields"]["unit"].values():
-            parts = [str(unit["base"])]
-            if unit.get("base_period"):
-                parts.append("basis " + str(unit["base_period"]))
-            if unit.get("adjustment"):
-                parts.append(str(unit["adjustment"]))
-            units.append(", ".join(parts))
-        context = "Enhet: " + " / ".join(units)
-        return super()._item(row, event, (label, context, *details[1:]), suppress)
+        fields = row["fields"]
+        context = "Enhet: " + _unit_text(fields["unit"])
+        changes = details[1:]
+        if event == "added":
+            changes = [f"{self.field_labels.get('value', 'Verdi')}: {shown(fields['value'])}"]
+            if fields["status"]:
+                changes.append(f"{self.field_labels.get('status', 'Datastatus')}: {fields['status']}")
+        return super()._item(row, event, (label, context, *changes), suppress)
+
+    def describe_change(self, name, before, after):
+        label = self.field_labels.get(name, {"value": "Verdi", "unit": "Enhet", "status": "Datastatus"}.get(name, name))
+        if name == "unit":
+            return f"{label}: {_unit_text(before, revision=True)} → {_unit_text(after, revision=True)}"
+        return f"{label}: {shown(before)} → {shown(after)}"

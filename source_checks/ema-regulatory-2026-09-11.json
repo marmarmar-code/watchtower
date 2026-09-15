@@ -1,0 +1,125 @@
+{
+  "checked_at": "2026-09-11",
+  "official_documentation": "https://www.ema.europa.eu/en/about-us/about-website/download-website-data-json-data-format",
+  "datasets": {
+    "dhpc": {
+      "url": "https://www.ema.europa.eu/en/documents/report/dhpc-output-json-report_en.json",
+      "source_total": 174,
+      "selected": 142,
+      "selection": "Human; exact type Medicine shortage excluded",
+      "identity": "dhpc_url",
+      "poll": {
+        "records_each": 142,
+        "first_alerts": 0,
+        "second_alerts": 0,
+        "identical_full_snapshots": true,
+        "scope_hash": "14794fe98547f0a09b3d618dda1639fcf562ac9456a96fd51301f11abdf313d4",
+        "snapshot_sha256": "8206505de0a040835cb23bddba0ee3305e580a286863f9720a8f17d8fef89ebc"
+      }
+    },
+    "referrals": {
+      "url": "https://www.ema.europa.eu/en/documents/report/referrals-output-json-report_en.json",
+      "source_total": 592,
+      "selected": 100,
+      "selection": "Human and safety_referral Yes",
+      "identity": "referral_url",
+      "poll": {
+        "records_each": 100,
+        "first_alerts": 0,
+        "second_alerts": 0,
+        "identical_full_snapshots": true,
+        "scope_hash": "3319c3f30cd1f8eb3ecd4773653f1db6f900c6c357b87c06331c4713900cfcc7",
+        "snapshot_sha256": "4523b2de22d57978d929182ef46ec9b16573c59de6992fcdfb0ca12398c96590"
+      }
+    },
+    "psusa": {
+      "url": "https://www.ema.europa.eu/en/documents/report/medicines-output-periodic_safety_update_report_single_assessments-output-json-report_en.json",
+      "source_total": 2714,
+      "selected": 2714,
+      "selection": "all records because category is blank in 2099 and Human in 615",
+      "identity": "psusa_url",
+      "poll": {
+        "records_each": 2714,
+        "first_alerts": 0,
+        "second_alerts": 0,
+        "identical_full_snapshots": true,
+        "scope_hash": "9444a37b89dc3b524af423ae661c36f4a53734134c9334903dc2b3360c9b9328",
+        "snapshot_sha256": "f7300e22768a60d358153bdb8082d8521209198ded984e76184017a01613505c"
+      }
+    }
+  },
+  "metadata_excluded_from_comparison": [
+    "meta.timestamp",
+    "last_updated_date"
+  ],
+  "published": "first_published_date",
+  "removed_supported": false,
+  "final_recipe_verification": [
+    {
+      "recipe": "ema_human_safety_communications",
+      "checked_at": "2026-09-11T13:34:01.730643+00:00",
+      "records": 142,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.ema.europa.eu/en/documents/report/dhpc-output-json-report_en.json",
+          "bytes": 142573,
+          "sha256": "e5fe1ef27d9fe4c55408fcdcb101ea9cdd33596e3a478cc39a0f5a368224fdf6"
+        },
+        {
+          "url": "https://www.ema.europa.eu/en/documents/report/dhpc-output-json-report_en.json",
+          "bytes": 142573,
+          "sha256": "e5fe1ef27d9fe4c55408fcdcb101ea9cdd33596e3a478cc39a0f5a368224fdf6"
+        }
+      ],
+      "config_sha256": "0e6461af5fcb0ec2aec7547262fd6aeb889587c1f8eef2f73c85333b3f06618a",
+      "module_sha256": "2337358f233e239617a121e8aad898f3ab49b89afae6a4210e9980e56656d30b"
+    },
+    {
+      "recipe": "ema_human_safety_referrals",
+      "checked_at": "2026-09-11T13:34:02.061561+00:00",
+      "records": 100,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.ema.europa.eu/en/documents/report/referrals-output-json-report_en.json",
+          "bytes": 729054,
+          "sha256": "52111595857d1603a54e9407fb36eec42440ca30440b980a258df40212ecf216"
+        },
+        {
+          "url": "https://www.ema.europa.eu/en/documents/report/referrals-output-json-report_en.json",
+          "bytes": 729054,
+          "sha256": "52111595857d1603a54e9407fb36eec42440ca30440b980a258df40212ecf216"
+        }
+      ],
+      "config_sha256": "df13a4d527651f7ffce1dd7b7e61074431e146f346574383ffe9be535fbfc6dd",
+      "module_sha256": "2337358f233e239617a121e8aad898f3ab49b89afae6a4210e9980e56656d30b"
+    },
+    {
+      "recipe": "ema_periodic_safety_outcomes",
+      "checked_at": "2026-09-11T13:34:02.656907+00:00",
+      "records": 2714,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.ema.europa.eu/en/documents/report/medicines-output-periodic_safety_update_report_single_assessments-output-json-report_en.json",
+          "bytes": 1403395,
+          "sha256": "69707aad7164b0620b4501455dae4a4dbf7d993ff8f9e678b0ed2345794ed425"
+        },
+        {
+          "url": "https://www.ema.europa.eu/en/documents/report/medicines-output-periodic_safety_update_report_single_assessments-output-json-report_en.json",
+          "bytes": 1403395,
+          "sha256": "69707aad7164b0620b4501455dae4a4dbf7d993ff8f9e678b0ed2345794ed425"
+        }
+      ],
+      "config_sha256": "29ebd704576fb773225848b94f564697872acf5250d4b425d03945ae8e1abd41",
+      "module_sha256": "2337358f233e239617a121e8aad898f3ab49b89afae6a4210e9980e56656d30b"
+    }
+  ]
+}

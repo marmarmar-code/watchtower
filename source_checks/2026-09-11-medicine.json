@@ -1,0 +1,24 @@
+{
+  "source": "DMP legemiddelmangel",
+  "checked_at": "2026-09-11",
+  "url": "https://www.dmp.no/forsyningssikkerhet/legemiddelmangel/oversikt-over-legemiddelmangel---for-pasienter-og-helsepersonell",
+  "http_fetches": 2,
+  "bytes_each": 922280,
+  "sha256_each": "6e37bfdcf981485ce4387d3ac9e22072cccc14ee2cc182fa1689b9e63e1fb06f",
+  "status_column": "Status pr. 10.09.2026",
+  "raw_rows": 1486,
+  "grouped_records": 1286,
+  "first_poll_alerts": 0,
+  "second_poll_alerts": 0,
+  "identical_fullsnapshots": true,
+  "default_max_records": 5000,
+  "removal_supported": false,
+  "complete_snapshot_supported": false,
+  "availability_note": "Mangelperiode til er forventet lagerdato hos leverandor; omtrent to uker til alle apotek er ikke publiseringsforsinkelse.",
+  "verification": [
+    "python3 -m unittest tests.test_medicine tests.test_change_sources",
+    "two public curl fetches",
+    "engine poll helper from tests/test_change_sources.py"
+  ],
+  "limitation": "Scheduled operation and future source revisions were not observed."
+}

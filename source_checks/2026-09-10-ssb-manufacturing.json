@@ -1,0 +1,116 @@
+{
+  "id": "ssb_manufacturing",
+  "table": "07095",
+  "official_url": "https://www.ssb.no/statbank/table/07095",
+  "scope": "Seasonally adjusted manufacturing production (P105 Industri), latest two monthly observations and revisions only within that rolling window. A separate series from the broad P101 aggregate; not turnover or percentage changes.",
+  "metadata_updated": "2026-09-07T06:00:00Z",
+  "method": "Root inspected current official metadata then fetched the exact final selection twice using existing ssb_data adapter. Validated dimensions, unit/base, dates, unique keys and stable full record snapshots; silent in-memory initialization and unchanged second evaluation. No synthetic observations or notification calls, no runtime state writes. Future new/revised delivery is not yet observed.",
+  "runs": [
+    {
+      "requests": [
+        {
+          "url": "https://data.ssb.no/api/pxwebapi/v2/tables/07095/data?lang=no&outputFormat=json-stat2&valueCodes%5BPKoder%5D=P105&valueCodes%5BContentsCode%5D=Sesongjustert&valueCodes%5BTid%5D=top%282%29",
+          "at": "2026-09-10T10:00:07.161990+00:00",
+          "status": 200
+        }
+      ],
+      "count": 2,
+      "filtered_count": 2,
+      "baseline": true,
+      "alerts": 0,
+      "observations": [
+        {
+          "key": "{\"ContentsCode\":\"Sesongjustert\",\"PKoder\":\"P105\",\"Tid\":\"2026M06\"}",
+          "title": "SSB · Industri / Produksjonsindeks. Sesongjustert / 2026M06",
+          "url": "https://www.ssb.no/statbank/table/07095",
+          "published": "2026M06",
+          "fields": {
+            "value": 107,
+            "unit": {
+              "ContentsCode": {
+                "base": "indeks",
+                "decimals": 1,
+                "base_period": "2021",
+                "adjustment": "WorkAndSes"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Sesongjustert\",\"PKoder\":\"P105\",\"Tid\":\"2026M07\"}",
+          "title": "SSB · Industri / Produksjonsindeks. Sesongjustert / 2026M07",
+          "url": "https://www.ssb.no/statbank/table/07095",
+          "published": "2026M07",
+          "fields": {
+            "value": 107.8,
+            "unit": {
+              "ContentsCode": {
+                "base": "indeks",
+                "decimals": 1,
+                "base_period": "2021",
+                "adjustment": "WorkAndSes"
+              }
+            },
+            "status": ""
+          }
+        }
+      ],
+      "identity_digest": "b7c4f235a298f5fc8691cd49cca80e900874e23c37b8789578867d3dec1a527b",
+      "snapshot_scope": "d1c51ed44e7294f4d4246fbf8437a5bc30f7ccafce74f20d9df7b955633ad77d"
+    },
+    {
+      "requests": [
+        {
+          "url": "https://data.ssb.no/api/pxwebapi/v2/tables/07095/data?lang=no&outputFormat=json-stat2&valueCodes%5BPKoder%5D=P105&valueCodes%5BContentsCode%5D=Sesongjustert&valueCodes%5BTid%5D=top%282%29",
+          "at": "2026-09-10T10:00:07.278477+00:00",
+          "status": 200
+        }
+      ],
+      "count": 2,
+      "filtered_count": 2,
+      "baseline": false,
+      "alerts": 0,
+      "observations": [
+        {
+          "key": "{\"ContentsCode\":\"Sesongjustert\",\"PKoder\":\"P105\",\"Tid\":\"2026M06\"}",
+          "title": "SSB · Industri / Produksjonsindeks. Sesongjustert / 2026M06",
+          "url": "https://www.ssb.no/statbank/table/07095",
+          "published": "2026M06",
+          "fields": {
+            "value": 107,
+            "unit": {
+              "ContentsCode": {
+                "base": "indeks",
+                "decimals": 1,
+                "base_period": "2021",
+                "adjustment": "WorkAndSes"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Sesongjustert\",\"PKoder\":\"P105\",\"Tid\":\"2026M07\"}",
+          "title": "SSB · Industri / Produksjonsindeks. Sesongjustert / 2026M07",
+          "url": "https://www.ssb.no/statbank/table/07095",
+          "published": "2026M07",
+          "fields": {
+            "value": 107.8,
+            "unit": {
+              "ContentsCode": {
+                "base": "indeks",
+                "decimals": 1,
+                "base_period": "2021",
+                "adjustment": "WorkAndSes"
+              }
+            },
+            "status": ""
+          }
+        }
+      ],
+      "identity_digest": "b7c4f235a298f5fc8691cd49cca80e900874e23c37b8789578867d3dec1a527b",
+      "snapshot_scope": "d1c51ed44e7294f4d4246fbf8437a5bc30f7ccafce74f20d9df7b955633ad77d"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "source": "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/",
+  "fetched": "2026-09-11",
+  "headers": ["Prosjektnr.", "Organisasjon", "Prosjekttittel", "Tema", "Søkt beløp", "Publisert"],
+  "rows": 19,
+  "sample": {"project_number": "363835", "organisation": "SINTEF AS", "project_title": "Lining Integrity for Energy Efficiency", "requested_amount": "16000000", "published": "10.06.2026", "outcome": "approved"},
+  "second_poll": "same parsed schema and rows observed; dynamic whole-document ids excluded",
+  "complete_snapshot": false,
+  "removed": false
+}

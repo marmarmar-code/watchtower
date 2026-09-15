@@ -1,0 +1,115 @@
+{
+  "checked_at": "2026-09-11",
+  "official_endpoints": [
+    "https://data.stortinget.no/eksport/sesjoner",
+    "https://data.stortinget.no/eksport/moter?sesjonid=2025-2026",
+    "https://data.stortinget.no/eksport/dagsorden?moteid=11658",
+    "https://data.stortinget.no/eksport/voteringer?sakid=109766"
+  ],
+  "verified_config": {
+    "kind": "parliament_vote_discovery",
+    "lookback_days": 30,
+    "max_sessions": 2,
+    "max_meetings": 40,
+    "max_cases": 200,
+    "max_records": 1000,
+    "max_bytes": 5000000,
+    "allow_empty": true,
+    "events": [
+      "added",
+      "changed"
+    ],
+    "urls": []
+  },
+  "current_window": {
+    "from": "2026-08-12",
+    "to": "2026-09-11",
+    "session": "2025-2026",
+    "meeting_ids": [
+      11658
+    ],
+    "case_ids": [
+      109766
+    ],
+    "vote_records": 0
+  },
+  "poll": {
+    "records_each": 0,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "identical_full_snapshots": true,
+    "scope_hash": "19e3b3cedf5e035b298dcb46e26b472ff5e2b1abf15583d6f837226457d32b23",
+    "snapshot_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+  },
+  "historical_positive_fixture": {
+    "case_id": 200314,
+    "vote_records": 31,
+    "first_vote_id": 28470,
+    "last_vote_id": 28500,
+    "bytes": 60621,
+    "sha256": "cfd499f43ec576122dccb15b04a071d1df591136aba61040a1690d6c21b8e8ec",
+    "non_personal_count_sentinel": "-1 is accepted only for a non-personal vote and stored as unavailable",
+    "stored_fixture": {
+      "normalization": "CRLF line endings converted to LF; XML content unchanged",
+      "bytes": 59188,
+      "sha256": "49b8e4a20ecd695fd509948f5f06e702cd2e59324178e2e0697c37e50ead942d"
+    }
+  },
+  "identity": "votering_id; identical events shared by several cases are aggregated",
+  "case_context": "case IDs and titles are alert context outside compared fields; a case leaving the rolling window is quiet",
+  "vote_selection": "all votes returned for every case on a selected meeting agenda, including votes whose own timestamp predates the window",
+  "published_field": null,
+  "removed_supported": false,
+  "final_recipe_verification": {
+    "recipe": "storting_recent_vote_discovery",
+    "checked_at": "2026-09-11T13:11:02.162436+00:00",
+    "records": 0,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://data.stortinget.no/eksport/sesjoner",
+        "bytes": 10810,
+        "sha256": "2cbb66a261971174d2fe58c7d8eb5dc076a2a4fc94d495b778338ebf5489fdee"
+      },
+      {
+        "url": "https://data.stortinget.no/eksport/moter?sesjonid=2025-2026",
+        "bytes": 98964,
+        "sha256": "87ace908436a4025fb440f264e3522eb4500839cc6008d6fe52c8646ab84b368"
+      },
+      {
+        "url": "https://data.stortinget.no/eksport/dagsorden?moteid=11658",
+        "bytes": 1195,
+        "sha256": "dabfc0a8162f5507cb785c2ea9d552fbcfaaa74df9ac7c9a8ad5bb5719e5562c"
+      },
+      {
+        "url": "https://data.stortinget.no/eksport/voteringer?sakid=109766",
+        "bytes": 328,
+        "sha256": "e3dd59c1baaaed293b18bd683e165b25ba1f7e12bc29251528d12de6a027ac05"
+      },
+      {
+        "url": "https://data.stortinget.no/eksport/sesjoner",
+        "bytes": 10810,
+        "sha256": "2cbb66a261971174d2fe58c7d8eb5dc076a2a4fc94d495b778338ebf5489fdee"
+      },
+      {
+        "url": "https://data.stortinget.no/eksport/moter?sesjonid=2025-2026",
+        "bytes": 98964,
+        "sha256": "87ace908436a4025fb440f264e3522eb4500839cc6008d6fe52c8646ab84b368"
+      },
+      {
+        "url": "https://data.stortinget.no/eksport/dagsorden?moteid=11658",
+        "bytes": 1195,
+        "sha256": "dabfc0a8162f5507cb785c2ea9d552fbcfaaa74df9ac7c9a8ad5bb5719e5562c"
+      },
+      {
+        "url": "https://data.stortinget.no/eksport/voteringer?sakid=109766",
+        "bytes": 328,
+        "sha256": "e3dd59c1baaaed293b18bd683e165b25ba1f7e12bc29251528d12de6a027ac05"
+      }
+    ],
+    "config_sha256": "716561e5686bcc00cd6d6860a627cedc96a76856fd21f7fdeb5b3cd411c19c12",
+    "module_sha256": "e28fdd29c511e2c46c55da600dc8d98d6fdf1cd138816365fffbe480fbaee994"
+  }
+}

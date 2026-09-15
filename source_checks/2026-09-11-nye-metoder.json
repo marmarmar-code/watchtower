@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-09-11",
+  "decision_page": "https://www.nyemetoder.no/innforing-av-nye-metoder/beslutning/",
+  "xlsx_discovery": "exactly one official-host .xlsx link per poll",
+  "verified_config": {"events": ["added", "changed"], "max_records": 1500, "max_bytes": 500000, "max_unpacked_bytes": 3000000},
+  "observed": {"xlsx_bytes": 222850, "workbook_rows": 1005, "distinct_method_ids": 993, "repeated_method_ids": 12, "monitored_records": 1004},
+  "duplicate_contract": {"different_indications_kept_separate": 11, "same_identity_grouped": 1, "conflicting_metadata_rejected": true},
+  "poll": {"records_each": 1004, "first_alerts": 0, "second_alerts": 0, "identical_full_snapshots": true, "scope_hash": "2d1633aa67670647bfc2b180ec2d95b3eff69286f1080f0334c49b911716a93b"},
+  "identity": "method ID plus normalized indication",
+  "published_field": null,
+  "decision_date": "Excel serial decoded with workbook date system; substantive field",
+  "removed_supported": false,
+  "scope_boundary": "National specialist-health-service method decisions; not EMA authorisation or a general reimbursement register"
+}

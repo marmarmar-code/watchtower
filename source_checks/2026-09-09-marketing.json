@@ -1,0 +1,259 @@
+[
+  {
+    "id": "kommunikasjonsforeningen_news",
+    "url": "https://www.kommunikasjon.no/fagstoff/nyheter",
+    "checks": [
+      {
+        "at": "2026-09-09T12:03:53.380129+00:00",
+        "count": 30,
+        "keys": [
+          "record:33edb1a36723d19a5d1c8af8927193449116cacc9c6a789d93b7e35c06242f04",
+          "record:69383cd58b2e4f4c8607451d064ae2eab885981ac3d33a24fd32beb737b9038e",
+          "record:0c8a4c309295de1cd484ec1c4bb707ecf9b30faf1077bb497d97c43d666c4b10",
+          "record:41d5bef1a0dd0d91831fa1a43c09a749e8534102104ee325bdfec7c6c8927c43",
+          "record:d918294e1548afb158dcd45f41c5a0be9e865c5277207a93a9d2a1af2686be6c",
+          "record:82bda502116428dc0e5f7c42908fb02b2df2e74f9877bfc5f9c9ae1e8f6ddd7a",
+          "record:99fea85ef9a5805462b6fc9f2cfc61cc45aa9665cccd0f99d3f319a318545130",
+          "record:cb1d56b7c68f7f0fac551bc5b1fafd3338093a779bc35bfa7fee558a950d0ed7",
+          "record:c6ed0a07cbfe907f3d85fc0a5c864bc2e3d412bed087630b2503aaa099bd7bc0",
+          "record:7a11bbc31df78525f6ff1f01916005247b09ead0b4a049b814b8774289b4f282",
+          "record:68779e7473327e5a65b4fcac557352a61b9a0bf06b0c8a5d32f9c7a224ba47aa",
+          "record:c160f368a6e3b32de7b903b4b3e0d112d056d83d5cd822fc2620eacfaa854b91",
+          "record:3c2a53c898b31b89a2f3948b46ba4770eb9fe2a44984c7ad98596d0385752583",
+          "record:c1a6777c332b1c4274bd5c1754666b2fda6c7fd2a60c72b7ec53639aede360df",
+          "record:1df06bfe04843ae4de1166eec0137d8029d088819f7f80006b932f197908096f",
+          "record:299fc3f8f080e3be84e6427bf86723e704f91cd21fdb67a4e3933e0806b174c2",
+          "record:5a705cefe75794574caa4bd15e09bc578627ffc1e90924392349eef1fe568f23",
+          "record:3a27bcaf2bec7196a6275d38bd64ac0b8563c9a2c9040fb645747ee10c512808",
+          "record:df00cb052f21fb132a51ad50eb4356d357944e30c19920d26dfac10d47800d47",
+          "record:273db2b1c18ba2246f8a4f81daaa36a8e0a356a09e76f6b67bdb310a17f128a2",
+          "record:58885fc7496271a3fa69b9a0192fc036ac2258df87106ec72e5358aeb6770354",
+          "record:6c34e97137b313c1fb1542965dc3bfde2b031466b6599babd6c5cda3ccc9a95e",
+          "record:b49c15dcc44e5545e3b459be40c24fb14a0fdac5afac86aed531be71c4f0b61f",
+          "record:1bfcbe967f7403cc090a2d03fdc70d364a4735d3be303f9467882055aa0693e0",
+          "record:cfd276b6ddf639a968e2167ab13b6e6dc1928c73421dd834802e4bdeb171e3a6",
+          "record:d72cd90fafc49bf6ddc6f5ae9fd36824dc789248cf74d92cde15b9141b7aa879",
+          "record:e1147976d3a2ff420963f961bfc221dfb2c8c2f6d6c6fea9599095dc27924466",
+          "record:cd806ed2add118acd294ba78e01b0d0821b1cc0c83b69378a3abe0a388f5fe09",
+          "record:6f1c0302837eaa0865f6d6c4cfd460cb3e97b58023caf2bcf0c75daa2a337043",
+          "record:ca607e059fbdf26b87be15a0e4d63549fbb65c371265d931085744b019d5d4ef"
+        ],
+        "examples": [
+          {
+            "title": "Sjekk Kladden 2.0",
+            "url": "https://www.kommunikasjon.no/fagstoff/nyheter/sjekk-kladden-2.0"
+          },
+          {
+            "title": "Krafttak vinner Gullpollen",
+            "url": "https://www.kommunikasjon.no/fagstoff/nyheter/krafttak-vinner-gullpollen"
+          }
+        ]
+      },
+      {
+        "at": "2026-09-09T12:03:53.519889+00:00",
+        "count": 30,
+        "keys": [
+          "record:33edb1a36723d19a5d1c8af8927193449116cacc9c6a789d93b7e35c06242f04",
+          "record:69383cd58b2e4f4c8607451d064ae2eab885981ac3d33a24fd32beb737b9038e",
+          "record:0c8a4c309295de1cd484ec1c4bb707ecf9b30faf1077bb497d97c43d666c4b10",
+          "record:41d5bef1a0dd0d91831fa1a43c09a749e8534102104ee325bdfec7c6c8927c43",
+          "record:d918294e1548afb158dcd45f41c5a0be9e865c5277207a93a9d2a1af2686be6c",
+          "record:82bda502116428dc0e5f7c42908fb02b2df2e74f9877bfc5f9c9ae1e8f6ddd7a",
+          "record:99fea85ef9a5805462b6fc9f2cfc61cc45aa9665cccd0f99d3f319a318545130",
+          "record:cb1d56b7c68f7f0fac551bc5b1fafd3338093a779bc35bfa7fee558a950d0ed7",
+          "record:c6ed0a07cbfe907f3d85fc0a5c864bc2e3d412bed087630b2503aaa099bd7bc0",
+          "record:7a11bbc31df78525f6ff1f01916005247b09ead0b4a049b814b8774289b4f282",
+          "record:68779e7473327e5a65b4fcac557352a61b9a0bf06b0c8a5d32f9c7a224ba47aa",
+          "record:c160f368a6e3b32de7b903b4b3e0d112d056d83d5cd822fc2620eacfaa854b91",
+          "record:3c2a53c898b31b89a2f3948b46ba4770eb9fe2a44984c7ad98596d0385752583",
+          "record:c1a6777c332b1c4274bd5c1754666b2fda6c7fd2a60c72b7ec53639aede360df",
+          "record:1df06bfe04843ae4de1166eec0137d8029d088819f7f80006b932f197908096f",
+          "record:299fc3f8f080e3be84e6427bf86723e704f91cd21fdb67a4e3933e0806b174c2",
+          "record:5a705cefe75794574caa4bd15e09bc578627ffc1e90924392349eef1fe568f23",
+          "record:3a27bcaf2bec7196a6275d38bd64ac0b8563c9a2c9040fb645747ee10c512808",
+          "record:df00cb052f21fb132a51ad50eb4356d357944e30c19920d26dfac10d47800d47",
+          "record:273db2b1c18ba2246f8a4f81daaa36a8e0a356a09e76f6b67bdb310a17f128a2",
+          "record:58885fc7496271a3fa69b9a0192fc036ac2258df87106ec72e5358aeb6770354",
+          "record:6c34e97137b313c1fb1542965dc3bfde2b031466b6599babd6c5cda3ccc9a95e",
+          "record:b49c15dcc44e5545e3b459be40c24fb14a0fdac5afac86aed531be71c4f0b61f",
+          "record:1bfcbe967f7403cc090a2d03fdc70d364a4735d3be303f9467882055aa0693e0",
+          "record:cfd276b6ddf639a968e2167ab13b6e6dc1928c73421dd834802e4bdeb171e3a6",
+          "record:d72cd90fafc49bf6ddc6f5ae9fd36824dc789248cf74d92cde15b9141b7aa879",
+          "record:e1147976d3a2ff420963f961bfc221dfb2c8c2f6d6c6fea9599095dc27924466",
+          "record:cd806ed2add118acd294ba78e01b0d0821b1cc0c83b69378a3abe0a388f5fe09",
+          "record:6f1c0302837eaa0865f6d6c4cfd460cb3e97b58023caf2bcf0c75daa2a337043",
+          "record:ca607e059fbdf26b87be15a0e4d63549fbb65c371265d931085744b019d5d4ef"
+        ],
+        "examples": [
+          {
+            "title": "Sjekk Kladden 2.0",
+            "url": "https://www.kommunikasjon.no/fagstoff/nyheter/sjekk-kladden-2.0"
+          },
+          {
+            "title": "Krafttak vinner Gullpollen",
+            "url": "https://www.kommunikasjon.no/fagstoff/nyheter/krafttak-vinner-gullpollen"
+          }
+        ]
+      }
+    ],
+    "same_keys": true
+  },
+  {
+    "id": "kreativtforum_news",
+    "url": "https://www.kreativtforum.no/artikler/nyheter",
+    "checks": [
+      {
+        "at": "2026-09-09T12:03:53.766608+00:00",
+        "count": 20,
+        "keys": [
+          "record:8178f9a46085f02a6eb0faf7ce38fbffac790a95d8bab638cc9719777935a029",
+          "record:68d94be6fd9cdd976b37ff0676e79e7dbcf4121c63b7f87e70978ff3a978b9cf",
+          "record:210603077392f769230a5769310e5532733d676667198915443385a98b53d7b3",
+          "record:7d6e57d8b01cdec9216945810b389e9447c32140156447219f397646fe08dfce",
+          "record:cbf810f6bcb5002a5c369819b6f038a8f58c72a7efe123cd5ef27c6d33928771",
+          "record:d79606210134a73d08db7e728fd4ce615e3b0a951b03f62136ec2851addca05b",
+          "record:c8821a7909476dbfb1cbbd318ff451954180ecb89f649f3384ae26c0c58059f6",
+          "record:94027c369167276f862c355c4832ed5fe9088dc629c2ce3a694565eff4a595f5",
+          "record:12c0db99a58af4391be815dd28e7435aef37897f6a2fe874cfb75c1a24cfbfd3",
+          "record:59ce391cdc360a9c08e47f5d9e0ace1be7cfb04b6ae9fc5689d2c1c2b6544723",
+          "record:40c6e291cad1827c6b107959f99d3b4e39c9b1468e5d220c282f0e3cd8f48ddc",
+          "record:9d01d239b8ad381f2acaa21881987be973499e95987876870c45cd588a9aade4",
+          "record:240efce2c8198d5ff0444a30fd25b1cfcff072cf1ffc553636722a395b74562c",
+          "record:02f5c9b4a6a2bf1e292a68397e848f97b8ee6d99acb13c0bb3ffa8dfff9fdb27",
+          "record:cd5357e14e444bebb045c66d5f2697710d3c72de87832f979374f52080af2700",
+          "record:e91d25b1ba769273f5681f6ae7e0398388fe08ab97f73e99b09bdb3e89555a48",
+          "record:c08f35739dfaa8b7a1dadc0f734f05ac25c197ef192d9505ca17674316853fa7",
+          "record:2180b4e86922b7559ca0c5e1257a6def9a31773f2e6d4cc28f0ec631f743face",
+          "record:a3b48d56f7e9475b8a7c83d0281f935117649de8f46736d72b7bc13199e97a24",
+          "record:5dac72e4a7b6922b1e6878f94444131300ac5f198d9fc0bd823e372d9db94da0"
+        ],
+        "examples": [
+          {
+            "title": "Hvem kan stoppe Morgenstern? Gullbranson åpner for årets bidrag",
+            "url": "https://www.kreativtforum.no/artikler/nyheter/hvem-kan-stoppe-morgenstern-gullbranson-apner-for-arets-bidrag"
+          },
+          {
+            "title": "Fra skolebenken til Nasjonalgalleriet: Møt de unge talentene på Tigerbrøl",
+            "url": "https://www.kreativtforum.no/artikler/nyheter/fra-skolebenken-til-nasjonalgalleriet-mot-de-unge-talentene-pa-tigerbrol"
+          }
+        ]
+      },
+      {
+        "at": "2026-09-09T12:03:54.052582+00:00",
+        "count": 20,
+        "keys": [
+          "record:8178f9a46085f02a6eb0faf7ce38fbffac790a95d8bab638cc9719777935a029",
+          "record:68d94be6fd9cdd976b37ff0676e79e7dbcf4121c63b7f87e70978ff3a978b9cf",
+          "record:210603077392f769230a5769310e5532733d676667198915443385a98b53d7b3",
+          "record:7d6e57d8b01cdec9216945810b389e9447c32140156447219f397646fe08dfce",
+          "record:cbf810f6bcb5002a5c369819b6f038a8f58c72a7efe123cd5ef27c6d33928771",
+          "record:d79606210134a73d08db7e728fd4ce615e3b0a951b03f62136ec2851addca05b",
+          "record:c8821a7909476dbfb1cbbd318ff451954180ecb89f649f3384ae26c0c58059f6",
+          "record:94027c369167276f862c355c4832ed5fe9088dc629c2ce3a694565eff4a595f5",
+          "record:12c0db99a58af4391be815dd28e7435aef37897f6a2fe874cfb75c1a24cfbfd3",
+          "record:59ce391cdc360a9c08e47f5d9e0ace1be7cfb04b6ae9fc5689d2c1c2b6544723",
+          "record:40c6e291cad1827c6b107959f99d3b4e39c9b1468e5d220c282f0e3cd8f48ddc",
+          "record:9d01d239b8ad381f2acaa21881987be973499e95987876870c45cd588a9aade4",
+          "record:240efce2c8198d5ff0444a30fd25b1cfcff072cf1ffc553636722a395b74562c",
+          "record:02f5c9b4a6a2bf1e292a68397e848f97b8ee6d99acb13c0bb3ffa8dfff9fdb27",
+          "record:cd5357e14e444bebb045c66d5f2697710d3c72de87832f979374f52080af2700",
+          "record:e91d25b1ba769273f5681f6ae7e0398388fe08ab97f73e99b09bdb3e89555a48",
+          "record:c08f35739dfaa8b7a1dadc0f734f05ac25c197ef192d9505ca17674316853fa7",
+          "record:2180b4e86922b7559ca0c5e1257a6def9a31773f2e6d4cc28f0ec631f743face",
+          "record:a3b48d56f7e9475b8a7c83d0281f935117649de8f46736d72b7bc13199e97a24",
+          "record:5dac72e4a7b6922b1e6878f94444131300ac5f198d9fc0bd823e372d9db94da0"
+        ],
+        "examples": [
+          {
+            "title": "Hvem kan stoppe Morgenstern? Gullbranson åpner for årets bidrag",
+            "url": "https://www.kreativtforum.no/artikler/nyheter/hvem-kan-stoppe-morgenstern-gullbranson-apner-for-arets-bidrag"
+          },
+          {
+            "title": "Fra skolebenken til Nasjonalgalleriet: Møt de unge talentene på Tigerbrøl",
+            "url": "https://www.kreativtforum.no/artikler/nyheter/fra-skolebenken-til-nasjonalgalleriet-mot-de-unge-talentene-pa-tigerbrol"
+          }
+        ]
+      }
+    ],
+    "same_keys": true
+  },
+  {
+    "id": "kreativtforum_people",
+    "url": "https://www.kreativtforum.no/artikler/overganger",
+    "checks": [
+      {
+        "at": "2026-09-09T12:03:56.458612+00:00",
+        "count": 20,
+        "keys": [
+          "record:acfd354e8eedfd06c13fc6a87c413499873d6b543e8ae2be4bbc765d26bb7f44",
+          "record:a498ad8d19087c01398f99b8749cf2bec550a9a5c65c8cf110484eecfc1b3d92",
+          "record:32d0d925f8872fdee4f5da25faee5de420e8fd03eccf857157153b4e223da307",
+          "record:a0ce37bbc00e782798ebb12e3fbbdcfa93530584aeaaf3fc195f9d890be83720",
+          "record:0c2fd13006ebe8e9abf4bf714c04e387f5c1f28a3e6d1d8520dbe5d171cd9027",
+          "record:62c5a5b320de00225786d49d62c2c5f2a9c86aa28a7b8bc6be1fddb439cc0d12",
+          "record:6d6aede8f8deb0ce471d8375d245c752d4685fe79df687fb5e241fdb3d498391",
+          "record:b73f7bff0877f09e780612a90f4bff9dbd4d40bf179646ce929d5deab7a0058c",
+          "record:a5479e8f4957c63cbd5db6c4d7df643241b7a2b3a70a9a0efc9fcb78f01dffb9",
+          "record:f849703e26afa7201d55a66cc2758c920e71de64992f841d81067e0c04f8b8ad",
+          "record:3c731758086b854dc6fc4bfe039c4945269f121d54b570128dcf225b2a3e5421",
+          "record:276c5b33e2b52a44ac3e38249aa86bfe5733f93579f1cece48bdc3e3ac8f13c1",
+          "record:7d355d031dc2737de5a658acd87713dee9d8f54b4fecb8812d951a4e3a7d9388",
+          "record:6c8f2c35597b338bd61728b9d0f133d4bf9e1c7f7312019da3a626f852aa1b07",
+          "record:1de59c3ac919769c5772706b413d14b484234fd1645b37281c4bd53689df5a9f",
+          "record:96e250eedb371e3bcce310c3262e65d3db7542de998f7937cf58fd7d49e4c8e6",
+          "record:479b2a7d9eb32ec2489aa8f91917f2bb440795a63f96fb602d69a5d44ae0e5ad",
+          "record:7b225721131af473fd55e247e13eba55ad1758305aa86edf9c9351f6deb4d710",
+          "record:96cb46a6c24350113943db8a35f2f714f6fa4524a87e2d379f1370713a67d90a",
+          "record:a0a8c7baa3127851456834cc19367bdab407a6a1c4dba058cfa16aa5249ee4f9"
+        ],
+        "examples": [
+          {
+            "title": "Vidar Grande er ny Senior Post-produsent i Nordisk Film Shortcut",
+            "url": "https://www.kreativtforum.no/artikler/overganger/vidar-grande-er-ny-senior-post-produsent-i-nordisk-film-shortcut"
+          },
+          {
+            "title": "Fersk innholdsprodusent til Bow",
+            "url": "https://www.kreativtforum.no/artikler/overganger/fersk-innholdsprodusent-til-bow"
+          }
+        ]
+      },
+      {
+        "at": "2026-09-09T12:03:56.749575+00:00",
+        "count": 20,
+        "keys": [
+          "record:acfd354e8eedfd06c13fc6a87c413499873d6b543e8ae2be4bbc765d26bb7f44",
+          "record:a498ad8d19087c01398f99b8749cf2bec550a9a5c65c8cf110484eecfc1b3d92",
+          "record:32d0d925f8872fdee4f5da25faee5de420e8fd03eccf857157153b4e223da307",
+          "record:a0ce37bbc00e782798ebb12e3fbbdcfa93530584aeaaf3fc195f9d890be83720",
+          "record:0c2fd13006ebe8e9abf4bf714c04e387f5c1f28a3e6d1d8520dbe5d171cd9027",
+          "record:62c5a5b320de00225786d49d62c2c5f2a9c86aa28a7b8bc6be1fddb439cc0d12",
+          "record:6d6aede8f8deb0ce471d8375d245c752d4685fe79df687fb5e241fdb3d498391",
+          "record:b73f7bff0877f09e780612a90f4bff9dbd4d40bf179646ce929d5deab7a0058c",
+          "record:a5479e8f4957c63cbd5db6c4d7df643241b7a2b3a70a9a0efc9fcb78f01dffb9",
+          "record:f849703e26afa7201d55a66cc2758c920e71de64992f841d81067e0c04f8b8ad",
+          "record:3c731758086b854dc6fc4bfe039c4945269f121d54b570128dcf225b2a3e5421",
+          "record:276c5b33e2b52a44ac3e38249aa86bfe5733f93579f1cece48bdc3e3ac8f13c1",
+          "record:7d355d031dc2737de5a658acd87713dee9d8f54b4fecb8812d951a4e3a7d9388",
+          "record:6c8f2c35597b338bd61728b9d0f133d4bf9e1c7f7312019da3a626f852aa1b07",
+          "record:1de59c3ac919769c5772706b413d14b484234fd1645b37281c4bd53689df5a9f",
+          "record:96e250eedb371e3bcce310c3262e65d3db7542de998f7937cf58fd7d49e4c8e6",
+          "record:479b2a7d9eb32ec2489aa8f91917f2bb440795a63f96fb602d69a5d44ae0e5ad",
+          "record:7b225721131af473fd55e247e13eba55ad1758305aa86edf9c9351f6deb4d710",
+          "record:96cb46a6c24350113943db8a35f2f714f6fa4524a87e2d379f1370713a67d90a",
+          "record:a0a8c7baa3127851456834cc19367bdab407a6a1c4dba058cfa16aa5249ee4f9"
+        ],
+        "examples": [
+          {
+            "title": "Vidar Grande er ny Senior Post-produsent i Nordisk Film Shortcut",
+            "url": "https://www.kreativtforum.no/artikler/overganger/vidar-grande-er-ny-senior-post-produsent-i-nordisk-film-shortcut"
+          },
+          {
+            "title": "Fersk innholdsprodusent til Bow",
+            "url": "https://www.kreativtforum.no/artikler/overganger/fersk-innholdsprodusent-til-bow"
+          }
+        ]
+      }
+    ],
+    "same_keys": true
+  }
+]

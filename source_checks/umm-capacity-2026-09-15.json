@@ -1,0 +1,48 @@
+{
+  "recipe": "umm_norway_capacity_message_changes",
+  "checked_at": "2026-09-15T07:42:12.572732+00:00",
+  "records": 53,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://ummrss.nordpoolgroup.com/messages/",
+      "method": "GET",
+      "bytes": 967125,
+      "sha256": "8ce65da628b5a2211c2a43668d6f1f5a64680f5e84c922f45b7e359acd59e34f"
+    },
+    {
+      "url": "https://ummrss.nordpoolgroup.com/messages/",
+      "method": "GET",
+      "bytes": 967125,
+      "sha256": "8ce65da628b5a2211c2a43668d6f1f5a64680f5e84c922f45b7e359acd59e34f"
+    },
+    {
+      "url": "https://ummrss.nordpoolgroup.com/messages/",
+      "method": "GET",
+      "bytes": 967125,
+      "sha256": "8ce65da628b5a2211c2a43668d6f1f5a64680f5e84c922f45b7e359acd59e34f"
+    },
+    {
+      "url": "https://ummrss.nordpoolgroup.com/messages/",
+      "method": "GET",
+      "bytes": 967125,
+      "sha256": "8ce65da628b5a2211c2a43668d6f1f5a64680f5e84c922f45b7e359acd59e34f"
+    }
+  ],
+  "config_sha256": "9d8c7e4f70f22283be49ef00837aeb6bc6d2ba656a02b95680dbb6b3d31250ad",
+  "module_sha256": "0829ea0991fbf1fe2e942a042c67ac6db9ee8c122f07b6bbf696975cb9397a80",
+  "engine_sha256": "0fa25fa702da4a3ba8c7895b8eb92ac02e77f418cef49616694248c281cf0b84",
+  "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+  "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+  "limitations": [
+    "Only the current public RSS window is read, not a complete history. Messages can leave the window between hourly checks.",
+    "The latest verified snapshot had 53 selected messages; the earlier source-contract snapshot had 52.",
+    "A message may describe capacity limits while physical assets remain operational. Status is preserved literally.",
+    "Complete ordered capacity tables retain blank parent, subunit and continuation cells without inheritance, arithmetic or timezone assumptions.",
+    "General messages, free-text reasons, remarks, assets and market-participant lists are excluded.",
+    "Two equal selected reads are not a server transaction or proof of global completeness.",
+    "Synthetic regression tests are separate from real-source verification; no runtime activation is implied."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "recipe": "eu_merger_decisions_recent",
+  "checked_at": "2026-09-14T06:43:58.538547+00:00",
+  "records": 12,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://webgate.ec.europa.eu/es/search-api/rest/search",
+      "bytes": 46712,
+      "sha256": "9311f8896d31d108e88904564dc11009276605043301a1f94fc110a3770da82a"
+    },
+    {
+      "url": "https://webgate.ec.europa.eu/es/search-api/rest/search",
+      "bytes": 46712,
+      "sha256": "ca961447ad0b8fb446ef08cf7303100414d9fae951a5cba6cfa93da45830d0fa"
+    }
+  ],
+  "config_sha256": "575aae91b344f3bd2439f39467d16959326a5a8d39823b36001bca1c674c0ce0",
+  "module_sha256": "2e964da9522c374398e9818d7bb17a261d6565c609834913c1787f37a43ce14d",
+  "raw_documents_per_read": 39,
+  "logical_decisions": 12,
+  "cases": 10,
+  "window": {
+    "field": "caseLastDecisionDate",
+    "lookback_days": 14,
+    "max_documents": 100,
+    "complete_page_required": true
+  },
+  "proof_boundary": "Two real public adapter reads; quiet local baseline and repeat. No hosted scheduling or notification delivery proof."
+}

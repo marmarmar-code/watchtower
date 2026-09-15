@@ -1,0 +1,48 @@
+{
+  "recipe": "eex_carbon_auction_result_changes",
+  "checked_at": "2026-09-15T09:57:33.786354+00:00",
+  "records": 156,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://public.eex-group.com/eex/eua-auction-report/emission-spot-primary-market-auction-report-2026-data.xlsx",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 66303,
+      "sha256": "ab52c5c2d9db6c8295d981490b17a47621b7a7e1f4861c5c49f3c36247bad4ab"
+    },
+    {
+      "url": "https://public.eex-group.com/eex/eua-auction-report/emission-spot-primary-market-auction-report-2026-data.xlsx",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 66303,
+      "sha256": "ab52c5c2d9db6c8295d981490b17a47621b7a7e1f4861c5c49f3c36247bad4ab"
+    },
+    {
+      "url": "https://public.eex-group.com/eex/eua-auction-report/emission-spot-primary-market-auction-report-2026-data.xlsx",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 66303,
+      "sha256": "ab52c5c2d9db6c8295d981490b17a47621b7a7e1f4861c5c49f3c36247bad4ab"
+    },
+    {
+      "url": "https://public.eex-group.com/eex/eua-auction-report/emission-spot-primary-market-auction-report-2026-data.xlsx",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 66303,
+      "sha256": "ab52c5c2d9db6c8295d981490b17a47621b7a7e1f4861c5c49f3c36247bad4ab"
+    }
+  ],
+  "config_sha256": "8cfb3be56d5ae1bf97309a15d5cc2c64cf61f5c45c2dee9ea82b941fdeed9487",
+  "module_sha256": "3997d7eb9f17a16da00bb38f1c191443bca557372de795f90a40ee639ee8a1c0",
+  "engine_sha256": "f2fa9dae38bf0c7b4a671c3b47ac7bc5f5883de6c4d315cc0e76016468adf950",
+  "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+  "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+  "targeted_tests": 62,
+  "limitations": [
+    "Local adapter repetition is not scheduled runtime or delivery proof.",
+    "Source dates and status are retained without inferred publication times or downstream outcomes."
+  ]
+}

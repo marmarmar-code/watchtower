@@ -1,0 +1,70 @@
+{
+  "method": "Two fresh issuer-page fetches per source. Compare exact keys and all compatible hashes against published prior parser using same response. Resolve each row through its official detail endpoint, require matching title/ISIN and unique official NewsWeb URL; verify each returned URL responds HTTP 200 on the same message path. Browser rendering is not tested. No state writes or notifications.",
+  "generated_at": "2026-09-10T07:28:45.987987+00:00",
+  "sources": [
+    {
+      "id": "euronext_polaris_media",
+      "runs": [
+        {
+          "at": "2026-09-10T07:28:37.423594+00:00",
+          "count": 5,
+          "unchanged_keys_and_hashes": true,
+          "improved_links": 5
+        },
+        {
+          "at": "2026-09-10T07:28:37.641878+00:00",
+          "count": 5,
+          "unchanged_keys_and_hashes": true,
+          "improved_links": 5
+        }
+      ],
+      "links": [
+        {
+          "url": "https://newsweb.oslobors.no/message/681923",
+          "resolved_url": "https://newsweb.oslobors.no/message/681923",
+          "title": "Polaris Media ASA (POL): Polaris Media kjøper seg opp til 100 % eierandel i Polaris Media Sør",
+          "direct_message": true,
+          "title_and_isin_verified_in_official_detail": true,
+          "http_status": 200,
+          "at": "2026-09-10T07:28:38.061037+00:00"
+        },
+        {
+          "url": "https://newsweb.oslobors.no/message/679781",
+          "resolved_url": "https://newsweb.oslobors.no/message/679781",
+          "title": "2. kvartal 2026: Sterk resultatvekst for Polaris Media i andre kvartal",
+          "direct_message": true,
+          "title_and_isin_verified_in_official_detail": true,
+          "http_status": 200,
+          "at": "2026-09-10T07:28:38.404117+00:00"
+        },
+        {
+          "url": "https://newsweb.oslobors.no/message/679247",
+          "resolved_url": "https://newsweb.oslobors.no/message/679247",
+          "title": "Polaris Media ASA (POL): Invitasjon til resultatpresentasjon 2. kvartal 2026",
+          "direct_message": true,
+          "title_and_isin_verified_in_official_detail": true,
+          "http_status": 200,
+          "at": "2026-09-10T07:28:38.765294+00:00"
+        },
+        {
+          "url": "https://newsweb.oslobors.no/message/675667",
+          "resolved_url": "https://newsweb.oslobors.no/message/675667",
+          "title": "Polaris Media ASA (POL): Salg av aksjer i Vend Marketplaces ASA",
+          "direct_message": true,
+          "title_and_isin_verified_in_official_detail": true,
+          "http_status": 200,
+          "at": "2026-09-10T07:28:39.097996+00:00"
+        },
+        {
+          "url": "https://newsweb.oslobors.no/message/675253",
+          "resolved_url": "https://newsweb.oslobors.no/message/675253",
+          "title": "Per Axel Koch varsler planlagt fratreden som konsernsjef i Polaris Media",
+          "direct_message": true,
+          "title_and_isin_verified_in_official_detail": true,
+          "http_status": 200,
+          "at": "2026-09-10T07:28:39.445585+00:00"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "havtil_news",
+  "selector": "main a[href*='/utforsk-fagstoff/fagstoff/']",
+  "checks": [
+    {
+      "at": "2026-09-09T12:27:17.589611+00:00",
+      "old_count": 10,
+      "new_count": 10,
+      "same_keys": true,
+      "keys_sha256": "97e0b3e7921f96feffa281f0e89c628742233b86659b2c5d85a92d7351dbd26f"
+    },
+    {
+      "at": "2026-09-09T12:27:18.305261+00:00",
+      "old_count": 10,
+      "new_count": 10,
+      "same_keys": true,
+      "keys_sha256": "97e0b3e7921f96feffa281f0e89c628742233b86659b2c5d85a92d7351dbd26f"
+    }
+  ]
+}

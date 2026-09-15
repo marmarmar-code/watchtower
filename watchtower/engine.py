@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timedelta, timezone
 from typing import Callable
 from hashlib import sha256
 
-from .config import Config, MIN_SOURCE_INTERVAL_MINUTES, SourceConfig
+from .config import Config, MIN_SOURCE_INTERVAL_MINUTES, SourceConfig, source_seen_limit
 from .models import Item, NotificationEntry
 from .notifier import Notifier, format_slack_entries
 from .state import StateStore
@@ -27,9 +27,141 @@ from .sources.patentstyret import PatentstyretSource
 from .sources.structured import StructuredSource
 from .sources.web_changes import WebChangesSource
 from .sources.ssb_data import SsbDataSource
+from .sources.food_recalls import FoodRecallsSource
+from .sources.nve_cases import NveCasesSource
+from .sources.medicine import MedicineSource
+from .sources.public_cases import PublicCasesSource
+from .sources.journals import JournalsSource
+from .sources.ted_notices import TedNoticesSource
+from .sources.building_cases import BuildingCasesSource
+from .sources.financial_decisions import FinancialDecisionsSource
+from .sources.aquaculture import AquacultureSource
+from .sources.research_awards import ResearchAwardsSource
+from .sources.account_documents import AccountDocumentsSource
+from .sources.press_cases import PressCasesSource
+from .sources.clinical_trials import ClinicalTrialsSource
+from .sources.clinical_trial_results import ClinicalTrialResultsSource
+from .sources.dmp_prices import DmpPricesSource
+from .sources.eu_merger_decisions import EUMergerDecisionsSource
+from .sources.customs_quotas import CustomsQuotasSource
+from .sources.customs_tariffs import CustomsTariffsSource
+from .sources.ofac_sdn import OfacSdnSource
+from .sources.number_allocations import NumberAllocationsSource
+from .sources.media_database import MediaDatabaseSource
+from .sources.consumer_decisions import ConsumerDecisionsSource
+from .sources.package_advisories import PackageAdvisoriesSource
+from .sources.package_metadata import PackageMetadataSource
+from .sources.device_actions import DeviceActionsSource
+from .sources.account_figures import AccountFiguresSource
+from .sources.consultations import ConsultationsSource
+from .sources.avalanche_warnings import AvalancheWarningsSource
+from .sources.hydropower import HydropowerSource
+from .sources.income_caps import IncomeCapsSource
+from .sources.novel_foods import NovelFoodsSource
+from .sources.staffing_register import StaffingRegisterSource
+from .sources.airworthiness import AirworthinessSource
+from .sources.emission_values import EmissionValuesSource
+from .sources.frequency_licences import FrequencyLicencesSource
+from .sources.law_gazette import LawGazetteSource
+from .sources.efta_procedural_documents import EftaProceduralDocumentsSource
+from .sources.short_positions import ShortPositionsSource
+from .sources.bankruptcy_notices import BankruptcyNoticesSource
+from .sources.umm_capacity import UmmCapacitySource
+from .sources.dsa_supervision import DsaSupervisionSource
+from .sources.certificate_auctions import CertificateAuctionsSource
+from .sources.corporate_actions import CorporateActionsSource
+from .sources.rasff_border_rejections import RasffBorderRejectionsSource
+from .sources.lobbying_finance import LobbyingFinanceSource
+from .sources.harmonised_standards import HarmonisedStandardsSource
+from .sources.carbon_auctions import CarbonAuctionsSource
+from .sources.research_corrections import ResearchCorrectionsSource
+from .sources.prac_signals import PracSignalsSource
+from .sources.pdmr_transactions import PdmrTransactionsSource
+from .sources.ets_compliance import EtsComplianceSource
+from .sources.gdpr_decisions import GdprDecisionsSource
+from .sources.import_quota_auctions import ImportQuotaAuctionsSource
+from .sources.aquaculture_production import AquacultureProductionSource
+from .sources.funding_calls import FundingCallsSource
+from .sources.food_establishments import FoodEstablishmentsSource
+from .sources.food_inspections import FoodInspectionsSource
+from .sources.ema_medicines import EmaMedicinesSource
+from .sources.ema_regulatory_events import EmaRegulatoryEventsSource
+from .sources.pesticides import PesticidesSource
+from .sources.methods_decisions import MethodsDecisionsSource
+from .sources.industrial_environment import IndustrialEnvironmentSource
+from .sources.industrial_documents import IndustrialDocumentsSource
+from .sources.company_discovery import CompanyDiscoverySource
+from .sources.parliament_votes import ParliamentVotesSource
+from .sources.parliament_vote_discovery import ParliamentVoteDiscoverySource
 
 
 SOURCE_TYPES: dict[str, type[Source]] = {
+    "industrial_environment": IndustrialEnvironmentSource,
+    "industrial_documents": IndustrialDocumentsSource,
+    "company_discovery": CompanyDiscoverySource,
+    "parliament_votes": ParliamentVotesSource,
+    "parliament_vote_discovery": ParliamentVoteDiscoverySource,
+    "pesticides": PesticidesSource,
+    "methods_decisions": MethodsDecisionsSource,
+    "ema_medicines": EmaMedicinesSource,
+    "ema_regulatory_events": EmaRegulatoryEventsSource,
+    "food_inspections": FoodInspectionsSource,
+    "clinical_trials": ClinicalTrialsSource,
+    "clinical_trial_results": ClinicalTrialResultsSource,
+    "dmp_prices": DmpPricesSource,
+    "eu_merger_decisions": EUMergerDecisionsSource,
+    "customs_quotas": CustomsQuotasSource,
+    "customs_tariffs": CustomsTariffsSource,
+    "ofac_sdn": OfacSdnSource,
+    "number_allocations": NumberAllocationsSource,
+    "media_database": MediaDatabaseSource,
+    "consumer_decisions": ConsumerDecisionsSource,
+    "package_advisories": PackageAdvisoriesSource,
+    "package_metadata": PackageMetadataSource,
+    "device_actions": DeviceActionsSource,
+    "account_figures": AccountFiguresSource,
+    "consultations": ConsultationsSource,
+    "avalanche_warnings": AvalancheWarningsSource,
+    "hydropower": HydropowerSource,
+    "income_caps": IncomeCapsSource,
+    "novel_foods": NovelFoodsSource,
+    "staffing_register": StaffingRegisterSource,
+    "airworthiness": AirworthinessSource,
+    "emission_values": EmissionValuesSource,
+    "frequency_licences": FrequencyLicencesSource,
+    "law_gazette": LawGazetteSource,
+    "efta_procedural_documents": EftaProceduralDocumentsSource,
+    "short_positions": ShortPositionsSource,
+    "bankruptcy_notices": BankruptcyNoticesSource,
+    "umm_capacity": UmmCapacitySource,
+    "dsa_supervision": DsaSupervisionSource,
+    "certificate_auctions": CertificateAuctionsSource,
+    "corporate_actions": CorporateActionsSource,
+    "rasff_border_rejections": RasffBorderRejectionsSource,
+    "lobbying_finance": LobbyingFinanceSource,
+    "harmonised_standards": HarmonisedStandardsSource,
+    "carbon_auctions": CarbonAuctionsSource,
+    "research_corrections": ResearchCorrectionsSource,
+    "prac_signals": PracSignalsSource,
+    "pdmr_transactions": PdmrTransactionsSource,
+    "ets_compliance": EtsComplianceSource,
+    "gdpr_decisions": GdprDecisionsSource,
+    "import_quota_auctions": ImportQuotaAuctionsSource,
+    "aquaculture_production": AquacultureProductionSource,
+    "funding_calls": FundingCallsSource,
+    "food_establishments": FoodEstablishmentsSource,
+    "account_documents": AccountDocumentsSource,
+    "press_cases": PressCasesSource,
+    "aquaculture": AquacultureSource,
+    "research_awards": ResearchAwardsSource,
+    "food_recalls": FoodRecallsSource,
+    "nve_cases": NveCasesSource,
+    "medicine": MedicineSource,
+    "public_cases": PublicCasesSource,
+    "journals": JournalsSource,
+    "ted_notices": TedNoticesSource,
+    "building_cases": BuildingCasesSource,
+    "financial_decisions": FinancialDecisionsSource,
     "json_records": StructuredSource,
     "csv_records": StructuredSource,
     "web_page": WebChangesSource,
@@ -185,6 +317,26 @@ def _save_alert_audit(state: StateStore, alerts: list[Alert], *, sent_at: str) -
     ])
 
 
+def _unique_web_link_alerts(alerts: list[Alert]) -> list[Alert]:
+    """Send an identical new link once when monitored lists overlap in a run.
+
+    Source histories remain independent. Different content, revisions and other
+    adapters are deliberately preserved; this is not cross-run deduplication.
+    """
+    seen = set()
+    result = []
+    for alert in alerts:
+        if alert.source.kind == "web_links" and alert.change == "new":
+            # Hash without the per-list source ID, without changing stored items.
+            identity = (alert.item.url, alert.item.key,
+                        replace(alert.item, source_id="").content_hash())
+            if identity in seen:
+                continue
+            seen.add(identity)
+        result.append(alert)
+    return result
+
+
 def run(
     config: Config,
     state: StateStore,
@@ -259,6 +411,7 @@ def run(
         except Exception as exc:
             errors[source_config.id] = _safe_error(exc)
 
+    alerts = _unique_web_link_alerts(alerts)
     if dry_run:
         return RunResult(checked, baselined, len(alerts), errors, warnings)
 
@@ -292,6 +445,7 @@ def evaluate(
     *,
     max_seen: int,
 ) -> tuple[dict, list[Alert], bool]:
+    max_seen = source_seen_limit(source, max_seen)
     seen = dict(previous.get("seen", {})) if previous else {}
     previous_order = list(previous.get("order", [])) if previous else []
     baseline = previous is None

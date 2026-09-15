@@ -1,0 +1,896 @@
+{
+  "recipe": "pdmr_transaction_form_changes",
+  "checked_at": "2026-09-15T11:35:32.777963+00:00",
+  "records": 18,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "config_sha256": "067c37fb6163f0cd545bcd7a285e31acee4bf281aa049522d974b31dcb83e67f",
+  "module_sha256": "27d9d830bc27a45424b2eecbcf5521caa45efcddf711327280a64acb0aa1b5ed",
+  "engine_sha256": "3134a8190879ef1e54b178a7495b257d83b4a203bf13f20060edc46d6cc49495",
+  "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+  "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+  "source": "Public NewsWeb category 1102 and attached transaction forms",
+  "index_records": 64,
+  "selected_messages": 18,
+  "attachments": 20,
+  "parsed_form_attachments": 14,
+  "transaction_sections": 15,
+  "announcement_copies": 3,
+  "unreadable_scans": 3,
+  "messages_without_attachments": 2,
+  "limited_messages": 5,
+  "targeted_tests": 60,
+  "reads": [
+    {
+      "url": "https://newsweb.oslobors.no/urls.json",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 138,
+      "sha256": "261e0b0b20fca581b74b64eb8ef3d0530c91aa5d2b20a2fba172e956745cdcbd"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/categories",
+      "method": "POST",
+      "request_json": null,
+      "bytes": 2711,
+      "sha256": "4cb5820a5fe2b0cb9eb6a70c10ede718c03d641672a7576c1cbdc6a741b33b6b"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/list?category=1102&fromDate=2026-09-01&toDate=2026-09-15&market=&issuer=&messageTitle=",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 38922,
+      "sha256": "28635011b1fe37f25de3974f2915c7f07f12a69cfce4457cbcb4935efcf6fc1e"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681422",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1544,
+      "sha256": "15adab7747744e252299ae6ed8fbb992e71d88b026fc44cc6a554ebd9fccf3ea"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681422&attachmentId=332543",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 109977,
+      "sha256": "00291ad4b50373a89372699bf01955ba9256c10307e18f1294f96d54fd139f52"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681637",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4122,
+      "sha256": "ae7000d1f7b5eba383e9fbda835f9c3b05671d5179725d9e989a3fc05c639d8e"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681637&attachmentId=332726",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 46984,
+      "sha256": "32b8ee64a19902fe1173cfac15f5d3364f98ae863c773376162377344e305182"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681637&attachmentId=332727",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 157169,
+      "sha256": "29ad1cde3762a156e2f4fe2337fbc3c5848da4e25dc1319a417e5a2f10427d8c"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681654",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 2693,
+      "sha256": "ae5ae4aa92f583f9126222dfb6f13b878d07fc1b30de6a4ce4c8e2e21526df1b"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681654&attachmentId=332742",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 83286,
+      "sha256": "25cf3b20befd8503781235e08a29b663467c72f22ec582ed7273f6af3f0e886a"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681685",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1301,
+      "sha256": "87999a3a9022d0cadd93fd92ef0c559c5fc2dbcb43415fe2d5f39d81b5e4eb54"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681685&attachmentId=332766",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 79804,
+      "sha256": "9ed323a6c8c927fd579889af461b26c781cd85331a699be4d93acc567c7afd18"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681813",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1545,
+      "sha256": "1d0d487ddcc441d66fe0cce616818be19036049bad5789f588aff8405f14f804"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681813&attachmentId=332856",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 109673,
+      "sha256": "96d89bf8ebf440f2b7fe0ab5e0a42ed672e6cc05c16a2b6cc2c975e9f474469e"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681862",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1546,
+      "sha256": "7888592420f99b2e799fa26bcc7f779f8d0b7bb977fd69a1398cf40131f7f28d"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681862&attachmentId=332883",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 109650,
+      "sha256": "5d63f18356e952ab101fbc231f77a8e6136b1ee35ffbfaa3dae36db8fdde616a"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681946",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1029,
+      "sha256": "9099c08450572f825fab481820367096f5a8c2dbcc3fdc1abe5d48f1c8f4560c"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681947",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1018,
+      "sha256": "8617b32aaff78f1ed7f49737c564d92e3eb40e669e60ae6fb594f84b7f2ee056"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681950",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1270,
+      "sha256": "f5722b317e26c3eefeedc83033d193bde1a84b46bd5d6830984ed29c3f2b7c60"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681950&attachmentId=332956",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 232005,
+      "sha256": "2fd1270dd74f0f683cf0830d6758cec0d0ad1131d85eb210ccb354b5def04eb4"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681951",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1303,
+      "sha256": "5c1ee533341b578c1473dd908aab79014cb58f0125af9d3cfdef2dc24b3691f7"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681951&attachmentId=332957",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 232005,
+      "sha256": "2fd1270dd74f0f683cf0830d6758cec0d0ad1131d85eb210ccb354b5def04eb4"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681952",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1270,
+      "sha256": "3d4d2423a21b266ef30a6450b1c4b130e1711ae571a78d518000ed4ac087228f"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681952&attachmentId=332958",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 232005,
+      "sha256": "2fd1270dd74f0f683cf0830d6758cec0d0ad1131d85eb210ccb354b5def04eb4"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681958",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4086,
+      "sha256": "c46eb10a54ab77f8a14ee4755429259a55359188a9bb43ef7f77410147989a86"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681958&attachmentId=332963",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 46614,
+      "sha256": "fc602e260e9117e732021faf0a8e91db4b3680c79f8587475eca0b4a5bff73ae"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681958&attachmentId=332964",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 213448,
+      "sha256": "ec5ba80d827228f64a283e6650720b1f282e2f78d46431b5d1962aac60cf1bbc"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682089",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1277,
+      "sha256": "f2ad0c6771964f64862a770c41d51df70d111c932ec699f59fe15f0493bdaf53"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682089&attachmentId=333077",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 90821,
+      "sha256": "69754d4bec0dabcfa7da6ec3957643edf34d81e4477c9be595fdb6e45153cd99"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682090",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1305,
+      "sha256": "340138f8ac88a717de8be715dcc8f6acc1946e98f5341ce2806fe20751f081c5"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682090&attachmentId=333078",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 90821,
+      "sha256": "69754d4bec0dabcfa7da6ec3957643edf34d81e4477c9be595fdb6e45153cd99"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682152",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4192,
+      "sha256": "5243bd7b57cc9cddf675d190767f1de07f0c290ed8866178987d012d07841172"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682152&attachmentId=333132",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 48000,
+      "sha256": "e7c08daaa65f801929874b2e2f31b43c8acc41c156fc30ae65ae110bf16ad538"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682152&attachmentId=333133",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 181051,
+      "sha256": "ce3187bc7057f7716015435a6ac09794d6dc1049ac064b5d76639a5b2f4be962"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682152&attachmentId=333134",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 273006,
+      "sha256": "bc1a7ab51b5b8422d2b62dea55c22848e0a237c7a8376ac3c2ea47b7c7ac16e1"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682153",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 2562,
+      "sha256": "8bccd83f8c0f1f505a2ee185e7d45535584a4c26d4ed8978a1a66a60463afe5e"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682153&attachmentId=333135",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 83043,
+      "sha256": "61daf38df217ffbfa49457480236fa53e88692930bf6d88b4207c7a0cc3d45e1"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682296",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1546,
+      "sha256": "0df4e4dc40d93886f55402bb5feb4f7ac5afc79a45a5b5b8eaf29986676cbdf9"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682296&attachmentId=333250",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 110348,
+      "sha256": "9c21a5ca114e2a683e084ab227f752642bfa9bfb14ad7cb3a7030fc742acb4ae"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682321",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3295,
+      "sha256": "c40a46ccc7b040794d82eed22b0136496bb4c1e81307098571d6f3028098fa5b"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682321&attachmentId=333261",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 226307,
+      "sha256": "cf72a7aeff84e28a0918b2c7b4b3207a1cbe5f135fdae7df84d231b87ff314f8"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681422",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1544,
+      "sha256": "a3f8f6a823d912d72aec1c6d7b6637594fbad4e95b1f747b313f5b355967114f"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681637",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4122,
+      "sha256": "7a4d1ab96140a297eba03f4e484ff6420accabe3cd0c1e09b57e05501e9eadb4"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681654",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 2693,
+      "sha256": "4347aa7f91dd0f72f5f52067c0770385b4ee26258ce62b03252e0804eadeb3b1"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681685",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1301,
+      "sha256": "f4af0c8d3ddceeb90616550bcba8a1ae57f02756ac2bbba9a53a0804927ad085"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681813",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1545,
+      "sha256": "12d82dacfd60fa292ccf5888b5972aa41de81ddeea4fc44cd8b2aecfb949b7ec"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681862",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1546,
+      "sha256": "b217abee8da7864b1184ac1b9a385e961bdf44b6c1234a20f8c1e2a6d14ff70d"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681946",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1029,
+      "sha256": "e3671cdd836b5922d35d8d69e24485534e2fb6c0ef67efddb3aa4b352cacc471"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681947",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1018,
+      "sha256": "074c95459aaf41d75441799cecd412731931d7c545d88f8f6c4c42bd5a59e414"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681950",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1270,
+      "sha256": "9e3bdf6ed28328b58f3bd17128169688189b2b06ab444d5410b42b76a4407a62"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681951",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1303,
+      "sha256": "3c3a167aff577023fc44acff352df7ebe7138dfbf17b6dac928edb46d528379a"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681952",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1270,
+      "sha256": "287874efc7d1e2b56ab9ecb0a8adb57ccd43eaf1b50fc462c473079bf54253ce"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681958",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4086,
+      "sha256": "970ebdad3d050759a65ca3e6459e9d66ec6ddf1d55caf670a12dffce264a2030"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682089",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1277,
+      "sha256": "41068e69ac4e99ea922912c98703712ff48d5cf33d224b5f5615299c78e2740f"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682090",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1305,
+      "sha256": "efa9080581428302edb4d95349295add9337f19b8a0dd60cbc43b7c99ba06045"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682152",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4192,
+      "sha256": "d5386df201a74825ca38468291a57b5fbbf38afa10799018d32b95bf14cf76af"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682153",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 2562,
+      "sha256": "71314f730033c786839c03d8274e2e60ad72463b069064d991c58608cac4bff6"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682296",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1546,
+      "sha256": "72397d549ff608443927ffb72dd380670a0c104804f6bef1d4056de058e91550"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682321",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3295,
+      "sha256": "5bb6b46f462200f4e76319ef7097e5ac05c6feaf2e7ea90a3736c9d6de84f2f0"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/list?category=1102&fromDate=2026-09-01&toDate=2026-09-15&market=&issuer=&messageTitle=",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 38922,
+      "sha256": "56586214be35c2e21c7ffa68492b23a62d203dee8e99cde0c866c65a109e19bd"
+    },
+    {
+      "url": "https://newsweb.oslobors.no/urls.json",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 138,
+      "sha256": "261e0b0b20fca581b74b64eb8ef3d0530c91aa5d2b20a2fba172e956745cdcbd"
+    },
+    {
+      "url": "https://newsweb.oslobors.no/urls.json",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 138,
+      "sha256": "261e0b0b20fca581b74b64eb8ef3d0530c91aa5d2b20a2fba172e956745cdcbd"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/categories",
+      "method": "POST",
+      "request_json": null,
+      "bytes": 2711,
+      "sha256": "2331018854dc01d3c3d1b0ac6299c3408e1dea56c0dd1fb2d95aaaa87c89b9a5"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/list?category=1102&fromDate=2026-09-01&toDate=2026-09-15&market=&issuer=&messageTitle=",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 38922,
+      "sha256": "cb0ec24c90368cdedc067b1d0707e2ee65357cfa7e7941491b1390cf1fc6a7e8"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681422",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1544,
+      "sha256": "fcdb4c2c6a99da931fd039fcc4b145f9e0f0098612c373bf631b056f83469602"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681422&attachmentId=332543",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 109977,
+      "sha256": "00291ad4b50373a89372699bf01955ba9256c10307e18f1294f96d54fd139f52"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681637",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4122,
+      "sha256": "5aea5e35e77a24ea4b59532857334b0ff39ab68c8b3adf5bac91a103cee89e26"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681637&attachmentId=332726",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 46984,
+      "sha256": "32b8ee64a19902fe1173cfac15f5d3364f98ae863c773376162377344e305182"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681637&attachmentId=332727",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 157169,
+      "sha256": "29ad1cde3762a156e2f4fe2337fbc3c5848da4e25dc1319a417e5a2f10427d8c"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681654",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 2693,
+      "sha256": "2330b290633040585741903feeeb98f196985bcb04ed3afdc4eb6f1f67840875"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681654&attachmentId=332742",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 83286,
+      "sha256": "25cf3b20befd8503781235e08a29b663467c72f22ec582ed7273f6af3f0e886a"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681685",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1301,
+      "sha256": "0823703cbfb66f94e8a3a8576955f1542f6b5dcca506fda1d06af46619a3d856"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681685&attachmentId=332766",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 79804,
+      "sha256": "9ed323a6c8c927fd579889af461b26c781cd85331a699be4d93acc567c7afd18"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681813",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1545,
+      "sha256": "fa55ad46e52d3f3c63702f05fd670d903ca89baaa112de069092a528459f9821"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681813&attachmentId=332856",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 109673,
+      "sha256": "96d89bf8ebf440f2b7fe0ab5e0a42ed672e6cc05c16a2b6cc2c975e9f474469e"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681862",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1546,
+      "sha256": "7cb50149d49d40446ff7d97ce067a55cf3a953fbd28d4240684b22cb09489349"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681862&attachmentId=332883",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 109650,
+      "sha256": "5d63f18356e952ab101fbc231f77a8e6136b1ee35ffbfaa3dae36db8fdde616a"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681946",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1029,
+      "sha256": "bf5810c36d6a4da7570060e692e4aca21881cf1e2953c3d00f1b40ac34117ee2"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681947",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1018,
+      "sha256": "cba95ac07506f0fa065a4dc36c314127e11e156f1aa15836c08afbbbba6dffd2"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681950",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1270,
+      "sha256": "089ef1dfcaa5f734465328a846d8cc4e39768f2f591cf469380f5ded39792784"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681950&attachmentId=332956",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 232005,
+      "sha256": "2fd1270dd74f0f683cf0830d6758cec0d0ad1131d85eb210ccb354b5def04eb4"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681951",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1303,
+      "sha256": "013692a7bee310f5936c82bb5e9162f4a941d2c87d81132301a3876649ed980a"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681951&attachmentId=332957",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 232005,
+      "sha256": "2fd1270dd74f0f683cf0830d6758cec0d0ad1131d85eb210ccb354b5def04eb4"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681952",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1270,
+      "sha256": "cf2f9334352e7846f0bc532fa4d1fb4f7624661dae768fccd292ee085cd40e97"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681952&attachmentId=332958",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 232005,
+      "sha256": "2fd1270dd74f0f683cf0830d6758cec0d0ad1131d85eb210ccb354b5def04eb4"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681958",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4086,
+      "sha256": "e1eb47af6fcbb63bb6b1c9144b1016726f20b944fe5e055d63aa06d7e934d80d"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681958&attachmentId=332963",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 46614,
+      "sha256": "fc602e260e9117e732021faf0a8e91db4b3680c79f8587475eca0b4a5bff73ae"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=681958&attachmentId=332964",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 213448,
+      "sha256": "ec5ba80d827228f64a283e6650720b1f282e2f78d46431b5d1962aac60cf1bbc"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682089",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1277,
+      "sha256": "ea944bf725de0efe1831d9f304ca5a6f7859735f248354e78ca32a05ce3a4447"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682089&attachmentId=333077",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 90821,
+      "sha256": "69754d4bec0dabcfa7da6ec3957643edf34d81e4477c9be595fdb6e45153cd99"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682090",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1305,
+      "sha256": "1c85a3ae5008b2bf2a63fa28910dc2e2fee8314aea3e86986f46a141c8cf2e7d"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682090&attachmentId=333078",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 90821,
+      "sha256": "69754d4bec0dabcfa7da6ec3957643edf34d81e4477c9be595fdb6e45153cd99"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682152",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4192,
+      "sha256": "781b9dc5331de6dd2884f60ae06625a0b856aeebd4f56d797eba79721a2d0f04"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682152&attachmentId=333132",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 48000,
+      "sha256": "e7c08daaa65f801929874b2e2f31b43c8acc41c156fc30ae65ae110bf16ad538"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682152&attachmentId=333133",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 181051,
+      "sha256": "ce3187bc7057f7716015435a6ac09794d6dc1049ac064b5d76639a5b2f4be962"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682152&attachmentId=333134",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 273006,
+      "sha256": "bc1a7ab51b5b8422d2b62dea55c22848e0a237c7a8376ac3c2ea47b7c7ac16e1"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682153",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 2562,
+      "sha256": "f3e4c6c99127e7e9b8ddfb038dbbd70beab7747b8675983f3aab8b98ca2479f8"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682153&attachmentId=333135",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 83043,
+      "sha256": "61daf38df217ffbfa49457480236fa53e88692930bf6d88b4207c7a0cc3d45e1"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682296",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1546,
+      "sha256": "605c7e2d56f8fa47c135b53dff6e0c5bab699e09a3ece9df8bf22504cb65a19c"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682296&attachmentId=333250",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 110348,
+      "sha256": "9c21a5ca114e2a683e084ab227f752642bfa9bfb14ad7cb3a7030fc742acb4ae"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682321",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3295,
+      "sha256": "72bb6dae3a4d2a333384ed701bb8f8505d9664f3cee9962190a2dcae4e5953d6"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/attachment?messageId=682321&attachmentId=333261",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 226307,
+      "sha256": "cf72a7aeff84e28a0918b2c7b4b3207a1cbe5f135fdae7df84d231b87ff314f8"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681422",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1544,
+      "sha256": "a53a01b7c2d81022db0c2d396280af73adf710d5be6df1ae2e55af865eab8819"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681637",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4122,
+      "sha256": "7c3af77fdc01d30d7bf29de9d34bf6eb5e65da10535f0ae6a7f8c05a79af29be"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681654",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 2693,
+      "sha256": "ced36fb1e58a0dcb7e95fe07183b8f34c157db2b87bbf97b57c41903439b4b36"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681685",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1301,
+      "sha256": "c01f23b9d33a4a982a7d8b8cd8bea0dea95d18f3cae118caf9b44e8a9eb7693d"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681813",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1545,
+      "sha256": "0c67a864cdd9319fb9900446b83d9282144e9eb62143e062d6d932527aebc3e8"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681862",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1546,
+      "sha256": "409a1bebfd8dd0b55dfc15534badc6baa0e9663073a4012fbae935613e1db23e"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681946",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1029,
+      "sha256": "d6c8043295853d9b94ed156e8d8418718f42f5bb34596e8484afe772617a9a3f"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681947",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1018,
+      "sha256": "9fe6e96babfb050a2fe0c0b8588061f9b2156f5f1063d26f748779af5304e89d"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681950",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1270,
+      "sha256": "4255c612092a97869ee2463513633aac640b46797241ff90bab5a48fba479128"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681951",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1303,
+      "sha256": "f4f2760eddfb60eb51129b856e999d4f49ef96456f3cd0a2cf8e2422eb888724"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681952",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1270,
+      "sha256": "d4869b44eebbd48d829e1437839078e38669c40bc73cb7f2b5bc2a5c6d244925"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=681958",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4086,
+      "sha256": "b4f4db2a7b9273ff4f75385fa5d187d9dbc42a6b116387284ca59ccfe057ae1a"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682089",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1277,
+      "sha256": "9a53cde9b05884af759975eab7bcf085b2f9723be811e6704ca90a83185c9f1a"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682090",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1305,
+      "sha256": "0d5ff2d01c33fa3289931991f371c8296c794cbaba60d2b603d80a9e5de86a50"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682152",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4192,
+      "sha256": "472d74719ff1f70f4c26e4f8c19cba61873677483c07aa26bed20e78b8ddd1f4"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682153",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 2562,
+      "sha256": "621d24f5a1587d9428ee8dcc427a2e8cbdb9404d38bf9fd425ef1f78068a21b9"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682296",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1546,
+      "sha256": "d8fd93e07f03a4c6c314aa13f302496ccfe28987c5cc4cb5ff5f9ddb54058f54"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/message?messageId=682321",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3295,
+      "sha256": "4eaa8289476aae9afac1cbd8ba4af7d2773380463680518c0e4622b2ca1ece84"
+    },
+    {
+      "url": "https://api3.oslo.oslobors.no/v1/newsreader/list?category=1102&fromDate=2026-09-01&toDate=2026-09-15&market=&issuer=&messageTitle=",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 38922,
+      "sha256": "2174a8767e1410e648299f843e38a01e187dbb7517ac4ea1706fa6b61ac3ad8e"
+    },
+    {
+      "url": "https://newsweb.oslobors.no/urls.json",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 138,
+      "sha256": "261e0b0b20fca581b74b64eb8ef3d0530c91aa5d2b20a2fba172e956745cdcbd"
+    }
+  ],
+  "parser_sha256": {
+    "pdmr_mar.py": "17615806071fd44dcb5c9aa8f01fc53722083b1687fc370fcdbad92eaaf7ef59",
+    "pdmr_krt.py": "8a900bd0db29e02c23dc305d375c9298e0d50d4e2b27fe0f4de6b687bfcb4b49"
+  },
+  "limitations": [
+    "Five explicitly selected issuers; not all listed issuers or all transaction-form layouts.",
+    "The API confirms overflow=false for the observed date window; no unobserved pagination is assumed.",
+    "Fourteen forms expose fifteen transaction sections. Three scanned attachments are not OCR-extracted; two messages have no attachment.",
+    "MAR price/volume and separate aggregate columns are retained literally; no locale conversion or combined totals.",
+    "KRT average unit price, aggregate volume and total are separate source fields.",
+    "Source LEI discrepancies are preserved without correction.",
+    "Form notification/amendment wording and API correction links are independent.",
+    "Announcement PDF copies are recognized by exact attachment name, matching title and source labels.",
+    "PDF bytes are read once per poll. Index and attachment manifests are re-read; two full polls produced identical state.",
+    "This local proof does not establish scheduled runtime recurrence or delivery."
+  ]
+}

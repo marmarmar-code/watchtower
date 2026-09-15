@@ -1,0 +1,314 @@
+[
+  {
+    "recipe": "mattilsynet_recall_products",
+    "checked_at": "2026-09-11T09:37:33.166540+00:00",
+    "records": 10,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger",
+        "bytes": 87450,
+        "sha256": "1fe7217f39d2346be056b637ef7ba8b46de096f9a4fb8a364686fee381d0ae74"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/europris-tilbakekaller-malt-kanel-fra-krydderhuset",
+        "bytes": 75223,
+        "sha256": "47ddf9197c7523ac0d92b1193d8d158f04cded8347db8d0ae156560795935a2a"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/kvite-ostar-fra-brubakken-gardsmeieri-vert-kalla-tilbake-grunna-funn-av-listeria-monocytogenes",
+        "bytes": 77116,
+        "sha256": "7c67882c21776aed0cd8320efccac8977ee81abe63236df4b6a77b9fb2c0a5cf"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/coop-tilbakekaller-mon-ami-fransk-brie-pa-grunn-av-mistanke-om-listeria",
+        "bytes": 74354,
+        "sha256": "1c26bf71d2787b41c2606a4f81c73f9485888e2d9b8dff49ac977d1465e746cc"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/first-price-rokt-laks-skivet-200-g-og-fiskemannen-rokt-laks-skivet-220-g-kalles-tilbake-grunnet-funn-av-listeria",
+        "bytes": 75286,
+        "sha256": "a07c6f25c2f28885b1cc7fd06697fc57a3d34a9645bafffd567dfd50fc215e52"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/spirefro-vital-miks-40-g-fra-rapunzel-kalles-tilbake-pa-grunn-av-funn-av-e.coli",
+        "bytes": 75056,
+        "sha256": "6613c9bc4327fbd716d30d7153b5bf113baba990eadac50cb6a8b4b08b417ab2"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/normal-as-tilbakekaller-godteri-fra-kina-pa-grunn-av-innhold-av-fargestoffet-e123",
+        "bytes": 75180,
+        "sha256": "654105c204b0394c35a8ced3e14b0b45c2b1c69b3451095c3bfdb64b3c1976ab"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/frosne-froskelar-fra-vietnam-blir-kalla-tilbake-etter-funn-av-ulovlege-antibiotikarestar",
+        "bytes": 73889,
+        "sha256": "97319b0d005154482536081bed0b8c42f639318f6204b958c60b8500c05c9cdd"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/geia-food-as-tilbakekaller-produktet-bapao-beef",
+        "bytes": 73882,
+        "sha256": "18dfe401af801e3d3f344e8e7c43927c402cbe7f50c044f5f0d8bb852ac077ad"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/bama-tilbakekaller-ferdigvasket-babyspinat-og-babyleaf-mix-pa-grunn-av-mistanke-om-listeria",
+        "bytes": 74171,
+        "sha256": "d76d93aba8724e0593655d337a943770f868fd80f01f307773b19ea47f619288"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/sunrise-food-as-tilbakekaller-basmatiris-fra-pakistan-etter-funn-av-plantevernmiddelrester-over-grenseverdi",
+        "bytes": 74617,
+        "sha256": "6537f326046dbcc9c101fcf2fa04b4fa6c96b7df954ae786fcd6f0f09e8e133a"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger",
+        "bytes": 87450,
+        "sha256": "1fe7217f39d2346be056b637ef7ba8b46de096f9a4fb8a364686fee381d0ae74"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/europris-tilbakekaller-malt-kanel-fra-krydderhuset",
+        "bytes": 75223,
+        "sha256": "47ddf9197c7523ac0d92b1193d8d158f04cded8347db8d0ae156560795935a2a"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/kvite-ostar-fra-brubakken-gardsmeieri-vert-kalla-tilbake-grunna-funn-av-listeria-monocytogenes",
+        "bytes": 77116,
+        "sha256": "7c67882c21776aed0cd8320efccac8977ee81abe63236df4b6a77b9fb2c0a5cf"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/coop-tilbakekaller-mon-ami-fransk-brie-pa-grunn-av-mistanke-om-listeria",
+        "bytes": 74354,
+        "sha256": "1c26bf71d2787b41c2606a4f81c73f9485888e2d9b8dff49ac977d1465e746cc"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/first-price-rokt-laks-skivet-200-g-og-fiskemannen-rokt-laks-skivet-220-g-kalles-tilbake-grunnet-funn-av-listeria",
+        "bytes": 75286,
+        "sha256": "a07c6f25c2f28885b1cc7fd06697fc57a3d34a9645bafffd567dfd50fc215e52"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/spirefro-vital-miks-40-g-fra-rapunzel-kalles-tilbake-pa-grunn-av-funn-av-e.coli",
+        "bytes": 75056,
+        "sha256": "6613c9bc4327fbd716d30d7153b5bf113baba990eadac50cb6a8b4b08b417ab2"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/normal-as-tilbakekaller-godteri-fra-kina-pa-grunn-av-innhold-av-fargestoffet-e123",
+        "bytes": 75180,
+        "sha256": "654105c204b0394c35a8ced3e14b0b45c2b1c69b3451095c3bfdb64b3c1976ab"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/frosne-froskelar-fra-vietnam-blir-kalla-tilbake-etter-funn-av-ulovlege-antibiotikarestar",
+        "bytes": 73889,
+        "sha256": "97319b0d005154482536081bed0b8c42f639318f6204b958c60b8500c05c9cdd"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/geia-food-as-tilbakekaller-produktet-bapao-beef",
+        "bytes": 73882,
+        "sha256": "18dfe401af801e3d3f344e8e7c43927c402cbe7f50c044f5f0d8bb852ac077ad"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/bama-tilbakekaller-ferdigvasket-babyspinat-og-babyleaf-mix-pa-grunn-av-mistanke-om-listeria",
+        "bytes": 74171,
+        "sha256": "d76d93aba8724e0593655d337a943770f868fd80f01f307773b19ea47f619288"
+      },
+      {
+        "url": "https://www.mattilsynet.no/tilbakekallinger/sunrise-food-as-tilbakekaller-basmatiris-fra-pakistan-etter-funn-av-plantevernmiddelrester-over-grenseverdi",
+        "bytes": 74617,
+        "sha256": "6537f326046dbcc9c101fcf2fa04b4fa6c96b7df954ae786fcd6f0f09e8e133a"
+      }
+    ],
+    "config_sha256": "7c44ffbdf4f1696334c4ca9b6ed360879432b2f2b1999189508bf18473b457a9",
+    "module_sha256": "b5464d765831eb96b1a9cfac0da41b90061259e6ccb7f8e94a8a738c1579ba61"
+  },
+  {
+    "recipe": "nve_solar_cases",
+    "checked_at": "2026-09-11T09:37:33.284837+00:00",
+    "records": 115,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.nve.no/umbraco/api/license/getall?type=A-8&pageNumber=1&pageSize=1000&sortBy=name&sortDir=ASC&filterText=&caseType=00&county=00&municipality=00&stadium=0&size=0&progress=0",
+        "bytes": 52602,
+        "sha256": "03358b13178455f87d49977ce08ca8b74d81deea379f625c314b13310d8d56b3"
+      },
+      {
+        "url": "https://www.nve.no/umbraco/api/license/getall?type=A-8&pageNumber=1&pageSize=1000&sortBy=name&sortDir=ASC&filterText=&caseType=00&county=00&municipality=00&stadium=0&size=0&progress=0",
+        "bytes": 52602,
+        "sha256": "03358b13178455f87d49977ce08ca8b74d81deea379f625c314b13310d8d56b3"
+      }
+    ],
+    "config_sha256": "757f850a36db18d3b595666bc1168450ce629c00df5ce356139b18fac472998e",
+    "module_sha256": "48b1065ea25b6b5e3cd030a915d544bb0c7fe1099b9bd32f2370b4a870febdab"
+  },
+  {
+    "recipe": "dmp_shortage_periods",
+    "checked_at": "2026-09-11T09:37:36.092438+00:00",
+    "records": 1286,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.dmp.no/forsyningssikkerhet/legemiddelmangel/oversikt-over-legemiddelmangel---for-pasienter-og-helsepersonell",
+        "bytes": 922280,
+        "sha256": "6e37bfdcf981485ce4387d3ac9e22072cccc14ee2cc182fa1689b9e63e1fb06f"
+      },
+      {
+        "url": "https://www.dmp.no/forsyningssikkerhet/legemiddelmangel/oversikt-over-legemiddelmangel---for-pasienter-og-helsepersonell",
+        "bytes": 922280,
+        "sha256": "6e37bfdcf981485ce4387d3ac9e22072cccc14ee2cc182fa1689b9e63e1fb06f"
+      }
+    ],
+    "config_sha256": "980a8af5d60175bd1d521a632cdde2a111fd9266795c7a29f11730f8cbe0e27a",
+    "module_sha256": "54af3be336ea4ef1edc1e90e862b4144223d04ae2ac05fa9386074b0e189372d"
+  },
+  {
+    "recipe": "kofa_case_progress",
+    "checked_at": "2026-09-11T09:37:39.352763+00:00",
+    "records": 50,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker",
+        "bytes": 89100,
+        "sha256": "b59d690898479ebeef6de183e9521ee7a8a78ff88da2110f33502131d1bcfffa"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/2?widget=single",
+        "bytes": 89573,
+        "sha256": "9a8bb930de8a6e82671b87161531a6d1e1df1209cd2ec763fd5d2c5a4e96d05a"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/3?widget=single",
+        "bytes": 89642,
+        "sha256": "2fedb3aae983e86a8e1df1b49a60f81a2192273d32d049bb1235b86e8c025df0"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/4?widget=single",
+        "bytes": 89845,
+        "sha256": "3b5884f609b89c6d9b37cd361ee4cd335bf2724375a788eb086c7b24db311dc6"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/5?widget=single",
+        "bytes": 89796,
+        "sha256": "e657b70ba65c23685771759e1d5a1f734619c315f592c47ef66a0f822aac5267"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker",
+        "bytes": 89100,
+        "sha256": "6dfbf2f4b5cfef4ad8532e32ebb1ed1f975173803966f233a9e4e33e94e2cc48"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/2?widget=single",
+        "bytes": 89573,
+        "sha256": "ff9934215a9c92980ca6ac5875e15067c79c4be1dafbeda0958aac8ff236d40a"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/3?widget=single",
+        "bytes": 89642,
+        "sha256": "ecbc518604bb61a5e775305adc9fc6331800afc4d966f88b9350e7ca9631505c"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/4?widget=single",
+        "bytes": 89845,
+        "sha256": "8acf18f5c0d055f3ae2272a73b00b6ca6c2e17baa3127e0dc49d43d28ebe588e"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/5?widget=single",
+        "bytes": 89796,
+        "sha256": "214804a898e011ed096e5321ad0b8bd841ed2b613c12b9f586ea380e4359587f"
+      }
+    ],
+    "config_sha256": "784b2eabbb042ae752705ade027d823fadb693c45b1052aae3e37a3fc88d3a5e",
+    "module_sha256": "915aabcc5366bfce74a11c7c8f22e01390babdc539a2ac1d52df3b946f4679d4"
+  },
+  {
+    "recipe": "media_appeal_cases",
+    "checked_at": "2026-09-11T09:37:41.056683+00:00",
+    "records": 30,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker",
+        "bytes": 84347,
+        "sha256": "3d10c9f81ad81ba5455bfc82166d72899e61cddc6d19c95e0874d1f5ef6c800e"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker/page/2?widget=medieklagenemnda-filter",
+        "bytes": 84763,
+        "sha256": "aee42156340aa411cf3fe3d124dae9ed3290aed45ecf32bfa17448303814e87f"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker/page/3?widget=medieklagenemnda-filter",
+        "bytes": 84922,
+        "sha256": "2053318a9d704cb1e172865480e6851ac00e57bbafe7be9effa16ecf473a70e2"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker",
+        "bytes": 84347,
+        "sha256": "06f745c5263140ca4b6ef1561b7cb05b951a9911c8527496f64c58a27850bbd9"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker/page/2?widget=medieklagenemnda-filter",
+        "bytes": 84763,
+        "sha256": "c2a3b440f69034e337f5e74243aa0fe39c68acd4384b21c18e6560ad74bb401b"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker/page/3?widget=medieklagenemnda-filter",
+        "bytes": 84922,
+        "sha256": "42ff539e7e91214ac2e2af2907dd89d2ffe80cd52359182f36d652071b117aa7"
+      }
+    ],
+    "config_sha256": "0f090a6c676e670014ff497da85749a4ea6a015aa375485009b62c558d25d3b5",
+    "module_sha256": "915aabcc5366bfce74a11c7c8f22e01390babdc539a2ac1d52df3b946f4679d4"
+  },
+  {
+    "recipe": "marketing_appeal_cases",
+    "checked_at": "2026-09-11T09:37:42.682355+00:00",
+    "records": 30,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker",
+        "bytes": 89131,
+        "sha256": "9cdad96704b6dec856f1e68f195a34b6e88e0fce344ea468c39bc047acbe3e2f"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker/page/2?widget=markedsrad-filter",
+        "bytes": 89625,
+        "sha256": "96cbed4f9ea29957240b8728a3793fc51a8c0b2ff1ea8981e94812e575bc09b9"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker/page/3?widget=markedsrad-filter",
+        "bytes": 89554,
+        "sha256": "f5dd06086d7a1e1bcc17a2d4e7103c44d1fa265662404975038a833cac444ddf"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker",
+        "bytes": 89131,
+        "sha256": "bf037140ed950fe2ff066aaccdbd24379237505723be5f7cde0624dc572a2826"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker/page/2?widget=markedsrad-filter",
+        "bytes": 89625,
+        "sha256": "17ed4591f283c6bc4d306b35c5480cb30bf01d85317d36ef76c6897b34422b6e"
+      },
+      {
+        "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker/page/3?widget=markedsrad-filter",
+        "bytes": 89554,
+        "sha256": "d9028d467f8eb5fd1bdae3fb44c1b5e107e9544a2a6ca70c8465d8f5d47f6ab4"
+      }
+    ],
+    "config_sha256": "36d0bd60e767bc747e8d329d85201a22b79c0f33e647574ca649bd5839e072f1",
+    "module_sha256": "915aabcc5366bfce74a11c7c8f22e01390babdc539a2ac1d52df3b946f4679d4"
+  }
+]

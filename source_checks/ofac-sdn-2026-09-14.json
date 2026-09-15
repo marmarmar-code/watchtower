@@ -1,0 +1,74 @@
+[
+  {
+    "recipe": "ofac_sdn_business_changes",
+    "checked_at": "2026-09-14T08:44:32.548950+00:00",
+    "records": 861,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/SdnList",
+        "bytes": 12104,
+        "sha256": "901ca4d6cb901d7db98bb05e380f6b4d5ceb47e24bbc9cd9b87146fcca2f6e2b"
+      },
+      {
+        "url": "https://wc2h-sls-prod-public-published.s3.us-gov-west-1.amazonaws.com/Published/12b71ad8-073b-481f-95e6-ee474a18aedd/2026-09-09/8077e100-a6c9-4d99-a7c9-1b3b3161482f/SDN_XML.ZIP",
+        "bytes": 2567096,
+        "sha256": "9cfb5e8fcbfe042a9472da2869f058a57ef26ded08f3a52052dcc973aed88211"
+      },
+      {
+        "url": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/SdnList",
+        "bytes": 12104,
+        "sha256": "901ca4d6cb901d7db98bb05e380f6b4d5ceb47e24bbc9cd9b87146fcca2f6e2b"
+      },
+      {
+        "url": "https://wc2h-sls-prod-public-published.s3.us-gov-west-1.amazonaws.com/Published/12b71ad8-073b-481f-95e6-ee474a18aedd/2026-09-09/8077e100-a6c9-4d99-a7c9-1b3b3161482f/SDN_XML.ZIP",
+        "bytes": 2567096,
+        "sha256": "9cfb5e8fcbfe042a9472da2869f058a57ef26ded08f3a52052dcc973aed88211"
+      }
+    ],
+    "config_sha256": "df010bd54b40828c2507d52547b0ec5db4f34bde8fc85cf73b3b3b36f726434a",
+    "module_sha256": "82edcd8f8c6b371ae0189dc8a57644a9a336e5e88baed15291d30fce6ae0c5e7",
+    "register_records": 19388,
+    "publication_date": "2026-09-10",
+    "xml_sha256": "387a9a810e4b6188a0e2a86f46c40c6f724f57f9a6c23ee51964ba4bb3d3f70e",
+    "proof_boundary": "Two actual final-recipe engine polls with identical full state and zero alerts. Not hosted scheduling or later changed-entry delivery evidence."
+  },
+  {
+    "recipe": "ofac_sdn_vessel_changes",
+    "checked_at": "2026-09-14T08:44:41.489812+00:00",
+    "records": 1540,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/SdnList",
+        "bytes": 12104,
+        "sha256": "901ca4d6cb901d7db98bb05e380f6b4d5ceb47e24bbc9cd9b87146fcca2f6e2b"
+      },
+      {
+        "url": "https://wc2h-sls-prod-public-published.s3.us-gov-west-1.amazonaws.com/Published/12b71ad8-073b-481f-95e6-ee474a18aedd/2026-09-09/8077e100-a6c9-4d99-a7c9-1b3b3161482f/SDN_XML.ZIP",
+        "bytes": 2567096,
+        "sha256": "9cfb5e8fcbfe042a9472da2869f058a57ef26ded08f3a52052dcc973aed88211"
+      },
+      {
+        "url": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/SdnList",
+        "bytes": 12104,
+        "sha256": "901ca4d6cb901d7db98bb05e380f6b4d5ceb47e24bbc9cd9b87146fcca2f6e2b"
+      },
+      {
+        "url": "https://wc2h-sls-prod-public-published.s3.us-gov-west-1.amazonaws.com/Published/12b71ad8-073b-481f-95e6-ee474a18aedd/2026-09-09/8077e100-a6c9-4d99-a7c9-1b3b3161482f/SDN_XML.ZIP",
+        "bytes": 2567096,
+        "sha256": "9cfb5e8fcbfe042a9472da2869f058a57ef26ded08f3a52052dcc973aed88211"
+      }
+    ],
+    "config_sha256": "896419391e03d371edb6218627c3395fa40221a2de188fe4680803a65770f346",
+    "module_sha256": "82edcd8f8c6b371ae0189dc8a57644a9a336e5e88baed15291d30fce6ae0c5e7",
+    "register_records": 19388,
+    "publication_date": "2026-09-10",
+    "xml_sha256": "387a9a810e4b6188a0e2a86f46c40c6f724f57f9a6c23ee51964ba4bb3d3f70e",
+    "proof_boundary": "Two actual final-recipe engine polls with identical full state and zero alerts. Not hosted scheduling or later changed-entry delivery evidence."
+  }
+]

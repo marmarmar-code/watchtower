@@ -1,0 +1,331 @@
+{
+  "id": "ssb_salmon_exports",
+  "table": "03024",
+  "official_url": "https://www.ssb.no/statbank/table/03024",
+  "statistics_page": "https://www.ssb.no/utenriksokonomi/utenrikshandel/statistikk/eksport-av-laks",
+  "scope": "Weekly export weight in tonnes and average export price per kilogram in NOK, separately for fresh/chilled and frozen farmed salmon. Latest two weeks (8 observations); new periods and revisions only inside this window. Not all seafood, not export revenue or a spot-price quote.",
+  "metadata_updated": "2026-09-09T06:00:00Z",
+  "method": "Official metadata inspected for every dimension, group and unit. Two actual final-selection fetches through existing ssb_data adapter, checking eight unique dated records, correct separate units, stable keys/hashes and complete snapshots. Silent in-memory initialization then unchanged evaluation. No synthetic data, notification calls or runtime state writes. Future delivery is not yet observed.",
+  "runs": [
+    {
+      "requests": [
+        {
+          "url": "https://data.ssb.no/api/pxwebapi/v2/tables/03024/data?lang=no&outputFormat=json-stat2&valueCodes%5BVareGrupper2%5D=01%2C02&valueCodes%5BContentsCode%5D=Vekt%2CKilopris&valueCodes%5BTid%5D=top%282%29",
+          "at": "2026-09-10T10:25:50.121100+00:00",
+          "status": 200
+        }
+      ],
+      "count": 8,
+      "filtered_count": 8,
+      "baseline": true,
+      "alerts": 0,
+      "observations": [
+        {
+          "key": "{\"ContentsCode\":\"Vekt\",\"Tid\":\"2026U35\",\"VareGrupper2\":\"01\"}",
+          "title": "SSB · Fersk oppalen laks / Vekt (tonn) / 2026U35",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U35",
+          "fields": {
+            "value": 30487,
+            "unit": {
+              "ContentsCode": {
+                "base": "tonn",
+                "decimals": 0,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Vekt\",\"Tid\":\"2026U36\",\"VareGrupper2\":\"01\"}",
+          "title": "SSB · Fersk oppalen laks / Vekt (tonn) / 2026U36",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U36",
+          "fields": {
+            "value": 30798,
+            "unit": {
+              "ContentsCode": {
+                "base": "tonn",
+                "decimals": 0,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Kilopris\",\"Tid\":\"2026U35\",\"VareGrupper2\":\"01\"}",
+          "title": "SSB · Fersk oppalen laks / Kilopris (kr) / 2026U35",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U35",
+          "fields": {
+            "value": 71.87,
+            "unit": {
+              "ContentsCode": {
+                "base": "kr",
+                "decimals": 2,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Kilopris\",\"Tid\":\"2026U36\",\"VareGrupper2\":\"01\"}",
+          "title": "SSB · Fersk oppalen laks / Kilopris (kr) / 2026U36",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U36",
+          "fields": {
+            "value": 69.71,
+            "unit": {
+              "ContentsCode": {
+                "base": "kr",
+                "decimals": 2,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Vekt\",\"Tid\":\"2026U35\",\"VareGrupper2\":\"02\"}",
+          "title": "SSB · Frosen oppalen laks / Vekt (tonn) / 2026U35",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U35",
+          "fields": {
+            "value": 720,
+            "unit": {
+              "ContentsCode": {
+                "base": "tonn",
+                "decimals": 0,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Vekt\",\"Tid\":\"2026U36\",\"VareGrupper2\":\"02\"}",
+          "title": "SSB · Frosen oppalen laks / Vekt (tonn) / 2026U36",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U36",
+          "fields": {
+            "value": 546,
+            "unit": {
+              "ContentsCode": {
+                "base": "tonn",
+                "decimals": 0,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Kilopris\",\"Tid\":\"2026U35\",\"VareGrupper2\":\"02\"}",
+          "title": "SSB · Frosen oppalen laks / Kilopris (kr) / 2026U35",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U35",
+          "fields": {
+            "value": 72.94,
+            "unit": {
+              "ContentsCode": {
+                "base": "kr",
+                "decimals": 2,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Kilopris\",\"Tid\":\"2026U36\",\"VareGrupper2\":\"02\"}",
+          "title": "SSB · Frosen oppalen laks / Kilopris (kr) / 2026U36",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U36",
+          "fields": {
+            "value": 68.07,
+            "unit": {
+              "ContentsCode": {
+                "base": "kr",
+                "decimals": 2,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        }
+      ],
+      "identity_digest": "fd7bebbaa3f1ae00ed534c7f2b7ce49db91923e021918410ae3409d9c2f25970"
+    },
+    {
+      "requests": [
+        {
+          "url": "https://data.ssb.no/api/pxwebapi/v2/tables/03024/data?lang=no&outputFormat=json-stat2&valueCodes%5BVareGrupper2%5D=01%2C02&valueCodes%5BContentsCode%5D=Vekt%2CKilopris&valueCodes%5BTid%5D=top%282%29",
+          "at": "2026-09-10T10:25:50.274389+00:00",
+          "status": 200
+        }
+      ],
+      "count": 8,
+      "filtered_count": 8,
+      "baseline": false,
+      "alerts": 0,
+      "observations": [
+        {
+          "key": "{\"ContentsCode\":\"Vekt\",\"Tid\":\"2026U35\",\"VareGrupper2\":\"01\"}",
+          "title": "SSB · Fersk oppalen laks / Vekt (tonn) / 2026U35",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U35",
+          "fields": {
+            "value": 30487,
+            "unit": {
+              "ContentsCode": {
+                "base": "tonn",
+                "decimals": 0,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Vekt\",\"Tid\":\"2026U36\",\"VareGrupper2\":\"01\"}",
+          "title": "SSB · Fersk oppalen laks / Vekt (tonn) / 2026U36",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U36",
+          "fields": {
+            "value": 30798,
+            "unit": {
+              "ContentsCode": {
+                "base": "tonn",
+                "decimals": 0,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Kilopris\",\"Tid\":\"2026U35\",\"VareGrupper2\":\"01\"}",
+          "title": "SSB · Fersk oppalen laks / Kilopris (kr) / 2026U35",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U35",
+          "fields": {
+            "value": 71.87,
+            "unit": {
+              "ContentsCode": {
+                "base": "kr",
+                "decimals": 2,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Kilopris\",\"Tid\":\"2026U36\",\"VareGrupper2\":\"01\"}",
+          "title": "SSB · Fersk oppalen laks / Kilopris (kr) / 2026U36",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U36",
+          "fields": {
+            "value": 69.71,
+            "unit": {
+              "ContentsCode": {
+                "base": "kr",
+                "decimals": 2,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Vekt\",\"Tid\":\"2026U35\",\"VareGrupper2\":\"02\"}",
+          "title": "SSB · Frosen oppalen laks / Vekt (tonn) / 2026U35",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U35",
+          "fields": {
+            "value": 720,
+            "unit": {
+              "ContentsCode": {
+                "base": "tonn",
+                "decimals": 0,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Vekt\",\"Tid\":\"2026U36\",\"VareGrupper2\":\"02\"}",
+          "title": "SSB · Frosen oppalen laks / Vekt (tonn) / 2026U36",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U36",
+          "fields": {
+            "value": 546,
+            "unit": {
+              "ContentsCode": {
+                "base": "tonn",
+                "decimals": 0,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Kilopris\",\"Tid\":\"2026U35\",\"VareGrupper2\":\"02\"}",
+          "title": "SSB · Frosen oppalen laks / Kilopris (kr) / 2026U35",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U35",
+          "fields": {
+            "value": 72.94,
+            "unit": {
+              "ContentsCode": {
+                "base": "kr",
+                "decimals": 2,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        },
+        {
+          "key": "{\"ContentsCode\":\"Kilopris\",\"Tid\":\"2026U36\",\"VareGrupper2\":\"02\"}",
+          "title": "SSB · Frosen oppalen laks / Kilopris (kr) / 2026U36",
+          "url": "https://www.ssb.no/statbank/table/03024",
+          "published": "2026U36",
+          "fields": {
+            "value": 68.07,
+            "unit": {
+              "ContentsCode": {
+                "base": "kr",
+                "decimals": 2,
+                "base_period": null,
+                "adjustment": "None"
+              }
+            },
+            "status": ""
+          }
+        }
+      ],
+      "identity_digest": "fd7bebbaa3f1ae00ed534c7f2b7ce49db91923e021918410ae3409d9c2f25970"
+    }
+  ]
+}

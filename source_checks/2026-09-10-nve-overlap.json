@@ -1,0 +1,92 @@
+{
+  "sources": {
+    "general": {
+      "recipe": "nve_news",
+      "count": 8,
+      "unique_count": 8,
+      "urls": [
+        "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-36-2026/",
+        "https://www.nve.no/nytt-fra-nve/rapporter-vassmagasinstatistikk/vassmagasinstatistikk-veke-36-2026/",
+        "https://www.nve.no/nytt-fra-nve/nyheter-skred-og-vassdrag/nve-har-startet-boreprosjekt-paa-ustabilt-fjellparti-i-kaafjord/",
+        "https://www.nve.no/nytt-fra-nve/nyheter-energi/naa-kan-man-soeke-om-konsesjon-til-store-vannkraftprosjekter-digitalt/",
+        "https://www.nve.no/nytt-fra-nve/nyheter-energi/velkommen-til-norges-energidager-2026/",
+        "https://www.nve.no/nytt-fra-nve/rapporter-vassmagasinstatistikk/vassmagasinstatistikk-veke-35-2026/",
+        "https://www.nve.no/nytt-fra-nve/nyheter-energi/naa-er-over-halvparten-av-vindkraften-her-til-lands-norskeid/",
+        "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-35-2026/"
+      ],
+      "duplicate_urls": []
+    },
+    "energy": {
+      "recipe": "nve_energy_news",
+      "count": 8,
+      "unique_count": 8,
+      "urls": [
+        "https://www.nve.no/nytt-fra-nve/nyheter-energi/naa-kan-man-soeke-om-konsesjon-til-store-vannkraftprosjekter-digitalt/",
+        "https://www.nve.no/nytt-fra-nve/nyheter-energi/velkommen-til-norges-energidager-2026/",
+        "https://www.nve.no/nytt-fra-nve/nyheter-energi/naa-er-over-halvparten-av-vindkraften-her-til-lands-norskeid/",
+        "https://www.nve.no/nytt-fra-nve/nyheter-energi/nve-legger-fram-oppdaterte-estimater-for-vindkraftproduksjon/",
+        "https://www.nve.no/nytt-fra-nve/nyheter-energi/nve-varsler-rapporteringsordning-for-vannkraftprodusenter-i-midt-norge/",
+        "https://www.nve.no/nytt-fra-nve/nyheter-energi/nve-har-samlet-informasjon-om-datasentre/",
+        "https://www.nve.no/nytt-fra-nve/nyheter-energi/kvartalsrapport-for-kraftsituasjonen-andre-kvartal-2026/",
+        "https://www.nve.no/nytt-fra-nve/nyheter-energi/viktig-at-kraftprodusentene-tar-hensyn-til-forsyningssikkerheten/"
+      ],
+      "duplicate_urls": []
+    },
+    "power": {
+      "recipe": "nve_power_situation",
+      "count": 8,
+      "unique_count": 8,
+      "urls": [
+        "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-36-2026/",
+        "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-35-2026/",
+        "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-34-2026/",
+        "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-33-2026/",
+        "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-32-2026/",
+        "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-31-2026/",
+        "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-30-2026/",
+        "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-29-2026/"
+      ],
+      "duplicate_urls": []
+    }
+  },
+  "comparison": {
+    "general_energy_overlap": [
+      "https://www.nve.no/nytt-fra-nve/nyheter-energi/naa-er-over-halvparten-av-vindkraften-her-til-lands-norskeid/",
+      "https://www.nve.no/nytt-fra-nve/nyheter-energi/naa-kan-man-soeke-om-konsesjon-til-store-vannkraftprosjekter-digitalt/",
+      "https://www.nve.no/nytt-fra-nve/nyheter-energi/velkommen-til-norges-energidager-2026/"
+    ],
+    "general_power_overlap": [
+      "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-35-2026/",
+      "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-36-2026/"
+    ],
+    "energy_missing_from_general": [
+      "https://www.nve.no/nytt-fra-nve/nyheter-energi/kvartalsrapport-for-kraftsituasjonen-andre-kvartal-2026/",
+      "https://www.nve.no/nytt-fra-nve/nyheter-energi/nve-har-samlet-informasjon-om-datasentre/",
+      "https://www.nve.no/nytt-fra-nve/nyheter-energi/nve-legger-fram-oppdaterte-estimater-for-vindkraftproduksjon/",
+      "https://www.nve.no/nytt-fra-nve/nyheter-energi/nve-varsler-rapporteringsordning-for-vannkraftprodusenter-i-midt-norge/",
+      "https://www.nve.no/nytt-fra-nve/nyheter-energi/viktig-at-kraftprodusentene-tar-hensyn-til-forsyningssikkerheten/"
+    ],
+    "power_missing_from_general": [
+      "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-29-2026/",
+      "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-30-2026/",
+      "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-31-2026/",
+      "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-32-2026/",
+      "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-33-2026/",
+      "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-34-2026/"
+    ],
+    "general_urls_outside_specialized_prefixes": [
+      "https://www.nve.no/nytt-fra-nve/nyheter-skred-og-vassdrag/nve-har-startet-boreprosjekt-paa-ustabilt-fjellparti-i-kaafjord/",
+      "https://www.nve.no/nytt-fra-nve/rapporter-vassmagasinstatistikk/vassmagasinstatistikk-veke-35-2026/",
+      "https://www.nve.no/nytt-fra-nve/rapporter-vassmagasinstatistikk/vassmagasinstatistikk-veke-36-2026/"
+    ],
+    "union_before_count": 19,
+    "union_after_exact_prefix_suppression_count": 19
+  },
+  "checked_on": "2026-09-10",
+  "method": "Actual public HTTP adapter fetches and saved HTML; no delivery calls. Coverage comparison is for these snapshots only.",
+  "raw_sha256": {
+    "general": "31185b2078b3037b4c35ee0417ac2dd62ce7147aab641963e4bee82fa0aa983a",
+    "energy": "c800a9ac9203df9b2d307bb15434d4a0b9f5d18a541a00832f90a9fdb3a634bc",
+    "power": "0f322013c6fb50268e37f562f05bc6b4b987313824f934f0b1935eedf153c400"
+  }
+}

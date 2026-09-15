@@ -1,0 +1,53 @@
+{
+  "source": "virke_pressemeldinger",
+  "official_page": "https://www.virke.no/kontakt/presse/",
+  "official_room": "https://kommunikasjon.ntb.no/presserom/13569120/virke",
+  "feed": "https://kommunikasjon.ntb.no/rss/releases/latest?publisherId=13569120",
+  "provenance": "Virke official press page links its NTB publisher room; that room advertises this RSS URL through link rel=alternate type=application/rss+xml. Every RSS GUID carries publisherId=13569120 and its release ID matches the parsed article URL.",
+  "method": "Two actual feed responses through existing RSS adapter. Exact title/date/key checks, stable content hashes and unique identities; silent in-memory baseline then unchanged evaluation. Three actual article pages matched feed titles. No runtime writes or notifications. Feed is bounded to its currently returned entries; older archive pages and future delivery are not proven.",
+  "runs": [
+    {
+      "at": "2026-09-10T08:43:18.786617+00:00",
+      "status": 200,
+      "count": 25,
+      "unique": 25,
+      "filtered_count": 25,
+      "baseline": true,
+      "in_memory_alerts": 0,
+      "identity_digest": "6bfcd4fef555fb027458233503aebfd42f2c7639764558b789a1dea7d7025c6b"
+    },
+    {
+      "at": "2026-09-10T08:43:18.812623+00:00",
+      "status": 200,
+      "count": 25,
+      "unique": 25,
+      "filtered_count": 25,
+      "baseline": false,
+      "in_memory_alerts": 0,
+      "identity_digest": "6bfcd4fef555fb027458233503aebfd42f2c7639764558b789a1dea7d7025c6b"
+    }
+  ],
+  "sample_articles": [
+    {
+      "title": "Fortsatt moderat matprisvekst i august",
+      "published": "Thu, 10 Sep 2026 06:21:54 GMT",
+      "url": "https://kommunikasjon.ntb.no/pressemelding/19058711/fortsatt-moderat-matprisvekst-i-august?lang=no",
+      "status": 200,
+      "title_matches_article": true
+    },
+    {
+      "title": "Enighet om Landsoverenskomst for Spesialisthelsetjenesten",
+      "published": "Tue, 08 Sep 2026 19:00:14 GMT",
+      "url": "https://kommunikasjon.ntb.no/pressemelding/19057094/enighet-om-landsoverenskomst-for-spesialisthelsetjenesten?lang=no",
+      "status": 200,
+      "title_matches_article": true
+    },
+    {
+      "title": "Virke: –Ungdomsløftet lykkes ikke uten flere jobber å gå til",
+      "published": "Thu, 20 Aug 2026 05:00:00 GMT",
+      "url": "https://kommunikasjon.ntb.no/pressemelding/19028088/virke-ungdomsloftet-lykkes-ikke-uten-flere-jobber-a-ga-til?lang=no",
+      "status": 200,
+      "title_matches_article": true
+    }
+  ]
+}

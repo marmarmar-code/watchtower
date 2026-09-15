@@ -1,0 +1,62 @@
+{
+  "source": "nho_business_news",
+  "feed": "https://www.nho.no/rss/",
+  "excluded_exact_host": "emp.jobylon.com",
+  "method": "Two real RSS fetches; compare default adapter with opt-in exact-host exclusion on the same response. All item identities and compatible hashes preserved. Job portal URLs suppressed; all other items and text filters unchanged. No notifications sent; future delivery is unverified.",
+  "runs": [
+    {
+      "at": "2026-09-10T09:37:06.141957+00:00",
+      "status": 200,
+      "count": 49,
+      "eligible": 46,
+      "suppressed_jobs": [
+        {
+          "title": "NHO Reiseliv - administrerende direktør",
+          "url": "https://emp.jobylon.com/jobs/381412-nho-reiseliv-administrerende-direktor/"
+        }
+      ],
+      "eligible_samples": [
+        {
+          "title": "NHO Nordland om ny hurtigbåtkontrakt: – Svært positivt at sommerruten sikres",
+          "url": "https://www.nho.no/regionforeninger/nho-nordland/artikkelarkiv/2026/nho-nordland-om-ny-hurtigbatkontrakt/"
+        },
+        {
+          "title": "Næring i Nordvest",
+          "url": "https://www.nho.no/regionforeninger/nho-more-romsdal/arrangementer/2027/naring-i-nordvest/"
+        },
+        {
+          "title": "Regional årskonferanse 2027",
+          "url": "https://www.nho.no/regionforeninger/nho-more-romsdal/arrangementer/2027/nhos-regionale-arskonferanse-2027/"
+        }
+      ],
+      "keys_and_all_compatible_hashes_unchanged": true
+    },
+    {
+      "at": "2026-09-10T09:37:06.227547+00:00",
+      "status": 200,
+      "count": 49,
+      "eligible": 46,
+      "suppressed_jobs": [
+        {
+          "title": "NHO Reiseliv - administrerende direktør",
+          "url": "https://emp.jobylon.com/jobs/381412-nho-reiseliv-administrerende-direktor/"
+        }
+      ],
+      "eligible_samples": [
+        {
+          "title": "NHO Nordland om ny hurtigbåtkontrakt: – Svært positivt at sommerruten sikres",
+          "url": "https://www.nho.no/regionforeninger/nho-nordland/artikkelarkiv/2026/nho-nordland-om-ny-hurtigbatkontrakt/"
+        },
+        {
+          "title": "Næring i Nordvest",
+          "url": "https://www.nho.no/regionforeninger/nho-more-romsdal/arrangementer/2027/naring-i-nordvest/"
+        },
+        {
+          "title": "Regional årskonferanse 2027",
+          "url": "https://www.nho.no/regionforeninger/nho-more-romsdal/arrangementer/2027/nhos-regionale-arskonferanse-2027/"
+        }
+      ],
+      "keys_and_all_compatible_hashes_unchanged": true
+    }
+  ]
+}

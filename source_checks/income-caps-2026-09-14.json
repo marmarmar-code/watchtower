@@ -1,0 +1,45 @@
+[
+  {
+    "recipe": "rme_distribution_income_cap_changes",
+    "checked_at": "2026-09-14T11:34:46.179032+00:00",
+    "records": 88,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.nve.no/reguleringsmyndigheten/bransje/bransjeoppgaver/inntektsrammer/inntektsrammer-for-2025-vedtak/",
+        "bytes": 195382,
+        "sha256": "b9171ee68ce082c4b69eb4d8aab189a6254d13a24e95eb2ae9ee2ecbae6866c5"
+      },
+      {
+        "url": "https://www.nve.no/media/19728/inntektsramme-2025.xlsx",
+        "bytes": 1511829,
+        "sha256": "e757c57e352c3f7ce6db17bc453ac8eb3a032082e8874498836168db41069c94"
+      },
+      {
+        "url": "https://www.nve.no/reguleringsmyndigheten/bransje/bransjeoppgaver/inntektsrammer/inntektsrammer-for-2025-vedtak/",
+        "bytes": 195382,
+        "sha256": "b9171ee68ce082c4b69eb4d8aab189a6254d13a24e95eb2ae9ee2ecbae6866c5"
+      },
+      {
+        "url": "https://www.nve.no/reguleringsmyndigheten/bransje/bransjeoppgaver/inntektsrammer/inntektsrammer-for-2025-vedtak/",
+        "bytes": 195382,
+        "sha256": "b9171ee68ce082c4b69eb4d8aab189a6254d13a24e95eb2ae9ee2ecbae6866c5"
+      },
+      {
+        "url": "https://www.nve.no/media/19728/inntektsramme-2025.xlsx",
+        "bytes": 1511829,
+        "sha256": "e757c57e352c3f7ce6db17bc453ac8eb3a032082e8874498836168db41069c94"
+      },
+      {
+        "url": "https://www.nve.no/reguleringsmyndigheten/bransje/bransjeoppgaver/inntektsrammer/inntektsrammer-for-2025-vedtak/",
+        "bytes": 195382,
+        "sha256": "b9171ee68ce082c4b69eb4d8aab189a6254d13a24e95eb2ae9ee2ecbae6866c5"
+      }
+    ],
+    "config_sha256": "c7499100757ab0eff7082df9f04811575fe0a910bbff74d290137a2844aa0fb2",
+    "module_sha256": "6d92701ac4ee60e42d33e758e5a8a44a6f4011f8040492c925c2b313f5a3e787",
+    "workbooks_sha256": "6ae5f5d3b4bc11aa2fe1ea20b7a9998497f087f788fe74a7f801b5ac9520143f"
+  }
+]

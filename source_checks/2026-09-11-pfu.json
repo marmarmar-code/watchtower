@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-09-11",
+  "source": "https://pfu.presse.no/pfu-basen/",
+  "transport": {
+    "kind": "public browser search-only Algolia index",
+    "index": "pfu-basen_processedAtDesc",
+    "private_credentials_required": false
+  },
+  "verified_config": {
+    "kind": "press_cases",
+    "urls": ["https://pfu.presse.no/pfu-basen/"],
+    "events": ["added", "changed"],
+    "lookback_days": 30,
+    "page_size": 100,
+    "max_pages": 5,
+    "max_records": 500,
+    "max_bytes": 1000000,
+    "allow_empty": true
+  },
+  "scope": {
+    "type": "rolling treatment-date window",
+    "processed_from_utc": "2026-08-12T00:00:00Z",
+    "processed_to_utc": "2026-09-11T23:59:59.999Z",
+    "complete_within_window": true,
+    "historically_complete": false
+  },
+  "poll": {
+    "records_each": 11,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "identical_full_snapshots": true,
+    "reported_total": 11,
+    "reported_pages": 1,
+    "case_numbers": ["26-073", "26-079", "26-089", "26-092", "26-098", "26-106", "26-107", "26-111", "26-119", "26-120", "26-121"]
+  },
+  "identity": "caseNumber",
+  "stored_change_fields": ["medium", "outcome", "complainant", "conclusion"],
+  "outcome_labels": {
+    "violation": "Brudd",
+    "criticism": "Kritikk",
+    "noViolation": "Ikke brudd",
+    "awaitingProcessing": "Venter behandling"
+  },
+  "published_field": null,
+  "treatment_timestamp_in_fingerprint": false,
+  "fulltext_stored": false,
+  "complaint_text_stored": false,
+  "empty_window_valid": true,
+  "removed_supported": false,
+  "limitations": "Records age out of the rolling window without a removal claim. Medium-filter mode and full historical coverage were not verified."
+}

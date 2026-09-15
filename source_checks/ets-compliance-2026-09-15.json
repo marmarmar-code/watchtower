@@ -1,0 +1,79 @@
+{
+  "recipe": "ets_installation_compliance_changes",
+  "checked_at": "2026-09-15T12:09:58.430254+00:00",
+  "records": 327,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "coverage_warnings": [],
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://climate.ec.europa.eu/areas-action/carbon-markets/eu-emissions-trading-system-eu-ets/union-registry_en",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 286261,
+      "sha256": "21f5bd0883445a37f50df346fbfd576e5de4241dd9e3a1bc185f5964844ee283"
+    },
+    {
+      "url": "https://climate.ec.europa.eu/document/download/b80300cf-7608-405d-969e-8b016687640e_en?filename=compliance_2024_code_en.xlsx",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1369471,
+      "sha256": "a8b2191b56fa576b7d9e0ae000ddab24b5aa90e8511e4287203461ca4684dd7a"
+    },
+    {
+      "url": "https://climate.ec.europa.eu/areas-action/carbon-markets/eu-emissions-trading-system-eu-ets/union-registry_en",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 286261,
+      "sha256": "21f5bd0883445a37f50df346fbfd576e5de4241dd9e3a1bc185f5964844ee283"
+    },
+    {
+      "url": "https://climate.ec.europa.eu/document/download/b80300cf-7608-405d-969e-8b016687640e_en?filename=compliance_2024_code_en.xlsx",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1369471,
+      "sha256": "a8b2191b56fa576b7d9e0ae000ddab24b5aa90e8511e4287203461ca4684dd7a"
+    },
+    {
+      "url": "https://climate.ec.europa.eu/areas-action/carbon-markets/eu-emissions-trading-system-eu-ets/union-registry_en",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 286261,
+      "sha256": "21f5bd0883445a37f50df346fbfd576e5de4241dd9e3a1bc185f5964844ee283"
+    },
+    {
+      "url": "https://climate.ec.europa.eu/document/download/b80300cf-7608-405d-969e-8b016687640e_en?filename=compliance_2024_code_en.xlsx",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1369471,
+      "sha256": "a8b2191b56fa576b7d9e0ae000ddab24b5aa90e8511e4287203461ca4684dd7a"
+    },
+    {
+      "url": "https://climate.ec.europa.eu/areas-action/carbon-markets/eu-emissions-trading-system-eu-ets/union-registry_en",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 286261,
+      "sha256": "21f5bd0883445a37f50df346fbfd576e5de4241dd9e3a1bc185f5964844ee283"
+    },
+    {
+      "url": "https://climate.ec.europa.eu/document/download/b80300cf-7608-405d-969e-8b016687640e_en?filename=compliance_2024_code_en.xlsx",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 1369471,
+      "sha256": "a8b2191b56fa576b7d9e0ae000ddab24b5aa90e8511e4287203461ca4684dd7a"
+    }
+  ],
+  "config_sha256": "5db8667d65a66b1e7898be09f41d189d5071e4be3ca6a819d52afb0dcc3d6ea3",
+  "module_sha256": "86edd234d567a4af823287687aa75975081ff7ff10a31ef911f392983fcf8204",
+  "engine_sha256": "3f403c5fb78ba4cab29d3d58169e8420ee651328e4a37a5fb492e6ec80441572",
+  "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+  "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+  "limitations": [
+    "Latest published compliance report is 2024, published 2025-10-03; the separate verified-emissions report for 2025 is not monitored by this recipe.",
+    "327 records from registry NO; all 14573 export rows are schema-validated, but cross-read record equality is limited to the selected registry/activity scope.",
+    "A conflicting duplicate in the FR selection causes that selection to fail. Other registry selections are not proven by this NO check.",
+    "Compliance codes, latest status year, source totals and future final-emissions years remain independent source values. No derived shortfall, annual-basis assumption or legal conclusion.",
+    "Local live reads do not establish scheduled recurrence or delivery."
+  ]
+}

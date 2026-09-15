@@ -1,0 +1,86 @@
+{
+  "checked_at": "2026-09-11T07:32:59.405617+00:00",
+  "method": "Two direct HTTP reads per final source through the existing json_records adapter. In-memory baseline and repeat comparison. No notification calls or runtime state writes.",
+  "sources": [
+    {
+      "id": "esa_state_aid",
+      "url": "https://www.eftasurv.int/cms/api/node?url=%2Fnewsroom%2Fupdates&search=theme%3D28%26language%3Den",
+      "reads": [
+        {
+          "status": 200,
+          "sha256": "eef5021e9cdfedf7caef0a713c1e6f4ad0a4267c8cde9e9e13bf8c8e405e8752"
+        },
+        {
+          "status": 200,
+          "sha256": "eef5021e9cdfedf7caef0a713c1e6f4ad0a4267c8cde9e9e13bf8c8e405e8752"
+        }
+      ],
+      "items": 24,
+      "matching_items": 19,
+      "matching_titles": [
+        "ESA adopts temporary State aid framework for sectors affected by the Middle East Crisis",
+        "ESA adopts guidelines on State aid for land and multimodal transport",
+        "ESA amends ETS State aid guidelines",
+        "ESA approves prolongation to Norwegian tax refund scheme for employing seafarers",
+        "ESA approves aid for broadband infrastructure rollout in Norway",
+        "ESA approves amendments to Norwegian support scheme for green industrial projects",
+        "ESA approves additional Norwegian aid for construction of a new airport in Mo i Rana",
+        "ESA closes investigation into Norwegian exemption from excise duty on waste incineration",
+        "ESA approves Norwegian aid scheme for Sámi news outlets",
+        "ESA approves Norwegian aid scheme for floating offshore wind projects",
+        "ESA approves Norwegian aid to municipal fitness centre",
+        "ESA adopts new State aid guidelines linked to the Clean Industrial Deal",
+        "ESA approves amendment to Norwegian innovation and development scheme for news and current affairs media",
+        "ESA approves Norwegian aid to rail freight carrier CargoNet",
+        "ESA approves Norwegian compensation scheme for rail freight operators following damage to the Otta bridge",
+        "ESA orders Norway to recover purchase price from a property developer",
+        "ESA approves Norwegian scheme for floating offshore wind in Utsira Nord",
+        "ESA approves amendments to Norwegian tax refund scheme for employing seafarers",
+        "ESA approves amendments to the Norwegian tax scheme for employee share options for start-up and growth companies"
+      ],
+      "silent_baseline": true,
+      "repeat_alerts": 0,
+      "stable_keys_hashes_full_state": true
+    },
+    {
+      "id": "esa_competition",
+      "url": "https://www.eftasurv.int/cms/api/node?url=%2Fnewsroom%2Fupdates&search=theme%3D29%26language%3Den",
+      "reads": [
+        {
+          "status": 200,
+          "sha256": "6cab6641c030e7d39d64b67aec0f5cb623ae71f7bc488df7f5032ba57d8cb70b"
+        },
+        {
+          "status": 200,
+          "sha256": "6cab6641c030e7d39d64b67aec0f5cb623ae71f7bc488df7f5032ba57d8cb70b"
+        }
+      ],
+      "items": 24,
+      "matching_items": 15,
+      "matching_titles": [
+        "Competition: ESA accepts Elkjøp’s commitments in consumer electronics investigation",
+        "Competition: ESA accepts Norway’s commitments in North Sea Link Interconnector investigation",
+        "Competition: ESA seeks comments on Norway’s commitments in North Sea Link interconnector investigation",
+        "Competition: ESA seeks comments on Elkjøp commitments in consumer electronics investigation",
+        "ESA updates procedural recommendation for notifying electronic communications regulations",
+        "ESA updates Recommendation on Relevant Markets in the electronic communication sector",
+        "ESA investigates possible breach by Norway of EEA competition rules over exclusive rights granted to power exchange Nord Pool",
+        "ESA launches investigation into alleged State aid to Vygruppen",
+        "ESA initiates investigation into possible anticompetitive conduct by Elkjøp in electronic goods",
+        "ESA takes further steps in Telenor investigation",
+        "ESA discontinues e-payments competition investigation in Norway",
+        "Competition: Widerøe may have breached EEA competition rules",
+        "Competition: ESA closes Color Line and Sandefjord investigation",
+        "Competition: ESA investigates DNB, Nordea, Finance Norway and BankID",
+        "Competition: EFTA Surveillance Authority opens proceedings against Widerøe"
+      ],
+      "silent_baseline": true,
+      "repeat_alerts": 0,
+      "stable_keys_hashes_full_state": true
+    }
+  ],
+  "scope": "The latest 24 English theme publications. Norway/Norwegian/guidelines/framework filter on title and summary; not complete decision registers or full coverage of Norway. Source epoch dates are not displayed as publication dates by this recipe. New aliases only; no revision alerts.",
+  "discovery": "Official site JavaScript uses /cms/api/node and search. Search must omit the leading question mark; wrong syntax was observed to silently return the unfiltered list and is not used.",
+  "exact_url_overlap_between_current_theme_lists": 0,
+  "overlap_limit": "Themes may overlap in future; this read is not proof of permanently disjoint lists."
+}

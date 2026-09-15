@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased – kildeutvidelse
+
+- 30 nye kildeoppskrifter og sju RSS-profiler, kontrollert med to separate
+  livehentinger gjennom eksisterende adaptere.
+- Nye startpakker for medier, energi, mat, jus og digital kommunikasjon/nett/sikkerhet,
+  og emneavgrensede tillegg i eksisterende pakker. Mediepakken bruker hele valgte
+  bransjefeeder. En egen kommunikasjons-/PR-pakke gjenstår.
+- Ukentlig, skrivebeskyttet katalogkontroll uten runtime, state, secrets eller varsling.
+- Neste rekkefølge er flere kilder, isolert samlet kilde- og leveringstest, deretter
+  mer automatisert drift og vedlikehold.
+
 ## 0.6.0 – hendelser, tall og valgte nettsider
 
 - Fem nye adaptertyper: `json_records`, `csv_records`, `web_page`, `web_links` og

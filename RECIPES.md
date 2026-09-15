@@ -1,9 +1,14 @@
 # Ferdige kildeoppsett
 
-Watchtower 0.6 har ti valgfrie oppskrifter for konkrete hendelser og endringer.
-De er hentet med de faktiske adapterne fra offisielle kilder 8. september 2026.
-Hver oppskrift ble også hentet på nytt uten falske endringsvarsler. Dette er en
-kontroll på denne datoen, ikke en garanti for fremtidig tilgjengelighet eller full dekning.
+Watchtower har valgfrie oppskrifter for konkrete hendelser og endringer.
+`python -m watchtower list-recipes` viser hele listen og sektorene. Hver oppskrift
+har egen kildelenke, kontrolldato og eksplisitt avgrensning. Kildefunn og faktiske
+kontroller ligger i `source_checks/`; les oppgitt begrensning før aktivering.
+En vellykket innlesing beviser ikke at et nytt relevant varsel er levert.
+
+Nye saks- og produktkilder er forklart i [utvidelsesoversikten](SOURCE_EXPANSION.md).
+Første ordinære innlesing er stille. Eksisterende oppsett endres ikke ved at
+katalogen får en ny oppskrift.
 
 | Oppskrift | Hva den følger | Standard |
 | --- | --- | --- |
@@ -88,3 +93,9 @@ Ved avbrudd under `add-source`: kontroller at ingen slik kommando fortsatt kjør
 Hvis `config/.watchtower-config.lock` ligger igjen, fjern den lokalt før ny kjøring.
 Ikke commit låsen eller midlertidige filer. Se [endringsreglene og begrensningene](EVENT_MONITORING.md)
 for egne JSON-, CSV-, nettside- og statistikkutvalg.
+
+## Flere næringslivskilder
+
+NHO, Finans Norge, Sjømat Norge og Forbrukertilsynet er tilgjengelige som valgfrie RSS-oppsett. Velg tema eller eksplisitt alle saker. NHO kan også publisere arrangementer; Finans Norge inkluderer bransjearrangementer. Rekrutteringsfraser hos Forbrukertilsynet og ikoninnhold hos NHO utelates også når alle saker velges. To ferske hentinger per kilde er kontrollert; dette dokumenterer henting og filtrering, ikke at nye varsler er levert.
+
+Se [30 nye hendelsesfunksjoner](EVENT_FUNCTIONS.md) for konservativ telling og minst to anvendelser per brukermiljø.

@@ -70,6 +70,27 @@ class SourceContractTests(unittest.TestCase):
         self.assertIn("NSporsmalId=123", items[0].url)
         self.assertIn("Example minister", items[0].searchable_text())
 
+    def test_stortinget_question_uses_record_id_before_nested_representative_id(self):
+        root = ET.fromstring(
+            """
+            <root><sporsmal>
+              <besvart_av><id>ASTAAS</id><etternavn>Aas-Hansen</etternavn></besvart_av>
+              <id>127133</id>
+              <sendt_dato>2026-08-28T08:22:47.6487941</sendt_dato>
+              <sporsmal_fra><id>EW</id><etternavn>Wiborg</etternavn></sporsmal_fra>
+              <status>besvart</status>
+              <tittel>Hvor mange saker de siste fem årene?</tittel>
+            </sporsmal></root>
+            """
+        )
+        source = StortingetSource(self.config(kind="stortinget"))
+        source._xml = lambda *_args, **_kwargs: root
+
+        items = source._fetch_questions()
+
+        self.assertEqual(["sporsmal:127133"], [item.key for item in items])
+        self.assertIn("NSporsmalId=127133", items[0].url)
+
     def test_konkurransetilsynet_table_is_normalized(self):
         html = """
         <table><tr>

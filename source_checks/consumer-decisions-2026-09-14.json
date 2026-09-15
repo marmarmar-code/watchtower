@@ -1,0 +1,23 @@
+{
+  "recipe": "consumer_enforcement_decision_links",
+  "checked_at": "2026-09-14T07:08:50.466926+00:00",
+  "records": 15,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://www.forbrukertilsynet.no/lov-og-rett/vedtak",
+      "bytes": 85185,
+      "sha256": "da73629341a821e03b8d27016af66c11173bdf30c538cf2d0654fc806eebcc52"
+    },
+    {
+      "url": "https://www.forbrukertilsynet.no/lov-og-rett/vedtak",
+      "bytes": 85185,
+      "sha256": "da73629341a821e03b8d27016af66c11173bdf30c538cf2d0654fc806eebcc52"
+    }
+  ],
+  "config_sha256": "87059fd644f8e4b0ad33b873e5c10f73c0bac1a4d19032aededcc5ba7dd3f811",
+  "module_sha256": "d2468d37b135f3e59b4d5c124f421c36cc21cfe9f171948b3f6f2c7b27ee6904",
+  "proof_boundary": "Two real public source polls through the final recipe and engine; no hosted scheduling or actual later delivery proof."
+}

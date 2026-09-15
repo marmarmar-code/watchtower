@@ -77,12 +77,15 @@ def selected_sources(*, recipe=None, rss_profile=None, source_id=None, topics=()
                     "allow_empty": rss_profile == "met_farevarsler"}
                    for i, url in enumerate(profile["feed_urls"], 1)]
     for source in sources:
+        exclusions = source.get("filter", {}).get("exclude_any")
         if topics:
             source["filter"] = {"include_any": list(topics), "match_mode": "smart"}
         elif match_all:
             source["filter"] = {"match_all": True}
-        elif not source.get("filter"):
+        elif not any(source.get("filter", {}).get(key) for key in ("include_any", "include_all", "match_all")):
             raise ValueError("add --topic or explicitly select --all for this news/list source")
+        if exclusions:
+            source["filter"]["exclude_any"] = deepcopy(exclusions)
     return sources
 
 

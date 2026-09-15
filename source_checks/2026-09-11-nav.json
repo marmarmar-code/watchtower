@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-09-11T07:59:08.872685+00:00",
+  "method": "Two actual HTTP reads per final source through existing adapters, followed by in-memory baseline and repeat evaluation. No notifier calls or runtime state writes.",
+  "sources": [
+    {
+      "id": "nav_labour_news",
+      "kind": "web_links",
+      "reads": [
+        {
+          "url": "https://www.nav.no/sok?ord=&page=0&f=presse&uf=&s=1&preferredLanguage=nb",
+          "status": 200,
+          "file": "nav_labour_news-0.raw",
+          "sha256": "af8b371314cc0dc87686c5aa24800e61ae41d9d4fca514d0226fb1dc11c44686"
+        },
+        {
+          "url": "https://www.nav.no/sok?ord=&page=0&f=presse&uf=&s=1&preferredLanguage=nb",
+          "status": 200,
+          "file": "nav_labour_news-1.raw",
+          "sha256": "af8b371314cc0dc87686c5aa24800e61ae41d9d4fca514d0226fb1dc11c44686"
+        }
+      ],
+      "items": 20,
+      "matching_items": 10,
+      "silent_baseline": true,
+      "repeat_alerts": 0,
+      "stable_keys_hashes_full_state": true,
+      "sample_titles": [
+        "Økt sykefravær i første halvår",
+        "Stabil arbeidsledighet i august",
+        "702 000 står utenfor arbeidslivet i Norge",
+        "Økt arbeidsledighet i juli",
+        "600 færre arbeidsledige i juni",
+        "Uendret arbeidsledighet i mai",
+        "Sykefraværet økte i 1. kvartal",
+        "Bedriftsundersøkelsen 2026: Norske virksomheter mangler 34 000 personer",
+        "400 færre arbeidsledige i april",
+        "Uendret arbeidsledighet i mars"
+      ],
+      "matching_titles": [
+        "Økt sykefravær i første halvår",
+        "Stabil arbeidsledighet i august",
+        "702 000 står utenfor arbeidslivet i Norge",
+        "Økt arbeidsledighet i juli",
+        "600 færre arbeidsledige i juni",
+        "Uendret arbeidsledighet i mai",
+        "Sykefraværet økte i 1. kvartal",
+        "Bedriftsundersøkelsen 2026: Norske virksomheter mangler 34 000 personer",
+        "400 færre arbeidsledige i april",
+        "Uendret arbeidsledighet i mars"
+      ]
+    }
+  ],
+  "limits": "First 20 national press results sorted by date; title keyword selection. No complete numerical statistics series or regional coverage. No publication-date extraction by web_links; new URLs only."
+}

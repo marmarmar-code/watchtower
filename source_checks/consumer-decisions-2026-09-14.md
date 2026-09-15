@@ -1,0 +1,11 @@
+# Formal consumer-enforcement decision index
+
+Two fresh public reads through the final recipe returned 15 unique decision links from the three latest published year groups: 2026, 2025 and 2024. Both local engine polls were silent, and full resulting state was identical. The companion JSON records final configuration/module and response hashes.
+
+The [official index](https://www.forbrukertilsynet.no/lov-og-rett/vedtak) has two observed year-container shapes: an accordion details/summary block and a page-list accordion with a button label. The parser requires the specific main decision article and validates all year containers before selecting the latest groups. It does not infer grouping from unrelated four-digit text or require a new calendar-year group before its first publication.
+
+Stable identity is the official link, preserving separate documents in one FOV case. An identical URL listed in multiple selected groups coalesces; contradictory title/case metadata fails. Year grouping is retained outside monitored fields, so movement between years does not create a new decision event. Monitored fields are the listed title and case reference. Only validated official decision-page or upload-PDF paths are accepted; credentials, alternate hosts/ports, query strings and fragments are rejected.
+
+This adds formal-register discovery beyond the existing general news feed. A news story may still discuss the same event under another URL; cross-source semantic deduplication is not claimed. Alerts say newly listed decision link or changed list information. The grouping year is not an exact adoption date, and may differ from the year in the FOV case reference. Publication date is deliberately unset. PDF contents, monetary sanctions, subsequent appeals and final legal outcomes are not extracted or inferred. Window departures do not establish removal.
+
+Targeted tests cover both actual container shapes, year boundaries, multiple decisions per case, quiet initialization/repeat, year movement, title revisions, old published groups, duplicate conflicts, invalid URLs/identities, empty or broken sections and bounds. Synthetic fixtures exercise guards; the 15 actual links establish current compatibility. Hosted initialization, periodic recurrence and later real notifications require separate runtime evidence.

@@ -1,0 +1,127 @@
+[
+  {
+    "recipe": "industrial_reported_emission_value_changes",
+    "checked_at": "2026-09-14T13:22:44.419643+00:00",
+    "records": 40,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+        "method": "GET",
+        "bytes": 101455,
+        "sha256": "13550e67b1068b72ecbb8960c848b4ee824a5e0987b6f380a267a5e62b897788"
+      },
+      {
+        "url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+        "method": "POST",
+        "bytes": 100754,
+        "sha256": "d62d527a74369d39529c2564d194fcf36a67e4d65420ea3e8ad6e7d170dab59a"
+      },
+      {
+        "url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+        "method": "GET",
+        "bytes": 101455,
+        "sha256": "edd578e92e0f5d3fcf92da96291f0607e4b24adc2c051bf8b6e24d5de5035722"
+      },
+      {
+        "url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+        "method": "POST",
+        "bytes": 100754,
+        "sha256": "e2b7f5db0db09a6be3c27b7c789f6b57b2f1e5d6529534fcb4d6d08f9bd1fa97"
+      },
+      {
+        "url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+        "method": "GET",
+        "bytes": 101455,
+        "sha256": "c91e6eb04c7f5ec93b0355090c153f62369fc8896ef7c56a5b7a2c1cea188be5"
+      },
+      {
+        "url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+        "method": "POST",
+        "bytes": 100754,
+        "sha256": "ef141c449da395ce029bc781ae02cdbc389e3c0bdd528ac54030059b6c8a24b1"
+      },
+      {
+        "url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+        "method": "GET",
+        "bytes": 101455,
+        "sha256": "5142039691080c05e253a1c8462778c055068af370d85cb937f14ddf8e00147f"
+      },
+      {
+        "url": "https://www.norskeutslipp.no/no/Diverse/Virksomhet/?CompanyID=5447&ComponentPageID=180",
+        "method": "POST",
+        "bytes": 100754,
+        "sha256": "783444974b8e1b7d33cd173286f7c11258ba72a4cf278853330d91835e944721"
+      }
+    ],
+    "config_sha256": "250a2bfd949a908d07349bcf7fbf3604ae06794a22da685a2d24bafb3da3681c",
+    "module_sha256": "05f0657740761efe68e78434df28e8d6793b21b80fd5d6952d9b0a698bf3781a",
+    "engine_sha256": "ec607000720094a07b689a47141e0af757f86337f5776477118b863dad28c32d",
+    "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+    "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+    "source_summary": {
+      "records": 40,
+      "numeric_values": 16,
+      "not_available": 12,
+      "not_reported": 12,
+      "latest_year_with_numeric_value": 2023,
+      "units": [
+        "1000 tonn per år",
+        "tonn per år"
+      ],
+      "response_count": 8
+    }
+  },
+  {
+    "recipe": "industrial_reported_water_emission_values",
+    "checked_at": "2026-09-14T13:22:44.665752+00:00",
+    "records": 20,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://www.norskeutslipp.no/Templates/NorskeUtslipp/Pages/company.aspx?CompanyID=658",
+        "method": "GET",
+        "bytes": 89831,
+        "sha256": "add880580c29d5779c21a4a3d0f90121756431bb145237620343146955a1f849"
+      },
+      {
+        "url": "https://www.norskeutslipp.no/Templates/NorskeUtslipp/Pages/company.aspx?CompanyID=658",
+        "method": "GET",
+        "bytes": 89831,
+        "sha256": "279058958654c523d00c35a581a1847819186df9a7019835da4c3fd6f45940a6"
+      },
+      {
+        "url": "https://www.norskeutslipp.no/Templates/NorskeUtslipp/Pages/company.aspx?CompanyID=658",
+        "method": "GET",
+        "bytes": 89831,
+        "sha256": "75a805d4c701f49d8e77a65a83f621f4c17775038a861e6776fdf7164f160552"
+      },
+      {
+        "url": "https://www.norskeutslipp.no/Templates/NorskeUtslipp/Pages/company.aspx?CompanyID=658",
+        "method": "GET",
+        "bytes": 89831,
+        "sha256": "885812cc4804798c68f746b5f965e34975077c5957e8da8bbf2771efd6fdcc72"
+      }
+    ],
+    "config_sha256": "6b15beff4810f228a0992a3af4b2c14961bbeebac5bb8a1dc11b73100cb890d9",
+    "module_sha256": "05f0657740761efe68e78434df28e8d6793b21b80fd5d6952d9b0a698bf3781a",
+    "engine_sha256": "ec607000720094a07b689a47141e0af757f86337f5776477118b863dad28c32d",
+    "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+    "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+    "source_summary": {
+      "records": 20,
+      "numeric_values": 10,
+      "not_available": 10,
+      "not_reported": 0,
+      "latest_year_with_numeric_value": 2025,
+      "units": [
+        "tonn per år"
+      ],
+      "response_count": 4
+    }
+  }
+]

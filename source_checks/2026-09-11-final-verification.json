@@ -1,0 +1,945 @@
+{
+  "date": "2026-09-11",
+  "boundary": "Local source and configuration verification only. No notification or remote runtime writes.",
+  "checks": [
+    {
+      "recipe": "mattilsynet_recall_products",
+      "checked_at": "2026-09-11T09:37:33.166540+00:00",
+      "records": 10,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger",
+          "bytes": 87450,
+          "sha256": "1fe7217f39d2346be056b637ef7ba8b46de096f9a4fb8a364686fee381d0ae74"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/europris-tilbakekaller-malt-kanel-fra-krydderhuset",
+          "bytes": 75223,
+          "sha256": "47ddf9197c7523ac0d92b1193d8d158f04cded8347db8d0ae156560795935a2a"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/kvite-ostar-fra-brubakken-gardsmeieri-vert-kalla-tilbake-grunna-funn-av-listeria-monocytogenes",
+          "bytes": 77116,
+          "sha256": "7c67882c21776aed0cd8320efccac8977ee81abe63236df4b6a77b9fb2c0a5cf"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/coop-tilbakekaller-mon-ami-fransk-brie-pa-grunn-av-mistanke-om-listeria",
+          "bytes": 74354,
+          "sha256": "1c26bf71d2787b41c2606a4f81c73f9485888e2d9b8dff49ac977d1465e746cc"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/first-price-rokt-laks-skivet-200-g-og-fiskemannen-rokt-laks-skivet-220-g-kalles-tilbake-grunnet-funn-av-listeria",
+          "bytes": 75286,
+          "sha256": "a07c6f25c2f28885b1cc7fd06697fc57a3d34a9645bafffd567dfd50fc215e52"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/spirefro-vital-miks-40-g-fra-rapunzel-kalles-tilbake-pa-grunn-av-funn-av-e.coli",
+          "bytes": 75056,
+          "sha256": "6613c9bc4327fbd716d30d7153b5bf113baba990eadac50cb6a8b4b08b417ab2"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/normal-as-tilbakekaller-godteri-fra-kina-pa-grunn-av-innhold-av-fargestoffet-e123",
+          "bytes": 75180,
+          "sha256": "654105c204b0394c35a8ced3e14b0b45c2b1c69b3451095c3bfdb64b3c1976ab"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/frosne-froskelar-fra-vietnam-blir-kalla-tilbake-etter-funn-av-ulovlege-antibiotikarestar",
+          "bytes": 73889,
+          "sha256": "97319b0d005154482536081bed0b8c42f639318f6204b958c60b8500c05c9cdd"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/geia-food-as-tilbakekaller-produktet-bapao-beef",
+          "bytes": 73882,
+          "sha256": "18dfe401af801e3d3f344e8e7c43927c402cbe7f50c044f5f0d8bb852ac077ad"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/bama-tilbakekaller-ferdigvasket-babyspinat-og-babyleaf-mix-pa-grunn-av-mistanke-om-listeria",
+          "bytes": 74171,
+          "sha256": "d76d93aba8724e0593655d337a943770f868fd80f01f307773b19ea47f619288"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/sunrise-food-as-tilbakekaller-basmatiris-fra-pakistan-etter-funn-av-plantevernmiddelrester-over-grenseverdi",
+          "bytes": 74617,
+          "sha256": "6537f326046dbcc9c101fcf2fa04b4fa6c96b7df954ae786fcd6f0f09e8e133a"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger",
+          "bytes": 87450,
+          "sha256": "1fe7217f39d2346be056b637ef7ba8b46de096f9a4fb8a364686fee381d0ae74"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/europris-tilbakekaller-malt-kanel-fra-krydderhuset",
+          "bytes": 75223,
+          "sha256": "47ddf9197c7523ac0d92b1193d8d158f04cded8347db8d0ae156560795935a2a"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/kvite-ostar-fra-brubakken-gardsmeieri-vert-kalla-tilbake-grunna-funn-av-listeria-monocytogenes",
+          "bytes": 77116,
+          "sha256": "7c67882c21776aed0cd8320efccac8977ee81abe63236df4b6a77b9fb2c0a5cf"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/coop-tilbakekaller-mon-ami-fransk-brie-pa-grunn-av-mistanke-om-listeria",
+          "bytes": 74354,
+          "sha256": "1c26bf71d2787b41c2606a4f81c73f9485888e2d9b8dff49ac977d1465e746cc"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/first-price-rokt-laks-skivet-200-g-og-fiskemannen-rokt-laks-skivet-220-g-kalles-tilbake-grunnet-funn-av-listeria",
+          "bytes": 75286,
+          "sha256": "a07c6f25c2f28885b1cc7fd06697fc57a3d34a9645bafffd567dfd50fc215e52"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/spirefro-vital-miks-40-g-fra-rapunzel-kalles-tilbake-pa-grunn-av-funn-av-e.coli",
+          "bytes": 75056,
+          "sha256": "6613c9bc4327fbd716d30d7153b5bf113baba990eadac50cb6a8b4b08b417ab2"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/normal-as-tilbakekaller-godteri-fra-kina-pa-grunn-av-innhold-av-fargestoffet-e123",
+          "bytes": 75180,
+          "sha256": "654105c204b0394c35a8ced3e14b0b45c2b1c69b3451095c3bfdb64b3c1976ab"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/frosne-froskelar-fra-vietnam-blir-kalla-tilbake-etter-funn-av-ulovlege-antibiotikarestar",
+          "bytes": 73889,
+          "sha256": "97319b0d005154482536081bed0b8c42f639318f6204b958c60b8500c05c9cdd"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/geia-food-as-tilbakekaller-produktet-bapao-beef",
+          "bytes": 73882,
+          "sha256": "18dfe401af801e3d3f344e8e7c43927c402cbe7f50c044f5f0d8bb852ac077ad"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/bama-tilbakekaller-ferdigvasket-babyspinat-og-babyleaf-mix-pa-grunn-av-mistanke-om-listeria",
+          "bytes": 74171,
+          "sha256": "d76d93aba8724e0593655d337a943770f868fd80f01f307773b19ea47f619288"
+        },
+        {
+          "url": "https://www.mattilsynet.no/tilbakekallinger/sunrise-food-as-tilbakekaller-basmatiris-fra-pakistan-etter-funn-av-plantevernmiddelrester-over-grenseverdi",
+          "bytes": 74617,
+          "sha256": "6537f326046dbcc9c101fcf2fa04b4fa6c96b7df954ae786fcd6f0f09e8e133a"
+        }
+      ],
+      "config_sha256": "7c44ffbdf4f1696334c4ca9b6ed360879432b2f2b1999189508bf18473b457a9",
+      "module_sha256": "b5464d765831eb96b1a9cfac0da41b90061259e6ccb7f8e94a8a738c1579ba61",
+      "raw_recording_set": "wave-one"
+    },
+    {
+      "recipe": "nve_solar_cases",
+      "checked_at": "2026-09-11T09:37:33.284837+00:00",
+      "records": 115,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.nve.no/umbraco/api/license/getall?type=A-8&pageNumber=1&pageSize=1000&sortBy=name&sortDir=ASC&filterText=&caseType=00&county=00&municipality=00&stadium=0&size=0&progress=0",
+          "bytes": 52602,
+          "sha256": "03358b13178455f87d49977ce08ca8b74d81deea379f625c314b13310d8d56b3"
+        },
+        {
+          "url": "https://www.nve.no/umbraco/api/license/getall?type=A-8&pageNumber=1&pageSize=1000&sortBy=name&sortDir=ASC&filterText=&caseType=00&county=00&municipality=00&stadium=0&size=0&progress=0",
+          "bytes": 52602,
+          "sha256": "03358b13178455f87d49977ce08ca8b74d81deea379f625c314b13310d8d56b3"
+        }
+      ],
+      "config_sha256": "757f850a36db18d3b595666bc1168450ce629c00df5ce356139b18fac472998e",
+      "module_sha256": "48b1065ea25b6b5e3cd030a915d544bb0c7fe1099b9bd32f2370b4a870febdab",
+      "raw_recording_set": "wave-one"
+    },
+    {
+      "recipe": "dmp_shortage_periods",
+      "checked_at": "2026-09-11T09:37:36.092438+00:00",
+      "records": 1286,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.dmp.no/forsyningssikkerhet/legemiddelmangel/oversikt-over-legemiddelmangel---for-pasienter-og-helsepersonell",
+          "bytes": 922280,
+          "sha256": "6e37bfdcf981485ce4387d3ac9e22072cccc14ee2cc182fa1689b9e63e1fb06f"
+        },
+        {
+          "url": "https://www.dmp.no/forsyningssikkerhet/legemiddelmangel/oversikt-over-legemiddelmangel---for-pasienter-og-helsepersonell",
+          "bytes": 922280,
+          "sha256": "6e37bfdcf981485ce4387d3ac9e22072cccc14ee2cc182fa1689b9e63e1fb06f"
+        }
+      ],
+      "config_sha256": "980a8af5d60175bd1d521a632cdde2a111fd9266795c7a29f11730f8cbe0e27a",
+      "module_sha256": "54af3be336ea4ef1edc1e90e862b4144223d04ae2ac05fa9386074b0e189372d",
+      "raw_recording_set": "wave-one"
+    },
+    {
+      "recipe": "kofa_case_progress",
+      "checked_at": "2026-09-11T10:14:49.428601+00:00",
+      "records": 50,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker",
+          "bytes": 89100,
+          "sha256": "d90159ed782d2bc4cd74728214477335cef2bb5753d22df859c3bfe43adb691a"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/2?widget=single",
+          "bytes": 89573,
+          "sha256": "9a902dfe76b641e47288925579fcc1c4e050e9cafe31fbbe310adb73da8ade7e"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/3?widget=single",
+          "bytes": 89642,
+          "sha256": "e8994a4feac9fa8a5bec92fd37faac458293adccfc7091d7d66f12d2a6ecb568"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/4?widget=single",
+          "bytes": 89845,
+          "sha256": "116f14a4b3e8621895767d3370ced38f657f549ddc591dc55c7f6fe544122c51"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/5?widget=single",
+          "bytes": 89796,
+          "sha256": "2fea4d3e5d7f7eb27ddf9e0b984c13e63f29a13d45343e7e7663199973304447"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker",
+          "bytes": 89100,
+          "sha256": "464a9191522a9b7a6e4bed470601f47c22342fbf5c11f853bff8505e4abd18ae"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/2?widget=single",
+          "bytes": 89573,
+          "sha256": "7c79d2653f9294f44e304b4a3c29b6800d594fadc6a52ac372f44839b1b0aa63"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/3?widget=single",
+          "bytes": 89642,
+          "sha256": "c015c3814720b25e021efc41621bcfc8f5ea6b98cd2d8a8d8805635c845ecc29"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/4?widget=single",
+          "bytes": 89845,
+          "sha256": "99120adbb757dbb8cf59de4cdf124eb851dd0d2c6890ae7891112fd02f51dff0"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa/innkomne-avgjorte-saker/page/5?widget=single",
+          "bytes": 89796,
+          "sha256": "4256794725410d1b601b01044ddf0c42d37ac465c4ec6218e506a48fe14c5a6d"
+        }
+      ],
+      "config_sha256": "784b2eabbb042ae752705ade027d823fadb693c45b1052aae3e37a3fc88d3a5e",
+      "module_sha256": "77562810f7a411798dd85dc0f26cea9fb1adf0d9970f2e67656143e3779b8938",
+      "raw_recording_set": "review-final"
+    },
+    {
+      "recipe": "media_appeal_cases",
+      "checked_at": "2026-09-11T10:14:51.078610+00:00",
+      "records": 30,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker",
+          "bytes": 84347,
+          "sha256": "d1c841f5f6ce0ca016ed99b3eab2020f51d85a632aa304877508501d0ddea009"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker/page/2?widget=medieklagenemnda-filter",
+          "bytes": 84763,
+          "sha256": "b05eeeffad852c32cb1be4b43d5d1f1c561aee41cbcaa864b92045cef9841eb4"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker/page/3?widget=medieklagenemnda-filter",
+          "bytes": 84922,
+          "sha256": "51c003c6a1866c1328c8c55fa50730c10f8f49788b323f1222b178f60eef6318"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker",
+          "bytes": 84347,
+          "sha256": "06f745c5263140ca4b6ef1561b7cb05b951a9911c8527496f64c58a27850bbd9"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker/page/2?widget=medieklagenemnda-filter",
+          "bytes": 84763,
+          "sha256": "680f269d5d6aac1ecdf8b37499ca9a02599d6b47fcc925d88dd3e2e0c8a2501c"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/medieklagenemnda/innkomne-avgjorte-saker/page/3?widget=medieklagenemnda-filter",
+          "bytes": 84922,
+          "sha256": "70cab6cbcd7b4bcb7204af2e53d5fa99d193c19625530171fe819421ab319289"
+        }
+      ],
+      "config_sha256": "0f090a6c676e670014ff497da85749a4ea6a015aa375485009b62c558d25d3b5",
+      "module_sha256": "77562810f7a411798dd85dc0f26cea9fb1adf0d9970f2e67656143e3779b8938",
+      "raw_recording_set": "review-final"
+    },
+    {
+      "recipe": "marketing_appeal_cases",
+      "checked_at": "2026-09-11T10:14:53.170789+00:00",
+      "records": 30,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker",
+          "bytes": 89131,
+          "sha256": "41f1a9eeb90959e8e799d1e04053ca616b461d92ec616311ed347dc545abc260"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker/page/2?widget=markedsrad-filter",
+          "bytes": 89625,
+          "sha256": "ba39acb3027bf51fd4f786ab4525f4f2f1eb12aa54350d83837453a46c4fdd48"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker/page/3?widget=markedsrad-filter",
+          "bytes": 89554,
+          "sha256": "dc44aa7556530ea3321f1cfcc8a072933358286f0bb697cedb7006362a9df3ba"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker",
+          "bytes": 89131,
+          "sha256": "4728e3712f992ff83fb1a0a43732fde12beb0f6b51d7336338f2392433414138"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker/page/2?widget=markedsrad-filter",
+          "bytes": 89625,
+          "sha256": "781ac3ca5e21be02fb67a1ed620c69078f13e2641e525ced1679464a8c3766fb"
+        },
+        {
+          "url": "https://www.klagenemndssekretariatet.no/markedsradet/innkomne-avgjorte-saker/page/3?widget=markedsrad-filter",
+          "bytes": 89554,
+          "sha256": "10b873177b8e49dd2051035a92e2728a5077139b01b9d5cd12037d9bf904565a"
+        }
+      ],
+      "config_sha256": "36d0bd60e767bc747e8d329d85201a22b79c0f33e647574ca649bd5839e072f1",
+      "module_sha256": "77562810f7a411798dd85dc0f26cea9fb1adf0d9970f2e67656143e3779b8938",
+      "raw_recording_set": "review-final"
+    },
+    {
+      "recipe": "einnsyn_project_journal",
+      "checked_at": "2026-09-11T09:48:42.558932+00:00",
+      "records": 3,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://api.einnsyn.no/search?entity=Journalpost&limit=100&sortBy=publisertDato&sortOrder=desc&publisertDatoFrom=2026-08-12&publisertDatoTo=2026-09-11&tittel=Wisting",
+          "bytes": 4304,
+          "sha256": "853c2f7e08ff52720a89ad38899ca008816f4965d78cd21fb86bb5d22d85fcf3"
+        },
+        {
+          "url": "https://api.einnsyn.no/search?entity=Journalpost&limit=100&sortBy=publisertDato&sortOrder=desc&publisertDatoFrom=2026-08-12&publisertDatoTo=2026-09-11&tittel=Wisting",
+          "bytes": 4304,
+          "sha256": "853c2f7e08ff52720a89ad38899ca008816f4965d78cd21fb86bb5d22d85fcf3"
+        }
+      ],
+      "config_sha256": "1e55d0a30ebf03fd402021c881c38dc48a48875847c464f6fada31d5c61af871",
+      "module_sha256": "ea2d8d9ad3f275beb1fb842265eb3d2510208007d0e67712bb0092ef5aa17446",
+      "raw_recording_set": "wave-two"
+    },
+    {
+      "recipe": "ted_contract_awards",
+      "checked_at": "2026-09-11T09:48:43.430954+00:00",
+      "records": 62,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://api.ted.europa.eu/v3/notices/search",
+          "bytes": 473555,
+          "sha256": "c198623aba7fdb1abe266a5411b1585a8b22f246400d844b1ea1ef1cbf8fec6c"
+        },
+        {
+          "url": "https://api.ted.europa.eu/v3/notices/search",
+          "bytes": 473555,
+          "sha256": "727f00515c879343672f948936a4b14bb7105ff3d7a0bdad631e4ade6d0ae68d"
+        }
+      ],
+      "config_sha256": "eeada328cb809c746fc12c8b54d8b7da82bb25f21e33e0005004915165ab6d00",
+      "module_sha256": "3deed8866aefdd323931cd1243e36fb1a702fe97bcb3c36b922dc329e9bda2be",
+      "raw_recording_set": "wave-two"
+    },
+    {
+      "recipe": "ted_contract_modifications",
+      "checked_at": "2026-09-11T09:48:43.786341+00:00",
+      "records": 0,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://api.ted.europa.eu/v3/notices/search",
+          "bytes": 78,
+          "sha256": "4392cb2130efe494f4bca8f6967874500e6242fa87227fa0bcb8504a0bfb6737"
+        },
+        {
+          "url": "https://api.ted.europa.eu/v3/notices/search",
+          "bytes": 78,
+          "sha256": "4392cb2130efe494f4bca8f6967874500e6242fa87227fa0bcb8504a0bfb6737"
+        }
+      ],
+      "config_sha256": "282fc5d208e38ac5c8eaf8fd48e0ec7a028fc78909a8151bbb561f64157534f2",
+      "module_sha256": "3deed8866aefdd323931cd1243e36fb1a702fe97bcb3c36b922dc329e9bda2be",
+      "raw_recording_set": "wave-two"
+    },
+    {
+      "recipe": "oslo_project_cases",
+      "checked_at": "2026-09-11T09:48:44.710539+00:00",
+      "records": 26,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://innsyn.pbe.oslo.kommune.no/saksinnsyn/main.asp?mode=all&text=Sinsenveien+5",
+          "bytes": 39629,
+          "sha256": "9bb8acebc346a3e5eeed3af4d3006982ea139d36520244db82eff32891816e34"
+        },
+        {
+          "url": "https://innsyn.pbe.oslo.kommune.no/saksinnsyn/main.asp?mode=all&text=Sinsenveien+5",
+          "bytes": 39629,
+          "sha256": "9bb8acebc346a3e5eeed3af4d3006982ea139d36520244db82eff32891816e34"
+        }
+      ],
+      "config_sha256": "a48822ab4e4a694f85b856cff1f5d546c9ed36886862881aa779cb5668d8dd47",
+      "module_sha256": "7dc5311c445219123129e3ce2b198da29478e92f5293a384c9f0ea65f4c5f2d2",
+      "raw_recording_set": "wave-two"
+    },
+    {
+      "recipe": "finkn_company_decisions",
+      "checked_at": "2026-09-11T09:48:44.885689+00:00",
+      "records": 2,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://publisering.finkn.no/api/statements/searchstatements",
+          "bytes": 71903,
+          "sha256": "9803c8d5665abb2bb7728ec76553837458555f0866100fe7e8d423b3bdb356e3"
+        },
+        {
+          "url": "https://publisering.finkn.no/api/statements/searchstatements",
+          "bytes": 71903,
+          "sha256": "9803c8d5665abb2bb7728ec76553837458555f0866100fe7e8d423b3bdb356e3"
+        }
+      ],
+      "config_sha256": "f239ccc7cd1e884986d342276d594a80ffce501121071972895145f3a8240c84",
+      "module_sha256": "980f95440ec7518e047782dd6875b63acee2fd8e2f131c32901eb5be3cefc903",
+      "raw_recording_set": "wave-two"
+    },
+    {
+      "recipe": "sodir_licence_operator",
+      "checked_at": "2026-09-11T09:52:12.439396+00:00",
+      "records": 541,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://factpages.sodir.no/public?/Factpages/external/tableview/licence_oper_hst&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false",
+          "bytes": 336366,
+          "sha256": "6e7c6f603a5785b12796bc641793d564c6a11645591235d21fabe693e9b60d41"
+        },
+        {
+          "url": "https://factpages.sodir.no/public?/Factpages/external/tableview/licence_oper_hst&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false",
+          "bytes": 336366,
+          "sha256": "6e7c6f603a5785b12796bc641793d564c6a11645591235d21fabe693e9b60d41"
+        }
+      ],
+      "config_sha256": "1c9282fcd09abdb55786a34df9150b0ff9567a3e7f216bb9fce4a08cb74b8407",
+      "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f",
+      "raw_recording_set": "wave-two"
+    },
+    {
+      "recipe": "sodir_field_status",
+      "checked_at": "2026-09-11T09:52:12.977947+00:00",
+      "records": 318,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://factpages.sodir.no/public?/Factpages/external/tableview/field_activity_status_hst&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false",
+          "bytes": 23205,
+          "sha256": "fca36019a6e2630437f36a3b49ed54bc9c5ba75430298ead87ce5cd417dff278"
+        },
+        {
+          "url": "https://factpages.sodir.no/public?/Factpages/external/tableview/field_activity_status_hst&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false",
+          "bytes": 23205,
+          "sha256": "fca36019a6e2630437f36a3b49ed54bc9c5ba75430298ead87ce5cd417dff278"
+        }
+      ],
+      "config_sha256": "a6382e172d155f1e455bc51563c7d8e717439a8d6b1485de8102d6e7f017e739",
+      "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f",
+      "raw_recording_set": "wave-two"
+    },
+    {
+      "recipe": "aquaculture_site_capacity",
+      "checked_at": "2026-09-11T09:56:10.638963+00:00",
+      "records": 1,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://api.fiskeridir.no/pub-aqua/api/v1/sites?nr=10029&range=0-9",
+          "bytes": 4976,
+          "sha256": "784cd70aeed52451d40fb65b9eeb0fefd62955c70bca8ace01c9ce482153d911"
+        },
+        {
+          "url": "https://api.fiskeridir.no/pub-aqua/api/v1/sites?nr=10029&range=0-9",
+          "bytes": 4976,
+          "sha256": "784cd70aeed52451d40fb65b9eeb0fefd62955c70bca8ace01c9ce482153d911"
+        }
+      ],
+      "config_sha256": "8b8969bb72bb214ae6561b787ff788420de24313f02f3121c3197bf89225e861",
+      "module_sha256": "db02aafb8893f7ac0cea6e974e049f85fec85e4cdae8b63dafa0e7c313f7b158",
+      "raw_recording_set": "wave-three"
+    },
+    {
+      "recipe": "research_approved_projects",
+      "checked_at": "2026-09-11T12:39:32.827887+00:00",
+      "records": 19,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/",
+          "bytes": 221653,
+          "sha256": "e59a275dbf6d6ec2e7ebc6cb68329d3abebf93ab5113c52b23d62af78db1c65a"
+        },
+        {
+          "url": "https://www.forskningsradet.no/utlysninger/2026/kompetansebyggende-prosjekt-naringslivet/",
+          "bytes": 221698,
+          "sha256": "0f73708a4838d78088951453ee1f9dda90b5a3b1f521d939e018bc831b5c0ad9"
+        }
+      ],
+      "config_sha256": "fac541872d3281d3c0135611e29524595afc56e510ab4f81c5b66811dd24f035",
+      "module_sha256": "111a227ec9edab178d7b7c446c2cbb7941a3b6df53929b266497dd8ab2a287a8"
+    },
+    {
+      "recipe": "sodir_exploration_progress",
+      "checked_at": "2026-09-11T09:57:57.974385+00:00",
+      "records": 402,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://factpages.sodir.no/public?/Factpages/external/tableview/wellbore_exploration_last_10_years&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false",
+          "bytes": 47562,
+          "sha256": "66c976ddd40380d67d9bc2ca78818f956c0b04e351a22c8763fbd5c0bec2a746"
+        },
+        {
+          "url": "https://factpages.sodir.no/public?/Factpages/external/tableview/wellbore_exploration_last_10_years&rs:Command=Render&rc:Toolbar=false&rc:Parameters=f&IpAddress=not_used&CultureCode=en&rs:Format=CSV&Top100=false",
+          "bytes": 47562,
+          "sha256": "66c976ddd40380d67d9bc2ca78818f956c0b04e351a22c8763fbd5c0bec2a746"
+        }
+      ],
+      "config_sha256": "6ff686095cec34f6eead0f5111da59e105d506e167dc885081f3544095fc6174",
+      "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f",
+      "raw_recording_set": "wave-three"
+    },
+    {
+      "recipe": "nb_nowa_observations",
+      "checked_at": "2026-09-11T09:57:58.196598+00:00",
+      "records": 5,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://data.norges-bank.no/api/data/SHORT_RATES/.NOWA?format=csv&lastNObservations=5&locale=en",
+          "bytes": 3385,
+          "sha256": "0349e14ee5ddc6c69209e80963a217c9297fed10ee36d1e0db691aa4d075af57"
+        },
+        {
+          "url": "https://data.norges-bank.no/api/data/SHORT_RATES/.NOWA?format=csv&lastNObservations=5&locale=en",
+          "bytes": 3385,
+          "sha256": "0349e14ee5ddc6c69209e80963a217c9297fed10ee36d1e0db691aa4d075af57"
+        }
+      ],
+      "config_sha256": "e1b3985098a78b56b06f21ca2568b522ffef89ce6ce49b2c516c5933a0fcc697",
+      "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f",
+      "raw_recording_set": "wave-three"
+    },
+    {
+      "recipe": "nve_reservoir_no1_weekly",
+      "checked_at": "2026-09-11T10:00:33.284157+00:00",
+      "records": 1,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://biapi.nve.no/magasinstatistikk/api/Magasinstatistikk/HentOffentligDataSisteUke",
+          "bytes": 2468,
+          "sha256": "7134b3fafcca7a26447af695b832d81e859084b46254ce7d64205fccce075a68"
+        },
+        {
+          "url": "https://biapi.nve.no/magasinstatistikk/api/Magasinstatistikk/HentOffentligDataSisteUke",
+          "bytes": 2468,
+          "sha256": "7134b3fafcca7a26447af695b832d81e859084b46254ce7d64205fccce075a68"
+        }
+      ],
+      "config_sha256": "0378393dfe4ba36334af4633dc5fe8118ff1abcd85457ec55249c524fc41453d",
+      "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f",
+      "raw_recording_set": "wave-four"
+    },
+    {
+      "recipe": "brreg_account_document_years",
+      "checked_at": "2026-09-11T10:14:53.358660+00:00",
+      "records": 15,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://data.brreg.no/regnskapsregisteret/regnskap/aarsregnskap/kopi/914778271/aar",
+          "bytes": 106,
+          "sha256": "b7bcd20d8a4607bc9ca49fbdfebf5e51cb31e39858edb985dc98a82e8d2b7cd1"
+        },
+        {
+          "url": "https://data.brreg.no/regnskapsregisteret/regnskap/aarsregnskap/kopi/914778271/aar",
+          "bytes": 106,
+          "sha256": "b7bcd20d8a4607bc9ca49fbdfebf5e51cb31e39858edb985dc98a82e8d2b7cd1"
+        }
+      ],
+      "config_sha256": "1eb92fd457aa021fbfc4256926851d921c673e9854c3d28b918ba3440b3577dd",
+      "module_sha256": "4dc6efa08a2afa0464b7616d287a13281d440918e9bcc8df0a4edf3500fa55cb",
+      "raw_recording_set": "review-final"
+    },
+    {
+      "recipe": "pfu_decision_outcomes",
+      "checked_at": "2026-09-11T10:00:33.788590+00:00",
+      "records": 11,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://z4hi2p3ajd-dsn.algolia.net/1/indexes/pfu-basen_processedAtDesc/query",
+          "bytes": 288626,
+          "sha256": "fd457764826a87eb4d03b4cc378dacf07115fd1826dde03d2f7440aa65832fcf"
+        },
+        {
+          "url": "https://z4hi2p3ajd-dsn.algolia.net/1/indexes/pfu-basen_processedAtDesc/query",
+          "bytes": 288613,
+          "sha256": "0a70fad44486c9fe0fb29df4511ac468106dd4c6832db165d8eb9efd60d92237"
+        }
+      ],
+      "config_sha256": "560a3ea4c1261e9de0ee53faecda52441f29eb36999b7130a17a5d32c933a75d",
+      "module_sha256": "e46b089bd250b46f5ba3582ae5c01e6d87fd29ad91c977096e55d6d5b9a4245c",
+      "raw_recording_set": "wave-four"
+    },
+    {
+      "recipe": "cisa_known_exploited",
+      "checked_at": "2026-09-11T10:00:34.220271+00:00",
+      "records": 1705,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+          "bytes": 1714060,
+          "sha256": "30f1fbd6104b59507bbb6ad0ced75c39834fe7bb8962a8f2ef1027d81a996211"
+        },
+        {
+          "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+          "bytes": 1714060,
+          "sha256": "30f1fbd6104b59507bbb6ad0ced75c39834fe7bb8962a8f2ef1027d81a996211"
+        }
+      ],
+      "config_sha256": "38e02020cc484a5029dac7b3bcf859c00ba80b6cd5eaa5ac82ebb5e2ce68ed71",
+      "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f",
+      "raw_recording_set": "wave-four"
+    },
+    {
+      "recipe": "clinical_trials_norway_updates",
+      "checked_at": "2026-09-11T10:05:27.756185+00:00",
+      "records": 135,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies?query.locn=AREA%5BLocationCountry%5DNorway&filter.advanced=AREA%5BLastUpdatePostDate%5DRANGE%5B2026-08-28%2C+2026-09-11%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CPhase%2CLeadSponsorName%2CStudyFirstPostDate%2CLastUpdatePostDate%2CLocationCountry%2CHasResults&format=json&pageSize=100&countTotal=true",
+          "bytes": 428722,
+          "sha256": "16b00a636d68901d0e4369b0e61e7716145b9c4dd88f6967c959cd47b9b0047c"
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies?query.locn=AREA%5BLocationCountry%5DNorway&filter.advanced=AREA%5BLastUpdatePostDate%5DRANGE%5B2026-08-28%2C+2026-09-11%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CPhase%2CLeadSponsorName%2CStudyFirstPostDate%2CLastUpdatePostDate%2CLocationCountry%2CHasResults&format=json&pageSize=100&countTotal=true&pageToken=ZVt07cGHkvI2wRk2CJf6_LLtzoHfMpVrd7KrgP4ZnT-Xvvw0IQ",
+          "bytes": 160053,
+          "sha256": "a3c17f78b1a8326587156c6e44a81628c3a107d007f69e638f645f2751595751"
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies?query.locn=AREA%5BLocationCountry%5DNorway&filter.advanced=AREA%5BLastUpdatePostDate%5DRANGE%5B2026-08-28%2C+2026-09-11%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CPhase%2CLeadSponsorName%2CStudyFirstPostDate%2CLastUpdatePostDate%2CLocationCountry%2CHasResults&format=json&pageSize=100&countTotal=true",
+          "bytes": 428722,
+          "sha256": "16b00a636d68901d0e4369b0e61e7716145b9c4dd88f6967c959cd47b9b0047c"
+        },
+        {
+          "url": "https://clinicaltrials.gov/api/v2/studies?query.locn=AREA%5BLocationCountry%5DNorway&filter.advanced=AREA%5BLastUpdatePostDate%5DRANGE%5B2026-08-28%2C+2026-09-11%5D&fields=NCTId%2CBriefTitle%2COverallStatus%2CPhase%2CLeadSponsorName%2CStudyFirstPostDate%2CLastUpdatePostDate%2CLocationCountry%2CHasResults&format=json&pageSize=100&countTotal=true&pageToken=ZVt07cGHkvI2wRk2CJf6_LLtzoHfMpVrd7KrgP4ZnT-Xvvw0IQ",
+          "bytes": 160053,
+          "sha256": "a3c17f78b1a8326587156c6e44a81628c3a107d007f69e638f645f2751595751"
+        }
+      ],
+      "config_sha256": "6b6a95c1dd0d51412736f29b57bf398449777842dd0a7b4f7fc4a3d12fc22282",
+      "module_sha256": "ac959b2ab0f3d1460f958ff05aa792d00ca0ddb15512f39e1b60d0b1149232dd",
+      "raw_recording_set": "wave-five"
+    },
+    {
+      "recipe": "arbeidstilsynet_inspection_reactions_by_industry",
+      "checked_at": "2026-09-11T10:09:41.265745+00:00",
+      "records": 126,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://registerdata.arbeidstilsynet.no/statistikk/Statistikk_Tilsyn_vedtak.csv",
+          "bytes": 508926,
+          "sha256": "30e5aad1e50a5c824e767a51b761b55d74cf43981a1409204172f9f3216f1759"
+        },
+        {
+          "url": "https://registerdata.arbeidstilsynet.no/statistikk/Statistikk_Tilsyn_vedtak.csv",
+          "bytes": 508926,
+          "sha256": "30e5aad1e50a5c824e767a51b761b55d74cf43981a1409204172f9f3216f1759"
+        }
+      ],
+      "config_sha256": "28f4275e4daf69c4f03fe8e2d860b5af450b40e2126324d4104d5b4c4c4a97de",
+      "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f",
+      "raw_recording_set": "wave-six"
+    },
+    {
+      "recipe": "smilefjes_restaurant_inspections",
+      "checked_at": "2026-09-11T10:14:53.726591+00:00",
+      "records": 10,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://smilefjes.mattilsynet.no/spisested/trondheim/pincho_nation.Z1502171421588723252EMWQC/",
+          "bytes": 114771,
+          "sha256": "16f3488226f007d45eebc74efe2e94a7ca395014623117afe9ae03b4f596f113"
+        },
+        {
+          "url": "https://smilefjes.mattilsynet.no/spisested/trondheim/pincho_nation.Z1502171421588723252EMWQC/",
+          "bytes": 114771,
+          "sha256": "16f3488226f007d45eebc74efe2e94a7ca395014623117afe9ae03b4f596f113"
+        }
+      ],
+      "config_sha256": "a336df3268b9f64c45520b627b1018397468fa1e5293ffc6012c37561a038c13",
+      "module_sha256": "e8525f6db3dcc24e67d2a7ee55fce3b1cf3052263505c459551103d1df37c82e",
+      "raw_recording_set": "review-final"
+    },
+    {
+      "recipe": "ema_medicine_authorisations",
+      "checked_at": "2026-09-11T10:11:31.891807+00:00",
+      "records": 2339,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.ema.europa.eu/en/documents/report/medicines-output-medicines-report_en.xlsx",
+          "bytes": 897597,
+          "sha256": "5e95f4815626dae083e0621efbfcd23d8095ed13f528dd556c4a5edbb7831e94"
+        },
+        {
+          "url": "https://www.ema.europa.eu/en/documents/report/medicines-output-medicines-report_en.xlsx",
+          "bytes": 897597,
+          "sha256": "5e95f4815626dae083e0621efbfcd23d8095ed13f528dd556c4a5edbb7831e94"
+        }
+      ],
+      "config_sha256": "8deed2443c6e763ec85e6f3b66066a3f36aa75dc73786705f03c9fe31e5b93cc",
+      "module_sha256": "be0f1ac49bc43ba6dcf601a92425e3ae23907bd69f2ecb19689f843d32fd744c",
+      "raw_recording_set": "wave-seven"
+    },
+    {
+      "recipe": "mattilsynet_pesticide_products",
+      "checked_at": "2026-09-11T10:23:22.924947+00:00",
+      "records": 268,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://api.plantevernmidler.mattilsynet.io/godkjente_kjemiske_mikrobiologiske_preparater",
+          "bytes": 410087,
+          "sha256": "7d17823967823b3b84abb3ba3e9c401b1554146274ee767ecd94883c9c50d76e"
+        },
+        {
+          "url": "https://api.plantevernmidler.mattilsynet.io/godkjente_kjemiske_mikrobiologiske_preparater",
+          "bytes": 410087,
+          "sha256": "7d17823967823b3b84abb3ba3e9c401b1554146274ee767ecd94883c9c50d76e"
+        }
+      ],
+      "config_sha256": "55d3154113c16251fd6244c4a0eac4c5116dc0d6f79a4c50bf91ed3314f3cd82",
+      "module_sha256": "6ecb3526cd2e2635cf513811af302f2cd7635d9cc0dfcd0870ddd5c79951a083",
+      "raw_recording_set": "review-pesticides-final"
+    },
+    {
+      "recipe": "mattilsynet_pesticide_temporary_permits",
+      "checked_at": "2026-09-11T10:23:23.105323+00:00",
+      "records": 5,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://api.plantevernmidler.mattilsynet.io/midlertidige_tillatelser",
+          "bytes": 11824,
+          "sha256": "0de0bc42d819d26f866461fb40e441bff4527829b1d8fc2ff97002605a5a3c02"
+        },
+        {
+          "url": "https://api.plantevernmidler.mattilsynet.io/midlertidige_tillatelser",
+          "bytes": 11824,
+          "sha256": "0de0bc42d819d26f866461fb40e441bff4527829b1d8fc2ff97002605a5a3c02"
+        }
+      ],
+      "config_sha256": "aceecd2ecc510bc2a949089354fe00af3676cf0b965cb1514dee7d505b221352",
+      "module_sha256": "6ecb3526cd2e2635cf513811af302f2cd7635d9cc0dfcd0870ddd5c79951a083",
+      "raw_recording_set": "review-pesticides-final"
+    },
+    {
+      "recipe": "fishhealth_ila_outbreaks",
+      "checked_at": "2026-09-11T10:21:55.587320+00:00",
+      "records": 17,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://geoserver.barentswatch.no/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=bw:localitywithila&outputFormat=application/json&maxFeatures=500",
+          "bytes": 6346,
+          "sha256": "9de860a04b324472def893e8c1862b452a95fdfd625a308735b8c22454fed2a7"
+        },
+        {
+          "url": "https://geoserver.barentswatch.no/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=bw:localitywithila&outputFormat=application/json&maxFeatures=500",
+          "bytes": 6346,
+          "sha256": "2f84af89899bb5b3eeacacdad787da566f72f98f0521e45c826bbf29e69f3abb"
+        }
+      ],
+      "config_sha256": "183fb782c113e5f6c1281c289f196250fa18b6d080b399327ee63c28a70aeb8d",
+      "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f",
+      "raw_recording_set": "wave-eight"
+    },
+    {
+      "recipe": "fishhealth_ila_zone_validity",
+      "checked_at": "2026-09-11T10:21:55.860784+00:00",
+      "records": 102,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://geoserver.barentswatch.no/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=bw:ilaprotectionzone&outputFormat=application/json&maxFeatures=500",
+          "bytes": 806106,
+          "sha256": "dc5e1c727988b0c5cebecafdfebb8a16136b78e7c1e7b7f8445be383bb1624b4"
+        },
+        {
+          "url": "https://geoserver.barentswatch.no/geoserver/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=bw:ilaprotectionzone&outputFormat=application/json&maxFeatures=500",
+          "bytes": 806106,
+          "sha256": "0970ab68b7c13c7215ce5f1281716fd9d0303086c985bbf0f53aba8f5b883849"
+        }
+      ],
+      "config_sha256": "7d76009c97b86c14bcce7899ccc0d67d33dd86285793fabfc90f431a3afcc2d9",
+      "module_sha256": "793784258f74809b84fb4ff779c55a3d1e0f45861c4eb859f5a7568f9b2e516f",
+      "raw_recording_set": "wave-eight"
+    },
+    {
+      "recipe": "nye_metoder_treatment_decisions",
+      "checked_at": "2026-09-11T10:21:56.333643+00:00",
+      "records": 1004,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://www.nyemetoder.no/innforing-av-nye-metoder/beslutning/",
+          "bytes": 35497,
+          "sha256": "17cb76409b28dbe088be0c20fd04823956a4989bee7f519121b54890a7032703"
+        },
+        {
+          "url": "https://www.nyemetoder.no/4a5664/contentassets/19fe66ad37d54dddb1338deff095e16c/2026/beslutningsforum-24.08.2026_til-publisering.xlsx",
+          "bytes": 222850,
+          "sha256": "aa88fff98230764936014ada1f5335b3b2ea1ebb9c9f970139817cca41a7b672"
+        },
+        {
+          "url": "https://www.nyemetoder.no/innforing-av-nye-metoder/beslutning/",
+          "bytes": 35497,
+          "sha256": "17cb76409b28dbe088be0c20fd04823956a4989bee7f519121b54890a7032703"
+        },
+        {
+          "url": "https://www.nyemetoder.no/4a5664/contentassets/19fe66ad37d54dddb1338deff095e16c/2026/beslutningsforum-24.08.2026_til-publisering.xlsx",
+          "bytes": 222850,
+          "sha256": "aa88fff98230764936014ada1f5335b3b2ea1ebb9c9f970139817cca41a7b672"
+        }
+      ],
+      "config_sha256": "985138f4458d5fccc77060b5cecf3cfb2e1bdf05cd4271c03292e26a3358db24",
+      "module_sha256": "8b8d8200da0a2fd014f371cc2732b807281a9cb0e2460696f3420d7388075f91",
+      "raw_recording_set": "wave-eight"
+    },
+    {
+      "recipe": "industrial_installation_status",
+      "checked_at": "2026-09-11T10:36:14.982490+00:00",
+      "records": 1,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://kart3.miljodirektoratet.no/arcgis/rest/services/industri/MapServer/0/query?where=anlegg_id+IN+%285447%29&outFields=anlegg_id%2Cnavn%2Cdriftsstatus%2Cforurensningsmyndighet%2Csiste_rapportering_aar%2Char_utslipp_luft%2Char_utslipp_vann%2Char_krav_til_overvaking%2Cfaktaark&returnGeometry=false&resultRecordCount=1&f=json",
+          "bytes": 1521,
+          "sha256": "a3b624bb3953078bd9e988fed952c3c2d978401f56f175cb9e728231bcc915e6"
+        },
+        {
+          "url": "https://kart3.miljodirektoratet.no/arcgis/rest/services/industri/MapServer/0/query?where=anlegg_id+IN+%285447%29&outFields=anlegg_id%2Cnavn%2Cdriftsstatus%2Cforurensningsmyndighet%2Csiste_rapportering_aar%2Char_utslipp_luft%2Char_utslipp_vann%2Char_krav_til_overvaking%2Cfaktaark&returnGeometry=false&resultRecordCount=1&f=json",
+          "bytes": 1521,
+          "sha256": "a3b624bb3953078bd9e988fed952c3c2d978401f56f175cb9e728231bcc915e6"
+        }
+      ],
+      "config_sha256": "298de3856d4c11898c102ce0f5f0032f570c2c0a1bbf50ebcb41d11efebde77a",
+      "module_sha256": "04d65c6a047cc3284ec30c41e5f8c8e392f66ee47a6bdf868ba04da20dc41832"
+    },
+    {
+      "recipe": "storting_case_vote_outcomes",
+      "checked_at": "2026-09-11T10:36:15.074964+00:00",
+      "records": 4,
+      "first_alerts": 0,
+      "second_alerts": 0,
+      "full_state_identical": true,
+      "reads": [
+        {
+          "url": "https://data.stortinget.no/eksport/voteringer?SakId=83657",
+          "bytes": 8184,
+          "sha256": "198c14cae5b7ebbeb321aaf908fc6a6474d882ee4edea90442df7322b1d1c372"
+        },
+        {
+          "url": "https://data.stortinget.no/eksport/voteringer?SakId=83657",
+          "bytes": 8184,
+          "sha256": "198c14cae5b7ebbeb321aaf908fc6a6474d882ee4edea90442df7322b1d1c372"
+        }
+      ],
+      "config_sha256": "8e00ebbabf1317795fe017724da1d5e3d4ec2ef3eac592207c0091d58a838a2d",
+      "module_sha256": "b7bc2991a9a36996146889a80ccb948dad6e80343aec805a0f1868c8d0f50dff"
+    }
+  ],
+  "shared_code_sha256": {
+    "watchtower/sources/changes.py": "b5b8620c36ed769266057780c0766cf0e6adfcbd70a946a1419e0de0898f2a0b",
+    "watchtower/sources/common.py": "4d6fa27473ce609f533724df4c9963051f2d0cc5fae22ae27c70cf33f9cc7867",
+    "watchtower/engine.py": "c5e357f452546741d2d8738b61366c5975eb7b38c09e1f1d5250a1f7217b3cee",
+    "watchtower/recipes.py": "64d171e56b125a42d12a6efe798cdc783fba261281fa1d00da49b72050cdcf5f"
+  }
+}

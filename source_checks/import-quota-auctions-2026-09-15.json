@@ -1,0 +1,199 @@
+{
+  "recipe": "grain_import_quota_allocation_changes",
+  "checked_at": "2026-09-15T12:56:35.138793+00:00",
+  "records": 5,
+  "first_alerts": 0,
+  "second_alerts": 0,
+  "coverage_warnings": [],
+  "full_state_identical": true,
+  "reads": [
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/history",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 51664,
+      "sha256": "3698450b2681109e16c81b2c04160038955c81f45e4a43bbbb89b50151320208"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1341",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4164,
+      "sha256": "a0071bd987f989199498c03d2d934e192166db672c03d1ecf9c2063e3786dae7"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1342",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3242,
+      "sha256": "41e62c3c9e4b0bcb5786f74c91035323ed9e3749cb6e2a4b4d69ae1a71cb4167"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1361",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4740,
+      "sha256": "b39f197ec7769fdc46ff68ce58fb497dd24b34b8ab60393570d5d5b1c5d59ebf"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1362",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3242,
+      "sha256": "8478676f97f6974e0ab7d5647d359eafe527e3eeb7d7fb8c079e30d10b15cb3e"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1363",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3840,
+      "sha256": "0f35ef9ed577bbe06727d22e51385caaded6252c524aa8850c388c7a5b06cb1e"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/history",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 51664,
+      "sha256": "3698450b2681109e16c81b2c04160038955c81f45e4a43bbbb89b50151320208"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1341",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4164,
+      "sha256": "a0071bd987f989199498c03d2d934e192166db672c03d1ecf9c2063e3786dae7"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1342",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3242,
+      "sha256": "41e62c3c9e4b0bcb5786f74c91035323ed9e3749cb6e2a4b4d69ae1a71cb4167"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1361",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4740,
+      "sha256": "b39f197ec7769fdc46ff68ce58fb497dd24b34b8ab60393570d5d5b1c5d59ebf"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1362",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3242,
+      "sha256": "8478676f97f6974e0ab7d5647d359eafe527e3eeb7d7fb8c079e30d10b15cb3e"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1363",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3840,
+      "sha256": "0f35ef9ed577bbe06727d22e51385caaded6252c524aa8850c388c7a5b06cb1e"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/history",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 51664,
+      "sha256": "3698450b2681109e16c81b2c04160038955c81f45e4a43bbbb89b50151320208"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1341",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4164,
+      "sha256": "a0071bd987f989199498c03d2d934e192166db672c03d1ecf9c2063e3786dae7"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1342",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3242,
+      "sha256": "41e62c3c9e4b0bcb5786f74c91035323ed9e3749cb6e2a4b4d69ae1a71cb4167"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1361",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4740,
+      "sha256": "b39f197ec7769fdc46ff68ce58fb497dd24b34b8ab60393570d5d5b1c5d59ebf"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1362",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3242,
+      "sha256": "8478676f97f6974e0ab7d5647d359eafe527e3eeb7d7fb8c079e30d10b15cb3e"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1363",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3840,
+      "sha256": "0f35ef9ed577bbe06727d22e51385caaded6252c524aa8850c388c7a5b06cb1e"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/history",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 51664,
+      "sha256": "3698450b2681109e16c81b2c04160038955c81f45e4a43bbbb89b50151320208"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1341",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4164,
+      "sha256": "a0071bd987f989199498c03d2d934e192166db672c03d1ecf9c2063e3786dae7"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1342",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3242,
+      "sha256": "41e62c3c9e4b0bcb5786f74c91035323ed9e3749cb6e2a4b4d69ae1a71cb4167"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1361",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 4740,
+      "sha256": "b39f197ec7769fdc46ff68ce58fb497dd24b34b8ab60393570d5d5b1c5d59ebf"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1362",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3242,
+      "sha256": "8478676f97f6974e0ab7d5647d359eafe527e3eeb7d7fb8c079e30d10b15cb3e"
+    },
+    {
+      "url": "https://auksjon.landbruksdirektoratet.no/js_history?aitem_id=1363",
+      "method": "GET",
+      "request_json": null,
+      "bytes": 3840,
+      "sha256": "0f35ef9ed577bbe06727d22e51385caaded6252c524aa8850c388c7a5b06cb1e"
+    }
+  ],
+  "config_sha256": "90260354cb850237594fd6bed1078b416d35513c4987a4b2791cb82ba4f8bdff",
+  "module_sha256": "b8bccd91ce24b061f9c9ff7251ebd20f47a78b6bc7574af38fda0ff917c40d1e",
+  "engine_sha256": "ec0bae41f1029d38ec75a728a968abfdc071036f0d5b62235e4c9a213e818260",
+  "config_module_sha256": "4850ba149a1e5630d9a61b74716c93748ff9b641c975d5861839e5c6585885f0",
+  "snapshot_module_sha256": "f471e81d93af63179fa00930c38f5f0b35c9220a9bcfbbdc756969799d8a57e8",
+  "award_rows": 20,
+  "limits": [
+    "Five current-year grain auctions with twenty published allocation rows. Other goods are outside the verified default selection.",
+    "The complete observed year index has 43 entries; no independently advertised total is available.",
+    "Quantities are tonnes and recorded bids NOK per tonne according to the official bidding guide.",
+    "Displayed minimum price is separate from historical allocation bids; lower recorded bids are preserved without inferring a violation.",
+    "No common clearing price, payment or completed import is inferred.",
+    "Missing result table is null availability, not zero allocation. A previously published table disappearing fails without advancing state.",
+    "Dates retain source local text without inferred timezone; auction history year is separate from quota period in the title.",
+    "These live polls establish parsing and repeat stability, not scheduled recurrence or notification delivery."
+  ],
+  "semantic_sources": [
+    "https://www.landbruksdirektoratet.no/nb/industri-og-handel/ordninger-for-industri-og-handel/kjope-tollkvote-pa-auksjon/veileder-for-auksjonslosning-for-tollkvoter/2.regler-for-a-gi-bud",
+    "https://www.landbruksdirektoratet.no/nb/industri-og-handel/ordninger-for-industri-og-handel/kjope-tollkvote-pa-auksjon/veileder-for-auksjonslosning-for-tollkvoter/5.tildeling-av-kvoteandel"
+  ]
+}

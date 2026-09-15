@@ -1,0 +1,112 @@
+[general]
+config_version = 1
+max_seen_per_source = 3000
+
+[notifications]
+provider = "teams"
+
+[[source]]
+id = "web_page_medietilsynet"
+kind = "web_page"
+label = "Medietilsynet – aktuelt sidetekst"
+urls = ["https://www.medietilsynet.no/nyheter/aktuelt/"]
+selector = ".right-content"
+min_text_length = 100
+max_text_length = 50000
+interval_minutes = 360
+[source.filter]
+match_all = true
+
+[[source]]
+id = "regjeringen_media"
+kind = "regjeringen"
+label = "Regjeringen – medier og presse"
+interval_minutes = 60
+[source.filter]
+include_any = ["medier", "presse", "journalistikk"]
+
+[[source]]
+id = "stortinget_horinger"
+kind = "stortinget"
+label = "Stortinget – høringer"
+datasets = ["horinger"]
+interval_minutes = 360
+[source.filter]
+include_any = ["medier", "presse", "journalistikk"]
+
+[[source]]
+id = "konkurransetilsynet_media"
+kind = "konkurransetilsynet"
+label = "Konkurransetilsynet – medieselskaper"
+interval_minutes = 360
+[source.filter]
+include_any = ["Schibsted", "Polaris", "Amedia"]
+
+[[source]]
+id = "euronext_polaris_media"
+kind = "euronext"
+label = "Euronext – Polaris Media"
+urls = ["https://live.euronext.com/nb/product/equities/NO0010466022-XOSL/company-information"]
+interval_minutes = 360
+[source.filter]
+include_any = ["Polaris Media", "POL"]
+
+[[source]]
+id = "hoyesterett_recent"
+kind = "hoyesterett"
+label = "Høyesterett – to nyeste avgjørelser"
+max_items = 2
+interval_minutes = 360
+[source.filter]
+match_all = true
+
+[[source]]
+id = "brreg_nrk"
+kind = "brreg"
+label = "BRREG – NRK selskapsstatus"
+companies = ["976390512"]
+events = ["company"]
+interval_minutes = 360
+[source.filter]
+match_all = true
+
+[[source]]
+id = "ssb_kpi"
+kind = "ssb"
+label = "SSB – konsumprisindeks"
+tables = ["14700"]
+lang = "no"
+interval_minutes = 360
+[source.filter]
+match_all = true
+
+[[source]]
+id = "stotte_nrk"
+kind = "stotte"
+label = "Støtteregisteret – NRK siden 2020"
+recipient_orgnrs = ["976390512"]
+from_date = "2020-01-01"
+page_size = 100
+max_pages = 2
+interval_minutes = 360
+[source.filter]
+match_all = true
+
+[[source]]
+id = "short_sale_bouvet"
+kind = "finanstilsynet_short_sale"
+label = "Finanstilsynets shortsalgregister – Bouvet"
+isins = ["NO0010360266"]
+interval_minutes = 360
+[source.filter]
+match_all = true
+
+[[source]]
+id = "finanstilsynet_dnb"
+kind = "finanstilsynet_registry"
+label = "Finanstilsynets virksomhetsregister – DNB Bank"
+companies = ["984851006"]
+max_pages = 3
+interval_minutes = 360
+[source.filter]
+match_all = true

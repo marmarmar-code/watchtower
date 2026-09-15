@@ -1,0 +1,74 @@
+[
+  {
+    "recipe": "npm_selected_tag_metadata_changes",
+    "checked_at": "2026-09-14T09:39:00.572471+00:00",
+    "records": 2,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://registry.npmjs.org/-/package/react/dist-tags",
+        "bytes": 237,
+        "sha256": "82f0819c185a28d870331e655b96f994941306751a6b28108f12031ffd6b6b29"
+      },
+      {
+        "url": "https://registry.npmjs.org/react/19.3.0",
+        "bytes": 2155,
+        "sha256": "c9b7f5adeab67cd3146ffc69712aee7ddc37c23e656e41feaaa5624dff4e02aa"
+      },
+      {
+        "url": "https://registry.npmjs.org/-/package/react/dist-tags",
+        "bytes": 237,
+        "sha256": "82f0819c185a28d870331e655b96f994941306751a6b28108f12031ffd6b6b29"
+      },
+      {
+        "url": "https://registry.npmjs.org/-/package/vite/dist-tags",
+        "bytes": 84,
+        "sha256": "5d703f596d910a4755c96659d6b1e9849fa8382816e1ac99980dcd221589b8e7"
+      },
+      {
+        "url": "https://registry.npmjs.org/vite/8.3.0",
+        "bytes": 5200,
+        "sha256": "4e3c0145dba179e36b8bc4c2deb333ad388fb46a8c02904605183e4cfbeb5cf2"
+      },
+      {
+        "url": "https://registry.npmjs.org/-/package/vite/dist-tags",
+        "bytes": 84,
+        "sha256": "5d703f596d910a4755c96659d6b1e9849fa8382816e1ac99980dcd221589b8e7"
+      },
+      {
+        "url": "https://registry.npmjs.org/-/package/react/dist-tags",
+        "bytes": 237,
+        "sha256": "82f0819c185a28d870331e655b96f994941306751a6b28108f12031ffd6b6b29"
+      },
+      {
+        "url": "https://registry.npmjs.org/react/19.3.0",
+        "bytes": 2155,
+        "sha256": "c9b7f5adeab67cd3146ffc69712aee7ddc37c23e656e41feaaa5624dff4e02aa"
+      },
+      {
+        "url": "https://registry.npmjs.org/-/package/react/dist-tags",
+        "bytes": 237,
+        "sha256": "82f0819c185a28d870331e655b96f994941306751a6b28108f12031ffd6b6b29"
+      },
+      {
+        "url": "https://registry.npmjs.org/-/package/vite/dist-tags",
+        "bytes": 84,
+        "sha256": "5d703f596d910a4755c96659d6b1e9849fa8382816e1ac99980dcd221589b8e7"
+      },
+      {
+        "url": "https://registry.npmjs.org/vite/8.3.0",
+        "bytes": 5200,
+        "sha256": "4e3c0145dba179e36b8bc4c2deb333ad388fb46a8c02904605183e4cfbeb5cf2"
+      },
+      {
+        "url": "https://registry.npmjs.org/-/package/vite/dist-tags",
+        "bytes": 84,
+        "sha256": "5d703f596d910a4755c96659d6b1e9849fa8382816e1ac99980dcd221589b8e7"
+      }
+    ],
+    "config_sha256": "76f3745f7a1e2aafebf807e49b1a77d974477b10ae41891f7f7cecdc6addc260",
+    "module_sha256": "1f74063fe5632135c5fa3d6861c830d452d6e8b64149e3ba52c8e5b47d6770dc"
+  }
+]

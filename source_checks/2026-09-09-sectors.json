@@ -1,0 +1,2354 @@
+{
+  "generated_on": "2026-09-09",
+  "method": "Each source was fetched and parsed twice with the existing Watchtower source class, without state persistence or notifications. Support requires two non-empty runs with identical ordered item keys.",
+  "source_count": 22,
+  "sources": [
+    {
+      "id": "fhi_news",
+      "name": "FHI – nyheter",
+      "sector": "health",
+      "kind": "rss",
+      "url": "https://www.fhi.no/rss/nyheter/",
+      "official_url": "https://www.fhi.no/om/om-nettstedet/nyhetsvarsel/",
+      "coverage": "Alle nyheter fra FHI.",
+      "checked_at": "2026-09-09T09:38:44.380042+00:00",
+      "runs": [
+        {
+          "count": 20,
+          "keys": [
+            "https://www.fhi.no/nyheter/2026/covid-19-i-svangerskapet-gir-ingen-okt-risiko-for-de-fleste-nevroutviklingsforstyrrelser-og-nevrologiske-lidelser/",
+            "https://www.fhi.no/nyheter/2026/livmorhalskreft-nesten-borte-blant-hpv-vaksinerte-unge-kvinner/",
+            "https://www.fhi.no/nyheter/2026/gode-behandlingsresultat-for-pasientar-som-har-brystkreft-med-spreiing/",
+            "https://www.fhi.no/nyheter/2026/fra-smorstrid-til-kjottdebatt-kostrad-har-alltid-skapt-diskusjon/",
+            "https://www.fhi.no/nyheter/2026/mange-lever-med-type-2-diabetes-utan-a-vite-det/",
+            "https://www.fhi.no/nyheter/2026/forebygging-bor-vare-forstevalg-mot-gnagere/",
+            "https://www.fhi.no/nyheter/2026/seksuelle-krenkelser-pa-nett-er-utbredt-blant-unge/",
+            "https://www.fhi.no/nyheter/2026/okende-fodselstall-i-2026--spesielt-i-andre-kvartal/",
+            "https://www.fhi.no/nyheter/2026/kan-foreldres-erfaringer-ga-i-arv---biologisk/",
+            "https://www.fhi.no/nyheter/2026/moba-undersokelsen-gir-et-mer-presist-bilde-av-hva-gener-faktisk-forklarer/",
+            "https://www.fhi.no/nyheter/2026/kunnskapshull-om-mikro--og-nanoplast-og-effekt-pa-helse/",
+            "https://www.fhi.no/nyheter/2026/flere-unge-oppsoker-fastlegen-om-psykiske-plager/",
+            "https://www.fhi.no/nyheter/2026/malet-om-redusert-alkoholbruk-nas-neppe-uten-sterkere-virkemidler/",
+            "https://www.fhi.no/nyheter/2026/norske-ungdommer-sover-for-lite/",
+            "https://www.fhi.no/nyheter/2026/nasjonalt-utbrudd-av-yersinia/",
+            "https://www.fhi.no/nyheter/2026/har-undersokt-helsen-til-menn-som-har-sex-med-menn-og-transpersoner/",
+            "https://www.fhi.no/nyheter/2026/sosiale-forskjeller-i-fedme-og-bruk-av-fedmemedisiner/",
+            "https://www.fhi.no/nyheter/2026/fhi-lanserer-sommervettregler/",
+            "https://www.fhi.no/nyheter/2026/forhoyede-nivaer-av-aluminium-i-drikkevann-i-hoyanger-kan-vare-uheldig-for-sma-barn/",
+            "https://www.fhi.no/nyheter/2026/psykiske-lidelser-blant-unge-flater-ut--men-utviklingen-er-ulik/"
+          ],
+          "examples": [
+            {
+              "title": "Covid-19 i svangerskapet gir ikkje auka risiko for dei fleste nevroutviklingsforstyrringar og nevrologiske lidingar",
+              "url": "https://www.fhi.no/nyheter/2026/covid-19-i-svangerskapet-gir-ingen-okt-risiko-for-de-fleste-nevroutviklingsforstyrrelser-og-nevrologiske-lidelser/"
+            },
+            {
+              "title": "Livmorhalskreft nesten borte blant HPV-vaksinerte unge kvinner",
+              "url": "https://www.fhi.no/nyheter/2026/livmorhalskreft-nesten-borte-blant-hpv-vaksinerte-unge-kvinner/"
+            },
+            {
+              "title": "Gode behandlingsresultat for pasientar som har brystkreft med spreiing",
+              "url": "https://www.fhi.no/nyheter/2026/gode-behandlingsresultat-for-pasientar-som-har-brystkreft-med-spreiing/"
+            }
+          ]
+        },
+        {
+          "count": 20,
+          "keys": [
+            "https://www.fhi.no/nyheter/2026/covid-19-i-svangerskapet-gir-ingen-okt-risiko-for-de-fleste-nevroutviklingsforstyrrelser-og-nevrologiske-lidelser/",
+            "https://www.fhi.no/nyheter/2026/livmorhalskreft-nesten-borte-blant-hpv-vaksinerte-unge-kvinner/",
+            "https://www.fhi.no/nyheter/2026/gode-behandlingsresultat-for-pasientar-som-har-brystkreft-med-spreiing/",
+            "https://www.fhi.no/nyheter/2026/fra-smorstrid-til-kjottdebatt-kostrad-har-alltid-skapt-diskusjon/",
+            "https://www.fhi.no/nyheter/2026/mange-lever-med-type-2-diabetes-utan-a-vite-det/",
+            "https://www.fhi.no/nyheter/2026/forebygging-bor-vare-forstevalg-mot-gnagere/",
+            "https://www.fhi.no/nyheter/2026/seksuelle-krenkelser-pa-nett-er-utbredt-blant-unge/",
+            "https://www.fhi.no/nyheter/2026/okende-fodselstall-i-2026--spesielt-i-andre-kvartal/",
+            "https://www.fhi.no/nyheter/2026/kan-foreldres-erfaringer-ga-i-arv---biologisk/",
+            "https://www.fhi.no/nyheter/2026/moba-undersokelsen-gir-et-mer-presist-bilde-av-hva-gener-faktisk-forklarer/",
+            "https://www.fhi.no/nyheter/2026/kunnskapshull-om-mikro--og-nanoplast-og-effekt-pa-helse/",
+            "https://www.fhi.no/nyheter/2026/flere-unge-oppsoker-fastlegen-om-psykiske-plager/",
+            "https://www.fhi.no/nyheter/2026/malet-om-redusert-alkoholbruk-nas-neppe-uten-sterkere-virkemidler/",
+            "https://www.fhi.no/nyheter/2026/norske-ungdommer-sover-for-lite/",
+            "https://www.fhi.no/nyheter/2026/nasjonalt-utbrudd-av-yersinia/",
+            "https://www.fhi.no/nyheter/2026/har-undersokt-helsen-til-menn-som-har-sex-med-menn-og-transpersoner/",
+            "https://www.fhi.no/nyheter/2026/sosiale-forskjeller-i-fedme-og-bruk-av-fedmemedisiner/",
+            "https://www.fhi.no/nyheter/2026/fhi-lanserer-sommervettregler/",
+            "https://www.fhi.no/nyheter/2026/forhoyede-nivaer-av-aluminium-i-drikkevann-i-hoyanger-kan-vare-uheldig-for-sma-barn/",
+            "https://www.fhi.no/nyheter/2026/psykiske-lidelser-blant-unge-flater-ut--men-utviklingen-er-ulik/"
+          ],
+          "examples": [
+            {
+              "title": "Covid-19 i svangerskapet gir ikkje auka risiko for dei fleste nevroutviklingsforstyrringar og nevrologiske lidingar",
+              "url": "https://www.fhi.no/nyheter/2026/covid-19-i-svangerskapet-gir-ingen-okt-risiko-for-de-fleste-nevroutviklingsforstyrrelser-og-nevrologiske-lidelser/"
+            },
+            {
+              "title": "Livmorhalskreft nesten borte blant HPV-vaksinerte unge kvinner",
+              "url": "https://www.fhi.no/nyheter/2026/livmorhalskreft-nesten-borte-blant-hpv-vaksinerte-unge-kvinner/"
+            },
+            {
+              "title": "Gode behandlingsresultat for pasientar som har brystkreft med spreiing",
+              "url": "https://www.fhi.no/nyheter/2026/gode-behandlingsresultat-for-pasientar-som-har-brystkreft-med-spreiing/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "nve_news",
+      "name": "NVE – nyhetsarkiv",
+      "sector": "energy",
+      "kind": "web_links",
+      "url": "https://www.nve.no/nyheter/nyhetsarkiv/",
+      "official_url": "https://www.nve.no/nyheter/nyhetsarkiv/",
+      "coverage": "Nye saker i NVEs nyhetsarkiv.",
+      "options": {
+        "selector": "main a[href^='/nytt-fra-nve/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:44.971674+00:00",
+      "runs": [
+        {
+          "count": 8,
+          "keys": [
+            "record:2ce0540b39be56ce9cd1fb1cd446ba1328ea688328789085a91adf5afe3871c2",
+            "record:2d219c40400d4bcaaa602de06e4f4dce46197f50a22397831d6459fd06fa486f",
+            "record:1a04e889b74792316ee6335cadc6c7ce9fc8c665bbca50e5d8c127d523ab3174",
+            "record:b14a80943091d262dffcc5de4c8a8e7d3d1bc01c5b917680f14d18c31e27457d",
+            "record:aa11fb007f0dd9331ff1311da072a95f3aea91aceda5d2538f09a55c51185e79",
+            "record:27d10205bc045af6ec88fcb8e6966461f54b20b5d71ffcfdb77d7f92cd452757",
+            "record:d7085c4409bafb2a5380ce71992c401b1fb10531ed04cc623b751e4a0bb72bc2",
+            "record:f4ed39dbef5d0ed53813cb6a565dce1759c9a7ce1486aa74207ecde6a9ba6e15"
+          ],
+          "examples": [
+            {
+              "title": "NVE har startet boreprosjekt på ustabilt fjellparti i Kåfjord Siden begynnelsen av august har NVE boret i det ustabile fjellpartiet Indre Nordnes i Kåfjord kommune. Målet er å få mer kunnskap om hva som skjer inne i fjellet og styrke overvåkingen av området. Publisert 25.08.2026 Nyheter, Skred og vassdrag",
+              "url": "https://www.nve.no/nytt-fra-nve/nyheter-skred-og-vassdrag/nve-har-startet-boreprosjekt-paa-ustabilt-fjellparti-i-kaafjord/"
+            },
+            {
+              "title": "Velkommen til Norges energidager 2026 Norges energidager 2026 arrangeres 29.-30. oktober 2026 på Scandic Fornebu. Dit kommer sentrale stemmer fra energisektoren, politikken, næringslivet og forvaltningen. Sammen skal de diskutere det s... Publisert 04.09.2026 Nyheter, Energi",
+              "url": "https://www.nve.no/nytt-fra-nve/nyheter-energi/velkommen-til-norges-energidager-2026/"
+            },
+            {
+              "title": "Vassmagasinstatistikk veke 35 2026 Ved utgangen av veke 35 var fyllingsgraden i magasina i Noreg på 63,4 prosent. Gjennom veka gjekk magasinfyllinga ned med 0,5 prosenteiningar. Energiinnhald og fyllingsgrad i vassmagasina i veke... Publisert 01.09.2026 Rapporter, Vassmagasinstatistikk",
+              "url": "https://www.nve.no/nytt-fra-nve/rapporter-vassmagasinstatistikk/vassmagasinstatistikk-veke-35-2026/"
+            }
+          ]
+        },
+        {
+          "count": 8,
+          "keys": [
+            "record:2ce0540b39be56ce9cd1fb1cd446ba1328ea688328789085a91adf5afe3871c2",
+            "record:2d219c40400d4bcaaa602de06e4f4dce46197f50a22397831d6459fd06fa486f",
+            "record:1a04e889b74792316ee6335cadc6c7ce9fc8c665bbca50e5d8c127d523ab3174",
+            "record:b14a80943091d262dffcc5de4c8a8e7d3d1bc01c5b917680f14d18c31e27457d",
+            "record:aa11fb007f0dd9331ff1311da072a95f3aea91aceda5d2538f09a55c51185e79",
+            "record:27d10205bc045af6ec88fcb8e6966461f54b20b5d71ffcfdb77d7f92cd452757",
+            "record:d7085c4409bafb2a5380ce71992c401b1fb10531ed04cc623b751e4a0bb72bc2",
+            "record:f4ed39dbef5d0ed53813cb6a565dce1759c9a7ce1486aa74207ecde6a9ba6e15"
+          ],
+          "examples": [
+            {
+              "title": "NVE har startet boreprosjekt på ustabilt fjellparti i Kåfjord Siden begynnelsen av august har NVE boret i det ustabile fjellpartiet Indre Nordnes i Kåfjord kommune. Målet er å få mer kunnskap om hva som skjer inne i fjellet og styrke overvåkingen av området. Publisert 25.08.2026 Nyheter, Skred og vassdrag",
+              "url": "https://www.nve.no/nytt-fra-nve/nyheter-skred-og-vassdrag/nve-har-startet-boreprosjekt-paa-ustabilt-fjellparti-i-kaafjord/"
+            },
+            {
+              "title": "Velkommen til Norges energidager 2026 Norges energidager 2026 arrangeres 29.-30. oktober 2026 på Scandic Fornebu. Dit kommer sentrale stemmer fra energisektoren, politikken, næringslivet og forvaltningen. Sammen skal de diskutere det s... Publisert 04.09.2026 Nyheter, Energi",
+              "url": "https://www.nve.no/nytt-fra-nve/nyheter-energi/velkommen-til-norges-energidager-2026/"
+            },
+            {
+              "title": "Vassmagasinstatistikk veke 35 2026 Ved utgangen av veke 35 var fyllingsgraden i magasina i Noreg på 63,4 prosent. Gjennom veka gjekk magasinfyllinga ned med 0,5 prosenteiningar. Energiinnhald og fyllingsgrad i vassmagasina i veke... Publisert 01.09.2026 Rapporter, Vassmagasinstatistikk",
+              "url": "https://www.nve.no/nytt-fra-nve/rapporter-vassmagasinstatistikk/vassmagasinstatistikk-veke-35-2026/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "nve_energy_news",
+      "name": "NVE – energinyheter",
+      "sector": "energy",
+      "kind": "web_links",
+      "url": "https://www.nve.no/nyheter/nyhetsarkiv/?term=&year=&topic=10381",
+      "official_url": "https://www.nve.no/nyheter/nyhetsarkiv/?term=&year=&topic=10381",
+      "coverage": "NVEs temasorterte energinyheter.",
+      "options": {
+        "selector": "main a[href*='/nytt-fra-nve/nyheter-energi/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:45.555543+00:00",
+      "runs": [
+        {
+          "count": 8,
+          "keys": [
+            "record:2d219c40400d4bcaaa602de06e4f4dce46197f50a22397831d6459fd06fa486f",
+            "record:b14a80943091d262dffcc5de4c8a8e7d3d1bc01c5b917680f14d18c31e27457d",
+            "record:d7085c4409bafb2a5380ce71992c401b1fb10531ed04cc623b751e4a0bb72bc2",
+            "record:f4ed39dbef5d0ed53813cb6a565dce1759c9a7ce1486aa74207ecde6a9ba6e15",
+            "record:d569efe83abefbc204b6aad41088905c5b5009f7b5951ed43dead60ff4ade4af",
+            "record:9391be43bfe2408e331d6d9ff612fb14b7c0b92ef30c4e2b0ca1df14f39c7c01",
+            "record:3d9bbe0cc94c426e9658d038edee0ad686f591b101f0e9e82b58bdcbee35602a",
+            "record:6addaebf0198afbc2bc2fb3a5a9264d26751b4aba756be1957dbc86b38b98cf3"
+          ],
+          "examples": [
+            {
+              "title": "Velkommen til Norges energidager 2026 Norges energidager 2026 arrangeres 29.-30. oktober 2026 på Scandic Fornebu. Dit kommer sentrale stemmer fra energisektoren, politikken, næringslivet og forvaltningen. Sammen skal de diskutere det s... Publisert 04.09.2026 Nyheter, Energi",
+              "url": "https://www.nve.no/nytt-fra-nve/nyheter-energi/velkommen-til-norges-energidager-2026/"
+            },
+            {
+              "title": "Nå er over halvparten av vindkraften her til lands norskeid Flere eierskifter de siste årene har gjort at norsk eierskap i vindkraft nå er på 51 prosent. Den norske eierandelen øker også for vann- og solkraft. Det viser nye tall fra Norges vassdrags- og ene... Publisert 02.09.2026 Nyheter, Energi",
+              "url": "https://www.nve.no/nytt-fra-nve/nyheter-energi/naa-er-over-halvparten-av-vindkraften-her-til-lands-norskeid/"
+            },
+            {
+              "title": "NVE legger fram oppdaterte estimater for vindkraftproduksjon Norges vassdrags- og energidirektorat har i senere år tatt i bruk en ny metodikk for å anslå vindkraftproduksjon i et normalår. Årets korrigering gir en reduksjon på 0,7 terrawattimer, og reduserer... Publisert 01.09.2026 Nyheter, Energi",
+              "url": "https://www.nve.no/nytt-fra-nve/nyheter-energi/nve-legger-fram-oppdaterte-estimater-for-vindkraftproduksjon/"
+            }
+          ]
+        },
+        {
+          "count": 8,
+          "keys": [
+            "record:2d219c40400d4bcaaa602de06e4f4dce46197f50a22397831d6459fd06fa486f",
+            "record:b14a80943091d262dffcc5de4c8a8e7d3d1bc01c5b917680f14d18c31e27457d",
+            "record:d7085c4409bafb2a5380ce71992c401b1fb10531ed04cc623b751e4a0bb72bc2",
+            "record:f4ed39dbef5d0ed53813cb6a565dce1759c9a7ce1486aa74207ecde6a9ba6e15",
+            "record:d569efe83abefbc204b6aad41088905c5b5009f7b5951ed43dead60ff4ade4af",
+            "record:9391be43bfe2408e331d6d9ff612fb14b7c0b92ef30c4e2b0ca1df14f39c7c01",
+            "record:3d9bbe0cc94c426e9658d038edee0ad686f591b101f0e9e82b58bdcbee35602a",
+            "record:6addaebf0198afbc2bc2fb3a5a9264d26751b4aba756be1957dbc86b38b98cf3"
+          ],
+          "examples": [
+            {
+              "title": "Velkommen til Norges energidager 2026 Norges energidager 2026 arrangeres 29.-30. oktober 2026 på Scandic Fornebu. Dit kommer sentrale stemmer fra energisektoren, politikken, næringslivet og forvaltningen. Sammen skal de diskutere det s... Publisert 04.09.2026 Nyheter, Energi",
+              "url": "https://www.nve.no/nytt-fra-nve/nyheter-energi/velkommen-til-norges-energidager-2026/"
+            },
+            {
+              "title": "Nå er over halvparten av vindkraften her til lands norskeid Flere eierskifter de siste årene har gjort at norsk eierskap i vindkraft nå er på 51 prosent. Den norske eierandelen øker også for vann- og solkraft. Det viser nye tall fra Norges vassdrags- og ene... Publisert 02.09.2026 Nyheter, Energi",
+              "url": "https://www.nve.no/nytt-fra-nve/nyheter-energi/naa-er-over-halvparten-av-vindkraften-her-til-lands-norskeid/"
+            },
+            {
+              "title": "NVE legger fram oppdaterte estimater for vindkraftproduksjon Norges vassdrags- og energidirektorat har i senere år tatt i bruk en ny metodikk for å anslå vindkraftproduksjon i et normalår. Årets korrigering gir en reduksjon på 0,7 terrawattimer, og reduserer... Publisert 01.09.2026 Nyheter, Energi",
+              "url": "https://www.nve.no/nytt-fra-nve/nyheter-energi/nve-legger-fram-oppdaterte-estimater-for-vindkraftproduksjon/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "nve_power_situation",
+      "name": "NVE – kraftsituasjonen",
+      "sector": "energy",
+      "kind": "web_links",
+      "url": "https://www.nve.no/nyheter/nyhetsarkiv/?term=&year=&topic=11960",
+      "official_url": "https://www.nve.no/nyheter/nyhetsarkiv/?term=&year=&topic=11960",
+      "coverage": "NVEs løpende rapporter om kraftsituasjonen.",
+      "options": {
+        "selector": "main a[href*='/nytt-fra-nve/rapporter-kraftsituasjonen/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:46.081233+00:00",
+      "runs": [
+        {
+          "count": 8,
+          "keys": [
+            "record:aa11fb007f0dd9331ff1311da072a95f3aea91aceda5d2538f09a55c51185e79",
+            "record:1c4f48f0ad247ef450284ef5aae10b4a9411de5950dadd56d5c85d6fa163059b",
+            "record:89cc69c82bed533d8a42122e5974e942f0de4c8bb67c86ce39dcbcdbd99a262d",
+            "record:9b82b1a82b4b0ff871d8bb860f72284be1fed94d1cf8fde6d8d77a9089ae06f2",
+            "record:9307bb7a9dbe12f738df430fd419ac00866a9b27a7e868fcb25af04b71113230",
+            "record:b3bf3b371e201586961b5f774feac2f55dfe724a85c374b7bf21ad3a5886b18f",
+            "record:a1ed31b0c2840b57dea2210fbd7a75242891a2edcc14a55201dfad8de98cbf31",
+            "record:5e9bba6eddf29b9ef1ac2554dc349d65b4695f5cb9dfc18dd485863a00421d10"
+          ],
+          "examples": [
+            {
+              "title": "Kraftsituasjonen veke 35, 2026 Redusert vasskraftproduksjon og nettoimport til sørlege Noreg Publisert 01.09.2026 Rapporter, Kraftsituasjonen",
+              "url": "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-35-2026/"
+            },
+            {
+              "title": "Kraftsituasjonen veke 34, 2026 Lågare magasinfylling og auka kraftprisar Publisert 26.08.2026 Rapporter, Kraftsituasjonen",
+              "url": "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-34-2026/"
+            },
+            {
+              "title": "Kraftsituasjonen veke 33, 2026 Liten auke i magasinfyllinga og periodar med høge kraftprisar Publisert 19.08.2026 Rapporter, Kraftsituasjonen",
+              "url": "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-33-2026/"
+            }
+          ]
+        },
+        {
+          "count": 8,
+          "keys": [
+            "record:aa11fb007f0dd9331ff1311da072a95f3aea91aceda5d2538f09a55c51185e79",
+            "record:1c4f48f0ad247ef450284ef5aae10b4a9411de5950dadd56d5c85d6fa163059b",
+            "record:89cc69c82bed533d8a42122e5974e942f0de4c8bb67c86ce39dcbcdbd99a262d",
+            "record:9b82b1a82b4b0ff871d8bb860f72284be1fed94d1cf8fde6d8d77a9089ae06f2",
+            "record:9307bb7a9dbe12f738df430fd419ac00866a9b27a7e868fcb25af04b71113230",
+            "record:b3bf3b371e201586961b5f774feac2f55dfe724a85c374b7bf21ad3a5886b18f",
+            "record:a1ed31b0c2840b57dea2210fbd7a75242891a2edcc14a55201dfad8de98cbf31",
+            "record:5e9bba6eddf29b9ef1ac2554dc349d65b4695f5cb9dfc18dd485863a00421d10"
+          ],
+          "examples": [
+            {
+              "title": "Kraftsituasjonen veke 35, 2026 Redusert vasskraftproduksjon og nettoimport til sørlege Noreg Publisert 01.09.2026 Rapporter, Kraftsituasjonen",
+              "url": "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-35-2026/"
+            },
+            {
+              "title": "Kraftsituasjonen veke 34, 2026 Lågare magasinfylling og auka kraftprisar Publisert 26.08.2026 Rapporter, Kraftsituasjonen",
+              "url": "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-34-2026/"
+            },
+            {
+              "title": "Kraftsituasjonen veke 33, 2026 Liten auke i magasinfyllinga og periodar med høge kraftprisar Publisert 19.08.2026 Rapporter, Kraftsituasjonen",
+              "url": "https://www.nve.no/nytt-fra-nve/rapporter-kraftsituasjonen/kraftsituasjonen-veke-33-2026/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "nve_rme_news",
+      "name": "RME – nyheter",
+      "sector": "energy",
+      "kind": "web_links",
+      "url": "https://www.nve.no/reguleringsmyndigheten/nytt-fra-rme/nyheter-reguleringsmyndigheten-for-energi/",
+      "official_url": "https://www.nve.no/reguleringsmyndigheten/nytt-fra-rme/nyheter-reguleringsmyndigheten-for-energi/",
+      "coverage": "Nyheter fra Reguleringsmyndigheten for energi.",
+      "options": {
+        "selector": "main a[href*='/reguleringsmyndigheten/nytt-fra-rme/nyheter-reguleringsmyndigheten-for-energi/']:not([href$='/nyheter-reguleringsmyndigheten-for-energi/'])",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:46.474193+00:00",
+      "runs": [
+        {
+          "count": 100,
+          "keys": [
+            "record:4c19cc566f140d3976f60b672db69c26f875b4a403e9a9b25c4e9a9fd2f5cf73",
+            "record:9b9d72d26407499367d1204b6293e54ec81355f875bcefcdd02e82eb70451f86",
+            "record:a9b5570356a76527d4b88668b491dee7e1bec9ac3b0fe48157ab56cd2229b49e",
+            "record:4eaaa74670322de4bcd5c5e49333abf87d1147fdf417e814f28d4c8c8f716ead",
+            "record:a475823670813f6e650d0530db47e2511b1fcdf1dd765bc06e1fc8d1637e7bd2",
+            "record:6349548658315f50bb29351ac92d197a0808e003d088eabfa26afc1e3361d08a",
+            "record:33587f9147c5d930cd7c027a26b58101fac44e71b8a6e5209435e5f112595f1e",
+            "record:ed84caa11dd464af1360dd7792b27b758b1749043266c446ba3ec7264e592a13",
+            "record:97cae029cbd329320f020391fcb78e4461c96572eb360cf8f5feacc6567bc59c",
+            "record:11edaa90b1a0181612d9f8657d7005cc0aaa74fa448ea65b59d9f7d4e6670d64",
+            "record:68201c2c8c1217146bbe170363c747f3cf7b093b5bdb84a6219dff34d507e593",
+            "record:14a61a902e69bcf356ab396dde0aa72a5fd160805632ebaded507f3caeda8eb7",
+            "record:7afda2f1382734e362a68a73c8303a60a63693bf64f3ffffc76bee9a12b11a78",
+            "record:65ea64150cbbf84d61ca0898a2dbbb9170278ee08b2119766e9400ce1fa20087",
+            "record:8cd744a6137431916e4f536483a235b2a3803ca22c278e75c5b29b375167924a",
+            "record:18d4ce904240911ef43b1ec506778f14266a61336183edb1115c1a07c3f703c8",
+            "record:2f14265bb0a83b091e3afef9eaf55502118785437a3322670f6f7de043dcf5d6",
+            "record:55ce32849f19c2843315461c2b3b60a9e8f5d3b7503fefda73bb2cbb05ce27d5",
+            "record:fd6980e5404a6d13ac314a6f74490a272e7c680c6f5033564ba304e9a789c648",
+            "record:441ae1cfa3c236ec02a8b6e3aeb897b38914d650aa8d88dfbfba5218f23d88e4",
+            "record:41c26d6f9a26b09b8d6c9f3e2b7751e32b75734cf9e77f55f5baa8052d03ffba",
+            "record:5360c7e1c6458781da350f92ab80cffaeadbc3f0dafbe5e8cebdd65baa1dc070",
+            "record:23ecb2f71b645c4f778414999be706d6f35c38074f16f9389079f08157029130",
+            "record:6f4d63129adee954809f1a48ef3db287e41515ef81554f94695c8a0e8ec2b683",
+            "record:1e43806effa35520a97dc29a50e15f3e14f75229fb3dbf35595e8e7807545a89",
+            "record:1fbaaceb13bdc7d7e64e7ea0fbafcff3b1a8fb21b24bf1bdac0dd59feffce269",
+            "record:32a843c34ed86ff4ed4f004f9e71482eaf3a394d22e417d8c88b0ad44a950dbb",
+            "record:f82981ef71f26a3406ff14d91931937f233375490c40640484b4784a46d79791",
+            "record:2e287531a4ecc50e6e065b6acc51394a5c8727c39f43db10fd5dcf8b73c4ecf6",
+            "record:127fd93ebddc1594b180df6076e3c4cdd9c9c28b301a8bd22bd0e6d129602456",
+            "record:f02126c69868f2abe1b012848d0906cd14a62ff158d6e7c5034ced5030ed05a7",
+            "record:f09b0f4eab6285d1f9ca491b3e9276b717945719f54f0f71f051a6dc4929b368",
+            "record:b467d2a2381b19c243f281a44f97014d5638d5e1f4c5049c4dfa7e063d662095",
+            "record:e5822e5850cc707856197295fee3865f7a81571e31cb7d22bb31a8e246cf296f",
+            "record:134ad8cc3d2ebb0b4d8b79c26973e537a74f3d0c7c50ae7b2296a2ddec9b2d2b",
+            "record:25f2c38ab163462e9f94167387f4de26c0149eaa48adf443e1acf8d35f99dfa4",
+            "record:ad4ed2624e6decc6381a24fd254647213bb6a7a02986f025e707a684a8e8fd58",
+            "record:67d036eebd07c1aba496e7468abdf77d24a3267e6e0741fd960ee6b90e009631",
+            "record:9510a299d7f87d62476bc7081f939bca7815bed52f02ec802b3acf4e2cb05d75",
+            "record:74ebab299100a6c27c366848ed639c2892a79958dbf0b1605a20230bf1c444c6",
+            "record:2877150bdca920ba57f1638de9714a5029a47f66353e9ea8cec80560727e4f39",
+            "record:34c567bcc846faadd133f5a9690dce258154482de3723cceb4740e01af869958",
+            "record:fac2c23bfc7c6d873c4877027dacf0fb7a8918f431ec6c63500e47c36d58f46e",
+            "record:e3ffda4910d5189c85598d8057f4c97d023d81f8b6a527445761bb730fe24b72",
+            "record:38957e913681e64039f7499ca288c934729e6602eeaf68ec8cdbc0e0d126a012",
+            "record:0a57bfebf3c3841e7dd7bd58b62c48432fa58f11611cb63b773a25c0cead3631",
+            "record:f686133ca40746ed5d382fdf5afc61076816fd1a713e2aee94cadee0dcb995eb",
+            "record:2d7c41b257f4d794ef4c524581b40c8c40e2413b1474bf358c2126b7c0de730e",
+            "record:501381a06c4408cfa3ce9fe6d2576f47dd3263ba338b5f81459b37c77cf3b7b8",
+            "record:552f43edc7fd0a92219254e3041009073d364aa86479d61bc9edc9d420c5db92",
+            "record:bbb821cb8f7d48e638d6263e08e68b72fcc820683c39e3dc40bfd88212e50d08",
+            "record:03fb3078996b763561e340a926a8bc8fb92063acbbeb52fb6f039ffb834847b7",
+            "record:95c969d0d27ecc06ce586aa8ebacccc70f04aa3ebb4b1c3874d2841db3e3f61c",
+            "record:b4c1af822905319e9e51562e1e97857f81da5d6dd6a48c5412fdb4d959407ec0",
+            "record:78aae73f6e133bf1809b10bd5edb08d0412d7b592f43d6a5aaf99c5288df8431",
+            "record:02686c62b24695344a2986788facc2bb659a5d1e7e0f9c86c3f9003938cc73b1",
+            "record:dc8be3c241cf18064d4021b71da864410c7c2f7787790118c5e2f3514180ac76",
+            "record:51de13a6fa84a3a8fa04cc35e02dd655f106ea3dfe18a5aff3027361b0da7676",
+            "record:ffeedb7c1e0defa79f51453f2cdef5c88da2117d2197e7018ac04b004b48afdb",
+            "record:b1eaad6b5df71f88cb4a834f629cb3d3da2d8e09e426050c2a5fafbb0591c1a2",
+            "record:5eed9a5100e2a1add423bd53470cfc0f60b072fa10de0a799ea2a37f1360f265",
+            "record:5973871046fc241d12c418de1ee2c11aafca2bbf94bb4b84ee32378badb889d2",
+            "record:7e979450051b347d1ff6c93a3f56ee0a36f5bad86841b64113122e25c5983146",
+            "record:19edaa7d8a2ddeaaa188472826dd13b2d53dffaaf4772e1e5553be1b7a7f4de5",
+            "record:36eed479bfd2cbe0367e5ab43ce665d4ecebb2196065dc4f60564967cd735db3",
+            "record:04e6a3404c2f18eb733d063cad5ace9508e52133cd46caf51846bbc8afb07ab6",
+            "record:ce8cd1d0e91019b1b67dc81a074eb88fe7678fb60be4ebbedeffa5e423c353f0",
+            "record:6d8b2055de50fcece9a87460cb5dd826880f9e88ede4555d3ae4a1b7b1cfaa60",
+            "record:9c9061d92ebca18a2fcb32b9dbceddc5baac7aeb81327c98cd87d68e6db82a14",
+            "record:a0aa0dde423627b083c92caffe9e563d31df28ee4895d5519e6395f683794f5b",
+            "record:e1ed1d8bcfb863aeba22d3d0b15014c7a871d83edf43ad10c3ba81328903ba46",
+            "record:2e28bbe5f3e0bee390c405188a56a5bccab97a0da4e6ee2dccaaaaee3fd41aff",
+            "record:7e113b641137a3825ccceb2eb2477aea3cd3776c988df8ebd5ed0d8c85b7aff9",
+            "record:72a0fc9849b31d3703d1122687db5ab8204be2852cf03129e9f55fd88f67b778",
+            "record:621a13438becec3bd72338ac3abd5ce7dced1b8014027c35347966d1bbf2cc47",
+            "record:7fe221c2fdfecfe5db41e43460596f098c9e4de2686f495d6c4ca009417b34c1",
+            "record:9207daf02736ae163bef83d3ef2be1d9a849d7f1a7f2c7a64ec5771ec46b57a6",
+            "record:60ed82c44fa5a311fab032b63cdfd56042385487426eee27f344297b3eade488",
+            "record:5dc65f280c63e31928b3f5e71236a6d1a3c2792dcc4660849f1bca7c6e6c47e0",
+            "record:7d31533027f5566417e4732a961f625ea6ec73c8cc605ebf8ab5087efa09bfcb",
+            "record:4246f761632276d631c447fd3e442bfa7cc835e5a1d6296ee7cfac90c4254773",
+            "record:0d4b3af553a04e100ae247765148ec59fe329136d67ebf6ca49fb04dce787cc9",
+            "record:a2f33429c8bffda687682ca1a5f454325310344df5435e41328ddff8905bb62a",
+            "record:8369dba54d6f0ed11702691841d1767ab10b41b064dbad1c6bd1b08cdbaf3829",
+            "record:382b90aab91a79ad35a6769ca367894ebfc3d089bd16492559bda7d5a94825a8",
+            "record:f46ba9990106bc81692ebbb3fe4e7cba5650b5add565076af778ffa8669b871d",
+            "record:650154102a245f4e817cee0fd5bfdac5ade7cc815efd7c374b59b5c5fc6e3e5c",
+            "record:f290befb7e8e02f2fd584181bbcfdd99e421a031f565b82a4a759fde754195d2",
+            "record:2bf70a50e723415dd294c68c33727cb25e88222f97e9fd4273b47b3a45b4ddc9",
+            "record:9a1289a9c70fef81c19c030240ab1cac3581914f5991fa7393f24b561712fc23",
+            "record:480e4d48acec61436ca72abac5ca39067cdbd6be44c0e89848c178eced8ba065",
+            "record:833d6a88171b62133984d03a4bb38dc020eb87785733f988efd562aa2f5fb006",
+            "record:09eda71c77fa860994e58245541ccb2a09c0dacf9c5aaf7043f13737663da80a",
+            "record:5ff520dd167dd0313631e67e24e292d3a418b6684f53be64d75e7d8a115b1205",
+            "record:cd598ba2cbab3f7ed119a8e04e309e1f27469106a0be1319108ce12b7fed80bf",
+            "record:af9f7d65227b572982c88046828117bcb414eb5dd2861b27ec69c6c398240b7d",
+            "record:89d2b62d20ab78f5804b83a986372dfa5bda9272724b9b3596a19285443446d6",
+            "record:07c53df8ced80a29563fa2aef8a1425806ea79561ec9d29d1ac1c3014c1b8cf1",
+            "record:5f3732a59175660a7ec639677a53e8c7b04ff4769755fc5ac03accf51516f330",
+            "record:d771a8bc0dc38bf440340056dc4479ced1054627084f6f13026aba6137ecd44b"
+          ],
+          "examples": [
+            {
+              "title": "RME vil styrke insentivene til beredskapsøvelser 06.08.2026 Reguleringsmyndigheten for energi i NVE (RME) foreslår å endre regelverket for nettselskapenes inntekter, slik at strømbrudd ved beredskapsøvelser på svartstart og separatdrift ikke lenger gir inntektstap for nettselskapene.",
+              "url": "https://www.nve.no/reguleringsmyndigheten/nytt-fra-rme/nyheter-reguleringsmyndigheten-for-energi/rme-vil-styrke-insentivene-til-beredskapsoevelser/"
+            },
+            {
+              "title": "RME gir Noranett Andøy delvis dispensasjon fra KILE etter ekstremværet Ingunn 29.06.2026 Reguleringsmyndigheten for energi i NVE (RME) gir Noranett Andøy AS delvis dispensasjon fra KILE-ordningen etter ekstremværet Ingunn vinteren 2024.",
+              "url": "https://www.nve.no/reguleringsmyndigheten/nytt-fra-rme/nyheter-reguleringsmyndigheten-for-energi/rme-gir-noranett-andoey-delvis-dispensasjon-fra-kile-etter-ekstremvaeret-ingunn/"
+            },
+            {
+              "title": "RME med nye avklaringer om nett, tilknytning og strømproduksjon 29.06.2026 Reguleringsmyndigheten for energi i NVE (RME) har behandlet flere saker som gir viktige avklaringer for kraftbransjen. Sakene gjelder blant annet betaling for nettutredninger, tilgang til nettkapasitet, forenklet tilknytningsprosess for små produksjonsanlegg, ansvarsfordeling mellom nettnivåer, krav til leveringskvalitet og brudd på anleggsbidragsregelverket.",
+              "url": "https://www.nve.no/reguleringsmyndigheten/nytt-fra-rme/nyheter-reguleringsmyndigheten-for-energi/rme-med-nye-avklaringer-om-nett-tilknytning-og-stroemproduksjon/"
+            }
+          ]
+        },
+        {
+          "count": 100,
+          "keys": [
+            "record:4c19cc566f140d3976f60b672db69c26f875b4a403e9a9b25c4e9a9fd2f5cf73",
+            "record:9b9d72d26407499367d1204b6293e54ec81355f875bcefcdd02e82eb70451f86",
+            "record:a9b5570356a76527d4b88668b491dee7e1bec9ac3b0fe48157ab56cd2229b49e",
+            "record:4eaaa74670322de4bcd5c5e49333abf87d1147fdf417e814f28d4c8c8f716ead",
+            "record:a475823670813f6e650d0530db47e2511b1fcdf1dd765bc06e1fc8d1637e7bd2",
+            "record:6349548658315f50bb29351ac92d197a0808e003d088eabfa26afc1e3361d08a",
+            "record:33587f9147c5d930cd7c027a26b58101fac44e71b8a6e5209435e5f112595f1e",
+            "record:ed84caa11dd464af1360dd7792b27b758b1749043266c446ba3ec7264e592a13",
+            "record:97cae029cbd329320f020391fcb78e4461c96572eb360cf8f5feacc6567bc59c",
+            "record:11edaa90b1a0181612d9f8657d7005cc0aaa74fa448ea65b59d9f7d4e6670d64",
+            "record:68201c2c8c1217146bbe170363c747f3cf7b093b5bdb84a6219dff34d507e593",
+            "record:14a61a902e69bcf356ab396dde0aa72a5fd160805632ebaded507f3caeda8eb7",
+            "record:7afda2f1382734e362a68a73c8303a60a63693bf64f3ffffc76bee9a12b11a78",
+            "record:65ea64150cbbf84d61ca0898a2dbbb9170278ee08b2119766e9400ce1fa20087",
+            "record:8cd744a6137431916e4f536483a235b2a3803ca22c278e75c5b29b375167924a",
+            "record:18d4ce904240911ef43b1ec506778f14266a61336183edb1115c1a07c3f703c8",
+            "record:2f14265bb0a83b091e3afef9eaf55502118785437a3322670f6f7de043dcf5d6",
+            "record:55ce32849f19c2843315461c2b3b60a9e8f5d3b7503fefda73bb2cbb05ce27d5",
+            "record:fd6980e5404a6d13ac314a6f74490a272e7c680c6f5033564ba304e9a789c648",
+            "record:441ae1cfa3c236ec02a8b6e3aeb897b38914d650aa8d88dfbfba5218f23d88e4",
+            "record:41c26d6f9a26b09b8d6c9f3e2b7751e32b75734cf9e77f55f5baa8052d03ffba",
+            "record:5360c7e1c6458781da350f92ab80cffaeadbc3f0dafbe5e8cebdd65baa1dc070",
+            "record:23ecb2f71b645c4f778414999be706d6f35c38074f16f9389079f08157029130",
+            "record:6f4d63129adee954809f1a48ef3db287e41515ef81554f94695c8a0e8ec2b683",
+            "record:1e43806effa35520a97dc29a50e15f3e14f75229fb3dbf35595e8e7807545a89",
+            "record:1fbaaceb13bdc7d7e64e7ea0fbafcff3b1a8fb21b24bf1bdac0dd59feffce269",
+            "record:32a843c34ed86ff4ed4f004f9e71482eaf3a394d22e417d8c88b0ad44a950dbb",
+            "record:f82981ef71f26a3406ff14d91931937f233375490c40640484b4784a46d79791",
+            "record:2e287531a4ecc50e6e065b6acc51394a5c8727c39f43db10fd5dcf8b73c4ecf6",
+            "record:127fd93ebddc1594b180df6076e3c4cdd9c9c28b301a8bd22bd0e6d129602456",
+            "record:f02126c69868f2abe1b012848d0906cd14a62ff158d6e7c5034ced5030ed05a7",
+            "record:f09b0f4eab6285d1f9ca491b3e9276b717945719f54f0f71f051a6dc4929b368",
+            "record:b467d2a2381b19c243f281a44f97014d5638d5e1f4c5049c4dfa7e063d662095",
+            "record:e5822e5850cc707856197295fee3865f7a81571e31cb7d22bb31a8e246cf296f",
+            "record:134ad8cc3d2ebb0b4d8b79c26973e537a74f3d0c7c50ae7b2296a2ddec9b2d2b",
+            "record:25f2c38ab163462e9f94167387f4de26c0149eaa48adf443e1acf8d35f99dfa4",
+            "record:ad4ed2624e6decc6381a24fd254647213bb6a7a02986f025e707a684a8e8fd58",
+            "record:67d036eebd07c1aba496e7468abdf77d24a3267e6e0741fd960ee6b90e009631",
+            "record:9510a299d7f87d62476bc7081f939bca7815bed52f02ec802b3acf4e2cb05d75",
+            "record:74ebab299100a6c27c366848ed639c2892a79958dbf0b1605a20230bf1c444c6",
+            "record:2877150bdca920ba57f1638de9714a5029a47f66353e9ea8cec80560727e4f39",
+            "record:34c567bcc846faadd133f5a9690dce258154482de3723cceb4740e01af869958",
+            "record:fac2c23bfc7c6d873c4877027dacf0fb7a8918f431ec6c63500e47c36d58f46e",
+            "record:e3ffda4910d5189c85598d8057f4c97d023d81f8b6a527445761bb730fe24b72",
+            "record:38957e913681e64039f7499ca288c934729e6602eeaf68ec8cdbc0e0d126a012",
+            "record:0a57bfebf3c3841e7dd7bd58b62c48432fa58f11611cb63b773a25c0cead3631",
+            "record:f686133ca40746ed5d382fdf5afc61076816fd1a713e2aee94cadee0dcb995eb",
+            "record:2d7c41b257f4d794ef4c524581b40c8c40e2413b1474bf358c2126b7c0de730e",
+            "record:501381a06c4408cfa3ce9fe6d2576f47dd3263ba338b5f81459b37c77cf3b7b8",
+            "record:552f43edc7fd0a92219254e3041009073d364aa86479d61bc9edc9d420c5db92",
+            "record:bbb821cb8f7d48e638d6263e08e68b72fcc820683c39e3dc40bfd88212e50d08",
+            "record:03fb3078996b763561e340a926a8bc8fb92063acbbeb52fb6f039ffb834847b7",
+            "record:95c969d0d27ecc06ce586aa8ebacccc70f04aa3ebb4b1c3874d2841db3e3f61c",
+            "record:b4c1af822905319e9e51562e1e97857f81da5d6dd6a48c5412fdb4d959407ec0",
+            "record:78aae73f6e133bf1809b10bd5edb08d0412d7b592f43d6a5aaf99c5288df8431",
+            "record:02686c62b24695344a2986788facc2bb659a5d1e7e0f9c86c3f9003938cc73b1",
+            "record:dc8be3c241cf18064d4021b71da864410c7c2f7787790118c5e2f3514180ac76",
+            "record:51de13a6fa84a3a8fa04cc35e02dd655f106ea3dfe18a5aff3027361b0da7676",
+            "record:ffeedb7c1e0defa79f51453f2cdef5c88da2117d2197e7018ac04b004b48afdb",
+            "record:b1eaad6b5df71f88cb4a834f629cb3d3da2d8e09e426050c2a5fafbb0591c1a2",
+            "record:5eed9a5100e2a1add423bd53470cfc0f60b072fa10de0a799ea2a37f1360f265",
+            "record:5973871046fc241d12c418de1ee2c11aafca2bbf94bb4b84ee32378badb889d2",
+            "record:7e979450051b347d1ff6c93a3f56ee0a36f5bad86841b64113122e25c5983146",
+            "record:19edaa7d8a2ddeaaa188472826dd13b2d53dffaaf4772e1e5553be1b7a7f4de5",
+            "record:36eed479bfd2cbe0367e5ab43ce665d4ecebb2196065dc4f60564967cd735db3",
+            "record:04e6a3404c2f18eb733d063cad5ace9508e52133cd46caf51846bbc8afb07ab6",
+            "record:ce8cd1d0e91019b1b67dc81a074eb88fe7678fb60be4ebbedeffa5e423c353f0",
+            "record:6d8b2055de50fcece9a87460cb5dd826880f9e88ede4555d3ae4a1b7b1cfaa60",
+            "record:9c9061d92ebca18a2fcb32b9dbceddc5baac7aeb81327c98cd87d68e6db82a14",
+            "record:a0aa0dde423627b083c92caffe9e563d31df28ee4895d5519e6395f683794f5b",
+            "record:e1ed1d8bcfb863aeba22d3d0b15014c7a871d83edf43ad10c3ba81328903ba46",
+            "record:2e28bbe5f3e0bee390c405188a56a5bccab97a0da4e6ee2dccaaaaee3fd41aff",
+            "record:7e113b641137a3825ccceb2eb2477aea3cd3776c988df8ebd5ed0d8c85b7aff9",
+            "record:72a0fc9849b31d3703d1122687db5ab8204be2852cf03129e9f55fd88f67b778",
+            "record:621a13438becec3bd72338ac3abd5ce7dced1b8014027c35347966d1bbf2cc47",
+            "record:7fe221c2fdfecfe5db41e43460596f098c9e4de2686f495d6c4ca009417b34c1",
+            "record:9207daf02736ae163bef83d3ef2be1d9a849d7f1a7f2c7a64ec5771ec46b57a6",
+            "record:60ed82c44fa5a311fab032b63cdfd56042385487426eee27f344297b3eade488",
+            "record:5dc65f280c63e31928b3f5e71236a6d1a3c2792dcc4660849f1bca7c6e6c47e0",
+            "record:7d31533027f5566417e4732a961f625ea6ec73c8cc605ebf8ab5087efa09bfcb",
+            "record:4246f761632276d631c447fd3e442bfa7cc835e5a1d6296ee7cfac90c4254773",
+            "record:0d4b3af553a04e100ae247765148ec59fe329136d67ebf6ca49fb04dce787cc9",
+            "record:a2f33429c8bffda687682ca1a5f454325310344df5435e41328ddff8905bb62a",
+            "record:8369dba54d6f0ed11702691841d1767ab10b41b064dbad1c6bd1b08cdbaf3829",
+            "record:382b90aab91a79ad35a6769ca367894ebfc3d089bd16492559bda7d5a94825a8",
+            "record:f46ba9990106bc81692ebbb3fe4e7cba5650b5add565076af778ffa8669b871d",
+            "record:650154102a245f4e817cee0fd5bfdac5ade7cc815efd7c374b59b5c5fc6e3e5c",
+            "record:f290befb7e8e02f2fd584181bbcfdd99e421a031f565b82a4a759fde754195d2",
+            "record:2bf70a50e723415dd294c68c33727cb25e88222f97e9fd4273b47b3a45b4ddc9",
+            "record:9a1289a9c70fef81c19c030240ab1cac3581914f5991fa7393f24b561712fc23",
+            "record:480e4d48acec61436ca72abac5ca39067cdbd6be44c0e89848c178eced8ba065",
+            "record:833d6a88171b62133984d03a4bb38dc020eb87785733f988efd562aa2f5fb006",
+            "record:09eda71c77fa860994e58245541ccb2a09c0dacf9c5aaf7043f13737663da80a",
+            "record:5ff520dd167dd0313631e67e24e292d3a418b6684f53be64d75e7d8a115b1205",
+            "record:cd598ba2cbab3f7ed119a8e04e309e1f27469106a0be1319108ce12b7fed80bf",
+            "record:af9f7d65227b572982c88046828117bcb414eb5dd2861b27ec69c6c398240b7d",
+            "record:89d2b62d20ab78f5804b83a986372dfa5bda9272724b9b3596a19285443446d6",
+            "record:07c53df8ced80a29563fa2aef8a1425806ea79561ec9d29d1ac1c3014c1b8cf1",
+            "record:5f3732a59175660a7ec639677a53e8c7b04ff4769755fc5ac03accf51516f330",
+            "record:d771a8bc0dc38bf440340056dc4479ced1054627084f6f13026aba6137ecd44b"
+          ],
+          "examples": [
+            {
+              "title": "RME vil styrke insentivene til beredskapsøvelser 06.08.2026 Reguleringsmyndigheten for energi i NVE (RME) foreslår å endre regelverket for nettselskapenes inntekter, slik at strømbrudd ved beredskapsøvelser på svartstart og separatdrift ikke lenger gir inntektstap for nettselskapene.",
+              "url": "https://www.nve.no/reguleringsmyndigheten/nytt-fra-rme/nyheter-reguleringsmyndigheten-for-energi/rme-vil-styrke-insentivene-til-beredskapsoevelser/"
+            },
+            {
+              "title": "RME gir Noranett Andøy delvis dispensasjon fra KILE etter ekstremværet Ingunn 29.06.2026 Reguleringsmyndigheten for energi i NVE (RME) gir Noranett Andøy AS delvis dispensasjon fra KILE-ordningen etter ekstremværet Ingunn vinteren 2024.",
+              "url": "https://www.nve.no/reguleringsmyndigheten/nytt-fra-rme/nyheter-reguleringsmyndigheten-for-energi/rme-gir-noranett-andoey-delvis-dispensasjon-fra-kile-etter-ekstremvaeret-ingunn/"
+            },
+            {
+              "title": "RME med nye avklaringer om nett, tilknytning og strømproduksjon 29.06.2026 Reguleringsmyndigheten for energi i NVE (RME) har behandlet flere saker som gir viktige avklaringer for kraftbransjen. Sakene gjelder blant annet betaling for nettutredninger, tilgang til nettkapasitet, forenklet tilknytningsprosess for små produksjonsanlegg, ansvarsfordeling mellom nettnivåer, krav til leveringskvalitet og brudd på anleggsbidragsregelverket.",
+              "url": "https://www.nve.no/reguleringsmyndigheten/nytt-fra-rme/nyheter-reguleringsmyndigheten-for-energi/rme-med-nye-avklaringer-om-nett-tilknytning-og-stroemproduksjon/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "statnett_news",
+      "name": "Statnett – nyheter og pressemeldinger",
+      "sector": "energy",
+      "kind": "web_links",
+      "url": "https://www.statnett.no/om-statnett/nyheter-og-pressemeldinger/",
+      "official_url": "https://www.statnett.no/om-statnett/nyheter-og-pressemeldinger/",
+      "coverage": "Nyheter og pressemeldinger fra Statnett.",
+      "options": {
+        "selector": "main a[href*='/om-statnett/nyheter-og-pressemeldinger/nyhetsarkiv-']",
+        "events": [
+          "added"
+        ],
+        "max_records": 100
+      },
+      "checked_at": "2026-09-09T09:38:46.780366+00:00",
+      "runs": [
+        {
+          "count": 5,
+          "keys": [
+            "record:dce4e9f549a6ec0d1ef350f4aff7311578c0d240bed1c4298e70700e87475bf8",
+            "record:5873f50d7aa60cde5360aea9b9bfce289924cd05bd97859d0cebcb788ead1a2c",
+            "record:67be895d352147e01f98c05a214e06bdbb0c24fd176f27fb69542d05e14f9ed9",
+            "record:0dac61b935b9a5a68b81856315482e968dc243c9763178a5733c798062173aa3",
+            "record:ad948f61f6cb069bb01894600d23e64b2c5c0c824a49a201a823cbc1a8f48ee0"
+          ],
+          "examples": [
+            {
+              "title": "Halvårsrapport 2026: Øker farten i utbyggingen av kraftnettet",
+              "url": "https://www.statnett.no/om-statnett/nyheter-og-pressemeldinger/nyhetsarkiv-2026/halvarsrapport-2026-oker-farten-i-utbyggingen-av-kraftnettet/"
+            },
+            {
+              "title": "Halvveis i arbeidet på forbindelsen Skaidi–Hammerfest",
+              "url": "https://www.statnett.no/om-statnett/nyheter-og-pressemeldinger/nyhetsarkiv-2026/halvveis-i-arbeidet-pa-den-viktige-forbindelsen-skaidihammerfest/"
+            },
+            {
+              "title": "Ny koblingsstasjon i Vestby styrker strømnettet på Østlandet",
+              "url": "https://www.statnett.no/om-statnett/nyheter-og-pressemeldinger/nyhetsarkiv-2026/langerud/"
+            }
+          ]
+        },
+        {
+          "count": 5,
+          "keys": [
+            "record:dce4e9f549a6ec0d1ef350f4aff7311578c0d240bed1c4298e70700e87475bf8",
+            "record:5873f50d7aa60cde5360aea9b9bfce289924cd05bd97859d0cebcb788ead1a2c",
+            "record:67be895d352147e01f98c05a214e06bdbb0c24fd176f27fb69542d05e14f9ed9",
+            "record:0dac61b935b9a5a68b81856315482e968dc243c9763178a5733c798062173aa3",
+            "record:ad948f61f6cb069bb01894600d23e64b2c5c0c824a49a201a823cbc1a8f48ee0"
+          ],
+          "examples": [
+            {
+              "title": "Halvårsrapport 2026: Øker farten i utbyggingen av kraftnettet",
+              "url": "https://www.statnett.no/om-statnett/nyheter-og-pressemeldinger/nyhetsarkiv-2026/halvarsrapport-2026-oker-farten-i-utbyggingen-av-kraftnettet/"
+            },
+            {
+              "title": "Halvveis i arbeidet på forbindelsen Skaidi–Hammerfest",
+              "url": "https://www.statnett.no/om-statnett/nyheter-og-pressemeldinger/nyhetsarkiv-2026/halvveis-i-arbeidet-pa-den-viktige-forbindelsen-skaidihammerfest/"
+            },
+            {
+              "title": "Ny koblingsstasjon i Vestby styrker strømnettet på Østlandet",
+              "url": "https://www.statnett.no/om-statnett/nyheter-og-pressemeldinger/nyhetsarkiv-2026/langerud/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "havtil_news",
+      "name": "Havtil – nyheter",
+      "sector": "energy",
+      "kind": "web_links",
+      "url": "https://www.havtil.no/utforsk-fagstoff/havtil/",
+      "official_url": "https://www.havtil.no/utforsk-fagstoff/havtil/",
+      "coverage": "Nyheter og fagpubliseringer fra Havindustritilsynet.",
+      "options": {
+        "selector": "main a[href*='/utforsk-fagstoff/'][href*='/2026/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:47.585463+00:00",
+      "runs": [
+        {
+          "count": 10,
+          "keys": [
+            "record:99c90c0eddc164b2949f1291c53e7ae75a5bf52240a499364858cd9435a43a9d",
+            "record:5b79e19e9502b8b36e0581671abadb27cc7d749175d7a3d26dcc0b9240c14562",
+            "record:f2a2c7eee68cc3847b3d5f9848215c33d7d7a744c124cc3c9c4d39d604ba3342",
+            "record:5261817767039a2bbe57b6f5b9ecbabf412e5a0f684efeb567630b0b0dcf62f9",
+            "record:46a3dd3e49b88efeda32f0f14838af32053a3cde4aa52579e412c6fbe93ab9f0",
+            "record:f6ca1cfc4b573ef69f159e9175703abafe0be24141b36abad6a8d307d892fcf3",
+            "record:eeb62d42541b92e8086fad0502980754500440c79376547871c8833b157e23e2",
+            "record:2a987a421f3cb250ed63adedddb675d76345bfb51f8aaaf30c6500540b55e9b6",
+            "record:dd3ecc7ed02864e2385b279b9c9cec5d2f576c02e482099003dfa27928e45144",
+            "record:71cd0966b1230e4656101ee0098279242d4988b321c346d0ab1170b7a3aba4b9"
+          ],
+          "examples": [
+            {
+              "title": "Havtil gransker gasslekkasje på Heidrun A Publisert: 7. september 2026 Havindustritilsynet (Havtil) har iverksatt gransking av en gasslekkasje på Heidrun A-innretningen 4. september 2026. Nyhet Prosessikkerhet Beredskap",
+              "url": "https://www.havtil.no/utforsk-fagstoff/fagstoff/fagartikler/2026/havtil-gransker-gasslekkasje-pa-heidrun-a/"
+            },
+            {
+              "title": "Louise Dedichen: - Motstandskraft begynner med ledelse Publisert: 2. september 2026 Energi har blitt sikkerhetspolitikk. For Louise Dedichen betyr det at ledere må tenke annerledes om risiko, beredskap og samarbeid. Magasinartikkel Beredskap Sikring",
+              "url": "https://www.havtil.no/utforsk-fagstoff/fagstoff/reportasjer/2026/motstandskraft-begynner-med-ledelse/"
+            },
+            {
+              "title": "Autonome boreoperasjoner krever nye løsninger for menneskelig overvåking og kontroll Publisert: 31. august 2026 Når automatiserte boresystemer blir mer autonome og tar beslutninger selv, øker behovet for god menneskelig oversikt. Det stiller krav til at teknologien bygges slik at mennesker kan forstå, vurdere og gripe inn på en sikker måte. Nyhet Kunstig intelligens Boring og brønn",
+              "url": "https://www.havtil.no/utforsk-fagstoff/fagstoff/fagartikler/2026/tekniske-losninger-for-menneskelig-overvaking-og-kontroll-i-automatiserte-boreoperasjoner/"
+            }
+          ]
+        },
+        {
+          "count": 10,
+          "keys": [
+            "record:99c90c0eddc164b2949f1291c53e7ae75a5bf52240a499364858cd9435a43a9d",
+            "record:5b79e19e9502b8b36e0581671abadb27cc7d749175d7a3d26dcc0b9240c14562",
+            "record:f2a2c7eee68cc3847b3d5f9848215c33d7d7a744c124cc3c9c4d39d604ba3342",
+            "record:5261817767039a2bbe57b6f5b9ecbabf412e5a0f684efeb567630b0b0dcf62f9",
+            "record:46a3dd3e49b88efeda32f0f14838af32053a3cde4aa52579e412c6fbe93ab9f0",
+            "record:f6ca1cfc4b573ef69f159e9175703abafe0be24141b36abad6a8d307d892fcf3",
+            "record:eeb62d42541b92e8086fad0502980754500440c79376547871c8833b157e23e2",
+            "record:2a987a421f3cb250ed63adedddb675d76345bfb51f8aaaf30c6500540b55e9b6",
+            "record:dd3ecc7ed02864e2385b279b9c9cec5d2f576c02e482099003dfa27928e45144",
+            "record:71cd0966b1230e4656101ee0098279242d4988b321c346d0ab1170b7a3aba4b9"
+          ],
+          "examples": [
+            {
+              "title": "Havtil gransker gasslekkasje på Heidrun A Publisert: 7. september 2026 Havindustritilsynet (Havtil) har iverksatt gransking av en gasslekkasje på Heidrun A-innretningen 4. september 2026. Nyhet Prosessikkerhet Beredskap",
+              "url": "https://www.havtil.no/utforsk-fagstoff/fagstoff/fagartikler/2026/havtil-gransker-gasslekkasje-pa-heidrun-a/"
+            },
+            {
+              "title": "Louise Dedichen: - Motstandskraft begynner med ledelse Publisert: 2. september 2026 Energi har blitt sikkerhetspolitikk. For Louise Dedichen betyr det at ledere må tenke annerledes om risiko, beredskap og samarbeid. Magasinartikkel Beredskap Sikring",
+              "url": "https://www.havtil.no/utforsk-fagstoff/fagstoff/reportasjer/2026/motstandskraft-begynner-med-ledelse/"
+            },
+            {
+              "title": "Autonome boreoperasjoner krever nye løsninger for menneskelig overvåking og kontroll Publisert: 31. august 2026 Når automatiserte boresystemer blir mer autonome og tar beslutninger selv, øker behovet for god menneskelig oversikt. Det stiller krav til at teknologien bygges slik at mennesker kan forstå, vurdere og gripe inn på en sikker måte. Nyhet Kunstig intelligens Boring og brønn",
+              "url": "https://www.havtil.no/utforsk-fagstoff/fagstoff/fagartikler/2026/tekniske-losninger-for-menneskelig-overvaking-og-kontroll-i-automatiserte-boreoperasjoner/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "havtil_investigations",
+      "name": "Havtil – granskingsrapporter",
+      "sector": "energy",
+      "kind": "web_links",
+      "url": "https://www.havtil.no/tilsyn/granskingsrapporter/",
+      "official_url": "https://www.havtil.no/tilsyn/granskingsrapporter/",
+      "coverage": "Nye granskingsrapporter fra Havtil.",
+      "options": {
+        "selector": "main a[href*='/tilsyn/granskingsrapporter/'][href*='/202']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:48.230209+00:00",
+      "runs": [
+        {
+          "count": 10,
+          "keys": [
+            "record:c698d039e0fb4f74ff8a6f0f2c55a157d0cb1bf72390c860977dc1493833c732",
+            "record:34ca686baa0a3fbf094a3a6f5cd50adf41633d857c99486ce798f1d29f10c968",
+            "record:2932a7a40d1f14c21ede59ecc53ff60c28796a652c313d757e95b0541b226459",
+            "record:1718fcf6cc8c397571f7e19cb06def45fe710a40abe164c1dcb989d45bd3b620",
+            "record:498d6352e3cadd7dff13f1c336b34f56c693649fa34a2b7f182b27e7e8b62e9f",
+            "record:c56d4b2390e7993dd51ace3b2d698d972e73d0ceda32ae3ce55da67f5f470315",
+            "record:6b3dca78f37ccb97c23e6fbb301118a5f4a809132b011b7843ab1c6d20817856",
+            "record:8598aaa800e015bfca4519b2e0156111e9b8e1b45aea7cc01c2a80d8460e2155",
+            "record:38085f92879def132c53f19da90cc8f4c19803041007bba8e86efd17f1a98c2b",
+            "record:a71b608a3b289b01a1c53a1a455df5673f971890af89173b7b0ec42fa958a536"
+          ],
+          "examples": [
+            {
+              "title": "Equinor - Deepsea Bollsta - gransking av brønnkontrollhendelse Publisert: 18. mai 2026 Havindustritilsynet (Havtil) har gransket brønnkontrollhendelsen i Q-21-brønnen på Trollfeltet med boreinnretningen Deepsea Bollsta 23. september 2025. Granskingen identifiserte alvorlige regelverksbrudd og vi har gitt Equinor pålegg. Boring og brønn",
+              "url": "https://www.havtil.no/tilsyn/granskingsrapporter/2026/equinor---deepsea-bollsta---gransking-av-bronnkontrollhendelse/"
+            },
+            {
+              "title": "Equinor/Island Offshore – Oseberg H/Island Clipper – gransking av tap av gangbro Publisert: 12. mai 2026 Havindustritilsynet (Havtil) har sluttført granskingen av hendelser med tap av gangbro (walk-to-work-system) mellom innretningen Oseberg H og servicefartøyet Island Clipper. Konstruksjonssikkerhet Kran og løft Beredskap Prosessikkerhet Vedlikeholdsstyring",
+              "url": "https://www.havtil.no/tilsyn/granskingsrapporter/2026/equinorisland-offshore--oseberg-hisland-clipper--gransking-av-tap-av-gangbro/"
+            },
+            {
+              "title": "Pålegg til Odfjell Drilling – Deepsea Nordkapp – gransking av løftehendelse med personskade Publisert: 22. april 2026 Havindustritilsynet (Havtil) har gransket hendelsen på Odfjell Drillings boreinnretning Deepsea Nordkapp 8. oktober 2025, hvor en person ble skadet under en løfteoperasjon. Vi har identifisert alvorlige regelverksbrudd og gitt selskapet pålegg. Kran og løft Risikostyring",
+              "url": "https://www.havtil.no/tilsyn/granskingsrapporter/2026/odfjell-drilling--deepsea-nordkapp--gransking-av-loftehendelse-med-personskade/"
+            }
+          ]
+        },
+        {
+          "count": 10,
+          "keys": [
+            "record:c698d039e0fb4f74ff8a6f0f2c55a157d0cb1bf72390c860977dc1493833c732",
+            "record:34ca686baa0a3fbf094a3a6f5cd50adf41633d857c99486ce798f1d29f10c968",
+            "record:2932a7a40d1f14c21ede59ecc53ff60c28796a652c313d757e95b0541b226459",
+            "record:1718fcf6cc8c397571f7e19cb06def45fe710a40abe164c1dcb989d45bd3b620",
+            "record:498d6352e3cadd7dff13f1c336b34f56c693649fa34a2b7f182b27e7e8b62e9f",
+            "record:c56d4b2390e7993dd51ace3b2d698d972e73d0ceda32ae3ce55da67f5f470315",
+            "record:6b3dca78f37ccb97c23e6fbb301118a5f4a809132b011b7843ab1c6d20817856",
+            "record:8598aaa800e015bfca4519b2e0156111e9b8e1b45aea7cc01c2a80d8460e2155",
+            "record:38085f92879def132c53f19da90cc8f4c19803041007bba8e86efd17f1a98c2b",
+            "record:a71b608a3b289b01a1c53a1a455df5673f971890af89173b7b0ec42fa958a536"
+          ],
+          "examples": [
+            {
+              "title": "Equinor - Deepsea Bollsta - gransking av brønnkontrollhendelse Publisert: 18. mai 2026 Havindustritilsynet (Havtil) har gransket brønnkontrollhendelsen i Q-21-brønnen på Trollfeltet med boreinnretningen Deepsea Bollsta 23. september 2025. Granskingen identifiserte alvorlige regelverksbrudd og vi har gitt Equinor pålegg. Boring og brønn",
+              "url": "https://www.havtil.no/tilsyn/granskingsrapporter/2026/equinor---deepsea-bollsta---gransking-av-bronnkontrollhendelse/"
+            },
+            {
+              "title": "Equinor/Island Offshore – Oseberg H/Island Clipper – gransking av tap av gangbro Publisert: 12. mai 2026 Havindustritilsynet (Havtil) har sluttført granskingen av hendelser med tap av gangbro (walk-to-work-system) mellom innretningen Oseberg H og servicefartøyet Island Clipper. Konstruksjonssikkerhet Kran og løft Beredskap Prosessikkerhet Vedlikeholdsstyring",
+              "url": "https://www.havtil.no/tilsyn/granskingsrapporter/2026/equinorisland-offshore--oseberg-hisland-clipper--gransking-av-tap-av-gangbro/"
+            },
+            {
+              "title": "Pålegg til Odfjell Drilling – Deepsea Nordkapp – gransking av løftehendelse med personskade Publisert: 22. april 2026 Havindustritilsynet (Havtil) har gransket hendelsen på Odfjell Drillings boreinnretning Deepsea Nordkapp 8. oktober 2025, hvor en person ble skadet under en løfteoperasjon. Vi har identifisert alvorlige regelverksbrudd og gitt selskapet pålegg. Kran og løft Risikostyring",
+              "url": "https://www.havtil.no/tilsyn/granskingsrapporter/2026/odfjell-drilling--deepsea-nordkapp--gransking-av-loftehendelse-med-personskade/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "havtil_orders",
+      "name": "Havtil – meldinger om pålegg",
+      "sector": "energy",
+      "kind": "web_links",
+      "url": "https://www.havtil.no/tilsyn/viktige-meldinger/",
+      "official_url": "https://www.havtil.no/tilsyn/viktige-meldinger/",
+      "coverage": "Pålegg publisert av Havtil uten tilknytning til ferdige revisjoner og granskingsrapporter.",
+      "options": {
+        "selector": "main a[href*='/tilsyn/viktige-meldinger/'][href*='/202']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:48.763474+00:00",
+      "runs": [
+        {
+          "count": 10,
+          "keys": [
+            "record:b7bd4b4e46d2bcaf3f4f2f7cc7060669b560a57035d0bfa88941ba318fe7b620",
+            "record:0b8ce5da083324ef34d9693f78f4c9d73895778157be3ee1a9855823610d3f1a",
+            "record:14306175983c492cdfe456240537b4ddfa9cde3f4ad73d1893413af84a7ec0a4",
+            "record:4d2a75f75fb818c79139be7c330f39b0195bc628a973b70d3700dea4ba646296",
+            "record:4379bc18d541d34eabb66b9c1919219e98fdc74265e8ad588cb2c2a31276583a",
+            "record:4bd759bb8b2b25658ed6c1fefe96a40127e581888ffcfc0a53d0d75ae958cc20",
+            "record:8cef4209990e68eaaf8da35b10b6e57117dba460e7bedaa3a85061ed713190ff",
+            "record:6aa00dd3e79111badbc4799cec32e2b6557864c21cf4746d09ca8f51077a2d4f",
+            "record:32dbf3c1181b82e2c02c7298b5d6e8f7803fd3b3b190f43adff1fb16411dbac6",
+            "record:d9b9a266eed8d9ae3be9b0f9006f7b37095dbdb8cb392b52ad0712197351a93d"
+          ],
+          "examples": [
+            {
+              "title": "Pålegg til ConocoPhillips – Ekofisk og Eldfisk - responstid for brannvatn Publisert: 3. mars 2026 Havindustritilsynet (Havtil) har gitt pålegg til ConocoPhillips om å korrigere avvik frå krav til responstid på brannvatn på alle sine innretningar på felta Ekofisk og Eldfisk. Prosessikkerhet Beredskap",
+              "url": "https://www.havtil.no/tilsyn/viktige-meldinger/2026/palegg-til-conocophillips--ekofisk-og-eldfisk---responstid-for-brannvatn/"
+            },
+            {
+              "title": "Pålegg til KCA Deutag Drilling – Askeladden – arbeidsmiljø Publisert: 28. januar 2026 Havindustritilsynet (Havtil) har gitt pålegg til KCA Deutag Drilling (KCAD) etter tilsyn med arbeidsmiljø på den flyttbare boreinnretningen Askeladden. Arbeidsmiljø",
+              "url": "https://www.havtil.no/tilsyn/viktige-meldinger/2026/palegg-til-kca-deutag-drilling--askeladden--arbeidsmiljo/"
+            },
+            {
+              "title": "Pålegg til Island Drilling – Island Innovator - sikker drift og vedlikehold Publisert: 19. januar 2026 Havtil har ført tilsyn med Island Drilling rettet mot sikker drift og vedlikehold på Island Innovator. Vi har påvist alvorlige brudd på regelverket, og har nå gitt selskapet pålegg. Deler av pålegget må etterkommes før innretningen tas i bruk. Vedlikeholdsstyring",
+              "url": "https://www.havtil.no/tilsyn/viktige-meldinger/2026/palegg-til-island-drilling--island-innovator---sikker-drift-og-vedlikehold/"
+            }
+          ]
+        },
+        {
+          "count": 10,
+          "keys": [
+            "record:b7bd4b4e46d2bcaf3f4f2f7cc7060669b560a57035d0bfa88941ba318fe7b620",
+            "record:0b8ce5da083324ef34d9693f78f4c9d73895778157be3ee1a9855823610d3f1a",
+            "record:14306175983c492cdfe456240537b4ddfa9cde3f4ad73d1893413af84a7ec0a4",
+            "record:4d2a75f75fb818c79139be7c330f39b0195bc628a973b70d3700dea4ba646296",
+            "record:4379bc18d541d34eabb66b9c1919219e98fdc74265e8ad588cb2c2a31276583a",
+            "record:4bd759bb8b2b25658ed6c1fefe96a40127e581888ffcfc0a53d0d75ae958cc20",
+            "record:8cef4209990e68eaaf8da35b10b6e57117dba460e7bedaa3a85061ed713190ff",
+            "record:6aa00dd3e79111badbc4799cec32e2b6557864c21cf4746d09ca8f51077a2d4f",
+            "record:32dbf3c1181b82e2c02c7298b5d6e8f7803fd3b3b190f43adff1fb16411dbac6",
+            "record:d9b9a266eed8d9ae3be9b0f9006f7b37095dbdb8cb392b52ad0712197351a93d"
+          ],
+          "examples": [
+            {
+              "title": "Pålegg til ConocoPhillips – Ekofisk og Eldfisk - responstid for brannvatn Publisert: 3. mars 2026 Havindustritilsynet (Havtil) har gitt pålegg til ConocoPhillips om å korrigere avvik frå krav til responstid på brannvatn på alle sine innretningar på felta Ekofisk og Eldfisk. Prosessikkerhet Beredskap",
+              "url": "https://www.havtil.no/tilsyn/viktige-meldinger/2026/palegg-til-conocophillips--ekofisk-og-eldfisk---responstid-for-brannvatn/"
+            },
+            {
+              "title": "Pålegg til KCA Deutag Drilling – Askeladden – arbeidsmiljø Publisert: 28. januar 2026 Havindustritilsynet (Havtil) har gitt pålegg til KCA Deutag Drilling (KCAD) etter tilsyn med arbeidsmiljø på den flyttbare boreinnretningen Askeladden. Arbeidsmiljø",
+              "url": "https://www.havtil.no/tilsyn/viktige-meldinger/2026/palegg-til-kca-deutag-drilling--askeladden--arbeidsmiljo/"
+            },
+            {
+              "title": "Pålegg til Island Drilling – Island Innovator - sikker drift og vedlikehold Publisert: 19. januar 2026 Havtil har ført tilsyn med Island Drilling rettet mot sikker drift og vedlikehold på Island Innovator. Vi har påvist alvorlige brudd på regelverket, og har nå gitt selskapet pålegg. Deler av pålegget må etterkommes før innretningen tas i bruk. Vedlikeholdsstyring",
+              "url": "https://www.havtil.no/tilsyn/viktige-meldinger/2026/palegg-til-island-drilling--island-innovator---sikker-drift-og-vedlikehold/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "landbruksdir_news",
+      "name": "Landbruksdirektoratet – nyhetsarkiv",
+      "sector": "food_retail",
+      "kind": "web_links",
+      "url": "https://www.landbruksdirektoratet.no/nb/nyhetsrom/nyhetsarkiv",
+      "official_url": "https://www.landbruksdirektoratet.no/nb/nyhetsrom/nyhetsarkiv",
+      "coverage": "Nyheter om jordbruk, skogbruk, reindrift og handel.",
+      "options": {
+        "selector": "main a[href*='/nb/nyhetsrom/nyhetsarkiv/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:52.836648+00:00",
+      "runs": [
+        {
+          "count": 20,
+          "keys": [
+            "record:7afdceeb026a1efc01ed0ac35ac9367811d25c8bd84fedcd047f3c7c00d4101e",
+            "record:99de7cc63c7ac3f2a43d0d48f09455adf7f6af2c7107c519b7ce8f35ce5d3f61",
+            "record:64d4f7ea0c59eb7d54159ad568f2e833fee2e1851d5d581cb7c89063acb43f21",
+            "record:0872936c4b6101057582e4cb8443c0510575534f07aea668df66cb94882d718d",
+            "record:8b748914d700a02b7953071ad3fbf73672cae6ed40827db78c09ad1f14759da1",
+            "record:f93c311a5e844ff4ad5d529c104dbbc5c9dd8fe99e0b30df62f32e0d199dbaea",
+            "record:def7ed0fabe18e1c4990cef5ba4a176940c47b9295fb633a2ad13734be111649",
+            "record:2ed147a2b9ebcc1f576f410fe11acc306558389f9b3313b79d3114a2091fd9ef",
+            "record:c4e1f4d5b144b15d360e6b6ba74608df8a3e14e0cc9bf13c7b3fab601a6d0e21",
+            "record:8377be0c0e965d83d6b9978e50f619e4b1696165ddc027f6c6e8eb04ee7d3f7e",
+            "record:68424687a7e8584c2cd485feef832911ba8997795200b5bed92f477bbd2184f7",
+            "record:56d50356ea1c936f7f3325dc59beb7aa2df28f91e2d509912750fdf49366ad12",
+            "record:84dfdcc0921e2af99670fe7dadd6e44cf23bd25f0d191a2a237795b5976a74cd",
+            "record:eaadf4f42b96c78736f6dcbfbc37e03c34aee2ea7d60c2f326650e4205a6e1da",
+            "record:b1b6e511d5b37d7ed27126ca99cc9bbea6c8d4f0ab699b7fda50576ba21fa673",
+            "record:f4b3aea20abe81d2fe2b8b1ca28c2f5d584a1008162b0a5e64ff6173578cc5a1",
+            "record:b095677005b8c828a30f85fc4a9517d744380bf9b7b2b92b263219e513a8e051",
+            "record:28c0874bd83d4af45b20b79442e3fd48b91431ac8f55a17ef568971cd0814238",
+            "record:50727bf36d5013b1947fc5a8a0189be9c7332cc56fd5a4ed3735a1de174274cc",
+            "record:9e34778b07e386a6802b9db20c72b7ff1c596ae0dfd9321a084796cf0976f2f8"
+          ],
+          "examples": [
+            {
+              "title": "Publisert: 08.09.2026 Skogbruk Stor interesse for ny tilskuddsordning: 73 søknader fra kommuner over hele landet Landbruksdirektoratet har mottatt 73 søknader fra i alt 44 kommuner etter at fristen for den nye tilskuddsordningen for utbedring av flaskehalser på kommunale veier gikk ut 1. september.",
+              "url": "https://www.landbruksdirektoratet.no/nb/nyhetsrom/nyhetsarkiv/stor-interesse-for-ny-tilskuddsordning-73-soknader-fra-kommuner-over-hele-landet"
+            },
+            {
+              "title": "Publisert: 04.09.2026 Jordbruk Foreløpige tall for salg av grunnkvote i 2026 I 2026 har 86 eiere av kumelkkvote, og 3 eiere av geitemelkkvote, søkt om salg av grunnkvote. Dette viser en foreløpig telling Landbruksdirektoratet har gjort.",
+              "url": "https://www.landbruksdirektoratet.no/nb/nyhetsrom/nyhetsarkiv/forelopige-tall-for-salg-av-grunnkvote-i-2026"
+            },
+            {
+              "title": "Publisert: 03.09.2026 Industri og handel Ekspertgruppe om investeringsbehov i verdikjeden for korn Ekspertgruppe om investeringsbehov i verdikjeden for korn har hatt sitt første møte.",
+              "url": "https://www.landbruksdirektoratet.no/nb/nyhetsrom/nyhetsarkiv/ekspertgruppe-om-investeringsbehov-i-verdikjeden-for-korn"
+            }
+          ]
+        },
+        {
+          "count": 20,
+          "keys": [
+            "record:7afdceeb026a1efc01ed0ac35ac9367811d25c8bd84fedcd047f3c7c00d4101e",
+            "record:99de7cc63c7ac3f2a43d0d48f09455adf7f6af2c7107c519b7ce8f35ce5d3f61",
+            "record:64d4f7ea0c59eb7d54159ad568f2e833fee2e1851d5d581cb7c89063acb43f21",
+            "record:0872936c4b6101057582e4cb8443c0510575534f07aea668df66cb94882d718d",
+            "record:8b748914d700a02b7953071ad3fbf73672cae6ed40827db78c09ad1f14759da1",
+            "record:f93c311a5e844ff4ad5d529c104dbbc5c9dd8fe99e0b30df62f32e0d199dbaea",
+            "record:def7ed0fabe18e1c4990cef5ba4a176940c47b9295fb633a2ad13734be111649",
+            "record:2ed147a2b9ebcc1f576f410fe11acc306558389f9b3313b79d3114a2091fd9ef",
+            "record:c4e1f4d5b144b15d360e6b6ba74608df8a3e14e0cc9bf13c7b3fab601a6d0e21",
+            "record:8377be0c0e965d83d6b9978e50f619e4b1696165ddc027f6c6e8eb04ee7d3f7e",
+            "record:68424687a7e8584c2cd485feef832911ba8997795200b5bed92f477bbd2184f7",
+            "record:56d50356ea1c936f7f3325dc59beb7aa2df28f91e2d509912750fdf49366ad12",
+            "record:84dfdcc0921e2af99670fe7dadd6e44cf23bd25f0d191a2a237795b5976a74cd",
+            "record:eaadf4f42b96c78736f6dcbfbc37e03c34aee2ea7d60c2f326650e4205a6e1da",
+            "record:b1b6e511d5b37d7ed27126ca99cc9bbea6c8d4f0ab699b7fda50576ba21fa673",
+            "record:f4b3aea20abe81d2fe2b8b1ca28c2f5d584a1008162b0a5e64ff6173578cc5a1",
+            "record:b095677005b8c828a30f85fc4a9517d744380bf9b7b2b92b263219e513a8e051",
+            "record:28c0874bd83d4af45b20b79442e3fd48b91431ac8f55a17ef568971cd0814238",
+            "record:50727bf36d5013b1947fc5a8a0189be9c7332cc56fd5a4ed3735a1de174274cc",
+            "record:9e34778b07e386a6802b9db20c72b7ff1c596ae0dfd9321a084796cf0976f2f8"
+          ],
+          "examples": [
+            {
+              "title": "Publisert: 08.09.2026 Skogbruk Stor interesse for ny tilskuddsordning: 73 søknader fra kommuner over hele landet Landbruksdirektoratet har mottatt 73 søknader fra i alt 44 kommuner etter at fristen for den nye tilskuddsordningen for utbedring av flaskehalser på kommunale veier gikk ut 1. september.",
+              "url": "https://www.landbruksdirektoratet.no/nb/nyhetsrom/nyhetsarkiv/stor-interesse-for-ny-tilskuddsordning-73-soknader-fra-kommuner-over-hele-landet"
+            },
+            {
+              "title": "Publisert: 04.09.2026 Jordbruk Foreløpige tall for salg av grunnkvote i 2026 I 2026 har 86 eiere av kumelkkvote, og 3 eiere av geitemelkkvote, søkt om salg av grunnkvote. Dette viser en foreløpig telling Landbruksdirektoratet har gjort.",
+              "url": "https://www.landbruksdirektoratet.no/nb/nyhetsrom/nyhetsarkiv/forelopige-tall-for-salg-av-grunnkvote-i-2026"
+            },
+            {
+              "title": "Publisert: 03.09.2026 Industri og handel Ekspertgruppe om investeringsbehov i verdikjeden for korn Ekspertgruppe om investeringsbehov i verdikjeden for korn har hatt sitt første møte.",
+              "url": "https://www.landbruksdirektoratet.no/nb/nyhetsrom/nyhetsarkiv/ekspertgruppe-om-investeringsbehov-i-verdikjeden-for-korn"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "fiskeridir_news",
+      "name": "Fiskeridirektoratet – nyheter",
+      "sector": "food_retail",
+      "kind": "web_links",
+      "url": "https://www.fiskeridir.no/nyheter",
+      "official_url": "https://www.fiskeridir.no/nyheter",
+      "coverage": "Alle nyheter fra Fiskeridirektoratet.",
+      "options": {
+        "selector": "main a[href^='/nyheter/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:53.466854+00:00",
+      "runs": [
+        {
+          "count": 30,
+          "keys": [
+            "record:0099e6202a08d9f55afe3e5c81154709c8a9ea86195826ebaa788f56e87be189",
+            "record:e39b9b43e4e1ea731acf04747cf213084eb4585e210f51713bc41a1c13a31cc2",
+            "record:739cbe9cd73749f1d2f7e0cbbb10e9fd6838154d226e30d102c28fe113f2ce83",
+            "record:bff29047434a7b9a063c1f4b43c1df00714b1c0ba59d0c03336bd0762eb7e350",
+            "record:d077fb3025ecc4f76a851dbc27d02703ebb1314fa66565c3e8c24c6310286f84",
+            "record:650c09155d5d289265891618394df7cad58942663a6aa162d6fab804d23ad1a5",
+            "record:5968c34c9da2cc7185169993a7720c76fd514ba285df7d01db2f2fe7ef5700c5",
+            "record:954560dcc99048e4db8c2c62ee39889e4390ef2a29b7beba3cc2d5f4e49344bd",
+            "record:f60cde681224e61d82cd90408212255fe747141d59b8cfef173148bba3defeb8",
+            "record:fd28640f52c283894494db8069f0f9b0bd133c72d9292879d85b42505576c315",
+            "record:51fb4d8f6f781184449a065488c92b5674f90c1e8e8485cab1429294b2ddf081",
+            "record:a81515774dbc425e782f11e6f6e16459c2b9f8253dd392c1ec1129a5f9d5f658",
+            "record:c70afcd4a0418b0169d9f95ad675e4520b4b647ea590a74f54e70053c7ad6fd5",
+            "record:e9de9525ab726c2aa365dbbef2cb20bd83eb18ede226fbb552fcfbc46f95248d",
+            "record:5ccdb251aca88f51719ff15ae91608f1cf891504070218dbd98df0c925b04bf8",
+            "record:bcfd78da9cec9321fa4c4e3365a96adf8de802c0160935ffe4872a83c4d843a2",
+            "record:0b9beb11ae7ae460bd3c798211829da47239156c8820d660a85530456bdaf018",
+            "record:4b751cb0e2bf7ad13e47f85ef77a52bf765905e70dfbfc9b122b5938359ee9c0",
+            "record:5550af5e1f12fda955794a52f07f5af00286e798a4a8a42d053b24d3a855d146",
+            "record:6c9c67a747b0f44a9e8bf71bc5772c982ba4c97d7acb2a617b75d83c84eaa6cc",
+            "record:73c30d72929581c966aa8fe472d363c35cc52f49c4a7ce52f4f9d3a748d346dd",
+            "record:9321564e44d01a9a402296c4232fee269d52fc7237c487050be3fbbf11812e52",
+            "record:862374e3d1eacdc603032e91d0ceb14478aa0dc550be5e15eaefac25d4368cb5",
+            "record:b43d11ee950249227f5565dcda4e1355dc73bdaad10ce7c272b193cf9790660e",
+            "record:c4b537f0903edec1fdcbd591364d0fe03252be0393c8b1403319832f4295fa07",
+            "record:dfdffee9d34b85b59260d6b479c9e289da2d064859a68296e9185abce1458504",
+            "record:3724994cdfc7b51dd9048e07b80b55789ebd4e83813f2f4a989c72c724c513b2",
+            "record:3c0c185a370155c62c5125168599d56bc3e2991a80d51a07912cb8464a052f8e",
+            "record:a67af4e41ba2967a68ed775be0495a32ae9fdf8548d49a6fb9d3231d0a797dee",
+            "record:7bd49b43c1c472017e95c66ebcd5cc2df6bef260d04cf8cf33a3d7c86ef959b7"
+          ],
+          "examples": [
+            {
+              "title": "Forskningskvoter for 2027 Nærings- og fiskeridepartementet avsetter årlige forskningskvoter for tildeling til forsknings- og undervisningsformål. Søknadsfrist 31. oktober 2026. 07.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/forskningskvoter-for-2027"
+            },
+            {
+              "title": "Kortere stenging for kongekrabbefisket utenfor kvoteregulert område Vi er i gang med årets opprenskningstokt av tapte fiskeredskaper. Toktet dekker fiskefeltene langs kysten til havområdet utenfor Kirkenes. 02.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/kortere-stenging-for-kongekrabbefisket-utenfor-kvoteregulert-omrade"
+            },
+            {
+              "title": "Stenging av områder for fangst av kongekrabbe Utvalgte fjorder i kvoteregulert område stenges i korte perioder for Havforskningsinstituttets bestandstokt. 01.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/stenging-av-omrader-for-fangst-avv-kongekrabbe"
+            }
+          ]
+        },
+        {
+          "count": 30,
+          "keys": [
+            "record:0099e6202a08d9f55afe3e5c81154709c8a9ea86195826ebaa788f56e87be189",
+            "record:e39b9b43e4e1ea731acf04747cf213084eb4585e210f51713bc41a1c13a31cc2",
+            "record:739cbe9cd73749f1d2f7e0cbbb10e9fd6838154d226e30d102c28fe113f2ce83",
+            "record:bff29047434a7b9a063c1f4b43c1df00714b1c0ba59d0c03336bd0762eb7e350",
+            "record:d077fb3025ecc4f76a851dbc27d02703ebb1314fa66565c3e8c24c6310286f84",
+            "record:650c09155d5d289265891618394df7cad58942663a6aa162d6fab804d23ad1a5",
+            "record:5968c34c9da2cc7185169993a7720c76fd514ba285df7d01db2f2fe7ef5700c5",
+            "record:954560dcc99048e4db8c2c62ee39889e4390ef2a29b7beba3cc2d5f4e49344bd",
+            "record:f60cde681224e61d82cd90408212255fe747141d59b8cfef173148bba3defeb8",
+            "record:fd28640f52c283894494db8069f0f9b0bd133c72d9292879d85b42505576c315",
+            "record:51fb4d8f6f781184449a065488c92b5674f90c1e8e8485cab1429294b2ddf081",
+            "record:a81515774dbc425e782f11e6f6e16459c2b9f8253dd392c1ec1129a5f9d5f658",
+            "record:c70afcd4a0418b0169d9f95ad675e4520b4b647ea590a74f54e70053c7ad6fd5",
+            "record:e9de9525ab726c2aa365dbbef2cb20bd83eb18ede226fbb552fcfbc46f95248d",
+            "record:5ccdb251aca88f51719ff15ae91608f1cf891504070218dbd98df0c925b04bf8",
+            "record:bcfd78da9cec9321fa4c4e3365a96adf8de802c0160935ffe4872a83c4d843a2",
+            "record:0b9beb11ae7ae460bd3c798211829da47239156c8820d660a85530456bdaf018",
+            "record:4b751cb0e2bf7ad13e47f85ef77a52bf765905e70dfbfc9b122b5938359ee9c0",
+            "record:5550af5e1f12fda955794a52f07f5af00286e798a4a8a42d053b24d3a855d146",
+            "record:6c9c67a747b0f44a9e8bf71bc5772c982ba4c97d7acb2a617b75d83c84eaa6cc",
+            "record:73c30d72929581c966aa8fe472d363c35cc52f49c4a7ce52f4f9d3a748d346dd",
+            "record:9321564e44d01a9a402296c4232fee269d52fc7237c487050be3fbbf11812e52",
+            "record:862374e3d1eacdc603032e91d0ceb14478aa0dc550be5e15eaefac25d4368cb5",
+            "record:b43d11ee950249227f5565dcda4e1355dc73bdaad10ce7c272b193cf9790660e",
+            "record:c4b537f0903edec1fdcbd591364d0fe03252be0393c8b1403319832f4295fa07",
+            "record:dfdffee9d34b85b59260d6b479c9e289da2d064859a68296e9185abce1458504",
+            "record:3724994cdfc7b51dd9048e07b80b55789ebd4e83813f2f4a989c72c724c513b2",
+            "record:3c0c185a370155c62c5125168599d56bc3e2991a80d51a07912cb8464a052f8e",
+            "record:a67af4e41ba2967a68ed775be0495a32ae9fdf8548d49a6fb9d3231d0a797dee",
+            "record:7bd49b43c1c472017e95c66ebcd5cc2df6bef260d04cf8cf33a3d7c86ef959b7"
+          ],
+          "examples": [
+            {
+              "title": "Forskningskvoter for 2027 Nærings- og fiskeridepartementet avsetter årlige forskningskvoter for tildeling til forsknings- og undervisningsformål. Søknadsfrist 31. oktober 2026. 07.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/forskningskvoter-for-2027"
+            },
+            {
+              "title": "Kortere stenging for kongekrabbefisket utenfor kvoteregulert område Vi er i gang med årets opprenskningstokt av tapte fiskeredskaper. Toktet dekker fiskefeltene langs kysten til havområdet utenfor Kirkenes. 02.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/kortere-stenging-for-kongekrabbefisket-utenfor-kvoteregulert-omrade"
+            },
+            {
+              "title": "Stenging av områder for fangst av kongekrabbe Utvalgte fjorder i kvoteregulert område stenges i korte perioder for Havforskningsinstituttets bestandstokt. 01.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/stenging-av-omrader-for-fangst-avv-kongekrabbe"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "fiskeridir_aquaculture",
+      "name": "Fiskeridirektoratet – akvakultur",
+      "sector": "food_retail",
+      "kind": "web_links",
+      "url": "https://www.fiskeridir.no/nyheter?type=akvakultur",
+      "official_url": "https://www.fiskeridir.no/nyheter?type=akvakultur",
+      "coverage": "Temasorterte akvakulturnyheter fra Fiskeridirektoratet.",
+      "options": {
+        "selector": "main a[href^='/nyheter/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:54.046741+00:00",
+      "runs": [
+        {
+          "count": 30,
+          "keys": [
+            "record:bff29047434a7b9a063c1f4b43c1df00714b1c0ba59d0c03336bd0762eb7e350",
+            "record:5968c34c9da2cc7185169993a7720c76fd514ba285df7d01db2f2fe7ef5700c5",
+            "record:fd28640f52c283894494db8069f0f9b0bd133c72d9292879d85b42505576c315",
+            "record:862374e3d1eacdc603032e91d0ceb14478aa0dc550be5e15eaefac25d4368cb5",
+            "record:b43d11ee950249227f5565dcda4e1355dc73bdaad10ce7c272b193cf9790660e",
+            "record:c4b537f0903edec1fdcbd591364d0fe03252be0393c8b1403319832f4295fa07",
+            "record:3724994cdfc7b51dd9048e07b80b55789ebd4e83813f2f4a989c72c724c513b2",
+            "record:19a22a1136e2bd58f60e3dd1dbe67dc9fe0cce4a28552ab621f6e89d2e6db452",
+            "record:4cba7572278c1727b3073b40b1fd648f4b44d99f5843cb98af3023e8f3ef55c2",
+            "record:acfe440d197cfdb6a9037b8ea7a3a7b1ee0bf7384865d62589392687aa5de7cf",
+            "record:36cdd5b5e0c73dd577825a53499cefaac97933f71747cf106cb115c8ea9f19f0",
+            "record:158735aeb9e95d07286f44ccd5f355b86c949a4bbd430ec37e67d6f30266b701",
+            "record:2cc50787a8447218592cbe09a84a0ead06d1024acb07a049543cebff2abb5049",
+            "record:d9346b6bc45864e248dc927e006881a3400e679356fbc57b02dd13077706c23c",
+            "record:559a7480d5b07aba5c42083502bc78a65e304a892bc108cd3cf57e378db90c6e",
+            "record:781f28e37c66160f3a625bd62f11451e34e5247211435f582f542f090f62a800",
+            "record:847c3328dd1d54cc3a39f88c7fd8dcb0c566a0ef3860108afd1108ddb98ea8ee",
+            "record:85d6e95ec89cafc357f02cd31741e664e642e02b358c64bec13883f62046ec9c",
+            "record:84e334e50fc09990361e501068ebadd649a6eba155dd5d76d5ac1a2969c2e1e8",
+            "record:32cc12a453197e02e717e16e11ddc184698c208cf3daa5fa1a2fa753abafe672",
+            "record:78cd308d5bc60c14cddacc578cbe07860674dbf9350b600efbe6db89cb035e68",
+            "record:92b9e7198628aa08298325a146cc684a766873d7ef7c044584a3ecadda65feda",
+            "record:fc509231cf8b9d30224de2df43a004f2acdceecaaea26bf4a0481827ac574190",
+            "record:becf78230dc26172247cb11d58aed6589870753499c97a8f7659e97f263aaa0d",
+            "record:69abf504881358719497fecaa0f03620e8f5eafe8ea446cd7449d74095a26908",
+            "record:ab900dd5d5b728e0a96b677be1f6784a871dc7ceed196c18fbca9dd7f59fecc0",
+            "record:13c354c7e5cdab56e278bf0a66e1f600783be7839ba189970a5fc73a128a8474",
+            "record:ebc27524766d3272b4f14dc0a2a4a81072e9319e646114c4eb88d60188cf80a8",
+            "record:c26adfc45528c6f9e29a3b638f5fb68a5cd106d175d3c3af46d7718f07bd6f04",
+            "record:5b00e0352040d1f62307751907e477d9250b27767e3b67e41cc0dc1ac1345584"
+          ],
+          "examples": [
+            {
+              "title": "Må ha beredskap for makrellstørje, pigghå og hval i not Virksomheter i utsatte områder må vurdere risikoen for predator i not og ha beredskap som kan settes inn raskt. 01.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/ma-ha-beredskap-for-makrellstorje-piggha-og-hval-i-not"
+            },
+            {
+              "title": "Mattilsynets nye driftsplanløsning for akvakulturanlegg i sjø er klar Fra og med 2027 skal alle akvakulturanlegg i sjø sende inn driftsplan i Mattilsynets nye løsning i Altinn 3. Fristen er 1. oktober 2026. 20.08.2026",
+              "url": "https://www.fiskeridir.no/nyheter/mattilsynets-nye-driftsplanlosning-for-akvakulturanlegg-i-sjo-er-klar"
+            },
+            {
+              "title": "Advarer mot spyling av impregnerte nøter Nye vurderinger fra Havforskningsinstituttet viser at spyling av impregnerte nøter kan føre til kortvarige utslipp med høye konsentrasjoner av stoffet tralopyril. 17.08.2026",
+              "url": "https://www.fiskeridir.no/nyheter/advarer-mot-spyling-av-impregnerte-noter"
+            }
+          ]
+        },
+        {
+          "count": 30,
+          "keys": [
+            "record:bff29047434a7b9a063c1f4b43c1df00714b1c0ba59d0c03336bd0762eb7e350",
+            "record:5968c34c9da2cc7185169993a7720c76fd514ba285df7d01db2f2fe7ef5700c5",
+            "record:fd28640f52c283894494db8069f0f9b0bd133c72d9292879d85b42505576c315",
+            "record:862374e3d1eacdc603032e91d0ceb14478aa0dc550be5e15eaefac25d4368cb5",
+            "record:b43d11ee950249227f5565dcda4e1355dc73bdaad10ce7c272b193cf9790660e",
+            "record:c4b537f0903edec1fdcbd591364d0fe03252be0393c8b1403319832f4295fa07",
+            "record:3724994cdfc7b51dd9048e07b80b55789ebd4e83813f2f4a989c72c724c513b2",
+            "record:19a22a1136e2bd58f60e3dd1dbe67dc9fe0cce4a28552ab621f6e89d2e6db452",
+            "record:4cba7572278c1727b3073b40b1fd648f4b44d99f5843cb98af3023e8f3ef55c2",
+            "record:acfe440d197cfdb6a9037b8ea7a3a7b1ee0bf7384865d62589392687aa5de7cf",
+            "record:36cdd5b5e0c73dd577825a53499cefaac97933f71747cf106cb115c8ea9f19f0",
+            "record:158735aeb9e95d07286f44ccd5f355b86c949a4bbd430ec37e67d6f30266b701",
+            "record:2cc50787a8447218592cbe09a84a0ead06d1024acb07a049543cebff2abb5049",
+            "record:d9346b6bc45864e248dc927e006881a3400e679356fbc57b02dd13077706c23c",
+            "record:559a7480d5b07aba5c42083502bc78a65e304a892bc108cd3cf57e378db90c6e",
+            "record:781f28e37c66160f3a625bd62f11451e34e5247211435f582f542f090f62a800",
+            "record:847c3328dd1d54cc3a39f88c7fd8dcb0c566a0ef3860108afd1108ddb98ea8ee",
+            "record:85d6e95ec89cafc357f02cd31741e664e642e02b358c64bec13883f62046ec9c",
+            "record:84e334e50fc09990361e501068ebadd649a6eba155dd5d76d5ac1a2969c2e1e8",
+            "record:32cc12a453197e02e717e16e11ddc184698c208cf3daa5fa1a2fa753abafe672",
+            "record:78cd308d5bc60c14cddacc578cbe07860674dbf9350b600efbe6db89cb035e68",
+            "record:92b9e7198628aa08298325a146cc684a766873d7ef7c044584a3ecadda65feda",
+            "record:fc509231cf8b9d30224de2df43a004f2acdceecaaea26bf4a0481827ac574190",
+            "record:becf78230dc26172247cb11d58aed6589870753499c97a8f7659e97f263aaa0d",
+            "record:69abf504881358719497fecaa0f03620e8f5eafe8ea446cd7449d74095a26908",
+            "record:ab900dd5d5b728e0a96b677be1f6784a871dc7ceed196c18fbca9dd7f59fecc0",
+            "record:13c354c7e5cdab56e278bf0a66e1f600783be7839ba189970a5fc73a128a8474",
+            "record:ebc27524766d3272b4f14dc0a2a4a81072e9319e646114c4eb88d60188cf80a8",
+            "record:c26adfc45528c6f9e29a3b638f5fb68a5cd106d175d3c3af46d7718f07bd6f04",
+            "record:5b00e0352040d1f62307751907e477d9250b27767e3b67e41cc0dc1ac1345584"
+          ],
+          "examples": [
+            {
+              "title": "Må ha beredskap for makrellstørje, pigghå og hval i not Virksomheter i utsatte områder må vurdere risikoen for predator i not og ha beredskap som kan settes inn raskt. 01.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/ma-ha-beredskap-for-makrellstorje-piggha-og-hval-i-not"
+            },
+            {
+              "title": "Mattilsynets nye driftsplanløsning for akvakulturanlegg i sjø er klar Fra og med 2027 skal alle akvakulturanlegg i sjø sende inn driftsplan i Mattilsynets nye løsning i Altinn 3. Fristen er 1. oktober 2026. 20.08.2026",
+              "url": "https://www.fiskeridir.no/nyheter/mattilsynets-nye-driftsplanlosning-for-akvakulturanlegg-i-sjo-er-klar"
+            },
+            {
+              "title": "Advarer mot spyling av impregnerte nøter Nye vurderinger fra Havforskningsinstituttet viser at spyling av impregnerte nøter kan føre til kortvarige utslipp med høye konsentrasjoner av stoffet tralopyril. 17.08.2026",
+              "url": "https://www.fiskeridir.no/nyheter/advarer-mot-spyling-av-impregnerte-noter"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "fiskeridir_fisheries",
+      "name": "Fiskeridirektoratet – yrkesfiske",
+      "sector": "food_retail",
+      "kind": "web_links",
+      "url": "https://www.fiskeridir.no/nyheter?type=yrkesfiske",
+      "official_url": "https://www.fiskeridir.no/nyheter?type=yrkesfiske",
+      "coverage": "Temasorterte yrkesfiskenyheter fra Fiskeridirektoratet.",
+      "options": {
+        "selector": "main a[href^='/nyheter/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:54.737966+00:00",
+      "runs": [
+        {
+          "count": 30,
+          "keys": [
+            "record:0099e6202a08d9f55afe3e5c81154709c8a9ea86195826ebaa788f56e87be189",
+            "record:e39b9b43e4e1ea731acf04747cf213084eb4585e210f51713bc41a1c13a31cc2",
+            "record:739cbe9cd73749f1d2f7e0cbbb10e9fd6838154d226e30d102c28fe113f2ce83",
+            "record:d077fb3025ecc4f76a851dbc27d02703ebb1314fa66565c3e8c24c6310286f84",
+            "record:650c09155d5d289265891618394df7cad58942663a6aa162d6fab804d23ad1a5",
+            "record:954560dcc99048e4db8c2c62ee39889e4390ef2a29b7beba3cc2d5f4e49344bd",
+            "record:a81515774dbc425e782f11e6f6e16459c2b9f8253dd392c1ec1129a5f9d5f658",
+            "record:c70afcd4a0418b0169d9f95ad675e4520b4b647ea590a74f54e70053c7ad6fd5",
+            "record:e9de9525ab726c2aa365dbbef2cb20bd83eb18ede226fbb552fcfbc46f95248d",
+            "record:bcfd78da9cec9321fa4c4e3365a96adf8de802c0160935ffe4872a83c4d843a2",
+            "record:0b9beb11ae7ae460bd3c798211829da47239156c8820d660a85530456bdaf018",
+            "record:4b751cb0e2bf7ad13e47f85ef77a52bf765905e70dfbfc9b122b5938359ee9c0",
+            "record:5550af5e1f12fda955794a52f07f5af00286e798a4a8a42d053b24d3a855d146",
+            "record:73c30d72929581c966aa8fe472d363c35cc52f49c4a7ce52f4f9d3a748d346dd",
+            "record:9321564e44d01a9a402296c4232fee269d52fc7237c487050be3fbbf11812e52",
+            "record:3c0c185a370155c62c5125168599d56bc3e2991a80d51a07912cb8464a052f8e",
+            "record:a67af4e41ba2967a68ed775be0495a32ae9fdf8548d49a6fb9d3231d0a797dee",
+            "record:469fb1b3a193924a3660b8824050204e687fe7b1eb13da7b0758ef1b01bef5ba",
+            "record:592a5e77129ded162763c51a4e2a8d332e1e277b7a63314d6a474227671f48e1",
+            "record:3eb824d0275e1431c91bb0da9d18faf031459b99592875a04d4c95cf8d62c0bf",
+            "record:b920c70a22260efa678527618d1578e21e03fa2af322c41d75f25fde6a20f6af",
+            "record:2368e276a94086482db979205753387a553256e76a71688aef0cc37dd245af5a",
+            "record:7716f5c7a9b36ff45d7e933b99ace660f4b9ede8a72fecc5f143a0f8d80a1020",
+            "record:cc086220b64776649b0d76a4d7506110bc85c932db747a4c4100b375dfac4d7c",
+            "record:88cea04b85deed3d95e08057a3d0cdaa63ea21492e7d3829d6449c248f0a619e",
+            "record:bce800d52aa78b452532eb050a42d5657d2683fa5a2929a60368f664bd184c59",
+            "record:2cc50787a8447218592cbe09a84a0ead06d1024acb07a049543cebff2abb5049",
+            "record:d9346b6bc45864e248dc927e006881a3400e679356fbc57b02dd13077706c23c",
+            "record:96716ed30a29882e9844a39aa3d3f244ac4e1f2773b10fb7eb7963c9265d2112",
+            "record:f2153d41b57f917017fc1e16c6d9c1c69c3dae4c6fae5a1a269d8112fad6ff3d"
+          ],
+          "examples": [
+            {
+              "title": "Forskningskvoter for 2027 Nærings- og fiskeridepartementet avsetter årlige forskningskvoter for tildeling til forsknings- og undervisningsformål. Søknadsfrist 31. oktober 2026. 07.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/forskningskvoter-for-2027"
+            },
+            {
+              "title": "Kortere stenging for kongekrabbefisket utenfor kvoteregulert område Vi er i gang med årets opprenskningstokt av tapte fiskeredskaper. Toktet dekker fiskefeltene langs kysten til havområdet utenfor Kirkenes. 02.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/kortere-stenging-for-kongekrabbefisket-utenfor-kvoteregulert-omrade"
+            },
+            {
+              "title": "Stenging av områder for fangst av kongekrabbe Utvalgte fjorder i kvoteregulert område stenges i korte perioder for Havforskningsinstituttets bestandstokt. 01.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/stenging-av-omrader-for-fangst-avv-kongekrabbe"
+            }
+          ]
+        },
+        {
+          "count": 30,
+          "keys": [
+            "record:0099e6202a08d9f55afe3e5c81154709c8a9ea86195826ebaa788f56e87be189",
+            "record:e39b9b43e4e1ea731acf04747cf213084eb4585e210f51713bc41a1c13a31cc2",
+            "record:739cbe9cd73749f1d2f7e0cbbb10e9fd6838154d226e30d102c28fe113f2ce83",
+            "record:d077fb3025ecc4f76a851dbc27d02703ebb1314fa66565c3e8c24c6310286f84",
+            "record:650c09155d5d289265891618394df7cad58942663a6aa162d6fab804d23ad1a5",
+            "record:954560dcc99048e4db8c2c62ee39889e4390ef2a29b7beba3cc2d5f4e49344bd",
+            "record:a81515774dbc425e782f11e6f6e16459c2b9f8253dd392c1ec1129a5f9d5f658",
+            "record:c70afcd4a0418b0169d9f95ad675e4520b4b647ea590a74f54e70053c7ad6fd5",
+            "record:e9de9525ab726c2aa365dbbef2cb20bd83eb18ede226fbb552fcfbc46f95248d",
+            "record:bcfd78da9cec9321fa4c4e3365a96adf8de802c0160935ffe4872a83c4d843a2",
+            "record:0b9beb11ae7ae460bd3c798211829da47239156c8820d660a85530456bdaf018",
+            "record:4b751cb0e2bf7ad13e47f85ef77a52bf765905e70dfbfc9b122b5938359ee9c0",
+            "record:5550af5e1f12fda955794a52f07f5af00286e798a4a8a42d053b24d3a855d146",
+            "record:73c30d72929581c966aa8fe472d363c35cc52f49c4a7ce52f4f9d3a748d346dd",
+            "record:9321564e44d01a9a402296c4232fee269d52fc7237c487050be3fbbf11812e52",
+            "record:3c0c185a370155c62c5125168599d56bc3e2991a80d51a07912cb8464a052f8e",
+            "record:a67af4e41ba2967a68ed775be0495a32ae9fdf8548d49a6fb9d3231d0a797dee",
+            "record:469fb1b3a193924a3660b8824050204e687fe7b1eb13da7b0758ef1b01bef5ba",
+            "record:592a5e77129ded162763c51a4e2a8d332e1e277b7a63314d6a474227671f48e1",
+            "record:3eb824d0275e1431c91bb0da9d18faf031459b99592875a04d4c95cf8d62c0bf",
+            "record:b920c70a22260efa678527618d1578e21e03fa2af322c41d75f25fde6a20f6af",
+            "record:2368e276a94086482db979205753387a553256e76a71688aef0cc37dd245af5a",
+            "record:7716f5c7a9b36ff45d7e933b99ace660f4b9ede8a72fecc5f143a0f8d80a1020",
+            "record:cc086220b64776649b0d76a4d7506110bc85c932db747a4c4100b375dfac4d7c",
+            "record:88cea04b85deed3d95e08057a3d0cdaa63ea21492e7d3829d6449c248f0a619e",
+            "record:bce800d52aa78b452532eb050a42d5657d2683fa5a2929a60368f664bd184c59",
+            "record:2cc50787a8447218592cbe09a84a0ead06d1024acb07a049543cebff2abb5049",
+            "record:d9346b6bc45864e248dc927e006881a3400e679356fbc57b02dd13077706c23c",
+            "record:96716ed30a29882e9844a39aa3d3f244ac4e1f2773b10fb7eb7963c9265d2112",
+            "record:f2153d41b57f917017fc1e16c6d9c1c69c3dae4c6fae5a1a269d8112fad6ff3d"
+          ],
+          "examples": [
+            {
+              "title": "Forskningskvoter for 2027 Nærings- og fiskeridepartementet avsetter årlige forskningskvoter for tildeling til forsknings- og undervisningsformål. Søknadsfrist 31. oktober 2026. 07.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/forskningskvoter-for-2027"
+            },
+            {
+              "title": "Kortere stenging for kongekrabbefisket utenfor kvoteregulert område Vi er i gang med årets opprenskningstokt av tapte fiskeredskaper. Toktet dekker fiskefeltene langs kysten til havområdet utenfor Kirkenes. 02.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/kortere-stenging-for-kongekrabbefisket-utenfor-kvoteregulert-omrade"
+            },
+            {
+              "title": "Stenging av områder for fangst av kongekrabbe Utvalgte fjorder i kvoteregulert område stenges i korte perioder for Havforskningsinstituttets bestandstokt. 01.09.2026",
+              "url": "https://www.fiskeridir.no/nyheter/stenging-av-omrader-for-fangst-avv-kongekrabbe"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "tolletaten_news",
+      "name": "Tolletaten – aktuelt",
+      "sector": "food_retail",
+      "kind": "web_links",
+      "url": "https://www.toll.no/no/om-oss/aktuelt-fra-tolletaten",
+      "official_url": "https://www.toll.no/no/om-oss/aktuelt-fra-tolletaten",
+      "coverage": "Nyheter fra Tolletaten om grensehandel, beslag og regelverk.",
+      "options": {
+        "selector": "main a[href*='/no/om-oss/aktuelt-fra-tolletaten/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:55.257610+00:00",
+      "runs": [
+        {
+          "count": 39,
+          "keys": [
+            "record:839004f521a4210f79316d84c07185550f1ac7bc2be3be6dda3035c23d61641e",
+            "record:f1784e7b300325bb373f343891c1726141cd8a088a4f0b8fe65d764c35659ec0",
+            "record:b64dc22bc98da6f7a0230776f983b0832f9a18b20d0a7deaf625523f2792bb1d",
+            "record:b6ee7d33bf624d41e44757f9124d049f2e49fad557f9ae71a79cb29ef9694372",
+            "record:ce7f9c095b5d73e3850c1b4c33120a2b737adf714b2f322bf3720c30066169d0",
+            "record:338a0f1f5bf342c13685e04c0eec269a41f85548e757951cb4ae5093395c6798",
+            "record:ed559672034ed0d11c89d092f336f25edb37bb6aca3699fbf48d6bb56e4bf221",
+            "record:f327c128099ba499ab222a6cbe200a1ea5c1255fdc5bd0e3479b9818b3fc5db1",
+            "record:be1d5cb1bd0ffbe0cb7ce59a5a32f124ac1ffa83b464e3cdccd6c09b9a5382af",
+            "record:654e57e7ff8d5cb3c25be44345b861721e3871cc1f0e14a6854bbfb041bcaf8f",
+            "record:9553313d8118db7cb31a9687a856a6f177ce3e769410b5d8716b8c821b004f3d",
+            "record:f7744e507a19f99ffb73452c40a972562d5c002671b41b0a9092c4f4248768fc",
+            "record:64832fa0d51d33f2197e22d9b937fd2db3d50e01b94beccde57b24d99fe44d34",
+            "record:ed55e61835d48777667b79eb4559593afab1e7383a9d13b80a18faaaf2b55a06",
+            "record:ae1c45b721a79eb24c9d96975efe347fd4d2d894a7e83c6f70178251bee53b3b",
+            "record:d3a5047e0cadc7b7fbac34bb9581e3b51e2d1416e2c47a4ff5d742d5e4f8a905",
+            "record:4fb2afbeff50482b9881d746c511adb4f24a57e06add02e337afd7b54d48d2ec",
+            "record:065d75b04d25051235e50a465515b25875ee24c5f14ad74ed99079d615e17c46",
+            "record:cdf47aef2f98400e1ce5cbc1097b612016086666bba4df1a61b69424c9030bb7",
+            "record:8afb7f2bf763e3d27fe988411bc7f22b1bb18483a0b96cd7ccf8ac0274fc2790",
+            "record:575c1c0fc361efeeac2e7b2ffc1b328fcfc85395571ffce3d29fe9f9b779f6f1",
+            "record:296f9712f3fec1335ce750a46b5d7464e5f479fe2cd35dc97b7e337e597eaa43",
+            "record:9ec58edad06e10760930c4fc6034541fcf49c1f3154fef4899563e2850b4e7c4",
+            "record:7168fbbab3cf7f0ccd3a5b6b77f5db2b1996306d4e3f3a30ca392e51ea46d284",
+            "record:6ed31adf7c2ed3c57d7fcd426dfc926f2a5413b823ccdf65e1f395e474a427a4",
+            "record:ab1d8f9ccb1981121b77bbc801ed1b863b9e5c41551c2375d341f07d350f5565",
+            "record:fe29002531decb9a8e0d68231065a6de4658db07a0ecbf00373ae68c97ba9f78",
+            "record:eee323d733489b804c0185c25856494b5830b6086353fdbd7048e68c1ed889fa",
+            "record:ef34d761a05a1aa565c6e1d7a4e92a159f73b6947f312dface3c7fd007810d98",
+            "record:6cc5effe3290c8fd2f5b2d9d51da611540ecb70d39465ff2e0cf47d777aebf74",
+            "record:c905ef5fa3bb5ea877765cba95a37031f86164f1f086f2d5de76140f2bcfb854",
+            "record:9e9fcb3e7ad4b4fd209d73edc333b1b115c9a03929610792320a0c00891c50d4",
+            "record:5386530dd74d2479da9214dfb25c826d8559819cdfe3d4b3df59d408958392aa",
+            "record:5136c0c130169b1dc3d61ee5de6be20f94d7e1c3401575aed1c1ae5400f5a3e3",
+            "record:2bfe109067bdac53f8a36cc02146f1cfceb269e9e8760fd67ed2917257c68d32",
+            "record:dcbe77d0c49672f0d49c00f0832dee4861e66ef3ddebaa8eca9eb0f9cea19658",
+            "record:be8ca50beea4c6db9069456058f8449f5a0792577745e0da9cda8acf19b7d0d0",
+            "record:4180775716c81841bac490276a106f65c12e69fa0b3eac7f4e2563f1fefb13e7",
+            "record:c6a871956f4f7aa42e06bb0c2d85ff04cb11cd29952bbb43cf03ece5def8722e"
+          ],
+          "examples": [
+            {
+              "title": "Ekspertutredning om Tolletatens utvikling er publisert Finansdepartementet har publisert en ekstern ekspertutredning om Tolletatens utvikling i et tiårsperspektiv. Den er gjennomført på oppdrag fra departementet. 03.09.2026 LES MER",
+              "url": "https://www.toll.no/no/om-oss/aktuelt-fra-tolletaten/ekspertutredning-om-tolletatens-utvikling-er-publisert"
+            },
+            {
+              "title": "Beslagstrenden held fram – går mot nytt rekordår i hasjbeslag Tolletaten har gjort store beslag av hasj, narkotiske piller, kokain, vapeprodukt og ulovlege legemiddel i 2026. Tala peikar mot eit nytt rekordår. 18.08.2026 LES MER",
+              "url": "https://www.toll.no/no/om-oss/aktuelt-fra-tolletaten/beslagstrenden-held-fram-gar-mot-nytt-rekordar-i-hasjbeslag"
+            },
+            {
+              "title": "Bøtesatsene øker fra 1. juli: – Sjekk kvoten før du reiser hjem Har du med deg varer over kvoten eller verdigrensen, risikerer du bot. Tolletaten minner reisende om å fortolle varene i Kvoteappen før de går på grønt. 01.07.2026 LES MER",
+              "url": "https://www.toll.no/no/om-oss/aktuelt-fra-tolletaten/botesatsene-oker-1-juli-sjekk-kvoten"
+            }
+          ]
+        },
+        {
+          "count": 39,
+          "keys": [
+            "record:839004f521a4210f79316d84c07185550f1ac7bc2be3be6dda3035c23d61641e",
+            "record:f1784e7b300325bb373f343891c1726141cd8a088a4f0b8fe65d764c35659ec0",
+            "record:b64dc22bc98da6f7a0230776f983b0832f9a18b20d0a7deaf625523f2792bb1d",
+            "record:b6ee7d33bf624d41e44757f9124d049f2e49fad557f9ae71a79cb29ef9694372",
+            "record:ce7f9c095b5d73e3850c1b4c33120a2b737adf714b2f322bf3720c30066169d0",
+            "record:338a0f1f5bf342c13685e04c0eec269a41f85548e757951cb4ae5093395c6798",
+            "record:ed559672034ed0d11c89d092f336f25edb37bb6aca3699fbf48d6bb56e4bf221",
+            "record:f327c128099ba499ab222a6cbe200a1ea5c1255fdc5bd0e3479b9818b3fc5db1",
+            "record:be1d5cb1bd0ffbe0cb7ce59a5a32f124ac1ffa83b464e3cdccd6c09b9a5382af",
+            "record:654e57e7ff8d5cb3c25be44345b861721e3871cc1f0e14a6854bbfb041bcaf8f",
+            "record:9553313d8118db7cb31a9687a856a6f177ce3e769410b5d8716b8c821b004f3d",
+            "record:f7744e507a19f99ffb73452c40a972562d5c002671b41b0a9092c4f4248768fc",
+            "record:64832fa0d51d33f2197e22d9b937fd2db3d50e01b94beccde57b24d99fe44d34",
+            "record:ed55e61835d48777667b79eb4559593afab1e7383a9d13b80a18faaaf2b55a06",
+            "record:ae1c45b721a79eb24c9d96975efe347fd4d2d894a7e83c6f70178251bee53b3b",
+            "record:d3a5047e0cadc7b7fbac34bb9581e3b51e2d1416e2c47a4ff5d742d5e4f8a905",
+            "record:4fb2afbeff50482b9881d746c511adb4f24a57e06add02e337afd7b54d48d2ec",
+            "record:065d75b04d25051235e50a465515b25875ee24c5f14ad74ed99079d615e17c46",
+            "record:cdf47aef2f98400e1ce5cbc1097b612016086666bba4df1a61b69424c9030bb7",
+            "record:8afb7f2bf763e3d27fe988411bc7f22b1bb18483a0b96cd7ccf8ac0274fc2790",
+            "record:575c1c0fc361efeeac2e7b2ffc1b328fcfc85395571ffce3d29fe9f9b779f6f1",
+            "record:296f9712f3fec1335ce750a46b5d7464e5f479fe2cd35dc97b7e337e597eaa43",
+            "record:9ec58edad06e10760930c4fc6034541fcf49c1f3154fef4899563e2850b4e7c4",
+            "record:7168fbbab3cf7f0ccd3a5b6b77f5db2b1996306d4e3f3a30ca392e51ea46d284",
+            "record:6ed31adf7c2ed3c57d7fcd426dfc926f2a5413b823ccdf65e1f395e474a427a4",
+            "record:ab1d8f9ccb1981121b77bbc801ed1b863b9e5c41551c2375d341f07d350f5565",
+            "record:fe29002531decb9a8e0d68231065a6de4658db07a0ecbf00373ae68c97ba9f78",
+            "record:eee323d733489b804c0185c25856494b5830b6086353fdbd7048e68c1ed889fa",
+            "record:ef34d761a05a1aa565c6e1d7a4e92a159f73b6947f312dface3c7fd007810d98",
+            "record:6cc5effe3290c8fd2f5b2d9d51da611540ecb70d39465ff2e0cf47d777aebf74",
+            "record:c905ef5fa3bb5ea877765cba95a37031f86164f1f086f2d5de76140f2bcfb854",
+            "record:9e9fcb3e7ad4b4fd209d73edc333b1b115c9a03929610792320a0c00891c50d4",
+            "record:5386530dd74d2479da9214dfb25c826d8559819cdfe3d4b3df59d408958392aa",
+            "record:5136c0c130169b1dc3d61ee5de6be20f94d7e1c3401575aed1c1ae5400f5a3e3",
+            "record:2bfe109067bdac53f8a36cc02146f1cfceb269e9e8760fd67ed2917257c68d32",
+            "record:dcbe77d0c49672f0d49c00f0832dee4861e66ef3ddebaa8eca9eb0f9cea19658",
+            "record:be8ca50beea4c6db9069456058f8449f5a0792577745e0da9cda8acf19b7d0d0",
+            "record:4180775716c81841bac490276a106f65c12e69fa0b3eac7f4e2563f1fefb13e7",
+            "record:c6a871956f4f7aa42e06bb0c2d85ff04cb11cd29952bbb43cf03ece5def8722e"
+          ],
+          "examples": [
+            {
+              "title": "Ekspertutredning om Tolletatens utvikling er publisert Finansdepartementet har publisert en ekstern ekspertutredning om Tolletatens utvikling i et tiårsperspektiv. Den er gjennomført på oppdrag fra departementet. 03.09.2026 LES MER",
+              "url": "https://www.toll.no/no/om-oss/aktuelt-fra-tolletaten/ekspertutredning-om-tolletatens-utvikling-er-publisert"
+            },
+            {
+              "title": "Beslagstrenden held fram – går mot nytt rekordår i hasjbeslag Tolletaten har gjort store beslag av hasj, narkotiske piller, kokain, vapeprodukt og ulovlege legemiddel i 2026. Tala peikar mot eit nytt rekordår. 18.08.2026 LES MER",
+              "url": "https://www.toll.no/no/om-oss/aktuelt-fra-tolletaten/beslagstrenden-held-fram-gar-mot-nytt-rekordar-i-hasjbeslag"
+            },
+            {
+              "title": "Bøtesatsene øker fra 1. juli: – Sjekk kvoten før du reiser hjem Har du med deg varer over kvoten eller verdigrensen, risikerer du bot. Tolletaten minner reisende om å fortolle varene i Kvoteappen før de går på grønt. 01.07.2026 LES MER",
+              "url": "https://www.toll.no/no/om-oss/aktuelt-fra-tolletaten/botesatsene-oker-1-juli-sjekk-kvoten"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "datatilsynet_news",
+      "name": "Datatilsynet – aktuelle nyheter",
+      "sector": "technology",
+      "kind": "web_links",
+      "url": "https://www.datatilsynet.no/aktuelt/aktuelle-nyheter-2026/",
+      "official_url": "https://www.datatilsynet.no/aktuelt/aktuelle-nyheter-2026/",
+      "coverage": "Aktuelle nyheter om personvern og tilsyn.",
+      "options": {
+        "selector": "main a[href*='/aktuelt/aktuelle-nyheter-2026/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:55.421697+00:00",
+      "runs": [
+        {
+          "count": 21,
+          "keys": [
+            "record:ea4ccc06c95628d32c01b23397d5a5dce973ea7a063c6cada3bdd39bbd0620d3",
+            "record:308bd69cfa56b111541f5b9a4caa692228009511be1435f7d7873688f64e7cdb",
+            "record:1f0b70922dd7f4e99cbdfd05b22404256f04fab2cf571632675b08d195c205b2",
+            "record:fb5708aa5905ad729ffe3c5ad156893876a23a5c0162fea7fff38e00c3163772",
+            "record:9fa7f3a0351a7644e7a251d1bd859d459f307da312d5c05e6c14b5c0843ce8fc",
+            "record:333a9d5ac8315573d93ec349cbd3048a2ab9a80e19348c8675b35149a3933fdc",
+            "record:80ad5c82430fc7aca157d288bfde9635abfc4053003c7daace4c54286c9d7746",
+            "record:fa37c43fcc964254895a17210fa2e8e3390ce6f1059b65e0edea08b0ec5384ff",
+            "record:5935e48b933817e369dffcc31ffa16e4c423385aeb79cf0369b08fd2beee06a5",
+            "record:ad139bf4b156a5eefd3159b5377ef320fb2787af848b2bba5eb8b9b9d51734e2",
+            "record:a0682841ba9317525175b8d20e8406a8ec42970d4c31483ed3a43ef811a68fb7",
+            "record:e855dc27c99ff05d6deb52f7656569bb8b436b9f235cf0a942df33fd8e70cf92",
+            "record:618a02637eab21fd4af996b438b700e843ef72a5d22536ac2f10734bd49e1395",
+            "record:340745c93989d061869588b5046b9f34e64a4ba7d03fc11cddd6528168db76ff",
+            "record:04f8fe7904844210c444e459b7481241497148c22ce2f1e8887d918ae2469f7e",
+            "record:fe797476c2f60b9e4e3b6bde05b6f2a213cdbd8df899c2f9b980f709062c9dfc",
+            "record:dce01f804f729200e5042dcda54cd9d4106dbfcdd5ef0c814a916baec390e9a7",
+            "record:ad415d7106db7de8afc3399df32b5c02799680dc5b7287b245c605438e42fcbc",
+            "record:c25f9945a4bc22cf85a8af08166b54d5f3b23c7fdff3a3ea0c03c69d043e5af9",
+            "record:100ce129b9ed6654b4b41f9617afa1f239fa85e512bd9fec3a59e169a36a6952",
+            "record:16b7f634234e58a4077705d40b4d071968a88f6d6b982938425a8ac3071aef30"
+          ],
+          "examples": [
+            {
+              "title": "Hvilke tema bør vi utforske i sandkassen?",
+              "url": "https://www.datatilsynet.no/aktuelt/aktuelle-nyheter-2026/del-dine-ideer-til-nye-sandkasseprosjekter/"
+            },
+            {
+              "title": "Chat Control går for langt",
+              "url": "https://www.datatilsynet.no/aktuelt/aktuelle-nyheter-2026/chat-control-gar-for-langt/"
+            },
+            {
+              "title": "Beskytt deg selv eller virksomheten mot dataangrep",
+              "url": "https://www.datatilsynet.no/aktuelt/aktuelle-nyheter-2026/beskytt-deg-selv-eller-virksomheten-mot-dataangrep/"
+            }
+          ]
+        },
+        {
+          "count": 21,
+          "keys": [
+            "record:ea4ccc06c95628d32c01b23397d5a5dce973ea7a063c6cada3bdd39bbd0620d3",
+            "record:308bd69cfa56b111541f5b9a4caa692228009511be1435f7d7873688f64e7cdb",
+            "record:1f0b70922dd7f4e99cbdfd05b22404256f04fab2cf571632675b08d195c205b2",
+            "record:fb5708aa5905ad729ffe3c5ad156893876a23a5c0162fea7fff38e00c3163772",
+            "record:9fa7f3a0351a7644e7a251d1bd859d459f307da312d5c05e6c14b5c0843ce8fc",
+            "record:333a9d5ac8315573d93ec349cbd3048a2ab9a80e19348c8675b35149a3933fdc",
+            "record:80ad5c82430fc7aca157d288bfde9635abfc4053003c7daace4c54286c9d7746",
+            "record:fa37c43fcc964254895a17210fa2e8e3390ce6f1059b65e0edea08b0ec5384ff",
+            "record:5935e48b933817e369dffcc31ffa16e4c423385aeb79cf0369b08fd2beee06a5",
+            "record:ad139bf4b156a5eefd3159b5377ef320fb2787af848b2bba5eb8b9b9d51734e2",
+            "record:a0682841ba9317525175b8d20e8406a8ec42970d4c31483ed3a43ef811a68fb7",
+            "record:e855dc27c99ff05d6deb52f7656569bb8b436b9f235cf0a942df33fd8e70cf92",
+            "record:618a02637eab21fd4af996b438b700e843ef72a5d22536ac2f10734bd49e1395",
+            "record:340745c93989d061869588b5046b9f34e64a4ba7d03fc11cddd6528168db76ff",
+            "record:04f8fe7904844210c444e459b7481241497148c22ce2f1e8887d918ae2469f7e",
+            "record:fe797476c2f60b9e4e3b6bde05b6f2a213cdbd8df899c2f9b980f709062c9dfc",
+            "record:dce01f804f729200e5042dcda54cd9d4106dbfcdd5ef0c814a916baec390e9a7",
+            "record:ad415d7106db7de8afc3399df32b5c02799680dc5b7287b245c605438e42fcbc",
+            "record:c25f9945a4bc22cf85a8af08166b54d5f3b23c7fdff3a3ea0c03c69d043e5af9",
+            "record:100ce129b9ed6654b4b41f9617afa1f239fa85e512bd9fec3a59e169a36a6952",
+            "record:16b7f634234e58a4077705d40b4d071968a88f6d6b982938425a8ac3071aef30"
+          ],
+          "examples": [
+            {
+              "title": "Hvilke tema bør vi utforske i sandkassen?",
+              "url": "https://www.datatilsynet.no/aktuelt/aktuelle-nyheter-2026/del-dine-ideer-til-nye-sandkasseprosjekter/"
+            },
+            {
+              "title": "Chat Control går for langt",
+              "url": "https://www.datatilsynet.no/aktuelt/aktuelle-nyheter-2026/chat-control-gar-for-langt/"
+            },
+            {
+              "title": "Beskytt deg selv eller virksomheten mot dataangrep",
+              "url": "https://www.datatilsynet.no/aktuelt/aktuelle-nyheter-2026/beskytt-deg-selv-eller-virksomheten-mot-dataangrep/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "nsm_news",
+      "name": "NSM – aktuelt",
+      "sector": "technology",
+      "kind": "web_links",
+      "url": "https://nsm.no/aktuelt/",
+      "official_url": "https://nsm.no/aktuelt/",
+      "coverage": "Nyheter og aktuelle råd fra Nasjonal sikkerhetsmyndighet.",
+      "options": {
+        "selector": "a[href^='https://nsm.no/aktuelt/']:not([href*='?']):not([href$='/aktuelt/'])",
+        "events": [
+          "added"
+        ],
+        "max_records": 300
+      },
+      "checked_at": "2026-09-09T09:38:55.729387+00:00",
+      "runs": [
+        {
+          "count": 10,
+          "keys": [
+            "record:bb18c366b800c433f79e7dcc2bb247b5abae8bb6a7fec0032cee893f93c194e6",
+            "record:9e7b03ba5db14840360523f0b888296c6c2fd6c2c99795aa9f85b02721c6e94c",
+            "record:1f934180640170dcfb73bc768687c41be997ab21decd623cbd5b8afeafeb09b9",
+            "record:fac2d6523ac8a2d6dc79c4903a1429a45bba54df315dd13c7e36d3c1c491f099",
+            "record:e16fe37959738d8be3b41c63e48b45cd406ecc144cefeb24b2944827dd796801",
+            "record:c244788ea2976d4c9e12eb5f8d12d255892697a89be101af8d1808dab3df90bf",
+            "record:03ce0094653a80384c07925ac561aee1f125b5710964f747dec1c078771bce3c",
+            "record:1059eefeb361c7792d7ace223a37752b2643433f9fe4e5dd83bddae575830008",
+            "record:312f32b456e9696b17421d07e2e2683e0717e9363bb64b2ab9807cf4fb9358bf",
+            "record:45ecaaa1166cbca7f63728e46a9d23b19fb0e99730084d95b41a55a0ada7e8ef"
+          ],
+          "examples": [
+            {
+              "title": "4 august 2026 Tjenestenektangrep er forstyrrende, ikke farlig Den seneste tiden har flere norske virksomheter vært plaget av tjenestenektangrep som har ført til treghet på nettsider og i innloggingstjenester. Denne type angrep handler som regel om oppmerksomhet, ikke om å påføre skade.",
+              "url": "https://nsm.no/aktuelt/tjenestenektangrep-er-forstyrrende-ikke-farlig"
+            },
+            {
+              "title": "7 juni 2026 Posisjonsnotat om kvantenøkkeldistribusjon Kvantedatamaskiner kan innen relativt kort tid utgjøre en trussel mot eksisterende kryptografiske løsninger. Det er avgjørende å bytte til nye kryptografiske løsninger som kan motstå denne trusselen.",
+              "url": "https://nsm.no/aktuelt/posisjonsnotat-om-kvantenokkeldistribusjon"
+            },
+            {
+              "title": "12 mai 2026 Om Mythos og Anthropic I lys av utviklingen av kraftige KI-systemer mener NSM at norske virksomheter må være proaktive og bedre egen cybersikkerhet. Dette er blitt aktualisert av Anthropics nyeste språkmodell Mythos.",
+              "url": "https://nsm.no/aktuelt/om-mythos-og-anthropic"
+            }
+          ]
+        },
+        {
+          "count": 10,
+          "keys": [
+            "record:bb18c366b800c433f79e7dcc2bb247b5abae8bb6a7fec0032cee893f93c194e6",
+            "record:9e7b03ba5db14840360523f0b888296c6c2fd6c2c99795aa9f85b02721c6e94c",
+            "record:1f934180640170dcfb73bc768687c41be997ab21decd623cbd5b8afeafeb09b9",
+            "record:fac2d6523ac8a2d6dc79c4903a1429a45bba54df315dd13c7e36d3c1c491f099",
+            "record:e16fe37959738d8be3b41c63e48b45cd406ecc144cefeb24b2944827dd796801",
+            "record:c244788ea2976d4c9e12eb5f8d12d255892697a89be101af8d1808dab3df90bf",
+            "record:03ce0094653a80384c07925ac561aee1f125b5710964f747dec1c078771bce3c",
+            "record:1059eefeb361c7792d7ace223a37752b2643433f9fe4e5dd83bddae575830008",
+            "record:312f32b456e9696b17421d07e2e2683e0717e9363bb64b2ab9807cf4fb9358bf",
+            "record:45ecaaa1166cbca7f63728e46a9d23b19fb0e99730084d95b41a55a0ada7e8ef"
+          ],
+          "examples": [
+            {
+              "title": "4 august 2026 Tjenestenektangrep er forstyrrende, ikke farlig Den seneste tiden har flere norske virksomheter vært plaget av tjenestenektangrep som har ført til treghet på nettsider og i innloggingstjenester. Denne type angrep handler som regel om oppmerksomhet, ikke om å påføre skade.",
+              "url": "https://nsm.no/aktuelt/tjenestenektangrep-er-forstyrrende-ikke-farlig"
+            },
+            {
+              "title": "7 juni 2026 Posisjonsnotat om kvantenøkkeldistribusjon Kvantedatamaskiner kan innen relativt kort tid utgjøre en trussel mot eksisterende kryptografiske løsninger. Det er avgjørende å bytte til nye kryptografiske løsninger som kan motstå denne trusselen.",
+              "url": "https://nsm.no/aktuelt/posisjonsnotat-om-kvantenokkeldistribusjon"
+            },
+            {
+              "title": "12 mai 2026 Om Mythos og Anthropic I lys av utviklingen av kraftige KI-systemer mener NSM at norske virksomheter må være proaktive og bedre egen cybersikkerhet. Dette er blitt aktualisert av Anthropics nyeste språkmodell Mythos.",
+              "url": "https://nsm.no/aktuelt/om-mythos-og-anthropic"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "nye_metoder_decision_docs",
+      "name": "Nye metoder – Beslutningsforum-dokumenter",
+      "sector": "health",
+      "kind": "web_links",
+      "url": "https://www.nyemetoder.no/moter-i-beslutningsforum-for-nye-metoder",
+      "official_url": "https://www.nyemetoder.no/moter-i-beslutningsforum-for-nye-metoder",
+      "coverage": "Sakslister, sakspapirer og protokoller fra Beslutningsforum.",
+      "options": {
+        "selector": "a[href$='.pdf'][href*='/contentassets/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 500
+      },
+      "checked_at": "2026-09-09T09:38:56.229385+00:00",
+      "runs": [
+        {
+          "count": 78,
+          "keys": [
+            "record:fc2e8cca300db36b61de98e49ff314c6c32780ee145ca5ae12310537dda69e9f",
+            "record:93c6540071d5b74cfc1cde05a4e7eb8ea7120ac78ca23157223d7cec0760662e",
+            "record:f7eb06e8c244229549c908112bff32f4c850c259b52de7786a3a649ba73c1055",
+            "record:b8ce873f995ed6e1ef23a1bb3ef914308323a6a9173729d0db4f0ed5854fe191",
+            "record:b5375aa983d46e7f02bed6ac03b0c78f41e88451e28d29de697aa1bd9383bbbd",
+            "record:c6a7e88d1cdd598db685234e75c2953bf70c882a18066dc3871cebedf5b230ca",
+            "record:b78a6139c0734d252439f77fda562c2a6bcf1764c1ab8b8cab7b410af9d862b0",
+            "record:80464869a86a4fff9a9b528aa9cd0386100ec9ff425e41e76e7eceba6bfaafb9",
+            "record:51b24dd5900bc6a0203416a2c93ed77f638f881380405b1bb1df4194bbec1bb8",
+            "record:90ec0381ab9ae5e0112da00fa57374f7d316c54d7351657cac58c0e435048f95",
+            "record:c2a5fae0e67e114366a61afe020d4b4a6c869003bfc1e82690c6bd9502befe12",
+            "record:aa475af7487c1af9dac0e54d852e4bc1bcfb25304922b67b49236710dd4618ea",
+            "record:eab6fae61623fb429d61ae351b217b65d0167e7cd95558c8c239afd3de4c7af7",
+            "record:4f2ab9032de5ce4272372583b1e3be6e12c0dd21cf78ec115743c459c69e4614",
+            "record:abbf16ab8f2a35508dff6198037597b188ccfd14bcd7e2b9342fa1e6e827a303",
+            "record:27a53f1d9792b95f873a273a27075e6b86f77e4aed353d4e5a1f92384df4ee0f",
+            "record:16121849cc61814a8d3308c061c5f7f4b27bc788e40c3c43c304bb914f6c9d00",
+            "record:d1b1b9f1a5f5356755fc856f27b42873a3addcbff3f14afe2eea8ebe88449e7b",
+            "record:86815344fd2f65c0cff45bb56e9e22a4fecd3ae6fa70abc7b7af67f9d45dc573",
+            "record:528e64663cc7333437435966fd643dd26d22497488a7a031f8e803ed7e9a740f",
+            "record:9de4b5d7dbafafa71ba3f6b4edd8aba81622d8e73547879f6c8e3465be162714",
+            "record:eaaf04cf39cb8b02c4e0479750bc2b82a795b5df139946db7639d380d1c68bdb",
+            "record:e63eb853b0752b6a635e8c0a749d12dfcc09da90e56cdc248a22e6c6ca7565ab",
+            "record:a75c987098c337196378351373eeb096c04158f806a84b3bce8b6e2bb91acdd4",
+            "record:3f6fd6b18928345362232d6b70e204954aee1f59e039001245a7d835b1f6eb4c",
+            "record:ae27e0a4cb33193f45635d06d312d9b5929ac0b5b4dfd10d88473c607be88d82",
+            "record:585efdc8bcae513217cd58b65ec172e49246d54a084bdccc75da06e330f9f467",
+            "record:5d7408f7cbfa373b3005829fcf1305847ba8857a03aee950a797821e9c6e9b95",
+            "record:6cb57fe51f8ac80b108b85d8d13079e1a5374f70c9c35c96e1944f8b2f84e42e",
+            "record:d120508e79e406493843b5185278b2ac490511cb494648823194d45f96832b0e",
+            "record:b3e1ef5c1e2e1069cae16979e8d2176797882ec03f1baa2c3505bf8289a41b68",
+            "record:486f0cf196ab18b77fec4e255308e2aba7dd14bfc50a35d05f40b5990c01f2b4",
+            "record:11001a7ca91002994c764e4ab6187aacc227431a55c05c325485907ed0f9494b",
+            "record:84a82c9aa7f536c767248bc4fd87683ee04ee71d6e77e0160e7b0f5f1469439b",
+            "record:08fe2de799c7669ad25a83f0f222321098dbf377672ce5701b69017a770ea125",
+            "record:3a3c5ca8367fd3c1789f06b94f6017e8520654e12f7065db7d48f95ca1a39d73",
+            "record:207a39346a11a403c1de4dbe4d9c015366bf874a901c9696f0edce8fd8809559",
+            "record:5de7dd6b3e42bc378d658a86f0600c860a901a2f4dd2d145b1d9e084b516d798",
+            "record:76ac6b937d24d94ec2dc727e816d05a1de08dfc560f656c77f8bad400f4d22eb",
+            "record:d4dcb20b373c22692063c6645dd5c1e522bed148dd211d842e6bdea66ac853a5",
+            "record:954e3b4f91b95112fbbd906ce1019768d8b11edeb3e621f90f4ac471618f0a67",
+            "record:a8577e73cd2764b02c57c98fd8e0043218b4e9afae99ac01d6be51032b9efc43",
+            "record:a0641b27faf58a2b2c4382570d512cbfd16e8aab31fd413e6533c59af4cca148",
+            "record:07209fd16e8e50a58ab30657857786378700009363302332d1061931cde6161d",
+            "record:e4ff44ad35d30327972e3c1a30ece0d0dd6c668b034959325302bfde7521c491",
+            "record:63013cfdf7364db39a7e645d1ad4a6b09dd65bef0543dbee48f6094e073fba3f",
+            "record:f00b431ee1c8f39422be17bdbfe02a02d7f3d86de284e5156ecd5f9aa8309c2d",
+            "record:8ce4c72738936967321a593e75716207af0b32a9491598efa25aac222a7e803c",
+            "record:d7102ec64cdf3928b6dca1125e0e57d15620a6237a0b663eb0ba52cd5cb60fc0",
+            "record:77bb04e8caa41ea115c55c6ebc0ab82994fde30d4d488d9e037f559fd2008f13",
+            "record:f0979c000cbf4174c12c734b4ae66ea0db8ef2ef1c0c5a1e35461c3593e03560",
+            "record:49608d2a57e7bec744c0f8cb661897c2d491ecc8e0ed34245467f45541da1c3e",
+            "record:5b2a6de689bf51883a0a35453636f63b53f0271baf4aa10c04cd747ab19ee1cf",
+            "record:d84e8524ea670a43e84249f872a3bce9207a2709d87703e3654cd42537866f69",
+            "record:68c56f103955b6a0c45b6d267e0744f13f55c457c117aa986221093937df7062",
+            "record:b3c5be4dc96658678672a74409191ef01148c6c4863018f9fe29e8e94137403f",
+            "record:394ef56be5df3defa54f58cfb2359a49eccd591a89daa2dea0d35f32b8d64b40",
+            "record:984affa32f17ab45c2fe7890c91e3966ae1715e85a2150f875e80c5773309100",
+            "record:e871529d02ef6c004809a3a2398de9125f75532d43a4742b02c53e1ce16f4f2f",
+            "record:2781e4d5b4f4154be296045c6a1a79a0bc5312c380c4e21af32bdc46d0ab0817",
+            "record:18665f7cd87a4afe120b043aad6fbcccc094932954a73982caeb318b75c3c1c0",
+            "record:f13699eb8ad46a40db07543f28a36b4d1867a254a085f19b6d4c1188fc6db67a",
+            "record:66a59a0f0b6e8ad4fe91a2821b0dc98f6785a6b784a1ddc7eb81d8850004ceae",
+            "record:ea79081200768af70a70cf4df5471e92e7528d6236c7fa1bc9dce95f5461186f",
+            "record:2bb17799368e5dbef80537a344a8d495825972071215d7378c1a1cb23633fc26",
+            "record:e308e3b8c99142255de86a0f833e5cad309db0adee176d297a5288cd0281d948",
+            "record:532512acfdfc3fd607d6530793a189cd2cb4a38648f674420b7b391320b90467",
+            "record:bc61b76417845cd99d25879f63cf9ce54f7c5bd32ab1fb38148fa9af4195e414",
+            "record:5d90d540439b7cc40a559c49337e5f5c745d59eb1cc4a5b7a4e8713eb4c4339e",
+            "record:ae453e6f38ebcf51e0f1f22ba1721d494ab97ec49de0ca7254e58ac54c88c141",
+            "record:a37fee66e332e9bb72f076d2500da0feb7a14ee9cf8397ca402b488a283d9fa4",
+            "record:4f2c12454f951996de616a353c64f1c813c3c34f49005bf5969ee68d9877feb0",
+            "record:f5d8cfe068df114a33680304ab31187723a57d0c7fead0952021061b2a9122cf",
+            "record:adcd3d7f8537631363b36c4e6b7d716f3b919ad3e638fd72cba4ea507eab4c90",
+            "record:dbfe0efdfacf110afa3ecd635323fd2ac672de1f32cb5ad64f3ab8def686f700",
+            "record:1bd9e97da29c0085b8b39c216b8206853de18ae62adeaa1b9797c0073b5845f9",
+            "record:2646b8c09e809574aba2eb58beb375aff7bd3047f7d3fbf1908b83e6a7e0055d",
+            "record:d1af81cc41f13ee4bf6a23fcd3cfac8e9e72fdb0099c0abbb6d7ee811e033768"
+          ],
+          "examples": [
+            {
+              "title": "saksliste (PDF)",
+              "url": "https://www.nyemetoder.no/4a36ba/contentassets/1deaee85578f4fc386b34ddd596e593e/sak-095-2026---saksliste.pdf"
+            },
+            {
+              "title": "sakspapirer (PDF)",
+              "url": "https://www.nyemetoder.no/4a4b80/contentassets/1deaee85578f4fc386b34ddd596e593e/offentlige-sakspapirer-beslutningsforum-24.-august-2026.pdf"
+            },
+            {
+              "title": "protokoll (PDF)",
+              "url": "https://www.nyemetoder.no/4a5621/contentassets/1deaee85578f4fc386b34ddd596e593e/protokoll-beslutningsforum-24.08.2026.pdf"
+            }
+          ]
+        },
+        {
+          "count": 78,
+          "keys": [
+            "record:fc2e8cca300db36b61de98e49ff314c6c32780ee145ca5ae12310537dda69e9f",
+            "record:93c6540071d5b74cfc1cde05a4e7eb8ea7120ac78ca23157223d7cec0760662e",
+            "record:f7eb06e8c244229549c908112bff32f4c850c259b52de7786a3a649ba73c1055",
+            "record:b8ce873f995ed6e1ef23a1bb3ef914308323a6a9173729d0db4f0ed5854fe191",
+            "record:b5375aa983d46e7f02bed6ac03b0c78f41e88451e28d29de697aa1bd9383bbbd",
+            "record:c6a7e88d1cdd598db685234e75c2953bf70c882a18066dc3871cebedf5b230ca",
+            "record:b78a6139c0734d252439f77fda562c2a6bcf1764c1ab8b8cab7b410af9d862b0",
+            "record:80464869a86a4fff9a9b528aa9cd0386100ec9ff425e41e76e7eceba6bfaafb9",
+            "record:51b24dd5900bc6a0203416a2c93ed77f638f881380405b1bb1df4194bbec1bb8",
+            "record:90ec0381ab9ae5e0112da00fa57374f7d316c54d7351657cac58c0e435048f95",
+            "record:c2a5fae0e67e114366a61afe020d4b4a6c869003bfc1e82690c6bd9502befe12",
+            "record:aa475af7487c1af9dac0e54d852e4bc1bcfb25304922b67b49236710dd4618ea",
+            "record:eab6fae61623fb429d61ae351b217b65d0167e7cd95558c8c239afd3de4c7af7",
+            "record:4f2ab9032de5ce4272372583b1e3be6e12c0dd21cf78ec115743c459c69e4614",
+            "record:abbf16ab8f2a35508dff6198037597b188ccfd14bcd7e2b9342fa1e6e827a303",
+            "record:27a53f1d9792b95f873a273a27075e6b86f77e4aed353d4e5a1f92384df4ee0f",
+            "record:16121849cc61814a8d3308c061c5f7f4b27bc788e40c3c43c304bb914f6c9d00",
+            "record:d1b1b9f1a5f5356755fc856f27b42873a3addcbff3f14afe2eea8ebe88449e7b",
+            "record:86815344fd2f65c0cff45bb56e9e22a4fecd3ae6fa70abc7b7af67f9d45dc573",
+            "record:528e64663cc7333437435966fd643dd26d22497488a7a031f8e803ed7e9a740f",
+            "record:9de4b5d7dbafafa71ba3f6b4edd8aba81622d8e73547879f6c8e3465be162714",
+            "record:eaaf04cf39cb8b02c4e0479750bc2b82a795b5df139946db7639d380d1c68bdb",
+            "record:e63eb853b0752b6a635e8c0a749d12dfcc09da90e56cdc248a22e6c6ca7565ab",
+            "record:a75c987098c337196378351373eeb096c04158f806a84b3bce8b6e2bb91acdd4",
+            "record:3f6fd6b18928345362232d6b70e204954aee1f59e039001245a7d835b1f6eb4c",
+            "record:ae27e0a4cb33193f45635d06d312d9b5929ac0b5b4dfd10d88473c607be88d82",
+            "record:585efdc8bcae513217cd58b65ec172e49246d54a084bdccc75da06e330f9f467",
+            "record:5d7408f7cbfa373b3005829fcf1305847ba8857a03aee950a797821e9c6e9b95",
+            "record:6cb57fe51f8ac80b108b85d8d13079e1a5374f70c9c35c96e1944f8b2f84e42e",
+            "record:d120508e79e406493843b5185278b2ac490511cb494648823194d45f96832b0e",
+            "record:b3e1ef5c1e2e1069cae16979e8d2176797882ec03f1baa2c3505bf8289a41b68",
+            "record:486f0cf196ab18b77fec4e255308e2aba7dd14bfc50a35d05f40b5990c01f2b4",
+            "record:11001a7ca91002994c764e4ab6187aacc227431a55c05c325485907ed0f9494b",
+            "record:84a82c9aa7f536c767248bc4fd87683ee04ee71d6e77e0160e7b0f5f1469439b",
+            "record:08fe2de799c7669ad25a83f0f222321098dbf377672ce5701b69017a770ea125",
+            "record:3a3c5ca8367fd3c1789f06b94f6017e8520654e12f7065db7d48f95ca1a39d73",
+            "record:207a39346a11a403c1de4dbe4d9c015366bf874a901c9696f0edce8fd8809559",
+            "record:5de7dd6b3e42bc378d658a86f0600c860a901a2f4dd2d145b1d9e084b516d798",
+            "record:76ac6b937d24d94ec2dc727e816d05a1de08dfc560f656c77f8bad400f4d22eb",
+            "record:d4dcb20b373c22692063c6645dd5c1e522bed148dd211d842e6bdea66ac853a5",
+            "record:954e3b4f91b95112fbbd906ce1019768d8b11edeb3e621f90f4ac471618f0a67",
+            "record:a8577e73cd2764b02c57c98fd8e0043218b4e9afae99ac01d6be51032b9efc43",
+            "record:a0641b27faf58a2b2c4382570d512cbfd16e8aab31fd413e6533c59af4cca148",
+            "record:07209fd16e8e50a58ab30657857786378700009363302332d1061931cde6161d",
+            "record:e4ff44ad35d30327972e3c1a30ece0d0dd6c668b034959325302bfde7521c491",
+            "record:63013cfdf7364db39a7e645d1ad4a6b09dd65bef0543dbee48f6094e073fba3f",
+            "record:f00b431ee1c8f39422be17bdbfe02a02d7f3d86de284e5156ecd5f9aa8309c2d",
+            "record:8ce4c72738936967321a593e75716207af0b32a9491598efa25aac222a7e803c",
+            "record:d7102ec64cdf3928b6dca1125e0e57d15620a6237a0b663eb0ba52cd5cb60fc0",
+            "record:77bb04e8caa41ea115c55c6ebc0ab82994fde30d4d488d9e037f559fd2008f13",
+            "record:f0979c000cbf4174c12c734b4ae66ea0db8ef2ef1c0c5a1e35461c3593e03560",
+            "record:49608d2a57e7bec744c0f8cb661897c2d491ecc8e0ed34245467f45541da1c3e",
+            "record:5b2a6de689bf51883a0a35453636f63b53f0271baf4aa10c04cd747ab19ee1cf",
+            "record:d84e8524ea670a43e84249f872a3bce9207a2709d87703e3654cd42537866f69",
+            "record:68c56f103955b6a0c45b6d267e0744f13f55c457c117aa986221093937df7062",
+            "record:b3c5be4dc96658678672a74409191ef01148c6c4863018f9fe29e8e94137403f",
+            "record:394ef56be5df3defa54f58cfb2359a49eccd591a89daa2dea0d35f32b8d64b40",
+            "record:984affa32f17ab45c2fe7890c91e3966ae1715e85a2150f875e80c5773309100",
+            "record:e871529d02ef6c004809a3a2398de9125f75532d43a4742b02c53e1ce16f4f2f",
+            "record:2781e4d5b4f4154be296045c6a1a79a0bc5312c380c4e21af32bdc46d0ab0817",
+            "record:18665f7cd87a4afe120b043aad6fbcccc094932954a73982caeb318b75c3c1c0",
+            "record:f13699eb8ad46a40db07543f28a36b4d1867a254a085f19b6d4c1188fc6db67a",
+            "record:66a59a0f0b6e8ad4fe91a2821b0dc98f6785a6b784a1ddc7eb81d8850004ceae",
+            "record:ea79081200768af70a70cf4df5471e92e7528d6236c7fa1bc9dce95f5461186f",
+            "record:2bb17799368e5dbef80537a344a8d495825972071215d7378c1a1cb23633fc26",
+            "record:e308e3b8c99142255de86a0f833e5cad309db0adee176d297a5288cd0281d948",
+            "record:532512acfdfc3fd607d6530793a189cd2cb4a38648f674420b7b391320b90467",
+            "record:bc61b76417845cd99d25879f63cf9ce54f7c5bd32ab1fb38148fa9af4195e414",
+            "record:5d90d540439b7cc40a559c49337e5f5c745d59eb1cc4a5b7a4e8713eb4c4339e",
+            "record:ae453e6f38ebcf51e0f1f22ba1721d494ab97ec49de0ca7254e58ac54c88c141",
+            "record:a37fee66e332e9bb72f076d2500da0feb7a14ee9cf8397ca402b488a283d9fa4",
+            "record:4f2c12454f951996de616a353c64f1c813c3c34f49005bf5969ee68d9877feb0",
+            "record:f5d8cfe068df114a33680304ab31187723a57d0c7fead0952021061b2a9122cf",
+            "record:adcd3d7f8537631363b36c4e6b7d716f3b919ad3e638fd72cba4ea507eab4c90",
+            "record:dbfe0efdfacf110afa3ecd635323fd2ac672de1f32cb5ad64f3ab8def686f700",
+            "record:1bd9e97da29c0085b8b39c216b8206853de18ae62adeaa1b9797c0073b5845f9",
+            "record:2646b8c09e809574aba2eb58beb375aff7bd3047f7d3fbf1908b83e6a7e0055d",
+            "record:d1af81cc41f13ee4bf6a23fcd3cfac8e9e72fdb0099c0abbb6d7ee811e033768"
+          ],
+          "examples": [
+            {
+              "title": "saksliste (PDF)",
+              "url": "https://www.nyemetoder.no/4a36ba/contentassets/1deaee85578f4fc386b34ddd596e593e/sak-095-2026---saksliste.pdf"
+            },
+            {
+              "title": "sakspapirer (PDF)",
+              "url": "https://www.nyemetoder.no/4a4b80/contentassets/1deaee85578f4fc386b34ddd596e593e/offentlige-sakspapirer-beslutningsforum-24.-august-2026.pdf"
+            },
+            {
+              "title": "protokoll (PDF)",
+              "url": "https://www.nyemetoder.no/4a5621/contentassets/1deaee85578f4fc386b34ddd596e593e/protokoll-beslutningsforum-24.08.2026.pdf"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "sivilombudet_statements",
+      "name": "Sivilombudet – uttalelser",
+      "sector": "legal",
+      "kind": "web_links",
+      "url": "https://www.sivilombudet.no/uttalelser/",
+      "official_url": "https://www.sivilombudet.no/uttalelser/",
+      "coverage": "Nye uttalelser fra Sivilombudet.",
+      "options": {
+        "selector": "a[href^='https://www.sivilombudet.no/uttalelser/']:not([href$='/uttalelser/'])",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:56.583265+00:00",
+      "runs": [
+        {
+          "count": 12,
+          "keys": [
+            "record:7d462576e1811870b64561467794b98df1b60c5f1e5c02f2c5c42aadf831db12",
+            "record:93969cc8164495456a16267680537d5220a593ca113d4b46d3c5ffaea9fdd246",
+            "record:0f21b6ba83b1cd5ad82eeabc7bae5a67c8aa84df6a318979b3dd4514d5cd0297",
+            "record:923a70d2f95f93c1931c8977cdc85074792ec5ee7af43ecfa793d468aa525061",
+            "record:0f1e09bfaf0a4241a5f1f50ec8b84702b4893ab639c7c461c3b719673a278565",
+            "record:cdf829f7ccc325aec46c89e263ecf3f9a2e2d5e2c0c8696eaba0556c8467ed24",
+            "record:2017fbab1f83848de131f6f07b8b09df1f99c58372cb35097bb540ff3ce670a8",
+            "record:a4e3fb3606ade0ed1127bb6a334d44ec22986e320d8b7f67864ee09a025864cd",
+            "record:3e47bf0255c98b9277920e030dc07af3a4ce0b2a1ff287201e6e4751c6c50500",
+            "record:c8e2ee29253a6e5fc60d737d672e6274de24e776197a7fd47f6134366f566e2f",
+            "record:73972a911921e57ecb3f69cbc4ab62148ae4d959db2b321a1037d338daba0d67",
+            "record:25a182a3bd8e23b09f1792499c16928996963fb2e8413aa79795213460e4e454"
+          ],
+          "examples": [
+            {
+              "title": "Merverdiavgiftskompensasjon ved oppføring av omsorgsboliger for eldre",
+              "url": "https://www.sivilombudet.no/uttalelser/merverdiavgiftskompensasjon-ved-oppforing-av-omsorgsboliger-for-eldre/"
+            },
+            {
+              "title": "Offentlig fastsettelse av barnebidrag ved avtale om delt fast bosted",
+              "url": "https://www.sivilombudet.no/uttalelser/offentlig-fastsettelse-av-barnebidrag-ved-avtale-om-delt-fast-bosted/"
+            },
+            {
+              "title": "Innsyn i informasjon om innkjøp av kontormøbler m.m. på Statens fellesavtale om kjøp av kontormøbler",
+              "url": "https://www.sivilombudet.no/uttalelser/innsyn-i-informasjon-om-innkjop-av-kontormobler-m-m-pa-statens-fellesavtale-om-kjop-av-kontormobler/"
+            }
+          ]
+        },
+        {
+          "count": 12,
+          "keys": [
+            "record:7d462576e1811870b64561467794b98df1b60c5f1e5c02f2c5c42aadf831db12",
+            "record:93969cc8164495456a16267680537d5220a593ca113d4b46d3c5ffaea9fdd246",
+            "record:0f21b6ba83b1cd5ad82eeabc7bae5a67c8aa84df6a318979b3dd4514d5cd0297",
+            "record:923a70d2f95f93c1931c8977cdc85074792ec5ee7af43ecfa793d468aa525061",
+            "record:0f1e09bfaf0a4241a5f1f50ec8b84702b4893ab639c7c461c3b719673a278565",
+            "record:cdf829f7ccc325aec46c89e263ecf3f9a2e2d5e2c0c8696eaba0556c8467ed24",
+            "record:2017fbab1f83848de131f6f07b8b09df1f99c58372cb35097bb540ff3ce670a8",
+            "record:a4e3fb3606ade0ed1127bb6a334d44ec22986e320d8b7f67864ee09a025864cd",
+            "record:3e47bf0255c98b9277920e030dc07af3a4ce0b2a1ff287201e6e4751c6c50500",
+            "record:c8e2ee29253a6e5fc60d737d672e6274de24e776197a7fd47f6134366f566e2f",
+            "record:73972a911921e57ecb3f69cbc4ab62148ae4d959db2b321a1037d338daba0d67",
+            "record:25a182a3bd8e23b09f1792499c16928996963fb2e8413aa79795213460e4e454"
+          ],
+          "examples": [
+            {
+              "title": "Merverdiavgiftskompensasjon ved oppføring av omsorgsboliger for eldre",
+              "url": "https://www.sivilombudet.no/uttalelser/merverdiavgiftskompensasjon-ved-oppforing-av-omsorgsboliger-for-eldre/"
+            },
+            {
+              "title": "Offentlig fastsettelse av barnebidrag ved avtale om delt fast bosted",
+              "url": "https://www.sivilombudet.no/uttalelser/offentlig-fastsettelse-av-barnebidrag-ved-avtale-om-delt-fast-bosted/"
+            },
+            {
+              "title": "Innsyn i informasjon om innkjøp av kontormøbler m.m. på Statens fellesavtale om kjøp av kontormøbler",
+              "url": "https://www.sivilombudet.no/uttalelser/innsyn-i-informasjon-om-innkjop-av-kontormobler-m-m-pa-statens-fellesavtale-om-kjop-av-kontormobler/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "advokattilsynet_news",
+      "name": "Advokattilsynet – aktuelt",
+      "sector": "legal",
+      "kind": "web_links",
+      "url": "https://tilsynet.no/aktuelt",
+      "official_url": "https://tilsynet.no/aktuelt",
+      "coverage": "Aktuelle saker og tilsynsrapporter fra Advokattilsynet.",
+      "options": {
+        "selector": "a[href^='/aktuelt/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:57.038484+00:00",
+      "runs": [
+        {
+          "count": 47,
+          "keys": [
+            "record:38e911536c6241f0afda609caebeffa6cefb6905dd6ca302457758e889c45a94",
+            "record:c3d4116eeb0713a284602812900d1ffb85e24970fd174ee9a4ace84f6cc35bf5",
+            "record:459548921958dd902fb1130c22e651508c91af8e8055be9bc5d56829a1722473",
+            "record:bf094f94811beb20f5db037ee83dc674a72dc7b23d08c75bce6ea2c3bd4a1aa5",
+            "record:623d80b08bce64c8b1545d0d32f304821911151c1080bd7c48f24fb0a1915c0a",
+            "record:4ce84b5c93364d69ff1ea6d8f9a8cacb4209df72c9e64c5071b986de991d0974",
+            "record:e3574cd38d4236e7d64d71c1a7502902fa9e8a8cd74ef97e0318265b301c86a0",
+            "record:c1bb841b9939c94456c470e192a7caadd7533d374e9571dacbbb8e57210abaa3",
+            "record:ef095628d3d01a6a9f0db16763e5e38a0cf8161554e54399c8d2279035550915",
+            "record:bb03ea6672639436140404f6905ed9efcabbc3a4d5993429a3da92c18665f762",
+            "record:15abadfe18eac4906788350f71903599d81463ef4375300c2ffe922fddccd3f8",
+            "record:a82c4c58a64ad458a604cb5721452209c1264fa3da0f4785cf824a5159b07563",
+            "record:57e60a35df75f121b5b897c5e7def1f0c3f796c54c789cf3e2762257bf4c6453",
+            "record:f8fe82a6c328e97b4212c47b838b43f084297d22988d21c7eb38a66928a91f68",
+            "record:b811e9176be00ae213aee9c58c57c2e7cb68cb7f00026c5a7acdbef554379a3c",
+            "record:e471e8c1ca2a372e4c0fbe2b8e2499883970c861d14411d15386d4d7bc886e2c",
+            "record:cd726831f9fb528a940446929c731575c2b349e62fcac95c835bb805e433cd9b",
+            "record:087d0a8b57e919f5ef1398ab240ef2f9818064effcac5179fbf9a0be1f663f7b",
+            "record:e076609d0afaac81daf7efb68a05c45f4885074a37ce9fe0a643816f7ddb93fa",
+            "record:a941d81f7aed12a1a99a14417a6ae83d1cba4bd05f74385619ffbe4bbcfd7f22",
+            "record:eb939f8ade2bf0aedb627177e3f770f01555a2e816620bf5d7f6e540ba08f6e8",
+            "record:46fa6aa1f730a18ecef7f23e20151c63e8c37c8e8be6352ec9b6b540f6c9686c",
+            "record:5a6da419ca82333b40529a8ba4ea43293a7cc0d7878cee0c0f35661398e49fac",
+            "record:c67cbe7b185d16cfd7090423764f19f5bf2756b9021f209c7a44b18d19edb319",
+            "record:bbdc1ff4b1af1f6c04f4c12277d0174d170b08c5a3d0ee6b4d3b98d4f0e1c0fe",
+            "record:4a45af1e5e2319ce276e5947cff1e604a23202fc8ff0b462c4e10feb2248da31",
+            "record:45457b4ce1d82626eb310ba1e76ab11121c06af81241f85720cbb21549170301",
+            "record:c40ca9f5d6492c1bdd9e87335e6a26fb5a64580cc84ce54b821b72d6dae52856",
+            "record:7cfa1722b7133ad616f470b5e3fc8bd0484c75bf1cca32d8aa191cbdc57d1e55",
+            "record:afde48a682bdc7aa6da75bb6d8f59c1805094db9a21b43351b777eebc6d95b1d",
+            "record:a5e5653c1be6ea36a106d8c85e9a4abb3b554d3f498973190cc60b298d56107b",
+            "record:8b4bdecc0417bb6ff282733226ea6a6176df71a1876eed8fc68729832306f049",
+            "record:e61aa5794df3005a635015d0288d30415274059a8b834f5011471e07287f22f6",
+            "record:99ad9ff757079fe64f9b2f3fa427339441f9cc6e7e513fff567a424581b4409f",
+            "record:bc38498ae6d3eedd605d08d4e81cadfdde8b060f6115231a747cece92c2ddf8c",
+            "record:347384526064f5e0449c0ced65a41126ee051e4b46702d245773a0db9f5a1569",
+            "record:875d1a16cc2afd9a85ba5f07bbfbced44c85cf3ecaf077156ae06278ab61f33c",
+            "record:9e61ad19694c23cd900e586aa810d461e72d8f6f21a6fb9bf9c38c0b4d095145",
+            "record:aaae43d190a57b1b5c726be50543414a1ae36ffd4b0e5bdf922b67919304efb3",
+            "record:ce229285a20a6acb31f96fb43f6bc1355253d376c08790c9e63d0a266ccd6fc7",
+            "record:92e3b0407d998041594861d00b8f1d5be2fd560d69118dde5fc6ca5b3e36f8bd",
+            "record:aad3ad39eaf30ff82261b22c76c77370a62e6cc5368c105ca140fbf7f5169d22",
+            "record:fe9ff6e33755ee26c03d2ff24d0b24c429acef1a1db228635166c23d74c18a00",
+            "record:537d1bb9f8cd3cf34e806359b5feceb291eca32a797e53f7577ad0e8b1c04e77",
+            "record:b6367c2d62efba86f23f264144ac4c1b48cfae20a395f4069ada51e92245645a",
+            "record:8ac2449d8ac643d1b34716e638b0a172c7081ab5bf8fd7d72979c837e1d70f6b",
+            "record:ab54ec96094e015ce89ade6526ffc68d80a052791f2845c3f23eb2b0a6fc7f76"
+          ],
+          "examples": [
+            {
+              "title": "Høring fra AMLA: Utfyllende regler om risikovurdering av forpliktede enheter i ikke-finansiell sektor 14.8.2026 Den europeiske antihvitvaskingsmyndigheten (AMLA) har sendt på høring forslag til nye tekniske reguleringsstandarder (RTS) for risikovurdering av rapporteringspliktige virksomheter i ikke-finansiell sektor.",
+              "url": "https://tilsynet.no/aktuelt/horing-fra-amla"
+            },
+            {
+              "title": "AMLA foreslår felles europeisk tilnærming til håndheving av hvitvaskingsregelverket 15.7.2026 Den europeiske anti-hvitvaskingsmyndigheten (AMLA) har publisert forslag til regulatoriske tekniske standarder (RTS) under sjette hvitvaskingsdirektiv (direktiv (EU)2024/1640) artikkel 53 (10).",
+              "url": "https://tilsynet.no/aktuelt/amla-foreslar"
+            },
+            {
+              "title": "Ny nasjonal risikovurdering for hvitvasking fra Økokrim 26.6.2026 Økokrim har publisert Nasjonal risikovurdering 2026. Rapporten er relevant for alle advokater og advokatforetak som tilbyr tjenester omfattet av hvitvaskingsloven. Samlet sett vurderes hvitvaskingsrisikoen for advokater som «betydelig». Nivået er det samme som i den forrige risikovurderingen 2022. Advokater som tar eiendomsmeglingsoppdrag, bør merke seg at risikonivået for eiendomsmeglere her hevet fra «betydelig» til «høy» i den siste nasjonale vurderingen.",
+              "url": "https://tilsynet.no/aktuelt/nasjonal-risikovurdering"
+            }
+          ]
+        },
+        {
+          "count": 47,
+          "keys": [
+            "record:38e911536c6241f0afda609caebeffa6cefb6905dd6ca302457758e889c45a94",
+            "record:c3d4116eeb0713a284602812900d1ffb85e24970fd174ee9a4ace84f6cc35bf5",
+            "record:459548921958dd902fb1130c22e651508c91af8e8055be9bc5d56829a1722473",
+            "record:bf094f94811beb20f5db037ee83dc674a72dc7b23d08c75bce6ea2c3bd4a1aa5",
+            "record:623d80b08bce64c8b1545d0d32f304821911151c1080bd7c48f24fb0a1915c0a",
+            "record:4ce84b5c93364d69ff1ea6d8f9a8cacb4209df72c9e64c5071b986de991d0974",
+            "record:e3574cd38d4236e7d64d71c1a7502902fa9e8a8cd74ef97e0318265b301c86a0",
+            "record:c1bb841b9939c94456c470e192a7caadd7533d374e9571dacbbb8e57210abaa3",
+            "record:ef095628d3d01a6a9f0db16763e5e38a0cf8161554e54399c8d2279035550915",
+            "record:bb03ea6672639436140404f6905ed9efcabbc3a4d5993429a3da92c18665f762",
+            "record:15abadfe18eac4906788350f71903599d81463ef4375300c2ffe922fddccd3f8",
+            "record:a82c4c58a64ad458a604cb5721452209c1264fa3da0f4785cf824a5159b07563",
+            "record:57e60a35df75f121b5b897c5e7def1f0c3f796c54c789cf3e2762257bf4c6453",
+            "record:f8fe82a6c328e97b4212c47b838b43f084297d22988d21c7eb38a66928a91f68",
+            "record:b811e9176be00ae213aee9c58c57c2e7cb68cb7f00026c5a7acdbef554379a3c",
+            "record:e471e8c1ca2a372e4c0fbe2b8e2499883970c861d14411d15386d4d7bc886e2c",
+            "record:cd726831f9fb528a940446929c731575c2b349e62fcac95c835bb805e433cd9b",
+            "record:087d0a8b57e919f5ef1398ab240ef2f9818064effcac5179fbf9a0be1f663f7b",
+            "record:e076609d0afaac81daf7efb68a05c45f4885074a37ce9fe0a643816f7ddb93fa",
+            "record:a941d81f7aed12a1a99a14417a6ae83d1cba4bd05f74385619ffbe4bbcfd7f22",
+            "record:eb939f8ade2bf0aedb627177e3f770f01555a2e816620bf5d7f6e540ba08f6e8",
+            "record:46fa6aa1f730a18ecef7f23e20151c63e8c37c8e8be6352ec9b6b540f6c9686c",
+            "record:5a6da419ca82333b40529a8ba4ea43293a7cc0d7878cee0c0f35661398e49fac",
+            "record:c67cbe7b185d16cfd7090423764f19f5bf2756b9021f209c7a44b18d19edb319",
+            "record:bbdc1ff4b1af1f6c04f4c12277d0174d170b08c5a3d0ee6b4d3b98d4f0e1c0fe",
+            "record:4a45af1e5e2319ce276e5947cff1e604a23202fc8ff0b462c4e10feb2248da31",
+            "record:45457b4ce1d82626eb310ba1e76ab11121c06af81241f85720cbb21549170301",
+            "record:c40ca9f5d6492c1bdd9e87335e6a26fb5a64580cc84ce54b821b72d6dae52856",
+            "record:7cfa1722b7133ad616f470b5e3fc8bd0484c75bf1cca32d8aa191cbdc57d1e55",
+            "record:afde48a682bdc7aa6da75bb6d8f59c1805094db9a21b43351b777eebc6d95b1d",
+            "record:a5e5653c1be6ea36a106d8c85e9a4abb3b554d3f498973190cc60b298d56107b",
+            "record:8b4bdecc0417bb6ff282733226ea6a6176df71a1876eed8fc68729832306f049",
+            "record:e61aa5794df3005a635015d0288d30415274059a8b834f5011471e07287f22f6",
+            "record:99ad9ff757079fe64f9b2f3fa427339441f9cc6e7e513fff567a424581b4409f",
+            "record:bc38498ae6d3eedd605d08d4e81cadfdde8b060f6115231a747cece92c2ddf8c",
+            "record:347384526064f5e0449c0ced65a41126ee051e4b46702d245773a0db9f5a1569",
+            "record:875d1a16cc2afd9a85ba5f07bbfbced44c85cf3ecaf077156ae06278ab61f33c",
+            "record:9e61ad19694c23cd900e586aa810d461e72d8f6f21a6fb9bf9c38c0b4d095145",
+            "record:aaae43d190a57b1b5c726be50543414a1ae36ffd4b0e5bdf922b67919304efb3",
+            "record:ce229285a20a6acb31f96fb43f6bc1355253d376c08790c9e63d0a266ccd6fc7",
+            "record:92e3b0407d998041594861d00b8f1d5be2fd560d69118dde5fc6ca5b3e36f8bd",
+            "record:aad3ad39eaf30ff82261b22c76c77370a62e6cc5368c105ca140fbf7f5169d22",
+            "record:fe9ff6e33755ee26c03d2ff24d0b24c429acef1a1db228635166c23d74c18a00",
+            "record:537d1bb9f8cd3cf34e806359b5feceb291eca32a797e53f7577ad0e8b1c04e77",
+            "record:b6367c2d62efba86f23f264144ac4c1b48cfae20a395f4069ada51e92245645a",
+            "record:8ac2449d8ac643d1b34716e638b0a172c7081ab5bf8fd7d72979c837e1d70f6b",
+            "record:ab54ec96094e015ce89ade6526ffc68d80a052791f2845c3f23eb2b0a6fc7f76"
+          ],
+          "examples": [
+            {
+              "title": "Høring fra AMLA: Utfyllende regler om risikovurdering av forpliktede enheter i ikke-finansiell sektor 14.8.2026 Den europeiske antihvitvaskingsmyndigheten (AMLA) har sendt på høring forslag til nye tekniske reguleringsstandarder (RTS) for risikovurdering av rapporteringspliktige virksomheter i ikke-finansiell sektor.",
+              "url": "https://tilsynet.no/aktuelt/horing-fra-amla"
+            },
+            {
+              "title": "AMLA foreslår felles europeisk tilnærming til håndheving av hvitvaskingsregelverket 15.7.2026 Den europeiske anti-hvitvaskingsmyndigheten (AMLA) har publisert forslag til regulatoriske tekniske standarder (RTS) under sjette hvitvaskingsdirektiv (direktiv (EU)2024/1640) artikkel 53 (10).",
+              "url": "https://tilsynet.no/aktuelt/amla-foreslar"
+            },
+            {
+              "title": "Ny nasjonal risikovurdering for hvitvasking fra Økokrim 26.6.2026 Økokrim har publisert Nasjonal risikovurdering 2026. Rapporten er relevant for alle advokater og advokatforetak som tilbyr tjenester omfattet av hvitvaskingsloven. Samlet sett vurderes hvitvaskingsrisikoen for advokater som «betydelig». Nivået er det samme som i den forrige risikovurderingen 2022. Advokater som tar eiendomsmeglingsoppdrag, bør merke seg at risikonivået for eiendomsmeglere her hevet fra «betydelig» til «høy» i den siste nasjonale vurderingen.",
+              "url": "https://tilsynet.no/aktuelt/nasjonal-risikovurdering"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "kartverket_news",
+      "name": "Kartverket – nyheter",
+      "sector": "property",
+      "kind": "web_links",
+      "url": "https://www.kartverket.no/om-kartverket/nyheter",
+      "official_url": "https://www.kartverket.no/om-kartverket/nyheter",
+      "coverage": "Nyheter om eiendom, matrikkel, kart og geodata.",
+      "options": {
+        "selector": "main a[href*='/om-kartverket/nyheter/']",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:57.459061+00:00",
+      "runs": [
+        {
+          "count": 3,
+          "keys": [
+            "record:6253139fdd9444c55f474af1a6cf5d9f4d04340873fab7eea9902a21448d68e2",
+            "record:893818c5fe6de5d4ea957915569f45300a520264cd11626f387a725eebe8c39d",
+            "record:9fd319ad46f958778ae45b5d3e97167765ddd542fdd84e8960324b891a659821"
+          ],
+          "examples": [
+            {
+              "title": "Best på omdømme Kartverket havnet på topp i årets omdømmeundersøkelse for virksomheter i offentlig sektor. Resultatene ble offentliggjort av Apeland og Altinget under Arendalsuka.",
+              "url": "https://www.kartverket.no/om-kartverket/nyheter/alle/2026/august/kartverket-best-i-omdommekaring"
+            },
+            {
+              "title": "Tester vannstandsmåler På sjøbunnen utenfor Kartverkets kontor i Stavanger testes en ny vannstandsmåler utviklet for å tåle arktiske forhold. Nyvinningen skal operere selvstendig og gi verdifulle vannstandsdata fra Svalbard.",
+              "url": "https://www.kartverket.no/om-kartverket/nyheter/til-sjos/2026/juli/tester-ny-vannstandsmaler-for-svalbard"
+            },
+            {
+              "title": "Bedre 3D på Norgeibilder «Norge i bilder» har fått ei skikkelig oppgradering. Nå får du bedre oversikt, mer informasjon og flere funksjoner, samtidig som Norgeibilder.no står bedre rusta for dagens teknologiske krav.",
+              "url": "https://www.kartverket.no/om-kartverket/nyheter/geodataarbeid/2026/juli/norge-i-bilder-er-oppgradert"
+            }
+          ]
+        },
+        {
+          "count": 3,
+          "keys": [
+            "record:6253139fdd9444c55f474af1a6cf5d9f4d04340873fab7eea9902a21448d68e2",
+            "record:893818c5fe6de5d4ea957915569f45300a520264cd11626f387a725eebe8c39d",
+            "record:9fd319ad46f958778ae45b5d3e97167765ddd542fdd84e8960324b891a659821"
+          ],
+          "examples": [
+            {
+              "title": "Best på omdømme Kartverket havnet på topp i årets omdømmeundersøkelse for virksomheter i offentlig sektor. Resultatene ble offentliggjort av Apeland og Altinget under Arendalsuka.",
+              "url": "https://www.kartverket.no/om-kartverket/nyheter/alle/2026/august/kartverket-best-i-omdommekaring"
+            },
+            {
+              "title": "Tester vannstandsmåler På sjøbunnen utenfor Kartverkets kontor i Stavanger testes en ny vannstandsmåler utviklet for å tåle arktiske forhold. Nyvinningen skal operere selvstendig og gi verdifulle vannstandsdata fra Svalbard.",
+              "url": "https://www.kartverket.no/om-kartverket/nyheter/til-sjos/2026/juli/tester-ny-vannstandsmaler-for-svalbard"
+            },
+            {
+              "title": "Bedre 3D på Norgeibilder «Norge i bilder» har fått ei skikkelig oppgradering. Nå får du bedre oversikt, mer informasjon og flere funksjoner, samtidig som Norgeibilder.no står bedre rusta for dagens teknologiske krav.",
+              "url": "https://www.kartverket.no/om-kartverket/nyheter/geodataarbeid/2026/juli/norge-i-bilder-er-oppgradert"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "lottstift_news",
+      "name": "Lotteri- og stiftelsestilsynet – nyheter",
+      "sector": "finance",
+      "kind": "web_links",
+      "url": "https://lottstift.no/nyheter/",
+      "official_url": "https://lottstift.no/nyheter/",
+      "coverage": "Nyheter om lotteri-, pengespill- og stiftelsestilsyn.",
+      "options": {
+        "selector": "main a[href*='/nyheter/']:not([href$='/nyheter/'])",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:58.507399+00:00",
+      "runs": [
+        {
+          "count": 9,
+          "keys": [
+            "record:62cf45550725ef763c2570c50d7d52e92e61a677f0f2a55f62c7ab48891d8907",
+            "record:b21edd45982c2d3657d6a1095f313906ea70c5f5b4600f3c9142d9245ae8d776",
+            "record:0c89f97cd2ab67ae6979dd21c6f21435a781f96c6cee9e64f061e67bb4e10b45",
+            "record:f8ae6ee39a45b053a9b46100deb96c8923918b9592245bb9450490a5538c3056",
+            "record:a73d4d981be83551eb9a1e9635bee192533d6a5682200f76847eb104440dd098",
+            "record:d268dcabc05c2a17f2416285e9632d37cb3207b5bec565756309b182f71861f5",
+            "record:52803e48666ef581d9436127be8a1f6088d790dce9dc10751e51c0a8e4730830",
+            "record:9595067a7f8346733183c48afb533d000bb1ba8b773cada6b182d14a1b0377f0",
+            "record:106c2c4676e2463d042b24ca60f5eb6309fd9696b99514e3cbc96e36f6dab36a"
+          ],
+          "examples": [
+            {
+              "title": "Ny undersøking om manipulering av idrettskonkurransar Nyhet 10.07.2026",
+              "url": "https://lottstift.no/nyheter/ny-undersoking-om-manipulering-av-idrettskonkurransar/"
+            },
+            {
+              "title": "Stor auke i nettkasinospelarar hos Norsk Tipping Nyhet 22.05.2026",
+              "url": "https://lottstift.no/nyheter/stor-auke-i-nettkasinospelarar-hos-norsk-tipping/"
+            },
+            {
+              "title": "Omsetninga i norske bingohallar går ned Nyhet 15.04.2026",
+              "url": "https://lottstift.no/nyheter/omsetninga-i-norske-bingohallar-gar-ned/"
+            }
+          ]
+        },
+        {
+          "count": 9,
+          "keys": [
+            "record:62cf45550725ef763c2570c50d7d52e92e61a677f0f2a55f62c7ab48891d8907",
+            "record:b21edd45982c2d3657d6a1095f313906ea70c5f5b4600f3c9142d9245ae8d776",
+            "record:0c89f97cd2ab67ae6979dd21c6f21435a781f96c6cee9e64f061e67bb4e10b45",
+            "record:f8ae6ee39a45b053a9b46100deb96c8923918b9592245bb9450490a5538c3056",
+            "record:a73d4d981be83551eb9a1e9635bee192533d6a5682200f76847eb104440dd098",
+            "record:d268dcabc05c2a17f2416285e9632d37cb3207b5bec565756309b182f71861f5",
+            "record:52803e48666ef581d9436127be8a1f6088d790dce9dc10751e51c0a8e4730830",
+            "record:9595067a7f8346733183c48afb533d000bb1ba8b773cada6b182d14a1b0377f0",
+            "record:106c2c4676e2463d042b24ca60f5eb6309fd9696b99514e3cbc96e36f6dab36a"
+          ],
+          "examples": [
+            {
+              "title": "Ny undersøking om manipulering av idrettskonkurransar Nyhet 10.07.2026",
+              "url": "https://lottstift.no/nyheter/ny-undersoking-om-manipulering-av-idrettskonkurransar/"
+            },
+            {
+              "title": "Stor auke i nettkasinospelarar hos Norsk Tipping Nyhet 22.05.2026",
+              "url": "https://lottstift.no/nyheter/stor-auke-i-nettkasinospelarar-hos-norsk-tipping/"
+            },
+            {
+              "title": "Omsetninga i norske bingohallar går ned Nyhet 15.04.2026",
+              "url": "https://lottstift.no/nyheter/omsetninga-i-norske-bingohallar-gar-ned/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    },
+    {
+      "id": "arbeidstilsynet_news",
+      "name": "Arbeidstilsynet – nyheter",
+      "sector": "general",
+      "kind": "web_links",
+      "url": "https://www.arbeidstilsynet.no/nyheter/",
+      "official_url": "https://www.arbeidstilsynet.no/nyheter/",
+      "coverage": "Nyheter om arbeidsmiljø, regelverk og tilsyn.",
+      "options": {
+        "selector": "main a[href*='/nyheter/']:not([href$='/nyheter/'])",
+        "events": [
+          "added"
+        ],
+        "max_records": 200
+      },
+      "checked_at": "2026-09-09T09:38:58.777447+00:00",
+      "runs": [
+        {
+          "count": 9,
+          "keys": [
+            "record:40d042cf18525526d4ef573c6a572c767bc3e9c35a8a1ce6035377580ffd60f6",
+            "record:d4438b443374b6379f2da3a310fc758ff84a893b18585c8edec3a04121e5c31e",
+            "record:23fc5aad520afcee9ce37612c5684252f97e20ca258317e02f83ca907a15ded9",
+            "record:109d496104098dc9125ba4d6f1cfdc4c97f3631431d517dd82904276487679a7",
+            "record:17a6f29d5c80c2ccd1615b2b9f26e3ddd6e4cea69437a46b08ce8a28de207a95",
+            "record:0aaf8922e4b943c5da1fb604a14c77996df058ad0f74f1d346f7ec69c99241d1",
+            "record:a5fbc672988850a98e04188aa18e02a1fbd9a9301a8d44cc05c0784082656651",
+            "record:a241e0d90c2919dfb287a7d49c465ab108ebf2023ff77db8904a3844ade5a217",
+            "record:c95c18e3ad9898259fec3bf9d85a61c434d286d75d05e761dfd40a9534be5a9b"
+          ],
+          "examples": [
+            {
+              "title": "Deltidsjobb ved siden av studiene? Dette må du huske! Er du student og på jakt etter en ekstrajobb ved semesterstart? En deltidsjobb gir verdifull erfaring på CV-en og gode ekstrainntekter, men som fersk i arbeidslivet kan det være mye å sette seg inn i. Publisert 26.08.2026",
+              "url": "https://www.arbeidstilsynet.no/nyheter/deltidsjobb-ved-siden-av-studiene-dette-ma-du-huske2/"
+            },
+            {
+              "title": "Bli med på nettmøte: Hvordan jobbe forebyggende med arbeidsmiljøet? Et godt arbeidsmiljø kan bidra til å forebygge både sykefravær og turnover i serverings- og overnattingsbransjen. Arbeidstilsynet inviterer til nettmøter om hvordan dere kan jobbe forebyggende med arbeidsmiljøet i praksis. Publisert 20.08.2026 Lesetid: 2 min",
+              "url": "https://www.arbeidstilsynet.no/nyheter/bli-med-pa-nettmoter-hvordan-jobbe-forebyggende-med-arbeidsmiljoet/"
+            },
+            {
+              "title": "Over 1200 voldshendelser på jobb varslet til Arbeidstilsynet «Beboer angriper uprovosert med kvelertak og roping. Elev blir sint, og slår hardt mot bakhodet.» – Vold og trusler er fortsatt et alvorlig arbeidsmiljøproblem i norsk arbeidsliv, sier direktør Ingvill Kvernmo i Arbeidstilsynet. Publisert 06.08.2026 Lesetid: 5 min",
+              "url": "https://www.arbeidstilsynet.no/nyheter/over-1200-voldshendelser-pa-jobb-varslet-til-arbeidstilsynet/"
+            }
+          ]
+        },
+        {
+          "count": 9,
+          "keys": [
+            "record:40d042cf18525526d4ef573c6a572c767bc3e9c35a8a1ce6035377580ffd60f6",
+            "record:d4438b443374b6379f2da3a310fc758ff84a893b18585c8edec3a04121e5c31e",
+            "record:23fc5aad520afcee9ce37612c5684252f97e20ca258317e02f83ca907a15ded9",
+            "record:109d496104098dc9125ba4d6f1cfdc4c97f3631431d517dd82904276487679a7",
+            "record:17a6f29d5c80c2ccd1615b2b9f26e3ddd6e4cea69437a46b08ce8a28de207a95",
+            "record:0aaf8922e4b943c5da1fb604a14c77996df058ad0f74f1d346f7ec69c99241d1",
+            "record:a5fbc672988850a98e04188aa18e02a1fbd9a9301a8d44cc05c0784082656651",
+            "record:a241e0d90c2919dfb287a7d49c465ab108ebf2023ff77db8904a3844ade5a217",
+            "record:c95c18e3ad9898259fec3bf9d85a61c434d286d75d05e761dfd40a9534be5a9b"
+          ],
+          "examples": [
+            {
+              "title": "Deltidsjobb ved siden av studiene? Dette må du huske! Er du student og på jakt etter en ekstrajobb ved semesterstart? En deltidsjobb gir verdifull erfaring på CV-en og gode ekstrainntekter, men som fersk i arbeidslivet kan det være mye å sette seg inn i. Publisert 26.08.2026",
+              "url": "https://www.arbeidstilsynet.no/nyheter/deltidsjobb-ved-siden-av-studiene-dette-ma-du-huske2/"
+            },
+            {
+              "title": "Bli med på nettmøte: Hvordan jobbe forebyggende med arbeidsmiljøet? Et godt arbeidsmiljø kan bidra til å forebygge både sykefravær og turnover i serverings- og overnattingsbransjen. Arbeidstilsynet inviterer til nettmøter om hvordan dere kan jobbe forebyggende med arbeidsmiljøet i praksis. Publisert 20.08.2026 Lesetid: 2 min",
+              "url": "https://www.arbeidstilsynet.no/nyheter/bli-med-pa-nettmoter-hvordan-jobbe-forebyggende-med-arbeidsmiljoet/"
+            },
+            {
+              "title": "Over 1200 voldshendelser på jobb varslet til Arbeidstilsynet «Beboer angriper uprovosert med kvelertak og roping. Elev blir sint, og slår hardt mot bakhodet.» – Vold og trusler er fortsatt et alvorlig arbeidsmiljøproblem i norsk arbeidsliv, sier direktør Ingvill Kvernmo i Arbeidstilsynet. Publisert 06.08.2026 Lesetid: 5 min",
+              "url": "https://www.arbeidstilsynet.no/nyheter/over-1200-voldshendelser-pa-jobb-varslet-til-arbeidstilsynet/"
+            }
+          ]
+        }
+      ],
+      "supported": true,
+      "error": null
+    }
+  ],
+  "limitations": [
+    {
+      "id": "digdir_news",
+      "url": "https://www.digdir.no/",
+      "error": "SourceError: Configured page selector no longer matches; previous state preserved"
+    },
+    {
+      "id": "nye_metoder_news",
+      "url": "https://www.nyemetoder.no/",
+      "error": "SourceError: Configured page selector no longer matches; previous state preserved"
+    },
+    {
+      "id": "kofa_decisions",
+      "url": "https://www.klagenemndssekretariatet.no/klagenemda-for-offentlige-anskaffelser-kofa",
+      "error": "SourceError: Link list has conflicting titles for the same URL"
+    },
+    {
+      "id": "konkurransetilsynet_news",
+      "url": "https://konkurransetilsynet.no/nyheter/",
+      "error": "SourceError: Link list has conflicting titles for the same URL"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "recipe": "nve_hydropower_registry_changes",
+    "checked_at": "2026-09-14T11:08:06.323795+00:00",
+    "records": 2009,
+    "first_alerts": 0,
+    "second_alerts": 0,
+    "full_state_identical": true,
+    "reads": [
+      {
+        "url": "https://api.nve.no/web/Powerplant/GetHydroPowerPlants",
+        "bytes": 2125156,
+        "sha256": "5db577d668badecc898ac52830a4de2ad08fd656bddceca571d5f40f92e27347"
+      },
+      {
+        "url": "https://api.nve.no/web/Powerplant/GetHydroPowerPlantsInOperation",
+        "bytes": 1992150,
+        "sha256": "08947923ee7b97de7d53fc3c16e89214d78ba9ff1ebea96d41de18ec6d2a2ead"
+      },
+      {
+        "url": "https://api.nve.no/web/Powerplant/GetHydroPowerPlants",
+        "bytes": 2125156,
+        "sha256": "5db577d668badecc898ac52830a4de2ad08fd656bddceca571d5f40f92e27347"
+      },
+      {
+        "url": "https://api.nve.no/web/Powerplant/GetHydroPowerPlantsInOperation",
+        "bytes": 1992150,
+        "sha256": "08947923ee7b97de7d53fc3c16e89214d78ba9ff1ebea96d41de18ec6d2a2ead"
+      }
+    ],
+    "config_sha256": "4f9a63bef676471268840b7df0be13c2bd0268ac7ffb0e859bc6a2ea068e5233",
+    "module_sha256": "459dcaee1d9d3f6c1ebb18ae030f188c985d3e5f606263891e74820ccec80f88"
+  }
+]
