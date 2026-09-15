@@ -2883,3 +2883,23 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "grain_import_quota_allocation_changes"
+name = "Kornimport – auksjonstildelinger og bud"
+sector = "food"
+description = "Følger kornauksjoner i Landbruksdirektoratets historikk for inneværende år. Stabil auksjons-ID, publiserte deltakernavn, tildelte tonn og bud i NOK per tonn overvåkes. Vist minstepris beholdes separat fra historiske bud; ingen felles sluttpris beregnes. Året i historikken er atskilt fra kvoteperioden i tittelen. title_prefixes velger titler; quantity_unit må verifiseres som kg eller tonne før andre vareutvalg brukes. Første innlesing er stille, og fravær betyr ikke tilbakekall. Tallene dokumenterer publisert tildeling, ikke betaling eller utført import."
+official_url = "https://auksjon.landbruksdirektoratet.no/history"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "import_quota_auctions"
+title_prefixes = ["KORN "]
+quantity_unit = "tonne"
+max_index_items = 200
+max_awards_per_auction = 100
+max_records = 100
+max_bytes = 4000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
