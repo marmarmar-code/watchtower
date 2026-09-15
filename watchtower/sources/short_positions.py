@@ -36,6 +36,8 @@ def percent(value):
     except InvalidOperation as exc:raise SourceError('Short percentage is malformed') from exc
     if not number.is_finite() or not 0<=number<=10000:
         raise SourceError('Short percentage is non-finite or out of bounds')
+    if number.as_tuple().exponent < -12 or len(number.as_tuple().digits)>20:
+        raise SourceError('Short percentage precision is excessive')
     return format(number,'f').rstrip('0').rstrip('.') if '.' in format(number,'f') else format(number,'f')
 
 

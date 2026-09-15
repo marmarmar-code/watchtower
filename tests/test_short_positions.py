@@ -151,6 +151,12 @@ class ShortPositionTests(unittest.TestCase):
             with self.assertRaises(SourceError):src.read_records()
             r.close.assert_called_once()
 
+    def test_excessive_decimal_exponent_is_rejected_before_rendering(self):
+        from decimal import Decimal
+        from watchtower.sources.short_positions import percent
+        for value in ('1e-1000000000','0e-1000000000'):
+            with self.subTest(value=value),self.assertRaises(SourceError):percent(Decimal(value))
+
     def test_configuration_is_bounded_and_disallows_removals(self):
         for options in [{'isins':[]},{'isins':['no0000000001']},{'isins':['bad']},{'max_history_events':True},
                         {'complete_snapshot':True},{'events':['removed']}]:

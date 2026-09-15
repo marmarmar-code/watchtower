@@ -2601,3 +2601,23 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "bankruptcy_opening_deadline_changes"
+name = "Konkursregisteret – konkursåpninger og saksfrister"
+sector = "business"
+description = "Følger konkursåpninger for foretak med organisasjonsnummer, kunngjort de siste tre kalenderdagene. Domstol, saksnummer, bostyrer, åpningsdato, kreditorfrist, fristdag og skiftesamling holdes atskilt. Valg av orgnrs kan avgrense utvalget. Dokument-ID gir identitet; kontaktadresser, telefon og e-post tas ikke med. Andre kunngjøringstyper og eldre dokumenter ligger utenfor utvalget; fravær beviser ikke avslutning av et bo."
+official_url = "https://w2.brreg.no/kunngjoring/index.jsp"
+verified_on = "2026-09-15"
+[recipe.source]
+kind = "bankruptcy_notices"
+window_days = 3
+max_results = 1000
+max_details = 100
+max_records = 100
+max_bytes = 1000000
+allow_empty = true
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

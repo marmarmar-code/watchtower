@@ -608,3 +608,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nyeste oppførte hendelse for valgte ISIN-er fra det dokumenterte offentlige API-et. Kildens samlede prosent og aksjetall samt hver aktive innehaverposisjon følges. To komplette svar valideres før lagring. Datoer beholdes som kildedatoer. Terskelbegrenset offentlig dekning; fravær eller null er ikke bevis på at en posisjon er lukket."
+
+[[source]]
+id = "bankruptcy_notices"
+name = "Konkurskunngjøringer med separate saksfrister"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede konkursåpningskunngjøringer for foretak med organisasjonsnummer i et kort datovindu. Treffantall, datofilter, dokumentidentitet og to komplette innlesinger kontrolleres. Saksnummer, domstol, bostyrer, åpning, kravfrist, fristdag og skiftesamling er separate kildefelt. Ingen nåværende bostatus eller avslutning utledes fra fravær."
