@@ -17,6 +17,8 @@ from .sources.konkurransetilsynet import KonkurransetilsynetSource
 from .sources.euronext import EuronextSource
 from .sources.doffin import DoffinSource
 from .sources.hoyesterett import HoyesterettSource
+from .sources.building_cases import BuildingCasesSource
+from .sources.research_awards import ResearchAwardsSource
 from .sources.brreg import BrregSource
 from .sources.rss import RssSource
 from .sources.ssb import SsbSource
@@ -75,6 +77,8 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "euronext": EuronextSource,
     "doffin": DoffinSource,
     "hoyesterett": HoyesterettSource,
+    "building_cases": BuildingCasesSource,
+    "research_awards": ResearchAwardsSource,
     "brreg": BrregSource,
     "rss": RssSource,
     "ssb": SsbSource,

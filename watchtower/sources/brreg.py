@@ -429,6 +429,8 @@ class BrregSource(Source):
         suppress_alert: bool,
     ) -> Item:
         details = tuple(_format_registry_change(change) for change in update["changes"])
+        if update.get("changes_unavailable"):
+            details = ("Feltendringer er ikke oppgitt av registeret",)
         visible = list(details[:20])
         if len(details) > 20:
             visible.append(f"I tillegg: {len(details) - 20} felt")
@@ -597,10 +599,10 @@ def _normalize_registry_update(row: dict[str, Any], orgnr: str) -> dict[str, Any
     changed_at = _clean(row.get("dato"))
     change_type = _clean(row.get("endringstype"))
     changes = row.get("endringer")
-    if not changed_at or not change_type or not isinstance(changes, list):
+    if not changed_at or not change_type or (changes is not None and not isinstance(changes, list)):
         raise SourceError("BRREG registry update was incomplete")
     normalized_changes: list[dict[str, Any]] = []
-    for change in changes:
+    for change in changes or []:
         if not isinstance(change, dict):
             raise SourceError("BRREG registry update contained an invalid field change")
         operation = _clean(change.get("op"))
@@ -619,6 +621,7 @@ def _normalize_registry_update(row: dict[str, Any], orgnr: str) -> dict[str, Any
         "date": changed_at,
         "change_type": change_type,
         "changes": normalized_changes,
+        **({"changes_unavailable": True} if changes is None else {}),
     }
 
 

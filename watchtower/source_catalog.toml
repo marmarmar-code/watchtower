@@ -312,3 +312,21 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Engelske utlysningsemner i et komplett, avgrenset fristvindu fra Funding & Tenders. Oppdager emner og endringer i oppført fristdato, program og statuskode innenfor vinduet. Gir ikke budsjett, kvalifikasjonsvilkår, eksakt fristklokkeslett eller full livsløpsdekning."
+
+[[source]]
+id = "building_cases"
+name = "Oslo PBE saksaktivitet"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye saksnummer og status/siste dokumentdato i eksplisitt PBE-fritekstsøk."
+
+[[source]]
+id = "research_awards"
+name = "Forskningsrådets innvilgede prosjekter"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Nye og endrede innvilgede prosjekter i eksplisitte eller automatisk oppdagede utlysninger fra valgte år. Søkt og tildelt beløp skilles."
