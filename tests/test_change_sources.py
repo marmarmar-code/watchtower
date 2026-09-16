@@ -189,6 +189,62 @@ class StructuredTests(unittest.TestCase):
 
 
 class WebTests(unittest.TestCase):
+    def test_display_heading_preserves_snapshot_identity_and_searchable_card(self):
+        original = WebChangesSource(config('web_links', selector='main a', events=['added']))
+        original.get = Mock(return_value=response(b'<main><a href="/old">Old</a></main>'))
+        previous, _ = poll(original)
+        presented = WebChangesSource(replace(original.config, options={
+            **original.config.options, 'display_title_selector': 'h2',
+            'display_ignore_selectors': ['small'], 'text_selector': '.summary',
+        }))
+        page = b'''<main><a href="/old"><h2>Old<small>10:00</small></h2>
+        <div class="summary">Previous story</div></a>
+        <a href="/new"><h2>Short heading<small>11:00 press release</small></h2>
+        <div class="summary">Searchable acquisition details</div></a></main>'''
+        original.get = Mock(return_value=response(page))
+        presented.get = Mock(return_value=response(page))
+        self.assertEqual(original.scope, presented.scope)
+        legacy_items = original.fetch_with_state(previous)
+        clean_items = presented.fetch_with_state(previous)
+        self.assertEqual([(i.key, i.content_hash()) for i in legacy_items],
+                         [(i.key, i.content_hash()) for i in clean_items])
+        self.assertEqual('Short heading', clean_items[1].title)
+        self.assertIn('Searchable acquisition details', clean_items[1].searchable_text())
+        self.assertIn('11:00 press release', clean_items[1].text)
+        updated, alerts = poll(presented, previous)
+        self.assertEqual(['Short heading'], [alert.item.title for alert in alerts])
+        self.assertEqual(('Ny registrering',), alerts[0].item.alert_details)
+        _, repeated = poll(presented, updated)
+        self.assertEqual([], repeated)
+
+    def test_snippet_can_extend_existing_title_selector_without_changing_hash(self):
+        original = WebChangesSource(config('web_links', selector='main a', title_selector='h2'))
+        presented = WebChangesSource(replace(original.config, options={
+            **original.config.options, 'text_selector': '.summary',
+        }))
+        page = b'<main><a href="/new"><h2>Heading</h2><p class="summary">Relevant detail</p></a></main>'
+        original.get = Mock(return_value=response(page))
+        presented.get = Mock(return_value=response(page))
+        before = original.fetch()[0]
+        after = presented.fetch()[0]
+        self.assertEqual(original.scope, presented.scope)
+        self.assertEqual(before.content_hash(), after.content_hash())
+        self.assertIn('Relevant detail', after.searchable_text())
+
+    def test_display_selector_drift_fails_closed_and_invalid_options_rejected(self):
+        source = WebChangesSource(config('web_links', selector='main a', display_title_selector='h2'))
+        source.get = Mock(return_value=response(b'<main><a href="/x">Missing heading</a></main>'))
+        with self.assertRaisesRegex(SourceError, 'display title selector'):
+            source.fetch()
+        source = WebChangesSource(config('web_links', selector='main a', text_selector='.summary'))
+        source.get = Mock(return_value=response(b'<main><a href="/x">No summary</a></main>'))
+        with self.assertRaisesRegex(SourceError, 'text selector'):
+            source.fetch()
+        for options in ({'display_title_selector': ''}, {'text_selector': 5},
+                        {'display_ignore_selectors': ['small']}):
+            with self.subTest(options=options), self.assertRaises(ValueError):
+                WebChangesSource(config('web_links', selector='main a', **options))
+
     def test_url_routing_keeps_scope_hashes_and_records_without_losing_new_news(self):
         original = WebChangesSource(config('web_links', selector='main a', events=['added']))
         original.get = Mock(return_value=response(b'<main><a href="/other/old">Old</a></main>'))

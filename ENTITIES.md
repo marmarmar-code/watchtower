@@ -34,6 +34,9 @@ exclude_any = []
 
 `filter.entity_refs` føyer navn og aliaser til `include_any`. Treff på tema **eller**
 virksomhetsnavn er nok, mens `include_all` og `exclude_any` fortsatt gjelder.
+Legg hendelser i `include_any_groups = [["oppkjøp", "nedbemanning"]]` for å kreve
+både aktør/tema og minst én hendelse. Hver gruppe må ha et treff; et navn alene
+oppfyller da ikke filteret.
 Organisasjonsnummeret blir ikke automatisk et tekstfilter. Tekstfiltre søker bare
 i innholdet adapteren faktisk henter; de utvider ikke kildens søkevindu.
 
@@ -44,6 +47,9 @@ Legg `entity_refs = ["example"]` direkte i kildeblokken for følgende koblinger:
 | Adapter | Fra virksomhetslisten | Effektivt kildefelt |
 | --- | --- | --- |
 | `brreg` | `orgnr` | `companies` |
+| `account_figures` | `orgnr` | `companies` |
+| `account_documents` | `orgnr` | `companies` |
+| `bankruptcy_notices` | `orgnr` | `orgnrs` |
 | `patentstyret` | `orgnr` | `companies` |
 | `stotte` | `orgnr` | `recipient_orgnrs` – mottakere, ikke støttegivere |
 | `finanstilsynet_short_sale` | `isins` | `isins` |
@@ -62,6 +68,9 @@ match_all = true
 ```
 
 Eksisterende eksplisitte identifikatorlister beholdes og kombineres med referansene.
+Adapterenes vanlige grenser gjelder fortsatt, blant annet maksimalt ti foretak per
+oppsett for `account_figures` og `account_documents`. Del større utvalg i flere
+kilder med stabile ID-er.
 Ingen automatisk kobling fra navn til børsmeldinger eller Doffin-kjøpere er
 implisitt i dette formatet. Virksomhetsregisteret bruker eksplisitte organisasjonsnumre.
 

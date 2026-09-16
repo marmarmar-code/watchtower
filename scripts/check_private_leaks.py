@@ -7,9 +7,10 @@ from typing import Any
 import tomllib
 
 
-FILTER_KEYS = ("include_any", "include_all", "exclude_any")
+FILTER_KEYS = ("include_any", "include_all", "include_any_groups", "exclude_any")
 SOURCE_KEYS = (
     "search_queries",
+    "title_queries",
     "companies",
     "recipient_orgnrs",
     "provider_orgnrs",
@@ -70,7 +71,7 @@ def collect_protected_values(data: dict[str, Any]) -> tuple[str, ...]:
             for key in FILTER_KEYS:
                 topics.update(_strings(rules.get(key, [])))
         for key in SOURCE_KEYS:
-            target = topics if key == "search_queries" else values
+            target = topics if key in {"search_queries", "title_queries"} else values
             target.update(_strings(source.get(key, [])))
 
     # A reviewed public topic can also occur in generic source documentation.

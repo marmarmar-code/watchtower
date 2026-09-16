@@ -330,3 +330,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Nye og endrede innvilgede prosjekter i eksplisitte eller automatisk oppdagede utlysninger fra valgte år. Søkt og tildelt beløp skilles."
+
+[[source]]
+id = "production_grants"
+name = "Medietilsynet – produksjonstilskudd per publikasjon"
+status = "beta"
+credential_required = false
+interval_class = "daily"
+maintenance_owner = "fork-owner"
+coverage = "Nyeste publiserte årstabell med tildelt beløp i kroner, foregående årsbeløp og revisjoner per publikasjon. Fravær utledes ikke som avslag eller tilbakekall."

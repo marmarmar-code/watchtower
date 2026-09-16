@@ -74,6 +74,37 @@ class PrivateLeakTests(unittest.TestCase):
             (root / "safe.py").write_text("generic public implementation\n", encoding="utf-8")
             self.assertEqual([], find_leaks(self.config(), root))
 
+    def test_group_terms_are_protected_and_masked_recursively(self):
+        from scripts.mask_private_config import walk
+
+        config = self.config()
+        groups = [["private-group-actor", "private-group-alias"], ["private-group-event"]]
+        config["source"][0]["filter"]["include_any_groups"] = groups
+        expected = {term for group in groups for term in group}
+        self.assertTrue(expected.issubset(collect_protected_values(config)))
+        self.assertTrue(expected.issubset(walk(config)))
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "leak.py").write_text("private-group-event", encoding="utf-8")
+            self.assertEqual([Path("leak.py")], find_leaks(config, root))
+
+    def test_title_queries_are_protected_masked_and_allow_reviewed_public_topics(self):
+        from scripts.mask_private_config import walk
+
+        config = self.config()
+        config["source"][0]["title_queries"] = ["private-title-query", "Public Subject"]
+        config["privacy"]["public_topic_terms"] = ["PUBLIC SUBJECT"]
+        self.assertIn("private-title-query", collect_protected_values(config))
+        self.assertNotIn("Public Subject", collect_protected_values(config))
+        self.assertTrue({"private-title-query", "Public Subject"}.issubset(walk(config)))
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "leak.py").write_text("private-title-query", encoding="utf-8")
+            self.assertEqual([Path("leak.py")], find_leaks(config, root))
+        config["entity"] = [{"name": "Private Entity", "aliases": ["Public Subject"]}]
+        with self.assertRaises(ValueError):
+            collect_protected_values(config)
+
     def test_private_term_in_public_tree_is_detected(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
