@@ -4,7 +4,7 @@ import unittest
 
 from watchtower.config import FilterRule, SourceConfig
 from watchtower.engine import SOURCE_TYPES, evaluate
-from watchtower.sources.brreg import BrregSource
+from watchtower.sources.brreg import BrregSource, _normalize_registry_update
 from watchtower.sources.common import SourceError
 
 
@@ -330,6 +330,22 @@ class BrregTests(unittest.TestCase):
             101,
             next_state["source_state"]["brreg"][ORGNR]["registry_updates"]["newest_id"],
         )
+
+    def test_registry_history_without_field_patch_preserves_event_and_explains_limit(self):
+        raw = {"oppdateringsid": 100, "organisasjonsnummer": ORGNR,
+               "dato": "2025-11-13T10:00:00Z", "endringstype": "Ukjent"}
+        update = _normalize_registry_update(raw, ORGNR)
+        self.assertEqual([], update["changes"])
+        self.assertTrue(update["changes_unavailable"])
+        source = self.source(events=["registry_updates"], current_updates=[update])
+        items = source.fetch_with_state(None)
+        self.assertTrue(items[0].suppress_alert)
+        self.assertIn("ikke oppgitt", items[0].alert_details[0])
+        for invalid in ({}, "unknown", 4):
+            with self.assertRaises(SourceError):
+                _normalize_registry_update({**raw, "endringer": invalid}, ORGNR)
+        with self.assertRaises(SourceError):
+            _normalize_registry_update({**raw, "organisasjonsnummer": "123456785"}, ORGNR)
 
     def test_registry_update_cursor_gap_fails_closed(self):
         state, _, _ = self.baseline()
