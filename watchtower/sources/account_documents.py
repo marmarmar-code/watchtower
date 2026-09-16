@@ -37,7 +37,8 @@ class AccountDocumentsSource(SnapshotSource):
                 raise SourceError('BRREG year list repeated a year')
             for year in sorted(years):
                 rows.append({'key': f'{orgnr}:{year}', 'title': f'Årsregnskap {year} · {orgnr}',
-                    'url': url, 'published': None, 'fields': {'organisation_number': orgnr,
+                    'url': ANNUAL_REPORT_URL.format(orgnr=orgnr, year=year),
+                    'published': None, 'fields': {'organisation_number': orgnr,
                     'year': year, 'availability': 'Året er oppført i BRREGs liste over tilgjengelige regnskapskopier'}})
                 if len(rows) > self.max_records:
                     raise SourceError('BRREG year list exceeds max_records')

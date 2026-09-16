@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 import re
 import tomllib
+import unicodedata
 
 from .entities import load_entities, resolve_entity_options, resolve_entity_terms
 
@@ -23,9 +24,13 @@ class FilterRule:
     exclude_any: tuple[str, ...] = ()
     match_mode: str = "smart"
     match_all: bool = False
+    include_any_groups: tuple[tuple[str, ...], ...] = ()
 
     def matches_term(self, text: str, term: str) -> bool:
-        needle = term.strip()
+        # Text extracted from HTML/XML can use decomposed letters or nonbreaking
+        # spaces. Equivalent visible phrases should have the same result.
+        needle = unicodedata.normalize("NFC", " ".join(term.split()))
+        text = unicodedata.normalize("NFC", " ".join(text.split()))
         if not needle:
             return False
         mode = self.match_mode
@@ -45,7 +50,21 @@ class FilterRule:
             return False
         if self.include_any and not any(self.matches_term(text, term) for term in self.include_any):
             return False
-        return self.match_all or bool(self.include_any or self.include_all)
+        if not all(
+            any(self.matches_term(text, term) for term in group)
+            for group in self.include_any_groups
+        ):
+            return False
+        return self.match_all or bool(self.include_any or self.include_all or self.include_any_groups)
+
+    def matched_terms(self, text: str) -> tuple[str, ...]:
+        """Explain positive matches, including each required alternative group."""
+        terms = dict.fromkeys((
+            *self.include_any,
+            *self.include_all,
+            *(term for group in self.include_any_groups for term in group),
+        ))
+        return tuple(term for term in terms if self.matches_term(text, term))
 
 
 @dataclass(frozen=True)
@@ -74,12 +93,18 @@ class Config:
 
 
 def source_seen_limit(source: SourceConfig, default: int) -> int:
-    """An explicit source limit changes retention only for that source."""
-    if "max_seen_per_source" not in source.options:
-        return default
-    value = source.options["max_seen_per_source"]
-    if type(value) is not int or not 1 <= value <= 50000:
-        raise ValueError("source.max_seen_per_source must be an integer from 1 to 50000")
+    """Apply source overrides and retain complete parliamentary sessions."""
+    value = default
+    if "max_seen_per_source" in source.options:
+        value = source.options["max_seen_per_source"]
+        if type(value) is not int or not 1 <= value <= 50000:
+            raise ValueError("source.max_seen_per_source must be an integer from 1 to 50000")
+    # The parliamentary feed contains a whole session, exceeding the general
+    # 3,000-key default. Eviction would replay old records and could discard
+    # legacy keys during the one-time identity repair. Preserve API-level zero
+    # (unlimited); do not impose a cap on a higher configured retention limit.
+    if source.kind == "stortinget" and value > 0:
+        return max(value, 20000)
     return value
 
 
@@ -89,6 +114,20 @@ def _strings(value: Any, field: str = "filter values") -> tuple[str, ...]:
     if not isinstance(value, list) or not all(isinstance(v, str) for v in value):
         raise ValueError(f"{field} must be a string array")
     return tuple(v.strip() for v in value if v.strip())
+
+
+def _string_groups(value: Any, field: str) -> tuple[tuple[str, ...], ...]:
+    if value is None:
+        return ()
+    if not isinstance(value, list):
+        raise ValueError(f"{field} must be an array of non-empty string arrays")
+    groups = []
+    for group in value:
+        terms = tuple(dict.fromkeys(_strings(group, field)))
+        if not terms:
+            raise ValueError(f"{field} groups must contain at least one non-empty term")
+        groups.append(terms)
+    return tuple(groups)
 
 
 def _boolean(value: Any, field: str) -> bool:
@@ -193,10 +232,15 @@ def load_config(path: str | Path) -> Config:
             exclude_any=_strings(filter_row.get("exclude_any"), "source.filter.exclude_any"),
             match_mode=match_mode,
             match_all=match_all,
+            include_any_groups=_string_groups(
+                filter_row.get("include_any_groups"), "source.filter.include_any_groups"
+            ),
         )
         if enabled and _contains_placeholder(list(entity_terms)):
             raise ValueError("enabled source references placeholder entity values")
-        if enabled and not (filters.include_any or filters.include_all or filters.match_all):
+        if enabled and not (
+            filters.include_any or filters.include_all or filters.include_any_groups or filters.match_all
+        ):
             raise ValueError(
                 f"enabled source {source_id} requires include rules or filter.match_all = true"
             )

@@ -61,6 +61,9 @@ def resolve_entity_options(kind: str, refs: Any, entities: dict, options: dict) 
         return options
     mappings = {
         "brreg": ("companies", "orgnr"),
+        "account_figures": ("companies", "orgnr"),
+        "account_documents": ("companies", "orgnr"),
+        "bankruptcy_notices": ("orgnrs", "orgnr"),
         "patentstyret": ("companies", "orgnr"),
         "stotte": ("recipient_orgnrs", "orgnr"),
         "finanstilsynet_short_sale": ("isins", "isins"),

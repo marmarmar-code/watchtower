@@ -31,6 +31,36 @@ def item(identity=JP1, title="Søknad"):
 
 
 class JournalTests(unittest.TestCase):
+    def test_title_variants_union_deduplicates_and_preserves_scope(self):
+        source = JournalsSource(config(title_queries=["Example", "Example Incorporated"]))
+        source.get = Mock(side_effect=[
+            response({"items": [item()], "next": None}),
+            response({"items": [item(), item(JP2)], "next": None}),
+        ])
+        rows = source.read_records()
+        self.assertEqual([JP1, JP2], [row["key"] for row in rows])
+        self.assertEqual(["Example", "Example Incorporated"], [
+            parse_qs(urlsplit(call.args[0]).query)["tittel"][0]
+            for call in source.get.call_args_list
+        ])
+        self.assertTrue(all(parse_qs(urlsplit(call.args[0]).query)["query"] == ["Equinor"]
+                            for call in source.get.call_args_list))
+
+    def test_title_union_rejects_conflict_and_aggregate_overflow(self):
+        for rows, limit in (([item(title="Changed")], 10), ([item(JP2)], 1)):
+            source = JournalsSource(config(title_queries=["Example", "Other"], max_records=limit))
+            source.get = Mock(side_effect=[response({"items": [item()], "next": None}),
+                                           response({"items": rows, "next": None})])
+            with self.assertRaises(SourceError):
+                source.read_records()
+
+    def test_invalid_title_queries_fail_at_configuration(self):
+        for options in ({"title_queries": "Example"}, {"title_queries": [""]},
+                        {"title_queries": [str(n) for n in range(61)]},
+                        {"tittel": "Example", "title_queries": ["Other"]}):
+            with self.assertRaises(ValueError):
+                JournalsSource(config(**options))
+
     def test_two_pages_keep_scope_sort_and_duplicate_cursor_values(self):
         source = JournalsSource(config(korrespondansepart_navn="Equinor", tittel="PL1121", limit=2))
         first = {"items": [item()], "next": "/search?limit=2&startingAfter=0.0&startingAfter=" + JP1}

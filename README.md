@@ -124,6 +124,19 @@ Egne feed-URL-er kan fortsatt legges i `urls` i stedet for eller sammen med prof
 Standard er å avvise tomme feeder; ugyldige elementer avvises også når tomhet er tillatt.
 EMA-innhold beskriver EU-prosesser og innebærer ikke automatisk norske vedtak.
 
+### Stortinget
+
+`stortinget` følger hele sesjonens saker, skriftlige spørsmål og høringer.
+Denne kilden beholder minst 20 000 observerte nøkler selv når den generelle
+grensen er lavere, slik at gamle sesjonsposter ikke varsles på nytt etter at de
+faller ut av historikken. En høyere valgt grense beholdes.
+
+Ved oppgradering fra parseren som kunne bruke person- eller emne-ID som saks-ID,
+gjennomføres én taus innhenting med korrekte ID-er. Gamle historikknøkler beholdes;
+det sendes ingen automatisk historisk etterlevering. Deretter varsles nye poster
+og, med `alert_on_update = true`, innholdsendringer som svarstatus og høringsfrister.
+Kildens tekniske responstidsstempler utløser ikke oppdateringsvarsler.
+
 ### SSB
 
 Fra 0.6 følger `ssb_data` også faktiske verdier og revisjoner i avgrensede utvalg.
@@ -251,6 +264,31 @@ exclude_any = []
 match_mode = "smart"
 ```
 
+For å kreve både en aktør eller kontekst **og** en hendelse:
+
+```toml
+[source.filter]
+include_any_groups = [
+  ["eksempelvirksomhet", "eksempelbransje"],
+  ["oppkjøp", "nedbemanning", "ny direktør"],
+]
+exclude_any = ["kursinvitasjon"]
+match_mode = "smart"
+```
+
+Minst ett ord eller én frase i **hver** gruppe må treffe. Gruppene kommer i tillegg
+til `include_any` (minst ett treff) og `include_all` (alle må treffe). `exclude_any`
+har alltid forrang, også med `match_all = true`. Tomme grupper avvises.
+`filter.entity_refs` kan brukes som aktørkravet i stedet for den første gruppen;
+da legges virksomhetsnavn og aliaser i `include_any`, mens hendelsene står i
+`include_any_groups`.
+
+`match_mode = "whole_word"` krever ordgrenser også for lange ord: `radio` treffer
+ikke `radiolocation`. `smart` bruker ordgrenser for ord med opptil tre tegn, ellers
+delstreng; `substring` bruker alltid delstreng. Bruk bevisste bøyningsvarianter med
+`whole_word`. Store og små bokstaver, kanonisk like Unicode-tegn og variasjon i
+blanktegn påvirker ikke treffet. Filteret søker bare i teksten adapteren henter.
+
 eller eksplisitt:
 
 ```toml
@@ -259,6 +297,20 @@ match_all = true
 ```
 
 `match_all` bør bare brukes når adapteren allerede er begrenset av en konkret liste. Aktive kilder med `REPLACE_ME` eller uten positive regler blir avvist før overvåking starter.
+
+### Overskrifter og utdrag fra listesider
+
+For `web_links` kan en lenke omfatte både overskrift, dato og ingress. Bruk
+`display_title_selector = "h2"` i kildeblokken for å vise bare overskriften, og
+eventuelt `display_ignore_selectors = ["small"]` for å fjerne datotekst inni den.
+`text_selector = ".summary"` legger valgt utdrag til den søkbare teksten.
+Alle selektorene er relative til lenken som `selector` velger.
+
+Disse visningsvalgene bevarer eksisterende registreringsnøkler, fingeravtrykk og
+historikk. Den opprinnelige kortteksten forblir søkbar. `title_selector` er fortsatt
+valget som bestemmer hvilken titteltekst som **overvåkes**; endring av dette valget
+gir en ny stille grunnlinje. Manglende overskrift eller utdrag i et konfigurert
+valg meldes som kildefeil slik at endringer i sidens oppbygning ikke skjules.
 
 ## Varsling
 

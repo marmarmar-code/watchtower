@@ -6,7 +6,7 @@ import json
 import re
 from urllib.parse import parse_qs, urlencode, urljoin, urlsplit, urlunsplit
 
-from .changes import SnapshotSource, document, integer, public_url
+from .changes import SnapshotSource, document, integer, public_url, strings
 from .common import SourceError
 
 DEFAULT_URL = "https://api.einnsyn.no/search"
@@ -30,13 +30,28 @@ class JournalsSource(SnapshotSource):
         self.query = _optional_text(config.options.get("query"))
         self.part = _optional_text(config.options.get("korrespondansepart_navn"))
         self.title = _optional_text(config.options.get("tittel"))
+        self.title_queries = strings(config.options.get("title_queries", []), "title_queries", empty=True)
+        if self.title and self.title_queries:
+            raise ValueError("journals accepts tittel or title_queries, not both")
+        if len(self.title_queries) > 60:
+            raise ValueError("journals title_queries is limited to 60 searches")
         self.lookback_days = integer(config.options.get("lookback_days", 14), "lookback_days", 1, 366)
-        if not any((self.query, self.part, self.title)):
+        if not any((self.query, self.part, self.title, self.title_queries)):
             raise ValueError("journals requires an explicit query, party or title")
 
     def read_records(self):
         today = datetime.now(timezone.utc).date()
-        fixed = self._params(today)
+        records = {}
+        for title in self.title_queries or (self.title,):
+            for row in self._read_query(self._params(today, title)):
+                if row["key"] in records and records[row["key"]] != row:
+                    raise SourceError("eInnsyn returned conflicting journalpost records")
+                records[row["key"]] = row
+                if len(records) > self.max_records:
+                    raise SourceError("eInnsyn exceeded max_records; narrow the query")
+        return list(records.values())
+
+    def _read_query(self, fixed):
         url, seen_urls, rows = self.url, set(), []
         for _ in range(self.max_pages):
             page_url = _with_params(url, fixed)
@@ -58,14 +73,14 @@ class JournalsSource(SnapshotSource):
             url = _next_url(next_url)
         raise SourceError("eInnsyn pagination exceeded max_pages")
 
-    def _params(self, today: date):
+    def _params(self, today: date, title: str | None = None):
         params = {
             "entity": "Journalpost", "limit": self.limit,
             "sortBy": "publisertDato", "sortOrder": "desc",
             "publisertDatoFrom": (today - timedelta(days=self.lookback_days)).isoformat(),
             "publisertDatoTo": today.isoformat(),
         }
-        for key, value in (("query", self.query), ("korrespondansepartNavn", self.part), ("tittel", self.title)):
+        for key, value in (("query", self.query), ("korrespondansepartNavn", self.part), ("tittel", self.title if title is None else title)):
             if value:
                 params[key] = value
         return params

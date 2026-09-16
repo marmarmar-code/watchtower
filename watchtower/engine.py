@@ -36,6 +36,7 @@ from .sources.account_documents import AccountDocumentsSource
 from .sources.press_cases import PressCasesSource
 from .sources.eu_merger_decisions import EUMergerDecisionsSource
 from .sources.media_database import MediaDatabaseSource
+from .sources.production_grants import ProductionGrantsSource
 from .sources.consumer_decisions import ConsumerDecisionsSource
 from .sources.account_figures import AccountFiguresSource
 from .sources.frequency_licences import FrequencyLicencesSource
@@ -53,6 +54,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "parliament_vote_discovery": ParliamentVoteDiscoverySource,
     "eu_merger_decisions": EUMergerDecisionsSource,
     "media_database": MediaDatabaseSource,
+    "production_grants": ProductionGrantsSource,
     "consumer_decisions": ConsumerDecisionsSource,
     "account_figures": AccountFiguresSource,
     "frequency_licences": FrequencyLicencesSource,
@@ -428,8 +430,7 @@ def evaluate(
 
 
 def _matched_terms(source: SourceConfig, text: str) -> tuple[str, ...]:
-    terms = [*source.filters.include_any, *source.filters.include_all]
-    return tuple(term for term in terms if source.filters.matches_term(text, term))[:8]
+    return source.filters.matched_terms(text)[:8]
 
 
 def _bounded_details(item: Item) -> tuple[str, ...]:

@@ -1,5 +1,6 @@
 """Selected page text and link-list events; no browser or JavaScript runtime."""
 import re
+from copy import deepcopy
 from dataclasses import replace
 from difflib import SequenceMatcher
 from urllib.parse import urldefrag, urljoin, urlsplit
@@ -35,9 +36,11 @@ class WebChangesSource(SnapshotSource):
                     or any(char.isspace() for char in prefix) or "*" in prefix):
                 raise ValueError("exclude_url_prefixes requires HTTPS directory URLs without queries or wildcards, for web_links only")
             self.excluded_prefixes.append((parsed.netloc.casefold(), parsed.path))
-        # Notification routing does not alter the selected records or their scope.
+        # Notification routing and presentation do not alter monitored fields,
+        # record identities or the scope of an existing snapshot.
         snapshot_config = replace(config, options={
-            key: value for key, value in config.options.items() if key != "exclude_url_prefixes"
+            key: value for key, value in config.options.items()
+            if key not in {"exclude_url_prefixes", "display_title_selector", "display_ignore_selectors", "text_selector"}
         })
         super().__init__(snapshot_config, *args, **kwargs)
         self.config = config
@@ -49,11 +52,24 @@ class WebChangesSource(SnapshotSource):
             raise ValueError("Web monitoring requires an explicit CSS selector")
         self.ignore = strings(config.options.get("ignore_selectors", []), "ignore_selectors", empty=True)
         self.title_selector = config.options.get("title_selector")
-        if self.title_selector is not None:
-            if not isinstance(self.title_selector, str):
-                raise ValueError("title_selector must be a CSS selector")
-            compile_selector(self.title_selector)
-        for selector in (self.selector, *self.ignore):
+        self.display_title_selector = config.options.get("display_title_selector")
+        self.display_ignore = strings(
+            config.options.get("display_ignore_selectors", []), "display_ignore_selectors", empty=True
+        )
+        self.text_selector = config.options.get("text_selector")
+        for name in ("title_selector", "display_title_selector", "text_selector"):
+            selector = getattr(self, name)
+            if selector is not None:
+                if not isinstance(selector, str) or not selector.strip():
+                    raise ValueError(f"{name} must be a non-empty CSS selector")
+                compile_selector(selector)
+        if config.kind != "web_links" and (
+            self.display_title_selector is not None or self.text_selector is not None
+        ):
+            raise ValueError("display_title_selector and text_selector require web_links")
+        if self.display_ignore and self.display_title_selector is None:
+            raise ValueError("display_ignore_selectors requires display_title_selector")
+        for selector in (self.selector, *self.ignore, *self.display_ignore):
             compile_selector(selector)
         self.minimum = integer(config.options.get("min_text_length", 20), "min_text_length", 1, 100000)
         self.maximum = integer(config.options.get("max_text_length", 100000), "max_text_length", 1, 1000000)
@@ -64,6 +80,13 @@ class WebChangesSource(SnapshotSource):
 
     def _item(self, row, event, details, suppress):
         item = super()._item(row, event, details, suppress)
+        if "display_title" in row:
+            # On a new link the heading already carries the title; repeating the
+            # complete card in its field details defeats clean presentation.
+            item = replace(item, title=row["display_title"],
+                           alert_details=details[:1] if event == "added" else item.alert_details)
+        if row.get("search_text"):
+            item = replace(item, text=item.text + "\n" + row["search_text"])
         parsed = urlsplit(item.url)
         if any(parsed.scheme == "https" and parsed.netloc.casefold() == host
                and parsed.path.startswith(path) for host, path in self.excluded_prefixes):
@@ -101,6 +124,25 @@ class WebChangesSource(SnapshotSource):
             if not title:
                 raise SourceError("Selected link lacks a visible title")
             record = {"key": url, "title": title, "url": url, "fields": {"title": title}}
+            if self.display_title_selector:
+                display_node = node.select_one(self.display_title_selector)
+                if display_node is None:
+                    raise SourceError("Configured display title selector no longer matches")
+                display_node = deepcopy(display_node)
+                for selector in self.display_ignore:
+                    for ignored in display_node.select(selector):
+                        ignored.decompose()
+                display_title = re.sub(r"\s+", " ", display_node.get_text(" ", strip=True)).strip()
+                if not display_title:
+                    raise SourceError("Selected link lacks a visible display title")
+                record["display_title"] = display_title
+            if self.text_selector:
+                text_nodes = node.select(self.text_selector)
+                if not text_nodes:
+                    raise SourceError("Configured link text selector no longer matches")
+                record["search_text"] = re.sub(
+                    r"\s+", " ", " ".join(part.get_text(" ", strip=True) for part in text_nodes)
+                ).strip()
             if url in records and records[url]["title"] != title:
                 raise SourceError("Link list has conflicting titles for the same URL")
             records[url] = record
