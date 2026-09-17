@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import os
+from dataclasses import replace
+from hashlib import sha256
+import json
 from typing import Any
 
 from .common import Source, SourceError
@@ -8,6 +11,7 @@ from ..models import Item
 
 # The Azure developer portal documents the API, but requests are served by api.doffin.no.
 DEFAULT_URL = "https://api.doffin.no/public/v2/search"
+_SCOPE_KEY = "doffin_query_scope"
 
 
 class DoffinSource(Source):
@@ -22,13 +26,26 @@ class DoffinSource(Source):
         if config.urls and config.urls != (DEFAULT_URL,):
             raise ValueError("Doffin accepts only the official API URL")
         self.endpoint = DEFAULT_URL
+        self._completed_scope: str | None = None
 
     def fetch_with_state(self, previous: dict | None) -> list[Item]:
         self._previous_keys = set((previous or {}).get("seen", {}))
-        return self.fetch()
+        items = self.fetch()
+        if previous is not None and previous.get(_SCOPE_KEY) != self._completed_scope:
+            # Expanding queries/pages can expose older notices that have never
+            # been observed. Quietly learn the changed window once; retain all
+            # existing notice identities instead of resetting the source state.
+            return [replace(item, suppress_alert=True) for item in items]
+        return items
+
+    def augment_state(self, state: dict) -> dict:
+        if self._completed_scope is None:
+            return state
+        return {**state, _SCOPE_KEY: self._completed_scope}
 
     def fetch(self) -> list[Item]:
         self.coverage_warnings = []
+        self._completed_scope = None
         api_key = os.environ.get("DOFFIN_API_KEY", "").strip()
         if not api_key:
             raise SourceError("Doffin API key is not configured")
@@ -36,8 +53,15 @@ class DoffinSource(Source):
         page_size = min(max(int(self.config.options.get("page_size", 100)), 1), 100)
         max_pages = min(max(int(self.config.options.get("max_pages", 1)), 1), 5)
         queries = self.config.options.get("search_queries", [""])
-        if not isinstance(queries, list) or not all(isinstance(q, str) for q in queries):
-            raise SourceError("Doffin search_queries must be a string array")
+        if not isinstance(queries, list) or not queries or not all(isinstance(q, str) for q in queries):
+            raise SourceError("Doffin search_queries must be a non-empty string array")
+        queries = list(dict.fromkeys(q.strip() for q in queries))
+        scope = sha256(json.dumps({
+            "version": 1,
+            "search_queries": sorted(queries),
+            "page_size": page_size,
+            "max_pages": max_pages,
+        }, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
         headers = {
             "Ocp-Apim-Subscription-Key": api_key,
@@ -47,7 +71,7 @@ class DoffinSource(Source):
         seen: set[str] = set()
         previous_keys = getattr(self, "_previous_keys", set())
 
-        for query in dict.fromkeys(q.strip() for q in queries):
+        for query in queries:
             overlap = False
             for page_index in range(max_pages):
                 params: dict[str, Any] = {
@@ -82,6 +106,9 @@ class DoffinSource(Source):
                     if previous_keys and not overlap:
                         self.coverage_warnings.append("no_overlap_with_previous_window")
         self.coverage_warnings = list(dict.fromkeys(self.coverage_warnings))
+        # The engine saves this together with seen keys only after successful
+        # fetch/evaluation and any required delivery transaction.
+        self._completed_scope = scope
         return out
 
 
