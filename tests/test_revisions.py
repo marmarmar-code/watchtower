@@ -1,6 +1,7 @@
 from dataclasses import replace
 import tempfile
 import unittest
+from unittest.mock import Mock
 
 from watchtower.config import FilterRule, SourceConfig
 from watchtower.engine import evaluate, notification_entries
@@ -8,6 +9,7 @@ from watchtower.models import Item
 from watchtower.notifier import format_slack_entries
 from watchtower.state import StateStore
 from watchtower.sources.doffin import _item as procurement_item
+from watchtower.sources.regjeringen import RegjeringenSource
 
 
 class RevisionTests(unittest.TestCase):
@@ -35,6 +37,62 @@ class RevisionTests(unittest.TestCase):
             self.assertIn('Revenue was 100 million EUR. → Revenue was 120 million EUR.', message)
             self.assertIn('https://example.org/1', message)
             self.assertEqual([], evaluate(self.source, [changed], current, max_seen=100)[1])
+
+    def government_source(self):
+        return RegjeringenSource(replace(self.source, kind='regjeringen'))
+
+    def government_items(self, source, description):
+        xml = f"""<rss><channel><item><guid>report</guid>
+          <title>Annual report</title><link>https://example.org/news/report</link>
+          <description><![CDATA[{description}]]></description>
+        </item></channel></rss>"""
+        source.get = Mock(return_value=Mock(content=xml.encode()))
+        return source.fetch()
+
+    def test_government_replaced_document_is_explained_and_retained(self):
+        source = self.government_source()
+        body = '<p>Download <a href="/reports/original.pdf">annual report</a>.</p>'
+        first = self.government_items(source, body)
+        state, _, _ = evaluate(source.config, first, None, max_seen=100)
+        with tempfile.TemporaryDirectory() as tmp:
+            store = StateStore(tmp)
+            store.save(source.config.id, state)
+            changed = self.government_items(source, body.replace('original.pdf', 'corrected.pdf'))
+            current, alerts, _ = evaluate(source.config, changed, store.load(source.config.id), max_seen=100)
+            self.assertEqual(1, len(alerts))
+            self.assertEqual(('Lenker i kildeteksten: https://example.org/reports/original.pdf → '
+                              'https://example.org/reports/corrected.pdf',), alerts[0].item.alert_details)
+            message = format_slack_entries(notification_entries(alerts))
+            self.assertIn('https://example.org/reports/corrected.pdf', message)
+            self.assertEqual([], evaluate(source.config, changed, current, max_seen=100)[1])
+            store.save(source.config.id, current)
+            removed = self.government_items(source, '<p>Download annual report.</p>')
+            _, alerts, _ = evaluate(source.config, removed, store.load(source.config.id), max_seen=100)
+            self.assertIn('Lenker i kildeteksten: https://example.org/reports/corrected.pdf → ikke oppgitt', alerts[0].item.alert_details)
+
+    def test_government_link_markup_is_ignored_but_content_parameters_are_kept(self):
+        source = self.government_source()
+        body = '<p>Download <a href="/reports/document.pdf?version=1&amp;lang=en#page=2">report</a>.</p>'
+        first = self.government_items(source, body)
+        state, _, _ = evaluate(source.config, first, None, max_seen=100)
+        formatted = '<div>Download <a class="document" href="https://example.org/reports/document.pdf?version=1&amp;lang=en#page=2"><strong>report</strong></a>.</div>'
+        same = self.government_items(source, formatted)
+        self.assertEqual([], evaluate(source.config, same, state, max_seen=100)[1])
+        revised = self.government_items(source, formatted.replace('version=1', 'version=2'))
+        _, alerts, _ = evaluate(source.config, revised, state, max_seen=100)
+        self.assertEqual(1, len(alerts))
+        self.assertIn('version=1&lang=en#page=2 →', alerts[0].item.alert_details[0])
+        self.assertIn('version=2&lang=en#page=2', alerts[0].item.alert_details[0])
+
+    def test_government_link_snapshot_upgrade_preserves_legacy_history_quietly(self):
+        source = self.government_source()
+        items = self.government_items(source, '<a href="/reports/document.pdf">Annual report</a>')
+        previous = {'initialized': True, 'seen': {'report': 'oldhash', 'outside': 'keep'},
+                    'order': ['outside', 'report']}
+        state, alerts, _ = evaluate(source.config, items, previous, max_seen=100)
+        self.assertEqual([], alerts)
+        self.assertEqual('keep', state['seen']['outside'])
+        self.assertEqual('https://example.org/reports/document.pdf', state['item_revisions_v1']['report']['links'])
 
     def test_legacy_hash_is_enriched_without_inventing_old_text(self):
         legacy = {'initialized': True, 'seen': {'1': 'oldhash', 'outside': 'keep'},

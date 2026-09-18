@@ -10,6 +10,7 @@ from difflib import SequenceMatcher
 from html import unescape
 import re
 import unicodedata
+from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
 
@@ -21,6 +22,7 @@ LABELS = {
     'title': 'Tittel', 'text': 'Kildetekst', 'buyer': 'Oppdragsgiver',
     'type': 'Kunngjøringstype', 'status': 'Status', 'cpv': 'CPV-koder',
     'deadline': 'Tilbudsfrist', 'estimated_value': 'Anslått verdi',
+    'links': 'Lenker i kildeteksten',
 }
 
 
@@ -35,6 +37,16 @@ def snapshot(kind: str, item: Item) -> dict[str, str] | None:
     if kind not in KINDS or item.fingerprint is not None:
         return None
     fields = {'title': clean(item.title), 'text': clean(item.text)}
+    if kind == 'regjeringen':
+        # This adapter retains HTML in descriptions. A replacement document can
+        # have the same visible link text, so preserve targets as editorial data.
+        # Attribute order, duplicate anchors and relative/absolute spelling are
+        # presentation only; query parameters and fragments may identify content.
+        soup = BeautifulSoup(unescape(item.text), 'html.parser')
+        targets = {urljoin(item.url, link['href'].strip())
+                   for link in soup.find_all('a', href=True)
+                   if isinstance(link['href'], str) and link['href'].strip()}
+        fields['links'] = '\n'.join(sorted(targets))
     if kind == 'konkurransetilsynet' and item.published:
         # This adapter includes the explicit first (publication-date) table cell
         # in its searchable row text. Ignore that cell only, never dates inside
