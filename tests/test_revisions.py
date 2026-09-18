@@ -92,6 +92,17 @@ class RevisionTests(unittest.TestCase):
         row['estimatedValue'] = {'value': 100}
         self.assertEqual('100', procurement_item('feed', row).metadata['estimated_value'])
 
+    def test_merger_publication_cell_is_ignored_but_case_deadline_is_not(self):
+        source = replace(self.source, kind='konkurransetilsynet')
+        first = replace(self.item, published='17.09.2026', text='17.09.2026 Example merger Frist 20.09.2026')
+        state, _, _ = evaluate(source, [first], None, max_seen=100)
+        dated = replace(first, published='18.09.2026', text='18.09.2026 Example merger Frist 20.09.2026')
+        self.assertEqual([], evaluate(source, [dated], state, max_seen=100)[1])
+        changed = replace(dated, text='18.09.2026 Example merger Frist 21.09.2026')
+        _, alerts, _ = evaluate(source, [changed], state, max_seen=100)
+        self.assertEqual(1, len(alerts))
+        self.assertIn('20.09.2026 →', alerts[0].item.alert_details[0])
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -35,6 +35,13 @@ def snapshot(kind: str, item: Item) -> dict[str, str] | None:
     if kind not in KINDS or item.fingerprint is not None:
         return None
     fields = {'title': clean(item.title), 'text': clean(item.text)}
+    if kind == 'konkurransetilsynet' and item.published:
+        # This adapter includes the explicit first (publication-date) table cell
+        # in its searchable row text. Ignore that cell only, never dates inside
+        # the merger description or procedural status.
+        prefix = clean(item.published) + ' '
+        if fields['text'].startswith(prefix):
+            fields['text'] = fields['text'][len(prefix):]
     if kind == 'doffin':
         for key in ('buyer', 'type', 'status', 'cpv', 'deadline', 'estimated_value'):
             value = clean(item.metadata.get(key) or '')
