@@ -139,7 +139,13 @@ def _item(source_id: str, row: dict[str, Any]) -> Item:
     cpv = _text(row.get("cpvCodes") or row.get("cpvCode") or row.get("cpv"))
     published = _first(row, "publicationDate", "publishedDate", "issueDate", "date") or None
     deadline = _first(row, "deadline", "tenderDeadline", "submissionDeadline")
-    estimated = _text(row.get("estimatedValue"))
+    value = row.get("estimatedValue")
+    estimated = _text(value)
+    if isinstance(value, dict):
+        amount = _first(value, "value", "amount")
+        currency = _first(value, "currency", "currencyCode")
+        if amount:
+            estimated = " ".join(part for part in (amount, currency) if part)
     url = _first(row, "url", "noticeUrl", "webUrl", "doffinClassicUrl") or (
         f"https://www.doffin.no/notices/{notice_id}"
     )
