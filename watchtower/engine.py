@@ -100,9 +100,29 @@ from .sources.dmp_quality_letters import DmpQualityLettersSource
 from .sources.statnett_grid import StatnettGridSource
 from .sources.aquaculture_auctions import AquacultureAuctionsSource
 from .sources.inspection_report import InspectionReportSource
+from .sources.aviation_operators import AviationOperatorsSource
+from .sources.aquaculture_certificates import AquacultureCertificatesSource
+from .sources.building_approvals import BuildingApprovalsSource
+from .sources.enova_projects import EnovaProjectsSource
+from .sources.device_clearances import DeviceClearancesSource
+from .sources.investor_warnings import InvestorWarningsSource
+from .sources.petroleum_figures import PetroleumFiguresSource
+from .sources.escape_incidents import EscapeIncidentsSource
+from .sources.nav_redundancy import NavRedundancySource
+from .sources.trade_defence_cases import TradeDefenceCasesSource
 
 
 SOURCE_TYPES: dict[str, type[Source]] = {
+    "aviation_operators": AviationOperatorsSource,
+    "aquaculture_certificates": AquacultureCertificatesSource,
+    "building_approvals": BuildingApprovalsSource,
+    "enova_projects": EnovaProjectsSource,
+    "device_clearances": DeviceClearancesSource,
+    "investor_warnings": InvestorWarningsSource,
+    "petroleum_figures": PetroleumFiguresSource,
+    "escape_incidents": EscapeIncidentsSource,
+    "nav_redundancy": NavRedundancySource,
+    "trade_defence_cases": TradeDefenceCasesSource,
     "capital_increase_notices": CapitalIncreaseNoticesSource,
     "reconstruction_notices": ReconstructionNoticesSource,
     "dmp_wholesale": DmpWholesaleSource,

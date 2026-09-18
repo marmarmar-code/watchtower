@@ -3057,3 +3057,232 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "nordic_device_premarket_decision_changes"
+name = "FDA – 510(k)-vedtak for søkere med nordisk postland"
+sector = "health"
+description = "Følger nye og reviderte 510(k)-vedtaksopplysninger for søkere med oppført postland NO, DK, SE, FI eller IS i siste 90 dager. Stabilt søknadsnummer, søker, utstyr, produktkode, mottaksdato, vedtaksdato, innsendingsmåte og kildens utfallskode/-tekst beholdes. Land er postadresse, ikke dokumentert eierskap eller markedsdekning. 510(k)-utfall er ikke en generell godkjenning eller dokumentasjon på klinisk effekt. Ingen aggregert openFDA-firmaliste brukes som søkeridentitet."
+official_url = "https://open.fda.gov/apis/device/510k/"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "device_clearances"
+decision_days = 90
+country_codes = ["NO", "DK", "SE", "FI", "IS"]
+page_size = 100
+max_pages = 5
+max_records = 200
+max_bytes = 2000000
+max_export_age_days = 60
+allow_empty = true
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "norwegian_investor_warning_changes"
+name = "Finanstilsynet – egne markedsadvarsler og tekstendringer"
+sector = "finance"
+description = "Henter alle Finanstilsynets egne advarsler sist publisert i inneværende og foregående kalenderår med komplett paginering og full artikkeltekst. Stabil side-ID, kildeoverskrift, sist-publisert-dato, innledning og advarselstekst følges. Myndighetens advarsel gjengis uten å anta skyld eller forveksle navnemisbruk med den legitime virksomheten. Utenlandske myndigheters advarsler, eldre publiseringer og senere tilbaketrekking utledet av fravær er ikke dekket."
+official_url = "https://www.finanstilsynet.no/markedsadvarsler/"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "investor_warnings"
+years_back = 2
+max_pages = 10
+max_records = 200
+max_bytes = 2000000
+allow_empty = true
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "aviation_operator_certificate_changes"
+name = "Luftfartstilsynet – AOC-operatøroppføringer"
+sector = "business"
+description = "Nye og endrede operatøroppføringer i hele Luftfartstilsynets publiserte AOC-liste. AOC-nummer er identitet; navn og oppført adresse sammenlignes. Alle sider hentes og avstemmes mot totalantallet. Listen gir ikke vedtaksdato eller gyldighetsperiode, og fravær brukes ikke som bevis på tilbakekall."
+official_url = "https://www.luftfartstilsynet.no/aktorer/flyselskap/godkjente-flyselskaper/"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "aviation_operators"
+urls = ["https://www.luftfartstilsynet.no/aktorer/flyselskap/godkjente-flyselskaper/"]
+max_pages = 10
+max_records = 200
+max_bytes = 1000000
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "aquaculture_installation_certificate_changes"
+name = "NYTEK – anleggssertifikater og eksplisitt trekking"
+sector = "food"
+description = "Nye og endrede publiserte anleggssertifikatrapporter i NYTEKs åpne API. Rapport-UUID er identitet. Sertifikatstatus, eventuell uttrykkelig trekking, utstedelse, utløp, revisjon, innehaver, inspeksjonsorgan og produksjonsenheter sammenlignes. Alle sider leses med ett fast uttrekkstidspunkt og kontrolleres i en andre lesning. Kildens datoer beholdes også ved uventet rekkefølge; fremtidig utstedelse eller utløp før utstedelse merkes. Status er kildens opplysning, ikke en selvstendig vurdering av gyldighet. Vedlegg og øvrig teknisk dokumentasjon overvåkes ikke. Omfanget er APIets publiserte NYTEK-poster, ikke alle oppdrettsanlegg eller alle tillatelser. Utløpsdato og fravær alene gir ikke trekkingsvarsel."
+official_url = "https://api.fiskeridir.no/nytek-public/swagger-ui/index.html"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "aquaculture_certificates"
+urls = ["https://api.fiskeridir.no/nytek-public/api/v3/certificates"]
+max_pages = 60
+max_records = 1200
+max_bytes = 4000000
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "dibk_central_approval_changes"
+name = "DiBK – endret sentral godkjenning"
+sector = "property"
+description = "Følger sentral godkjenning for to eksplisitte byggeforetak i DiBKs åpne v2-register. orgnrs velger andre gyldige organisasjonsnumre etter kildekontroll. Status, godkjenningsperiodens sluttdato og alle funksjon/fagområde/tiltaksklasse-kombinasjoner kontrolleres to ganger. Dette er frivillig sentral godkjenning, ikke prosjektvis byggetillatelse. Fravær er ikke tilbakekall; første innlesing er stille."
+official_url = "https://sgregister.dibk.no/"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "building_approvals"
+urls = ["https://sgregister.dibk.no/"]
+orgnrs = ["911274426", "984024290"]
+max_records = 25
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "enova_project_execution_changes"
+name = "Enova – prosjektgjennomføring i bygg og eiendom"
+sector = "property"
+description = "Følger oppført gjennomføring, kansellering og gjeldende start/sluttdato for prosjekter i Bygg og eiendom med vedtak fra 2025. Publisert saksnummer er identitet. Hele det normale offisielle appdatasettet valideres to ganger, med egne grenser for den store eksporten. Flere støtteobjekter i samme sak bevares. Separat eksempelgrunnlag avvises. Kilden oppgir ikke oppdateringstid for status; nyeste observerte vedtaksdato er 15. juni 2026, og daterer ikke statusene. Første innlesing er stille. Ingen faktisk utbetaling eller realisert klimaeffekt utledes."
+official_url = "https://kunnskapshuset.enova.no/prosjektliste"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "enova_projects"
+urls = ["https://kunnskapshuset.enova.no/prosjektliste"]
+sectors = ["Bygg og eiendom"]
+from_year = 2025
+max_records = 3000
+max_bundle_bytes = 40000000
+max_export_records = 100000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "sodir_production_figure_changes"
+name = "Sodir – månedlige produksjonsvolumer"
+sector = "energy"
+description = "Følger de seks nyeste sammenhengende månedene med publiserte netto produksjonsvolumer per felt/funn. De komplette historiske CSV-radene kontrolleres før periodeutvalg. Olje, gass, NGL, kondensat, oljeekvivalenter og produsert vann holdes atskilt; oljeekvivalenter summeres ikke med komponentene. NGL er i mill. Sm3 og gass i mrd. Sm3. Dette er månedsvolumer, ikke dagsrate eller prognose. Nyeste observerte periode er juni 2026. Negative korreksjoner bevares. field_ids kan velge eksakte kilde-ID-er. To komplette lesinger kreves, første innlesing er stille, og tidligere perioder beholdes uten fjerningsvarsel."
+official_url = "https://factpages.sodir.no/en/field/tableview/production/saleable/monthly"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "petroleum_figures"
+profile = "production"
+latest_months = 6
+latest_versions = 1
+max_period_age_days = 150
+max_export_rows = 50000
+max_records = 3000
+max_bytes = 4000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "sodir_reserves_figure_changes"
+name = "Sodir – årlige reserveanslag"
+sector = "energy"
+description = "Følger nyeste publiserte årsversjon av opprinnelige utvinnbare og gjenværende reserveanslag per felt. Versjon og kildens anslagsdato holdes atskilt. NGL er i mill. tonn og gass i mrd. Sm3; oljeekvivalenter summeres ikke med komponentene. Null, manglende tall og negative korreksjoner bevares. Dette er reserveanslag, ikke nye funn eller faktisk produksjon. Nyeste observerte årsversjon er 2025. field_ids kan velge eksakte kilde-ID-er. To komplette lesinger kreves, første innlesing er stille, og tidligere perioder beholdes uten fjerningsvarsel."
+official_url = "https://factpages.sodir.no/en/field/tableview/resources"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "petroleum_figures"
+profile = "reserves"
+latest_months = 6
+latest_versions = 1
+max_period_age_days = 550
+max_export_rows = 50000
+max_records = 3000
+max_bytes = 4000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "eu_trade_defence_case_timetable_changes"
+name = "EU – handelsundersøkelser, dokumentmetadata og veiledende tidsplaner"
+sector = "trade"
+description = "Følger hele den offisielle listen over pågående antidumping-, antisubsidie- og beskyttelsesundersøkelser med stabil saks-ID. Produkt, undersøkte land, type, tiltaksstatus, dokumentmetadata og veiledende kalenderfrister overvåkes der detaljside finnes. Poster uten detaljside beholdes med eksplisitt manglende detaljdekning. Tidsplanen er ikke i seg selv juridisk bindende; tiltakssats, utfall, oppstartsdato og avslutning utledes ikke. Dokumentvedlegg lastes ikke ned. To komplette like innlesinger og kildeversjon kontrolleres."
+official_url = "https://tron.trade.ec.europa.eu/investigations/ongoing"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "trade_defence_cases"
+max_records = 200
+max_bytes = 2000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "aquaculture_escape_report_changes"
+name = "Fiskeridirektoratet – publiserte GIS-rømmingsmeldinger"
+sector = "food"
+description = "Nye og endrede meldinger om faktisk eller mulig rømming i Fiskeridirektoratets eksterne GIS-lag. GlobalID identifiserer meldingen; lokalitet, virksomhet, art, hendelsestid, meldingsstatus, anslag, endelig oppgitt antall og gjenfangstopplysninger sammenlignes. Ukjent antall, null, intervallanslag og endelig oppgitt antall beholdes separat. Hele lagets publiserte ID-sett avstemmes mot antall og rader i to komplette lesninger. Dette laget gir ikke full nasjonal dekning eller alle sluttmeldinger. Fravær tolkes ikke som avslutning. Kildens hendelsestid vises som UTC, aldri som publiseringsdato."
+official_url = "https://www.fiskeridir.no/statistikk-tall-og-analyse/data-og-statistikk-om-akvakultur/rommingshendelser"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "escape_incidents"
+urls = ["https://gis.fiskeridir.no/server/rest/services/eksterne_tjenester/FiskeridirAPI_akva_feature/FeatureServer/1"]
+max_records = 1000
+max_bytes = 4000000
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "sodir_expected_field_investment_changes"
+name = "Sodir – forventede framtidige feltinvesteringer"
+sector = "energy"
+description = "Følger kildeoppgitte forventede framtidige investeringer per felt og basisår. Beløpet er summen framover fra oppført år, i millioner faste kroner med samme prisbasisår; det er ikke faktisk årsforbruk, prosjektets opprinnelige totalbudsjett eller en dokumentert kostnadsoverskridelse. Felt-ID og basisår gir identitet, slik at skifte av prisbasis ikke sammenlignes direkte. Negative kildeverdier bevares. Basisåret er ikke publiseringsdato eller bevis på fersk status."
+official_url = "https://factpages.sodir.no/en/field/TableView/Investment/ExpectedByField"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "petroleum_figures"
+profile = "investments"
+latest_months = 6
+latest_versions = 1
+max_period_age_days = 730
+max_export_rows = 50000
+max_records = 3000
+max_bytes = 4000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "nav_redundancy_notifications"
+name = "NAV – innmeldt mulig nedbemanning etter bransje"
+sector = "labour"
+description = "Følger publiserte månedstall for berørte personer i arbeidsgiveres meldinger om mulig permittering eller masseoppsigelse i SN2025-næring F bygg, H transport og M eiendom. Dette er innmeldte mulige tiltak, ikke gjennomførte oppsigelser eller registrert ledighet. SN2025, mottaksmåned og meldingstype inngår i identiteten. Gammel næringsstandard er ukjent hos kilden; skjermet antall er ukjent, aldri null. Hele rapporten avstemmes mot egen nasjonal tidsserie og leses to ganger. Historiske perioder beholdes. Selskapene identifiseres ikke."
+official_url = "https://www.nav.no/no/nav-og-samfunn/statistikk/arbeidssokere-og-stillinger-statistikk/permitteringsvarsel%20og%20permitterte"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "nav_redundancy"
+urls = ["https://www.nav.no/no/nav-og-samfunn/statistikk/arbeidssokere-og-stillinger-statistikk/permitteringsvarsel%20og%20permitterte"]
+industry_codes = ["F", "H", "M"]
+from_year = 2025
+max_records = 1000
+max_report_age_days = 75
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

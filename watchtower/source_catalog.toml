@@ -824,3 +824,93 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Den publiserte rapportens fem reaksjonsmål per år og hovednæring. Profilen erstatter ikke detaljdekning på næringsgruppe og omfatter ikke enkeltvedtak. Hele rapportens tabeller kontrolleres ved to like lesinger før eksplisitt utvalg. Kilderevisjoner varsles med konkrete før/etter-tall."
+
+[[source]]
+id = "device_clearances"
+name = "FDA – vedtaksopplysninger for medisinsk utstyr"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "510(k)-søknadsnummer identifiserer vedtaksposten. Følger søker, postland, utstyr, produktkode, utfall og separate mottaks-/vedtaksdatoer i et avgrenset vindu. Full paginering, eksportdato og to like komplette lesinger kreves. Bevarer utfallskode og kildetekst uten generell godkjenningspåstand. Tilbakekallinger og eldre rettinger utenfor vinduet dekkes ikke."
+
+[[source]]
+id = "investor_warnings"
+name = "Finanstilsynet – egne markedsadvarsler"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Egne norske markedsadvarsler med stabil side-ID, kildeoverskrift, sist-publisert-dato og full innlednings-/advarselstekst. Myndighetsfilter, komplett årspaginering, artikkelidentitet og to like fullstendige lesinger kontrolleres. Navnemisbruk og kloning utledes ikke som skyld hos en navngitt legitim virksomhet. Fravær betyr ikke tilbaketrekking."
+
+[[source]]
+id = "aviation_operators"
+name = "Luftfart – publiserte AOC-operatøroppføringer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Hele den offentlige AOC-listen avstemmes mot paginering og total. Stabilt sertifikatnummer, operatørnavn og adresse overvåkes. Ingen vedtaksdato eller gyldighetsperiode utledes fra listen, og fravær er ikke tilbakekall."
+
+[[source]]
+id = "aquaculture_certificates"
+name = "Havbruk – NYTEK-anleggssertifikater"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Alle publiserte sertifikatrapporter hentes med samme tidspunkt i komplett paginering. Rapport-UUID, kildestatus, eksplisitt trekking, datoer, innehaver og produksjonsenheter bevares. Motstridende og framtidige kildedatoer merkes. Vedlegg og øvrige tekniske dokumenter hentes ikke."
+
+[[source]]
+id = "building_approvals"
+name = "Bygg – sentral godkjenning og tiltaksklasser"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "DiBKs åpne v2-oppslag for eksplisitte organisasjonsnumre. Godkjenningsstatus, sluttdato og alle funksjon/fagområde/tiltaksklasse-kombinasjoner bevares, også ulike klasser i samme fag. Identiske eksportduplikater er nøytrale. Dette er frivillig sentral godkjenning, ikke byggetillatelse."
+
+[[source]]
+id = "enova_projects"
+name = "Enova – prosjektgjennomføring"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Publisert prosjektstatus og gjeldende start/sluttdato per saksnummer i valgt sektor og vedtaksår. Det offisielle appens normale datasett avstemmes to ganger; separat eksempelgrunnlag kan ikke bli valgt. Flere støtteobjekter i samme sak bevares uten beløpssummering. Oppdateringstid for status er ikke publisert; vedtaksdato er et annet felt. Ingen utbetaling eller realisert effekt utledes."
+
+[[source]]
+id = "petroleum_figures"
+name = "Sodir – produksjon, reserver og forventede investeringer"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Tre forskjellige profiler: månedlige felt-/funnvolumer, versjonerte årlige reserveanslag og forventede framtidige investeringer. Investeringsanslag gjelder framtidig sum i mill. faste NOK fra oppført basisår; ikke faktisk årsforbruk eller dokumentert overskridelse. Hele de offisielle CSV-eksportene kontrolleres før periode- og feltutvalg. Negative korreksjoner, null og manglende tall holdes atskilt. Gass er i mrd. Sm3; NGL-produksjon i mill. Sm3 og NGL-reserver i mill. tonn. Perioden er ikke publiseringstid."
+
+[[source]]
+id = "trade_defence_cases"
+name = "EU – handelsundersøkelser og veiledende tidsplaner"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Hele API-listen over pågående EU-handelsundersøkelser med stabile saks-ID-er. Produkt, land, undersøkelsestype, oppført tiltaksstatus, dokumentmetadata og veiledende kalenderfrister følges; manglende detaljsider er eksplisitte. Kildeversjon og to like komplette svar kontrolleres. Bindende frister må leses i regelverk og kunngjøringer. Tiltakssatser, dokumentinnhold, oppstartsdato og avslutning fra fravær utledes ikke."
+
+[[source]]
+id = "nav_redundancy"
+name = "NAV – meldinger om mulig nedbemanning"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Månedlige SN2025-bransjetall for personer i innmeldte mulige masseoppsigelser og permitteringer. Alle ark og perioder valideres, totaler avstemmes og komplett eksport leses to ganger. Skjerming og gammel næringsstandard beholdes eksplisitt; ingen selskapsidentitet eller gjennomført nedbemanning utledes."
+
+[[source]]
+id = "escape_incidents"
+name = "Fiskeridirektoratet – publiserte GIS-rømmingsmeldinger"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Komplett kontroll av valgt offentlig GIS-lags metadata, antall og ID-sett. GlobalID, meldingsstatus, antall/anslag, hendelsestid, lokalitet, virksomhet og gjenfangst overvåkes. Null, ukjent og intervallanslag holdes atskilt. Ikke full nasjonal dekning eller alle sluttmeldinger; fravær beviser ikke avslutning."

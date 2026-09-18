@@ -90,3 +90,7 @@ Den særskilte vedtakslisten gir ett nytt konfigurerbart hendelsesutvalg. Konser
 Tre nye funksjoner følger EMAs strukturerte sikkerhetsdatasett: `ema_human_safety_communications` oppdager direkte sikkerhetskommunikasjon og endrede fagopplysninger; `ema_human_safety_referrals` følger sikkerhetsprosedyrers status, anbefalinger og beslutningsdatoer; `ema_periodic_safety_outcomes` følger regulatoriske utfall av periodiske sikkerhetsvurderinger. De er forskjellige prosesser, ikke flere mål innen samme utvalg.
 
 To endelige avlesninger per oppskrift ga henholdsvis 142, 100 og 2714 poster, med stille baseline og identisk historikk uten gjentakelsesvarsler. EMAs genereringstid og generelle oppdateringsdato gir ikke egne varsler. Endret faglig innhold gjør det. Streng kontroll av totaler, skjema, valgte URL-er, datoer og statustyper avviser ufullstendige uttrekk. Ingen av disse kildene dokumenterer norsk refusjon eller gir behandlingsråd. Se [kildekontroll](source_checks/ema-regulatory-2026-09-11.md). Katalogen har nå 98 oppskrifter og konservativt 38 ulike funksjoner.
+
+## Twelve additional event capabilities, 18 September 2026
+
+The twelve recipes in [the source verification record](source_checks/sector-events-2026-09-18.md) cover separate approval, warning, trade-case, project, workforce, aquaculture and petroleum events. Different company selections do not increase this count. All completed two actual quiet adapter polls; observed source limits and later operational proof remain separate.

@@ -29,7 +29,7 @@ def _xml(raw):
 
 
 def table_rows(raw, sheet_name, max_unpacked, max_rows, columns, *,
-               allow_cached_formulas=False, allow_blank_rows=False):
+               allow_cached_formulas=False, allow_blank_rows=False, allow_leading_blank_rows=False):
     """Read text values; explicit cache mode never evaluates Excel formulas."""
     try:
         with ZipFile(BytesIO(raw)) as archive:
@@ -67,12 +67,14 @@ def table_rows(raw, sheet_name, max_unpacked, max_rows, columns, *,
                     raise SourceError('Workbook shared-string namespace changed')
                 shared = [''.join(t.text or '' for t in item.iter(NS+'t')) for item in root.findall(NS+'si')]
             sheet = _xml(archive.read(target))
-            return _rows(sheet, shared, max_rows, columns, allow_cached_formulas, allow_blank_rows)
+            return _rows(sheet, shared, max_rows, columns, allow_cached_formulas, allow_blank_rows,
+                         allow_leading_blank_rows=allow_leading_blank_rows)
     except (BadZipFile, KeyError, RuntimeError, NotImplementedError, ET.ParseError, UnicodeError, ValueError, IndexError) as exc:
         raise SourceError('Public workbook is invalid') from exc
 
 
-def _rows(sheet, shared, max_rows, columns, allow_cached_formulas=False, allow_blank_rows=False):
+def _rows(sheet, shared, max_rows, columns, allow_cached_formulas=False, allow_blank_rows=False, *,
+          allow_leading_blank_rows=False):
     if sheet.tag != NS+'worksheet':
         raise SourceError('Worksheet namespace changed')
     data = sheet.findall(NS+'sheetData')
@@ -116,9 +118,10 @@ def _rows(sheet, shared, max_rows, columns, allow_cached_formulas=False, allow_b
             cells[index] = text
         parsed[number] = cells
     populated = [n for n, values in parsed.items() if any(values)]
-    if not populated or min(populated) != 1 or max(populated) < 2:
+    if not populated or (min(populated) != 1 and not allow_leading_blank_rows) or max(populated) < 2:
         raise SourceError('Worksheet is empty or lacks header/data')
     last = max(populated)
-    if not allow_blank_rows and any(n not in parsed or not any(parsed[n]) for n in range(1,last+1)):
+    first = min(populated) if allow_leading_blank_rows else 1
+    if not allow_blank_rows and any(n not in parsed or not any(parsed[n]) for n in range(first,last+1)):
         raise SourceError('Worksheet has missing or blank interior rows')
     return [parsed.get(n, ['']*columns) for n in range(1,last+1)]
