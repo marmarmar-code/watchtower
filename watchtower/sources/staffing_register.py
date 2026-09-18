@@ -44,6 +44,11 @@ def unit_record(row):
 
 
 class StaffingRegisterSource(SnapshotSource):
+    def fetch_with_state(self, previous):
+        saved = ((previous or {}).get('source_state') or {}).get('records', {})
+        self._previous_rows = saved.get('rows', {}) if saved.get('scope') == self.scope else {}
+        return super().fetch_with_state(previous)
+
     def __init__(self, config, *args, **kwargs):
         super().__init__(config,*args,**kwargs)
         if config.urls not in ((),(PAGE,)):
@@ -128,14 +133,39 @@ class StaffingRegisterSource(SnapshotSource):
             selected = [by_id[org] for org in self.orgnrs]
         if len(selected) > self.max_records:
             raise SourceError('Staffing-register selection exceeds max_records')
+        missing_names = 0
+        for row in selected:
+            observed_name = row['fields']['name']
+            row['observed_name'] = observed_name
+            if observed_name is None:
+                missing_names += 1
+                old = getattr(self, '_previous_rows', {}).get(row['key'], {}).get('row', {})
+                known_name = old.get('fields', {}).get('name')
+                if known_name:
+                    # Keep the last observed name as context, explicitly marked
+                    # below. A missing optional API field is not a company rename.
+                    row['fields']['name'] = known_name
+                    row['title'] = known_name
+        self.coverage_warnings = ['staffing_names_missing'] if missing_names else []
         return sorted(selected,key=lambda row:row['key'])
 
     def _item(self,row,event,details,suppress):
+        prior = getattr(self, '_previous_rows', {}).get(row['key'], {}).get('row', {}).get('fields', {})
+        if event == 'changed' and prior and prior.get('name') is None:
+            # Learning a previously absent name is enrichment, not evidence of a
+            # rename. Continue to report any accompanying approval/status change.
+            changes = tuple(value for value in details[1:]
+                            if not value.startswith(self.field_labels['name'] + ':'))
+            details = (details[0], *changes)
+            suppress = suppress or not changes
         item = super()._item(row,event,details,suppress)
         label = 'Nyobservert oppføring i bemanningsregisteret' if event=='added' else 'Endret oppføring i bemanningsregisteret'
         info = (label,f"Organisasjonsnummer: {row['key']} · {row['fields']['unit_type']}",
                 f"Oppført godkjenningsstatus: {row['fields']['approval_status']}")
         if event == 'changed':
             info += tuple(d[:800] for d in details[1:])
+        if row.get('observed_name') is None:
+            info += ('Navn mangler i dagens kilde; viser sist observerte navn.' if row['fields']['name']
+                     else 'Navn er ikke oppgitt i dagens kilde.',)
         info += ('Registerobservasjon uten vedtaksdato; fravær tolkes ikke som inndratt godkjenning',)
         return replace(item,alert_details=info)

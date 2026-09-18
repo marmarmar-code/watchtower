@@ -2903,3 +2903,22 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "acer_remit_enforcement_changes"
+name = "Kraftmarked – håndhevingsstatus og reaksjoner"
+sector = "energy"
+description = "Følger ACERs publiserte REMIT-rapport fra 2024. Nye rapportgrupper og endringer i oppgitt beløp/reaksjon og status gir varsler med konkret før/etter. Myndighet, aktør, regelreferanse, år og nasjonal lenke definerer en rapportgruppe; dette er ikke en offisiell saks-ID. Flere underposter med samme sammensatte nøkkel bevares uten å slå sammen beløp eller utfall. authorities og participants kan velge eksakte kildeetiketter. Hele rapportens rader avstemmes med antall utfylte aktørfelt før filtrering og kontrolleres to ganger. Beløp gjengis som kildetekst; bot, inndragning og tilbakebetaling summeres ikke. År er ikke full vedtaksdato. Første innlesing er stille; fravær gir ikke varsel om omgjøring. ACER-rapporten er ikke et komplett register over alle nasjonale vedtak."
+official_url = "https://www.acer.europa.eu/remit/coordination-on-cases/enforcement-decisions"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "remit_enforcement"
+from_year = 2024
+max_report_rows = 500
+max_model_age_days = 45
+max_records = 200
+max_bytes = 4000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

@@ -68,6 +68,30 @@ class StaffingRegisterTests(unittest.TestCase):
         s=self.source();self.load(s,[unit(),unit(1)]);state,_=poll(s)
         self.load(s,[unit()]);_,alerts=poll(s,state);self.assertEqual([],alerts)
 
+    def test_optional_name_gaps_do_not_create_rename_alerts(self):
+        s=self.source();self.load(s,[unit()]);state,_=poll(s)
+        self.load(s,[unit(name=False)]);missing,alerts=poll(s,state)
+        self.assertEqual([],alerts)
+        self.assertEqual('Example Unit 0',s._next['rows'][ORGS[0]]['row']['fields']['name'])
+        self.assertIsNone(s._next['rows'][ORGS[0]]['row']['observed_name'])
+        self.assertEqual(['staffing_names_missing'],s.coverage_warnings)
+        self.load(s,[unit()]);restored,alerts=poll(s,missing);self.assertEqual([],alerts)
+        renamed=unit();renamed['virksomhet']['navn']='Renamed Unit'
+        self.load(s,[renamed]);_,alerts=poll(s,restored)
+        self.assertIn('Example Unit 0 → Renamed Unit',' '.join(alerts[0].item.alert_details))
+
+    def test_approval_change_is_delivered_even_while_name_is_absent(self):
+        s=self.source();self.load(s,[unit()]);state,_=poll(s)
+        self.load(s,[unit(status=2,name=False)]);_,alerts=poll(s,state)
+        self.assertEqual(1,len(alerts))
+        details=' '.join(alerts[0].item.alert_details)
+        self.assertIn('Godkjent → Ikke godkjent',details)
+        self.assertIn('Navn mangler i dagens kilde',details)
+
+    def test_learning_first_available_name_is_quiet(self):
+        s=self.source();self.load(s,[unit(name=False)]);state,_=poll(s)
+        self.load(s,[unit()]);_,alerts=poll(s,state);self.assertEqual([],alerts)
+
     def test_bad_pagination_partial_pages_and_cross_page_duplicates_fail(self):
         rows=[unit(),unit(1),unit(2)]
         changes=[lambda d,n:{**d,'pagination':{**d['pagination'],'pageNumber':9}},

@@ -752,3 +752,12 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "Publiserte tildelingsrader fra Landbruksdirektoratets auksjonshistorikk i inneværende år. Standardutvalget er korn i tonn. Deltakernavn, tildelt mengde og bud i kroner per enhet holdes atskilt fra vist minstepris. Hele årslisten og hvert valgt resultat sammenlignes ved to lesinger. Manglende resultattabell er ikke null tildeling, og forsvunnet tidligere tabell stopper innlesingen."
+
+[[source]]
+id = "remit_enforcement"
+name = "REMIT – publiserte håndhevingsopplysninger"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "ACERs offentlige rapport med kildeoppgitt aktør, myndighet, regelreferanse, år, beløp/reaksjon, status og direkte nasjonal kildelenke. Hele rapportens rader avstemmes mot uavhengig antall utfylte aktørfelt før filtrering. Sammensatte grupper er ikke offisielle saks-ID-er; alle ulike underposter bevares. Beløp er ufortolket kildetekst og kan omfatte inndragning eller tilbakebetaling. Ingen antatt vedtaksdato, total for alle nasjonale saker, regneoperasjon eller juridisk konklusjon. To komplette lesinger må samsvare."
