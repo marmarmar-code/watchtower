@@ -148,16 +148,30 @@ class AccountFiguresSource(SnapshotSource):
     def _item(self, row, event, details, suppress):
         item = super()._item(row, event, details, suppress)
         fields = row['fields']
+        key_figures = ('revenue', 'operating_result', 'annual_result', 'assets', 'equity')
+        currency = self.field_labels['currency'] + ': ' + fields['currency']
         if event == 'added':
-            details = ('Nyobservert regnskapsperiode med nøkkeltall',
-                       *(f'{self.field_labels[k]}: {fields[k] if fields[k] is not None else "ikke oppgitt"}'
-                         for k in ('revenue', 'operating_result', 'annual_result', 'assets', 'equity')))
+            heading = 'Nyobservert regnskapsperiode med nøkkeltall'
+            changes = [f'{self.field_labels[k]}: {fields[k] if fields[k] is not None else "ikke oppgitt"}'
+                       for k in key_figures]
         else:
-            details = ('Endrede kildeopplysninger for samme regnskapsperiode', *details[1:])
-        return replace(item, alert_details=(*details,
-            f'Selskapsregnskap: {row["period_start"]}–{row["period_end"]}; oppgitt valuta: {fields["currency"]}',
-            'Tallene gjengis uten omregning. API-et dokumenterer ikke tallskalaen; kontroller årsregnskapet før beløp brukes',
-            'Kilden viser siste offentlige selskapsregnskap. Historiske korreksjoner og konserntall er ikke dekket'))
+            heading = 'Endrede kildeopplysninger for samme regnskapsperiode'
+            changes = list(details[1:])
+            for index, change in enumerate(changes):
+                if change.startswith(self.field_labels['currency'] + ':'):
+                    currency = changes.pop(index)
+                    break
+            priority = tuple(dict.fromkeys((*key_figures, *FIGURES)))
+            changes.sort(key=lambda change: next((index for index, key in enumerate(priority)
+                         if change.startswith(self.field_labels[key] + ':')), len(priority)))
+            if len(changes) > 5:
+                heading += f' · {len(changes)-5} øvrige feltendringer; se kilden'
+        # Reserve the first three lines for context; all figures remain in state.
+        return replace(item, alert_details=(heading,
+            f'Selskapsregnskap: {row["period_start"]}–{row["period_end"]}; {currency}',
+            'Tallene gjengis uten omregning. API-et dokumenterer ikke tallskalaen; kontroller årsregnskapet før beløp brukes. '
+            'Kilden viser siste offentlige selskapsregnskap. Historiske korreksjoner og konserntall er ikke dekket',
+            *changes[:5]))
 
 
 def _record(value, orgnr):

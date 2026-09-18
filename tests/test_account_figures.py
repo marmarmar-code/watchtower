@@ -5,7 +5,8 @@ import unittest
 from unittest.mock import Mock
 
 from watchtower.config import FilterRule, SourceConfig
-from watchtower.sources.account_figures import AccountFiguresSource, API
+from watchtower.engine import notification_entries
+from watchtower.sources.account_figures import AccountFiguresSource, API, FIGURES
 from watchtower.sources.common import SourceError
 from test_change_sources import poll
 
@@ -40,6 +41,46 @@ class AccountFiguresTests(unittest.TestCase):
         self.assertEqual(1,len(alerts));self.assertIn('-2 → -3',' '.join(alerts[0].item.alert_details))
         s.get.return_value=response([r]);same,alerts=poll(s,state);self.assertEqual(state,same);self.assertEqual([],alerts)
 
+    def test_many_changes_keep_period_currency_scale_and_key_figures_in_notification(self):
+        s=source();r=account()
+        for index,(path,_) in enumerate(FIGURES.values()):
+            target=r;parts=path.split('.')
+            for part in parts[:-1]:target=target.setdefault(part,{})
+            target[parts[-1]]=index+10
+        r['regnkapsprinsipper']={'regnskapsregler':'Example rules'}
+        s.get=Mock(return_value=response([r]));state,_=poll(s);saved=deepcopy(state);scope=s.scope
+        for index,(path,_) in enumerate(FIGURES.values()):
+            target=r;parts=path.split('.')
+            for part in parts[:-1]:target=target[part]
+            target[parts[-1]]=index+110
+        r.update(id=101,journalnr='2026000200',valuta='NOK',oppstillingsplan='small',avviklingsregnskap=True)
+        r['regnkapsprinsipper']['regnskapsregler']='Example revised rules'
+        s.get.return_value=response([r]);updated,alerts=poll(s,state)
+        self.assertEqual(saved,state);self.assertEqual(scope,s.scope)
+        self.assertEqual(1,len(alerts));details=notification_entries(alerts)[0].details
+        self.assertLessEqual(len(details),8);self.assertTrue(all(len(line)<=500 for line in details))
+        text=' '.join(details)
+        for phrase in [r['regnskapsperiode']['fraDato'],r['regnskapsperiode']['tilDato'],'USD → NOK',
+                       'dokumenterer ikke tallskalaen','Historiske korreksjoner og konserntall er ikke dekket',
+                       '14 øvrige feltendringer']:
+            self.assertIn(phrase,text)
+        for field in ('revenue','operating_result','annual_result','assets','equity'):
+            index=list(FIGURES).index(field)
+            self.assertIn(f'{FIGURES[field][1]}: {index+10} → {index+110}',text)
+        fields=next(iter(updated['source_state']['records']['rows'].values()))['row']['fields']
+        for index,field in enumerate(FIGURES):self.assertEqual(str(index+110),fields[field])
+        self.assertEqual(101,fields['submission_id']);self.assertEqual('NOK',fields['currency'])
+        repeated,alerts=poll(s,updated);self.assertFalse(alerts);self.assertEqual(updated,repeated)
+
+    def test_new_period_keeps_all_source_limits_within_notification_bounds(self):
+        s=source();s.get=Mock(return_value=response([account(year=datetime.now(timezone.utc).year-2)]))
+        state,_=poll(s);r=account();s.get.return_value=response([r]);_,alerts=poll(s,state)
+        details=notification_entries(alerts)[0].details
+        self.assertLessEqual(len(details),8);self.assertTrue(all(len(line)<=500 for line in details))
+        text=' '.join(details)
+        for phrase in ['Selskapsregnskap:',r['regnskapsperiode']['fraDato'],'USD','ikke tallskalaen',
+                       'Historiske korreksjoner og konserntall er ikke dekket','Årsresultat: -2']:
+            self.assertIn(phrase,text)
     def test_replacement_id_same_period_and_new_period_are_distinguished(self):
         s=source();r=account(year=datetime.now(timezone.utc).year-2);s.get=Mock(return_value=response([r]));state,_=poll(s)
         key=next(iter(state['source_state']['records']['rows']));r['id']=101;r['journalnr']='2026000200'
