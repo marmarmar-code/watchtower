@@ -40,7 +40,8 @@ class WebChangesSource(SnapshotSource):
         # record identities or the scope of an existing snapshot.
         snapshot_config = replace(config, options={
             key: value for key, value in config.options.items()
-            if key not in {"exclude_url_prefixes", "display_title_selector", "display_ignore_selectors", "text_selector"}
+            if key not in {"exclude_url_prefixes", "display_title_selector", "display_ignore_selectors", "text_selector",
+                           "published_selector", "published_attribute", "published_text_separator"}
         })
         super().__init__(snapshot_config, *args, **kwargs)
         self.config = config
@@ -57,7 +58,11 @@ class WebChangesSource(SnapshotSource):
             config.options.get("display_ignore_selectors", []), "display_ignore_selectors", empty=True
         )
         self.text_selector = config.options.get("text_selector")
-        for name in ("title_selector", "display_title_selector", "text_selector"):
+        self.published_selector = config.options.get("published_selector")
+        self.published_attribute = config.options.get("published_attribute")
+        self.published_text_separator = config.options.get("published_text_separator")
+        self._previous_publication_rows = {}
+        for name in ("title_selector", "display_title_selector", "text_selector", "published_selector"):
             selector = getattr(self, name)
             if selector is not None:
                 if not isinstance(selector, str) or not selector.strip():
@@ -65,8 +70,16 @@ class WebChangesSource(SnapshotSource):
                 compile_selector(selector)
         if config.kind != "web_links" and (
             self.display_title_selector is not None or self.text_selector is not None
+            or self.published_selector is not None
         ):
-            raise ValueError("display_title_selector and text_selector require web_links")
+            raise ValueError("display_title_selector, text_selector and published_selector require web_links")
+        for name in ("published_attribute", "published_text_separator"):
+            value = getattr(self, name)
+            if value is not None and (not self.published_selector or not isinstance(value, str)
+                                      or not value.strip() or len(value) > 100):
+                raise ValueError(f"{name} requires published_selector and a non-empty string")
+        if self.published_attribute and not re.fullmatch(r"[A-Za-z_:][\w:.-]*", self.published_attribute):
+            raise ValueError("published_attribute must be an HTML attribute name")
         if self.display_ignore and self.display_title_selector is None:
             raise ValueError("display_ignore_selectors requires display_title_selector")
         for selector in (self.selector, *self.ignore, *self.display_ignore):
@@ -77,6 +90,34 @@ class WebChangesSource(SnapshotSource):
             raise ValueError("min_text_length exceeds max_text_length")
         if self.thresholds:
             raise ValueError("Numeric thresholds apply to structured records, not page text")
+
+    def fetch_with_state(self, previous):
+        if not self.published_selector:
+            return super().fetch_with_state(previous)
+        # A presentation upgrade must neither mutate the caller's history nor
+        # invent the date of a legacy title that also changed at the source.
+        previous = deepcopy(previous)
+        stored = ((previous or {}).get("source_state") or {}).get("records", {})
+        self._previous_publication_rows = stored.get("rows", {}) if stored.get("scope") == self.scope else {}
+        try:
+            return super().fetch_with_state(previous)
+        finally:
+            self._previous_publication_rows = {}
+
+    def _normalize_legacy_publication_title(self, record):
+        before = self._previous_publication_rows.get(record["key"], {})
+        old_row = before.get("row", {})
+        if not before.get("present") or old_row.get("publication_title_normalized"):
+            return
+        old_title = old_row.get("fields", {}).get("title")
+        if not isinstance(old_title, str):
+            raise SourceError("Invalid prior link title; previous state preserved")
+        if old_title == record["fields"]["title"]:
+            return
+        publication_text = old_row.get("publication_text") or record["publication_text"]
+        if publication_text not in old_title:
+            raise SourceError("Publication presentation migration lacks a comparable prior date; previous state preserved")
+        old_row["fields"]["title"] = re.sub(r"\s+", " ", old_title.replace(publication_text, "", 1)).strip()
 
     def _item(self, row, event, details, suppress):
         item = super()._item(row, event, details, suppress)
@@ -124,6 +165,38 @@ class WebChangesSource(SnapshotSource):
             if not title:
                 raise SourceError("Selected link lacks a visible title")
             record = {"key": url, "title": title, "url": url, "fields": {"title": title}}
+            if self.published_selector:
+                dates = node.select(self.published_selector)
+                if len(dates) != 1:
+                    raise SourceError("Configured published selector must match exactly one date per link")
+                date_node = dates[0]
+                published = (date_node.get(self.published_attribute) if self.published_attribute
+                             else date_node.get_text(" ", strip=True))
+                if not isinstance(published, str) or not published.strip():
+                    raise SourceError("Selected publication date or attribute is missing")
+                if self.published_text_separator:
+                    if self.published_text_separator not in published:
+                        raise SourceError("Configured publication text separator no longer matches")
+                    published = published.split(self.published_text_separator, 1)[0]
+                published = re.sub(r"\s+", " ", published).strip()
+                if not published:
+                    raise SourceError("Selected publication date is empty")
+                # Keep the source's date and timezone verbatim. A time element
+                # inside a title is transport/presentation, not a news change.
+                record["published"] = published
+                clean_title = deepcopy(title_node)
+                embedded_dates = clean_title.select(self.published_selector)
+                if embedded_dates:
+                    record["raw_title"] = title
+                    record["publication_text"] = re.sub(r"\s+", " ", date_node.get_text(" ", strip=True)).strip()
+                    for date in embedded_dates:
+                        date.decompose()
+                    title = re.sub(r"\s+", " ", clean_title.get_text(" ", strip=True)).strip()
+                    if not title:
+                        raise SourceError("Selected link lacks a title apart from its publication date")
+                    record["title"] = record["fields"]["title"] = title
+                    record["publication_title_normalized"] = True
+                    self._normalize_legacy_publication_title(record)
             if self.display_title_selector:
                 display_node = node.select_one(self.display_title_selector)
                 if display_node is None:

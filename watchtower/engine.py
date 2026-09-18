@@ -7,6 +7,7 @@ from hashlib import sha256
 
 from .config import Config, MIN_SOURCE_INTERVAL_MINUTES, SourceConfig, source_seen_limit
 from .models import Item, NotificationEntry
+from . import revisions
 from .notifier import Notifier, format_slack_entries
 from .state import StateStore
 from .delivery import pending, prepare, deliver, record_history
@@ -375,6 +376,8 @@ def evaluate(
         latest[item.key] = (index, item)
     unique_items = [item for _, item in sorted(latest.values(), key=lambda pair: pair[0])]
 
+    snapshots = dict((previous or {}).get(revisions.STATE_KEY, {}))
+
     move_to_end: list[str] = []
     moved: set[str] = set()
     for item in unique_items:
@@ -387,6 +390,18 @@ def evaluate(
             change = "unchanged"
         else:
             change = "updated"
+        current_snapshot = revisions.snapshot(source.kind, item)
+        if current_snapshot is not None:
+            prior_snapshot = snapshots.get(item.key)
+            if old_digest is not None:
+                # A digest cannot tell us the old text or whether only a list's
+                # timestamps changed. Enrich that legacy record quietly once.
+                if prior_snapshot is None or prior_snapshot == current_snapshot:
+                    change = "unchanged"
+                else:
+                    change = "updated"
+            item = replace(item, alert_details=revisions.details(prior_snapshot, current_snapshot))
+            snapshots[item.key] = current_snapshot
         candidate = change == "new" or (change == "updated" and source.alert_on_update)
         if (
             not baseline
@@ -411,12 +426,14 @@ def evaluate(
         order = order[-max_seen:]
         for key in drop:
             seen.pop(key, None)
+            snapshots.pop(key, None)
 
     if (
         previous is not None
         and previous.get("initialized") is True
         and previous.get("seen") == seen
         and previous.get("order") == order
+        and previous.get(revisions.STATE_KEY, {}) == snapshots
     ):
         return dict(previous), alerts, baseline
 
@@ -426,6 +443,8 @@ def evaluate(
         "seen": seen,
         "order": order,
     }
+    if snapshots:
+        next_state[revisions.STATE_KEY] = snapshots
     return next_state, alerts, baseline
 
 
