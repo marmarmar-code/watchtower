@@ -199,7 +199,7 @@ class AquacultureCertificatesSource(SnapshotSource):
 
     def _item(self, row, event, details, suppress):
         fields = row['fields']
-        content = ['Nyobservert NYTEK-anleggssertifikat' if event == 'added' else 'Endret NYTEK-anleggssertifikat',
+        content = ['Nyobservert NYTEK-sertifikatrapport' if event == 'added' else 'Endret NYTEK-sertifikatrapport',
                    'Lokalitetsnummer: ' + str(fields['site']['number'])]
         if event == 'added':
             content.extend(['Kildens sertifikatstatus: ' + fields['status'],
@@ -207,6 +207,10 @@ class AquacultureCertificatesSource(SnapshotSource):
                             + (' · ' + ' '.join(row.get('date_notes', [])) if row.get('date_notes') else ''),
                             'Innehaver: ' + fields['holder']['name'] + ' (' + fields['holder']['orgnr'] + ')',
                             'Maksimalt antall produksjonsenheter i sertifikatet: ' + str(fields['max_units'])])
+            if fields['audit_log']:
+                latest = fields['audit_log'][-1]
+                content.append('Revisjonshistorikk (siste av '+str(len(fields['audit_log']))+'): '
+                    +str(latest['number'])+' · '+latest['date']+' · '+latest['description'])
         else:
             if row.get('date_notes'):
                 content.append(' '.join(row['date_notes']))

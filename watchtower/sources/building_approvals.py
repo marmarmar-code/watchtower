@@ -1,4 +1,4 @@
-"""Explicit companies' central construction approvals in DiBK's open v2 API."""
+"""Explicit companies' central construction approvals in DiBK's open API."""
 from dataclasses import replace
 from datetime import date
 import json
@@ -22,9 +22,13 @@ def unique_object(pairs):
 
 
 def enterprise_record(payload, orgnr):
-    if not isinstance(payload, dict) or not isinstance(payload.get('enterprise'), dict):
-        raise SourceError('DiBK enterprise envelope is missing')
-    row = payload['enterprise']
+    # The public cache can serve v1 after a v2 request despite Vary: Accept.
+    # Both documented single-enterprise envelopes carry the same inner schema.
+    if not isinstance(payload, dict) or set(payload) not in ({'enterprise'}, {'dibk-sgdata'}):
+        raise SourceError('DiBK enterprise envelope is missing or ambiguous')
+    row = next(iter(payload.values()))
+    if not isinstance(row, dict):
+        raise SourceError('DiBK enterprise envelope is invalid')
     unit, status, areas = row.get('enterprise'), row.get('status'), row.get('valid_approval_areas')
     if (not isinstance(unit, dict) or unit.get('organizational_number') != orgnr
             or not isinstance(unit.get('name'), str) or not unit['name'].strip()
@@ -112,7 +116,7 @@ class BuildingApprovalsSource(SnapshotSource):
                              'approval_areas': 'Godkjenningsområder', **self.field_labels}
 
     def _lookup(self, orgnr):
-        response = self.get(API + orgnr, headers={'Accept': 'application/vnd.sgpub.v2+json'},
+        response = self.get(API + orgnr, headers={'Accept': 'application/vnd.sgpub.v2'},
                             stream=True, allow_redirects=False,
                             accepted_statuses=(301, 302, 303, 307, 308))
         try:

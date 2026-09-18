@@ -35,6 +35,37 @@ class BuildingApprovalsTests(unittest.TestCase):
         self.assertEqual(state, repeat); self.assertEqual([], alerts)
         self.assertNotIn('email', str(state))
 
+    def test_documented_v1_and_v2_envelopes_share_state_and_real_changes(self):
+        source = self.source(); self.load(source, payload()); state, _ = poll(source)
+        v1 = {'dibk-sgdata': payload()['enterprise']}
+        self.load(source, v1); repeated, alerts = poll(source, state)
+        self.assertEqual(state, repeated); self.assertFalse(alerts)
+        self.assertEqual({'Accept': 'application/vnd.sgpub.v2'}, source.get.call_args.kwargs['headers'])
+        v1['dibk-sgdata']['valid_approval_areas'][0]['grade'] = '3'
+        self.load(source, v1); updated, alerts = poll(source, repeated)
+        self.assertEqual(1, len(alerts))
+        self.assertIn('tiltaksklasse 2 → 3', ' '.join(notification_entries(alerts)[0].details))
+        self.load(source, payload('3')); repeated, alerts = poll(source, updated)
+        self.assertEqual(updated, repeated); self.assertFalse(alerts)
+
+    def test_unknown_ambiguous_or_incomplete_v1_is_rejected_without_state_change(self):
+        source = self.source(); self.load(source, payload()); state, _ = poll(source)
+        saved = copy.deepcopy(state)
+        malformed = [None, [], {'error': 'Source error'}, payload()['enterprise'],
+                     {'enterprise': payload()['enterprise'], 'dibk-sgdata': payload()['enterprise']},
+                     {'dibk-sgdata': None}, {'dibk-sgdata': {}}]
+        wrong_identity = {'dibk-sgdata': copy.deepcopy(payload()['enterprise'])}
+        wrong_identity['dibk-sgdata']['enterprise']['organizational_number'] = '976967631'
+        malformed.append(wrong_identity)
+        wrong_status = {'dibk-sgdata': copy.deepcopy(payload()['enterprise'])}
+        wrong_status['dibk-sgdata']['status']['approved'] = 1
+        malformed.append(wrong_status)
+        for data in malformed:
+            with self.subTest(data=data):
+                self.load(source, data)
+                with self.assertRaises(SourceError): poll(source, state)
+                self.assertEqual(saved, state)
+
     def test_grade_change_retains_before_after_and_distinct_same_area_rows(self):
         source = self.source(); self.load(source, payload()); state, _ = poll(source)
         data = payload('3'); self.load(source, data); state, alerts = poll(source, state)

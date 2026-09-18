@@ -37,6 +37,20 @@ def source(entries=None):
 
 
 class AquacultureCertificateTests(unittest.TestCase):
+    def test_new_report_id_for_existing_site_preserves_history_and_shows_revision(self):
+        state,_=poll(source());changed=certificate()
+        changed['installationCertificate']['uuid']=certificate(2)['installationCertificate']['uuid']
+        changed['installationCertificate']['auditLog']=[
+            {'auditNumber':1,'dateOfUpdate':'2026-09-11','description':'Example first correction'},
+            {'auditNumber':2,'dateOfUpdate':'2026-09-18','description':'Example revised coordinates'}]
+        updated,alerts=poll(source([changed]),state)
+        self.assertEqual(1,len(alerts));self.assertEqual(2,len(updated['source_state']['records']['rows']))
+        details=notification_entries(alerts)[0].details
+        self.assertEqual(8,len(details));self.assertTrue(all(len(line)<=500 for line in details))
+        self.assertIn('Nyobservert NYTEK-sertifikatrapport',details)
+        self.assertTrue(any('siste av 2' in line and '2026-09-18' in line and 'revised coordinates' in line for line in details))
+        self.assertFalse(poll(source([changed]),updated)[1])
+
     def test_status_timestamp_and_file_metadata_do_not_realert(self):
         src=source();state,alerts=poll(src);self.assertFalse(alerts)
         changed=certificate();changed['installationCertificate']['reportTime']='2026-09-02T00:00:00Z'

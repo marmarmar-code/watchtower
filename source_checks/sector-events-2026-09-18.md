@@ -18,3 +18,9 @@ Each recipe completed two real reads through its adapter, with silent initialisa
 | `sodir_expected_field_investment_changes` | 107 | Expected future field-investment totals from the stated base year, in million fixed NOK. The observed basis was 2025. This is neither actual annual spending nor evidence of cost overrun. Base year is part of identity and is not a publication date. |
 
 The twelve capabilities describe different events, rather than additional company IDs or filters. Every new adapter uses the existing snapshot and notification mechanisms. Complete reads are compared before accepting state. Missing rows do not establish withdrawal or closure. Notifications retain their source limitations within the actual eight-line, 500-character-per-line delivery bounds. Later scheduled execution, an actual source change, delivery and editorial usefulness require separate evidence.
+
+## Source follow-up
+
+DiBK's documented v1 (`dibk-sgdata`) and v2 (`enterprise`) envelopes can be returned for the same requested version by the public cache. Both are accepted only as single, unambiguous wrappers around the identical strictly validated enterprise fields. A format-only transition remains quiet; identity, approval status, expiry and competence-class changes remain meaningful. Two real ordinary post-fix polls preserved the original records exactly.
+
+An actual NYTEK update replaced a report UUID while retaining its site, original issue and expiry dates, and adding revision-history entries. Separate report identities remain separate; a newly observed report is not automatically a newly issued certificate. New-report notifications include the latest source revision text when present.
