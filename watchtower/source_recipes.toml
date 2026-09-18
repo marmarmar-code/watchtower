@@ -2922,3 +2922,138 @@ interval_minutes = 1440
 events = ["added", "changed"]
 [recipe.source.filter]
 match_all = true
+
+[[recipe]]
+id = "registered_capital_increase_changes"
+name = "Foretaksregisteret – registrerte kapitalforhøyelser"
+sector = "finance"
+description = "Strukturerte kapitalforhøyelseskunngjøringer for foretak i siste tre kalenderdager. Følger kunngjørings-ID, organisasjonsnummer, foretak, kildens publiseringsdato, valuta og registrert aksjekapital. Rettelsesdokumenter merkes særskilt og beholder kildeforklaring om eldre vedtak. Beløpet er ikke innhentet finansiering, emisjonsproveny eller overkurs. Eksakt orgnrs-utvalg er valgfritt. To like fullstendige lesinger kreves; førstegangslesing er stille. Endringer oppdages bare mens kunngjøringen er i vinduet."
+official_url = "https://w2.brreg.no/kunngjoring/index.jsp"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "capital_increase_notices"
+window_days = 3
+max_results = 1000
+max_details = 200
+max_records = 200
+max_bytes = 1000000
+allow_empty = true
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "reconstruction_opening_deadline_changes"
+name = "Brønnøysundregistrene – rekonstruksjonsåpninger og saksfrister"
+sector = "business"
+description = "Strukturerte kunngjøringer om åpnet offentlig rekonstruksjonsforhandling for foretak i siste 30 kalenderdager. Domstol, saksnummer, kjennelsesdato, kunngjøringsdato, kravfrist, fristdag, rekonstruktør og kildeopplysning om fordringshavermøte er separate felt. Ingen antatt møtedato, konkurs eller avslutning utledes. Eksakt orgnrs-utvalg er valgfritt. To like fullstendige lesinger kreves; førstegangslesing er stille. Kun åpninger er dekket; senere faser og rettinger utenfor vinduet er ikke dekket."
+official_url = "https://w2.brreg.no/kunngjoring/index.jsp"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "reconstruction_notices"
+window_days = 30
+max_results = 1000
+max_details = 200
+max_records = 200
+max_bytes = 1000000
+allow_empty = true
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+# For root integration only. Public descriptions contain no installation selections.
+[[recipe]]
+id = "dmp_wholesale_authorisation_changes"
+name = "DMP – grossisttillatelser for legemidler"
+sector = "health"
+description = "Nye og endrede oppføringer i hele DMPs publiserte grossistregister. Autorisasjonsnummeret identifiserer tillatelsen; foretak, organisasjonsnummer, dokumentnummer, lokasjoner og gyldighetsdatoer overvåkes. Registerdato vises som kildegrunnlag, ikke som publiseringstid. Fravær eller utløpsdato alene dokumenterer ikke tilbakekall."
+official_url = "https://www.dmp.no/tilvirkning-import-og-salg/import-og-grossistvirksomhet-med-legemidler/virksomheter-som-kan-importere/godkjente-legemiddelgrossister"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "dmp_wholesale"
+urls = ["https://www.dmp.no/tilvirkning-import-og-salg/import-og-grossistvirksomhet-med-legemidler/virksomheter-som-kan-importere/godkjente-legemiddelgrossister"]
+max_records = 1000
+max_bytes = 4000000
+max_unpacked_bytes = 4000000
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "dmp_quality_defect_letter_changes"
+name = "DMP – produktbrev om kvalitetssvikt"
+sector = "health"
+description = "Nye og endrede produktbrev i DMPs særskilte kvalitetssviktindeks. Preparat, virkestoff, brevperioder og lesbar PDF-tekst overvåkes. Identiteten bygger på preparat og opprinnelig brevmåned; tvetydige dubletter avvises. Månedsdatoer blir ikke oppdiktede publiseringsdager. Indeksen dekker disse brevene, ikke alle tilbakekallinger eller all sikkerhetsinformasjon."
+official_url = "https://www.dmp.no/tilvirkning-import-og-salg/import-og-grossistvirksomhet-med-legemidler/tiltak-ved-kvalitetssvikt-pa-legemidler/kjare-helsepersonell-brev-om-kvalitetssvikt"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "dmp_quality_letters"
+urls = ["https://www.dmp.no/tilvirkning-import-og-salg/import-og-grossistvirksomhet-med-legemidler/tiltak-ved-kvalitetssvikt-pa-legemidler/kjare-helsepersonell-brev-om-kvalitetssvikt"]
+max_documents = 30
+max_pdf_pages = 8
+max_records = 100
+max_bytes = 4000000
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "statnett_grid_connection_changes"
+name = "Nettkapasitet – kø, reservasjoner og prosjektendringer"
+sector = "energy"
+description = "Følger hele Statnetts publiserte utvalg av kapasitetskø og reservasjoner for produksjon og forbruk. Offisielt saksnummer samler samtidige oppføringer uten summering. MW, datoer, stasjon og kunde/prosjekt varsles med før/etter. Planlagt dato er kildens dato ved reservasjon/bestilling, ikke faktisk tilknytning. industries kan velge eksakte næringsetiketter. Alle fire tabeller og publiserte filtre kontrolleres ved to komplette lesinger. Første innlesing er stille; fravær dokumenterer ikke kansellering. Kontaktpersoner overvåkes ikke."
+official_url = "https://www.statnett.no/nettkapasitet-til-produksjon-og-forbruk/foresporsler-og-reservasjon-i-nettet/"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "statnett_grid"
+max_report_rows = 5000
+max_model_age_days = 7
+max_records = 3000
+max_bytes = 4000000
+interval_minutes = 720
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "aquaculture_capacity_auction_changes"
+name = "Havbruk – auksjonstildelinger og vederlag"
+sector = "food"
+description = "Følger auksjoner fra 2024 i Fiskeridirektoratets offisielle oversikt. Nye annonser oppdages, og publiserte selskapstildelinger kontrolleres mot både totalsum og områdefordeling. Tonn MTB, vederlag i NOK og auksjonsperiode er separate felt. Selskapsnavn er tabellidentitet, ikke organisasjonsnummer. Kapasitet er ikke produsert fisk, og oppgitt vederlag beviser ikke innbetaling. To komplette lesinger kreves. Første innlesing er stille; manglende tidligere publisert tabell stopper innlesingen. Fravær fastslår ikke tilbakekall."
+official_url = "https://www.fiskeridir.no/akvakultur/auksjon-av-produksjonskapasitet"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "aquaculture_auctions"
+from_year = 2024
+max_auctions = 8
+max_records = 1000
+max_bytes = 4000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true
+
+[[recipe]]
+id = "arbeidstilsynet_main_industry_reaction_changes"
+name = "Arbeidstilsynet – reviderte årsaggregater per hovednæring"
+sector = "property"
+description = "Følger fem reaksjonsmål i den publiserte tilsynsrapporten for bygg og anlegg fra 2024. main_industries velger eksakte hovednæringer. Identitet er år og hovednæring. Tallene er antall tilsyn med vedtak; samme tilsyn kan inngå i flere reaksjoner. Dette er årsaggregater, ikke nye enkeltvedtak, og underliggende næringsgrupper dekkes ikke. Hele rapporten leses to ganger før utvalg. Første innlesing er stille; gamle detaljuttrekk må beholde egen historikk og identitet."
+official_url = "https://www.arbeidstilsynet.no/om-oss/statistikk/tilsynsstatistikk/"
+verified_on = "2026-09-18"
+[recipe.source]
+kind = "inspection_report"
+profile = "main_industry"
+main_industries = ["F Bygge- og anleggsvirksomhet"]
+from_year = 2024
+max_model_age_days = 7
+max_report_rows = 1000
+max_records = 100
+max_bytes = 4000000
+interval_minutes = 1440
+events = ["added", "changed"]
+[recipe.source.filter]
+match_all = true

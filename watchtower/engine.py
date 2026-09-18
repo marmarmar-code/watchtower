@@ -94,9 +94,22 @@ from .sources.industrial_documents import IndustrialDocumentsSource
 from .sources.company_discovery import CompanyDiscoverySource
 from .sources.parliament_votes import ParliamentVotesSource
 from .sources.parliament_vote_discovery import ParliamentVoteDiscoverySource
+from .sources.company_financial_notices import CapitalIncreaseNoticesSource, ReconstructionNoticesSource
+from .sources.dmp_wholesale import DmpWholesaleSource
+from .sources.dmp_quality_letters import DmpQualityLettersSource
+from .sources.statnett_grid import StatnettGridSource
+from .sources.aquaculture_auctions import AquacultureAuctionsSource
+from .sources.inspection_report import InspectionReportSource
 
 
 SOURCE_TYPES: dict[str, type[Source]] = {
+    "capital_increase_notices": CapitalIncreaseNoticesSource,
+    "reconstruction_notices": ReconstructionNoticesSource,
+    "dmp_wholesale": DmpWholesaleSource,
+    "dmp_quality_letters": DmpQualityLettersSource,
+    "statnett_grid": StatnettGridSource,
+    "aquaculture_auctions": AquacultureAuctionsSource,
+    "inspection_report": InspectionReportSource,
     "industrial_environment": IndustrialEnvironmentSource,
     "industrial_documents": IndustrialDocumentsSource,
     "company_discovery": CompanyDiscoverySource,

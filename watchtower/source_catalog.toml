@@ -761,3 +761,66 @@ credential_required = false
 interval_class = "custom"
 maintenance_owner = "fork-owner"
 coverage = "ACERs offentlige rapport med kildeoppgitt aktør, myndighet, regelreferanse, år, beløp/reaksjon, status og direkte nasjonal kildelenke. Hele rapportens rader avstemmes mot uavhengig antall utfylte aktørfelt før filtrering. Sammensatte grupper er ikke offisielle saks-ID-er; alle ulike underposter bevares. Beløp er ufortolket kildetekst og kan omfatte inndragning eller tilbakebetaling. Ingen antatt vedtaksdato, total for alle nasjonale saker, regneoperasjon eller juridisk konklusjon. To komplette lesinger må samsvare."
+
+[[source]]
+id = "capital_increase_notices"
+name = "Registrerte kapitalforhøyelser"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Offisielle kapitalforhøyelseskunngjøringer med stabil dokument-ID og organisasjonsnummer. Følger resulterende registrert aksjekapital og valuta, ikke finansieringsbeløp. Publiseringsdato leses fra originalen. Avgrenset datovindu, fullstendig treffantall og to like innlesinger kontrolleres. Fravær betyr ikke tilbaketrekking."
+
+[[source]]
+id = "reconstruction_notices"
+name = "Rekonstruksjonsåpninger og separate saksfrister"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Offisielle kunngjøringer om åpnet offentlig rekonstruksjonsforhandling for foretak med organisasjonsnummer. Kunngjøring, kjennelse, kravfrist og fristdag holdes atskilt, med kildeopplysning om fordringshavermøte. Stabil dokument-ID, komplett treffantall og to like lesinger kreves. Kontaktadresser og e-post tas ikke med. Andre faser og nåværende saksstatus utledes ikke."
+
+[[source]]
+id = "dmp_wholesale"
+name = "Legemidler – grossisttillatelser"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "DMPs nedlastbare register over grossisttillatelser. Autorisasjonsnummer, foretak, organisasjonsnummer, dokumenttype, gyldighet og alle lokasjoner bevares. Registerets egen dato er atskilt fra kontrolltidspunkt. Førstegangslesing er stille; fravær fastslår ikke tilbakekall."
+
+[[source]]
+id = "dmp_quality_letters"
+name = "Legemidler – produktbrev om kvalitetssvikt"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Preparat, virkestoff, opprinnelig og oppdatert brevmåned samt lesbar PDF-tekst fra DMPs særskilte kvalitetssviktindeks. Omfatter disse brevene, ikke alle tilbakekallinger. Tvetydige identiteter, ukjente datoer og uleselige dokumenter stopper innlesingen."
+
+[[source]]
+id = "statnett_grid"
+name = "Nettkapasitet – reservasjoner og kapasitetskø"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Statnetts publiserte reservasjoner og kapasitetskø grupperes på offisielt saksnummer. MW, fase, retning, kunde, stasjon og planlagt dato følges. Samtidig kø og reservasjon bevares uten summering. Publiserte filtervilkår og komplette tabeller kontrolleres to ganger. Ingen kansellering utledes av fravær."
+
+[[source]]
+id = "aquaculture_auctions"
+name = "Havbruk – publiserte kapasitetstildelinger"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Fiskeridirektoratets auksjoner fra 2024 med publiserte selskapsvise tonn MTB og vederlag i NOK. Selskaps-, område- og publiserte totaler avstemmes. Nye år oppdages fra den offisielle oversikten. Selskapsnavn er tabellidentitet; tallene dokumenterer tillatelseskapasitet og oppgitt vederlag, ikke produksjon eller betaling."
+
+[[source]]
+id = "inspection_report"
+name = "Arbeidstilsyn – årsaggregater per hovednæring"
+status = "beta"
+credential_required = false
+interval_class = "custom"
+maintenance_owner = "fork-owner"
+coverage = "Den publiserte rapportens fem reaksjonsmål per år og hovednæring. Profilen erstatter ikke detaljdekning på næringsgruppe og omfatter ikke enkeltvedtak. Hele rapportens tabeller kontrolleres ved to like lesinger før eksplisitt utvalg. Kilderevisjoner varsles med konkrete før/etter-tall."
