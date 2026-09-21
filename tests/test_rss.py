@@ -294,6 +294,7 @@ class RssSourceTests(unittest.TestCase):
         source = RssSource(
             self.config("https://example.test/one.xml", "https://example.test/two.xml")
         )
+        source.retry_attempts = 1
         responses = iter([
             Response(
                 b"<rss><channel><item><title>Example</title>"
