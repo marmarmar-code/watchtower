@@ -135,7 +135,19 @@ class WebChangesSource(SnapshotSource):
         return item
 
     def read_records(self):
-        raw = document(self, self.url)
+        last_error: SourceError | None = None
+        for attempt in range(1, self.retry_attempts + 1):
+            raw = document(self, self.url)
+            try:
+                return self._read_records_from(raw)
+            except SourceError as exc:
+                last_error = exc
+                if attempt < self.retry_attempts:
+                    self.sleep(min(2.0, float(attempt)))
+        assert last_error is not None
+        raise last_error
+
+    def _read_records_from(self, raw):
         soup = BeautifulSoup(raw, "html.parser")
         for node in soup.select("script, style, noscript, nav, footer"):
             node.decompose()

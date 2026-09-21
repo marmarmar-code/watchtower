@@ -182,9 +182,26 @@ class EuronextTests(unittest.TestCase):
         self.assertEqual(2, source.get.call_count)
         self.assertEqual([], source.coverage_warnings)
 
+    def test_expanded_retries_transient_missing_list_link(self):
+        source, company, listing = self.expanded_source()
+        source.sleep = Mock()
+        temporary = company.replace('/nb/listview/company-press-release/1', '/temporary')
+        source.get = Mock(side_effect=[
+            Mock(text=temporary),
+            Mock(text=company),
+            Mock(text=listing),
+        ])
+
+        items = source.fetch_with_state(None)
+
+        self.assertEqual(50, len(items))
+        self.assertEqual(3, source.get.call_count)
+        source.sleep.assert_called_once_with(1.0)
+
     def test_expanded_never_silently_falls_back_to_short_or_foreign_list(self):
         for mode in ('missing', 'foreign', 'stale', 'duplicate'):
             source, company, listing = self.expanded_source()
+            source.retry_attempts = 1
             if mode == 'missing': company = company.replace('/nb/listview/company-press-release/1', '/other')
             if mode == 'foreign': company = company.replace('/nb/listview/', 'https://other.test/nb/listview/')
             if mode == 'stale': listing = listing.replace('Notice 0', 'Old notice')

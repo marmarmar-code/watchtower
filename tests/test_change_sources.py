@@ -301,6 +301,20 @@ class WebTests(unittest.TestCase):
         self.assertIn('Price 20',detail)
         self.assertLess(len(detail),1000)
 
+    def test_transient_missing_selector_is_retried(self):
+        source = WebChangesSource(config('web_links', selector='main a'))
+        source.sleep = Mock()
+        source.get = Mock(side_effect=[
+            response(b'<html><body>temporary upstream page</body></html>'),
+            response(b'<main><a href="/one">One story</a></main>'),
+        ])
+
+        items = source.fetch()
+
+        self.assertEqual(['One story'], [item.title for item in items])
+        self.assertEqual(2, source.get.call_count)
+        source.sleep.assert_called_once_with(1.0)
+
     def test_missing_selector_is_failure_and_links_use_stable_absolute_urls(self):
         source=WebChangesSource(config('web_links',selector='main a',title_selector='h2',events=['added']))
         source.get=Mock(return_value=response(b'<main><a href="/one#anchor"><h2>One</h2>ignored date</a></main>'))

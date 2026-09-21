@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import unittest
+from unittest.mock import Mock
 from dataclasses import replace
 from watchtower.engine import evaluate
 
@@ -269,6 +270,20 @@ class RssSourceTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unknown RSS profile"):
             RssSource(self.profile_config("missing"))
 
+    def test_transient_invalid_xml_is_retried_before_failing(self):
+        source = RssSource(self.config("https://example.test/feed.xml"))
+        source.sleep = Mock()
+        source.get = Mock(side_effect=[
+            Response(b"<html>temporary upstream page</html>"),
+            Response(b"<rss><channel><item><title>Example</title><link>https://example.test/1</link></item></channel></rss>"),
+        ])
+
+        items = source.fetch()
+
+        self.assertEqual(1, len(items))
+        self.assertEqual(2, source.get.call_count)
+        source.sleep.assert_called_once_with(1.0)
+
     def test_empty_feed_fails_closed(self):
         source = RssSource(self.config("https://example.test/feed.xml"))
         source.get = lambda *_args, **_kwargs: Response(b"<rss><channel /></rss>")
@@ -280,6 +295,7 @@ class RssSourceTests(unittest.TestCase):
         source = RssSource(
             self.config("https://example.test/one.xml", "https://example.test/two.xml")
         )
+        source.retry_attempts = 1
         responses = iter([
             Response(
                 b"<rss><channel><item><title>Example</title>"

@@ -70,27 +70,48 @@ class RssSource(Source):
         items: list[Item] = []
         seen: set[str] = set()
         for feed_url in self.feed_urls:
-            response = self.get(feed_url)
-            try:
-                root = ET.fromstring(response.content)
-            except ET.ParseError as exc:
-                raise SourceError("invalid RSS or Atom XML") from exc
+            last_error: SourceError | None = None
+            parsed = []
+            for attempt in range(1, self.retry_attempts + 1):
+                response = self.get(feed_url)
+                try:
+                    root = ET.fromstring(response.content)
+                except ET.ParseError as exc:
+                    last_error = SourceError("invalid RSS or Atom XML")
+                    last_error.__cause__ = exc
+                else:
+                    root_type = _local(root.tag).casefold()
+                    if root_type == "feed":
+                        parsed = _atom_items(self.config.id, root, feed_url, self.exclude_categories)
+                        nodes = [node for node in root if _local(node.tag) == "entry"]
+                        last_error = None
+                    elif root_type in {"rss", "rdf"}:
+                        if not any(_local(node.tag) == "channel" for node in root):
+                            last_error = SourceError("RSS feed is missing its channel")
+                            nodes = []
+                        else:
+                            parsed = _rss_items(self.config.id, root, feed_url, self.exclude_categories)
+                            nodes = [node for node in root.iter() if _local(node.tag) == "item"]
+                            last_error = None
+                    else:
+                        last_error = SourceError("unsupported RSS or Atom format")
+                        nodes = []
 
-            root_type = _local(root.tag).casefold()
-            if root_type == "feed":
-                parsed = _atom_items(self.config.id, root, feed_url, self.exclude_categories)
-                nodes = [node for node in root if _local(node.tag) == "entry"]
-            elif root_type in {"rss", "rdf"}:
-                if not any(_local(node.tag) == "channel" for node in root):
-                    raise SourceError("RSS feed is missing its channel")
-                parsed = _rss_items(self.config.id, root, feed_url, self.exclude_categories)
-                nodes = [node for node in root.iter() if _local(node.tag) == "item"]
+                    if last_error is None:
+                        if nodes and len(parsed) != len(nodes):
+                            last_error = SourceError(
+                                "RSS or Atom feed contained no usable items or malformed entries"
+                            )
+                        elif not parsed and not self.allow_empty:
+                            last_error = SourceError("RSS or Atom feed contained no usable items")
+
+                if last_error is None:
+                    break
+                if attempt < self.retry_attempts:
+                    self.sleep(min(2.0, float(attempt)))
             else:
-                raise SourceError("unsupported RSS or Atom format")
-            if nodes and len(parsed) != len(nodes):
-                raise SourceError("RSS or Atom feed contained no usable items or malformed entries")
-            if not parsed and not self.allow_empty:
-                raise SourceError("RSS or Atom feed contained no usable items")
+                assert last_error is not None
+                raise last_error
             for item in parsed:
                 if item.key in seen:
                     continue
