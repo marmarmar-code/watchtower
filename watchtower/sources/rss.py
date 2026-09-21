@@ -84,6 +84,7 @@ class RssSource(Source):
                     if root_type == "feed":
                         parsed = _atom_items(self.config.id, root, feed_url, self.exclude_categories)
                         nodes = [node for node in root if _local(node.tag) == "entry"]
+                        last_error = None
                     elif root_type in {"rss", "rdf"}:
                         if not any(_local(node.tag) == "channel" for node in root):
                             last_error = SourceError("RSS feed is missing its channel")
