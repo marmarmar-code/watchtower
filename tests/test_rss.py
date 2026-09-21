@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import unittest
+from unittest.mock import Mock
 from dataclasses import replace
 from watchtower.engine import evaluate
 
