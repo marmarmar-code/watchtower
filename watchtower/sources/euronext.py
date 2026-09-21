@@ -174,27 +174,47 @@ class EuronextSource(Source):
         page = urlsplit(page_url)
         if page.scheme != "https" or page.netloc != "live.euronext.com":
             raise SourceError("Expanded Euronext requires an official issuer URL")
-        company = BeautifulSoup(self.get(page_url).text, "html.parser")
-        urls = [url for url in _listview_urls(company, page_url)
-                if urlsplit(url).scheme == "https" and urlsplit(url).netloc == page.netloc
-                and re.fullmatch(r"/[a-z]{2}/listview/company-press-release/[0-9]+", urlsplit(url).path)
-                and not urlsplit(url).query and not urlsplit(url).fragment]
-        if len(urls) != 1:
-            raise SourceError("Expanded Euronext requires one unambiguous issuer list")
-        soup = BeautifulSoup(self.get(urls[0]).text, "html.parser")
-        items = _listview_items(self.config.id, soup, urls[0], issuer_url=page_url)
-        if not items or len({item.key for item in items}) != len(items):
-            raise SourceError("Expanded Euronext list is empty or has duplicate identities")
-        latest = _company_page_items(self.config.id, company, page_url)
-        pairs = {(_iso_date(item.published or ""), item.title) for item in items}
-        if not latest or any((_iso_date(item.published or ""), item.title) not in pairs for item in latest):
-            raise SourceError("Expanded Euronext list does not contain current issuer notices")
-        limit = self.config.options.get("max_items", 50)
-        items = items[:limit]
-        previous = getattr(self, "_previous_seen", {})
-        if previous and len(items) == limit and not any(item.key in previous for item in items):
-            self.coverage_warnings.append("Euronext list has no overlap with previous history; older notices may be missing")
-        return items
+        last_error: SourceError | None = None
+        for attempt in range(1, self.retry_attempts + 1):
+            company = BeautifulSoup(self.get(page_url).text, "html.parser")
+            urls = [url for url in _listview_urls(company, page_url)
+                    if urlsplit(url).scheme == "https" and urlsplit(url).netloc == page.netloc
+                    and re.fullmatch(r"/[a-z]{2}/listview/company-press-release/[0-9]+", urlsplit(url).path)
+                    and not urlsplit(url).query and not urlsplit(url).fragment]
+            if len(urls) != 1:
+                last_error = SourceError("Expanded Euronext requires one unambiguous issuer list")
+            else:
+                soup = BeautifulSoup(self.get(urls[0]).text, "html.parser")
+                items = _listview_items(self.config.id, soup, urls[0], issuer_url=page_url)
+                if not items or len({item.key for item in items}) != len(items):
+                    last_error = SourceError("Expanded Euronext list is empty or has duplicate identities")
+                else:
+                    latest = _company_page_items(self.config.id, company, page_url)
+                    pairs = {(_iso_date(item.published or ""), item.title) for item in items}
+                    if not latest or any(
+                        (_iso_date(item.published or ""), item.title) not in pairs
+                        for item in latest
+                    ):
+                        last_error = SourceError(
+                            "Expanded Euronext list does not contain current issuer notices"
+                        )
+                    else:
+                        limit = self.config.options.get("max_items", 50)
+                        items = items[:limit]
+                        previous = getattr(self, "_previous_seen", {})
+                        if previous and len(items) == limit and not any(
+                            item.key in previous for item in items
+                        ):
+                            self.coverage_warnings.append(
+                                "Euronext list has no overlap with previous history; older notices may be missing"
+                            )
+                        return items
+
+            if attempt < self.retry_attempts:
+                self.sleep(min(2.0, float(attempt)))
+
+        assert last_error is not None
+        raise last_error
 
 
 def _company_page_items(source_id: str, soup: BeautifulSoup, page_url: str) -> list[Item]:
