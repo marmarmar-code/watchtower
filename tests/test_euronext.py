@@ -201,6 +201,7 @@ class EuronextTests(unittest.TestCase):
     def test_expanded_never_silently_falls_back_to_short_or_foreign_list(self):
         for mode in ('missing', 'foreign', 'stale', 'duplicate'):
             source, company, listing = self.expanded_source()
+            source.retry_attempts = 1
             if mode == 'missing': company = company.replace('/nb/listview/company-press-release/1', '/other')
             if mode == 'foreign': company = company.replace('/nb/listview/', 'https://other.test/nb/listview/')
             if mode == 'stale': listing = listing.replace('Notice 0', 'Old notice')
