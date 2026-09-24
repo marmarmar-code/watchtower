@@ -162,6 +162,62 @@ jobs:
             --state-dir runtime/state \
             --redact-output | tee -a "$GITHUB_STEP_SUMMARY"
 
+      - name: Report recovered source health
+        if: >-
+          always() &&
+          steps.install.outcome == 'success' &&
+          steps.validate_runtime.outcome == 'success' &&
+          steps.operation.outputs.value == 'run'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          from watchtower.config import load_config
+          from watchtower.notifier import build_notifier
+
+          before_path = Path("/tmp/watchtower-status-before.json")
+          current_path = Path("runtime/state/_status.json")
+          if not before_path.exists() or not current_path.exists():
+              raise SystemExit(0)
+
+          before = json.loads(before_path.read_text(encoding="utf-8"))
+          current = json.loads(current_path.read_text(encoding="utf-8"))
+          previous_errors = before.get("errors", {}) if isinstance(before, dict) else {}
+          current_errors = current.get("errors", {}) if isinstance(current, dict) else {}
+          if not isinstance(previous_errors, dict) or not isinstance(current_errors, dict):
+              raise SystemExit(0)
+
+          recovered = sorted(set(previous_errors) - set(current_errors))
+          if not recovered:
+              raise SystemExit(0)
+
+          lines = [
+              "WATCHTOWER · DRIFT · BEDRING",
+              "Tilbake: " + ", ".join(recovered),
+          ]
+          if current_errors:
+              lines.append("Fortsatt feil: " + ", ".join(sorted(current_errors)))
+          else:
+              lines.append("Alle registrerte kildefeil er borte.")
+
+          config = load_config("runtime/config/watchtower.toml")
+          notifier = build_notifier(
+              config.notifications.provider,
+              slack_url=os.environ.get("SLACK_WEBHOOK_URL", ""),
+              teams_url=os.environ.get("TEAMS_WEBHOOK_URL", ""),
+          )
+          try:
+              notifier.send_text("\n".join(lines))
+          except Exception as exc:
+              print(f"Could not send recovery notification: {type(exc).__name__}")
+          PY
+
       - name: Commit private state only
         id: commit_state
         if: >-
