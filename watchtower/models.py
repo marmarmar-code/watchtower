@@ -67,3 +67,7 @@ class NotificationEntry:
     published: str | None = None
     matched_terms: tuple[str, ...] = ()
     details: tuple[str, ...] = ()
+    priority: str = "NORMAL"
+    category: str = ""
+    summary: str = ""
+    group_key: str = ""
