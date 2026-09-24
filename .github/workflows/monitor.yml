@@ -86,6 +86,17 @@ jobs:
           python -m watchtower validate-runtime runtime
           python3 public-source/scripts/check_private_leaks.py runtime/config/watchtower.toml public-source
 
+      - name: Preserve previous source health
+        id: previous_health
+        if: steps.validate_runtime.outcome == 'success'
+        shell: bash
+        run: |
+          if [[ -f runtime/state/_status.json ]]; then
+            cp runtime/state/_status.json /tmp/watchtower-status-before.json
+          else
+            printf '{"errors":{}}\n' > /tmp/watchtower-status-before.json
+          fi
+
       - name: Test notification
         id: notification_test
         if: >-
@@ -150,6 +161,67 @@ jobs:
             --config runtime/config/watchtower.toml \
             --state-dir runtime/state \
             --redact-output | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Report recovered source health
+        if: >-
+          always() &&
+          steps.install.outcome == 'success' &&
+          steps.validate_runtime.outcome == 'success' &&
+          steps.operation.outputs.value == 'run'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import tomllib
+          from pathlib import Path
+
+          from watchtower.notifier import build_notifier
+
+          before_path = Path("/tmp/watchtower-status-before.json")
+          current_path = Path("runtime/state/_status.json")
+          if not before_path.exists() or not current_path.exists():
+              raise SystemExit(0)
+
+          before = json.loads(before_path.read_text(encoding="utf-8"))
+          current = json.loads(current_path.read_text(encoding="utf-8"))
+          previous_errors = before.get("errors", {}) if isinstance(before, dict) else {}
+          current_errors = current.get("errors", {}) if isinstance(current, dict) else {}
+          if not isinstance(previous_errors, dict) or not isinstance(current_errors, dict):
+              raise SystemExit(0)
+
+          recovered = sorted(set(previous_errors) - set(current_errors))
+          if not recovered:
+              raise SystemExit(0)
+
+          lines = [
+              "WATCHTOWER · DRIFT · BEDRING",
+              "Tilbake: " + ", ".join(recovered),
+          ]
+          if current_errors:
+              lines.append("Fortsatt feil: " + ", ".join(sorted(current_errors)))
+          else:
+              lines.append("Alle registrerte kildefeil er borte.")
+
+          config = tomllib.loads(Path("runtime/config/watchtower.toml").read_text(encoding="utf-8"))
+          notifications = config.get("notifications", {})
+          provider = notifications.get("provider", "slack") if isinstance(notifications, dict) else "slack"
+          if not isinstance(provider, str) or provider.strip().lower() not in {"slack", "teams"}:
+              provider = "slack"
+          provider = provider.strip().lower()
+          notifier = build_notifier(
+              provider,
+              slack_url=os.environ.get("SLACK_WEBHOOK_URL", ""),
+              teams_url=os.environ.get("TEAMS_WEBHOOK_URL", ""),
+          )
+          try:
+              notifier.send_text("\n".join(lines))
+          except Exception as exc:
+              print(f"Could not send recovery notification: {type(exc).__name__}")
+          PY
 
       - name: Commit private state only
         id: commit_state
@@ -255,8 +327,19 @@ jobs:
           try:
               status = json.loads(Path("runtime/state/_status.json").read_text(encoding="utf-8"))
               errors = status.get("errors") if isinstance(status, dict) else None
-              if stage == "kildekontroll" and isinstance(errors, dict) and errors:
-                  detail = f"{len(errors)} kilde(r) meldte feil"
+              if stage in {"kildekontroll", "helsekontroll"} and isinstance(errors, dict) and errors:
+                  previous = {}
+                  before = Path("/tmp/watchtower-status-before.json")
+                  if before.exists():
+                      previous_status = json.loads(before.read_text(encoding="utf-8"))
+                      if isinstance(previous_status, dict) and isinstance(previous_status.get("errors"), dict):
+                          previous = previous_status["errors"]
+                  new_errors = sorted(set(errors) - set(previous))
+                  if not new_errors:
+                      sys.exit(0)
+                  detail = "Nye kildefeil: " + ", ".join(new_errors)
+          except SystemExit:
+              raise
           except Exception:
               pass
 

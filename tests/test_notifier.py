@@ -56,13 +56,16 @@ class NotifierTests(unittest.TestCase):
         self.assertEqual("Åpne kilden", action["title"])
         self.assertEqual("https://example.test/items/1", action["url"])
         self.assertIn("Example change: A → B", str(payload))
+        self.assertIn("NORMAL", str(payload))
+        self.assertNotIn('"Treff"', str(payload))
         self.assertNotIn("<https://", str(payload))
 
     def test_slack_alert_payload_keeps_slack_link_syntax_and_details(self):
         text = format_slack_entries((self.entry(),))
-        self.assertIn("*WATCHTOWER · EXAMPLE SOURCE · NY*", text)
+        self.assertIn("*WATCHTOWER · NORMAL · EXAMPLE SOURCE · NY*", text)
         self.assertIn("• Example change: A → B", text)
         self.assertIn("<https://example.test/items/1|Åpne kilden>", text)
+        self.assertNotIn("Treff:", text)
 
     def test_notification_batches_are_bounded(self):
         entries = tuple(self.entry(index) for index in range(1, 10))

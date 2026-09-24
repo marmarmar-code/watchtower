@@ -119,8 +119,12 @@ def _record(row):
     if parties is not None and (not isinstance(parties, list) or any(not isinstance(value, str) or not _REFERENCE.fullmatch(value) for value in parties)):
         raise SourceError("eInnsyn korrespondansepart references are invalid")
     fields = {"offentligTittel": title.strip(), "journalposttype": post_type, "journaldato": journal_date}
+    metadata = {}
+    case_id = row.get("saksmappe")
+    if isinstance(case_id, str) and case_id:
+        metadata["group_key"] = "journal-case:" + case_id
     return {"key": identity, "title": title.strip(), "url": PUBLIC_URL.format(identity),
-            "published": published, "fields": fields}
+            "published": published, "fields": fields, "metadata": metadata}
 
 
 def _timestamp(value, name):

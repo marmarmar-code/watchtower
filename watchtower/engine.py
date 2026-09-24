@@ -201,6 +201,12 @@ def _source_is_due(
     return at >= last_checked + timedelta(minutes=source_interval_minutes(source))
 
 
+def _alert_id(alert: Alert) -> str:
+    return sha256("\0".join((
+        alert.source.id, alert.item.key, alert.item.content_hash(), alert.change,
+    )).encode()).hexdigest()
+
+
 def _audit_rows(alerts: list[Alert], *, detected_at: str) -> list[dict]:
     return [
         {
@@ -208,9 +214,7 @@ def _audit_rows(alerts: list[Alert], *, detected_at: str) -> list[dict]:
             "source_id": alert.source.id,
             "item_key": alert.item.key,
             "change": alert.change,
-            "alert_id": sha256("\0".join((
-                alert.source.id, alert.item.key, alert.item.content_hash(), alert.change,
-            )).encode()).hexdigest(),
+            "alert_id": _alert_id(alert),
             "title": alert.item.title[:1000], "url": alert.item.url,
             "published": alert.item.published, "matched_terms": list(alert.matched_terms),
             "details": list(_bounded_details(alert.item)),
@@ -224,6 +228,85 @@ def _save_alert_audit(state: StateStore, alerts: list[Alert], *, sent_at: str) -
     record_history(state, [
         {**row, "sent_at": sent_at} for row in _audit_rows(alerts, detected_at=sent_at)
     ])
+
+
+def _suppress_recent_replays(
+    state: StateStore,
+    alerts: list[Alert],
+    *,
+    at: datetime,
+    window: timedelta = timedelta(hours=24),
+) -> list[Alert]:
+    """Block identical alert receipts from being re-sent after state drift."""
+    audit = state.load("_alert_audit") or {}
+    entries = audit.get("entries", [])
+    if not isinstance(entries, list):
+        raise ValueError("invalid private alert audit")
+    cutoff = at.astimezone(timezone.utc) - window
+    recent: set[str] = set()
+    for row in entries:
+        if not isinstance(row, dict):
+            raise ValueError("invalid private alert audit")
+        alert_id = row.get("alert_id")
+        raw_time = row.get("sent_at") or row.get("detected_at")
+        if not isinstance(alert_id, str) or not isinstance(raw_time, str):
+            continue
+        try:
+            sent = datetime.fromisoformat(raw_time.replace("Z", "+00:00"))
+        except ValueError:
+            continue
+        if sent.tzinfo is None:
+            sent = sent.replace(tzinfo=timezone.utc)
+        if sent >= cutoff:
+            recent.add(alert_id)
+    return [alert for alert in alerts if _alert_id(alert) not in recent]
+
+
+def _group_related_alerts(alerts: list[Alert]) -> list[Alert]:
+    """Collapse records with the same source-provided group key into one alert."""
+    groups: dict[tuple[str, str, str], list[Alert]] = {}
+    sequence: list[Alert | tuple[str, str, str]] = []
+    for alert in alerts:
+        group_key = str(alert.item.metadata.get("group_key") or "").strip()
+        if not group_key:
+            sequence.append(alert)
+            continue
+        key = (alert.source.id, alert.change, group_key)
+        if key not in groups:
+            groups[key] = []
+            sequence.append(key)
+        groups[key].append(alert)
+
+    result: list[Alert] = []
+    for entry in sequence:
+        if isinstance(entry, Alert):
+            result.append(entry)
+            continue
+        members = groups[entry]
+        if len(members) == 1:
+            result.append(members[0])
+            continue
+        first = members[0]
+        titles = tuple(dict.fromkeys(member.item.title for member in members))
+        details = [f"{len(members)} dokumenter i samme sak."]
+        details.extend(titles[:4])
+        if len(titles) > 4:
+            details.append(f"+ {len(titles) - 4} flere")
+        fingerprint = sha256(
+            "\0".join(sorted(_alert_id(member) for member in members)).encode()
+        ).hexdigest()
+        synthetic = replace(
+            first.item,
+            key=f"group:{entry[2]}",
+            title=f"{titles[0]} (+{len(members) - 1} relaterte dokumenter)",
+            alert_details=tuple(details),
+            fingerprint=fingerprint,
+        )
+        matched = tuple(dict.fromkeys(
+            term for member in members for term in member.matched_terms
+        ))[:8]
+        result.append(Alert(first.source, synthetic, first.change, matched))
+    return result
 
 
 def _unique_web_link_alerts(alerts: list[Alert]) -> list[Alert]:
@@ -321,6 +404,8 @@ def run(
             errors[source_config.id] = _safe_error(exc)
 
     alerts = _unique_web_link_alerts(alerts)
+    alerts = _suppress_recent_replays(state, alerts, at=started_at)
+    alerts = _group_related_alerts(alerts)
     if dry_run:
         return RunResult(checked, baselined, len(alerts), errors, warnings)
 
@@ -454,13 +539,30 @@ def _matched_terms(source: SourceConfig, text: str) -> tuple[str, ...]:
 
 def _bounded_details(item: Item) -> tuple[str, ...]:
     details: list[str] = []
+    title = " ".join(item.title.split()).casefold()
+    redundant_labels = {"ny registrering", "endret registrering"}
     for value in item.alert_details:
         cleaned = " ".join(str(value).split())
-        if cleaned:
-            details.append(cleaned[:500])
+        if not cleaned:
+            continue
+        folded = cleaned.casefold()
+        if folded in redundant_labels:
+            continue
+        if folded == title or folded in {
+            f"title: {title}",
+            f"tittel: {title}",
+            f"offentlig tittel: {title}",
+        }:
+            continue
+        details.append(cleaned[:500])
         if len(details) >= 8:
             break
     return tuple(details)
+
+
+def _presentation_value(source: SourceConfig, name: str, default: str = "") -> str:
+    value = source.options.get(name, default)
+    return value.strip() if isinstance(value, str) and value.strip() else default
 
 
 def notification_entries(alerts: list[Alert]) -> tuple[NotificationEntry, ...]:
@@ -473,6 +575,10 @@ def notification_entries(alerts: list[Alert]) -> tuple[NotificationEntry, ...]:
             published=alert.item.published,
             matched_terms=alert.matched_terms,
             details=_bounded_details(alert.item),
+            priority=_presentation_value(alert.source, "priority", "NORMAL").upper(),
+            category=_presentation_value(alert.source, "category"),
+            summary=str(alert.item.metadata.get("summary") or "").strip()[:500],
+            group_key=str(alert.item.metadata.get("group_key") or "").strip(),
         )
         for alert in alerts
     )
