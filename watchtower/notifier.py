@@ -178,16 +178,19 @@ def notification_batches(
 def format_slack_entries(alerts: Sequence[NotificationEntry]) -> str:
     blocks: list[str] = []
     for alert in alerts:
+        heading = ["WATCHTOWER", alert.priority, alert.source_label.upper()]
+        if alert.category:
+            heading.append(alert.category.upper())
+        heading.append(alert.status)
         lines = [
-            f"*WATCHTOWER · {_slack_escape(alert.source_label.upper())} · "
-            f"{_slack_escape(alert.status)}*",
+            "*" + " · ".join(_slack_escape(value) for value in heading) + "*",
             f"*{_slack_escape(alert.title)}*",
         ]
+        if alert.summary:
+            lines.append(_slack_escape(alert.summary))
         lines.extend(f"• {_slack_escape(detail)}" for detail in alert.details)
         if alert.published:
             lines.append(f"Publisert: {_slack_escape(alert.published)}")
-        if alert.matched_terms:
-            lines.append("Treff: " + _slack_escape(", ".join(alert.matched_terms)))
         lines.append(f"<{alert.url}|Åpne kilden>")
         blocks.append("\n".join(lines))
     return "\n\n——————————\n\n".join(blocks)
@@ -198,7 +201,15 @@ def format_teams_payload(alerts: Sequence[NotificationEntry]) -> dict:
     for index, alert in enumerate(alerts):
         header = {
             "type": "TextBlock",
-            "text": f"WATCHTOWER · {alert.source_label.upper()} · {alert.status}",
+            "text": " · ".join(
+                value for value in (
+                    "WATCHTOWER",
+                    alert.priority,
+                    alert.source_label.upper(),
+                    alert.category.upper() if alert.category else "",
+                    alert.status,
+                ) if value
+            ),
             "weight": "Bolder",
             "size": "Medium",
             "wrap": True,
@@ -217,6 +228,16 @@ def format_teams_payload(alerts: Sequence[NotificationEntry]) -> dict:
             }
         )
 
+        if alert.summary:
+            body.append(
+                {
+                    "type": "TextBlock",
+                    "text": alert.summary,
+                    "wrap": True,
+                    "spacing": "Small",
+                }
+            )
+
         if alert.details:
             body.append(
                 {
@@ -230,8 +251,6 @@ def format_teams_payload(alerts: Sequence[NotificationEntry]) -> dict:
         facts = []
         if alert.published:
             facts.append({"title": "Publisert", "value": alert.published})
-        if alert.matched_terms:
-            facts.append({"title": "Treff", "value": ", ".join(alert.matched_terms)})
         if facts:
             body.append(
                 {
@@ -282,6 +301,9 @@ def _entry_size(alert: NotificationEntry) -> int:
         for value in (
             alert.source_label,
             alert.status,
+            alert.priority,
+            alert.category,
+            alert.summary,
             alert.title,
             alert.url,
             alert.published or "",
