@@ -80,6 +80,7 @@ class JournalTests(unittest.TestCase):
         assert row["key"] == JP1 and row["published"].endswith("Z")
         assert row["url"] == "https://einnsyn.no/journalpost/" + JP1
         assert row["fields"] == {"offentligTittel": "Søknad", "journalposttype": "inngaaende_dokument", "journaldato": "2026-09-03"}
+        assert row["metadata"]["group_key"] == "journal-case:sm_01m27vjtbwesdrp80sfwn3g4xh"
 
 
     def test_initial_repeat_and_metadata_timestamp_change_are_quiet(self):
