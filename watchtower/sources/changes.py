@@ -152,7 +152,7 @@ class SnapshotSource(Source):
         # A changed selection has its own quiet baseline, rather than a storm.
         self.scope = digest({"kind": config.kind, "urls": config.urls, "options": {
             k: v for k, v in options.items()
-            if k not in {"interval_minutes", "max_seen_per_source", "priority"}
+            if k not in {"interval_minutes", "max_seen_per_source", "priority", "category"}
         }})
 
     def read_records(self):
