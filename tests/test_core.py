@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import tempfile
+from datetime import datetime
 import unittest
 from pathlib import Path
 from unittest.mock import Mock
@@ -16,6 +17,8 @@ from watchtower.engine import (
     _save_alert_audit,
     _should_save_status,
     _state_for_evaluation,
+    _suppress_recent_replays,
+    _group_related_alerts,
     evaluate,
     format_slack,
     run,
@@ -287,6 +290,50 @@ class CoreTests(unittest.TestCase):
             self.assertEqual(500, len(audit["entries"]))
             self.assertEqual("1", audit["entries"][0]["item_key"])
             self.assertEqual("500", audit["entries"][-1]["item_key"])
+
+
+    def test_recent_identical_alert_is_suppressed_but_changed_content_is_not(self):
+        source = self.source()
+        original = Alert(source, self.item("Alpha-rule item"), "new", ("alpha-rule",))
+        changed = Alert(
+            source,
+            Item("x", "1", "Alpha-rule item", "https://example.test/1", text="changed"),
+            "updated",
+            ("alpha-rule",),
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            state = StateStore(tmp)
+            sent_at = "2026-09-24T08:00:00+00:00"
+            _save_alert_audit(state, [original], sent_at=sent_at)
+            at = datetime.fromisoformat("2026-09-24T12:00:00+00:00")
+            self.assertEqual([], _suppress_recent_replays(state, [original], at=at))
+            self.assertEqual([changed], _suppress_recent_replays(state, [changed], at=at))
+
+    def test_related_records_are_grouped_without_merging_unrelated_alerts(self):
+        source = self.source()
+        first = Alert(
+            source,
+            Item(
+                "x", "1", "Document 1", "https://example.test/1",
+                metadata={"group_key": "case:123"},
+            ),
+            "new",
+            ("alpha-rule",),
+        )
+        second = Alert(
+            source,
+            Item(
+                "x", "2", "Document 2", "https://example.test/2",
+                metadata={"group_key": "case:123"},
+            ),
+            "new",
+            ("alpha-rule",),
+        )
+        separate = Alert(source, self.item("Alpha-rule separate"), "new", ("alpha-rule",))
+        grouped = _group_related_alerts([first, second, separate])
+        self.assertEqual(2, len(grouped))
+        self.assertIn("2 dokumenter i samme sak.", grouped[0].item.alert_details)
+        self.assertEqual(separate, grouped[1])
 
     def test_any_source_error_produces_nonzero_exit_code(self):
         healthy = RunResult(6, 0, 0, {})
