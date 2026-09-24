@@ -201,6 +201,12 @@ def _source_is_due(
     return at >= last_checked + timedelta(minutes=source_interval_minutes(source))
 
 
+def _alert_id(alert: Alert) -> str:
+    return sha256("\0".join((
+        alert.source.id, alert.item.key, alert.item.content_hash(), alert.change,
+    )).encode()).hexdigest()
+
+
 def _audit_rows(alerts: list[Alert], *, detected_at: str) -> list[dict]:
     return [
         {
@@ -208,9 +214,7 @@ def _audit_rows(alerts: list[Alert], *, detected_at: str) -> list[dict]:
             "source_id": alert.source.id,
             "item_key": alert.item.key,
             "change": alert.change,
-            "alert_id": sha256("\0".join((
-                alert.source.id, alert.item.key, alert.item.content_hash(), alert.change,
-            )).encode()).hexdigest(),
+            "alert_id": _alert_id(alert),
             "title": alert.item.title[:1000], "url": alert.item.url,
             "published": alert.item.published, "matched_terms": list(alert.matched_terms),
             "details": list(_bounded_details(alert.item)),
