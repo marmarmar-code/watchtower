@@ -262,6 +262,53 @@ def _suppress_recent_replays(
     return [alert for alert in alerts if _alert_id(alert) not in recent]
 
 
+def _group_related_alerts(alerts: list[Alert]) -> list[Alert]:
+    """Collapse records with the same source-provided group key into one alert."""
+    groups: dict[tuple[str, str, str], list[Alert]] = {}
+    sequence: list[Alert | tuple[str, str, str]] = []
+    for alert in alerts:
+        group_key = str(alert.item.metadata.get("group_key") or "").strip()
+        if not group_key:
+            sequence.append(alert)
+            continue
+        key = (alert.source.id, alert.change, group_key)
+        if key not in groups:
+            groups[key] = []
+            sequence.append(key)
+        groups[key].append(alert)
+
+    result: list[Alert] = []
+    for entry in sequence:
+        if isinstance(entry, Alert):
+            result.append(entry)
+            continue
+        members = groups[entry]
+        if len(members) == 1:
+            result.append(members[0])
+            continue
+        first = members[0]
+        titles = tuple(dict.fromkeys(member.item.title for member in members))
+        details = [f"{len(members)} dokumenter i samme sak."]
+        details.extend(titles[:4])
+        if len(titles) > 4:
+            details.append(f"+ {len(titles) - 4} flere")
+        fingerprint = sha256(
+            "\0".join(sorted(_alert_id(member) for member in members)).encode()
+        ).hexdigest()
+        synthetic = replace(
+            first.item,
+            key=f"group:{entry[2]}",
+            title=f"{titles[0]} (+{len(members) - 1} relaterte dokumenter)",
+            alert_details=tuple(details),
+            fingerprint=fingerprint,
+        )
+        matched = tuple(dict.fromkeys(
+            term for member in members for term in member.matched_terms
+        ))[:8]
+        result.append(Alert(first.source, synthetic, first.change, matched))
+    return result
+
+
 def _unique_web_link_alerts(alerts: list[Alert]) -> list[Alert]:
     """Send an identical new link once when monitored lists overlap in a run.
 
@@ -358,6 +405,7 @@ def run(
 
     alerts = _unique_web_link_alerts(alerts)
     alerts = _suppress_recent_replays(state, alerts, at=started_at)
+    alerts = _group_related_alerts(alerts)
     if dry_run:
         return RunResult(checked, baselined, len(alerts), errors, warnings)
 
