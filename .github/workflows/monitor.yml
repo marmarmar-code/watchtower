@@ -266,8 +266,19 @@ jobs:
           try:
               status = json.loads(Path("runtime/state/_status.json").read_text(encoding="utf-8"))
               errors = status.get("errors") if isinstance(status, dict) else None
-              if stage == "kildekontroll" and isinstance(errors, dict) and errors:
-                  detail = f"{len(errors)} kilde(r) meldte feil"
+              if stage in {"kildekontroll", "helsekontroll"} and isinstance(errors, dict) and errors:
+                  previous = {}
+                  before = Path("/tmp/watchtower-status-before.json")
+                  if before.exists():
+                      previous_status = json.loads(before.read_text(encoding="utf-8"))
+                      if isinstance(previous_status, dict) and isinstance(previous_status.get("errors"), dict):
+                          previous = previous_status["errors"]
+                  new_errors = sorted(set(errors) - set(previous))
+                  if not new_errors:
+                      sys.exit(0)
+                  detail = "Nye kildefeil: " + ", ".join(new_errors)
+          except SystemExit:
+              raise
           except Exception:
               pass
 
