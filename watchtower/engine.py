@@ -230,6 +230,38 @@ def _save_alert_audit(state: StateStore, alerts: list[Alert], *, sent_at: str) -
     ])
 
 
+def _suppress_recent_replays(
+    state: StateStore,
+    alerts: list[Alert],
+    *,
+    at: datetime,
+    window: timedelta = timedelta(hours=24),
+) -> list[Alert]:
+    """Block identical alert receipts from being re-sent after state drift."""
+    audit = state.load("_alert_audit") or {}
+    entries = audit.get("entries", [])
+    if not isinstance(entries, list):
+        raise ValueError("invalid private alert audit")
+    cutoff = at.astimezone(timezone.utc) - window
+    recent: set[str] = set()
+    for row in entries:
+        if not isinstance(row, dict):
+            raise ValueError("invalid private alert audit")
+        alert_id = row.get("alert_id")
+        raw_time = row.get("sent_at") or row.get("detected_at")
+        if not isinstance(alert_id, str) or not isinstance(raw_time, str):
+            continue
+        try:
+            sent = datetime.fromisoformat(raw_time.replace("Z", "+00:00"))
+        except ValueError:
+            continue
+        if sent.tzinfo is None:
+            sent = sent.replace(tzinfo=timezone.utc)
+        if sent >= cutoff:
+            recent.add(alert_id)
+    return [alert for alert in alerts if _alert_id(alert) not in recent]
+
+
 def _unique_web_link_alerts(alerts: list[Alert]) -> list[Alert]:
     """Send an identical new link once when monitored lists overlap in a run.
 
@@ -325,6 +357,7 @@ def run(
             errors[source_config.id] = _safe_error(exc)
 
     alerts = _unique_web_link_alerts(alerts)
+    alerts = _suppress_recent_replays(state, alerts, at=started_at)
     if dry_run:
         return RunResult(checked, baselined, len(alerts), errors, warnings)
 
