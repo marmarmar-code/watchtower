@@ -151,7 +151,8 @@ class SnapshotSource(Source):
             raise ValueError("field_labels must map field names to text")
         # A changed selection has its own quiet baseline, rather than a storm.
         self.scope = digest({"kind": config.kind, "urls": config.urls, "options": {
-            k: v for k, v in options.items() if k not in {"interval_minutes", "max_seen_per_source"}
+            k: v for k, v in options.items()
+            if k not in {"interval_minutes", "max_seen_per_source", "priority"}
         }})
 
     def read_records(self):
@@ -228,9 +229,12 @@ class SnapshotSource(Source):
         return items
 
     def _item(self, row, event, details, suppress):
+        metadata = row.get("metadata", {})
+        if not isinstance(metadata, dict):
+            raise SourceError("Record metadata must be an object")
         return Item(self.config.id, "record:" + digest(row["key"]), row["title"], row["url"],
                     published=row.get("published"), text=canonical(row["fields"]),
-                    metadata={"event": event}, alert_details=tuple(details),
+                    metadata={"event": event, **metadata}, alert_details=tuple(details),
                     fingerprint=digest({"fields": row["fields"], "present": event != "removed"}),
                     suppress_alert=suppress)
 
