@@ -176,9 +176,9 @@ jobs:
           python3 - <<'PY'
           import json
           import os
+          import tomllib
           from pathlib import Path
 
-          from watchtower.config import load_config
           from watchtower.notifier import build_notifier
 
           before_path = Path("/tmp/watchtower-status-before.json")
@@ -206,9 +206,14 @@ jobs:
           else:
               lines.append("Alle registrerte kildefeil er borte.")
 
-          config = load_config("runtime/config/watchtower.toml")
+          config = tomllib.loads(Path("runtime/config/watchtower.toml").read_text(encoding="utf-8"))
+          notifications = config.get("notifications", {})
+          provider = notifications.get("provider", "slack") if isinstance(notifications, dict) else "slack"
+          if not isinstance(provider, str) or provider.strip().lower() not in {"slack", "teams"}:
+              provider = "slack"
+          provider = provider.strip().lower()
           notifier = build_notifier(
-              config.notifications.provider,
+              provider,
               slack_url=os.environ.get("SLACK_WEBHOOK_URL", ""),
               teams_url=os.environ.get("TEAMS_WEBHOOK_URL", ""),
           )
