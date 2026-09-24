@@ -86,6 +86,17 @@ jobs:
           python -m watchtower validate-runtime runtime
           python3 public-source/scripts/check_private_leaks.py runtime/config/watchtower.toml public-source
 
+      - name: Preserve previous source health
+        id: previous_health
+        if: steps.validate_runtime.outcome == 'success'
+        shell: bash
+        run: |
+          if [[ -f runtime/state/_status.json ]]; then
+            cp runtime/state/_status.json /tmp/watchtower-status-before.json
+          else
+            printf '{"errors":{}}\n' > /tmp/watchtower-status-before.json
+          fi
+
       - name: Test notification
         id: notification_test
         if: >-
