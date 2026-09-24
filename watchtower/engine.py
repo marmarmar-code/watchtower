@@ -539,13 +539,30 @@ def _matched_terms(source: SourceConfig, text: str) -> tuple[str, ...]:
 
 def _bounded_details(item: Item) -> tuple[str, ...]:
     details: list[str] = []
+    title = " ".join(item.title.split()).casefold()
+    redundant_labels = {"ny registrering", "endret registrering"}
     for value in item.alert_details:
         cleaned = " ".join(str(value).split())
-        if cleaned:
-            details.append(cleaned[:500])
+        if not cleaned:
+            continue
+        folded = cleaned.casefold()
+        if folded in redundant_labels:
+            continue
+        if folded == title or folded in {
+            f"title: {title}",
+            f"tittel: {title}",
+            f"offentlig tittel: {title}",
+        }:
+            continue
+        details.append(cleaned[:500])
         if len(details) >= 8:
             break
     return tuple(details)
+
+
+def _presentation_value(source: SourceConfig, name: str, default: str = "") -> str:
+    value = source.options.get(name, default)
+    return value.strip() if isinstance(value, str) and value.strip() else default
 
 
 def notification_entries(alerts: list[Alert]) -> tuple[NotificationEntry, ...]:
@@ -558,6 +575,10 @@ def notification_entries(alerts: list[Alert]) -> tuple[NotificationEntry, ...]:
             published=alert.item.published,
             matched_terms=alert.matched_terms,
             details=_bounded_details(alert.item),
+            priority=_presentation_value(alert.source, "priority", "NORMAL").upper(),
+            category=_presentation_value(alert.source, "category"),
+            summary=str(alert.item.metadata.get("summary") or "").strip()[:500],
+            group_key=str(alert.item.metadata.get("group_key") or "").strip(),
         )
         for alert in alerts
     )
