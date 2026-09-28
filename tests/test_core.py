@@ -24,6 +24,7 @@ from watchtower.engine import (
     run,
 )
 from watchtower.models import Item
+from watchtower.incidents import reportable_failures, recovered_failures
 from watchtower.runtime_safety import validate_runtime
 from watchtower.sources.doffin import _item as doffin_item
 from watchtower.sources.euronext import _listview_items
@@ -265,9 +266,11 @@ class CoreTests(unittest.TestCase):
             self.assertEqual(1, state.load("_status")["error_streaks"]["x"])
             self.assertIn("x", first.errors)
 
-            second = run(Config((source,)), state, None, source_factory=lambda _: failed)
+            changed_failure = Mock()
+            changed_failure.fetch_with_state.side_effect = TimeoutError("different message, same outage")
+            second = run(Config((source,)), state, None, source_factory=lambda _: changed_failure)
             self.assertEqual(2, state.load("_status")["error_streaks"]["x"])
-            self.assertIn("x", second.errors)
+            self.assertIn("different message", second.errors["x"])
 
             recovered = run(Config((source,)), state, None, source_factory=lambda _: healthy)
             self.assertEqual({}, state.load("_status")["error_streaks"])
@@ -357,6 +360,19 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(2, len(grouped))
         self.assertIn("2 dokumenter i samme sak.", grouped[0].item.alert_details)
         self.assertEqual(separate, grouped[1])
+
+    def test_incident_notifications_fire_once_and_recovery_requires_reported_outage(self):
+        first = {"errors": {"x": "TimeoutError: one"}, "error_streaks": {"x": 1}}
+        second = {"errors": {"x": "TimeoutError: two"}, "error_streaks": {"x": 2}}
+        third = {"errors": {"x": "HTTPError: changed"}, "error_streaks": {"x": 3}}
+        healthy = {"errors": {}, "error_streaks": {}}
+
+        self.assertEqual((), reportable_failures(first))
+        self.assertEqual(("x",), reportable_failures(second))
+        self.assertEqual((), reportable_failures(third))
+        self.assertEqual((), recovered_failures(first, healthy))
+        self.assertEqual(("x",), recovered_failures(second, healthy))
+        self.assertEqual(("x",), recovered_failures(third, healthy))
 
     def test_any_source_error_produces_nonzero_exit_code(self):
         healthy = RunResult(6, 0, 0, {})
