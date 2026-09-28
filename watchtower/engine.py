@@ -415,7 +415,7 @@ def run(
                 baselined += 1
         except Exception as exc:
             error = _safe_error(exc)
-            if errors.get(source_config.id) == error:
+            if source_config.id in errors:
                 error_streaks[source_config.id] = error_streaks.get(source_config.id, 1) + 1
             else:
                 error_streaks[source_config.id] = 1
