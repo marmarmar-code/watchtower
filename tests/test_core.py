@@ -250,6 +250,29 @@ class CoreTests(unittest.TestCase):
             self.assertIsNone(state.load("x"))
             self.assertIsNone(state.load("_status"))
 
+    def test_source_error_streak_persists_until_same_source_recovers(self):
+        source = self.source(options={"interval_minutes": 10})
+        failed = Mock()
+        failed.fetch_with_state.side_effect = TimeoutError("synthetic timeout")
+        healthy = Mock()
+        healthy.fetch_with_state.return_value = []
+        healthy.augment_state.side_effect = lambda value: value
+        healthy.coverage_warnings = []
+
+        with tempfile.TemporaryDirectory() as tmp:
+            state = StateStore(tmp)
+            first = run(Config((source,)), state, None, source_factory=lambda _: failed)
+            self.assertEqual(1, state.load("_status")["error_streaks"]["x"])
+            self.assertIn("x", first.errors)
+
+            second = run(Config((source,)), state, None, source_factory=lambda _: failed)
+            self.assertEqual(2, state.load("_status")["error_streaks"]["x"])
+            self.assertIn("x", second.errors)
+
+            recovered = run(Config((source,)), state, None, source_factory=lambda _: healthy)
+            self.assertEqual({}, state.load("_status")["error_streaks"])
+            self.assertEqual({}, recovered.errors)
+
     def test_source_failure_does_not_discard_other_successful_source_state(self):
         healthy = Mock()
         healthy.fetch_with_state.return_value = []
