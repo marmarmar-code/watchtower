@@ -177,16 +177,27 @@ class EuronextSource(Source):
         last_error: SourceError | None = None
         for attempt in range(1, self.retry_attempts + 1):
             company = BeautifulSoup(self.get(page_url).text, "html.parser")
-            urls = [url for url in _listview_urls(company, page_url)
-                    if urlsplit(url).scheme == "https" and urlsplit(url).netloc == page.netloc
-                    and re.fullmatch(r"/[a-z]{2}/listview/company-press-release/[0-9]+", urlsplit(url).path)
-                    and not urlsplit(url).query and not urlsplit(url).fragment]
+            urls = list(dict.fromkeys(
+                url for url in _listview_urls(company, page_url)
+                if urlsplit(url).scheme == "https" and urlsplit(url).netloc == page.netloc
+                and re.fullmatch(r"/[a-z]{2}/listview/company-press-release/[0-9]+", urlsplit(url).path)
+                and not urlsplit(url).query and not urlsplit(url).fragment
+            ))
             if len(urls) != 1:
                 last_error = SourceError("Expanded Euronext requires one unambiguous issuer list")
             else:
                 soup = BeautifulSoup(self.get(urls[0]).text, "html.parser")
                 items = _listview_items(self.config.id, soup, urls[0], issuer_url=page_url)
-                if not items or len({item.key for item in items}) != len(items):
+                unique: dict[str, Item] = {}
+                conflicting_identity = False
+                for item in items:
+                    existing = unique.get(item.key)
+                    if existing is None:
+                        unique[item.key] = item
+                    elif existing != item:
+                        conflicting_identity = True
+                items = list(unique.values())
+                if not items or conflicting_identity:
                     last_error = SourceError("Expanded Euronext list is empty or has duplicate identities")
                 else:
                     latest = _company_page_items(self.config.id, company, page_url)
