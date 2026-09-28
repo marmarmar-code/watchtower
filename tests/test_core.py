@@ -265,9 +265,11 @@ class CoreTests(unittest.TestCase):
             self.assertEqual(1, state.load("_status")["error_streaks"]["x"])
             self.assertIn("x", first.errors)
 
-            second = run(Config((source,)), state, None, source_factory=lambda _: failed)
+            changed_failure = Mock()
+            changed_failure.fetch_with_state.side_effect = TimeoutError("different message, same outage")
+            second = run(Config((source,)), state, None, source_factory=lambda _: changed_failure)
             self.assertEqual(2, state.load("_status")["error_streaks"]["x"])
-            self.assertIn("x", second.errors)
+            self.assertIn("different message", second.errors["x"])
 
             recovered = run(Config((source,)), state, None, source_factory=lambda _: healthy)
             self.assertEqual({}, state.load("_status")["error_streaks"])
