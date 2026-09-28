@@ -91,7 +91,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "patentstyret": PatentstyretSource,
 }
 
-_STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors", "warnings")
+_STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors", "error_streaks", "warnings")
 _LAST_CHECKED_FIELD = "last_checked_at"
 DEFAULT_SOURCE_INTERVAL_MINUTES = 60
 MAX_DETAILED_ALERTS_PER_RUN = 32
@@ -355,6 +355,18 @@ def run(
         key: value for key, value in prior_errors.items()
         if key in enabled_ids
     }
+    prior_streaks = previous_status.get("error_streaks", {})
+    if not isinstance(prior_streaks, dict) or any(
+        not isinstance(key, str)
+        or type(value) is not int
+        or value < 1
+        for key, value in prior_streaks.items()
+    ):
+        raise ValueError("invalid private status error streaks")
+    error_streaks = {
+        key: value for key, value in prior_streaks.items()
+        if key in enabled_ids and key in errors
+    }
     warnings: dict[str, list[str]] = {}
     staged: dict[str, dict] = {}
     started_at = run_at or datetime.now(timezone.utc)
@@ -393,6 +405,7 @@ def run(
             next_state["last_item_count"] = len(items)
             next_state["coverage_warnings"] = source_warnings
             errors.pop(source_config.id, None)
+            error_streaks.pop(source_config.id, None)
             warnings.pop(source_config.id, None)
             if source_warnings:
                 warnings[source_config.id] = source_warnings
@@ -401,7 +414,12 @@ def run(
             if was_baseline:
                 baselined += 1
         except Exception as exc:
-            errors[source_config.id] = _safe_error(exc)
+            error = _safe_error(exc)
+            if errors.get(source_config.id) == error:
+                error_streaks[source_config.id] = error_streaks.get(source_config.id, 1) + 1
+            else:
+                error_streaks[source_config.id] = 1
+            errors[source_config.id] = error
 
     alerts = _unique_web_link_alerts(alerts)
     alerts = _suppress_recent_replays(state, alerts, at=started_at)
@@ -412,7 +430,7 @@ def run(
     status = {
         "last_run_at": now_iso(), "checked_sources": checked,
         "baselined_sources": baselined, "alerts": len(alerts),
-        "errors": errors, "warnings": warnings,
+        "errors": errors, "error_streaks": error_streaks, "warnings": warnings,
     }
     if alerts:
         if notifier is None:

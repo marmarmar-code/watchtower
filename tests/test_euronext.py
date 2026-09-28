@@ -210,6 +210,23 @@ class EuronextTests(unittest.TestCase):
             with self.subTest(mode=mode), self.assertRaises(SourceError):
                 source.fetch_with_state(None)
 
+    def test_expanded_tolerates_identical_duplicate_list_rows_and_links(self):
+        source, company, listing = self.expanded_source()
+        source.retry_attempts = 1
+        company = company.replace(
+            '<a href="/nb/listview/company-press-release/1">All</a>',
+            '<a href="/nb/listview/company-press-release/1">All</a>'
+            '<a href="/nb/listview/company-press-release/1">All again</a>',
+        )
+        first_row = '<tr><td>14 Aug 2026 12:00 CEST</td><td>EXAMPLE</td><td><a href="" data-node-nid="100">Notice 0</a></td></tr>'
+        listing = listing.replace(first_row, first_row + first_row)
+        source.get = Mock(side_effect=[Mock(text=company), Mock(text=listing)])
+
+        items = source.fetch_with_state(None)
+
+        self.assertEqual(50, len(items))
+        self.assertEqual(50, len({item.key for item in items}))
+
     def test_expanded_limit_and_missing_overlap_warning(self):
         source, _, _ = self.expanded_source(max_items=10)
         source._notification_links = lambda items: items

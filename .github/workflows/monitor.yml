@@ -190,10 +190,19 @@ jobs:
           current = json.loads(current_path.read_text(encoding="utf-8"))
           previous_errors = before.get("errors", {}) if isinstance(before, dict) else {}
           current_errors = current.get("errors", {}) if isinstance(current, dict) else {}
-          if not isinstance(previous_errors, dict) or not isinstance(current_errors, dict):
+          previous_streaks = before.get("error_streaks", {}) if isinstance(before, dict) else {}
+          if (
+              not isinstance(previous_errors, dict)
+              or not isinstance(current_errors, dict)
+              or not isinstance(previous_streaks, dict)
+          ):
               raise SystemExit(0)
 
-          recovered = sorted(set(previous_errors) - set(current_errors))
+          recovered = sorted(
+              source_id
+              for source_id in set(previous_errors) - set(current_errors)
+              if previous_streaks.get(source_id, 0) >= 2
+          )
           if not recovered:
               raise SystemExit(0)
 
@@ -327,17 +336,18 @@ jobs:
           try:
               status = json.loads(Path("runtime/state/_status.json").read_text(encoding="utf-8"))
               errors = status.get("errors") if isinstance(status, dict) else None
+              streaks = status.get("error_streaks") if isinstance(status, dict) else None
               if stage in {"kildekontroll", "helsekontroll"} and isinstance(errors, dict) and errors:
-                  previous = {}
-                  before = Path("/tmp/watchtower-status-before.json")
-                  if before.exists():
-                      previous_status = json.loads(before.read_text(encoding="utf-8"))
-                      if isinstance(previous_status, dict) and isinstance(previous_status.get("errors"), dict):
-                          previous = previous_status["errors"]
-                  new_errors = sorted(set(errors) - set(previous))
-                  if not new_errors:
+                  if not isinstance(streaks, dict):
                       sys.exit(0)
-                  detail = "Nye kildefeil: " + ", ".join(new_errors)
+                  reportable = sorted(
+                      source_id
+                      for source_id in errors
+                      if streaks.get(source_id) == 2
+                  )
+                  if not reportable:
+                      sys.exit(0)
+                  detail = "Vedvarende kildefeil (2 kontroller): " + ", ".join(reportable)
           except SystemExit:
               raise
           except Exception:
