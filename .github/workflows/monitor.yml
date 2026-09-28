@@ -179,6 +179,7 @@ jobs:
           import tomllib
           from pathlib import Path
 
+          from watchtower.incidents import recovered_failures
           from watchtower.notifier import build_notifier
 
           before_path = Path("/tmp/watchtower-status-before.json")
@@ -188,21 +189,8 @@ jobs:
 
           before = json.loads(before_path.read_text(encoding="utf-8"))
           current = json.loads(current_path.read_text(encoding="utf-8"))
-          previous_errors = before.get("errors", {}) if isinstance(before, dict) else {}
           current_errors = current.get("errors", {}) if isinstance(current, dict) else {}
-          previous_streaks = before.get("error_streaks", {}) if isinstance(before, dict) else {}
-          if (
-              not isinstance(previous_errors, dict)
-              or not isinstance(current_errors, dict)
-              or not isinstance(previous_streaks, dict)
-          ):
-              raise SystemExit(0)
-
-          recovered = sorted(
-              source_id
-              for source_id in set(previous_errors) - set(current_errors)
-              if previous_streaks.get(source_id, 0) >= 2
-          )
+          recovered = list(recovered_failures(before, current))
           if not recovered:
               raise SystemExit(0)
 
@@ -309,6 +297,8 @@ jobs:
           import sys
           import time
           from pathlib import Path
+
+          from watchtower.incidents import reportable_failures
           from urllib.error import HTTPError, URLError
           from urllib.parse import urlparse
           from urllib.request import Request, urlopen
@@ -336,15 +326,8 @@ jobs:
           try:
               status = json.loads(Path("runtime/state/_status.json").read_text(encoding="utf-8"))
               errors = status.get("errors") if isinstance(status, dict) else None
-              streaks = status.get("error_streaks") if isinstance(status, dict) else None
               if stage in {"kildekontroll", "helsekontroll"} and isinstance(errors, dict) and errors:
-                  if not isinstance(streaks, dict):
-                      sys.exit(0)
-                  reportable = sorted(
-                      source_id
-                      for source_id in errors
-                      if streaks.get(source_id) == 2
-                  )
+                  reportable = reportable_failures(status)
                   if not reportable:
                       sys.exit(0)
                   detail = "Vedvarende kildefeil (2 kontroller): " + ", ".join(reportable)
