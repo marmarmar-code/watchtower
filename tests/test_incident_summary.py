@@ -49,8 +49,10 @@ class IncidentSummaryTests(unittest.TestCase):
             "errors": {"account_figures_a": "SourceError: failed"},
             "error_since": {"account_figures_a": "2026-10-05T10:00:00+00:00"},
         }
-        before = dict(common, last_run_at="2026-10-06T09:45:00+00:00")
-        current = dict(common, last_run_at="2026-10-06T10:05:00+00:00")
+        before = dict(common, last_run_at="2026-10-06T09:45:00+00:00",
+                      error_streaks={"account_figures_a": 25})
+        current = dict(common, last_run_at="2026-10-06T10:05:00+00:00",
+                       error_streaks={"account_figures_a": 26})
         self.assertEqual(
             ("account_figures_a",),
             reportable_escalations(before, current, now="2026-10-06T10:05:00+00:00"),
