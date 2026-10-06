@@ -179,7 +179,7 @@ jobs:
           import tomllib
           from pathlib import Path
 
-          from watchtower.incidents import recovered_failures
+          from watchtower.incidents import recovered_failures, summarize_sources
           from watchtower.notifier import build_notifier
 
           before_path = Path("/tmp/watchtower-status-before.json")
@@ -196,10 +196,10 @@ jobs:
 
           lines = [
               "WATCHTOWER · DRIFT · BEDRING",
-              "Tilbake: " + ", ".join(recovered),
+              "Tilbake: " + summarize_sources(recovered),
           ]
           if current_errors:
-              lines.append("Fortsatt feil: " + ", ".join(sorted(current_errors)))
+              lines.append(f"Fortsatt feil i {len(current_errors)} kilder: " + summarize_sources(current_errors))
           else:
               lines.append("Alle registrerte kildefeil er borte.")
 
@@ -298,7 +298,7 @@ jobs:
           import time
           from pathlib import Path
 
-          from watchtower.incidents import reportable_failures
+          from watchtower.incidents import reportable_failures, summarize_sources
           from urllib.error import HTTPError, URLError
           from urllib.parse import urlparse
           from urllib.request import Request, urlopen
@@ -330,7 +330,7 @@ jobs:
                   reportable = reportable_failures(status)
                   if not reportable:
                       sys.exit(0)
-                  detail = "Vedvarende kildefeil (2 kontroller): " + ", ".join(reportable)
+                  detail = "Vedvarende kildefeil (2 kontroller): " + summarize_sources(reportable)
           except SystemExit:
               raise
           except Exception:
