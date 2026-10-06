@@ -47,3 +47,19 @@ def recovered_failures(
         for source_id in set(previous_errors) - set(current_errors)
         if previous_streaks.get(source_id, 0) >= threshold
     ))
+
+
+def summarize_sources(source_ids, *, max_names: int = 5) -> str:
+    """Bound notification size while retaining the number and category of failures."""
+    sources = sorted(set(source_ids))
+    if not sources:
+        return "ingen"
+    accounts = [source for source in sources if source.startswith("account_figures_")]
+    remaining = [source for source in sources if not source.startswith("account_figures_")]
+    if len(accounts) >= 4:
+        parts = [f"BRREG-regnskapstall ({len(accounts)} kilder)", *remaining]
+    else:
+        parts = [*accounts, *remaining]
+    if len(parts) > max_names:
+        return ", ".join(parts[:max_names]) + f" + {len(parts) - max_names} andre"
+    return ", ".join(parts)

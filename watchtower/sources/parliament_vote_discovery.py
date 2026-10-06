@@ -53,13 +53,16 @@ class ParliamentVoteDiscoverySource(SnapshotSource):
         if len(meeting_ids) > self.max_meetings:
             raise SourceError("Stortinget discovery window exceeds max_meetings")
 
-        cases = {}
+        # A case can be listed under different agenda wording in different
+        # meetings. Its official case ID, not that presentation title, is the
+        # identity. Preserve all observed variants instead of guessing which
+        # wording is authoritative; voting outcomes remain strictly validated.
+        case_titles = {}
         for meeting_id in meeting_ids:
             for case_id, title in _agenda(self, meeting_id):
-                prior = cases.get(case_id)
-                if prior is not None and prior != title:
-                    raise SourceError("Stortinget returned conflicting titles for one case")
-                cases[case_id] = title
+                case_titles.setdefault(case_id, set()).add(title)
+        cases = {case_id: " | ".join(sorted(titles))
+                 for case_id, titles in case_titles.items()}
         if len(cases) > self.max_cases:
             raise SourceError("Stortinget discovery window exceeds max_cases")
 

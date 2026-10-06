@@ -140,11 +140,22 @@ jobs:
           if [[ "${{ inputs.respect_intervals }}" == "true" ]]; then
             interval_args+=(--respect-intervals)
           fi
-          python -m watchtower "$command" \
+          # Distinguish a completed poll with source failures from a crashed run.
+          # This marker is emitted only after the redacted CLI summary is printed.
+          set +e
+          output=$(python -m watchtower "$command" \
             --config runtime/config/watchtower.toml \
             --state-dir runtime/state \
             --redact-output \
-            "${interval_args[@]}"
+            "${interval_args[@]}" 2>&1)
+          code=$?
+          set -e
+          printf '%s\n' "$output"
+          if [[ "$command" == "run" && "$code" == 2 ]] && \
+             grep -Eq '^watchtower complete; sources=[0-9]+ baselines=[0-9]+ alerts=[0-9]+ errors=[1-9][0-9]* coverage_limited=[0-9]+$' <<< "$output"; then
+            echo "source_degraded=true" >> "$GITHUB_OUTPUT"
+          fi
+          exit "$code"
 
       - name: Summarize private source health
         id: source_health
@@ -179,7 +190,7 @@ jobs:
           import tomllib
           from pathlib import Path
 
-          from watchtower.incidents import recovered_failures
+          from watchtower.incidents import recovered_failures, summarize_sources
           from watchtower.notifier import build_notifier
 
           before_path = Path("/tmp/watchtower-status-before.json")
@@ -196,10 +207,10 @@ jobs:
 
           lines = [
               "WATCHTOWER · DRIFT · BEDRING",
-              "Tilbake: " + ", ".join(recovered),
+              "Tilbake: " + summarize_sources(recovered),
           ]
           if current_errors:
-              lines.append("Fortsatt feil: " + ", ".join(sorted(current_errors)))
+              lines.append(f"Fortsatt feil i {len(current_errors)} kilder: " + summarize_sources(current_errors))
           else:
               lines.append("Alle registrerte kildefeil er borte.")
 
@@ -298,7 +309,7 @@ jobs:
           import time
           from pathlib import Path
 
-          from watchtower.incidents import reportable_failures
+          from watchtower.incidents import reportable_failures, summarize_sources
           from urllib.error import HTTPError, URLError
           from urllib.parse import urlparse
           from urllib.request import Request, urlopen
@@ -330,7 +341,7 @@ jobs:
                   reportable = reportable_failures(status)
                   if not reportable:
                       sys.exit(0)
-                  detail = "Vedvarende kildefeil (2 kontroller): " + ", ".join(reportable)
+                  detail = "Vedvarende kildefeil (2 kontroller): " + summarize_sources(reportable)
           except SystemExit:
               raise
           except Exception:
@@ -433,4 +444,55 @@ jobs:
            steps.watchtower_run.outcome == 'failure' ||
            steps.source_health.outcome == 'failure' ||
            steps.commit_state.outcome == 'failure')
-        run: exit 1
+        env:
+          SOURCE_DEGRADED: ${{ steps.watchtower_run.outputs.source_degraded }}
+          PUBLIC_SOURCE_OUTCOME: ${{ steps.public_source.outcome }}
+          PUBLIC_SAFETY_OUTCOME: ${{ steps.public_safety.outcome }}
+          OPERATION_OUTCOME: ${{ steps.operation.outcome }}
+          RUNTIME_OUTCOME: ${{ steps.runtime_checkout.outcome }}
+          PYTHON_OUTCOME: ${{ steps.python_setup.outcome }}
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          MASK_OUTCOME: ${{ steps.mask_private.outcome }}
+          VALIDATE_OUTCOME: ${{ steps.validate_runtime.outcome }}
+          NOTIFICATION_OUTCOME: ${{ steps.notification_test.outcome }}
+          RECORD_SETUP_OUTCOME: ${{ steps.record_setup.outcome }}
+          COMMIT_OUTCOME: ${{ steps.commit_state.outcome }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          import subprocess
+
+          critical = (
+              "PUBLIC_SOURCE_OUTCOME", "PUBLIC_SAFETY_OUTCOME",
+              "OPERATION_OUTCOME", "RUNTIME_OUTCOME", "PYTHON_OUTCOME",
+              "INSTALL_OUTCOME", "MASK_OUTCOME", "VALIDATE_OUTCOME",
+              "NOTIFICATION_OUTCOME", "RECORD_SETUP_OUTCOME", "COMMIT_OUTCOME",
+          )
+          if any(os.environ.get(name) == "failure" for name in critical):
+              raise SystemExit("Critical Watchtower setup/state operation failed")
+          if os.environ.get("SOURCE_DEGRADED") != "true":
+              raise SystemExit("Watchtower failure not classified as source-only")
+
+          result = subprocess.run(
+              ["python", "-m", "watchtower", "status",
+               "--config", "runtime/config/watchtower.toml",
+               "--state-dir", "runtime/state", "--redact-output"],
+              capture_output=True, text=True, timeout=40,
+          )
+          summary = re.fullmatch(
+              r"WATCHTOWER STATUS NEEDS ATTENTION; "
+              r"enabled_sources=(\d+) healthy=(\d+) late=(\d+) errors=(\d+) "
+              r"not_started=(\d+) coverage_limited=(\d+) "
+              r"pending_batches=(\d+) pending_delivery=(\d+)",
+              result.stdout.strip(),
+          )
+          if result.returncode != 2 or not summary:
+              raise SystemExit("Unclassified source health failure")
+          enabled, healthy, late, errors, not_started, _, batches, delivery = (
+              int(value) for value in summary.groups()
+          )
+          if not errors or late or not_started or batches or delivery or healthy + errors != enabled:
+              raise SystemExit("Unexplained or additional source health failure")
+          print(f"Known source-only degradation: {errors} sources. Details in private status.")
+          PY

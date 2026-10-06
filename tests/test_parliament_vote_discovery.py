@@ -95,6 +95,17 @@ class ParliamentVoteDiscoveryTests(unittest.TestCase):
         _, alerts = poll(source(changed), state)
         self.assertEqual(1, len(alerts)); self.assertIn("Ja → Nei", " ".join(alerts[0].item.alert_details))
 
+    def test_same_case_with_different_agenda_wording_preserves_votes(self):
+        item = source([sessions(), meetings((10, 11)),
+                       agenda(10, ((100, "Første tittel"),)),
+                       agenda(11, ((100, "Alternativ tittel"),)),
+                       votes(100)])
+        rows = item.read_records()
+        self.assertEqual(1, len(rows))
+        self.assertEqual([100], rows[0]["case_ids"])
+        self.assertEqual("Alternativ tittel | Første tittel", rows[0]["case_titles"])
+        self.assertTrue(rows[0]["fields"]["adopted"])
+
     def test_conflicting_shared_vote_fails(self):
         item = source([sessions(), meetings(), agenda(cases=((100, "A"), (101, "B"))),
                        votes(100), votes(101, adopted="false")])
