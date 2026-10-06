@@ -91,7 +91,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "patentstyret": PatentstyretSource,
 }
 
-_STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors", "error_streaks", "warnings", "retry_after")
+_STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors", "error_streaks", "warnings", "retry_after", "error_since")
 _LAST_CHECKED_FIELD = "last_checked_at"
 DEFAULT_SOURCE_INTERVAL_MINUTES = 60
 MAX_DETAILED_ALERTS_PER_RUN = 32
@@ -398,6 +398,16 @@ def run(
         key: value for key, value in previous_retry.items()
         if key in enabled_ids and key in errors
     }
+    previous_since = previous_status.get("error_since", {})
+    if not isinstance(previous_since, dict) or any(
+        not isinstance(key, str) or not isinstance(value, str)
+        for key, value in previous_since.items()
+    ):
+        raise ValueError("invalid private failure start times")
+    error_since = {
+        key: value for key, value in previous_since.items()
+        if key in enabled_ids and key in errors
+    }
     warnings: dict[str, list[str]] = {}
     staged: dict[str, dict] = {}
     started_at = run_at or datetime.now(timezone.utc)
@@ -439,6 +449,7 @@ def run(
             errors.pop(source_config.id, None)
             error_streaks.pop(source_config.id, None)
             retry_after.pop(source_config.id, None)
+            error_since.pop(source_config.id, None)
             warnings.pop(source_config.id, None)
             if source_warnings:
                 warnings[source_config.id] = source_warnings
@@ -453,6 +464,7 @@ def run(
             else:
                 error_streaks[source_config.id] = 1
             errors[source_config.id] = error
+            error_since.setdefault(source_config.id, checked_at)
             retry_after[source_config.id] = (
                 started_at + timedelta(minutes=failure_retry_minutes(
                     error_streaks[source_config.id]
@@ -469,7 +481,8 @@ def run(
         "last_run_at": now_iso(), "checked_sources": checked,
         "baselined_sources": baselined, "alerts": len(alerts),
         "errors": errors, "error_streaks": error_streaks,
-        "retry_after": retry_after, "warnings": warnings,
+        "retry_after": retry_after, "error_since": error_since,
+        "warnings": warnings,
     }
     if alerts:
         if notifier is None:
