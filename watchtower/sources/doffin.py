@@ -64,13 +64,18 @@ class DoffinSource(Source):
         if not isinstance(queries, list) or not queries or not all(isinstance(q, str) for q in queries):
             raise SourceError("Doffin search_queries must be a non-empty string array")
         queries = list(dict.fromkeys(q.strip() for q in queries))
-        scope = sha256(json.dumps({
+        scope_fields = {
             "version": 1,
             "search_queries": sorted(queries),
             "page_size": page_size,
             "max_pages": max_pages,
-            "lookback_days": lookback,
-        }, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+        }
+        # Preserve legacy fingerprints for installations without the option.
+        if lookback is not None:
+            scope_fields["lookback_days"] = lookback
+        scope = sha256(json.dumps(
+            scope_fields, sort_keys=True, separators=(",", ":")
+        ).encode()).hexdigest()
 
         headers = {
             "Ocp-Apim-Subscription-Key": api_key,
