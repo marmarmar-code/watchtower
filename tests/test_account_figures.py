@@ -78,9 +78,27 @@ class AccountFiguresTests(unittest.TestCase):
         with self.assertRaises(SourceError):poll(s,state)
         self.assertEqual(saved,state);self.assertEqual(next_saved,s._next)
 
+    def test_historical_years_and_consolidated_accounts_choose_only_latest_company(self):
+        s=source()
+        old=account(year=datetime.now(timezone.utc).year-3);old['id']=50
+        newer=account();newer['id']=60
+        consolidated=account();consolidated['regnskapstype']='KONSERN';consolidated['id']=61
+        older=account(year=datetime.now(timezone.utc).year-2);older['id']=55
+        # Ordering is not an API guarantee; KONSERN must never be selected.
+        s.get=Mock(return_value=response([consolidated, newer, old, older]))
+        selected=s.read_records()
+        self.assertEqual(1,len(selected))
+        self.assertEqual(60, selected[0]['fields']['submission_id'])
+        self.assertEqual('SELSKAP',selected[0]['key'].split(':')[1])
+
     def test_ambiguous_scope_invalid_identity_dates_and_statement_shapes(self):
         s=source()
         for body in [[],[account(),account()],account()]:
+            s.get=Mock(return_value=response(body))
+            with self.assertRaises(SourceError):s.read_records()
+        for body in [[dict(account(),regnskapstype='KONSERN')],
+                     [dict(account(),regnskapstype='OTHER')],
+                     [account(),dict(account(),regnskapstype='KONSERN',virksomhet={'organisasjonsnummer':'976967631'})]]:
             s.get=Mock(return_value=response(body))
             with self.assertRaises(SourceError):s.read_records()
         for field,value in [('id',True),('regnskapstype','KONSERN'),('valuta',''),('journalnr',None),
