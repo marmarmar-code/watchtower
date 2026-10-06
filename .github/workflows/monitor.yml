@@ -173,7 +173,7 @@ jobs:
             --state-dir runtime/state \
             --redact-output | tee -a "$GITHUB_STEP_SUMMARY"
 
-      - name: Report recovered source health
+      - name: Report recovered sources and coverage limitations
         if: >-
           always() &&
           steps.install.outcome == 'success' &&
@@ -190,7 +190,7 @@ jobs:
           import tomllib
           from pathlib import Path
 
-          from watchtower.incidents import recovered_failures, summarize_sources
+          from watchtower.incidents import coverage_transitions, recovered_failures, summarize_sources
           from watchtower.notifier import build_notifier
 
           before_path = Path("/tmp/watchtower-status-before.json")
@@ -202,17 +202,22 @@ jobs:
           current = json.loads(current_path.read_text(encoding="utf-8"))
           current_errors = current.get("errors", {}) if isinstance(current, dict) else {}
           recovered = list(recovered_failures(before, current))
-          if not recovered:
+          limited, restored = coverage_transitions(before, current)
+          if not recovered and not limited and not restored:
               raise SystemExit(0)
 
-          lines = [
-              "WATCHTOWER · DRIFT · BEDRING",
-              "Tilbake: " + summarize_sources(recovered),
-          ]
-          if current_errors:
-              lines.append(f"Fortsatt feil i {len(current_errors)} kilder: " + summarize_sources(current_errors))
-          else:
-              lines.append("Alle registrerte kildefeil er borte.")
+          lines = ["WATCHTOWER · DRIFT · STATUSENDRING"]
+          if recovered:
+              lines.append("Kilder tilbake: " + summarize_sources(recovered))
+              if current_errors:
+                  lines.append(f"Fortsatt feil i {len(current_errors)} kilder: " + summarize_sources(current_errors))
+              else:
+                  lines.append("Ingen registrerte kildefeil.")
+          if limited:
+              lines.append("Begrenset dekning: " + summarize_sources(limited))
+              lines.append("Mulige manglende treff; undersøk datavinduet.")
+          if restored:
+              lines.append("Dekning normalisert: " + summarize_sources(restored))
 
           config = tomllib.loads(Path("runtime/config/watchtower.toml").read_text(encoding="utf-8"))
           notifications = config.get("notifications", {})
@@ -309,7 +314,7 @@ jobs:
           import time
           from pathlib import Path
 
-          from watchtower.incidents import reportable_failures, summarize_sources
+          from watchtower.incidents import reportable_escalations, reportable_failures, summarize_sources
           from urllib.error import HTTPError, URLError
           from urllib.parse import urlparse
           from urllib.request import Request, urlopen
@@ -339,9 +344,23 @@ jobs:
               errors = status.get("errors") if isinstance(status, dict) else None
               if stage in {"kildekontroll", "helsekontroll"} and isinstance(errors, dict) and errors:
                   reportable = reportable_failures(status)
-                  if not reportable:
+                  previous_path = Path("/tmp/watchtower-status-before.json")
+                  previous = (
+                      json.loads(previous_path.read_text(encoding="utf-8"))
+                      if previous_path.exists() else {}
+                  )
+                  from datetime import datetime, timezone
+                  overdue = reportable_escalations(
+                      previous, status, now=datetime.now(timezone.utc).isoformat()
+                  )
+                  if not reportable and not overdue:
                       sys.exit(0)
-                  detail = "Vedvarende kildefeil (2 kontroller): " + summarize_sources(reportable)
+                  details = []
+                  if reportable:
+                      details.append("Ny vedvarende kildefeil: " + summarize_sources(reportable))
+                  if overdue:
+                      details.append("Feil har vart over 24 timer: " + summarize_sources(overdue))
+                  detail = "; ".join(details)
           except SystemExit:
               raise
           except Exception:
