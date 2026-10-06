@@ -140,12 +140,20 @@ jobs:
           if [[ "${{ inputs.respect_intervals }}" == "true" ]]; then
             interval_args+=(--respect-intervals)
           fi
-          python -m watchtower "$command" \
+          # A completed poll exits 2 while any source is degraded. Keep the
+          # recorded incident and health checks, but do not turn persistent
+          # known source errors into a fresh GitHub failure every five minutes.
+          set +e
+          output=$(python -m watchtower "$command" \
             --config runtime/config/watchtower.toml \
             --state-dir runtime/state \
             --redact-output \
-            "${interval_args[@]}"
-
+            "${interval_args[@]}" 2>&1)
+          code=$?
+          set -e
+          printf '%s\n' "$output"
+          if [[ "$command" == "run" && "$code" == 2 ]] && \
+             grep -Eq '^watchtower complete; sources=[0-9]+ baselines=[0-9]+ alerts=[0-9]+ errors=[1-9][0-9]* coverage_limited=[0-9]+
       - name: Summarize private source health
         id: source_health
         if: >-
@@ -434,3 +442,348 @@ jobs:
            steps.source_health.outcome == 'failure' ||
            steps.commit_state.outcome == 'failure')
         run: exit 1
+ <<< "$output"; then
+            echo "source_degraded=true" >> "$GITHUB_OUTPUT"
+          fi
+          exit "$code"
+
+      - name: Summarize private source health
+        id: source_health
+        if: >-
+          always() &&
+          steps.runtime_checkout.outcome == 'success' &&
+          steps.validate_runtime.outcome == 'success' &&
+          steps.operation.outputs.value == 'run'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m watchtower status \
+            --config runtime/config/watchtower.toml \
+            --state-dir runtime/state \
+            --redact-output | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Report recovered source health
+        if: >-
+          always() &&
+          steps.install.outcome == 'success' &&
+          steps.validate_runtime.outcome == 'success' &&
+          steps.operation.outputs.value == 'run'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import tomllib
+          from pathlib import Path
+
+          from watchtower.incidents import recovered_failures, summarize_sources
+          from watchtower.notifier import build_notifier
+
+          before_path = Path("/tmp/watchtower-status-before.json")
+          current_path = Path("runtime/state/_status.json")
+          if not before_path.exists() or not current_path.exists():
+              raise SystemExit(0)
+
+          before = json.loads(before_path.read_text(encoding="utf-8"))
+          current = json.loads(current_path.read_text(encoding="utf-8"))
+          current_errors = current.get("errors", {}) if isinstance(current, dict) else {}
+          recovered = list(recovered_failures(before, current))
+          if not recovered:
+              raise SystemExit(0)
+
+          lines = [
+              "WATCHTOWER · DRIFT · BEDRING",
+              "Tilbake: " + summarize_sources(recovered),
+          ]
+          if current_errors:
+              lines.append(f"Fortsatt feil i {len(current_errors)} kilder: " + summarize_sources(current_errors))
+          else:
+              lines.append("Alle registrerte kildefeil er borte.")
+
+          config = tomllib.loads(Path("runtime/config/watchtower.toml").read_text(encoding="utf-8"))
+          notifications = config.get("notifications", {})
+          provider = notifications.get("provider", "slack") if isinstance(notifications, dict) else "slack"
+          if not isinstance(provider, str) or provider.strip().lower() not in {"slack", "teams"}:
+              provider = "slack"
+          provider = provider.strip().lower()
+          notifier = build_notifier(
+              provider,
+              slack_url=os.environ.get("SLACK_WEBHOOK_URL", ""),
+              teams_url=os.environ.get("TEAMS_WEBHOOK_URL", ""),
+          )
+          try:
+              notifier.send_text("\n".join(lines))
+          except Exception as exc:
+              print(f"Could not send recovery notification: {type(exc).__name__}")
+          PY
+
+      - name: Commit private state only
+        id: commit_state
+        if: >-
+          always() &&
+          steps.runtime_checkout.outcome == 'success' &&
+          steps.validate_runtime.outcome == 'success' &&
+          (steps.operation.outputs.value == 'run' || steps.notification_test.outcome == 'success')
+        working-directory: runtime
+        run: |
+          set -euo pipefail
+          git config user.name "watchtower[bot]"
+          git config user.email "watchtower[bot]@users.noreply.github.com"
+          git add -- state
+          changed=$(git diff --cached --name-only)
+          if [[ -n "$changed" ]] && grep -Ev '^state/' <<< "$changed" >/dev/null; then
+            echo "Refusing to commit files outside private state/" >&2
+            exit 1
+          fi
+          if git diff --cached --quiet; then
+            echo "Private state unchanged"
+            exit 0
+          fi
+          git commit --quiet -m "chore: update watchtower state"
+          for attempt in 1 2 3; do
+            if git pull --rebase --quiet origin "${{ vars.WATCHTOWER_RUNTIME_REF || 'main' }}" && \
+               git push --quiet origin "HEAD:${{ vars.WATCHTOWER_RUNTIME_REF || 'main' }}"; then
+              exit 0
+            fi
+            git rebase --abort >/dev/null 2>&1 || true
+            sleep $((attempt * 2))
+          done
+          echo "Could not synchronize private runtime state" >&2
+          exit 1
+
+      - name: Report setup or monitor failure
+        if: >-
+          always() &&
+          (steps.public_source.outcome == 'failure' ||
+           steps.public_safety.outcome == 'failure' ||
+           steps.operation.outcome == 'failure' ||
+           steps.runtime_checkout.outcome == 'failure' ||
+           steps.python_setup.outcome == 'failure' ||
+           steps.install.outcome == 'failure' ||
+           steps.mask_private.outcome == 'failure' ||
+           steps.validate_runtime.outcome == 'failure' ||
+           steps.notification_test.outcome == 'failure' ||
+           steps.record_setup.outcome == 'failure' ||
+           steps.watchtower_run.outcome == 'failure' ||
+           steps.source_health.outcome == 'failure' ||
+           steps.commit_state.outcome == 'failure')
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          PUBLIC_SOURCE_OUTCOME: ${{ steps.public_source.outcome }}
+          PUBLIC_SAFETY_OUTCOME: ${{ steps.public_safety.outcome }}
+          OPERATION_OUTCOME: ${{ steps.operation.outcome }}
+          RUNTIME_OUTCOME: ${{ steps.runtime_checkout.outcome }}
+          PYTHON_OUTCOME: ${{ steps.python_setup.outcome }}
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          MASK_OUTCOME: ${{ steps.mask_private.outcome }}
+          VALIDATE_OUTCOME: ${{ steps.validate_runtime.outcome }}
+          NOTIFICATION_OUTCOME: ${{ steps.notification_test.outcome }}
+          RECORD_SETUP_OUTCOME: ${{ steps.record_setup.outcome }}
+          RUN_OUTCOME: ${{ steps.watchtower_run.outcome }}
+          HEALTH_OUTCOME: ${{ steps.source_health.outcome }}
+          COMMIT_OUTCOME: ${{ steps.commit_state.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+          import sys
+          import time
+          from pathlib import Path
+
+          from watchtower.incidents import reportable_failures, summarize_sources
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlparse
+          from urllib.request import Request, urlopen
+
+          stages = (
+              ("PUBLIC_SOURCE_OUTCOME", "uthenting av offentlig kildekode"),
+              ("PUBLIC_SAFETY_OUTCOME", "sikkerhetskontroll av offentlig kildekode"),
+              ("OPERATION_OUTCOME", "valg av operasjon"),
+              ("RUNTIME_OUTCOME", "tilgang til privat runtime"),
+              ("PYTHON_OUTCOME", "oppsett av Python"),
+              ("INSTALL_OUTCOME", "installasjon av Watchtower"),
+              ("MASK_OUTCOME", "skjerming av privat konfigurasjon"),
+              ("VALIDATE_OUTCOME", "validering av privat runtime"),
+              ("NOTIFICATION_OUTCOME", "test av varsling"),
+              ("RECORD_SETUP_OUTCOME", "lagring av oppsettskontroll"),
+              ("RUN_OUTCOME", "kildekontroll"),
+              ("HEALTH_OUTCOME", "helsekontroll"),
+              ("COMMIT_OUTCOME", "skriving av privat tilstand"),
+          )
+          stage = next(
+              (label for variable, label in stages if os.environ.get(variable) == "failure"),
+              "ukjent steg",
+          )
+          detail = ""
+          try:
+              status = json.loads(Path("runtime/state/_status.json").read_text(encoding="utf-8"))
+              errors = status.get("errors") if isinstance(status, dict) else None
+              if stage in {"kildekontroll", "helsekontroll"} and isinstance(errors, dict) and errors:
+                  reportable = reportable_failures(status)
+                  if not reportable:
+                      sys.exit(0)
+                  detail = "Vedvarende kildefeil (2 kontroller): " + summarize_sources(reportable)
+          except SystemExit:
+              raise
+          except Exception:
+              pass
+
+          run_url = os.environ.get("RUN_URL", "")
+          text = f"WATCHTOWER · DRIFTSVARSEL\nFeil i: {stage}."
+          if detail:
+              text += f"\nDetalj: {detail}."
+          if run_url:
+              text += f"\nKjøring: {run_url}"
+
+          provider = "slack"
+          try:
+              config_text = Path("runtime/config/watchtower.toml").read_text(encoding="utf-8")
+              section = re.search(
+                  r"(?ms)^\[notifications\]\s*$\n(.*?)(?=^\[|\Z)",
+                  config_text,
+              )
+              match = re.search(r'(?m)^\s*provider\s*=\s*["\'](slack|teams)["\']', section.group(1)) if section else None
+              if match:
+                  provider = match.group(1)
+          except Exception:
+              if os.environ.get("TEAMS_WEBHOOK_URL") and not os.environ.get("SLACK_WEBHOOK_URL"):
+                  provider = "teams"
+
+          def payload_for(selected_provider, message):
+              if selected_provider == "slack":
+                  return {"text": message}
+              return {
+                  "type": "message",
+                  "attachments": [{
+                      "contentType": "application/vnd.microsoft.card.adaptive",
+                      "contentUrl": None,
+                      "content": {
+                          "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                          "type": "AdaptiveCard",
+                          "version": "1.4",
+                          "body": [{"type": "TextBlock", "text": message, "wrap": True}],
+                      },
+                  }],
+              }
+
+          def send(selected_provider, message):
+              variable = "SLACK_WEBHOOK_URL" if selected_provider == "slack" else "TEAMS_WEBHOOK_URL"
+              webhook = os.environ.get(variable, "").strip()
+              parsed = urlparse(webhook)
+              if selected_provider == "slack":
+                  valid = (
+                      parsed.scheme == "https"
+                      and parsed.hostname in {"hooks.slack.com", "hooks.slack-gov.com"}
+                      and parsed.path.startswith("/services/")
+                  )
+              else:
+                  valid = parsed.scheme == "https" and bool(parsed.hostname)
+              if not valid:
+                  raise RuntimeError("notification webhook is unavailable")
+
+              body = json.dumps(payload_for(selected_provider, message)).encode("utf-8")
+              request = Request(
+                  webhook,
+                  data=body,
+                  headers={"Content-Type": "application/json"},
+                  method="POST",
+              )
+              for attempt in range(1, 4):
+                  try:
+                      with urlopen(request, timeout=20) as response:
+                          status_code = getattr(response, "status", 200)
+                      if 200 <= status_code < 300:
+                          return
+                      retryable = status_code == 429 or status_code >= 500
+                  except HTTPError as exc:
+                      retryable = exc.code == 429 or exc.code >= 500
+                  except URLError:
+                      retryable = True
+                  if not retryable or attempt == 3:
+                      raise RuntimeError("notification delivery failed") from None
+                  time.sleep(float(attempt))
+
+          try:
+              send(provider, text)
+          except Exception as exc:
+              print(f"Could not send failure notification: {type(exc).__name__}", file=sys.stderr)
+          PY
+
+      - name: Fail job when monitoring failed
+        if: >-
+          always() &&
+          (steps.public_source.outcome == 'failure' ||
+           steps.public_safety.outcome == 'failure' ||
+           steps.operation.outcome == 'failure' ||
+           steps.runtime_checkout.outcome == 'failure' ||
+           steps.python_setup.outcome == 'failure' ||
+           steps.install.outcome == 'failure' ||
+           steps.mask_private.outcome == 'failure' ||
+           steps.validate_runtime.outcome == 'failure' ||
+           steps.notification_test.outcome == 'failure' ||
+           steps.record_setup.outcome == 'failure' ||
+           steps.watchtower_run.outcome == 'failure' ||
+           steps.source_health.outcome == 'failure' ||
+           steps.commit_state.outcome == 'failure')
+        env:
+          SOURCE_DEGRADED: ${{ steps.watchtower_run.outputs.source_degraded }}
+          PUBLIC_SOURCE_OUTCOME: ${{ steps.public_source.outcome }}
+          PUBLIC_SAFETY_OUTCOME: ${{ steps.public_safety.outcome }}
+          OPERATION_OUTCOME: ${{ steps.operation.outcome }}
+          RUNTIME_OUTCOME: ${{ steps.runtime_checkout.outcome }}
+          PYTHON_OUTCOME: ${{ steps.python_setup.outcome }}
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          MASK_OUTCOME: ${{ steps.mask_private.outcome }}
+          VALIDATE_OUTCOME: ${{ steps.validate_runtime.outcome }}
+          NOTIFICATION_OUTCOME: ${{ steps.notification_test.outcome }}
+          RECORD_SETUP_OUTCOME: ${{ steps.record_setup.outcome }}
+          RUN_OUTCOME: ${{ steps.watchtower_run.outcome }}
+          HEALTH_OUTCOME: ${{ steps.source_health.outcome }}
+          COMMIT_OUTCOME: ${{ steps.commit_state.outcome }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from watchtower.config import load_config
+          from watchtower.health import ERROR, LATE, NOT_STARTED, inspect_health
+          from watchtower.state import StateStore
+
+          critical = (
+              "PUBLIC_SOURCE_OUTCOME", "PUBLIC_SAFETY_OUTCOME",
+              "OPERATION_OUTCOME", "RUNTIME_OUTCOME", "PYTHON_OUTCOME",
+              "INSTALL_OUTCOME", "MASK_OUTCOME", "VALIDATE_OUTCOME",
+              "NOTIFICATION_OUTCOME", "RECORD_SETUP_OUTCOME", "COMMIT_OUTCOME",
+          )
+          if any(os.environ.get(name) == "failure" for name in critical):
+              raise SystemExit("Critical Watchtower setup/state operation failed")
+          if os.environ.get("SOURCE_DEGRADED") != "true":
+              raise SystemExit("Watchtower failure not classified as source-only")
+
+          report = inspect_health(
+              load_config("runtime/config/watchtower.toml"),
+              StateStore("runtime/state"),
+          )
+          counts = report.counts
+          if (
+              not counts[ERROR]
+              or counts[LATE]
+              or counts[NOT_STARTED]
+              or report.pending_batches
+              or report.pending_delivery
+          ):
+              raise SystemExit("Unexplained or additional health failure")
+
+          print(
+              f"Known source-only degradation: {counts[ERROR]} sources. "
+              "Failure details remain in private status and incident alerts. "
+              "No duplicate GitHub job failure."
+          )
+          PY
