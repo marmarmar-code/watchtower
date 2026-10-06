@@ -122,7 +122,8 @@ class DoffinTests(unittest.TestCase):
         scoped = self.source_with_rows([{"id": "new", "title": "Newly visible notice"}],
                                       search_queries=["media"], lookback_days=30)
         current, alerts = self.poll(scoped, previous)
-        self.assertEqual([], alerts)
+        # Narrowing an existing window must not silently discard new events.
+        self.assertEqual(["new"], [event.item.key for event in alerts])
         self.assertIn("old", current["seen"])
         self.assertIn("new", current["seen"])
         self.assertNotEqual(previous["doffin_query_scope"], current["doffin_query_scope"])
