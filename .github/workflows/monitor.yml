@@ -460,9 +460,8 @@ jobs:
         run: |
           python3 - <<'PY'
           import os
-          from watchtower.config import load_config
-          from watchtower.health import ERROR, LATE, NOT_STARTED, inspect_health
-          from watchtower.state import StateStore
+          import re
+          import subprocess
 
           critical = (
               "PUBLIC_SOURCE_OUTCOME", "PUBLIC_SAFETY_OUTCOME",
@@ -475,22 +474,25 @@ jobs:
           if os.environ.get("SOURCE_DEGRADED") != "true":
               raise SystemExit("Watchtower failure not classified as source-only")
 
-          report = inspect_health(
-              load_config("runtime/config/watchtower.toml"),
-              StateStore("runtime/state"),
+          result = subprocess.run(
+              ["python", "-m", "watchtower", "status",
+               "--config", "runtime/config/watchtower.toml",
+               "--state-dir", "runtime/state", "--redact-output"],
+              capture_output=True, text=True, timeout=40,
           )
-          counts = report.counts
-          if (
-              not counts[ERROR]
-              or counts[LATE]
-              or counts[NOT_STARTED]
-              or report.pending_batches
-              or report.pending_delivery
-          ):
-              raise SystemExit("Unexplained or additional health failure")
-
-          print(
-              f"Known source-only degradation: {counts[ERROR]} sources. "
-              "Details remain in private status and incident alerts."
+          summary = re.fullmatch(
+              r"WATCHTOWER STATUS NEEDS ATTENTION; "
+              r"enabled_sources=(\\d+) healthy=(\\d+) late=(\\d+) errors=(\\d+) "
+              r"not_started=(\\d+) coverage_limited=(\\d+) "
+              r"pending_batches=(\\d+) pending_delivery=(\\d+)",
+              result.stdout.strip(),
           )
+          if result.returncode != 2 or not summary:
+              raise SystemExit("Unclassified source health failure")
+          enabled, healthy, late, errors, not_started, _, batches, delivery = (
+              int(value) for value in summary.groups()
+          )
+          if not errors or late or not_started or batches or delivery or healthy + errors != enabled:
+              raise SystemExit("Unexplained or additional source health failure")
+          print(f"Known source-only degradation: {errors} sources. Details in private status.")
           PY
