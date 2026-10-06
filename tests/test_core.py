@@ -341,6 +341,37 @@ class CoreTests(unittest.TestCase):
             self.assertEqual((moment + timedelta(minutes=60)).isoformat(timespec="seconds"),
                              state.load("_status")["retry_after"]["x"])
 
+    def test_long_outage_recovery_flags_unverified_history_once(self):
+        source = self.source(options={"interval_minutes": 10})
+        healthy = Mock()
+        healthy.fetch_with_state.return_value = []
+        healthy.augment_state.side_effect = lambda value: value
+        healthy.coverage_warnings = []
+        now = datetime(2026, 10, 6, 10, 0, tzinfo=timezone.utc)
+        previous = now - timedelta(hours=72)
+        with tempfile.TemporaryDirectory() as tmp:
+            state = StateStore(tmp)
+            state.save("x", {
+                "initialized": True, "seen": {}, "order": [],
+                "last_checked_at": previous.isoformat(),
+            })
+            state.save("_status", {
+                "errors": {"x": "TimeoutError: outage"},
+                "error_streaks": {"x": 12},
+                "error_since": {"x": previous.isoformat()},
+                "retry_after": {"x": (now - timedelta(minutes=5)).isoformat()},
+            })
+            run(Config((source,)), state, None,
+                respect_intervals=True, run_at=now,
+                source_factory=lambda _: healthy)
+            status = state.load("_status")
+            self.assertEqual({"x": 72}, status["recovery_gaps"])
+            self.assertEqual({}, status["errors"])
+            run(Config((source,)), state, None,
+                respect_intervals=True, run_at=now + timedelta(minutes=10),
+                source_factory=lambda _: healthy)
+            self.assertEqual({}, state.load("_status")["recovery_gaps"])
+
     def test_source_failure_does_not_discard_other_successful_source_state(self):
         healthy = Mock()
         healthy.fetch_with_state.return_value = []
