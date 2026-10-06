@@ -482,9 +482,9 @@ jobs:
           )
           summary = re.fullmatch(
               r"WATCHTOWER STATUS NEEDS ATTENTION; "
-              r"enabled_sources=(\\d+) healthy=(\\d+) late=(\\d+) errors=(\\d+) "
-              r"not_started=(\\d+) coverage_limited=(\\d+) "
-              r"pending_batches=(\\d+) pending_delivery=(\\d+)",
+              r"enabled_sources=(\d+) healthy=(\d+) late=(\d+) errors=(\d+) "
+              r"not_started=(\d+) coverage_limited=(\d+) "
+              r"pending_batches=(\d+) pending_delivery=(\d+)",
               result.stdout.strip(),
           )
           if result.returncode != 2 or not summary:
