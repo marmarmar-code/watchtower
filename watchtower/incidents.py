@@ -50,16 +50,27 @@ def recovered_failures(
 
 
 def summarize_sources(source_ids, *, max_names: int = 5) -> str:
-    """Bound notification size while retaining the number and category of failures."""
+    """Group repeated source families without conflating unrelated errors."""
+    import re
     sources = sorted(set(source_ids))
     if not sources:
         return "ingen"
-    accounts = [source for source in sources if source.startswith("account_figures_")]
-    remaining = [source for source in sources if not source.startswith("account_figures_")]
-    if len(accounts) >= 4:
-        parts = [f"BRREG-regnskapstall ({len(accounts)} kilder)", *remaining]
-    else:
-        parts = [*accounts, *remaining]
+    families = {}
+    individuals = []
+    for source in sources:
+        match = re.fullmatch(r"(.+)_([0-9]{9})_v([0-9]+)", source)
+        if match:
+            families.setdefault((match.group(1), match.group(3)), []).append(source)
+        else:
+            individuals.append(source)
+    parts = []
+    for (prefix, version), members in sorted(families.items()):
+        if len(members) >= 4:
+            label = "BRREG-regnskapstall" if prefix == "account_figures" else prefix.replace("_", " ")
+            parts.append(f"{label} ({len(members)} kilder)")
+        else:
+            individuals.extend(members)
+    parts.extend(sorted(individuals))
     if len(parts) > max_names:
         return ", ".join(parts[:max_names]) + f" + {len(parts) - max_names} andre"
     return ", ".join(parts)
