@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import tempfile
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import unittest
 from pathlib import Path
 from unittest.mock import Mock
@@ -275,6 +275,102 @@ class CoreTests(unittest.TestCase):
             recovered = run(Config((source,)), state, None, source_factory=lambda _: healthy)
             self.assertEqual({}, state.load("_status")["error_streaks"])
             self.assertEqual({}, recovered.errors)
+
+    def test_failed_source_respects_backoff_and_recovers_without_rebaseline(self):
+        source = self.source(options={"interval_minutes": 10})
+        failing = Mock()
+        failing.fetch_with_state.side_effect = TimeoutError("upstream unavailable")
+        healthy = Mock()
+        healthy.fetch_with_state.return_value = []
+        healthy.augment_state.side_effect = lambda value: value
+        healthy.coverage_warnings = []
+        origin = datetime(2026, 10, 6, 10, 0, tzinfo=timezone.utc)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            state = StateStore(tmp)
+            config = Config((source,))
+            def check(minutes, factory):
+                return run(config, state, None, respect_intervals=True,
+                           run_at=origin + timedelta(minutes=minutes),
+                           source_factory=lambda _: factory)
+
+            check(0, failing)
+            first = state.load("_status")
+            self.assertEqual(1, first["error_streaks"]["x"])
+            self.assertEqual((origin + timedelta(minutes=5)).isoformat(timespec="seconds"),
+                             first["retry_after"]["x"])
+            check(1, failing)
+            self.assertEqual(1, failing.fetch_with_state.call_count)
+            check(5, failing)
+            self.assertEqual(2, failing.fetch_with_state.call_count)
+            self.assertEqual(2, state.load("_status")["error_streaks"]["x"])
+            check(10, failing)
+            self.assertEqual(2, failing.fetch_with_state.call_count)
+            check(20, failing)
+            self.assertEqual(3, failing.fetch_with_state.call_count)
+            self.assertEqual((origin + timedelta(minutes=80)).isoformat(timespec="seconds"),
+                             state.load("_status")["retry_after"]["x"])
+            check(25, healthy)
+            self.assertEqual(0, healthy.fetch_with_state.call_count)
+            check(80, healthy)
+            self.assertEqual(1, healthy.fetch_with_state.call_count)
+            self.assertNotIn("x", state.load("_status")["errors"])
+            self.assertEqual({}, state.load("_status")["retry_after"])
+            check(85, healthy)
+            self.assertEqual(1, healthy.fetch_with_state.call_count)
+            check(90, healthy)
+            self.assertEqual(2, healthy.fetch_with_state.call_count)
+
+    def test_existing_failure_without_retry_deadline_is_retried_and_migrated(self):
+        source = self.source(options={"interval_minutes": 60})
+        failing = Mock()
+        failing.fetch_with_state.side_effect = TimeoutError("synthetic")
+        with tempfile.TemporaryDirectory() as tmp:
+            state = StateStore(tmp)
+            state.save("_status", {
+                "errors": {"x": "TimeoutError: old"},
+                "error_streaks": {"x": 1300},
+                "last_run_at": "2026-10-06T09:00:00+00:00",
+            })
+            state.save("x", {"initialized": True, "seen": {}, "order": [], "last_checked_at": "2026-09-30T09:00:00+00:00"})
+            moment = datetime(2026, 10, 6, 10, 0, tzinfo=timezone.utc)
+            run(Config((source,)), state, None,
+                respect_intervals=True, run_at=moment, source_factory=lambda _: failing)
+            self.assertEqual(1, failing.fetch_with_state.call_count)
+            self.assertEqual(1301, state.load("_status")["error_streaks"]["x"])
+            self.assertEqual((moment + timedelta(minutes=60)).isoformat(timespec="seconds"),
+                             state.load("_status")["retry_after"]["x"])
+
+    def test_long_outage_recovery_flags_unverified_history_once(self):
+        source = self.source(options={"interval_minutes": 10})
+        healthy = Mock()
+        healthy.fetch_with_state.return_value = []
+        healthy.augment_state.side_effect = lambda value: value
+        healthy.coverage_warnings = []
+        now = datetime(2026, 10, 6, 10, 0, tzinfo=timezone.utc)
+        previous = now - timedelta(hours=72)
+        with tempfile.TemporaryDirectory() as tmp:
+            state = StateStore(tmp)
+            state.save("x", {
+                "initialized": True, "seen": {}, "order": [],
+                "last_checked_at": previous.isoformat(),
+            })
+            state.save("_status", {
+                "errors": {"x": "TimeoutError: outage"},
+                "error_streaks": {"x": 12},
+                "error_since": {"x": previous.isoformat()},
+                "retry_after": {"x": (now - timedelta(minutes=5)).isoformat()},
+            })
+            run(Config((source,)), state, None,
+                respect_intervals=True, run_at=now,
+                source_factory=lambda _: healthy)
+            status = state.load("_status")
+            self.assertEqual({"x": 72}, status["recovery_gaps"])
+            self.assertEqual({}, status["errors"])
+            run(Config((source,)), state, None,
+                respect_intervals=True, run_at=now + timedelta(minutes=10),
+                source_factory=lambda _: healthy)
+            self.assertEqual({}, state.load("_status")["recovery_gaps"])
 
     def test_source_failure_does_not_discard_other_successful_source_state(self):
         healthy = Mock()
