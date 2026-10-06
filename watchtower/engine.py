@@ -91,7 +91,7 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "patentstyret": PatentstyretSource,
 }
 
-_STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors", "error_streaks", "warnings", "retry_after", "error_since")
+_STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors", "error_streaks", "warnings", "retry_after", "error_since", "recovery_gaps")
 _LAST_CHECKED_FIELD = "last_checked_at"
 DEFAULT_SOURCE_INTERVAL_MINUTES = 60
 MAX_DETAILED_ALERTS_PER_RUN = 32
@@ -409,6 +409,7 @@ def run(
         if key in enabled_ids and key in errors
     }
     warnings: dict[str, list[str]] = {}
+    recovery_gaps: dict[str, int] = {}
     staged: dict[str, dict] = {}
     started_at = run_at or datetime.now(timezone.utc)
     if started_at.tzinfo is None:
@@ -446,6 +447,21 @@ def run(
             next_state[_LAST_CHECKED_FIELD] = checked_at
             next_state["last_item_count"] = len(items)
             next_state["coverage_warnings"] = source_warnings
+            # Recovery restores the current snapshot, but does not guarantee
+            # every event published during a long interruption was retained.
+            if source_config.id in errors and old_state:
+                raw_last_success = old_state.get(_LAST_CHECKED_FIELD)
+                if isinstance(raw_last_success, str):
+                    try:
+                        last_success = datetime.fromisoformat(raw_last_success.replace("Z", "+00:00"))
+                        if last_success.tzinfo is not None:
+                            missing_hours = int(
+                                (started_at - last_success.astimezone(timezone.utc)).total_seconds() // 3600
+                            )
+                            if missing_hours >= 24:
+                                recovery_gaps[source_config.id] = missing_hours
+                    except ValueError:
+                        pass
             errors.pop(source_config.id, None)
             error_streaks.pop(source_config.id, None)
             retry_after.pop(source_config.id, None)
@@ -482,7 +498,7 @@ def run(
         "baselined_sources": baselined, "alerts": len(alerts),
         "errors": errors, "error_streaks": error_streaks,
         "retry_after": retry_after, "error_since": error_since,
-        "warnings": warnings,
+        "recovery_gaps": recovery_gaps, "warnings": warnings,
     }
     if alerts:
         if notifier is None:
