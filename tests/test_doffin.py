@@ -114,6 +114,47 @@ class DoffinTests(unittest.TestCase):
         self.assertEqual(["new"], [alert.item.key for alert in alerts])
 
     @patch.dict(os.environ, {"DOFFIN_API_KEY": "test-key"})
+    def test_bounded_lookback_filters_api_requests_and_migrates_quietly(self):
+        from datetime import datetime, timedelta, timezone
+        legacy = self.source_with_rows([{"id": "old", "title": "Historical notice"}],
+                                      search_queries=["media"])
+        previous, _ = self.poll(legacy)
+        scoped = self.source_with_rows([{"id": "new", "title": "Newly visible notice"}],
+                                      search_queries=["media"], lookback_days=30)
+        current, alerts = self.poll(scoped, previous)
+        self.assertEqual([], alerts)
+        self.assertIn("old", current["seen"])
+        self.assertIn("new", current["seen"])
+        self.assertNotEqual(previous["doffin_query_scope"], current["doffin_query_scope"])
+        params = scoped.get.call_args.kwargs["params"]
+        self.assertEqual("media", params["searchString"])
+        self.assertEqual(
+            (datetime.now(timezone.utc).date() - timedelta(days=30)).isoformat(),
+            params["issueDateFrom"],
+        )
+        scoped.get.return_value.json.return_value = {"hits": [
+            {"id": "new", "title": "Newly visible notice"},
+            {"id": "future", "title": "New notice"},
+        ]}
+        _, subsequent = self.poll(scoped, current)
+        self.assertEqual(["future"], [event.item.key for event in subsequent])
+
+    @patch.dict(os.environ, {"DOFFIN_API_KEY": "test-key"})
+    def test_legacy_query_without_lookback_does_not_send_a_date_parameter(self):
+        source = self.source_with_rows([], search_queries=["media"])
+        source.fetch()
+        self.assertNotIn("issueDateFrom", source.get.call_args.kwargs["params"])
+
+    @patch.dict(os.environ, {"DOFFIN_API_KEY": "test-key"})
+    def test_invalid_lookback_values_fail_closed_before_fetch(self):
+        for value in (0, 91, True, "30", -1, 1.5):
+            with self.subTest(value=value):
+                source = self.source_with_rows([], lookback_days=value)
+                with self.assertRaisesRegex(SourceError, "lookback_days"):
+                    source.fetch()
+                source.get.assert_not_called()
+
+    @patch.dict(os.environ, {"DOFFIN_API_KEY": "test-key"})
     def test_partial_query_failure_does_not_commit_scope_or_seen_keys(self):
         source = self.source_with_rows([], search_queries=["alpha", "beta"])
         successful = Mock()
