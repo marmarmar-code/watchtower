@@ -115,8 +115,12 @@ def reportable_escalations(
 
     errors = current.get("errors", {})
     since = current.get("error_since", {})
+    previous_streaks = before.get("error_streaks", {})
+    current_streaks = current.get("error_streaks", {})
     previous_time = before.get("last_run_at")
-    if not isinstance(errors, dict) or not isinstance(since, dict):
+    if not all(isinstance(data, dict) for data in (
+        errors, since, previous_streaks, current_streaks
+    )):
         return ()
     try:
         at = datetime.fromisoformat(now.replace("Z", "+00:00"))
@@ -129,6 +133,15 @@ def reportable_escalations(
     cutoff = timedelta(hours=after_hours)
     result = []
     for source in errors:
+        # Only escalate after an actual failed recheck. A scheduler tick with
+        # no due sources must never repeat the same Slack escalation.
+        prev_count = previous_streaks.get(source, 0)
+        now_count = current_streaks.get(source, 0)
+        if (
+            type(prev_count) is not int or type(now_count) is not int
+            or now_count <= prev_count
+        ):
+            continue
         stamp = since.get(source)
         try:
             started = datetime.fromisoformat(stamp.replace("Z", "+00:00"))
