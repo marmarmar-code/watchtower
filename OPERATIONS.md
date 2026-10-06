@@ -21,8 +21,17 @@ registrerte begrensninger. Den kontakter ingen eksterne kilder.
 | `IKKE STARTET` | Ingen registrert vellykket henting. Fullfør oppsett/baseline. |
 | `FORSINKET` | Sist henting er eldre enn intervallet pluss 15 minutters slingringsmonn. Se Actions og scheduler. |
 | `FEIL` | Siste forsøk feilet. Undersøk privat `_status.json`, tilgang og kildeformat. |
-| `result_window_full` | Doffin fylte siste tillatte side. Eldre treff kan ligge utenfor vinduet. Avgrens søket eller øk `max_pages` bevisst, opptil 5. |
+| `result_window_full` | Doffin fylte siste tillatte side. Eldre treff kan ligge utenfor vinduet. Avgrens søket eller øk `max_pages` bevisst, opptil 5. Med `lookback_days` kan søket avgrenses til 1–90 dagers overlapp med `issueDateFrom`, men et fullt tidsvindu må fortsatt undersøkes. |
 | `no_overlap_with_previous_window` | Et fullt Doffin-søk gjenfant ingen tidligere lagret ID. Undersøk mulig hull etter avbrudd eller endret søk. |
+
+Bruk `lookback_days` bare når den valgte Doffin-søkestrategien kan tåle
+den historiske grensen. Første aktivering fra et ubegrenset søk
+beholder tidligere identiteter og varsler fortsatt om nye treff i det
+innsnevrede vinduet. Utvidelse av et eksisterende begrenset søk lærer
+historiske treff stille for å unngå falske nyhetsvarsler.
+Et tidsvindu er ikke garantert historisk fullstendig etter avbrudd som
+varer lenger enn vinduet. Ikke anta at tidsfilteret reparerer
+søk med flere treff enn tilgjengelige sider.
 
 Doffin-markeringene stanser ikke varsling av hentede treff. De vises også i den
 anonymiserte Actions-oppsummeringen som `coverage_limited`. En slik markering er
