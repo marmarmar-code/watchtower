@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from datetime import datetime, timedelta, timezone
 from dataclasses import replace
 from hashlib import sha256
 import json
@@ -27,14 +28,22 @@ class DoffinSource(Source):
             raise ValueError("Doffin accepts only the official API URL")
         self.endpoint = DEFAULT_URL
         self._completed_scope: str | None = None
+        self._legacy_unbounded_scope: str | None = None
 
     def fetch_with_state(self, previous: dict | None) -> list[Item]:
         self._previous_keys = set((previous or {}).get("seen", {}))
         items = self.fetch()
         if previous is not None and previous.get(_SCOPE_KEY) != self._completed_scope:
-            # Expanding queries/pages can expose older notices that have never
-            # been observed. Quietly learn the changed window once; retain all
-            # existing notice identities instead of resetting the source state.
+            if (
+                self.config.options.get("lookback_days") is not None
+                and previous.get(_SCOPE_KEY) == self._legacy_unbounded_scope
+            ):
+                # Adding a date floor only narrows the existing search. Preserve
+                # legitimate fresh alerts on this first poll, rather than
+                # silently losing everything discovered during deployment.
+                return items
+            # Expanding queries/pages or widening an existing date window may
+            # reveal historical notices. Quietly learn that changed scope.
             return [replace(item, suppress_alert=True) for item in items]
         return items
 
@@ -46,22 +55,40 @@ class DoffinSource(Source):
     def fetch(self) -> list[Item]:
         self.coverage_warnings = []
         self._completed_scope = None
+        self._legacy_unbounded_scope = None
         api_key = os.environ.get("DOFFIN_API_KEY", "").strip()
         if not api_key:
             raise SourceError("Doffin API key is not configured")
 
         page_size = min(max(int(self.config.options.get("page_size", 100)), 1), 100)
         max_pages = min(max(int(self.config.options.get("max_pages", 1)), 1), 5)
+        lookback = self.config.options.get("lookback_days")
+        if lookback is not None and (type(lookback) is not int or not 1 <= lookback <= 90):
+            raise SourceError("Doffin lookback_days must be from 1 to 90")
+        date_from = (
+            (datetime.now(timezone.utc).date() - timedelta(days=lookback)).isoformat()
+            if lookback is not None else None
+        )
         queries = self.config.options.get("search_queries", [""])
         if not isinstance(queries, list) or not queries or not all(isinstance(q, str) for q in queries):
             raise SourceError("Doffin search_queries must be a non-empty string array")
         queries = list(dict.fromkeys(q.strip() for q in queries))
-        scope = sha256(json.dumps({
+        scope_fields = {
             "version": 1,
             "search_queries": sorted(queries),
             "page_size": page_size,
             "max_pages": max_pages,
-        }, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+        }
+        # Preserve legacy fingerprints for installations without the option.
+        legacy_scope = sha256(json.dumps(
+            scope_fields, sort_keys=True, separators=(",", ":")
+        ).encode()).hexdigest()
+        self._legacy_unbounded_scope = legacy_scope
+        if lookback is not None:
+            scope_fields["lookback_days"] = lookback
+        scope = sha256(json.dumps(
+            scope_fields, sort_keys=True, separators=(",", ":")
+        ).encode()).hexdigest()
 
         headers = {
             "Ocp-Apim-Subscription-Key": api_key,
@@ -81,6 +108,11 @@ class DoffinSource(Source):
                 }
                 if query:
                     params["searchString"] = query
+                if date_from is not None:
+                    # Official API filter; limit broad searches to a recent,
+                    # overlapping interval instead of truncating at 500
+                    # historical results.
+                    params["issueDateFrom"] = date_from
                 response = self.get(
                     self.endpoint,
                     params=params,
