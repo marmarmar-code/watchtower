@@ -131,11 +131,32 @@ class AccountFiguresSource(SnapshotSource):
             raise SourceError('Account response is invalid JSON') from exc
         finally:
             response.close()
-        # The verified unauthenticated contract returns one latest company account.
-        # Do not choose arbitrarily if the service changes its response scope.
-        if not isinstance(values, list) or len(values) != 1:
-            raise SourceError('Expected exactly one public latest company account')
-        row = _record(values[0], orgnr)
+        # BRREG now returns historical years and sometimes both SELSKAP and
+        # KONSERN accounts. Restrict selection to this organisation and the
+        # single latest SELSKAP period; never choose between two filings for
+        # the same latest end date (a correction may be involved).
+        if not isinstance(values, list) or not values:
+            raise SourceError('Account API returned no account list')
+        candidates = []
+        for item in values:
+            if not isinstance(item, dict) or item.get('regnskapstype') not in ('SELSKAP', 'KONSERN'):
+                raise SourceError('Account API returned an unknown account type')
+            company = _mapping(item, 'virksomhet')
+            if company.get('organisasjonsnummer') != orgnr:
+                raise SourceError('Account API returned a different organisation')
+            if item['regnskapstype'] == 'SELSKAP':
+                period = _mapping(item, 'regnskapsperiode')
+                start, end = _date(period.get('fraDato')), _date(period.get('tilDato'))
+                if start > end:
+                    raise SourceError('Account period is invalid')
+                candidates.append((end, item))
+        if not candidates:
+            raise SourceError('Account API returned no company account')
+        latest_date = max(end for end, _ in candidates)
+        latest = [item for end, item in candidates if end == latest_date]
+        if len(latest) != 1:
+            raise SourceError('Account API returned ambiguous latest company accounts')
+        row = _record(latest[0], orgnr)
         if row['period_end'] < self._previous_periods.get(orgnr, ''):
             raise SourceError('Latest account period regressed; previous state preserved')
         return row
