@@ -332,7 +332,7 @@ class CoreTests(unittest.TestCase):
                 "error_streaks": {"x": 1300},
                 "last_run_at": "2026-10-06T09:00:00+00:00",
             })
-            state.save("x", {"last_checked_at": "2026-09-30T09:00:00+00:00"})
+            state.save("x", {"initialized": True, "seen": {}, "order": [], "last_checked_at": "2026-09-30T09:00:00+00:00"})
             moment = datetime(2026, 10, 6, 10, 0, tzinfo=timezone.utc)
             run(Config((source,)), state, None,
                 respect_intervals=True, run_at=moment, source_factory=lambda _: failing)
