@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from datetime import datetime, timedelta, timezone
 from dataclasses import replace
 from hashlib import sha256
 import json
@@ -52,6 +53,13 @@ class DoffinSource(Source):
 
         page_size = min(max(int(self.config.options.get("page_size", 100)), 1), 100)
         max_pages = min(max(int(self.config.options.get("max_pages", 1)), 1), 5)
+        lookback = self.config.options.get("lookback_days")
+        if lookback is not None and (type(lookback) is not int or not 1 <= lookback <= 90):
+            raise SourceError("Doffin lookback_days must be from 1 to 90")
+        date_from = (
+            (datetime.now(timezone.utc).date() - timedelta(days=lookback)).isoformat()
+            if lookback is not None else None
+        )
         queries = self.config.options.get("search_queries", [""])
         if not isinstance(queries, list) or not queries or not all(isinstance(q, str) for q in queries):
             raise SourceError("Doffin search_queries must be a non-empty string array")
@@ -61,6 +69,7 @@ class DoffinSource(Source):
             "search_queries": sorted(queries),
             "page_size": page_size,
             "max_pages": max_pages,
+            "lookback_days": lookback,
         }, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
         headers = {
@@ -81,6 +90,11 @@ class DoffinSource(Source):
                 }
                 if query:
                     params["searchString"] = query
+                if date_from is not None:
+                    # Official API filter; limit broad searches to a recent,
+                    # overlapping interval instead of truncating at 500
+                    # historical results.
+                    params["issueDateFrom"] = date_from
                 response = self.get(
                     self.endpoint,
                     params=params,
