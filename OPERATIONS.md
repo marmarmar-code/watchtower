@@ -35,6 +35,40 @@ ofte korte historiske vinduer, Doffin kontrollerer bare konfigurert vindu, Euron
 følger valgte utstedersider, og SSB-adapteren leser tabellbeskrivelser uten selve tallene.
 En vellykket henting beviser heller ikke at kildens publiserte data er ferske.
 
+## Feil, nye forsøk og driftsvarsler
+
+Ved en mislykket kildekontroll bevarer Watchtower siste gyldige data og
+registrerer tidspunktet da feilen først ble sett. Kilder med feil blir ikke
+deaktivert. De prøves igjen etter 5 minutter, deretter 15 minutter og
+deretter hvert 60. minutt mens feilen vedvarer. En vellykket kontroll
+nullstiller denne ekstra ventetiden og gjenopptar kildens ordinære intervall.
+Dette reduserer gjentatte kall når en ekstern tjeneste har problemer.
+Ved en ny installasjon uten tidligere `retry_after` benyttes eksisterende
+siste vellykkede kontroll til første forsøk.
+
+Gjentatte tekniske kildefeil grupperes i korte meldinger, særlig når mange
+overvåkede selskaper bruker samme integrasjon. Slack/Teams får en melding
+ved vedvarende feil (to mislykkede forsøk) og én eskalering når en faktisk
+mislykket ny kontroll viser at feilen har vart over 24 timer. Meldingen
+gjentas ikke ved hvert femminutters scheduler-tikk. Kritiske oppsettsfeil,
+manglende lagring og leveringsfeil behandles fortsatt separat og skal ikke
+kamufleres som kjente kildefeil.
+
+Nye eller bortfalte dekningsbegrensninger rapporteres som statusendringer,
+ikke som gjentatte fullstendige feilvarsler. Et Doffin-søk med
+`result_window_full` er fortsatt begrenset selv om kjøringen er teknisk frisk.
+Når en kilde blir frisk etter minst 24 timer uten vellykket kontroll, varsler
+Watchtower **mulig udekket historikk**. Det betyr ikke at dokumenter faktisk
+er tapt, og det betyr heller ikke at en vellykket ny kontroll fyller
+historiske hull. Eventuell innhenting må vurderes etter den aktuelle
+kildens historikk-/API-kontrakt, ikke ved å sende gamle elementer som nye.
+
+Privat `state/_status.json` lagrer `retry_after`, `error_since`
+og én kjørings `recovery_gaps` (antall timer). Disse verdiene er
+driftsmetadata, ikke publiserbare kildeopplysninger. Forløp og eventuelle
+manglende nyheter må vurderes redaksjonelt; aldri nullstill state for å
+få grønn status.
+
 ## RSS-feil
 
 Nye startpakker bruker én kilde per feed. I eksisterende konfigurasjoner med flere
