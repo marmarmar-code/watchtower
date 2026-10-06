@@ -91,10 +91,20 @@ SOURCE_TYPES: dict[str, type[Source]] = {
     "patentstyret": PatentstyretSource,
 }
 
-_STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors", "error_streaks", "warnings")
+_STATUS_FIELDS = ("checked_sources", "baselined_sources", "alerts", "errors", "error_streaks", "warnings", "retry_after")
 _LAST_CHECKED_FIELD = "last_checked_at"
 DEFAULT_SOURCE_INTERVAL_MINUTES = 60
 MAX_DETAILED_ALERTS_PER_RUN = 32
+
+
+def failure_retry_minutes(streak: int) -> int:
+    """Poll an unhealthy source less often without disabling it."""
+    if streak <= 1:
+        return 5
+    if streak == 2:
+        return 15
+    return 60
+
 
 
 @dataclass
@@ -186,7 +196,18 @@ def _source_is_due(
     previous: dict | None,
     *,
     at: datetime,
+    retry_after: str | None = None,
 ) -> bool:
+    # A failed check must not make the last successful timestamp a reason
+    # to retry every five-minute scheduler tick.
+    if retry_after is not None:
+        try:
+            retry = datetime.fromisoformat(retry_after.replace("Z", "+00:00"))
+            if retry.tzinfo is None:
+                raise ValueError("missing retry timezone")
+        except (TypeError, ValueError) as exc:
+            raise ValueError("invalid private retry deadline") from exc
+        return at >= retry
     if previous is None:
         return True
     last_value = previous.get(_LAST_CHECKED_FIELD)
@@ -367,6 +388,16 @@ def run(
         key: value for key, value in prior_streaks.items()
         if key in enabled_ids and key in errors
     }
+    previous_retry = previous_status.get("retry_after", {})
+    if not isinstance(previous_retry, dict) or any(
+        not isinstance(key, str) or not isinstance(value, str)
+        for key, value in previous_retry.items()
+    ):
+        raise ValueError("invalid private retry deadlines")
+    retry_after = {
+        key: value for key, value in previous_retry.items()
+        if key in enabled_ids and key in errors
+    }
     warnings: dict[str, list[str]] = {}
     staged: dict[str, dict] = {}
     started_at = run_at or datetime.now(timezone.utc)
@@ -386,6 +417,7 @@ def run(
                 source_config,
                 old_state,
                 at=started_at,
+                retry_after=retry_after.get(source_config.id),
             ):
                 continue
             source = source_factory(source_config)
@@ -406,6 +438,7 @@ def run(
             next_state["coverage_warnings"] = source_warnings
             errors.pop(source_config.id, None)
             error_streaks.pop(source_config.id, None)
+            retry_after.pop(source_config.id, None)
             warnings.pop(source_config.id, None)
             if source_warnings:
                 warnings[source_config.id] = source_warnings
@@ -420,6 +453,11 @@ def run(
             else:
                 error_streaks[source_config.id] = 1
             errors[source_config.id] = error
+            retry_after[source_config.id] = (
+                started_at + timedelta(minutes=failure_retry_minutes(
+                    error_streaks[source_config.id]
+                ))
+            ).isoformat(timespec="seconds")
 
     alerts = _unique_web_link_alerts(alerts)
     alerts = _suppress_recent_replays(state, alerts, at=started_at)
@@ -430,7 +468,8 @@ def run(
     status = {
         "last_run_at": now_iso(), "checked_sources": checked,
         "baselined_sources": baselined, "alerts": len(alerts),
-        "errors": errors, "error_streaks": error_streaks, "warnings": warnings,
+        "errors": errors, "error_streaks": error_streaks,
+        "retry_after": retry_after, "warnings": warnings,
     }
     if alerts:
         if notifier is None:
