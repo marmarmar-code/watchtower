@@ -203,7 +203,10 @@ jobs:
           current_errors = current.get("errors", {}) if isinstance(current, dict) else {}
           recovered = list(recovered_failures(before, current))
           limited, restored = coverage_transitions(before, current)
-          if not recovered and not limited and not restored:
+          recovery_gaps = current.get("recovery_gaps", {})
+          if not isinstance(recovery_gaps, dict):
+              recovery_gaps = {}
+          if not recovered and not limited and not restored and not recovery_gaps:
               raise SystemExit(0)
 
           lines = ["WATCHTOWER · DRIFT · STATUSENDRING"]
@@ -218,6 +221,11 @@ jobs:
               lines.append("Mulige manglende treff; undersøk datavinduet.")
           if restored:
               lines.append("Dekning normalisert: " + summarize_sources(restored))
+          if recovery_gaps:
+              lines.append("Mulig udekket historikk etter driftsavbrudd: " +
+                           summarize_sources(recovery_gaps))
+              lines.append("Siste vellykkede kontroll var minst 24 timer før gjenoppretting; " +
+                           "ny vellykket kontroll bekrefter ikke historisk fullstendighet.")
 
           config = tomllib.loads(Path("runtime/config/watchtower.toml").read_text(encoding="utf-8"))
           notifications = config.get("notifications", {})
