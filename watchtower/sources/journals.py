@@ -10,7 +10,8 @@ from .changes import SnapshotSource, document, integer, public_url, strings
 from .common import SourceError
 
 DEFAULT_URL = "https://api.einnsyn.no/search"
-PUBLIC_URL = "https://einnsyn.no/journalpost/{}"
+PUBLIC_CASE_URL = "https://einnsyn.no/saksmappe"
+PUBLIC_API_URL = "https://api.einnsyn.no/journalpost/{}"
 _ID = re.compile(r"^jp_[0-9a-hjkmnp-tv-z]{26}$")
 _REFERENCE = re.compile(r"^[a-z]+_[0-9a-hjkmnp-tv-z]{26}$")
 
@@ -123,8 +124,19 @@ def _record(row):
     case_id = row.get("saksmappe")
     if isinstance(case_id, str) and case_id:
         metadata["group_key"] = "journal-case:" + case_id
-    return {"key": identity, "title": title.strip(), "url": PUBLIC_URL.format(identity),
+    return {"key": identity, "title": title.strip(),
+            "url": _public_journalpost_url(identity, case_id),
             "published": published, "fields": fields, "metadata": metadata}
+
+
+def _public_journalpost_url(identity, case_id):
+    # The public portal displays journalposts within their case, using id/jid.
+    # The API's /journalpost/{id} route is not a public-portal page.
+    if isinstance(case_id, str) and case_id.startswith("sm_") and _REFERENCE.fullmatch(case_id):
+        return PUBLIC_CASE_URL + "?" + urlencode({"id": case_id, "jid": identity})
+    # Without a case reference, use the documented record endpoint instead of
+    # inventing a direct link to a non-existent public journalpost page.
+    return PUBLIC_API_URL.format(identity)
 
 
 def _timestamp(value, name):
