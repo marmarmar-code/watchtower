@@ -78,9 +78,27 @@ class JournalTests(unittest.TestCase):
     def test_identity_public_link_and_publish_time_are_separate(self):
         row = _record(item())
         assert row["key"] == JP1 and row["published"].endswith("Z")
-        assert row["url"] == "https://einnsyn.no/journalpost/" + JP1
+        assert row["url"] == "https://einnsyn.no/saksmappe?id=sm_01m27vjtbwesdrp80sfwn3g4xh&jid=" + JP1
         assert row["fields"] == {"offentligTittel": "Søknad", "journalposttype": "inngaaende_dokument", "journaldato": "2026-09-03"}
         assert row["metadata"]["group_key"] == "journal-case:sm_01m27vjtbwesdrp80sfwn3g4xh"
+
+
+    def test_public_link_without_case_uses_documented_api_not_broken_portal_route(self):
+        without_case = item()
+        without_case.pop("saksmappe")
+        assert _record(without_case)["url"] == "https://api.einnsyn.no/journalpost/" + JP1
+
+        # Invalid relationship types cannot create an incorrect case link.
+        with_wrong_case = item()
+        with_wrong_case["saksmappe"] = JP2
+        assert _record(with_wrong_case)["url"] == "https://api.einnsyn.no/journalpost/" + JP1
+
+        case_link = _record(item())["url"]
+        parsed = urlsplit(case_link)
+        assert (parsed.scheme, parsed.netloc, parsed.path) == ("https", "einnsyn.no", "/saksmappe")
+        assert parse_qs(parsed.query) == {
+            "id": ["sm_01m27vjtbwesdrp80sfwn3g4xh"], "jid": [JP1]
+        }
 
 
     def test_initial_repeat_and_metadata_timestamp_change_are_quiet(self):
