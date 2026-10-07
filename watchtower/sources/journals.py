@@ -10,7 +10,7 @@ from .changes import SnapshotSource, document, integer, public_url, strings
 from .common import SourceError
 
 DEFAULT_URL = "https://api.einnsyn.no/search"
-PUBLIC_URL = "https://einnsyn.no/journalpost/{}"
+PUBLIC_SEARCH_URL = "https://einnsyn.no/search"
 _ID = re.compile(r"^jp_[0-9a-hjkmnp-tv-z]{26}$")
 _REFERENCE = re.compile(r"^[a-z]+_[0-9a-hjkmnp-tv-z]{26}$")
 
@@ -123,8 +123,19 @@ def _record(row):
     case_id = row.get("saksmappe")
     if isinstance(case_id, str) and case_id:
         metadata["group_key"] = "journal-case:" + case_id
-    return {"key": identity, "title": title.strip(), "url": PUBLIC_URL.format(identity),
+    return {"key": identity, "title": title.strip(),
+            "url": _public_journalpost_url(title),
             "published": published, "fields": fields, "metadata": metadata}
+
+
+def _public_journalpost_url(title):
+    # eInnsyn's current public frontend has no implemented journalpost detail
+    # page. Link to its supported journalpost search instead of inventing a
+    # /journalpost/{id} route that returns an error.
+    return PUBLIC_SEARCH_URL + "?" + urlencode({
+        "q": title.strip(),
+        "entity": "Journalpost",
+    })
 
 
 def _timestamp(value, name):

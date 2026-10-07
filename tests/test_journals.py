@@ -78,9 +78,20 @@ class JournalTests(unittest.TestCase):
     def test_identity_public_link_and_publish_time_are_separate(self):
         row = _record(item())
         assert row["key"] == JP1 and row["published"].endswith("Z")
-        assert row["url"] == "https://einnsyn.no/journalpost/" + JP1
+        assert row["url"] == "https://einnsyn.no/search?q=S%C3%B8knad&entity=Journalpost"
         assert row["fields"] == {"offentligTittel": "Søknad", "journalposttype": "inngaaende_dokument", "journaldato": "2026-09-03"}
         assert row["metadata"]["group_key"] == "journal-case:sm_01m27vjtbwesdrp80sfwn3g4xh"
+
+
+    def test_public_link_uses_supported_journalpost_search_route(self):
+        row = _record(item(title="Klage på vedtak & ny vurdering"))
+        parsed = urlsplit(row["url"])
+        assert (parsed.scheme, parsed.netloc, parsed.path) == ("https", "einnsyn.no", "/search")
+        assert parse_qs(parsed.query) == {
+            "q": ["Klage på vedtak & ny vurdering"],
+            "entity": ["Journalpost"],
+        }
+        assert "/journalpost/" not in row["url"]
 
 
     def test_initial_repeat_and_metadata_timestamp_change_are_quiet(self):
