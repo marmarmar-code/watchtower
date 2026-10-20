@@ -37,12 +37,29 @@ def validate_runtime(root: str | Path) -> list[str]:
     if root.is_symlink():
         return ["runtime path must not be a symbolic link"]
 
-    allowed_top = {"README.md", ".gitignore", "config", "state", ".git"}
+    # Private runtimes may define their own reviewed CI/workflows.
+    # Keep the rest of the runtime layout closed to unexpected files.
+    allowed_top = {"README.md", ".gitignore", "config", "state", ".git", ".github"}
     for child in root.iterdir():
         if child.is_symlink():
             problems.append(f"symbolic link is not allowed: {child.name}")
         if child.name not in allowed_top:
             problems.append(f"unexpected top-level path: {child.name}")
+
+    workflows_root = root / ".github"
+    if workflows_root.exists():
+        if not workflows_root.is_dir() or workflows_root.is_symlink():
+            problems.append("invalid .github directory")
+        else:
+            # A runtime PR check is allowed; arbitrary unreviewed files are not.
+            allowed_workflow_paths = {
+                ".github/workflows",
+                ".github/workflows/validate-runtime.yml",
+            }
+            for child in workflows_root.rglob("*"):
+                relative = child.relative_to(root).as_posix()
+                if relative not in allowed_workflow_paths:
+                    problems.append(f"unexpected GitHub workflow path: {relative}")
 
     for directory_name in ("config", "state"):
         directory = root / directory_name

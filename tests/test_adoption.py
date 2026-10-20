@@ -119,6 +119,24 @@ class SetupTests(unittest.TestCase):
                     if source.kind == "rss":
                         self.assertEqual(1, len(RssSource(source).feed_urls))
 
+    def test_reviewed_runtime_ci_is_allowed_without_accepting_extra_files(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            write_runtime(root, make_config(
+                "general", ["Synthetic Topic"], [], "slack"
+            ))
+            workflows = root / ".github" / "workflows"
+            workflows.mkdir(parents=True)
+            (workflows / "validate-runtime.yml").write_text("name: Validate\\n", encoding="utf-8")
+            self.assertEqual([], validate_runtime(root))
+            (workflows / "unexpected.yml").write_text("name: Surprise\\n", encoding="utf-8")
+            self.assertTrue(any("unexpected GitHub workflow path" in error
+                                for error in validate_runtime(root)))
+            (workflows / "unexpected.yml").unlink()
+            (root / ".github" / "workflow-data.env").write_text("x=y\\n")
+            self.assertTrue(any("unexpected GitHub workflow path" in error
+                                for error in validate_runtime(root)))
+
     def test_active_runtime_and_state_are_never_overwritten(self):
         content = make_config("general", ["Synthetic Topic"], [], "teams")
         with tempfile.TemporaryDirectory() as directory:
