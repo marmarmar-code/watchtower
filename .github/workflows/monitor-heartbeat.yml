@@ -9,7 +9,6 @@ on:
 
 permissions:
   actions: read
-  issues: write
   contents: read
 
 jobs:
@@ -17,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Check production heartbeat and deduplicate incident
+      - name: Check production heartbeat and alert on state transition
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
@@ -63,37 +62,34 @@ jobs:
               default=None,
           )
           stalled = latest is None or now - latest > timedelta(minutes=35)
-          issues = api("GET", "/issues?state=open&per_page=100")
-          active = next(
-              (row for row in issues if row.get("title") == title and "pull_request" not in row),
+          previous_runs = api(
+              "GET", "/actions/workflows/monitor-heartbeat.yml/runs?branch=main&per_page=10"
+          ).get("workflow_runs", [])
+          previous_completed = next(
+              (run for run in previous_runs
+               if run.get("status") == "completed"
+               and run.get("id") != int(os.environ["GITHUB_RUN_ID"])),
               None,
+          )
+          previously_stalled = (
+              previous_completed is not None
+              and previous_completed.get("conclusion") == "failure"
           )
           if not stalled:
               print("Monitoring dispatch heartbeat OK")
-              if active:
-                  api("PATCH", f"/issues/{active['number']}", {
-                      "state": "closed",
-                      "state_reason": "completed",
-                  })
               raise SystemExit(0)
 
           elapsed = "unknown" if latest is None else str(int((now - latest).total_seconds() // 60))
           print(f"Monitoring dispatch is stale; last run minutes ago: {elapsed}")
-          if active:
-              # Open incident already exists: do not repeatedly notify Slack/Teams.
-              raise SystemExit(0)
+          if previously_stalled:
+              print("Existing outage: notification already emitted on previous heartbeat")
+              raise SystemExit(1)
 
-          issue = api("POST", "/issues", {
-              "title": title,
-              "body": (
-                  "The independent hourly workflow has not observed a production monitor "
-                  "dispatch within 35 minutes. Check GitHub Actions scheduler and monitor "
-                  "history. This is a dispatch outage, not an individual source error. "
-                  "The incident automatically closes after a new production dispatch."
-              ),
-          })
-          issue_url = issue["html_url"]
-          message = "WATCHTOWER · DRIFTSSTOPP\\nIngen monitor-kjøring siste 35 minutter. " + issue_url
+          message = (
+              "WATCHTOWER · DRIFTSSTOPP\\n"
+              "Ingen monitor-kjøring siste 35 minutter. "
+              f"https://github.com/{repo}/actions/workflows/monitor.yml"
+          )
           slack = os.environ.get("SLACK_WEBHOOK_URL", "")
           teams = os.environ.get("TEAMS_WEBHOOK_URL", "")
           if slack:
@@ -101,8 +97,8 @@ jobs:
           elif teams:
               destination, body = teams, {"text": message}
           else:
-              print("No notification webhook configured; GitHub issue is the alert")
-              raise SystemExit(0)
+              print("No notification webhook configured; heartbeat job failure is the alert")
+              raise SystemExit(1)
           # Avoid redirecting a sensitive webhook URL to a different origin.
           class NoRedirect(urllib.request.HTTPRedirectHandler):
               def redirect_request(self, request, fp, code, msg, headers, newurl):
@@ -116,5 +112,6 @@ jobs:
               ).close()
           except (urllib.error.URLError, OSError) as exc:
               print(f"Notification delivery failed: {type(exc).__name__}")
-              # GitHub issue is still available for diagnosis.
+              # Red heartbeat job remains visible for diagnosis.
+          raise SystemExit(1)
           PY
