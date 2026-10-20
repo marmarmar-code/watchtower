@@ -85,6 +85,26 @@ class MergerDecisionTests(unittest.TestCase):
             with self.subTest(payload=p), self.assertRaises(SourceError):
                 s.read_records()
 
+    def test_non_merger_case_in_mixed_results_is_ignored_with_coverage_warning(self):
+        s = source()
+        other = document("C.45")
+        other["metadata"]["caseNumber"] = ["C.45"]
+        other["metadata"]["caseInstrument"] = ["C"]
+        s.post = Mock(return_value=response(payload([document(), other])))
+        rows = s.read_records()
+        self.assertEqual(1, len(rows))
+        self.assertEqual(["out_of_scope_search_results"], s.coverage_warnings)
+
+        # Never accept contradictory purported merger decisions.
+        bad = document()
+        bad["metadata"]["caseInstrument"] = ["C"]
+        with self.assertRaisesRegex(SourceError, "contradictory"):
+            _records(payload([bad]), date(2026, 1, 1), date(2026, 12, 31))
+
+        # A completely unrelated result window cannot silently become an empty baseline.
+        with self.assertRaisesRegex(SourceError, "only unrelated"):
+            _records(payload([other]), date(2026, 1, 1), date(2026, 12, 31))
+
     def test_decision_attachment_and_parent_coalesce_without_rebaseline(self):
         s = source(); parent = document(); attached = deepcopy(parent)
         attached["metadata"]["esST_REFERENCE"][0] += "-ATT71"
