@@ -77,7 +77,10 @@ class EUMergerDecisionsSource(SnapshotSource):
             raise SourceError("EU merger search returned invalid JSON") from exc
         finally:
             response.close()
-        return _records(payload, first, today)
+        # Search results sometimes include unrelated case families despite the
+        # server-side caseInstrument filter. Preserve visibility of this drift.
+        self.coverage_warnings.clear()
+        return _records(payload, first, today, coverage_warnings=self.coverage_warnings)
 
     def _item(self, row, event, details, suppress):
         item = super()._item(row, event, details, suppress)
@@ -115,7 +118,7 @@ def _date(metadata, name):
         raise SourceError(f"EU merger document has invalid {name}") from None
 
 
-def _records(payload, first, today):
+def _records(payload, first, today, *, coverage_warnings=None):
     if (not isinstance(payload, dict) or type(payload.get("totalResults")) is not int
             or not isinstance(payload.get("results"), list)):
         raise SourceError("EU merger search response schema changed")
@@ -126,13 +129,21 @@ def _records(payload, first, today):
             or payload.get("warnings") not in (None, [])):
         raise SourceError("EU merger window is incomplete or exceeds the 100-document bound")
     rows, seen = {}, set()
+    skipped_unrelated = 0
     for result in results:
         if not isinstance(result, dict) or not isinstance(result.get("metadata"), dict):
             raise SourceError("EU merger document is malformed")
         metadata = result["metadata"]
         ref, case = _single(metadata, "esST_REFERENCE", 120), _single(metadata, "caseNumber", 20)
-        if not CASE_ID.fullmatch(case) or _single(metadata, "caseInstrument") != "M":
-            raise SourceError("EU merger document is outside merger scope")
+        instrument = _single(metadata, "caseInstrument", 40)
+        is_merger_case = bool(CASE_ID.fullmatch(case))
+        if instrument != "M" and not is_merger_case:
+            # A provably unrelated case is not a malformed merger decision.
+            skipped_unrelated += 1
+            continue
+        if instrument != "M" or not is_merger_case:
+            # Contradictory or malformed merger metadata still fails closed.
+            raise SourceError("EU merger document has contradictory case scope")
         if _single(metadata, "esST_DATASOURCE") != "CS_PROD_ODSE_PROD":
             raise SourceError("EU merger source identifier changed")
         if not first <= _date(metadata, "caseLastDecisionDate") <= today:
@@ -163,4 +174,9 @@ def _records(payload, first, today):
         if decision_id in rows and rows[decision_id]["fields"] != fields:
             raise SourceError("EU merger documents disagree about the same decision")
         rows[decision_id] = row
+    if skipped_unrelated:
+        if skipped_unrelated == len(results):
+            raise SourceError("EU merger search returned only unrelated cases")
+        if coverage_warnings is not None:
+            coverage_warnings.append("out_of_scope_search_results")
     return sorted(rows.values(), key=lambda row: row["key"])
