@@ -45,6 +45,12 @@ def response(value):
 
 
 class CompanyDiscoveryTests(unittest.TestCase):
+    def test_foreign_address_without_norwegian_municipality(self):
+        row = entity()
+        row["forretningsadresse"] = {"landkode": "SE", "poststed": "Stockholm"}
+        result = self.source(payload([row])).read_records()
+        self.assertEqual("", result[0]["fields"]["municipality"])
+
     def source(self, replies, **options):
         source = CompanyDiscoverySource(config(**options))
         if not isinstance(replies, list): replies = [replies]

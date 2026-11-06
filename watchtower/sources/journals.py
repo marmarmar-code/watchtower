@@ -59,8 +59,12 @@ class JournalsSource(SnapshotSource):
                 raise SourceError("eInnsyn pagination loop")
             seen_urls.add(page_url)
             payload = _json(document(self, page_url))
-            if set(payload) - {"items", "next", "previous"}:
+            # The API also returns a summary object alongside the result window.
+            # It is not used for pagination; keep validating the actual items/cursor.
+            if set(payload) - {"items", "next", "previous", "total"}:
                 raise SourceError("eInnsyn response schema changed")
+            if "total" in payload and not isinstance(payload["total"], dict):
+                raise SourceError("eInnsyn total summary is invalid")
             items = payload.get("items")
             if not isinstance(items, list) or not all(isinstance(item, dict) for item in items):
                 raise SourceError("eInnsyn response lacks a valid items array")

@@ -95,6 +95,26 @@ coverage = "Publiseringer om nett, frekvenser og tilsyn."
 feed_urls = ["https://nkom.no/aktuelt/rss.xml"]
 
 [[profile]]
+id = "medietilsynet_nyheter"
+name = "Medietilsynet – nyheter"
+official_url = "https://www.medietilsynet.no/nyheter/"
+owner = "Medietilsynet"
+status = "verified"
+verified_on = "2026-11-06"
+coverage = "Publiserte nyheter og aktualitetssaker; feeden dekker ikke alle dokumenttyper eller vedtak."
+feed_urls = ["https://www.medietilsynet.no/RssFeed/Nyheter"]
+
+[[profile]]
+id = "stortinget_representantforslag"
+name = "Stortinget – representantforslag"
+official_url = "https://www.stortinget.no/rss"
+owner = "Stortinget"
+status = "verified"
+verified_on = "2026-11-06"
+coverage = "Nye Dokument 8-forslag i Stortingets RSS; kort historisk vindu, supplement til sakslisten."
+feed_urls = ["https://stortinget.no/no/Stottemeny/RSS/Representantforslag/"]
+
+[[profile]]
 id = "met_farevarsler"
 name = "MET – farevarsler"
 owner = "Meteorologisk institutt"

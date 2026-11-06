@@ -31,6 +31,12 @@ def item(identity=JP1, title="Søknad"):
 
 
 class JournalTests(unittest.TestCase):
+    def test_api_total_summary_does_not_block_valid_results(self):
+        source = JournalsSource(config())
+        source.get = Mock(return_value=response({"items": [item()], "next": None,
+                                                 "total": {"capped": False, "value": 1}}))
+        self.assertEqual([JP1], [row["key"] for row in source.read_records()])
+
     def test_title_variants_union_deduplicates_and_preserves_scope(self):
         source = JournalsSource(config(title_queries=["Example", "Example Incorporated"]))
         source.get = Mock(side_effect=[

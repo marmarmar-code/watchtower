@@ -123,6 +123,9 @@ def _record(row, types):
         raise SourceError("TED returned a notice outside the requested types")
     title = _localized(row.get("notice-title"), many=False)
     value, currency = row.get("total-value"), row.get("total-value-cur", [])
+    # TED can encode an undisclosed total as -1. Never report it as a sum.
+    if value == -1 and type(value) is int:
+        value = None
     if value is not None and (isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value < 0):
         raise SourceError("TED value is invalid")
     if not isinstance(currency, list) or any(not isinstance(c, str) or not re.fullmatch("[A-Z]{3}", c) for c in currency):
