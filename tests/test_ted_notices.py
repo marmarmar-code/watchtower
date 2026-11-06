@@ -18,6 +18,12 @@ def payload(rows, **extra):
 
 
 class TedTests(unittest.TestCase):
+    def test_undisclosed_value_sentinel_is_not_reported_as_negative_amount(self):
+        row = _record({**notice(), "total-value": -1}, ("can-standard",))
+        self.assertIsNone(row["fields"]["value"])
+        with self.assertRaises(SourceError):
+            _record({**notice(), "total-value": -2}, ("can-standard",))
+
     def source(self, **options):
         return TedNoticesSource(SourceConfig("test","ted_notices",filters=FilterRule(match_all=True),options=options))
     def test_stable_winner_order_and_value_change(self):

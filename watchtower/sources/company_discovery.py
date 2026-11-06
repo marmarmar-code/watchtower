@@ -158,9 +158,10 @@ def _record(entity, query_prefix, selected_prefixes, first: date, last: date):
     address = entity.get("forretningsadresse")
     municipality = ""
     if address is not None:
-        if not isinstance(address, dict) or not isinstance(address.get("kommune"), str):
+        if not isinstance(address, dict) or (address.get("kommune") is not None
+                                             and not isinstance(address["kommune"], str)):
             raise SourceError("BRREG company discovery address is invalid")
-        municipality = address["kommune"].strip()
+        municipality = (address.get("kommune") or "").strip()
     link = entity.get("_links")
     self_value = link.get("self") if isinstance(link, dict) else None
     self_link = self_value.get("href") if isinstance(self_value, dict) else None

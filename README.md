@@ -101,6 +101,8 @@ Følgende offisielle profiler følger med. Alle feedene i tabellen ble hentet og
 | `skatteetaten_uttalelser` | Juridiske uttalelser |
 | `skatteklagenemnda` | Publiserte vedtak i Skatteklagenemnda |
 | `nkom` | Nkoms publiseringer |
+| `medietilsynet_nyheter` | Medietilsynets nyheter og aktualitetssaker |
+| `stortinget_representantforslag` | Dokument 8-forslag direkte fra Stortingets RSS |
 | `met_farevarsler` | METs gjeldende farevarsler; kan være tom |
 
 Vis den maskinlesbare profillisten med `python -m watchtower list-rss-profiles`. Profilene gjør oppsettet enklere, men hver fork må fortsatt følge med på om den eksterne eieren endrer eller avvikler en feed.
