@@ -19,6 +19,8 @@ class RssProfileCatalogTests(unittest.TestCase):
                 "skatteetaten_uttalelser",
                 "skatteklagenemnda",
                 "nkom",
+                "medietilsynet_nyheter",
+                "stortinget_representantforslag",
                 "met_farevarsler",
             },
             {p["id"] for p in profiles},
